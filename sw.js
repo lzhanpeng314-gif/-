@@ -1,5 +1,5 @@
 /* 851 复习库 Service Worker —— 首次打开后即可离线 */
-const CACHE = 'g851-v2';
+const CACHE = 'g851-v3';
 const ASSETS = [
  "./",
  "index.html",

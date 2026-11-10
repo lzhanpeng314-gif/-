@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -333,7 +333,7 @@
     （1）垂直入射的平行可见光（380–780 nm）通过 Q 后，是否有变化，为什么？<br>
     （2）该入射的平行光通过 Q 后，由 R 出射后的一级光谱散开的角范围（用反三角表示）。<br>
     （3）钠原子的 D 线包含波长分别为 589.6 nm，589.0 nm 两条谱线，能否用此光栅的一级光谱分辨率？</div>
-    <figure><img src="figs/emb-2023-二-4-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p21 插图（自动裁自真题 PDF）</figcaption></figure>
+    <figure><img src="figs/emb-2023-二-4-1.png" alt="原卷插图"><figcaption>原卷 p21 插图（自动裁自真题 PDF）</figcaption></figure>
     <figure style="margin:14px 0;text-align:center">
     <img src="figs/fig-2023-grating-qr.png" alt="晶片 Q 与光栅 R" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
     <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 21 页）：平行光垂直射入晶片 Q（光轴 ↔ 与入射方向平行），再射向光栅 R</figcaption>
@@ -477,6 +477,10 @@
   #totop.show{display:block;}
   #totop:hover{opacity:1;}
   @media print{ #totop{display:none;} }
+  /* 收藏 */
+  .starbtn{background:none;border:0;cursor:pointer;font-size:16px;line-height:1;color:#cfc8bb;padding:0 3px;}
+  .starbtn.on{color:#e0a300;}
+  body.onlystar .q:not(.starred){display:none;}
   /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
   nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
                border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
@@ -630,6 +634,46 @@
   function upd(){ if (window.scrollY > 400) b.classList.add('show'); else b.classList.remove('show'); }
   window.addEventListener('scroll', upd, {passive:true}); upd();
   b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+<script>
+/* 收藏（重点/薄弱题） */
+(function(){
+  if (window.__starInit) return; window.__starInit = 1;
+  var KEY = 'g851-star', saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+  var qs = [].slice.call(document.querySelectorAll('.q'));
+  qs.forEach(function(q){
+    var tag = q.querySelector('.tag');
+    if (!tag) return;
+    var id = tag.textContent.trim();
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'starbtn'; b.title = '收藏为重点';
+    b.textContent = saved[id] ? '\u2605' : '\u2606';
+    if (saved[id]) { b.classList.add('on'); q.classList.add('starred'); }
+    b.addEventListener('click', function(ev){
+      ev.preventDefault();
+      var on = !b.classList.contains('on');
+      b.classList.toggle('on', on);
+      b.textContent = on ? '\u2605' : '\u2606';
+      q.classList.toggle('starred', on);
+      if (on) saved[id] = 1; else delete saved[id];
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+    var hd = q.querySelector('.hd');
+    if (hd) hd.appendChild(b);
+  });
+  var bar = document.querySelector('.bar');
+  if (bar) {
+    var f = document.createElement('button');
+    f.type = 'button'; f.textContent = '\u2605 只看收藏';
+    f.addEventListener('click', function(){
+      var on = !document.body.classList.contains('onlystar');
+      document.body.classList.toggle('onlystar', on);
+      f.classList.toggle('on', on);
+    });
+    bar.appendChild(f);
+  }
 })();
 </script>
 <script>/* SWREG */
