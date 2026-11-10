@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 计算题 · 第四章 光在各向异性介质中的传播特性</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 计算题 · 第四章 光在各向异性介质中的传播特性</h1>
+  <div class="sub">
+    近 10 年（2016–2024）· <b>10 道</b> · 折射定律与双折射画图 3、单轴晶体中的传播 3、偏振棱镜 1、波片 1、偏光干涉（KDP）2<br>
+    来源：<code>计算题分题型.pdf</code> 第 23–32 页（第四章从第 23 页标题"第四章-光在各向异性介质中的传播特性"起，到第 32 页末，下一章"第五章-晶体的感应双折射"在第 33 页）
+  </div>
+  <div class="lg">标注：<b>【真题】</b> 题面照录　<b>【自算】</b> 解答由我推导　<b>【待核】</b> 结论有约定或口径上的不确定，已在文中写明</div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#a">A 折射定律·双折射画图</a><a href="#b">B 单轴晶体中的传播</a><a href="#c">C 偏振棱镜</a><a href="#d">D 波片</a><a href="#e">E 偏光干涉·KDP</a>
+</nav>
+
+<div class="bar">
+  <span id="stat">已掌握 0 / 10</span>
+  <button id="f-all" class="on">全部</button>
+  <button id="f-todo">只看没掌握的</button>
+  <span style="margin-left:auto;font-size:12px">勾选自动记住</span>
+</div>
+
+<div class="warn" style="margin-top:20px">
+  <b>这一章只考四件事</b>：① 折射定律把一束光拆成两支；② <i>δ</i> = 2π<span class="frac"><span class="num">Δ<i>n</i>·<i>d</i></span><span class="den">λ</span></span> 定偏振态；
+  ③ 走离角 <i>ρ</i> 求两束光间距；④ KDP 纵向电光：半波电压 <i>U</i><sub>π</sub> = <span class="frac"><span class="num">λ</span><span class="den">2<i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub></span></span>。
+  十道题里九道是这四个式子的排列组合，剩下一个是渥拉斯顿棱镜的连续两次折射。
+</div>
+
+<div class="warn" style="border-left-color:#8c4a2f;background:#f6f2e9">
+  <b>旋向约定（全文统一）</b>：迎着光的传播方向看（光冲你而来），<i>E</i> 逆时针转记作<b>左旋</b>，顺时针记作<b>右旋</b>；
+  相位差 <i>δ</i> = <i>φ</i><sub>e</sub> − <i>φ</i><sub>o</sub> 取"慢光超前为正"。有些教材正好相反，若你的约定相反，把"左旋/右旋"互换即可，数值结论不变。
+</div>
+
+<div class="fbox">
+  <div class="fcard">
+    <div class="fname">双折射·折射定律</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>n</i><sub>1</sub> sin<i>i</i> = <i>n</i><sub>o</sub> sin<i>r</i><sub>o</sub> = <i>n</i><sub>e</sub>(<i>θ</i>) sin<i>r</i><sub>e</sub></span></div>
+    <div class="fnote">光轴 ⊥ 入射面（或光线 ⊥ 光轴）时 <i>n</i><sub>e</sub>(<i>θ</i>) = <i>n</i><sub>e</sub> 取主值；否则用 <span class="frac"><span class="num">1</span><span class="den"><i>n</i><sub>e</sub><sup>2</sup>(<i>θ</i>)</span></span> = <span class="frac"><span class="num">cos<sup>2</sup><i>θ</i></span><span class="den"><i>n</i><sub>o</sub><sup>2</sup></span></span> + <span class="frac"><span class="num">sin<sup>2</sup><i>θ</i></span><span class="den"><i>n</i><sub>e</sub><sup>2</sup></span></span>，<i>θ</i> 是波法线与光轴的夹角。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">相位差 · 波片判据</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>(<i>n</i><sub>慢</sub> − <i>n</i><sub>快</sub>)<i>d</i></span></div>
+    <div class="fnote">δ = π/2 → 1/4 波片；δ = π → 1/2 波片；δ = 2π → 全波片。只看 Δ<i>n</i>·<i>d</i>/λ 的小数部分。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">走离角（光轴与法线成 θ）</div>
+    <div class="fml"><span class="eqb" style="margin:0">tan<i>ρ</i> = <span class="frac"><span class="num">sin<i>θ</i>cos<i>θ</i>(<i>n</i><sub>e</sub><sup>2</sup> − <i>n</i><sub>o</sub><sup>2</sup>)</span><span class="den"><i>n</i><sub>o</sub><sup>2</sup>sin<sup>2</sup><i>θ</i> + <i>n</i><sub>e</sub><sup>2</sup>cos<sup>2</sup><i>θ</i></span></span></span></div>
+    <div class="fnote">母光沿法线时，e 光走这偏角；出射面仍平行，两光间距 <i>s</i> = <i>d</i> tan<i>ρ</i>。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">KDP 纵向电光</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>U</i>，<i>U</i><sub>π</sub> = <span class="frac"><span class="num">λ</span><span class="den">2<i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub></span></span></span></div>
+    <div class="fnote">纵向运用 E = U/l，长度 l 约掉，δ 只与电压有关。γ<sub>63</sub>(KDP) = 10.6×10<sup>−12</sup> m/V = 10.6×10<sup>−10</sup> cm/V。</div>
+  </div>
+</div>
+
+<!-- ===== A ===== -->
+<h2 id="a">A · 折射定律与双折射画图<span class="cnt">3 题</span></h2>
+<div class="lead">题面都带"画图"，但真正要算的只有一个数：两支光在晶体里走不同角度，出射面上就分开一段距离。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2020-二-4</span><span class="ttl">掠入射 5 cm 单轴平板，第二面上二光分开多远</span></div>
+  <div class="stem">一细光束掠入射厚度为 5 cm 的单轴晶体平行平板，晶体的光轴与入射面垂直。若 <i>n</i><sub>0</sub> = 1.525，<i>n</i><sub>e</sub> = 1.479，试计算在第二个面上输出二光分开的距离，并绘出光路图。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>先把"折射率取哪个值"定下来：光轴垂直于入射面，晶体里两支光的波法线始终在入射面内，与光轴恒成 90°，所以 o 光用 <i>n</i><sub>0</sub>、e 光用主值 <i>n</i><sub>e</sub>，且 e 光不走出离（波法线方向 = 光线方向）。
+    </div>
+    <div class="step"><b class="n">2</b>掠入射即 <i>i</i> = 90°，sin<i>i</i> = 1，故 sin<i>r</i> = 1/<i>n</i>
+      <div class="eqb">sin<i>r</i><sub>o</sub> = <span class="frac"><span class="num">1</span><span class="den">1.525</span></span> = 0.6557 ⇒ <i>r</i><sub>o</sub> = 40.98°；　sin<i>r</i><sub>e</sub> = <span class="frac"><span class="num">1</span><span class="den">1.479</span></span> = 0.6761 ⇒ <i>r</i><sub>e</sub> = 42.54°</div>
+    </div>
+    <div class="step"><b class="n">3</b>两支光从同一点射入，各自沿 <i>r</i><sub>o</sub>、<i>r</i><sub>e</sub> 走到第二面（垂直距离 <i>d</i> = 5 cm = 50 mm），在第二面上的落点相距
+      <div class="eqb">Δ = <i>d</i>(tan<i>r</i><sub>e</sub> − tan<i>r</i><sub>o</sub>) = 50 × (0.9177 − 0.8685) = <b>2.46 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>出射面仍是同一块平板，<i>n</i> sin<i>r</i> = sin<i>i</i>′ ⇒ sin<i>i</i>′ = 1，两支光都以 90° <b>掠着第二面出射</b>，方向与第二面平行，故二者离开晶体后互相平行。画光路图时：入射光擦着第一面射入，晶体里两条线分别与法线成 40.98°、42.54°，到第二面各折成沿面方向。
+    </div>
+    <div class="res">第二面上两出射点相距 <b>2.46 mm</b>；出射后两光均沿第二面掠出、彼此平行；o 光偏折小于 e 光（<i>r</i><sub>o</sub> &lt; <i>r</i><sub>e</sub>，因为 <i>n</i><sub>0</sub> &gt; <i>n</i><sub>e</sub>）。<b>【待核】</b>掠入射时出射光严格平行于第二面，若把"二光分开的距离"理解为<b>垂直于光线的间距</b>，则退化为 0；本页按"沿第二面量"的口径给出 2.46 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2021-二-5</span><span class="ttl">方解石直角棱镜：只让一种线偏振光射出，顶角 α 取多大</span></div>
+  <div class="stem">如图所示，一方解石 <i>n</i><sub>0</sub> = 1.6548，<i>n</i><sub>e</sub> = 1.4864 直角棱镜，光轴平行于直角棱，自然光垂直入射。要使出射光只有一种线偏振光，另一种被完全反射掉。<br>（1）顶角 α 应取什么范围；（2）画出光路并标上反射光和透射光的振动方向。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2021-calcite-prism.png" alt="方解石直角棱镜截面" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 23 页）：竖直左边是入射面，斜边为反射/透射面，<i>θ</i> 标在斜边法线与水平入射光之间，α 为底部顶角</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>几何关系：入射光垂直入射面 ⇒ 在棱镜内沿水平方向前进，斜边法线与水平方向成 α，所以<b>斜面上的入射角 θ = α</b>（题图里 θ 正是这个角）。
+    </div>
+    <div class="step"><b class="n">2</b>光轴平行于直角棱（截面内竖直，与光线垂直），故两支光都用主折射率：o 光（振动 ⊥ 主截面，即 ⊥ 纸面）用 <i>n</i><sub>0</sub>，e 光（振动在主截面内、∥ 光轴）用 <i>n</i><sub>e</sub>。全反射临界角
+      <div class="eqb">sin<i>C</i><sub>o</sub> = <span class="frac"><span class="num">1</span><span class="den">1.6548</span></span> = 0.6043 ⇒ <i>C</i><sub>o</sub> = <b>37.2°</b>；　sin<i>C</i><sub>e</sub> = <span class="frac"><span class="num">1</span><span class="den">1.4864</span></span> = 0.6728 ⇒ <i>C</i><sub>e</sub> = <b>42.3°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>要求"一种全反射、另一种能透射"，即入射角落在两个临界角之间
+      <div class="eqb"><i>C</i><sub>o</sub> &lt; α &lt; <i>C</i><sub>e</sub>　⇒　<b>37.2° &lt; α &lt; 42.3°</b></div>
+      <p style="margin:4px 0 0">α 若 &gt; 42.3°，两支全反射，没有出射光；α 若 &lt; 37.2°，两支都透射，出射仍是自然光的混合。</p>
+    </div>
+    <div class="step"><b class="n">4</b>取 α = 40° 验算：<i>n</i><sub>0</sub> sin40° = 1.064 &gt; 1，o 光全反射；<i>n</i><sub>e</sub> sin40° = 0.9554，e 光折射角 arcsin0.9554 = 72.8° 掠射出去。
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">5</b>光路：o 光在斜面上按反射定律反向射回棱内（反射角 = α），e 光偏折后从斜面射出、方向几乎贴着斜面（72.8°）。振动方向：<b>反射的 o 光振动 ⊥ 纸面</b>；<b>透射的 e 光振动在纸面内、平行于光轴</b>。
+    </div>
+    <div class="res">顶角取 <b>37.2° &lt; α &lt; 42.3°</b>（即 arcsin(1/1.6548) &lt; α &lt; arcsin(1/1.4864)）；此时 o 光全反射、e 光透射，出射光为单一 e 光线偏振。</div>
+    <div class="warn"><b>易错</b>：① 入射角在斜面上等于 α，不是 90°−α —— 因为光线垂直入射面、斜边法线与光线成 α；② 谁全反射看的是"哪个折射率小"，<i>n</i><sub>e</sub> 小 ⇒ 临界角大 ⇒ e 光透射。若题图把光轴画成垂直纸面，则两支光的 o/e 名称互换（<b>角度范围不变</b>）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2024-二-5</span><span class="ttl">方解石薄片：垂直入射与 60° 斜入射后，出射光的偏振</span></div>
+  <div class="stem">如图所示为一方解石晶体 <i>n</i><sub>0</sub> = 1.5246，<i>n</i><sub>e</sub> = 1.4792，<i>d</i> = 0.01 mm，光轴方向如图所示，入射波长 λ = 550 nm，线偏振光入射的偏振角度为 45°，求出射后的光波偏振方向；当入射夹角为 60° 时，求出射后的光波偏振方向。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2024-calcite-plates.png" alt="方解石晶片两种入射情况" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 24 页）：⊙ 表示光轴垂直于纸面；上图垂直入射，下图晶片转过 60°（虚线为入射面法线）</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）垂直入射</b></p>
+    <div class="step"><b class="n">1</b>光轴 ⊥ 纸面、光线在纸面内 ⇒ 光线与光轴垂直。o 光振动在纸面内（图中竖直），e 光振动 ⊥ 纸面（沿光轴），二者都取主折射率。
+    </div>
+    <div class="step"><b class="n">2</b>累计相位差
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>(<i>n</i><sub>0</sub> − <i>n</i><sub>e</sub>)<i>d</i> = <span class="frac"><span class="num">2π</span><span class="den">550×10<sup>−9</sup></span></span> × 0.0454 × 1.0×10<sup>−5</sup> = 5.19 rad = 297° = 0.825×2π</div>
+      <p style="margin:4px 0 0"><i>n</i><sub>0</sub> &gt; <i>n</i><sub>e</sub>（负晶体）⇒ o 光慢，<b>e 光超前 o 光 297°</b>（等价于 o 超前 63°）。</p>
+    </div>
+    <div class="step"><b class="n">3</b>入射振动与两支光成 45° ⇒ 两分量等幅。等幅 + 相位差 0.825×2π，出射是<b>椭圆偏振光</b>，椭圆主轴与 o、e 振动方向各成 45°；半轴比（用 <i>E</i><sub>o</sub> = <i>E</i><sub>e</sub> = <i>A</i>）：
+      <div class="eqb"><i>a</i> = <i>A</i>√(1+|cos<i>δ</i>|) = 1.207<i>A</i>，<i>b</i> = <i>A</i>√(1−|cos<i>δ</i>|) = 0.737<i>A</i>　⇒　<span class="frac"><span class="num"><i>b</i></span><span class="den"><i>a</i></span></span> = <b>0.61</b>　（cos<i>δ</i> = cos297° = 0.457）</div>
+    </div>
+    <p style="margin-top:14px"><b>（2）入射角 60°</b></p>
+    <div class="step"><b class="n">4</b>此时光轴仍 ⊥ 入射面，两支光波法线都在入射面内、与光轴成 90°，所以仍用主折射率，按折射定律分开
+      <div class="eqb">sin60° = <i>n</i><sub>0</sub> sin<i>r</i><sub>o</sub> ⇒ <i>r</i><sub>o</sub> = arcsin<span class="bkt"><span class="frac"><span class="num">0.8660</span><span class="den">1.5246</span></span></span> = 34.6°；　sin60° = <i>n</i><sub>e</sub> sin<i>r</i><sub>e</sub> ⇒ <i>r</i><sub>e</sub> = 35.8°</div>
+    </div>
+    <div class="step"><b class="n">5</b>两支光在晶体内分开 1.2°，走完 <i>d</i> 后从平行的第二面射出，各自折射回与入射方向平行；因此出射是<b>两束平行的线偏振光</b>：o 光振动 ⊥ 入射面（⊥ 纸面），e 光振动在入射面内，两者振动方向互相垂直。
+    </div>
+    <div class="res">垂直入射：出射为<b>椭圆偏振光</b>（δ = 297° ≈ 0.825×2π，椭圆主轴与 o、e 振动方向成 45°，轴比 0.61，<b>左旋</b>）。<br>60° 斜入射：进入晶体时分成 o、e 两支（<i>r</i><sub>o</sub> = 34.6°、<i>r</i><sub>e</sub> = 35.8°），出射为两束平行线偏振光、振动方向互相垂直，<b>偏振方向不再旋转</b>。</div>
+    <div class="warn"><b>口径说明</b>：题面两处都写"偏振方向"，但垂直入射的情形按相位差算出来是椭圆偏振，只能给"偏振态 + 椭圆主轴方位"。这一点与真题答案册的口径一致（答案册给出"<i>φ</i> = <i>k</i>(<i>n</i><sub>e</sub> − <i>n</i><sub>o</sub>)<i>d</i>、椭圆偏振、以及 60° 时 <i>n</i> sin60° = <i>n</i><sub>o</sub> sin<i>θ</i><sub>o</sub> = <i>n</i><sub>e</sub> sin<i>θ</i><sub>e</sub>"）；但答案册写"o 光超前 e 光"与本页相反 —— 方解石 <i>n</i><sub>e</sub> &lt; <i>n</i><sub>o</sub>，e 光快，应为 e 超前，本页按物理事实写。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== B ===== -->
+<h2 id="b">B · 光在单轴晶体中的传播<span class="cnt">3 题</span></h2>
+<div class="lead">这一组是"波片 + 偏振态"：先算 <i>δ</i> = 2πΔ<i>n</i><i>d</i>/λ 折成 π 的几倍，再看入射振幅比，最后判圆/椭圆/线。</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2018-二-5</span><span class="ttl">0.05 mm 石英晶片：45° 入射的出射偏振态、是几号波片</span></div>
+  <div class="stem">如图所示，一束线偏振光（λ = 600 nm）垂直通过厚度为 0.05 mm 的石英晶片，晶片折射率为 <i>n</i><sub>0</sub> = 1.544，<i>n</i><sub>e</sub> = 1.553，光轴沿 <i>x</i> 轴方向。（1）求线偏振光的振动方向与 <i>x</i> 轴夹角为 45° 时，出射光的偏振态。（2）该晶片相当于何种波片？其快、慢轴在哪个方向？</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2018-quartz-plate.png" alt="石英晶片坐标与入射振动方向" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 25 页）：光轴沿 <i>x</i> 轴，光线沿晶片法线（垂直纸面方向穿过晶片），<i>E</i> 与 <i>x</i> 轴夹角 <i>θ</i></figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>石英 <i>n</i><sub>e</sub> &gt; <i>n</i><sub>0</sub>（正晶体）。光垂直入射、光线 ⊥ 光轴：沿 <i>x</i>（光轴）振动的是 e 光，慢；沿 <i>y</i> 振动的是 o 光，快。
+    </div>
+    <div class="step"><b class="n">2</b>
+      <div class="eqb"><span class="frac"><span class="num">Δ<i>n</i>·<i>d</i></span><span class="den">λ</span></span> = <span class="frac"><span class="num">(1.553 − 1.544) × 0.05×10<sup>−3</sup></span><span class="den">600×10<sup>−9</sup></span></span> = <span class="frac"><span class="num">4.5×10<sup>−7</sup></span><span class="den">6.0×10<sup>−7</sup></span></span> = 0.75</div>
+      <div class="eqb"><i>δ</i> = 2π × 0.75 = 1.5π = <b>270°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>45° 入射 ⇒ <i>E</i><sub>x</sub> = <i>E</i><sub>y</sub> = <i>A</i>；两支光相位差 270°（等价 −90°），等幅 + |δ| = 90° ⇒ 振幅合成轨迹是圆
+      <div class="eqb"><i>E</i><sub>x</sub> = <i>A</i>cos(<i>ωt</i> − 270°) = −<i>A</i>sin<i>ωt</i>，<i>E</i><sub>y</sub> = <i>A</i>cos<i>ωt</i>　⇒　<i>E</i><sub>x</sub><sup>2</sup> + <i>E</i><sub>y</sub><sup>2</sup> = <i>A</i><sup>2</sup></div>
+      <p style="margin:4px 0 0">t = 0 时指向 +<i>y</i>，之后转向 −<i>x</i>：迎着光看是逆时针 ⇒ <b>左旋圆偏振光</b>。</p>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">4</b>Δ<i>n</i>·<i>d</i> = 0.75λ ⇒ 光程差 3λ/4，相位差 3π/2，故是 <b>3/4 波片</b>（= −1/4 波片）。
+    </div>
+    <div class="step"><b class="n">5</b>慢轴在折射率大的振动方向：<b>慢轴 ∥ <i>x</i>（光轴）</b>，<b>快轴 ∥ <i>y</i></b>。
+    </div>
+    <div class="res">（1）出射为<b>左旋圆偏振光</b>（δ = 270°，等幅两分量）；（2）该晶片是 <b>3/4 波片</b>（光程差 0.75λ），<b>慢轴沿 <i>x</i>（光轴）</b>、<b>快轴沿 <i>y</i></b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2023-二-5</span><span class="ttl">钠黄光 2.5π 相位延迟：多厚、出射什么偏振</span></div>
+  <div class="stem">对于钠黄光（波长为 589.3 nm）晶体的主折射率 <i>n</i><sub>0</sub> = 1.54424，<i>n</i><sub>e</sub> = 1.55335，光轴沿 <i>x</i> 方向。<i>z</i> 为入射方向，入射线偏振光的振动方向与光轴的夹角为 <i>θ</i> = 30 度，试：（1）画图说明钠黄光在晶体内的传播，标出 o 光、e 光及相对应的振动方向。（2）若要使 o 光和 e 光的相位延迟为 2.5π，求晶体厚度。（3）确定光通过上述厚度晶体后的偏振状态。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2023-crystal-plate.png" alt="晶片坐标与 30 度入射振动" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 26 页）：光轴沿 <i>x</i>，入射方向沿 <i>z</i>，<i>E</i> 与光轴夹角 <i>θ</i> = 30°</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>光沿 <i>z</i> 传播、光轴沿 <i>x</i> ⇒ 光线 ⊥ 光轴。沿 <i>x</i> 振动的是 e 光（<i>n</i><sub>e</sub> = 1.55335，慢），沿 <i>y</i> 振动的是 o 光（<i>n</i><sub>0</sub> = 1.54424，快）；两支光都沿 <i>z</i> 直进、无走离，只是速度不同。
+    </div>
+    <p><b>（2）</b></p>
+    <div class="step"><b class="n">2</b>由 <i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>(<i>n</i><sub>e</sub> − <i>n</i><sub>0</sub>)<i>d</i> = 2.5π 反解
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">2.5π λ</span><span class="den">2π(<i>n</i><sub>e</sub> − <i>n</i><sub>0</sub>)</span></span> = <span class="frac"><span class="num">1.25 × 589.3×10<sup>−9</sup></span><span class="den">1.55335 − 1.54424</span></span> = <span class="frac"><span class="num">7.366×10<sup>−7</sup></span><span class="den">0.00911</span></span> = 8.09×10<sup>−5</sup> m</div>
+      <div class="eqb"><i>d</i> ≈ <b>80.9 μm</b>（≈ 0.081 mm）</div>
+    </div>
+    <p><b>（3）</b></p>
+    <div class="step"><b class="n">3</b>振幅分配：<i>A</i><sub>e</sub> = <i>A</i>cos30° = 0.866<i>A</i>（沿 <i>x</i>），<i>A</i><sub>o</sub> = <i>A</i>sin30° = 0.500<i>A</i>（沿 <i>y</i>）。
+    </div>
+    <div class="step"><b class="n">4</b>2.5π mod 2π = 0.5π，即等效 1/4 波片。相位差正好 90° ⇒ 椭圆主轴就沿 <i>x</i>、<i>y</i>：
+      <div class="eqb"><span class="frac"><span class="num"><i>E</i><sub>x</sub><sup>2</sup></span><span class="den">(0.866<i>A</i>)<sup>2</sup></span></span> + <span class="frac"><span class="num"><i>E</i><sub>y</sub><sup>2</sup></span><span class="den">(0.500<i>A</i>)<sup>2</sup></span></span> = 1，　长轴 ∥ <i>x</i>（光轴），轴比 = <span class="frac"><span class="num">0.500</span><span class="den">0.866</span></span> = <b>0.577</b></div>
+    </div>
+    <div class="step"><b class="n">5</b>旋向：e 光是慢光、滞后 2.5π ≈ 90°，t = 0 时 <i>E</i> 指向 +<i>y</i>，随后转向 +<i>x</i> ⇒ 迎着光看顺时针 ⇒ <b>右旋</b>椭圆偏振光。
+    </div>
+    <div class="res">（2）<i>d</i> ≈ <b>80.9 μm</b>；（3）出射为<b>右旋椭圆偏振光</b>，椭圆长轴沿光轴 <i>x</i>，长短轴比 0.577（≈1/√3），等效于一块 1/4 波片。</div>
+    <div class="warn"><b>别写成圆偏振</b>：只有在 45° 入射（<i>A</i><sub>e</sub> = <i>A</i><sub>o</sub>）且 δ = 90° 时才是圆偏振；本题 30° 入射，两分量不等，只能是椭圆。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2016-二-4</span><span class="ttl">光轴与表面成 45° 的 1 mm 晶体：o、e 光线夹角与相位差</span></div>
+  <div class="stem">如图所示，一块光轴方向与晶体表面成 45° 角的晶体，晶体厚度 <i>d</i> = 1.0 mm，其主折射率 <i>n</i><sub>0</sub> = 1.654，<i>n</i><sub>e</sub> = 1.484，现有波长 λ = 600 nm 的激光垂直入射该晶体表面，求：（1）晶体内 o 光线和 e 光线的夹角；（2）画出 o 光线和 e 光线的光路，并确定它们的振动方向；（3）o 光线和 e 光线通过晶体后的相位差。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2016-plate45.png" alt="光轴与表面成 45 度的晶片" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 27 页）：平行平板，光轴（箭头）与表面成 45°，激光垂直入射</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>正入射时按边界条件，两支光的<b>波法线都沿表面法线</b>（sin<i>r</i> = 0），所以波法线与光轴成 <i>θ</i> = 45°。o 光按 <i>n</i><sub>0</sub> 直进；e 光虽沿同一波法线，但能流方向（光线）偏离波法线 —— 这就是走离角 <i>ρ</i>。
+    </div>
+    <div class="step"><b class="n">2</b>代入走离角公式（<i>θ</i> = 45°，sin<i>θ</i>cos<i>θ</i> = 0.5，sin<sup>2</sup><i>θ</i> = cos<sup>2</sup><i>θ</i> = 0.5）
+      <div class="eqb">tan<i>ρ</i> = <span class="frac"><span class="num">0.5 × (1.484<sup>2</sup> − 1.654<sup>2</sup>)</span><span class="den">0.5 × (1.654<sup>2</sup> + 1.484<sup>2</sup>)</span></span> = <span class="frac"><span class="num">0.5 × (−0.5334)</span><span class="den">2.4690</span></span> = −0.1080</div>
+      <div class="eqb">|<i>ρ</i>| = <b>6.17°</b></div>
+      <p style="margin:4px 0 0">负号表示 e 光线偏向光轴一侧（负晶体 <i>n</i><sub>e</sub> &lt; <i>n</i><sub>0</sub>，e 光向光轴靠）。</p>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">3</b>光路：o 光沿法线直进、出射面不再偏折；e 光在晶体内偏离法线 6.17°（朝光轴方向），到第二面出射时又折回，出射后与 o 光平行。振动方向：<b>o 光振动 ⊥ 主截面</b>（⊥ 光轴与法线所在平面，即垂直纸面）；<b>e 光振动在主截面内</b>（图中纸面内）。
+    </div>
+    <p style="margin-top:14px"><b>（3）</b></p>
+    <div class="step"><b class="n">4</b>相位差要按"波法线方向的等效折射率"算，波法线与光轴成 45°，故
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>n</i><sub>e</sub><sup>2</sup>(45°)</span></span> = <span class="frac"><span class="num">cos<sup>2</sup>45°</span><span class="den">1.654<sup>2</sup></span></span> + <span class="frac"><span class="num">sin<sup>2</sup>45°</span><span class="den">1.484<sup>2</sup></span></span> ⇒ <i>n</i><sub>e</sub>(45°) = 1.5621</div>
+    </div>
+    <div class="step"><b class="n">5</b>
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>(<i>n</i><sub>e</sub>(45°) − <i>n</i><sub>0</sub>)<i>d</i> = <span class="frac"><span class="num">2π</span><span class="den">600×10<sup>−9</sup></span></span> × (1.5621 − 1.654) × 1.0×10<sup>−3</sup> = −962 rad</div>
+      <div class="eqb">|<i>δ</i>| ≈ 9.6×10<sup>2</sup> rad ≈ 306π ≈ 153.2 × 2π（即约 153 个波长）</div>
+    </div>
+    <div class="res">（1）晶体内 o、e 光线夹角 <b>6.17°</b>（e 光偏向光轴）；（3）相位差 |<i>δ</i>| ≈ <b>9.6×10<sup>2</sup> rad</b>（≈ 306π，折合 153.2 个波长），o 光超前。<b>【待核】</b>若按"直接用主折射率 <i>n</i><sub>e</sub>"算，会得 2π(0.17)(10<sup>−3</sup>)/6×10<sup>−7</sup> ≈ 1780 rad —— 那是把 45° 斜光轴当成"光线垂直光轴"，与本题条件矛盾，本页不采用。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== C ===== -->
+<h2 id="c">C · 偏振棱镜<span class="cnt">1 题</span></h2>
+<div class="lead">渥拉斯顿棱镜的套路：两棱镜光轴互相垂直 ⇒ 同一支光在两半里的折射率<b>互换</b>，在斜面上"一大一小"各折一次，夹角就出来了。</div>
+
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2017-二-4</span><span class="ttl">渥拉斯顿棱镜（45° 方解石）：ADC 中两光夹角</span></div>
+  <div class="stem">如图所示为渥拉斯顿棱镜的截面，由两块棱角均为 45° 的直角方解石棱镜粘合其斜面而构成，两直角棱镜的光轴如图所示，方解石的主折射率为 <i>n</i><sub>0</sub> = 1.658，<i>n</i><sub>e</sub> = 1.486，当自然光垂直 AB 面入射时，（1）分析说明光在两直角棱镜中的传播情况，并画出光在两棱镜中的光路和离开 DC 面时的光路，标示出相应光矢量的振动方向；（2）求出直角棱镜 ADC 中光的夹角。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2017-wollaston.png" alt="渥拉斯顿棱镜截面" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.6px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 29 页）：左半 ABC 光轴竖直（↑），右半 ADC 光轴垂直纸面（••），斜面 AC 与 AB 成 45°</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>第一半 ABC：光轴竖直、光水平入射 ⇒ 光线 ⊥ 光轴，两支光各按主折射率直进、无走离。e 光（振动在主截面内、竖直）<i>n</i><sub>e</sub> = 1.486，o 光（振动 ⊥ 纸面）<i>n</i><sub>0</sub> = 1.658。
+    </div>
+    <div class="step"><b class="n">2</b>第二半 ADC：光轴垂直纸面。原来在纸面内振动的光（ABC 中的 e 光）现在变成 o 光（<i>n</i><sub>0</sub>）；原来 ⊥ 纸面振动的光（ABC 中的 o 光）变成 e 光（<i>n</i><sub>e</sub>）。即两支光在斜面上<b>折射率互换</b>。
+    </div>
+    <div class="step"><b class="n">3</b>斜面 AC 上入射角 45°（AC 与 AB 成 45°）。一支从 <i>n</i><sub>0</sub> → <i>n</i><sub>e</sub>（由密到疏），另一支 <i>n</i><sub>e</sub> → <i>n</i><sub>0</sub>（由疏到密）：
+      <div class="eqb">1.658 sin45° = 1.486 sin<i>r</i><sub>1</sub> ⇒ <i>r</i><sub>1</sub> = 52.09°；　1.486 sin45° = 1.658 sin<i>r</i><sub>2</sub> ⇒ <i>r</i><sub>2</sub> = 39.33°</div>
+    </div>
+    <div class="step"><b class="n">4</b>换算成相对原入射方向（法线与入射方向成 45°）
+      <div class="eqb">第一支偏 <i>r</i><sub>1</sub> − 45° = 7.09°（向下）；第二支偏 45° − <i>r</i><sub>2</sub> = 5.67°（向上）</div>
+      <div class="eqb">ADC 内夹角 Δ = 7.09° + 5.67° = <b>12.76°</b></div>
+    </div>
+    <p><b>（2）</b></p>
+    <div class="step"><b class="n">5</b>出 DC 面（法线水平）时的入射角就是各自的偏角，再折射一次
+      <div class="eqb">sin<i>i</i><sub>1</sub>′ = 1.486 sin7.09° = 0.1834 ⇒ 10.57°；　sin<i>i</i><sub>2</sub>′ = 1.658 sin5.67° = 0.1638 ⇒ 9.43°</div>
+      <div class="eqb">出射后两光夹角 ≈ 10.57° + 9.43° = <b>20.0°</b></div>
+    </div>
+    <div class="res">ADC 中两束光的夹角 <b>12.8°</b>（其中一支向下 7.09°、另一支向上 5.67°）；从 DC 面射出后夹角扩大到约 <b>20.0°</b>。两束光的振动方向互相垂直（一支 ⊥ 纸面，一支在纸面内）。</div>
+    <div class="warn"><b>验算小技巧</b>：由疏到密那支（<i>n</i><sub>e</sub>→<i>n</i><sub>0</sub>）折射角 39.33° &lt; 45°，靠向法线；由密到疏那支 52.09° &gt; 45°，远离法线 —— 所以两支出射后一定分向两侧，夹角 = 两偏角之和，不是之差。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== D ===== -->
+<h2 id="d">D · 波片<span class="cnt">1 题</span></h2>
+<div class="lead">波片题的坑在"对谁而言是几号波片"：同一块片子，对不同波长 <i>δ</i> 不一样（色散）。</div>
+
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2019-二-4</span><span class="ttl">λ<sub>1</sub> 的 1/4 波片对 λ<sub>2</sub> 是什么波片</span></div>
+  <div class="stem">已知方解石对波长 λ<sub>1</sub> = 405 nm 光波的主折射率为 <i>n</i><sub>o</sub> = 1.6813，<i>n</i><sub>e</sub> = 1.4969；对波长 λ<sub>2</sub> = 710 nm 光波的主折射率为 <i>n</i><sub>o</sub>′ = 1.6521，<i>n</i><sub>e</sub>′ = 1.4836。若一束波长为 λ<sub>2</sub> 的左旋正椭圆偏振光入射到相应于波长为 λ<sub>1</sub> 的方解石 1/4 波片上，求：（1）λ<sub>1</sub> 光波通过该波片时，所产生的相位差？（2）对于 λ<sub>2</sub> 光波而言，判断该波片是哪种波片？（3）出射光束的偏振态？</div>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>定义就是答案：既然它是"对 λ<sub>1</sub> 的 1/4 波片"，则 λ<sub>1</sub> 通过时的相位差
+      <div class="eqb"><i>δ</i><sub>1</sub> = <span class="frac"><span class="num">2π</span><span class="den">λ<sub>1</sub></span></span>(<i>n</i><sub>o</sub> − <i>n</i><sub>e</sub>)<i>d</i> = <span class="frac"><span class="num">π</span><span class="den">2</span></span> = <b>90°</b>，　且 (1.6813 − 1.4969)<i>d</i> = <span class="frac"><span class="num">405</span><span class="den">4</span></span> nm = 101.25 nm</div>
+      <div class="eqb">⇒ <i>d</i> = <span class="frac"><span class="num">101.25 nm</span><span class="den">0.1844</span></span> = <b>549.1 nm</b></div>
+    </div>
+    <p><b>（2）</b></p>
+    <div class="step"><b class="n">2</b>同一块片对 λ<sub>2</sub>：
+      <div class="eqb"><i>δ</i><sub>2</sub> = <span class="frac"><span class="num">2π</span><span class="den">λ<sub>2</sub></span></span>(<i>n</i><sub>o</sub>′ − <i>n</i><sub>e</sub>′)<i>d</i> = <span class="frac"><span class="num">2π</span><span class="den">710×10<sup>−9</sup></span></span> × 0.1685 × 549.1×10<sup>−9</sup> = 2π × 0.1303 = <b>0.819 rad = 46.9°</b></div>
+      <p style="margin:4px 0 0">也可用比例一步算：<i>δ</i><sub>2</sub>/<i>δ</i><sub>1</sub> = <span class="frac"><span class="num">Δ<i>n</i>′</span><span class="den">Δ<i>n</i></span></span> · <span class="frac"><span class="num">λ<sub>1</sub></span><span class="den">λ<sub>2</sub></span></span> = (0.1685/0.1844)(405/710) = 0.521 ⇒ <i>δ</i><sub>2</sub> = 0.521 × 90° = 46.9°。</p>
+    </div>
+    <div class="step"><b class="n">3</b>判据：46.9° 既不是 90°（1/4 波片）也不是 180°（1/2 波片）、更不是 360°。<b>对 λ<sub>2</sub> 而言它只是一块"任意波片"</b>，光程差 0.13λ（相当于约 1/8 波片，介于 1/8 与 1/4 之间）。
+    </div>
+    <p><b>（3）</b></p>
+    <div class="step"><b class="n">4</b>入射是"正椭圆"（椭圆主轴恰在 o、e 振动方向上），经这块片子再叠加 46.9° 相位差后：椭圆主轴相对入射方向<b>转过一个角度</b>、椭圆率改变，但总的相位差仍在 0°～180° 区间内，<b>旋向不翻转，仍是左旋</b>。
+    </div>
+    <div class="res">（1）<i>δ</i><sub>1</sub> = <b>90°</b>（<i>d</i> = 549.1 nm）；（2）对 λ<sub>2</sub> 它不是 1/4 波片，只是一块 <i>δ</i> ≈ <b>46.9°</b> 的任意波片（光程差 0.13λ）；（3）出射仍为<b>左旋椭圆偏振光</b>，只是椭圆主轴方位与轴比发生变化。<b>【待核】</b>题面没有给入射"正椭圆"的轴比，所以第（3）问只能定性：主轴转角与轴比的具体数值取决于入射椭圆度；若把"正椭圆"理解为圆偏振（轴比 1），则出射为总相位差 90°+47° = 137° 的椭圆、长轴与 <i>x</i> 轴成 45°，轴比（短/长）= |tan(137°/2)|<sup>−1</sup> ≈ 0.39。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== E ===== -->
+<h2 id="e">E · 偏光干涉与 KDP 电光调制<span class="cnt">2 题</span></h2>
+<div class="lead">两块偏振片 + 一块电光晶体，输出光强永远是 <i>I</i> = <i>I</i><sub>0</sub>sin<sup>2</sup>(<i>δ</i>/2)（正交偏振片、45° 放置）。区别只在 δ 用电压怎么表示。</div>
+
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2016-二-5</span><span class="ttl">KDP 纵向运用：感应主轴上的两个折射率与输出光强式</span></div>
+  <div class="stem">如图所示，P<sub>1</sub>、P<sub>2</sub> 是透振方向正交的偏振片，电光晶体是纵向运用的 KDP 晶体，沿 <i>x</i><sub>3</sub> 方向晶体长度为 <i>l</i>，若在晶体的两端面间加一强电场 <i>U</i>，晶体内线偏振模式的光矢量方向与两偏振片的透光轴成 45° 角，已知 γ<sub>63</sub> = 10.6×10<sup>−10</sup> m/V，<i>n</i><sub>0</sub> = 1.51。写出加电情况下感应主轴方向上振动的两个许可的折射率；推导出从第二个偏振片透出的光强度表示式。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2016-kdp-long.png" alt="KDP 纵向电光调制器" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 31 页）：P<sub>1</sub>—KDP—P<sub>2</sub>，电场沿通光方向 <i>x</i><sub>3</sub>（纵向运用）</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）两个许可的折射率</b></p>
+    <div class="step"><b class="n">1</b>加电场 <i>E</i> = <i>U</i>/<i>l</i>（沿 <i>x</i><sub>3</sub>）后，KDP 由单轴变双轴，感应主轴 <i>x</i><sub>1</sub>′、<i>x</i><sub>2</sub>′ 相对原主轴转过 45°，折射率改变量
+      <div class="eqb">Δ<i>n</i> = ±<span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>E</i> ⇒ <i>n</i><sub>1,2</sub> = <i>n</i><sub>0</sub> ± <span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><span class="frac"><span class="num"><i>U</i></span><span class="den"><i>l</i></span></span></div>
+    </div>
+    <div class="step"><b class="n">2</b>代入数：<i>n</i><sub>0</sub><sup>3</sup> = 1.51<sup>3</sup> = 3.4430，γ<sub>63</sub> = 10.6×10<sup>−10</sup> m/V = 1.06×10<sup>−11</sup> m/V
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub> = 0.5 × 3.4430 × 1.06×10<sup>−11</sup> = 1.82×10<sup>−11</sup> m/V</div>
+      <div class="eqb"><i>n</i><sub>1,2</sub> = 1.51 ± 1.82×10<sup>−11</sup> <i>E</i>（<i>E</i> 单位 V/m）　= 1.51 ± 1.82×10<sup>−11</sup><span class="frac"><span class="num"><i>U</i></span><span class="den"><i>l</i></span></span></div>
+    </div>
+    <p><b>（2）输出光强</b></p>
+    <div class="step"><b class="n">3</b>两支光沿同一方向（<i>x</i><sub>3</sub>）走过长度 <i>l</i>，相位差
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>(<i>n</i><sub>1</sub> − <i>n</i><sub>2</sub>)<i>l</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><span class="frac"><span class="num"><i>U</i></span><span class="den"><i>l</i></span></span><i>l</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>U</i></div>
+      <p style="margin:4px 0 0">纵向运用时 <i>l</i> 约掉 —— <b>相位差只与电压有关</b>，这是纵向电光调制最大的优点。</p>
+    </div>
+    <div class="step"><b class="n">4</b>入射振动与两偏振片透光轴成 45° ⇒ 进入晶体后沿感应主轴分解为等幅两份；正交偏振片 P<sub>2</sub> 只取出后到光的分量，干涉结果
+      <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup><span class="frac"><span class="num"><i>δ</i></span><span class="den">2</span></span> = <i>I</i><sub>0</sub> sin<sup>2</sup><span class="bkt"><span class="frac"><span class="num">π<i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>U</i></span><span class="den">λ</span></span></span></div>
+    </div>
+    <div class="step"><b class="n">5</b>数值化：π<i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub> = π × 3.649×10<sup>−11</sup> = 1.147×10<sup>−10</sup> m/V，故
+      <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup>(1.147×10<sup>−10</sup><span class="frac"><span class="num"><i>U</i></span><span class="den">λ</span></span>)，　λ = 550 nm 时 <i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup>(2.09×10<sup>−4</sup><i>U</i>)</div>
+    </div>
+    <div class="res"><i>n</i><sub>1,2</sub> = <b>1.51 ± 1.82×10<sup>−11</sup>(<i>U</i>/<i>l</i>)</b>（即 1.51 ± 1.82×10<sup>−11</sup><i>E</i>）；输出光强 <b><i>I</i> = <i>I</i><sub>0</sub>sin<sup>2</sup>(π<i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>U</i>/λ)</b>，与晶体长度无关。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q010">
+  <div class="hd"><span class="tag">2019-二-5</span><span class="ttl">KDP 强度调制器：U = 3.74 kV 时的相位差、U<sub>π</sub> 与 U<sub>2π</sub> 时的输出</span></div>
+  <div class="stem">如图所示为一电光强度调制器的原理图，电光晶体是纵向运用的 KDP 晶体，沿 <i>x</i><sub>3</sub> 方向晶体长度为 <i>l</i>，入射光的振动方向与检偏器 P 的透光方向垂直，且与 KDP 晶体的感应主轴（<i>x</i><sub>1</sub>′，<i>x</i><sub>2</sub>′）方向成 45° 角。入射光强为 <i>I</i><sub>0</sub>，若其波长为 550mm 时，KDP 晶体的 <i>n</i><sub>0</sub> = 1.51，γ<sub>63</sub> = 10.6×10<sup>−12</sup> cm/V，求：（1）与未加电场相比，加电场后 KDP 晶体的光学特性有哪些变化；（2）计算外加电压为 3.74×10<sup>3</sup> 伏特时，从晶体中射出的两偏振光的相位差；（3）计算 <i>U</i> = <i>U</i><sub>2π</sub>、<i>U</i><sub>π</sub> 时，通过检偏器 P 输出的光强。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2019-kdp-mod.png" alt="KDP 电光强度调制器" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+    <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 32 页）：起偏器 P<sub>1</sub>—KDP（<i>x</i><sub>1</sub>、<i>x</i><sub>2</sub> 为主轴）—检偏器 P<sub>2</sub>，光沿 <i>x</i><sub>3</sub></figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>未加电场：KDP 是单轴晶体，光沿光轴 <i>x</i><sub>3</sub> 传播 ⇒ <b>没有双折射</b>，任何偏振的入射光出射后偏振态不变。<br>
+      加电场后：<i>x</i><sub>3</sub> 方向加 <i>E</i>，电光张量 γ<sub>63</sub> 起作用，单轴晶体变成<b>双轴晶体</b>，感应主轴 <i>x</i><sub>1</sub>′、<i>x</i><sub>2</sub>′ 相对原主轴 <i>x</i><sub>1</sub>、<i>x</i><sub>2</sub> 转过 45°，并出现感应双折射 Δ<i>n</i> = <i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>E</i>；原来的光轴 <i>x</i><sub>3</sub> 不再是光轴（沿它传播会出现相位差）。
+    </div>
+    <p><b>（2）</b></p>
+    <div class="step"><b class="n">2</b>统一单位：γ<sub>63</sub> = 10.6×10<sup>−12</sup> cm/V = <b>1.06×10<sup>−11</sup> m/V</b>（题面把指数写成了 cm/V，若照字面算 <i>U</i><sub>π</sub> 会是 754 kV，与 KDP 公认的 7.5 kV 差 100 倍，故按 m/V 计）。
+    </div>
+    <div class="step"><b class="n">3</b>
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>U</i> = <span class="frac"><span class="num">2π</span><span class="den">550×10<sup>−9</sup></span></span> × 1.51<sup>3</sup> × 1.06×10<sup>−11</sup> × 3.74×10<sup>3</sup></div>
+      <div class="eqb">= <span class="frac"><span class="num">2π</span><span class="den">5.5×10<sup>−7</sup></span></span> × 1.3647×10<sup>−7</sup> = 2π × 0.2481 = <b>1.56 rad = 89.3° ≈ 0.496π</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>半波电压与全波电压
+      <div class="eqb"><i>U</i><sub>π</sub> = <span class="frac"><span class="num">λ</span><span class="den">2<i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub></span></span> = <span class="frac"><span class="num">5.5×10<sup>−7</sup></span><span class="den">2 × 3.4430 × 1.06×10<sup>−11</sup></span></span> = 7.54×10<sup>3</sup> V，　<i>U</i><sub>2π</sub> = 1.51×10<sup>4</sup> V</div>
+      <p style="margin:4px 0 0">（题给的 3.74 kV 正好≈<i>U</i><sub>π</sub>/2 = 3.77 kV，所以 δ 落在 90° 附近，与计算一致。）</p>
+    </div>
+    <p><b>（3）</b></p>
+    <div class="step"><b class="n">5</b>正交偏振片、45° 放置 ⇒ <i>I</i> = <i>I</i><sub>0</sub>sin<sup>2</sup>(<i>δ</i>/2)
+      <div class="eqb"><i>U</i> = <i>U</i><sub>π</sub>（δ = π）：<i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup>(π/2) = <b><i>I</i><sub>0</sub></b>；　<i>U</i> = <i>U</i><sub>2π</sub>（δ = 2π）：<i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup>π = <b>0</b></div>
+    </div>
+    <div class="res">（1）加电场后单轴变双轴，感应主轴转 45°、出现 Δ<i>n</i> = <i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>E</i> 的感应双折射；（2）<i>U</i> = 3.74 kV 时 <i>δ</i> ≈ <b>1.56 rad（89.3°）</b>；（3）<i>I</i>(<i>U</i><sub>π</sub>) = <b><i>I</i><sub>0</sub></b>，<i>I</i>(<i>U</i><sub>2π</sub>) = <b>0</b>。<i>U</i><sub>π</sub> ≈ 7.54 kV。</div>
+    <div class="warn"><b>单位坑（真题里就写错）</b>：KDP 的 γ<sub>63</sub> = 10.6×10<sup>−12</sup> m/V = 10.6×10<sup>−10</sup> cm/V。本题题面写"10.6×10<sup>−12</sup> cm/V"，与同一份资料里 2020-二-5、2009-7 的写法（10<sup>−10</sup> cm/V）不一致，按后者（=1.06×10<sup>−11</sup> m/V）才有 <i>U</i><sub>π</sub> ≈ 7.5 kV 的合理结果。另外题面"波长为 550mm"显然是 550 nm 之误（照 550 mm 算，δ 会小 10<sup>6</sup> 倍），本页按 550 nm 计算。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>本章范围</b>：PDF 第 23 页"第四章-光在各向异性介质中的传播特性"起，到第 32 页末（第五章标题在第 33 页）。本章完整落在负责页 21–35 内，无跨页截断。</p>
+  <p><b>未收录</b>（早于 2016 年，按"近 10 年"规则跳过）：2009-5、2009-6、2010-6、2011-7、2012-5、2012-6、2013-5、2014-6、2014-7。</p>
+  <p><b>页码接缝</b>：第 21–22 页仍是<b>第三章</b>（衍射）的尾巴，其中 2023-二-4、2016-二-3 属于 2016–2024 范围，已补进<code>851-计算题-第3章-衍射.html</code>末尾；第五章开头两题（2020-二-5、2022-三-6，第 33、35 页）见<code>851-计算题-第5章-感应双折射.html</code>。</p>
+  <p><b>标了【待核】的题</b>：2020-二-4（"间距"沿面量还是垂直量）、2016-二-4 第（3）问（相位差用等效折射率 <i>n</i><sub>e</sub>(45°) 还是主折射率 <i>n</i><sub>e</sub>）、2019-二-4 第（3）问（未给入射椭圆度）。</p>
+  <p><b>已知局限</b>：① 全部结论为自行推导（【自算】），未逐题比对机构答案册；② 旋向按"迎着光看，逆时针=左旋"，若约定相反请互换；③ 题面中的单位/符号笔误已在各题的 warn 中标注。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+  (function () {
+    var KEY = 'g851-c4-mastered';
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var stat = document.getElementById('stat');
+    function refresh() {
+      stat.textContent = '已掌握 ' + document.querySelectorAll('.q.done').length + ' / ' + qs.length;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+    qs.forEach(function (q) {
+      var tag = q.querySelector('.tag'), hd = q.querySelector('.hd');
+      if (!tag || !hd) return;
+      var id = tag.textContent.trim();
+      var lab = document.createElement('label');
+      lab.className = 'mk';
+      lab.innerHTML = '<input type="checkbox"> 已掌握';
+      var box = lab.querySelector('input');
+      box.checked = !!saved[id];
+      if (box.checked) q.classList.add('done');
+      box.addEventListener('change', function () {
+        if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+        else { delete saved[id]; q.classList.remove('done'); }
+        refresh();
+      });
+      hd.appendChild(lab);
+    });
+    refresh();
+    var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+    bAll.addEventListener('click', function () {
+      document.body.classList.remove('onlytodo');
+      bAll.classList.add('on'); bTodo.classList.remove('on');
+    });
+    bTodo.addEventListener('click', function () {
+      document.body.classList.add('onlytodo');
+      bTodo.classList.add('on'); bAll.classList.remove('on');
+    });
+  })();
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 计算题 · 早年真题 Part3（第 55–81 页，2009–2015）</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 计算题 · 早年真题 Part3（第 55–81 页）</h1>
+  <div class="sub">
+    标签年份 <b>2009–2015</b> · <b>21 道</b> · 解析法（棱镜）6、双光组 3、孔径/视场光阑 1、放大镜 2、显微镜 4、照相机 2、望远镜 3<br>
+    来源：<code>计算题分题型.pdf</code> 第 55–81 页；跳过 55–56 页（应用光学简答）与 2016 年及以后各题
+  </div>
+  <div class="lg">标注：<b>【真题】</b> 题面照录　<b>【自算】</b> 解答由我推导　<b>【待核】</b> 关键参数或结论待与答案册核对</div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#a">A 解析法·棱镜</a><a href="#b">B 双光组</a><a href="#c">C 光阑</a><a href="#d">D 放大镜</a><a href="#e">E 显微镜</a><a href="#f">F 照相机</a><a href="#g">G 望远镜</a>
+</nav>
+
+<div class="bar">
+  <span id="stat">已掌握 0 / 21</span>
+  <button id="f-all" class="on">全部</button>
+  <button id="f-todo">只看没掌握的</button>
+  <span style="margin-left:auto;font-size:12px">勾选自动记住</span>
+</div>
+
+<div class="warn" style="margin-top:20px">
+  <b>这一段是应用光学的主场</b>。前半（55–66 页）考"薄透镜 + 棱镜"的解析法，套路固定：<b>透镜成一次像 → 棱镜换成等效玻璃平板（厚度 L，沿光轴）→ 平板把像点再推 L(1−1/n) → 按折转后的光轴报位置</b>。
+  后半（67–81 页）是双光组、光阑、放大镜、显微镜、照相机、望远镜六个仪器的公式。符号一律按 <i>l</i> 左负右正、<i>β</i> = <i>l</i>′/<i>l</i>。
+</div>
+
+<div class="fbox">
+  <div class="fcard">
+    <div class="fname">高斯公式（全篇通用）</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span>　<i>β</i> = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span></span></div>
+    <div class="fnote">球面折射把 1/<i>f</i>′ 换成 (<i>n</i>′−<i>n</i>)/<i>r</i>，<i>β</i> = <i>nl</i>′/(<i>n</i>′<i>l</i>)。反射面用 1/<i>l</i>′ + 1/<i>l</i> = 2/<i>r</i>。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">平行平板位移</div>
+    <div class="fml"><span class="eqb" style="margin:0">Δ = <i>d</i><span class="bkt">1 − <span class="frac"><span class="num">1</span><span class="den"><i>n</i></span></span></span></span></div>
+    <div class="fnote">棱镜按反射面展开成玻璃板，厚度 = 沿光轴的光路长；像点沿光轴被推远 Δ，放大率不变。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">双光组</div>
+    <div class="fml"><span class="eqb" style="margin:0">Φ = Φ<sub>1</sub> + Φ<sub>2</sub> − <i>d</i>Φ<sub>1</sub>Φ<sub>2</sub></span></div>
+    <div class="fnote"><i>l</i><sub>F</sub>′ = <i>f</i>′(1 − <i>d</i>/<i>f</i><sub>1</sub>′)，<i>l</i><sub>F</sub> = −<i>f</i>′(1 − <i>d</i>/<i>f</i><sub>2</sub>′)，<i>l</i><sub>H</sub> = <i>f</i>′<i>d</i>/<i>f</i><sub>2</sub>′，<i>l</i><sub>H</sub>′ = −<i>f</i>′<i>d</i>/<i>f</i><sub>1</sub>′。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">仪器的三个 Γ</div>
+    <div class="fml"><span class="eqb" style="margin:0">Γ<sub>显</sub> = Γ<sub>物</sub>·<span class="frac"><span class="num">250</span><span class="den"><i>f</i><sub>2</sub>′</span></span>　Γ<sub>望</sub> = <span class="frac"><span class="num"><i>f</i><sub>1</sub>′</span><span class="den"><i>f</i><sub>2</sub>′</span></span></span></div>
+    <div class="fnote">放大镜 Γ = 250/<i>f</i>′；显微镜 Γ<sub>物</sub> = −Δ/<i>f</i><sub>1</sub>′（Δ 为光学筒长）；望远镜 Γ = −<i>f</i><sub>1</sub>′/<i>f</i><sub>2</sub>′。</div>
+  </div>
+</div>
+
+<!-- ===== A ===== -->
+<h2 id="a">A · 解析法：厚透镜、棱镜、反射膜<span class="cnt">6 题</span></h2>
+<div class="lead">前 6 题全是同一个循环：<b>折射 / 反射 / 再折射</b>，每一步套一个公式、记一个 <i>β</i>，最后连乘。棱镜只干两件事 —— 把光轴折转 90°，以及把空气换成厚度 <i>L</i> 的玻璃。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2009-8</span><span class="ttl">厚平凸透镜；加直角棱镜；后表面镀高反膜</span></div>
+  <div class="stem">一个由折射率为 1.5 的玻璃构成的平凸透镜，其前凸面为曲率半径为 30 cm 的球面，透镜的厚度为 15 cm。如果在透镜前 90 cm 有一个高为 5 mm 的物体：<br>
+  （1）试求透镜对物体直接成像时，像的位置和大小；<br>
+  （2）如果紧贴透镜的后平面放置一个一次反射等腰直角棱镜，其中构成棱镜的介质的折射率也是 1.5，棱镜的通光口径为 60 cm，试求这时系统的像的位置和大小；<br>
+  （3）如果在透镜的后平面上直接镀一层高反射膜，试求这时系统的像的位置和大小。</div>
+  <div class="ans">
+    <p><b>（1）厚透镜直接成像</b></p>
+    <div class="step"><b class="n">1</b>前凸面 <i>r</i><sub>1</sub> = +30 cm，后平面 <i>r</i><sub>2</sub> = ∞，<i>n</i> = 1.5，<i>d</i> = 15 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = (<i>n</i>−1)<span class="bkt"><span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span></span> = <span class="frac"><span class="num">0.5</span><span class="den">30</span></span>　⇒　<i>f</i>′ = <b>60 cm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>主面：<i>l</i><sub>H</sub> = 0（<i>r</i><sub>2</sub> = ∞，H 在前顶点）；<i>l</i><sub>H</sub>′ = −<i>f</i>′(<i>n</i>−1)<i>d</i>/(<i>n r</i><sub>1</sub>) = −60×0.5×15/(1.5×30) = −10 cm，即 H′ 在后顶点左方 10 cm（前顶点右方 5 cm）。
+    </div>
+    <div class="step"><b class="n">3</b>物在前 90 cm，对 H 取 <i>l</i> = −90
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> + <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">1</span><span class="den">180</span></span>　⇒　<i>l</i>′ = +180 cm（自 H′）</div>
+      <p style="margin:2px 0 0">换算到后顶点：180 − 10 = <b>170 cm</b>；<i>β</i> = 180/(−90) = −2，像高 10 mm。</p>
+    </div>
+    <div class="res">（1）像在后表面<b>右方 170 cm</b>，<b>倒立实像</b>，高 <b>10 mm</b>（<i>β</i> = −2）。</div>
+
+    <p style="margin-top:16px"><b>（2）紧贴直角棱镜：整体变成一块 75 cm 厚的玻璃板 + 折转 90°</b></p>
+    <div class="step"><b class="n">4</b>棱镜与前表面同折射率 1.5，界面不折射；一次反射直角棱镜沿光轴的光路长 = 直角边长，所以玻璃总厚 <i>d</i> = 15 + 60 = 75 cm，出射面在折转后的光轴上距前表面 75 cm。
+    </div>
+    <div class="step"><b class="n">5</b>先算玻璃内光束本会聚于何处（只经第一面折射）
+      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> − <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">0.5</span><span class="den">30</span></span>　⇒　<i>l</i><sub>1</sub>′ = 270 cm</div>
+    </div>
+    <div class="step"><b class="n">6</b>到出射面还差 270 − 75 = 195 cm（仍在玻璃内），由平面出射面折射进空气
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1.5</span><span class="den">195</span></span>　⇒　<i>l</i>′ = <b>130 cm</b></div>
+    </div>
+    <div class="res">（2）像在<b>棱镜出射面后 130 cm</b>（沿折转后的光轴），<b>倒立实像</b>，高 <b>10 mm</b>。平板放大率为 1，故与（1）同大。</div>
+
+    <p style="margin-top:16px"><b>（3）后平面镀高反膜：折射 → 反射 → 再折射</b></p>
+    <div class="step"><b class="n">7</b>第一步同（2）：<i>l</i><sub>1</sub>′ = 270 cm，<i>β</i><sub>1</sub> = (1×270)/(1.5×(−90)) = −2。
+    </div>
+    <div class="step"><b class="n">8</b>平面镜在后表面（距前顶点 15 cm）。会聚点在镜后 270 − 15 = 255 cm，即虚物 <i>l</i><sub>2</sub> = +255
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">2</span><span class="den">∞</span></span> − <span class="frac"><span class="num">1</span><span class="den">255</span></span>　⇒　<i>l</i><sub>2</sub>′ = −255 cm，　<i>β</i><sub>2</sub> = −<span class="frac"><span class="num">−255</span><span class="den">255</span></span> = +1</div>
+      <p style="margin:2px 0 0">即反射后光束会聚在镜前 255 cm，也就是前表面之前 240 cm。</p>
+    </div>
+    <div class="step"><b class="n">9</b>回穿前凸面（反向：<i>r</i><sub>3</sub> = −30，<i>n</i> = 1.5 → 1）。该会聚点已在出射方向上，故为虚物 <i>l</i><sub>3</sub> = +240
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>3</sub>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">240</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i><sub>3</sub>′ = <b>43.6 cm</b></div>
+      <div class="eqb"><i>β</i><sub>3</sub> = <span class="frac"><span class="num">1.5 × 43.64</span><span class="den">1 × 240</span></span> = 0.273</div>
+    </div>
+    <div class="step"><b class="n">10</b>连乘：<i>β</i> = (−2)(+1)(0.273) = −0.545，像高 5 × 0.545 = 2.73 mm。
+    </div>
+    <div class="res">（3）像在<b>前凸面之前 43.6 cm</b>（与物同侧，距物 90 − 43.6 = 46.4 cm），<b>实像</b>，<b>倒立</b>，高 <b>2.73 mm</b>。</div>
+    <div class="warn"><b>易错</b>：第 8 步的反射面是<b>平面</b>，<i>r</i> = ∞，只剩 <i>l</i><sub>2</sub>′ = −<i>l</i><sub>2</sub>；回穿凸面时曲率半径必须变号（+30 → −30），否则 43.6 cm 会算成 11 cm 一类的怪值。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2010-11</span><span class="ttl">f′ = 100 mm 薄透镜 + 90 mm 直角棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个一次反射等腰直角棱镜（介质折射率为 1.5，直角边长为 90 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图：透镜光轴水平，棱镜的竖直直角面在透镜右方 200 mm 处，光轴垂直射入该面，经斜边反射后向下折转 90° 射出，水平直角边 90 mm。）</span></div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜单独成像（<i>l</i> = −150，<i>f</i>′ = 100）
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">100</span></span> + <span class="frac"><span class="num">1</span><span class="den">−150</span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span>　⇒　<i>l</i>′ = 300 mm，　<i>β</i> = −2</div>
+      <p style="margin:2px 0 0">即会聚点在透镜右方 300 mm，而棱镜入射面在 200 mm 处，所以光束是<b>会聚着进棱镜</b>的。</p>
+    </div>
+    <div class="step"><b class="n">2</b>棱镜展开：一次反射直角棱镜沿光轴的光路长 <i>L</i> = 直角边长 = 90 mm（与入射高度无关：斜边两侧的入、出两段之和恒为 <i>a</i>），折射率 1.5。
+    </div>
+    <div class="step"><b class="n">3</b>把棱镜换成"空气等效板"：等价于把像点沿光轴再推远
+      <div class="eqb">Δ = <i>L</i><span class="bkt">1 − <span class="frac"><span class="num">1</span><span class="den">1.5</span></span></span> = <span class="frac"><span class="num">90</span><span class="den">3</span></span> = 30 mm</div>
+    </div>
+    <div class="step"><b class="n">4</b>会聚点距入射面 300 − 200 = 100 mm，被推到 100 + 30 = 130 mm；出射面在光路上距入射面 90 mm
+      <div class="eqb">像距出射面 = 130 − 90 = <b>40 mm</b></div>
+    </div>
+    <div class="res">像在<b>棱镜出射面外 40 mm</b>（沿向下折转 90° 后的光轴），<b>实像</b>，<b>倒立</b>，高 <b>2 mm</b>（平板 <i>β</i> = 1，总 <i>β</i> = −2）。</div>
+    <div class="warn"><b>捷径公式</b>：像距出射面 = (<i>l</i>′<sub>透镜</sub> − 入射面距离) + <i>L</i>/3 − <i>L</i> = (300−200) + 30 − 90 = 40 mm。后面几道棱镜题都套这个式子。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2011-12</span><span class="ttl">f′ = 100 mm 薄透镜 + 60 mm 直角棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个一次等腰直角棱镜（介质折射率为 1.5，直角边长为 60 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图与 2010-11 相同：棱镜竖直直角面距透镜 200 mm。）</span></div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜成像与 2010-11 完全一样：<i>l</i>′ = 300 mm，<i>β</i> = −2，会聚点距棱镜入射面 100 mm。
+    </div>
+    <div class="step"><b class="n">2</b><i>L</i> = 60 mm，平板位移
+      <div class="eqb">Δ = <span class="frac"><span class="num">60</span><span class="den">3</span></span> = 20 mm　⇒　会聚点被推到 100 + 20 = 120 mm（自入射面）</div>
+    </div>
+    <div class="step"><b class="n">3</b>出射面距入射面 60 mm
+      <div class="eqb">像距出射面 = 120 − 60 = <b>60 mm</b></div>
+    </div>
+    <div class="res">像在<b>棱镜出射面外 60 mm</b>，<b>倒立实像</b>，高 <b>2 mm</b>。棱镜变短（90→60），像离出射面反而更远 —— 因为总位移少了 10 mm、出射面又前移了 30 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2012-11</span><span class="ttl">f′ = 60 mm 薄透镜 + 60 mm 直角棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 60 mm 的薄透镜和一个一次等腰直角棱镜（介质折射率为 1.5，直角边长为 60 mm）构成的光学系统，在透镜前 90 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图：棱镜竖直直角面距透镜 120 mm，水平直角边 60 mm。）</span></div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜成像（<i>l</i> = −90，<i>f</i>′ = 60）
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> + <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">1</span><span class="den">180</span></span>　⇒　<i>l</i>′ = 180 mm，　<i>β</i> = −2</div>
+    </div>
+    <div class="step"><b class="n">2</b>会聚点距入射面 180 − 120 = 60 mm；<i>L</i> = 60 mm，Δ = 20 mm
+      <div class="eqb">会聚点被推到 60 + 20 = 80 mm（自入射面）</div>
+    </div>
+    <div class="step"><b class="n">3</b>出射面在 60 mm 处
+      <div class="eqb">像距出射面 = 80 − 60 = <b>20 mm</b></div>
+    </div>
+    <div class="res">像在<b>棱镜出射面外 20 mm</b>，<b>倒立实像</b>，高 <b>2 mm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2013-11</span><span class="ttl">f′ = 100 mm 薄透镜 + 二次反射五棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个二次反射五棱镜（介质折射率为 1.5，两个直角边长均为 60 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图：五棱镜左端竖直直角面距透镜 150 mm，顶面 60 mm，右上内角 112.5°；光轴垂直射入竖直面，两次反射后向下折转 90° 射出。）</span></div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜成像：同 2010-11，<i>l</i>′ = 300 mm，<i>β</i> = −2，会聚点距棱镜入射面 300 − 150 = 150 mm。
+    </div>
+    <div class="step"><b class="n">2</b>二次反射五棱镜按两个反射面展开成一块玻璃板，展开厚度（沿光轴的光路长）按标准五棱镜取
+      <div class="eqb"><i>L</i> = (2 + √2)<i>a</i> = 3.414 × 60 ≈ 205 mm</div>
+    </div>
+    <div class="step"><b class="n">3</b>平板位移 Δ = <i>L</i>(1 − 1/1.5) = 205/3 ≈ 68 mm；会聚点被推到 150 + 68 = 218 mm
+    </div>
+    <div class="step"><b class="n">4</b>出射面在光路上距入射面 <i>L</i> = 205 mm
+      <div class="eqb">像距出射面 = 218 − 205 ≈ <b>13 mm</b>　（通式：150 − <span class="frac"><span class="num">2<i>L</i></span><span class="den">3</span></span>）</div>
+    </div>
+    <div class="res">像在<b>五棱镜出射面外约 13 mm</b>（沿折转 90° 后的光轴），<b>倒立实像</b>，高 <b>2 mm</b>。</div>
+    <div class="warn"><b>【待核】</b>这题唯一不确定的量是五棱镜的<b>展开厚度 <i>L</i></b>：它取决于五边形各边长度，而题面只给了"两个直角边长 60 mm"与"112.5°"。本页按标准五棱镜 <i>L</i> = (2+√2)<i>a</i> ≈ 205 mm 计算。若课上取 <i>L</i> = 2<i>a</i> = 120 mm，则像距出射面 = 150 − 80 = <b>70 mm</b>；取 <i>L</i> = <i>a</i>(1+√2) = 145 mm，则为 <b>53 mm</b>。通式 150 − 2<i>L</i>/3 已给出，换 <i>L</i> 即得。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2014-11</span><span class="ttl">与 2013-11 参数完全相同的五棱镜题</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个二次反射五棱镜（介质折射率为 1.5，两个直角边长均为 60 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题面与 2013-11 逐字相同，题图也相同：五棱镜距透镜 150 mm、顶面 60 mm、内角 112.5°。）</span></div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>数据与 2013-11 完全一致，直接沿用其结论：透镜 <i>l</i>′ = 300 mm、<i>β</i> = −2；<i>L</i> ≈ 205 mm、Δ ≈ 68 mm。
+    </div>
+    <div class="step"><b class="n">2</b>
+      <div class="eqb">像距出射面 = (300 − 150) + 68 − 205 ≈ <b>13 mm</b>，　像高 = 2 mm</div>
+    </div>
+    <div class="res">与 <b>2013-11 答案相同</b>：像在<b>出射面外约 13 mm</b>，倒立实像，高 2 mm。两年同一道题、同一组数。</div>
+    <div class="warn"><b>【待核】</b>同 2013-11：不确定的只是五棱镜展开厚度 <i>L</i> 的取法。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+
+<!-- ===== B ===== -->
+<h2 id="b">B · 双光组：基点、焦距、间隔<span class="cnt">3 题</span></h2>
+<div class="lead">三个公式就能覆盖这一类：<b>Φ = Φ₁+Φ₂−dΦ₁Φ₂</b>、<b>l<sub>F</sub>′ = f′(1−d/f₁′)</b>、<b>l<sub>H</sub>′ = −f′d/f₁′</b>。求间隔的反问题则把它当方程组解。</div>
+
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2009-9</span><span class="ttl">f₁′ = 90 cm、f₂′ = 30 cm、d = 60 cm 的双光组</span></div>
+  <div class="stem">空气中由两个像方焦距依次为 90 cm 和 30 cm 的薄透镜构成光学系统，两个透镜的空间间隔为 60 cm：<br>
+  （1）试求系统等效光组的焦点和主点的位置，并画图表示基点与两个透镜的相对位置；<br>
+  （2）如果在第一个透镜前 45 cm 处放置一个物体，试求像面的位置。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>等效光焦度与焦距
+      <div class="eqb">Φ = <span class="frac"><span class="num">1</span><span class="den">90</span></span> + <span class="frac"><span class="num">1</span><span class="den">30</span></span> − 60 × <span class="frac"><span class="num">1</span><span class="den">90</span></span> × <span class="frac"><span class="num">1</span><span class="den">30</span></span> = 0.01111 + 0.03333 − 0.02222 = 0.02222</div>
+      <div class="eqb"><i>f</i>′ = <b>+45 cm</b>（会聚系统）</div>
+    </div>
+    <div class="step"><b class="n">2</b>主点位置（相对各自透镜，右正）
+      <div class="eqb"><i>l</i><sub>H</sub> = <span class="frac"><span class="num"><i>f</i>′<i>d</i></span><span class="den"><i>f</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">45 × 60</span><span class="den">30</span></span> = +90 cm　（H 在第一透镜右方 90 cm，即第二透镜右方 30 cm）</div>
+      <div class="eqb"><i>l</i><sub>H</sub>′ = −<span class="frac"><span class="num"><i>f</i>′<i>d</i></span><span class="den"><i>f</i><sub>1</sub>′</span></span> = −<span class="frac"><span class="num">45 × 60</span><span class="den">90</span></span> = −30 cm　（H′ 在第二透镜左方 30 cm，即第一透镜右方 30 cm）</div>
+    </div>
+    <div class="step"><b class="n">3</b>焦点位置
+      <div class="eqb"><i>l</i><sub>F</sub>′ = <i>f</i>′<span class="bkt">1 − <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i><sub>1</sub>′</span></span></span> = 45<span class="bkt">1 − <span class="frac"><span class="num">60</span><span class="den">90</span></span></span> = <b>+15 cm</b>　（F′ 在第二透镜右方 15 cm）</div>
+      <div class="eqb"><i>l</i><sub>F</sub> = −<i>f</i>′<span class="bkt">1 − <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i><sub>2</sub>′</span></span></span> = −45<span class="bkt">1 − <span class="frac"><span class="num">60</span><span class="den">30</span></span></span> = <b>+45 cm</b>　（F 在第一透镜右方 45 cm，即第二透镜左方 15 cm）</div>
+      <p style="margin:2px 0 0">核对：<i>l</i><sub>H</sub>′ + <i>f</i>′ = 30 + 45 = 75 cm（第一透镜右方）= 第二透镜右方 15 cm ✓；<i>l</i><sub>H</sub> − <i>f</i>′ = 90 − 45 = 45 cm ✓。</p>
+    </div>
+    <div class="step"><b class="n">4</b>（2）物在第一透镜前 45 cm，换算到 H 为 <i>l</i> = −(45 + 90) = −135 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">45</span></span> + <span class="frac"><span class="num">1</span><span class="den">−135</span></span> = <span class="frac"><span class="num">2</span><span class="den">135</span></span>　⇒　<i>l</i>′ = +67.5 cm（自 H′）</div>
+      <p style="margin:2px 0 0">换回原坐标：67.5 + 30 = 97.5 cm（第一透镜右方），即<b>第二透镜右方 37.5 cm</b>；<i>β</i> = 67.5/(−135) = −0.5。</p>
+    </div>
+    <div class="res">（1）<i>f</i>′ = <b>45 cm</b>；F′ 在第二透镜右 15 cm，F 在第一透镜右 45 cm；H 在第一透镜右 90 cm，H′ 在第一透镜右 30 cm（H 在 H′ 右侧，属"负间隔"型基点排列）。<br>（2）像在<b>第二透镜右方 37.5 cm</b>，实像，倒立，<i>β</i> = −0.5。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2015-9</span><span class="ttl">两个 f′ = 60 mm、间隔 40 mm 的透镜组成的目镜</span></div>
+  <div class="stem">用焦距同为 60 mm 的两个薄透镜在空气中构成一个目镜，两个薄透镜的空间间隔为 40 mm，试问：（1）该目镜等效光组的焦点和主点的位置；（2）如果在第一个透镜前 10 mm 处放置一个物体，试求像面的位置。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>等效焦距（<i>f</i><sub>1</sub>′ = <i>f</i><sub>2</sub>′ = 60，<i>d</i> = 40）
+      <div class="eqb"><i>f</i>′ = <span class="frac"><span class="num"><i>f</i><sub>1</sub>′<i>f</i><sub>2</sub>′</span><span class="den"><i>f</i><sub>1</sub>′ + <i>f</i><sub>2</sub>′ − <i>d</i></span></span> = <span class="frac"><span class="num">3600</span><span class="den">80</span></span> = <b>45 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>主点
+      <div class="eqb"><i>l</i><sub>H</sub> = <span class="frac"><span class="num">45 × 40</span><span class="den">60</span></span> = +30 mm，　<i>l</i><sub>H</sub>′ = −<span class="frac"><span class="num">45 × 40</span><span class="den">60</span></span> = −30 mm</div>
+      <p style="margin:2px 0 0">H 在第一透镜右 30 mm（= 第二透镜左 10 mm）；H′ 在第二透镜左 30 mm（= 第一透镜右 10 mm）。</p>
+    </div>
+    <div class="step"><b class="n">3</b>焦点
+      <div class="eqb"><i>l</i><sub>F</sub>′ = 45<span class="bkt">1 − <span class="frac"><span class="num">40</span><span class="den">60</span></span></span> = +15 mm，　<i>l</i><sub>F</sub> = −45<span class="bkt">1 − <span class="frac"><span class="num">40</span><span class="den">60</span></span></span> = −15 mm</div>
+      <p style="margin:2px 0 0">F′ 在第二透镜右 15 mm；F 在第一透镜左 15 mm。</p>
+    </div>
+    <div class="step"><b class="n">4</b>（2）物在第一透镜前 10 mm，对 H 取 <i>l</i> = −(10 + 30) = −40 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">45</span></span> + <span class="frac"><span class="num">1</span><span class="den">−40</span></span> = −<span class="frac"><span class="num">1</span><span class="den">360</span></span>　⇒　<i>l</i>′ = −360 mm</div>
+      <p style="margin:2px 0 0"><i>l</i>′ &lt; 0 ⇒ 像在 H′ 左方 360 mm，而 H′ 在第一透镜右 10 mm，故像在<b>第一透镜左方 350 mm</b>；<i>β</i> = −360/(−40) = <b>+9</b>。</p>
+    </div>
+    <div class="res">（1）<i>f</i>′ = <b>45 mm</b>；F′ 在第二透镜右 15 mm，F 在第一透镜左 15 mm；H 在第一透镜右 30 mm，H′ 在第一透镜右 10 mm。<br>（2）像在<b>第一透镜前方 350 mm</b>，<b>正立虚像</b>，<i>β</i> = +9。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2010-10</span><span class="ttl">已知 f′、总长度 L、后焦距 l<sub>F</sub>′，反求两个焦距与间隔</span></div>
+  <div class="stem">已知两个薄透镜组合，组合系统焦距 <i>f</i>′ = 1000 mm，总长度（第一薄透镜到系统像方焦点的距离）<i>L</i> = 700 mm，总焦点位置 <i>l</i><sub>F</sub>′ = 400 mm，求组成此系统的两个薄透镜像方焦距及其间隔。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>"总长度"就是第一透镜到 F′ 的距离，而 <i>l</i><sub>F</sub>′ 是第二透镜到 F′ 的距离，故间隔直接可定
+      <div class="eqb"><i>L</i> = <i>d</i> + <i>l</i><sub>F</sub>′　⇒　<i>d</i> = 700 − 400 = <b>300 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>由 <i>l</i><sub>F</sub>′ = <i>f</i>′(1 − <i>d</i>/<i>f</i><sub>1</sub>′) 解第一透镜
+      <div class="eqb">400 = 1000<span class="bkt">1 − <span class="frac"><span class="num">300</span><span class="den"><i>f</i><sub>1</sub>′</span></span></span>　⇒　<span class="frac"><span class="num">300</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = 0.6　⇒　<i>f</i><sub>1</sub>′ = <b>500 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>由光焦度公式解第二透镜
+      <div class="eqb">Φ = <span class="frac"><span class="num">1</span><span class="den">1000</span></span> = <span class="frac"><span class="num">1</span><span class="den">500</span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>2</sub>′</span></span> − <span class="frac"><span class="num">300</span><span class="den">500 <i>f</i><sub>2</sub>′</span></span></div>
+      <div class="eqb">0.001 = 0.002 + <span class="frac"><span class="num">0.4</span><span class="den"><i>f</i><sub>2</sub>′</span></span>　⇒　<i>f</i><sub>2</sub>′ = <b>−400 mm</b>（负透镜）</div>
+    </div>
+    <div class="step"><b class="n">4</b>验算：<i>l</i><sub>F</sub>′ = 1000(1 − 300/500) = 400 ✓；<i>L</i> = 300 + 400 = 700 ✓；<i>l</i><sub>F</sub> = −1000(1 − 300/(−400)) = −1750 mm。
+    </div>
+    <div class="res"><b><i>f</i><sub>1</sub>′ = 500 mm，<i>f</i><sub>2</sub>′ = −400 mm，<i>d</i> = 300 mm</b>。这是一个典型的<b>摄远（远摄）物镜</b>：正组在前、负组在后，筒长 300 mm 却给出 1000 mm 的焦距，物方焦点在系统前 1750 mm。</div>
+    <div class="warn"><b>关键在读题</b>：题面写的是 <i>l</i><sub>F</sub>′（像方焦点的位置，从第二个透镜量），不是 <i>l</i><sub>F</sub>。若误当 <i>l</i><sub>F</sub> = 400 去算，会得到 <i>d</i> = 1200 mm &gt; <i>L</i> = 700 mm 的矛盾结果。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== C ===== -->
+<h2 id="c">C · 孔径光阑、入瞳、出瞳<span class="cnt">1 题</span></h2>
+<div class="lead">判据只有一个：<b>把每个光孔都对它前面的光学元件成像（得到"入瞳"候选），再从物点看谁张角最小，谁就是孔径光阑</b>。物在无穷远时，光线高度沿轴不变，直接比直径。</div>
+
+<div class="q" id="q010">
+  <div class="hd"><span class="tag">2010-12</span><span class="ttl">物在 −∞ 与 −300 mm 时的光阑、入瞳、出瞳</span></div>
+  <div class="stem">焦距为 <i>f</i>′ = 120 mm 的薄透镜，直径 <i>D</i><sub>0</sub> = 40 mm，在透镜前 50 mm 处有一光孔，直径 <i>D</i><sub>p</sub> = 35 mm。试问物体在 −∞ 和 −300 mm 处时，孔径光阑、入瞳和出瞳的位置和大小。</div>
+  <div class="ans">
+    <p><b>（1）物在 −∞</b></p>
+    <div class="step"><b class="n">1</b>平行光入射，光线在各面上的高度相同，故只看通光直径：光孔 35 mm &lt; 透镜框 40 mm
+      <div class="eqb">⇒ <b>孔径光阑 = 光孔</b>（透镜前 50 mm，直径 35 mm）</div>
+    </div>
+    <div class="step"><b class="n">2</b>入瞳 = 光孔经其前方元件所成的像。光孔前方无元件，故入瞳就是光孔本身
+      <div class="eqb">入瞳：透镜前 50 mm，<b>D = 35 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>出瞳 = 光孔经其后方元件（透镜）所成的像。<i>l</i> = −50 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">120</span></span> + <span class="frac"><span class="num">1</span><span class="den">−50</span></span> = −0.011667　⇒　<i>l</i>′ = −85.7 mm</div>
+      <div class="eqb"><i>β</i> = <span class="frac"><span class="num">−85.7</span><span class="den">−50</span></span> = +1.71　⇒　<i>D</i>′ = 35 × 1.71 ≈ <b>60 mm</b></div>
+      <p style="margin:2px 0 0"><i>l</i>′ &lt; 0 ⇒ 出瞳在透镜<b>前</b>方 85.7 mm，是<b>虚出瞳</b>。</p>
+    </div>
+    <p style="margin-top:16px"><b>（2）物在 −300 mm</b></p>
+    <div class="step"><b class="n">4</b>从轴上物点看两个光孔的半张角（张角小者为光阑）
+      <div class="eqb">光孔：tan<i>U</i> = <span class="frac"><span class="num">17.5</span><span class="den">300 − 50</span></span> = 0.0700　　</div>
+      <div class="eqb">透镜框：tan<i>U</i> = <span class="frac"><span class="num">20</span><span class="den">300</span></span> = 0.0667　&lt; 0.0700</div>
+      <p style="margin:2px 0 0">⇒ <b>孔径光阑 = 透镜框</b>。物移近后，原本"更小"的光孔反而张角更大，光阑换人了 —— 这是本题的考点。</p>
+    </div>
+    <div class="step"><b class="n">5</b>透镜框前方、后方都没有别的元件，故入瞳、出瞳都与之重合
+      <div class="eqb">入瞳 = 出瞳 = <b>透镜框本身</b>：位于透镜处，<b>D = 40 mm</b></div>
+    </div>
+    <div class="res">物在 <b>−∞</b>：光阑为光孔（前 50 mm、Ø35），入瞳同处 Ø35，出瞳在透镜前 85.7 mm、Ø60（虚）。<br>
+      物在 <b>−300 mm</b>：光阑为透镜框，入瞳 = 出瞳 = 透镜框（Ø40，位于透镜处）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== D ===== -->
+<h2 id="d">D · 放大镜<span class="cnt">2 题</span></h2>
+<div class="lead">放大镜题的固定套路：<b>物在物方焦平面</b>时，瞳孔位于像方焦点，于是"入射窗/孔径角"全部退化成初中几何。判光阑仍用"从物点看张角"。</div>
+
+<div class="q" id="q011">
+  <div class="hd"><span class="tag">2013-12</span><span class="ttl">f′ = 40 mm、D₁ = 30 mm 的放大镜：光阑、入瞳、入窗、线视场</span></div>
+  <div class="stem">一个像方焦距为 40 mm，直径 <i>D</i><sub>1</sub> = 30 mm 的薄透镜做成放大镜，眼瞳位于透镜像方焦点 F′ 上，眼瞳直径 <i>D</i><sub>2</sub> = 4 mm，物面放在透镜物方焦平面上。试问：<br>
+  （1）哪一个是孔径光阑，哪一个是视场光阑；（2）入瞳在哪里，物方孔径角等于多少；（3）入窗在哪里，物方无渐晕的线视场等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>判孔径光阑：从轴上物点（在 F 上）看两个光孔的<b>像方张角</b>。
+      <div class="eqb">透镜框：tan<i>U</i> = <span class="frac"><span class="num">15</span><span class="den">40</span></span> = 0.375</div>
+      <p style="margin:2px 0 0">眼瞳在 F′ 上，从物方看它<b>经透镜成像于无穷远</b>，只能比"光束半宽"：物点在 F 上，出射光束平行于光轴，在透镜处的半宽就等于瞳孔半径 2 mm，即 tan<i>U</i> = 2/40 = 0.05。</p>
+      <div class="eqb">0.05 &lt; 0.375　⇒　<b>孔径光阑 = 眼瞳</b>，<b>视场光阑 = 放大镜框</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>入瞳 = 眼瞳经其前方元件（放大镜）所成的像。眼瞳在 F′，故像在物方无穷远
+      <div class="eqb">入瞳：位于物方<b>无穷远</b>，角半径 = <span class="frac"><span class="num"><i>D</i><sub>2</sub>/2</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">2</span><span class="den">40</span></span> = 0.05 rad</div>
+      <div class="eqb">物方孔径角 2<i>U</i> = <span class="frac"><span class="num"><i>D</i><sub>2</sub></span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">4</span><span class="den">40</span></span> = 0.1 rad ≈ <b>5.7°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>入窗 = 视场光阑经其前方元件所成的像。放大镜框前方无元件，故入窗就是镜框本身
+      <div class="eqb">入窗：位于<b>放大镜处</b>，直径 <b>30 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>线视场：物在物方焦平面，物高 <i>y</i> 的主光线过瞳孔中心（F′ 处轴上点），由相似三角形知它在透镜上的高度为 <i>y</i>/2；光束在透镜处的半宽 = 瞳孔半径 2 mm。无渐晕要求整束光都通过镜框（半径 15 mm）
+      <div class="eqb"><span class="frac"><span class="num"><i>y</i></span><span class="den">2</span></span> + 2 ≤ 15　⇒　<i>y</i> ≤ 26 mm　⇒　2<i>y</i> = <b>52 mm</b></div>
+    </div>
+    <div class="res">（1）孔径光阑 = <b>眼瞳</b>，视场光阑 = <b>放大镜框</b>；（2）入瞳在物方<b>无穷远</b>，物方孔径角 <b>0.1 rad（5.7°）</b>；（3）入窗在<b>放大镜处</b>（Ø30），物方无渐晕线视场 <b>2y = 52 mm</b>。</div>
+    <div class="warn"><b>说明</b>：若只算主光线、不计光束宽度（有的教材这么处理），则 <i>y</i>/2 ≤ 15 ⇒ 2<i>y</i> = 60 mm。本题明确说"<b>无渐晕</b>"，所以取 52 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q012">
+  <div class="hd"><span class="tag">2015-10</span><span class="ttl">与 2013-12 同参数的放大镜题</span></div>
+  <div class="stem">将一个像方焦距为 40 mm，直径 <i>D</i><sub>1</sub> = 30 mm 的薄透镜做成放大镜，眼瞳位于透镜像方焦点 F′ 上，眼瞳直径 <i>D</i><sub>2</sub> = 4 mm，物面放在透镜物方焦平面上。试问：（1）哪一个是孔径光阑，哪一个是视场光阑；（2）入瞳在哪里，物方孔径角等于多少；（3）入窗在哪里，物方无渐晕的线视场等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>与 2013-12 逐字相同，结论直接沿用：眼瞳张角 0.05 rad &lt; 镜框 0.375 rad，故<b>孔径光阑 = 眼瞳</b>、<b>视场光阑 = 镜框</b>。
+    </div>
+    <div class="step"><b class="n">2</b>入瞳在物方无穷远，物方孔径角 2<i>U</i> = <i>D</i><sub>2</sub>/<i>f</i>′ = 4/40 = 0.1 rad。
+    </div>
+    <div class="step"><b class="n">3</b>入窗 = 镜框本身（放大镜处，Ø30）；线视场 <i>y</i>/2 + 2 ≤ 15 ⇒ 2<i>y</i> = 52 mm。
+    </div>
+    <div class="res">同 <b>2013-12</b>：光阑为眼瞳（孔径）/镜框（视场），入瞳在无穷远、孔径角 0.1 rad，入窗在镜框处，无渐晕线视场 2<i>y</i> = <b>52 mm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== E ===== -->
+<h2 id="e">E · 显微镜<span class="cnt">4 题</span></h2>
+<div class="lead">两条主线：<b>几何</b>（共轭距、光学筒长 Δ = <i>l</i>′−<i>f</i><sub>1</sub>′、间距 = <i>l</i>′+<i>f</i><sub>2</sub>′）与<b>分辨</b>（0.61λ/NA，或用"人眼 60″ ÷ Γ × 250"换算）。两类题都用 <i>Γ</i> = <i>Γ</i><sub>物</sub>·250/<i>f</i><sub>2</sub>′ 串起来。</div>
+
+<div class="q" id="q013">
+  <div class="hd"><span class="tag">2010-13</span><span class="ttl">β₁ = −40、Γ₂ = 15、共轭距 195 mm 的显微镜</span></div>
+  <div class="stem">有一显微镜系统，物镜的放大率为 −40，目镜的倍率为 15（设均为薄透镜），物镜的共轭距为 195 mm，求物镜和目镜的焦距、物体的位置和光学筒长、物镜与目镜的间距、系统等效焦距与总倍率。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>物镜：共轭距 = <i>l</i>′ − <i>l</i> = 195，且 <i>β</i><sub>1</sub> = <i>l</i>′/<i>l</i> = −40 ⇒ <i>l</i>′ = −40<i>l</i>
+      <div class="eqb">−40<i>l</i> − <i>l</i> = 195　⇒　<i>l</i> = <b>−4.76 mm</b>，　<i>l</i>′ = <b>+190.2 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>物镜焦距
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">190.2</span></span> − <span class="frac"><span class="num">1</span><span class="den">−4.76</span></span> = 0.00526 + 0.21008 = 0.21534　⇒　<i>f</i><sub>1</sub>′ = <b>4.64 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>目镜视角放大率 15 ⇒ <i>f</i><sub>2</sub>′ = 250/15 = <b>16.7 mm</b>
+    </div>
+    <div class="step"><b class="n">4</b>光学筒长（物镜像方焦点到目镜物方焦点）
+      <div class="eqb">Δ = <i>l</i>′ − <i>f</i><sub>1</sub>′ = 190.2 − 4.64 = <b>185.6 mm</b></div>
+      <p style="margin:2px 0 0">验算：<i>Γ</i><sub>物</sub> = −Δ/<i>f</i><sub>1</sub>′ = −185.6/4.64 = −40 ✓</p>
+    </div>
+    <div class="step"><b class="n">5</b>两镜间距 = <i>l</i>′ + <i>f</i><sub>2</sub>′ = 190.2 + 16.7 = <b>206.9 mm</b>
+    </div>
+    <div class="step"><b class="n">6</b>系统等效焦距与总倍率
+      <div class="eqb"><i>f</i>′ = −<span class="frac"><span class="num"><i>f</i><sub>1</sub>′<i>f</i><sub>2</sub>′</span><span class="den">Δ</span></span> = −<span class="frac"><span class="num">4.64 × 16.7</span><span class="den">185.6</span></span> = <b>−0.417 mm</b>，　<i>Γ</i> = (−40)(15) = <b>−600×</b></div>
+    </div>
+    <div class="res">物镜 <b><i>f</i><sub>1</sub>′ = 4.64 mm</b>、目镜 <b><i>f</i><sub>2</sub>′ = 16.7 mm</b>；物在物镜前 <b>4.76 mm</b>（<i>l</i> = −4.76）；光学筒长 <b>185.6 mm</b>；镜间距 <b>206.9 mm</b>；<i>f</i>′ = <b>−0.417 mm</b>，总倍率 <b>Γ = −600×</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q014">
+  <div class="hd"><span class="tag">2012-13</span><span class="ttl">Γ = −300×、目镜 20 mm：物镜倍率与最小分辨距离</span></div>
+  <div class="stem">已知显微镜的视角放大率为 −300×，目镜的焦距为 20 mm，求显微镜物镜的倍率。假定人眼的视角分辨率为 60″，问使用该显微镜观察时，能分辨的两物点的最小距离等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>目镜的视角放大率
+      <div class="eqb"><i>Γ</i><sub>2</sub> = <span class="frac"><span class="num">250</span><span class="den"><i>f</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">250</span><span class="den">20</span></span> = 12.5×</div>
+    </div>
+    <div class="step"><b class="n">2</b>总倍率是两级相乘
+      <div class="eqb"><i>Γ</i><sub>1</sub> = <span class="frac"><span class="num">Γ</span><span class="den"><i>Γ</i><sub>2</sub></span></span> = <span class="frac"><span class="num">−300</span><span class="den">12.5</span></span> = <b>−24×</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>分辨判据：把物方间隔 <i>δ</i> 放大 <i>Γ</i> 倍后（相对明视距离 250 mm）恰等于人眼分辨角
+      <div class="eqb">60″ = 2.91×10<sup>−4</sup> rad，　<span class="frac"><span class="num">Γ<i>δ</i></span><span class="den">250</span></span> = 2.91×10<sup>−4</sup></div>
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">250 × 2.91×10<sup>−4</sup></span><span class="den">300</span></span> = 2.42×10<sup>−4</sup> mm ≈ <b>0.24 μm</b></div>
+    </div>
+    <div class="res">物镜倍率 <b>Γ₁ = −24×</b>；能分辨的两物点最小距离 <b>δ ≈ 0.24 μm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q015">
+  <div class="hd"><span class="tag">2015-11</span><span class="ttl">与 2012-13 同参数（−300×、目镜 20 mm、60″）</span></div>
+  <div class="stem">已知显微镜的视角放大率为 −300×，目镜的焦距为 20 mm，求显微镜物镜的倍率。假定人眼的视角分辨率为 60″，问使用该显微镜观察时，能分辨的两物点的最小距离等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b><i>Γ</i><sub>2</sub> = 250/20 = 12.5，<i>Γ</i><sub>1</sub> = −300/12.5 = <b>−24×</b>
+    </div>
+    <div class="step"><b class="n">2</b><i>δ</i> = 250 × (60/206265)/300 = 2.42×10<sup>−4</sup> mm ≈ <b>0.24 μm</b>
+    </div>
+    <div class="res">同 2012-13：物镜 <b>−24×</b>，最小分辨距离 <b>0.24 μm</b>。若改用衍射判据 0.61λ/NA（λ = 550 nm，NA ≈ 0.65）也落在 0.5 μm 量级，两法互相印证。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q016">
+  <div class="hd"><span class="tag">2013-13</span><span class="ttl">Γ = −1000×、NA = 1.3、λ = 555 nm 的分辨距离</span></div>
+  <div class="stem">有一架显微镜，视角放大率 <i>Γ</i> = −1000×，目镜焦距为 25 mm，显微物镜的数值孔径为 1.3，求系统在物平面上能分辨的两物点的最小间隔以及在物镜像平面上能分辨的最小间隔（照明波长为 555 nm）。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>放大率分配：<i>Γ</i><sub>2</sub> = 250/25 = 10 ⇒ <i>Γ</i><sub>1</sub> = −1000/10 = <b>−100×</b>
+    </div>
+    <div class="step"><b class="n">2</b>物面分辨极限用数值孔径（瑞利判据）
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">0.61λ</span><span class="den">NA</span></span> = <span class="frac"><span class="num">0.61 × 555</span><span class="den">1.3</span></span> nm = <b>260 nm = 0.26 μm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>物镜像平面上的间隔 = 物镜放大 100 倍后的间隔
+      <div class="eqb"><i>δ</i>′ = |<i>Γ</i><sub>1</sub>| · <i>δ</i> = 100 × 0.26 = <b>26 μm</b></div>
+    </div>
+    <div class="res">物面上最小可分辨间隔 <b>δ ≈ 0.26 μm</b>；物镜像平面上最小可分辨间隔 <b>δ′ ≈ 26 μm</b>（恰好是 100 倍关系）。</div>
+    <div class="warn"><b>两种判据</b>：有的教材取 <i>δ</i> = 0.5λ/NA，则 δ = 0.21 μm、δ′ = 21 μm。本题给了 NA 和 λ，说明要用衍射判据而不是"人眼 60″"那一套。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== F ===== -->
+<h2 id="f">F · 照相机：景深与近拍镜<span class="cnt">2 题</span></h2>
+<div class="lead">景深题先定<b>容许弥散圆 z</b>（题面没给，通行取 z = 0.03 mm，135 画幅标准），再用"像面上弥散斑 = <i>D</i>·Δ<i>l</i>′/<i>l</i>′"列式；近拍镜题的本质是"让 0.2 m 的物经近拍镜成一虚像，正好落在相机原调焦距离上"。</div>
+
+<div class="q" id="q017">
+  <div class="hd"><span class="tag">2012-12</span><span class="ttl">f′ = 75 mm、F = 16，远景到无穷远时的对准平面与近景面</span></div>
+  <div class="stem">如果照相物镜的对准平面以后的整个空间都能在景像平面上成清晰像，物镜的焦距 <i>f</i>′ = 75 mm，所用光圈数 <i>F</i> = 16。求对准平面位置和近景面的位置。如果调焦于无限远处，即 <i>p</i> = ∞，求近景位置。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>取容许弥散圆 <i>z</i> = 0.03 mm，则孔径 <i>D</i> = <i>f</i>′/<i>F</i> = 75/16 = 4.69 mm，判据为
+      <div class="eqb"><span class="frac"><span class="num"><i>z</i></span><span class="den"><i>D</i></span></span> = <span class="frac"><span class="num"><i>z F</i></span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">0.03 × 16</span><span class="den">75</span></span> = 0.0064</div>
+    </div>
+    <div class="step"><b class="n">2</b>"对准平面以后全部清晰" ⇒ 远景 <i>p</i><sub>1</sub> = ∞，其像正好落在景像平面上，即像距
+      <div class="eqb"><i>p</i>′ = <i>f</i>′ + <i>zF</i> = 75 + 0.48 = 75.48 mm</div>
+    </div>
+    <div class="step"><b class="n">3</b>由像距反求对准平面
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>p</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">75</span></span> − <span class="frac"><span class="num">1</span><span class="den">75.48</span></span> = 8.479×10<sup>−5</sup>　⇒　<i>p</i> = <b>11.8 m</b></div>
+      <p style="margin:2px 0 0">等价写法：<i>p</i> = <i>f</i>′<sup>2</sup>/(<i>zF</i>) + <i>f</i>′ = 5625/0.48 + 75 = 11794 mm。</p>
+    </div>
+    <div class="step"><b class="n">4</b>近景面：弥散斑同样为 <i>z</i> 时，近物的像距 <i>p</i><sub>2</sub>′ = <i>p</i>′/(1 − 0.0064) = 75.966 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>p</i><sub>2</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">75</span></span> − <span class="frac"><span class="num">1</span><span class="den">75.966</span></span> = 1.696×10<sup>−4</sup>　⇒　<i>p</i><sub>2</sub> = <b>5.9 m</b></div>
+      <p style="margin:2px 0 0">"远景到 ∞"时恒有 <i>p</i> = 2<i>p</i><sub>2</sub> 这一好用的结论，可用来秒验。</p>
+    </div>
+    <div class="step"><b class="n">5</b>调焦于无穷远（<i>p</i> = ∞，<i>p</i>′ = <i>f</i>′ = 75 mm）：近景像距 75.483 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>p</i><sub>2</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">75</span></span> − <span class="frac"><span class="num">1</span><span class="den">75.483</span></span> = 8.55×10<sup>−5</sup>　⇒　<i>p</i><sub>2</sub> = <b>11.7 m</b></div>
+    </div>
+    <div class="res">对准平面 <b>11.8 m</b>，近景面 <b>5.9 m</b>（景深 5.9 m → ∞）；调焦无穷远时近景 <b>11.7 m</b>。</div>
+    <div class="warn"><b>【待核】</b>题面未给容许弥散圆，本页取 <i>z</i> = 0.03 mm。若你们课程取 <i>z</i> = 0.05 mm，则 <i>zF</i> = 0.8，<i>p</i> = 5625/0.8 + 75 = 7.1 m，<i>p</i><sub>2</sub> = 3.5 m，<i>p</i><sub>2</sub>(∞) = 7.0 m。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+
+<div class="q" id="q018">
+  <div class="hd"><span class="tag">2014-12</span><span class="ttl">0.6 m 的相机加近拍镜能拍 0.2 m，求近拍镜焦距</span></div>
+  <div class="stem">一台照相机只能够对其 0.6 m 以前的物体成像。通过增加近拍镜可以拍摄更近的物体，要使该照相机能够拍摄其 0.2 m 以前的物体，近拍镜的焦距应该为多少？（将近拍镜看作薄透镜）</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>相机调焦范围到 0.6 m 为止，说明它最靠近的位置对应"物在 0.6 m"。加近拍镜后相机仍按 0.6 m 调焦，所以要<b>让 0.2 m 处的物经近拍镜后，其像正好出现在 0.6 m 处</b>（虚像）。
+    </div>
+    <div class="step"><b class="n">2</b>对近拍镜：物 <i>l</i> = −200 mm，像 <i>l</i>′ = −600 mm（虚像、在物同侧）
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">−600</span></span> − <span class="frac"><span class="num">1</span><span class="den">−200</span></span> = <span class="frac"><span class="num">2</span><span class="den">600</span></span></div>
+      <div class="eqb"><i>f</i>′ = <b>+300 mm</b>（光焦度 +3.33 D）</div>
+    </div>
+    <div class="step"><b class="n">3</b>验算：近拍镜把 0.2 m 的物成 0.6 m 处的正立虚像，相机对 0.6 m 调焦即可拍清；放大率 <i>β</i> = −600/−200 = +3，画面中心仍是正立的。
+    </div>
+    <div class="res">近拍镜焦距 <b><i>f</i>′ = +300 mm</b>（即 +3.33 屈光度、俗称 No.3 近拍镜）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== G ===== -->
+<h2 id="g">G · 望远镜<span class="cnt">3 题</span></h2>
+<div class="lead">三条线：<b>Γ = <i>f</i><sub>1</sub>′/<i>f</i><sub>2</sub>′</b> 定结构、<b>1.22λ/<i>D</i> ≤ 1′/Γ</b> 定口径（"不出现空放大"）、<b>视场光阑在中间像面</b>定视场。<b>筒长 = <i>f</i><sub>1</sub>′ + <i>f</i><sub>2</sub>′</b>。</div>
+
+<div class="q" id="q019">
+  <div class="hd"><span class="tag">2009-11</span><span class="ttl">10× 、f₁′ = 20 cm：目镜焦距、物镜口径、出射光束宽度</span></div>
+  <div class="stem">想设计一个由两个正的薄透镜构成的放大倍率为 10× 的望远镜，如果物镜的像方焦距为 20 cm：<br>
+  （1）试问应该选择焦距为多大的目镜？<br>
+  （2）如果眼的角分辨极限为 1′，要求通过该望远镜观察时不出现明显的假象，试问选择的物镜的口径至少为多大？（以波长为 555 nm 的光波为准）<br>
+  （3）用该望远镜系统对光束进行变换，如果入射光束的宽度为 <i>D</i>，试求出射光束的宽度为多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>放大率 <i>Γ</i> = <i>f</i><sub>1</sub>′/<i>f</i><sub>2</sub>′
+      <div class="eqb"><i>f</i><sub>2</sub>′ = <span class="frac"><span class="num"><i>f</i><sub>1</sub>′</span><span class="den">Γ</span></span> = <span class="frac"><span class="num">200</span><span class="den">10</span></span> = <b>20 mm</b>（筒长 220 mm）</div>
+    </div>
+    <div class="step"><b class="n">2</b>"不出现明显假象"= 望远镜的分辨角被放大后仍不大于人眼极限，否则是空放大
+      <div class="eqb"><i>Γ</i> · <span class="frac"><span class="num">1.22λ</span><span class="den"><i>D</i></span></span> ≤ 1′ = 2.91×10<sup>−4</sup> rad</div>
+      <div class="eqb"><i>D</i> ≥ <span class="frac"><span class="num">1.22 × 555×10<sup>−9</sup> × 10</span><span class="den">2.91×10<sup>−4</sup></span></span> = <b>23.3 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>望远镜是"光束压缩器"：入射宽度 <i>D</i> 被压缩 <i>Γ</i> 倍
+      <div class="eqb"><i>D</i>′ = <span class="frac"><span class="num"><i>D</i></span><span class="den">Γ</span></span> = <b>0.1<i>D</i></b></div>
+      <p style="margin:2px 0 0">这也就是出瞳直径：<i>D</i> = 23.3 mm 时出瞳仅 2.3 mm，正好与人眼瞳孔匹配。</p>
+    </div>
+    <div class="res">（1）目镜 <b><i>f</i><sub>2</sub>′ = 20 mm</b>；（2）物镜口径 <b><i>D</i> ≥ 23 mm</b>；（3）出射光束宽度 <b><i>D</i>′ = <i>D</i>/10 = 0.1<i>D</i></b>。</div>
+    <div class="warn"><b>【待核】</b>另有"有效放大率"经验式 <i>Γ</i> ≤ 2<i>D</i>(mm)，得 <i>D</i> ≥ 5 mm，与本页的衍射判据差 4 倍。本题特意给了波长 555 nm，应以 1.22λ/<i>D</i> 为准。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+
+<div class="q" id="q020">
+  <div class="hd"><span class="tag">2011-13</span><span class="ttl">10 km 处 50 mm 两点：倍率、焦距、口径</span></div>
+  <div class="stem">欲看清 10 km 处相隔 50 mm 的两个物点，用开普勒望远镜。试求：<br>
+  （1）望远镜至少应选用多大倍率（正常倍率）；<br>
+  （2）当筒长为 465 mm 时，物镜和目镜的焦距；<br>
+  （3）保证人眼极限分辨角为 1′ 时，物镜和目镜的口径 <i>D</i><sub>1</sub> 和 <i>D</i><sub>2</sub>。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>两物点对物镜的张角
+      <div class="eqb"><i>θ</i> = <span class="frac"><span class="num">50</span><span class="den">10 × 10<sup>3</sup></span></span> = 5×10<sup>−6</sup> rad = 1.03″</div>
+      <p style="margin:2px 0 0">要"看清"，放大后须达到人眼极限 1′ = 60″。</p>
+    </div>
+    <div class="step"><b class="n">2</b>正常倍率
+      <div class="eqb"><i>Γ</i> ≥ <span class="frac"><span class="num">60″</span><span class="den">1.03″</span></span> ≈ <b>58×</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>筒长 = <i>f</i><sub>1</sub>′ + <i>f</i><sub>2</sub>′ = 465，且 <i>f</i><sub>1</sub>′/<i>f</i><sub>2</sub>′ = 58.2
+      <div class="eqb"><i>f</i><sub>2</sub>′ = <span class="frac"><span class="num">465</span><span class="den">58.2 + 1</span></span> = <b>7.86 mm</b>，　<i>f</i><sub>1</sub>′ = 465 − 7.86 = <b>457 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>物镜口径：分辨角要被放大到 1′
+      <div class="eqb"><i>D</i><sub>1</sub> ≥ <span class="frac"><span class="num">1.22λΓ</span><span class="den">1′</span></span> = <span class="frac"><span class="num">1.22 × 555×10<sup>−9</sup> × 58.2</span><span class="den">2.91×10<sup>−4</sup></span></span> = 0.136 m ≈ <b>136 mm</b></div>
+    </div>
+    <div class="step"><b class="n">5</b>目镜口径：至少要能放过出瞳
+      <div class="eqb"><i>D</i><sub>2</sub> ≥ <span class="frac"><span class="num"><i>D</i><sub>1</sub></span><span class="den">Γ</span></span> = <span class="frac"><span class="num">136</span><span class="den">58.2</span></span> ≈ <b>2.3 mm</b></div>
+    </div>
+    <div class="res">（1）<b>Γ ≥ 58×</b>；（2）<i>f</i><sub>1</sub>′ = <b>457 mm</b>、<i>f</i><sub>2</sub>′ = <b>7.9 mm</b>（筒长 465 mm）；（3）<i>D</i><sub>1</sub> ≥ <b>136 mm</b>、<i>D</i><sub>2</sub> ≥ <b>2.3 mm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q021">
+  <div class="hd"><span class="tag">2014-13</span><span class="ttl">用 −10、10、200 mm 三片与一个光阑设计无渐晕望远镜</span></div>
+  <div class="stem">现有焦距分别为 −10 mm、10 mm 和 200 mm 的三个薄透镜和一个光阑，试用其中的两个薄透镜和光阑设计一个无渐晕的望远镜系统：（1）画出光学系统的结构图；（2）该系统的视角放大率为多少；（3）如果要使物方全视场角为 2°，问光阑的孔径应该为多大？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>取 <i>f</i><sub>1</sub>′ = 200 mm 作物镜、<i>f</i><sub>2</sub>′ = 10 mm 作目镜（两片正透镜，构成开普勒望远镜），−10 mm 那片留作场镜/不用。
+      <div class="eqb">筒长 = 200 + 10 = 210 mm，物镜框即孔径光阑</div>
+    </div>
+    <div class="step"><b class="n">2</b>视角放大率（放大率与物镜口径无关，只由两焦距定）
+      <div class="eqb"><i>Γ</i> = −<span class="frac"><span class="num"><i>f</i><sub>1</sub>′</span><span class="den"><i>f</i><sub>2</sub>′</span></span> = −<span class="frac"><span class="num">200</span><span class="den">10</span></span> = <b>−20×</b>（|Γ| = 20）</div>
+    </div>
+    <div class="step"><b class="n">3</b>"无渐晕"的关键：把光阑放在<b>物镜的像方焦面（也就是目镜的物方焦面、中间像面）</b>上，它天然是<b>视场光阑</b>——轴外光束的主光线都过它的中心，边缘光束不被切割。
+    </div>
+    <div class="step"><b class="n">4</b>物方全视场 2<i>ω</i> = 2°，半视场 <i>ω</i> = 1°。中间像面上像高
+      <div class="eqb"><i>y</i>′ = <i>f</i><sub>1</sub>′ tan<i>ω</i> = 200 × tan1° = 200 × 0.01746 = 3.49 mm</div>
+      <div class="eqb">光阑孔径 <b>2<i>y</i>′ = 6.98 mm ≈ 7.0 mm</b></div>
+    </div>
+    <div class="res">（1）结构：物镜 <i>f</i><sub>1</sub>′ = 200（Ø 兼作孔径光阑）— 210 mm 筒长 — 目镜 <i>f</i><sub>2</sub>′ = 10，光阑（Ø7）紧贴中间像面，即距物镜 200 mm、距目镜 10 mm；<br>
+      （2）<b><i>Γ</i> = −20×</b>；（3）光阑孔径 <b><i>D</i> = 2<i>f</i><sub>1</sub>′tan1° ≈ 7.0 mm</b>。</div>
+    <div class="warn"><b>为什么不用 −10 mm 那片</b>：−10 只能作场镜（放在中间像面附近把光束"压"进目镜），题目要求"两个薄透镜 + 光阑"，而光阑本身放在中间像面就已经满足无渐晕，故取 200 + 10 这一组。若改用 20× 以外的组合（例如 200 配 −10）会得到虚放大率的伽利略系统，但那样光阑无处安放、无法无渐晕。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>本页范围与取舍</b>：源 PDF 第 55–81 页。第 55–56 页是 2023/2024 的「三、应用光学简答题」（畸变、视角放大率、施密特棱镜作图等），不属计算题，未收；第 57 页起为「解析法」计算题，其中 2019-四-1 已在《851-计算题-应用光学-解析法》里做过，本页不重复；其余 2016 年及以后（2016-四-3、2017-四-2/3/4、2018-四-1/2/3/4、2019-四-2/3、2020-四-2/3/4、2021-四-2/3/4、2022-三-3/5/7、2023-四-4、2024-四-3/4）按"只收 ≤2015"的约定全部跳过。</p>
+  <p><b>【待核】清单（3 处）</b>：① 2013-11 / 2014-11 的五棱镜<b>展开厚度</b> <i>L</i>（本页取 (2+√2)<i>a</i> ≈ 205 mm，通式 150 − 2<i>L</i>/3 已给）；② 2012-12 的<b>容许弥散圆</b> <i>z</i>（取 0.03 mm，取 0.05 mm 时答案为 7.1 m / 3.5 m / 7.0 m）；③ 2009-11 的<b>物镜口径判据</b>（取衍射判据得 23 mm，若按经验式 Γ ≤ 2<i>D</i> 则为 5 mm）。<br>
+  <b>另两处"题目本身有歧义"</b>：2010-10 的 <i>l</i><sub>F</sub>′ 必须读成"第二透镜到像方焦点的距离"，否则与 <i>L</i> = 700 mm 矛盾；2013-12 的"无渐晕线视场"，若不计光束宽度则得 60 mm 而非 52 mm。</p>
+</div>
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+  (function () {
+    var KEY = 'g851-part3-mastered';
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var stat = document.getElementById('stat');
+    function refresh() {
+      stat.textContent = '已掌握 ' + document.querySelectorAll('.q.done').length + ' / ' + qs.length;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+    qs.forEach(function (q) {
+      var tag = q.querySelector('.tag'), hd = q.querySelector('.hd');
+      if (!tag || !hd) return;
+      var id = tag.textContent.trim();
+      var lab = document.createElement('label');
+      lab.className = 'mk';
+      lab.innerHTML = '<input type="checkbox"> 已掌握';
+      var box = lab.querySelector('input');
+      box.checked = !!saved[id];
+      if (box.checked) q.classList.add('done');
+      box.addEventListener('change', function () {
+        if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+        else { delete saved[id]; q.classList.remove('done'); }
+        refresh();
+      });
+      hd.appendChild(lab);
+    });
+    refresh();
+    var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+    bAll.addEventListener('click', function () {
+      document.body.classList.remove('onlytodo');
+      bAll.classList.add('on'); bTodo.classList.remove('on');
+    });
+    bTodo.addEventListener('click', function () {
+      document.body.classList.add('onlytodo');
+      bTodo.classList.add('on'); bAll.classList.remove('on');
+    });
+  })();
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>

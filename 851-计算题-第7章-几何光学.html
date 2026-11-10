@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 计算题 · 第七章 几何光学基础</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 计算题 · 第七章 几何光学基础</h1>
+  <div class="sub">
+    近 10 年（2016–2024）· <b>8 道</b>（9 个题次；2020-四-1 与 2022-三-4 为同一题，已合并）<br>
+    薄透镜 4 · 厚透镜＋镀膜 1 · 单球面与视深 3<br>
+    来源：<code>计算题分题型.pdf</code> 第 38–42 页（本章全部题目）
+  </div>
+  <div class="lg">标注：<b>【真题】</b> 题面照录　<b>【自算】</b> 解答由我逐题推导、数值重算</div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#a">A 薄透镜成像</a><a href="#b">B 厚透镜与反射膜</a><a href="#c">C 单球面折射与视深</a>
+</nav>
+
+<div class="bar">
+  <span id="stat">已掌握 0 / 8</span>
+  <button id="f-all" class="on">全部</button>
+  <button id="f-todo">只看没掌握的</button>
+  <span style="margin-left:auto;font-size:12px">勾选自动记住</span>
+</div>
+
+<div class="warn" style="margin-top:20px">
+  <b>这一章只有三件事</b>：高斯公式配 <b>β = l′/l</b>；厚透镜<b>逐面折射</b>（后一面的物距 = 前一面的像距 − 厚度 d）；单球面／平面折射的<b>视深 = 实深 × n₂/n₁</b>。
+  考场上真正拉开差距的是"虚物/虚像"那一步 —— 2024-四-1、2016-四-1、2020-四-1 三道都把"实物 vs 虚物"当考点。
+</div>
+
+<div class="fbox">
+  <div class="fcard">
+    <div class="fname">高斯公式</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span>，　<i>β</i> = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span></span></div>
+    <div class="fnote">实物 l&lt;0、实像 l′&gt;0、f′&gt;0 为会聚。共轭距 = |l′ − l|。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">薄透镜焦距（两侧同介质）</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = (<i>n</i>−1)<span class="bkt"><span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span></span></span></div>
+    <div class="fnote">双凸 r₁&gt;0、r₂&lt;0；后表面凸、球心在物方则 r₂ = −R，于是 f′ = R/(n−1)。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">两侧介质不同</div>
+    <div class="fml"><span class="eqb" style="margin:0">Φ = <span class="frac"><span class="num"><i>n</i>−<i>n</i><sub>1</sub></span><span class="den"><i>r</i><sub>1</sub></span></span> + <span class="frac"><span class="num"><i>n</i><sub>2</sub>−<i>n</i></span><span class="den"><i>r</i><sub>2</sub></span></span>，　<i>f</i>′ = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den">Φ</span></span>，<i>f</i> = −<span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den">Φ</span></span></span></div>
+    <div class="fnote">平面贴水面时 r₁ = ∞，只剩后表面一项。成像用 n₂/l′ − n₁/l = Φ。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">单球面折射</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num"><i>n</i>′</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i>′−<i>n</i></span><span class="den"><i>r</i></span></span></span></div>
+    <div class="fnote">r = ∞ 退化为 n′/l′ = n/l ⇒ 视深 = 实深×n′/n；纵向放大 d<i>l</i>′/d<i>l</i> = (n/n′)(l′/l)²。</div>
+  </div>
+</div>
+
+<!-- ===== A ===== -->
+<h2 id="a">A · 薄透镜成像<span class="cnt">4 题次</span></h2>
+<div class="lead">四道题共用一条主线：先由题给的"成像状态"定 β 与 l、l′，再回代求 f′ 或反过来求像。符号只记一条 —— 顺着光走为正。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2017-四-1</span><span class="ttl">平凸薄透镜：反推后表面曲率半径，再换物距成像</span></div>
+  <div class="stem">一个由折射率为 1.5 的玻璃构成的平凸薄透镜，其前表面为平面，后表面为凸的球面。已知在透镜前 90 cm 的物体成了一个放大了两倍的实像。<br>
+  （1）试确定该透镜后表面的曲率半径；<br>
+  （2）如果在透镜前 30 cm 有个高为 1 cm 的物体，试求该物体的像的位置和大小。</div>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>"实像 + 放大两倍"⇒ 必定倒立，<i>β</i> = −2。物在镜前 90 cm，即 <i>l</i> = −90 cm，于是
+      <div class="eqb"><i>l</i>′ = <i>βl</i> = (−2) × (−90) = 180 cm</div>
+    </div>
+    <div class="step"><b class="n">2</b>高斯公式求像方焦距
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">180</span></span> + <span class="frac"><span class="num">1</span><span class="den">90</span></span> = <span class="frac"><span class="num">3</span><span class="den">180</span></span>　⇒　<i>f</i>′ = 60 cm</div>
+    </div>
+    <div class="step"><b class="n">3</b>前表面为平面 <i>r</i><sub>1</sub> = ∞；"后表面为凸"指球心落在物方，按符号规则 <i>r</i><sub>2</sub> = −<i>R</i>。代入造镜公式
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den">60</span></span> = (1.5 − 1)<span class="bkt">0 + <span class="frac"><span class="num">1</span><span class="den"><i>R</i></span></span></span> = <span class="frac"><span class="num">0.5</span><span class="den"><i>R</i></span></span>　⇒　<i>R</i> = 30 cm</div>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">4</b>同一个 <i>f</i>′ = 60 cm，物距换成 <i>l</i> = −30 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> − <span class="frac"><span class="num">1</span><span class="den">30</span></span> = −<span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i>′ = −60 cm</div>
+      <p style="margin:4px 0 0"><i>l</i>′ &lt; 0 ⇒ 虚像，位于透镜<b>前</b> 60 cm。</p>
+    </div>
+    <div class="step"><b class="n">5</b>放大率与像高
+      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">−60</span><span class="den">−30</span></span> = +2　⇒　<i>h</i>′ = 2 × 1 cm = 2 cm</div>
+    </div>
+    <div class="res">后表面曲率半径 <b>R = 30 cm</b>；镜前 30 cm、高 1 cm 的物体成<b>正立、放大 2 倍的虚像</b>，像在透镜前 <b>60 cm</b>，像高 <b>2 cm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2021-四-1</span><span class="ttl">平凸透镜：像方焦距；平面贴水面后的物方/像方焦距与池底物体成像</span></div>
+  <div class="stem">如图 (a)，一个由折射率 n = 1.5 的玻璃构成一个平凸薄透镜，放在空气中，其凸面的曲率半径大小为 50 cm。<br>
+  （1）试问该薄透镜的像方焦距为多少；<br>
+  （2）如果将该薄透镜的平面紧贴水池水面，如图 (b) 所示，对水池中的物体成像，设水的折射率为 4/3，这时该成像系统中薄透镜的物方和像方焦距各为多少？并求池底 2 米处物体的像的位置。</div>
+  <figure style="margin:14px 0;text-align:center">
+    <img src="figs/fig-2021-lens-water.png" alt="(a) 空气中的平凸薄透镜；(b) 透镜平面贴水面给 2 m 深的池底物体成像"
+         style="max-width:100%;height:auto;border:1px solid var(--line);border-radius:4px;background:#fff;padding:6px">
+    <figcaption style="font-size:12.5px;color:var(--mut);margin-top:5px">图：(a) 空气中的平凸薄透镜；(b) 平面贴水面，池底 2 m 处有物点</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>空气中两侧同为 n = 1，平面 <i>r</i><sub>1</sub> = ∞，凸面（球心在物方）<i>r</i><sub>2</sub> = −50 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = (1.5 − 1)<span class="bkt">0 + <span class="frac"><span class="num">1</span><span class="den">50</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">100</span></span>　⇒　<i>f</i>′ = 100 cm</div>
+      <p style="margin:4px 0 0">即 <i>f</i>′ = <i>R</i>/(<i>n</i>−1) = 50/0.5 = 100 cm。</p>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">2</b>平面贴水面后：物方介质 <i>n</i><sub>1</sub> = 4/3（水），像方 <i>n</i><sub>2</sub> = 1（空气），透镜 <i>n</i> = 1.5。先求光焦度
+      <div class="eqb">Φ = <span class="frac"><span class="num"><i>n</i> − <i>n</i><sub>1</sub></span><span class="den"><i>r</i><sub>1</sub></span></span> + <span class="frac"><span class="num"><i>n</i><sub>2</sub> − <i>n</i></span><span class="den"><i>r</i><sub>2</sub></span></span> = 0 + <span class="frac"><span class="num">1 − 1.5</span><span class="den">−50</span></span> = 0.01 cm<sup>−1</sup></div>
+    </div>
+    <div class="step"><b class="n">3</b>两侧介质不同，物方与像方焦距不再对称
+      <div class="eqb"><i>f</i>′ = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den">Φ</span></span> = <span class="frac"><span class="num">1</span><span class="den">0.01</span></span> = <b>100 cm</b>，　<i>f</i> = −<span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den">Φ</span></span> = −<span class="frac"><span class="num">4/3</span><span class="den">0.01</span></span> = <b>−133.3 cm</b></div>
+      <p style="margin:4px 0 0">物方焦点在透镜前 133.3 cm（水中），像方焦点仍在镜后 100 cm（空气中）。</p>
+    </div>
+    <div class="step"><b class="n">4</b>池底物体在镜前 2 m = 200 cm 处，<i>l</i> = −200 cm，用两侧介质不同的成像公式
+      <div class="eqb"><span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den"><i>l</i></span></span> = Φ　⇒　<span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = 0.01 + <span class="frac"><span class="num">4/3</span><span class="den">−200</span></span> = 0.01 − 0.00667 = 0.00333</div>
+      <div class="eqb"><i>l</i>′ = <span class="frac"><span class="num">1</span><span class="den">0.00333</span></span> = 300 cm</div>
+    </div>
+    <div class="step"><b class="n">5</b>验算（高斯型：f′/l′ + f/l = 1）
+      <div class="eqb"><span class="frac"><span class="num">100</span><span class="den">300</span></span> + <span class="frac"><span class="num">−133.3</span><span class="den">−200</span></span> = 0.333 + 0.667 = 1 ✓</div>
+    </div>
+    <div class="res">（1）像方焦距 <b>f′ = 100 cm</b>；（2）该成像系统中 <b>f′ = +100 cm、f = −133.3 cm</b>，池底 2 m 处的物体成像于<b>水面上方 300 cm</b>（空气中，实像）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2016-四-1</span><span class="ttl">共轭距 250 mm、β = 4，实物与虚物两种情形的焦距</span></div>
+  <div class="stem">要使一个薄透镜成像时，共轭距（物像间的距离）为 250 mm，垂轴放大率 β = 4，当物体分别为实物和虚物时，薄透镜的焦距各为多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>由 <i>β</i> = <i>l</i>′/<i>l</i> = 4 得 <i>l</i>′ = 4<i>l</i>；共轭距是两者之差的绝对值
+      <div class="eqb">|<i>l</i>′ − <i>l</i>| = |4<i>l</i> − <i>l</i>| = 3|<i>l</i>| = 250 mm</div>
+    </div>
+    <div class="step"><b class="n">2</b><b>实物</b>：<i>l</i> &lt; 0 ⇒ <i>l</i>′ = 4<i>l</i> &lt; 0，成虚像（正立放大，正是放大镜的工作区间）
+      <div class="eqb"><i>l</i> = −<span class="frac"><span class="num">250</span><span class="den">3</span></span> = −83.3 mm，　<i>l</i>′ = −333.3 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">−333.3</span></span> − <span class="frac"><span class="num">1</span><span class="den">−83.3</span></span> = −0.003 + 0.012 = 0.009　⇒　<i>f</i>′ = 111.1 mm</div>
+    </div>
+    <div class="step"><b class="n">3</b><b>虚物</b>：<i>l</i> &gt; 0 ⇒ <i>l</i>′ = 4<i>l</i> &gt; 0，成实像
+      <div class="eqb"><i>l</i> = +83.3 mm，　<i>l</i>′ = +333.3 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">333.3</span></span> − <span class="frac"><span class="num">1</span><span class="den">83.3</span></span> = 0.003 − 0.012 = −0.009　⇒　<i>f</i>′ = −111.1 mm</div>
+    </div>
+    <div class="step"><b class="n">4</b>公式校验（共轭距 <i>L</i> = −<i>f</i>′(1−<i>β</i>)²/<i>β</i>）
+      <div class="eqb"><i>L</i> = −<i>f</i>′ · <span class="frac"><span class="num">(1 − 4)<sup>2</sup></span><span class="den">4</span></span> = −2.25<i>f</i>′ = −250　⇒　<i>f</i>′ = 111.1 mm ✓</div>
+    </div>
+    <div class="res"><b>实物</b>时 <b>f′ = +111.1 mm</b>（凸透镜，成正立放大虚像）；<b>虚物</b>时 <b>f′ = −111.1 mm</b>（凹透镜，成正立放大实像）。同一 β 下两种物态对应一正一负、数值相同的焦距。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2024-四-1</span><span class="ttl">共轭距 250 mm、β = −4，实物与虚物两种情形的焦距</span></div>
+  <div class="stem">要使一个薄透镜成像时，共轭距（物像间的距离）为 250 mm，垂轴放大率 β = −4，当物体分别为实物和虚物时，薄透镜的焦距各为多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b><i>l</i>′ = <i>βl</i> = −4<i>l</i>，共轭距 |<i>l</i>′ − <i>l</i>| = |−5<i>l</i>| = 250 mm。</div>
+    <div class="step"><b class="n">2</b><b>实物</b> <i>l</i> &lt; 0 ⇒ <i>l</i>′ &gt; 0（倒立实像），<i>l</i>′ − <i>l</i> = 250
+      <div class="eqb">−5<i>l</i> = 250　⇒　<i>l</i> = −50 mm，<i>l</i>′ = +200 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">200</span></span> + <span class="frac"><span class="num">1</span><span class="den">50</span></span> = 0.005 + 0.02 = 0.025　⇒　<i>f</i>′ = 40 mm</div>
+    </div>
+    <div class="step"><b class="n">3</b><b>虚物</b> <i>l</i> &gt; 0 ⇒ <i>l</i>′ = −4<i>l</i> &lt; 0（倒立虚像），<i>l</i> − <i>l</i>′ = 250
+      <div class="eqb">5<i>l</i> = 250　⇒　<i>l</i> = +50 mm，<i>l</i>′ = −200 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">−200</span></span> − <span class="frac"><span class="num">1</span><span class="den">50</span></span> = −0.005 − 0.02 = −0.025　⇒　<i>f</i>′ = −40 mm</div>
+    </div>
+    <div class="step"><b class="n">4</b>与 2016-四-1 对比：只把 β 从 +4 换成 −4，共轭距不变，焦距就从 ±111.1 mm 缩到 ±40 mm —— 因为 <i>L</i> = −<i>f</i>′(1−<i>β</i>)²/<i>β</i> 里 (1−<i>β</i>)² 从 9 变成 25。</div>
+    <div class="res"><b>实物</b>时 <b>f′ = +40 mm</b>（凸透镜，在物后 200 mm 成倒立实像）；<b>虚物</b>时 <b>f′ = −40 mm</b>（凹透镜，在物方 200 mm 处成倒立虚像）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== B ===== -->
+<h2 id="b">B · 厚透镜与反射膜<span class="cnt">1 题</span></h2>
+<div class="lead">厚度 15 cm 不能当薄透镜。做法只有一种：<b>逐面追迹</b>；镀膜后把反射当作"翻转光路"，第三面就是把第一面镜像过来（同一球面、半径反号）。</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2023-四-2</span><span class="ttl">厚透镜直接成像；后表面镀全反射膜后的像</span></div>
+  <div class="stem">一个由折射率为 1.5 的玻璃构成的平凹透镜，其前凸面为曲率半径为 30 cm 的球面，透镜的厚度为 15 cm，如果在透镜前 90 cm 有一个高为 5 mm 的物体：<br>
+  （1）求透镜对物体直接成像时，像的位置和大小。<br>
+  （2）如果在透镜的后平面上直接镀一层全反射膜，试求这时系统的像的位置和大小。</div>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>把透镜看成两个折射面：前表面 <i>r</i><sub>1</sub> = +30 cm（凸向物方，球心在右），后表面 <i>r</i><sub>2</sub> = ∞，<i>d</i> = 15 cm，<i>n</i> = 1.5。第一面（1 → 1.5，<i>l</i><sub>1</sub> = −90）
+      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> − <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">1.5 − 1</span><span class="den">30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i><sub>1</sub>′ = <b>270 cm</b></div>
+      <div class="eqb"><i>β</i><sub>1</sub> = <span class="frac"><span class="num"><i>n</i><sub>1</sub><i>l</i><sub>1</sub>′</span><span class="den"><i>n</i><sub>2</sub><i>l</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1 × 270</span><span class="den">1.5 × (−90)</span></span> = −2</div>
+    </div>
+    <div class="step"><b class="n">2</b>第二面：物距要减去厚度，<i>l</i><sub>2</sub> = 270 − 15 = 255 cm（对平面而言是虚物），1.5 → 1
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">255</span></span> = 0　⇒　<i>l</i><sub>2</sub>′ = <span class="frac"><span class="num">255</span><span class="den">1.5</span></span> = <b>170 cm</b></div>
+      <div class="eqb"><i>β</i><sub>2</sub> = <span class="frac"><span class="num">1.5 × 170</span><span class="den">1 × 255</span></span> = 1，　<i>β</i> = <i>β</i><sub>1</sub><i>β</i><sub>2</sub> = −2</div>
+    </div>
+    <div class="step"><b class="n">3</b>像高
+      <div class="eqb"><i>h</i>′ = |<i>β</i>|·<i>h</i> = 2 × 5 mm = <b>10 mm</b></div>
+      <p style="margin:4px 0 0">像在后表面之后 170 cm，实像、倒立。</p>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b>后平面镀全反射膜 ⇒ 光原路返回再经前表面出射，共三个"面"：前表面 → 平面镜 → 前表面（反向）。</p>
+    <div class="step"><b class="n">4</b>第一面结果同上：<i>l</i><sub>1</sub>′ = 270 cm，<i>β</i><sub>1</sub> = −2。</div>
+    <div class="step"><b class="n">5</b>平面镜在后表面处：会聚点在后表面之后 270 − 15 = 255 cm，是平面镜的虚物 ⇒ 反射后变为镜前 255 cm 的实像，即<b>前表面之前 255 − 15 = 240 cm</b>处；平面镜 <i>β</i> = +1（大小不变）。
+      <div class="eqb"><i>l</i><sub>镜后</sub> = 240 cm（对前表面为虚物）</div>
+    </div>
+    <div class="step"><b class="n">6</b>反向通过前表面：此时光从玻璃射向空气，球心在物方的凸面在反向坐标系里 <i>r</i> = −30 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">240</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">8</span><span class="den">480</span></span> + <span class="frac"><span class="num">3</span><span class="den">480</span></span> = <span class="frac"><span class="num">11</span><span class="den">480</span></span></div>
+      <div class="eqb"><i>l</i>′ = 43.6 cm，　<i>β</i><sub>3</sub> = <span class="frac"><span class="num">1.5 × 43.6</span><span class="den">1 × 240</span></span> = 0.273</div>
+    </div>
+    <div class="step"><b class="n">7</b>总放大率与像高
+      <div class="eqb"><i>β</i> = <i>β</i><sub>1</sub><i>β</i><sub>镜</sub><i>β</i><sub>3</sub> = (−2)(1)(0.273) = −0.545　⇒　<i>h</i>′ = 5 × 0.545 = <b>2.7 mm</b></div>
+      <p style="margin:4px 0 0">用"展开光路"验算：玻璃内总光程 2<i>d</i> = 30 cm、第二面 <i>r</i> = −30 cm，得 <i>l</i>′ = 43.6 cm、<i>β</i> = −0.545，一致。</p>
+    </div>
+    <div class="res">（1）像在后表面之后 <b>170 cm</b>，实像、倒立，高 <b>10 mm</b>；（2）像在前表面之前 <b>43.6 cm</b>（物方，实像）、倒立，高约 <b>2.7 mm</b>。<br>
+    <b>【待核】</b>题面"<b>平凹透镜</b>"与"<b>前凸面</b>"自相矛盾，此处按<b>前表面为凸球面（R = 30 cm）、后表面为平面</b>计算（会聚系统）。若原题实为前表面凹（<i>r</i><sub>1</sub> = −30 cm），则（1）成正立虚像于镜前 46 cm、像高 2 mm；（2）成虚像于前表面之后约 29 cm、像高约 1.0 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== C ===== -->
+<h2 id="c">C · 单球面折射与视深<span class="cnt">2 题（3 题次）</span></h2>
+<div class="lead">"看水里/看天上"三类题共用一条结论：<b>平面折射把深度按 n′/n 缩放，横向不变</b>。球形界面（鱼缸）则要用 <i>n</i>′/<i>l</i>′ − <i>n</i>/<i>l</i> = (<i>n</i>′−<i>n</i>)/<i>r</i>，且速度要再乘一次纵向放大率。</div>
+
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2023-四-1</span><span class="ttl">水中的铅球、空气中的气球，各看成什么形状多大</span></div>
+  <div class="stem">水池中有一个直径为 16 cm 的铅球，试问站在水边的人观察到铅球的形状和大小。在空中有一直径为 30 cm 的气球，试问这时在水池中游泳的人观察到气球的形状和大小（<i>n</i><sub>水</sub> = 4/3）。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>平面界面近轴成像：<i>n</i><sub>1</sub>/<i>s</i> + <i>n</i><sub>2</sub>/<i>s</i>′ = 0 ⇒ 视深 <i>s</i>′ = −(<i>n</i><sub>2</sub>/<i>n</i><sub>1</sub>)<i>s</i>，即"<b>看到的位置 = 真实位置 × n<sub>2</sub>/n<sub>1</sub></b>"（沿观察方向）；而横向放大率恒为 1。</div>
+    <div class="step"><b class="n">2</b><b>水中的铅球</b>（水 → 空气，<i>n</i><sub>1</sub> = 4/3，<i>n</i><sub>2</sub> = 1）：球面上每一点沿竖直方向的视深都被压成 3/4
+      <div class="eqb">竖直方向：<i>D</i><sub>竖</sub>′ = 16 × <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <b>12 cm</b></div>
+      <div class="eqb">水平方向：<i>D</i><sub>横</sub>′ = 16 × 1 = <b>16 cm</b>（横向不变）</div>
+    </div>
+    <div class="step"><b class="n">3</b><b>空气中的气球</b>（空气 → 水，<i>n</i><sub>1</sub> = 1，<i>n</i><sub>2</sub> = 4/3）：竖直方向被放大 4/3
+      <div class="eqb">竖直方向：<i>D</i><sub>竖</sub>′ = 30 × <span class="frac"><span class="num">4</span><span class="den">3</span></span> = <b>40 cm</b>，　水平方向仍为 <b>30 cm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>两次都是"圆变椭圆"：竖直与水平方向缩放比不同 ⇒ 旋转椭球（近轴近似下）。
+      <table class="g">
+        <tr><th>观察对象</th><th>光从→到</th><th>竖直</th><th>水平</th><th>形状</th></tr>
+        <tr><td>水中铅球 φ16 cm</td><td>水 → 空气</td><td>12 cm</td><td>16 cm</td><td>扁椭球</td></tr>
+        <tr><td>空中气球 φ30 cm</td><td>空气 → 水</td><td>40 cm</td><td>30 cm</td><td>长椭球</td></tr>
+      </table>
+    </div>
+    <div class="res">铅球看成<b>竖直 12 cm、水平 16 cm 的扁旋转椭球</b>（变扁）；气球看成<b>竖直 40 cm、水平 30 cm 的长旋转椭球</b>（变长）。口诀：<b>从"密"看"疏"压扁（×n₂/n₁&nbsp;&lt;&nbsp;1），从"疏"看"密"拉长</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2024-四-2</span><span class="ttl">看到的是 12×16 cm、深 2.7 m 的物体，实际是什么</span></div>
+  <div class="stem">人看到水池中有一个垂直方向 12 cm，水平方向 16 cm，深度为 2.7 m 的物体，求物在水中深度和形状大小。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>人从空气看水中的物体（空气 1 → 水 4/3 的逆过程）：看到的深度是被压缩后的视深
+      <div class="eqb"><i>h</i><sub>视</sub> = <span class="frac"><span class="num">1</span><span class="den">4/3</span></span> <i>h</i><sub>实</sub> = <span class="frac"><span class="num">3</span><span class="den">4</span></span> <i>h</i><sub>实</sub></div>
+    </div>
+    <div class="step"><b class="n">2</b>反解实际深度
+      <div class="eqb"><i>h</i><sub>实</sub> = <span class="frac"><span class="num">4</span><span class="den">3</span></span> × 2.7 m = <b>3.6 m</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>尺寸：视竖直 12 cm 是被压缩过的，实际竖直 = 12 × 4/3；水平方向不缩放
+      <div class="eqb">竖直：12 × <span class="frac"><span class="num">4</span><span class="den">3</span></span> = <b>16 cm</b>，　水平：<b>16 cm</b>（不变）</div>
+    </div>
+    <div class="step"><b class="n">4</b>竖直 = 水平 = 16 cm ⇒ 真实物体是<b>球</b>，直径 16 cm。也就是说：看到的"竖直 12、水平 16"正是 2023-四-1 里那颗 φ16 cm 铅球的像，两题互为反演。</div>
+    <div class="res">物体实际在<b>水下 3.6 m</b> 处，形状为<b>直径 16 cm 的球</b>（看到的 12 cm×16 cm 扁椭球是它的像）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2020-四-1 / 2022-三-4</span><span class="ttl">球形鱼缸：金鱼经过曲率中心时的实际位置与速度</span></div>
+  <div class="stem">一个由很薄的均匀玻璃构成半径为 100 cm 的球形鱼缸，其中水的折射率为 4/3，缸内有一条金鱼游向缸壁，某人从缸壁外观察到金鱼沿水平方向游过鱼缸壁的曲率中心，此时速度为 2 cm/s，试问金鱼实际的位置和速度。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>缸壁很薄，按单一球面折射处理：水 <i>n</i> = 4/3 → 空气 <i>n</i>′ = 1；球心在水一侧（入射方），故 <i>r</i> = −100 cm
+      <div class="eqb">Φ = <span class="frac"><span class="num"><i>n</i>′ − <i>n</i></span><span class="den"><i>r</i></span></span> = <span class="frac"><span class="num">1 − 4/3</span><span class="den">−100</span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span> cm<sup>−1</sup></div>
+    </div>
+    <div class="step"><b class="n">2</b>观察者"看到金鱼经过曲率中心"⇒ 像在球心，<i>l</i>′ = −100 cm。代入
+      <div class="eqb"><span class="frac"><span class="num"><i>n</i>′</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = Φ　⇒　<span class="frac"><span class="num">1</span><span class="den">−100</span></span> − <span class="frac"><span class="num">4/3</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span></div>
+      <div class="eqb"><span class="frac"><span class="num">4/3</span><span class="den"><i>l</i></span></span> = −<span class="frac"><span class="num">1</span><span class="den">100</span></span> − <span class="frac"><span class="num">1</span><span class="den">300</span></span> = −<span class="frac"><span class="num">4</span><span class="den">300</span></span>　⇒　<i>l</i> = <b>−100 cm</b></div>
+      <p style="margin:4px 0 0">即金鱼真实位置也在<b>曲率中心</b>（距观察侧缸壁 100 cm，恰在鱼缸中心）——球心的物像重合，这是球面折射的必然结果。</p>
+    </div>
+    <div class="step"><b class="n">3</b>速度：纵向放大率由 Φ = 常数 微分得到
+      <div class="eqb"><span class="frac"><span class="num">d<i>l</i>′</span><span class="den">d<i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>n</i>′</span></span><span class="bkt"><span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span></span><sup>2</sup> = <span class="frac"><span class="num">4/3</span><span class="den">1</span></span> × 1<sup>2</sup> = <span class="frac"><span class="num">4</span><span class="den">3</span></span></div>
+      <div class="eqb"><i>v</i><sub>视</sub> = <span class="frac"><span class="num">4</span><span class="den">3</span></span> <i>v</i><sub>实</sub>　⇒　<i>v</i><sub>实</sub> = <span class="frac"><span class="num">3</span><span class="den">4</span></span> × 2 cm/s = <b>1.5 cm/s</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>顺带一算横向放大率（鱼看起来的大小）
+      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>n l</i>′</span><span class="den"><i>n</i>′<i>l</i></span></span> = <span class="frac"><span class="num">(4/3)(−100)</span><span class="den">1 × (−100)</span></span> = <span class="frac"><span class="num">4</span><span class="den">3</span></span>（比实际大 1/3）</div>
+    </div>
+    <div class="res">金鱼实际就在<b>缸壁的曲率中心</b>（距缸壁 100 cm，即鱼缸中心）；它真实的游动速度是 <b>1.5 cm/s</b>，方向仍沿水平指向缸壁（观察到的 2 cm/s 被放大了 4/3）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>未收录</b>（早于 2016 年，按"近 10 年"规则跳过）：2015-7 高斯公式（p40）、2013-10 高斯公式（p39）、2012-10 两薄透镜贴合（p39）、2014-10 球形鱼缸（p41）、2010-9 厚透镜组合（p42）。
+  其中 2014-10 与本章 2020-四-1 / 2022-三-4 是同一道鱼缸题，2013-10 与 2024-四-1 是同一道"共轭距 250 mm"题（β 由 −4 变 −4、数据互换），可作为补充练习。</p>
+  <p><b>页码范围</b>：本章题目全部落在第 <b>38–42 页</b>，均在本人负责的 36–48 页之内，<b>完整覆盖</b>；第 38 页页首即"第七章-几何光学基础"标题。第 43 页起进入第八章"理想光学系统"。</p>
+  <p><b>第八章边界</b>：第 43–48 页只有"图解法"段（2010-8、2011-8、2012-8、2013-8、2014-8、2015-8 作图题与 2016-三 的作图/简答混合题），<b>没有 2016–2024 年的计算题</b>，因此本文件不含第八章；第八章的 2016–2024 计算题在第 48 页之后，不在本人负责的 36–48 页范围内。</p>
+  <p><b>已知局限</b>：① 全部结果为教材推导（【自算】），未逐题比对机构答案册；② 符号约定采用"实物 <i>l</i>&lt;0、实像 <i>l</i>′&gt;0、f′&gt;0 会聚"，若所跟教材符号相反，只需整体取反；③ 2023-四-2 的"平凹／前凸面"矛盾已按前凸面计算并在题内给出凹面备选；④ 2023-四-1、2024-四-2 的"圆看成椭圆"是近轴近似结论，严格来说球面成像有像散。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+  (function () {
+    var KEY = 'g851-c7-geometric-mastered';
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var stat = document.getElementById('stat');
+    function refresh() {
+      stat.textContent = '已掌握 ' + document.querySelectorAll('.q.done').length + ' / ' + qs.length;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+    qs.forEach(function (q) {
+      var tag = q.querySelector('.tag'), hd = q.querySelector('.hd');
+      if (!tag || !hd) return;
+      var id = tag.textContent.trim();
+      var lab = document.createElement('label');
+      lab.className = 'mk';
+      lab.innerHTML = '<input type="checkbox"> 已掌握';
+      var box = lab.querySelector('input');
+      box.checked = !!saved[id];
+      if (box.checked) q.classList.add('done');
+      box.addEventListener('change', function () {
+        if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+        else { delete saved[id]; q.classList.remove('done'); }
+        refresh();
+      });
+      hd.appendChild(lab);
+    });
+    refresh();
+    var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+    bAll.addEventListener('click', function () {
+      document.body.classList.remove('onlytodo');
+      bAll.classList.add('on'); bTodo.classList.remove('on');
+    });
+    bTodo.addEventListener('click', function () {
+      document.body.classList.add('onlytodo');
+      bTodo.classList.add('on'); bAll.classList.remove('on');
+    });
+  })();
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>

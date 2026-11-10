@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 应用光学 · 简答与画图（p49–56）</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  table.g td.l,table.g th.l{text-align:left;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  figure{margin:14px 0 6px;text-align:center;}
+  figure img{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);
+             border-radius:6px;padding:4px;}
+  figcaption{font-size:12.5px;color:var(--mut);margin-top:5px;line-height:1.6;}
+  ul.k{margin:6px 0 6px 1.1em;padding:0;}
+  ul.k li{margin:3px 0;}
+  @media (max-width:640px){
+    .fbox{grid-template-columns:1fr;}
+    .bar{top:0;}
+  }
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 应用光学 · 简答与画图（p49–56）</h1>
+  <div class="sub">
+    2017–2024 · <b>34 道真题</b>（按小问拆成 36 条）· 12 个考点 · 20 张图<br>
+    来源：<code>计算题分题型.pdf</code> 第 49–56 页「三、应用光学简答题 / 画图题」· 逐题照录
+  </div>
+  <div class="lg">标注：<b>【真题】</b> 题面照录　<b>【教材】</b> 按石顺祥《物理光学与应用光学》整理　<b>【自算】</b> 我推导的数值</div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#a">A 完善像</a><a href="#b">B 像差</a><a href="#c">C 光阑</a><a href="#d">D 光度学</a>
+  <a href="#e">E 费马原理</a><a href="#f">F 景深</a><a href="#g">G 屋脊棱镜</a><a href="#h">H 显微镜</a>
+  <a href="#i">I 放大镜</a><a href="#j">J 图解法</a><a href="#k">K 棱镜坐标</a><a href="#l">L 施密特</a><a href="#m">M 对账</a>
+</nav>
+
+<div class="bar">
+  <span id="stat">已掌握 0 / 36</span>
+  <button id="f-all" class="on">全部</button>
+  <button id="f-todo">只看没掌握的</button>
+  <span style="margin-left:auto;font-size:12px">勾选自动记住</span>
+</div>
+
+<div class="warn" style="margin-top:20px">
+  <b>这份文件补的是《简答题·按章节》总表漏掉的应用光学部分</b>。49–56 页是 2017–2024 年逐年出的
+  简答 + 画图题（总表里“屋脊棱镜 / 施密特棱镜 / 放大镜 / 节点 / 图解法”等命中为 0），
+  这里按考点重排、逐条给可背的答案；作图题都配了原题图，答案写成“先画什么、再画什么”。
+  章节末尾 M 节列了「本文件覆盖、总表没有」的清单。
+</div>
+
+<!-- ===== A ===== -->
+<h2 id="a">A · 完善像与完善成像条件<span class="cnt">7 条</span></h2>
+<div class="lead">七年里问了六次。核心只有一句：<b>物点发出的所有光线到像点的光程相等</b>；轴外点再加正弦条件。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2017-三-2</span><span class="ttl">什么是完善像？系统成完善的条件？</span></div>
+  <div class="stem">什么是光学系统的完善像，光学系统成完善的条件是什么？</div>
+  <div class="ans">
+    <p><b>完善像</b>：由同一物点发出的所有光线，经系统后都交于同一点（点对点成像），像面上得到清晰的点像，称该像点为物点的完善像。等价说法：系统把发散的球面波变换成会聚的球面波。</p>
+    <p><b>成完善像的条件</b>：</p>
+    <ul class="k">
+      <li><b>等光程</b>（费马原理）：物点到像点的任意两条光路，光程相等；</li>
+      <li><b>正弦条件</b>：轴外点还要满足 <i>n y</i> sin<i>u</i> = <i>n</i>′<i>y</i>′ sin<i>u</i>′，否则宽光束有彗差。</li>
+    </ul>
+    <div class="res"><b>背</b>：完善像 = 点对点 + 等光程；轴外点再加正弦条件。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2018-三-1（前）</span><span class="ttl">完善成像条件</span></div>
+  <div class="stem">光学系统的完善的成像条件是什么？</div>
+  <div class="ans">
+    <p>物点与像点之间所有光线的<b>光程相等</b>（等光程条件），即实际波面为以像点为中心的球面；对轴外点还要满足<b>正弦条件</b>，保证宽光束无彗差。同时满足这两条的系统称为<b>理想光学系统</b>。</p>
+    <div class="res"><b>背</b>：等光程 + 正弦条件。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2019-三-1</span><span class="ttl">完善条件；无穷远物点经单一曲面反射成完善像的面形</span></div>
+  <div class="stem">光学系统成完善像的条件是什么？试由该条件确定将无穷远的物点经单一曲面反射成完善实像点的曲面形状。</div>
+  <div class="ans">
+    <p><b>条件</b>：等光程（轴外点再加正弦条件）。</p>
+    <p><b>面形</b>：<b>旋转抛物面</b>。平行光（无穷远物点）沿轴入射，反射后会聚于焦点，焦点就是像点；抛物面上任一点到焦点的距离等于它到准平面的距离，故各条光路光程相等 —— 满足等光程，成完善像。</p>
+    <div class="res"><b>背</b>：无穷远物点 → 抛物面（焦点即像点）；有限共轭点 → 椭球面（两焦点为物、像点）。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2020-三-2（前）</span><span class="ttl">完善成像条件</span></div>
+  <div class="stem">光学系统的完善成像条件是什么？</div>
+  <div class="ans">
+    <p>同一物点发出的所有光线经系统后<b>光程相等</b>并交于同一点；轴外点还需<b>正弦条件</b> <i>n y</i> sin<i>u</i> = <i>n</i>′<i>y</i>′ sin<i>u</i>′。</p>
+    <div class="res"><b>背</b>：等光程（轴上）+ 正弦条件（轴外）。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2021-三-1</span><span class="ttl">格里高利望远镜次镜应是什么面形</span></div>
+  <div class="stem">什么是光学系统的完善像？格里高利双反射式望远镜的次镜为了将主镜在有限位置的实像（对次镜为实物）进一步成像为有限处的实像，它的次镜反射面的几何面应该是什么形状，并说明原因？</div>
+  <div class="ans">
+    <p><b>完善像</b>：同一物点发出的所有光线经系统后交于同一点。</p>
+    <p><b>次镜面形</b>：<b>旋转椭球面</b>（凹面）。椭球的两个焦点分别与被成像的物点（主镜所成的实像点）和最终像点重合。</p>
+    <p><b>原因</b>：次镜要把有限距离的实物点成实像于另一有限距离处，等光程要求 |<i>AP</i>| + |<i>PA</i>′| = 常数；到两定点距离之和为常数的曲面正是以这两点为焦点的旋转椭球面。</p>
+    <div class="res"><b>背</b>：主镜抛物面（无穷远→焦点），次镜椭球面（焦点对焦点）；两个焦点就是物点与像点。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2023-三-3</span><span class="ttl">等光程求反射面方程（AO=4，AA′=2）</span></div>
+  <div class="stem">关于 <i>z</i> 坐标轴旋转对称的反射曲面经过坐标原点 <i>O</i>，可以将旋转对称轴上实物点 <i>A</i> 反射成像在 <i>A</i>′，如果 <i>AO</i> = 4 cm，<i>AA</i>′ = 2 cm，试基于光完善条件确定反射面的方程。</div>
+  <figure><img src="figs/fig-2023-reflect-ellipse.png" alt="A 经反射面成像于 A′，O 为顶点"><figcaption>源 PDF 第 55 页：<i>A</i> 物点、<i>A</i>′ 像点、<i>O</i> 顶点、<i>P</i> 面上任一点。</figcaption></figure>
+  <div class="ans">
+    <p>等光程：|<i>AP</i>| + |<i>PA</i>′| = 常数；取 <i>P</i> = <i>O</i> 得常数 = 4 + 2 = 6 cm。</p>
+    <p>到两定点距离之和为常数 ⇒ <b>旋转椭球面</b>，<i>A</i>、<i>A</i>′ 为焦点：2<i>a</i> = 6 ⇒ <i>a</i> = 3，2<i>c</i> = 2 ⇒ <i>c</i> = 1，<i>b</i><sup>2</sup> = 8；中心在 <i>z</i> = −3（<i>O</i> 为原点、光沿 +<i>z</i>）。</p>
+    <div class="eqb"><span class="frac"><span class="num">(<i>z</i> + 3)<sup>2</sup></span><span class="den">9</span></span> + <span class="frac"><span class="num"><i>x</i><sup>2</sup> + <i>y</i><sup>2</sup></span><span class="den">8</span></span> = 1　（cm）</div>
+    <div class="res"><b>答</b>：旋转椭球面，(<i>z</i>+3)<sup>2</sup>/9 + (<i>x</i><sup>2</sup>+<i>y</i><sup>2</sup>)/8 = 1（cm）。详细推导见《计算题-应用光学-解析法》附录 C。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2024-三-1</span><span class="ttl">完善像条件；单个球面反射镜能否完善成像</span></div>
+  <div class="stem">成完善像的条件？单个球面反射镜能否成完善像？</div>
+  <div class="ans">
+    <p><b>条件</b>：等光程 +（轴外）正弦条件。</p>
+    <p><b>单个球面反射镜</b>：<b>一般不能</b> —— 球面对有限共轭点有球差（只有近轴小光束才近似完善）。能完善成像的只有特殊共轭位置：</p>
+    <ul class="k">
+      <li>物点在<b>球心 C</b>：所有光线沿半径入射、原路返回，像也在 C；</li>
+      <li>物点在<b>镜面顶点</b>：像与物重合于顶点（平凡情形）。</li>
+    </ul>
+    <p>要在有限共轭距下真正完善成像，面形须是<b>椭球面</b>（两焦点为物、像点）；物在无穷远时须是<b>抛物面</b>。</p>
+    <div class="res"><b>背</b>：球面镜只有“物在球心”“物在顶点”两处完善，其余有球差。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== B ===== -->
+<h2 id="b">B · 几何像差与色差<span class="cnt">5 条</span></h2>
+<div class="lead">单色像差 5 种、色差 2 种，必须能一口气报出来；畸变、像散、场曲要能对上图。</div>
+
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2018-三-1（后）</span><span class="ttl">像差概念；几何像差包括哪几种</span></div>
+  <div class="stem">解释实际光学系统的像差概念？光学系统的几何像差主要包括哪几种？</div>
+  <div class="ans">
+    <p><b>像差</b>：实际光学系统所成的像与理想（高斯）像之间的偏差。本质是实际出射波面偏离了理想的球面波。</p>
+    <p><b>几何像差</b>：</p>
+    <ul class="k">
+      <li><b>单色像差 5 种</b>：球差、彗差、像散、场曲、畸变；</li>
+      <li><b>色差 2 种</b>：位置色差（轴向色差）、倍率色差（垂轴色差）。</li>
+    </ul>
+    <div class="res"><b>背</b>：单色五种“球彗像场畸”，色差两种“位置、倍率”。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2020-三-2（后）</span><span class="ttl">色差有哪几种、产生原因</span></div>
+  <div class="stem">光学系统的色差主要包括哪几种，解释其产生的原因？</div>
+  <div class="ans">
+    <p><b>位置色差（轴向色差）</b>：轴上物点不同波长的光成像位置不同（焦距随波长变），像点沿光轴前后分开，屏上看到彩色圆斑。</p>
+    <p><b>倍率色差（垂轴色差）</b>：不同波长的垂轴放大率不同，同一物高的像高不同，像的边缘出现彩色镶边。</p>
+    <p><b>原因</b>：光学材料折射率随波长变化（色散），<i>n</i> 随 λ 减小而增大，使不同色光的焦距和放大率不同。</p>
+    <div class="res"><b>背</b>：色差 = 色散引起；位置色差沿轴、倍率色差垂轴。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q010">
+  <div class="hd"><span class="tag">2021-三-2</span><span class="ttl">由图判断 (a)(b) 各存在哪种单色像差</span></div>
+  <div class="stem">什么是光学系统的像差？下图 (a) 和 (b) 分别给出了物体经过两个光学系统成像后像面，试问这时它们各自主要存在哪种单色像差？</div>
+  <figure><img src="figs/fig-2021-aberr.png" alt="(a) 正方形物体及其枕形像；(b) 同心圆辐射线物体及其变形像"><figcaption>源 PDF 第 53 页：(a) 物为正方形、像四边内凹四角外伸；(b) 物为同心圆 + 辐射线，像的圆与辐射线不能同时清晰。</figcaption></figure>
+  <div class="ans">
+    <p><b>像差</b>：实际像与理想像的偏差（实际波面偏离理想球面波）。</p>
+    <p><b>(a) 畸变</b>：正方形像四边内凹、四角外伸，放大率随视场增大 —— 是<b>正（枕形）畸变</b>。像本身仍清晰，只是形状变了（物像不相似）。</p>
+    <p><b>(b) 像散</b>：同心圆（切向）与辐射线（弧矢）属于子午、弧矢两个方向，两者不能同时清晰，说明子午像与弧矢像不重合 —— 典型<b>像散</b>（通常伴随场曲）。</p>
+    <div class="res"><b>答</b>：(a) 畸变（枕形）；(b) 像散。<b>【待核】</b>：(b) 的扫描图样较粗，若答案册判为“场曲”，以教材图为准 —— 像散与场曲在轴上点之外的图上常同时出现，但“两个方向不能同时清晰”这一特征是像散。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q011">
+  <div class="hd"><span class="tag">2023-三-1</span><span class="ttl">畸变的定义与形成原因（画图说明）</span></div>
+  <div class="stem">从物像关系画图说明什么是光学成像的畸变像差，并解释其形成原因。</div>
+  <figure><img src="figs/fig-2023-distortion.png" alt="(a) 物；(b) 正畸变（枕形）；(c) 负畸变（桶形）"><figcaption>源 PDF 第 55 页：(a) 物为方格；(b) 正畸变（枕形）—— 四角外拉、四边内凹；(c) 负畸变（桶形）—— 四边外鼓、四角内收。</figcaption></figure>
+  <div class="ans">
+    <p><b>定义</b>：同一物平面内，不同视场的垂轴放大率不同，使像与物不相似（直线变弯），但每个像点仍清晰。定量：主光线与高斯像面的交点高度 <i>y</i>′ 不等于理想像高 <i>y</i><sub>0</sub>′，畸变 Δ<i>y</i>′ = <i>y</i>′ − <i>y</i><sub>0</sub>′。</p>
+    <p><b>原因</b>：孔径光阑（入瞳）不在透镜上时，不同视场的主光线通过透镜的不同部位；透镜各带的球差/焦距不同，等效放大率随视场变化 → 像的径向位置被拉大或压缩。</p>
+    <p><b>两种</b>：正畸变（枕形，β 随视场增大，四角外伸）；负畸变（桶形，β 随视场减小，四边外鼓）。</p>
+    <div class="res"><b>背</b>：畸变 = 放大率随视场变 → 物像不相似但清晰；正枕形、负桶形；光阑位置是主因。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q012">
+  <div class="hd"><span class="tag">2024-三-2</span><span class="ttl">像散、场曲的概念及对成像的影响</span></div>
+  <div class="stem">两个像散，场曲的概念，对成像又有何影响？</div>
+  <div class="ans">
+    <p><b>像散</b>：轴外物点发出的细光束经系统后，子午方向与弧矢方向的聚焦位置不同，形成两条互相垂直的短焦线（子午焦线、弧矢焦线），两线之间为最小弥散圆。影响：轴外点不能成清晰的点像，像被拉成椭圆或短线，视场越大越明显。</p>
+    <p><b>场曲</b>：即使没有像散，平面物体的像面也不是平面而是曲面（子午场曲、弧矢场曲，两者一般不重合）。影响：用平面探测器接收时，中心调焦清晰则边缘离焦模糊，反之亦然，有效视场受限。</p>
+    <div class="res"><b>背</b>：像散 = 子午/弧矢焦线分离；场曲 = 像面是弯的；两者都使轴外像质下降，且常同时出现。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== C ===== -->
+<h2 id="c">C · 孔径光阑与视场光阑<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q013">
+  <div class="hd"><span class="tag">2018-三-2</span><span class="ttl">孔径光阑与入瞳/出瞳；视场光阑与入窗/出窗</span></div>
+  <div class="stem">对于一个光学系统，什么是孔径光阑，它与入瞳和出瞳的关系是什么？什么是视场光阑，它与入窗和出窗的关系是什么？</div>
+  <div class="ans">
+    <p><b>孔径光阑</b>：系统中限制轴上物点成像光束孔径角（光束立体角）的那个光阑，它决定进入系统的光能量和系统的分辨率。</p>
+    <ul class="k">
+      <li><b>入瞳</b>：孔径光阑经它<b>前方</b>光组所成的像，是物方孔径角的入口；</li>
+      <li><b>出瞳</b>：孔径光阑经它<b>后方</b>光组所成的像，是像方孔径角的出口；</li>
+      <li>三者互为共轭；入瞳对轴上物点的张角即物方孔径角。</li>
+    </ul>
+    <p><b>视场光阑</b>：限制物平面（或像平面）上成像范围的光阑，决定视场大小。</p>
+    <ul class="k">
+      <li><b>入窗</b>：视场光阑经前方光组所成的像；</li>
+      <li><b>出窗</b>：视场光阑经后方光组所成的像；</li>
+      <li>入窗对<b>入瞳中心</b>的张角 = 物方视场角；出窗对<b>出瞳中心</b>的张角 = 像方视场角；过入瞳中心的光线叫主光线。</li>
+    </ul>
+    <div class="res"><b>背</b>：光阑→入瞳/出瞳（前/后成像），视场光阑→入窗/出窗；入瞳定孔径，入窗定视场。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== D ===== -->
+<h2 id="d">D · 光度学：光亮度与光照度<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q014">
+  <div class="hd"><span class="tag">2017-三-3</span><span class="ttl">光亮度和光照度的定义与表达式</span></div>
+  <div class="stem">什么是光亮度和光照度？并写出它们定义的数学表达式。</div>
+  <div class="ans">
+    <p><b>光亮度 </b><i>L</i>：发光面上一点在给定方向上的发光强度 d<i>I</i>，与该面元在垂直于该方向的投影面积 d<i>A</i> cos<i>θ</i> 之比。</p>
+    <div class="eqb"><i>L</i> = <span class="frac"><span class="num">d<i>I</i></span><span class="den">d<i>A</i> cos<i>θ</i></span></span>　（cd/m<sup>2</sup>）</div>
+    <p><b>光照度 </b><i>E</i>：照射到面元上的光通量 d<i>Φ</i> 与该面元面积 d<i>A</i> 之比。</p>
+    <div class="eqb"><i>E</i> = <span class="frac"><span class="num">d<i>Φ</i></span><span class="den">d<i>A</i></span></span>　（lx）</div>
+    <p>配套的两个量：发光强度 <i>I</i> = d<i>Φ</i>/d<i>Ω</i>（cd），光通量 <i>Φ</i>（lm）。</p>
+    <div class="res"><b>背</b>：亮度 = 单位投影面积上的发光强度（cd/m²）；照度 = 单位面积上的光通量（lx）。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== E ===== -->
+<h2 id="e">E · 费马原理<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q015">
+  <div class="hd"><span class="tag">2019-三-2</span><span class="ttl">费马原理的内容；用它解释直线传播</span></div>
+  <div class="stem">费马原理的内容是什么？试用该原理解释光在均匀各向同性的介质中沿直线传播。</div>
+  <div class="ans">
+    <p><b>内容</b>：光从一点传播到另一点，其实际路径使光程取极值（极小、极大或稳定值），即光程的一阶变分为零：</p>
+    <div class="eqb">δ∫<sub><i>A</i></sub><sup><i>B</i></sup> <i>n</i> d<i>s</i> = 0</div>
+    <p><b>解释直线传播</b>：均匀各向同性介质中 <i>n</i> = 常数，光程 = <i>n</i> × 几何路程；两点间几何路程以直线最短，故光程也最小，光沿直线传播。</p>
+    <div class="res"><b>背</b>：费马 = 光程取极值（δ∫n ds = 0）；均匀介质 n 为常数 → 直线最短 → 直线传播。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== F ===== -->
+<h2 id="f">F · 景深<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q016">
+  <div class="hd"><span class="tag">2019-三-3</span><span class="ttl">景深定义、影响因素；增大景深怎么调光圈</span></div>
+  <div class="stem">什么是光学系统的景深？景深的大小受哪些因素影响？照相时为了增加景深，光圈应该增大还是减小？</div>
+  <div class="ans">
+    <p><b>景深</b>：在像面上能成清晰像的物空间深度（= 远景深度 + 近景深度），即物平面前后能清晰成像的范围。景深端点对应弥散圆直径等于允许值。</p>
+    <p><b>影响因素</b>：</p>
+    <ul class="k">
+      <li>光圈（相对孔径）：<b>越小</b>（F 数越大）景深越大；</li>
+      <li>焦距：越短景深越大；</li>
+      <li>摄距：越远景深越大；</li>
+      <li>允许弥散圆：越大景深越大。</li>
+    </ul>
+    <p><b>增加景深</b>：<b>缩小光圈</b>（增大 F 数）。</p>
+    <div class="res"><b>背</b>：景深 ∝ 1/光圈、∝ 1/焦距²、∝ 摄距²；要景深就收小光圈。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== G ===== -->
+<h2 id="g">G · 屋脊棱镜<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q017">
+  <div class="hd"><span class="tag">2019-三-4</span><span class="ttl">什么是屋脊棱镜；举例并画平面表示图</span></div>
+  <div class="stem">什么是屋脊棱镜？试列举一个屋脊棱镜，并给出平面表示图。</div>
+  <div class="ans">
+    <p><b>定义</b>：把直角棱镜的一个反射面（通常是斜面）做成 <b>90° 屋脊</b>（两个互相垂直的反射面）的棱镜。屋脊的两个面各反射一次（共两次），使像在<b>垂直于屋脊</b>的方向上倒转，常用于望远系统/双筒望远镜的倒像。</p>
+    <p><b>举例</b>：屋脊直角棱镜（阿贝棱镜）、屋脊五角棱镜、屋脊半五角棱镜。</p>
+    <p><b>平面表示图画法</b>（答题时按这四步画）：</p>
+    <ol style="margin:4px 0 0 1.2em;padding:0">
+      <li>画直角棱镜的三角形轮廓（直角在左上，斜边朝右下）；</li>
+      <li>把斜边改画成“人”字形折线（两条 45° 线交于屋脊棱），在棱上标 <b>90°</b>；</li>
+      <li>画出光线：从前表面入射 → 在屋脊两面各反射一次 → 从另一表面出射；</li>
+      <li>用箭头标出出射方向相对入射方向折转 180°（反向），像上下颠倒。</li>
+    </ol>
+    <div class="res"><b>背</b>：屋脊棱镜 = 斜面做成 90° 双反射面的棱镜；两次反射、像沿垂直屋脊方向倒转；例：屋脊直角棱镜。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== H ===== -->
+<h2 id="h">H · 显微镜<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q018">
+  <div class="hd"><span class="tag">2020-三-1</span><span class="ttl">显微镜的结构、放大原理与分辨率</span></div>
+  <div class="stem">阐述显微镜光学系统结构组成和成像放大原理；显微镜分辨率受哪些物理参量影响？</div>
+  <div class="ans">
+    <p><b>组成</b>：物镜 + 目镜（外加聚光镜、光源、载物台）。</p>
+    <p><b>放大原理</b>：物体放在物镜前焦点外不远处，物镜先成<b>放大实像</b>于目镜前焦面附近；目镜再把该实像放大成<b>虚像</b>（正常调节时在无穷远，或成在明视距离）供人眼观察。两次放大：</p>
+    <div class="eqb"><i>Γ</i> = <i>β</i><sub>物</sub> · <i>Γ</i><sub>目</sub> = (−<span class="frac"><span class="num">Δ</span><span class="den"><i>f</i>′<sub>物</sub></span></span>) · <span class="frac"><span class="num">250 mm</span><span class="den"><i>f</i>′<sub>目</sub></span></span></div>
+    <p>其中 Δ 为光学筒长（物镜后焦点到目镜前焦点的距离）。</p>
+    <p><b>分辨率</b>：受物镜<b>数值孔径</b> NA = <i>n</i> sin<i>u</i> 与波长限制，</p>
+    <div class="eqb">δ = <span class="frac"><span class="num">0.61λ</span><span class="den">NA</span></span></div>
+    <p>影响因素：波长 λ（越短越好）、介质折射率 <i>n</i>、孔径角 <i>u</i>（NA 越大越好），以及照明方式与像差校正水平。</p>
+    <div class="res"><b>背</b>：物镜成实像、目镜再放大；Γ = β<sub>物</sub>·250/f′<sub>目</sub>；分辨率 δ = 0.61λ/(n sin u)。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== I ===== -->
+<h2 id="i">I · 放大镜与视角放大率<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q019">
+  <div class="hd"><span class="tag">2023-三-2</span><span class="ttl">放大镜视角放大率；5× 的焦距</span></div>
+  <div class="stem">什么是放大镜的视角放大率？放大倍数 5× 的放大镜焦距多少？</div>
+  <div class="ans">
+    <p><b>定义</b>：视角放大率 = 用仪器后像对人眼的张角 <i>ω</i>′，与不用仪器、把物放在明视距离（250 mm）处时对人眼的张角 <i>ω</i> 之比：<i>Γ</i> = tan<i>ω</i>′/tan<i>ω</i>。</p>
+    <p>放大镜把物放在前焦点内、像成在无穷远（正常调节）时：<i>Γ</i> = 250 mm/<i>f</i>′。</p>
+    <div class="eqb"><i>f</i>′ = <span class="frac"><span class="num">250</span><span class="den">5</span></span> = <b>50 mm</b></div>
+    <div class="res"><b>答</b>：<i>f</i>′ = 50 mm（按像在无穷远）；若约定像成在明视距离，则 <i>Γ</i> = 1 + 250/<i>f</i>′，<i>f</i>′ = 62.5 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== J ===== -->
+<h2 id="j">J · 图解法：物像作图<span class="cnt">11 条</span></h2>
+<div class="lead">作图题只考三件事：三条特殊光线、主面等高、虚物/负光组的符号。先把“总则”背下来，后面 11 道都是套它。</div>
+
+<div class="ans" style="margin-bottom:6px">
+  <p><b>作图总则（先背这段）</b></p>
+  <ul class="k">
+    <li><b>三条特殊光线</b>：① 平行于光轴的入射光线，出射后过（或其反向延长线过）像方焦点 <i>F</i>′；② 过物方焦点 <i>F</i> 的光线，出射后平行于光轴；③ 过节点 <i>J</i> 的光线，出射后方向不变（两侧为空气时 <i>J</i> = <i>H</i>）。</li>
+    <li><b>主面性质</b>：物方主面 <i>H</i> 与像方主面 <i>H</i>′ 上<b>等高</b>的两点共轭（β = +1）；<i>F</i> 到 <i>H</i> 为 <i>f</i>，<i>H</i>′ 到 <i>F</i>′ 为 <i>f</i>′。</li>
+    <li><b>轴上点</b>：像是轴上点，取一条轴外辅助光线（例如过 <i>F</i> 作与它平行的辅助线），定出出射方向，与光轴的交点即像点。</li>
+    <li><b>虚物</b>：入射光束是会聚的，物点在系统<b>后方</b>；作图时仍把“物点”当作三条光线的交点，只是光线要画延长线。</li>
+    <li><b>负光组</b>：<i>F</i>′ 在 <i>H</i> 左侧、<i>F</i> 在 <i>H</i>′ 右侧；平行入射的光线出射后发散，其<b>反向延长线</b>过 <i>F</i>′；过 <i>F</i> 的光线出射后仍平行于光轴。</li>
+  </ul>
+</div>
+
+<div class="q" id="q020">
+  <div class="hd"><span class="tag">2017-三-4</span><span class="ttl">作虚物 A 经光组所成的像 A′</span></div>
+  <div class="stem">作出虚物 A 经光组所成的像 A′。</div>
+  <figure><img src="figs/fig-2017-axis-virtual.png" alt="光轴上的 F、H、H′、F′ 与虚物点 A"><figcaption>源 PDF 第 49 页：<i>A</i> 在 <i>F</i>′ 之外（右侧），是虚物。</figcaption></figure>
+  <div class="ans">
+    <p><b>作图步骤</b>：</p>
+    <ol style="margin:4px 0 0 1.2em;padding:0">
+      <li>过 <i>A</i> 任作一条光线，交 <i>H</i> 面于 <i>M</i>，在 <i>H</i>′ 面取等高点 <i>M</i>′；</li>
+      <li>过 <i>F</i> 作与 <i>AM</i> 平行的辅助光线，交 <i>H</i> 于 <i>N</i>，它出射后平行于光轴（高度为 <i>N</i>′）；</li>
+      <li>连 <i>M</i>′ 与该平行线在像方焦平面上的交点，交光轴于 <i>A</i>′。</li>
+    </ol>
+    <p><b>结果</b>：<i>A</i>′ 在 <i>H</i>′ 与 <i>F</i>′ 之间，是<b>实像</b>（虚物成实像），相对虚物正立、缩小。</p>
+    <div class="res"><b>答</b>：A′ 落在 H′–F′ 之间，实像。口诀：虚物在 F′ 外 → 实像在 H′、F′ 之间。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q021">
+  <div class="hd"><span class="tag">2017-三-5</span><span class="ttl">作图确定节点 J、J′</span></div>
+  <div class="stem">作图确定下图的节点 J 和 J′。</div>
+  <figure><img src="figs/fig-2017-nodes.png" alt="光轴及 F、H、H′、F′"><figcaption>源 PDF 第 49 页：只给出 <i>F</i>、<i>H</i>、<i>H</i>′、<i>F</i>′。</figcaption></figure>
+  <div class="ans">
+    <p><b>依据</b>：节点是<b>角放大率为 +1</b> 的一对共轭点 —— 过 <i>J</i> 的光线出射后必过 <i>J</i>′，且方向不变。</p>
+    <p><b>本题（两侧同为空气）</b>：<i>f</i> = −<i>f</i>′，节点与主点重合，故 <b><i>J</i> 与 <i>H</i> 重合、<i>J</i>′ 与 <i>H</i>′ 重合</b>。</p>
+    <p><b>作图验证</b>：任取一条过 <i>H</i> 的斜光线，它在 <i>H</i>′ 处同高度出射且方向不变 —— 这条光线与光轴的交点就是 <i>J</i>、<i>J</i>′，正好落在 <i>H</i>、<i>H</i>′ 上。</p>
+    <div class="res"><b>答</b>：J = H，J′ = H′（空气中节点与主点重合）。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q022">
+  <div class="hd"><span class="tag">2018-三-3</span><span class="ttl">作实物 ABC 的像 A′B′C′</span></div>
+  <div class="stem">作实物 ABC 的像 A′B′C′。</div>
+  <figure><img src="figs/fig-2018-abc.png" alt="光轴上的 A、正上方的 B、B 右后方的 C，以及 F、H、H′、F′"><figcaption>源 PDF 第 50 页：<i>A</i> 在轴上、<i>B</i> 在 <i>A</i> 正上方、<i>C</i> 在 <i>B</i> 的右后方（离透镜更近），三者不在同一物平面。</figcaption></figure>
+  <div class="ans">
+    <p><b>作图步骤</b>：</p>
+    <ol style="margin:4px 0 0 1.2em;padding:0">
+      <li>先定 <i>B</i>′：由 <i>B</i> 作平行于光轴的光线（在 <i>H</i> 处高度 <i>h</i>，出射后过 <i>F</i>′），再由 <i>B</i> 作过 <i>F</i> 的光线（出射后平行于光轴），两出射光线交点即 <i>B</i>′；</li>
+      <li>同法作 <i>C</i>′（<i>C</i> 离透镜更近，放大率更大，<i>C</i>′ 更低更远）；</li>
+      <li><i>A</i> 在轴上，<i>A</i>′ 是 <i>A</i> 的共轭点，落在轴上；连 <i>A</i>′<i>B</i>′、<i>B</i>′<i>C</i>′。</li>
+    </ol>
+    <p><b>结果</b>：物在 <i>F</i> 外 → <b>倒立实像</b>；因 <i>B</i>、<i>C</i> 深度不同、放大率不同，<i>B</i>′<i>C</i>′ 不再与 <i>BC</i> 平行，像的 ABC 发生“倾斜”（空间物体各点放大率不同）。</p>
+    <div class="res"><b>答</b>：A′B′C′ 为倒立实像；B′C′ 因两点的物距不同而倾斜 —— 这正是“平面物成像后不再是相似形”的图示。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q023">
+  <div class="hd"><span class="tag">2019-三-5</span><span class="ttl">作虚物 AB 的像 A′B′</span></div>
+  <div class="stem">作出虚物 AB 经光组所成的像 A′B′。</div>
+  <figure><img src="figs/fig-2019-virtual-ab.png" alt="光轴上的 F、H、H′、F′ 与虚物 AB"><figcaption>源 PDF 第 51 页：<i>A</i> 在 <i>F</i>′ 右侧，<i>B</i> 在 <i>A</i> 上方。</figcaption></figure>
+  <div class="ans">
+    <p><b>作图步骤</b>：同 2017-三-4 的三步，先求出 <i>A</i>′（轴上），再由 <i>B</i> 引两条特殊光线求 <i>B</i>′：平行于光轴的光线出射后过 <i>F</i>′；过 <i>F</i> 的光线出射后平行于光轴。两线交点即 <i>B</i>′。</p>
+    <p><b>结果</b>：<i>A</i>′<i>B</i>′ 在 <i>H</i>′ 与 <i>F</i>′ 之间，<b>实像、正立（相对虚物）、缩小</b>；<i>B</i>′ 与 <i>B</i> 在光轴同侧。</p>
+    <div class="res"><b>答</b>：A′B′ 实像，位于 H′–F′ 之间，正立缩小。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q024">
+  <div class="hd"><span class="tag">2019-三-6</span><span class="ttl">由 β=+1、β=−1 的共轭面作 A 的像</span></div>
+  <div class="stem">如图，一个理想光学系统，π<sub>1</sub> 和 π<sub>1</sub>′ 为一对垂直放大率为 1 的共轭面，π<sub>2</sub> 和 π<sub>2</sub>′ 为一对垂直放大率为 −1 的共轭面，试作图确定物点 A 的像点。</div>
+  <figure><img src="figs/fig-2019-planes.png" alt="π2、π1、系统、π1′、π2′ 与物点 A"><figcaption>源 PDF 第 51 页：<i>A</i> 在 π<sub>2</sub> 左侧；中间为系统（画成带网纹的厚透镜）。</figcaption></figure>
+  <div class="ans">
+    <p><b>第一步：把共轭面翻译成基点</b></p>
+    <ul class="k">
+      <li>β = +1 的一对共轭面就是<b>主平面</b>：<i>H</i> = π<sub>1</sub>，<i>H</i>′ = π<sub>1</sub>′；</li>
+      <li>β = −1 的一对共轭面在 <b>2<i>f</i></b> 处（薄透镜物在 2<i>f</i> 时像在 2<i>f</i>、β = −1），故 <i>F</i> 是 π<sub>1</sub>π<sub>2</sub> 的<b>中点</b>，<i>F</i>′ 是 π<sub>1</sub>′π<sub>2</sub>′ 的<b>中点</b>。</li>
+    </ul>
+    <p><b>第二步：作图</b>：过 <i>A</i> 作平行于光轴的光线（在 <i>H</i> 处高度 <i>h</i>）→ 出射后过 <i>F</i>′；过 <i>A</i> 作过 <i>F</i> 的光线 → 出射后平行于光轴。两条出射光线的交点即 <i>A</i>′（<i>A</i> 在轴上时取其与光轴的交点/投影）。</p>
+    <p><b>结果</b>：<i>A</i> 在 π<sub>2</sub> 之外（|l| &gt; 2<i>f</i>）→ <i>A</i>′ 为<b>实像</b>，位于 <i>F</i>′ 与 π<sub>2</sub>′ 之间，倒立缩小。</p>
+    <div class="res"><b>背</b>：β=+1 的共轭面 = 主面；β=−1 的共轭面 = 2f 面 → 由此定出 H、H′、F、F′，再按常规两光线作图。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q025">
+  <div class="hd"><span class="tag">2020-三-3</span><span class="ttl">作虚物 AB 的像 A′B′</span></div>
+  <div class="stem">作虚物 AB 的像 A′B′。</div>
+  <figure><img src="figs/fig-2020-virtual-ab.png" alt="光轴上的 F、H、H′、F′ 与虚物 AB"><figcaption>源 PDF 第 52 页：<i>A</i> 在 <i>F</i>′ 右侧，<i>B</i> 在 <i>A</i> 上方。</figcaption></figure>
+  <div class="ans">
+    <p><b>作图</b>：与 2019-三-5 完全同型。由 <i>A</i> 定 <i>A</i>′（轴上，H′–F′ 之间）；由 <i>B</i> 作平行光轴光线（出射过 <i>F</i>′）和过 <i>F</i> 光线（出射平行光轴），交点即 <i>B</i>′。</p>
+    <p><b>结果</b>：<b>实像、正立、缩小</b>，位于 <i>H</i>′ 与 <i>F</i>′ 之间；<i>A</i>′<i>B</i>′ 与 <i>AB</i> 同侧。</p>
+    <div class="res"><b>答</b>：与 2019-三-5 同：虚物在 F′ 外 → 实像落在 H′–F′ 之间，正立缩小。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q026">
+  <div class="hd"><span class="tag">2021-三-3</span><span class="ttl">负光组：作物体 AB 的像</span></div>
+  <div class="stem">作图确定物体 AB 的像。</div>
+  <figure><img src="figs/fig-2021-neg-ab.png" alt="A、F′、H、H′、F 依次排列（负光组）"><figcaption>源 PDF 第 53 页：从左到右依次为 <i>A</i>、<i>F</i>′、<i>H</i>、<i>H</i>′、<i>F</i> —— <i>F</i>′ 在 <i>H</i> 左侧、<i>F</i> 在 <i>H</i>′ 右侧，是<b>负（发散）光组</b>。</figcaption></figure>
+  <div class="ans">
+    <p><b>判断</b>：图中 <i>F</i>′ 在 <i>H</i> 左边、<i>F</i> 在 <i>H</i>′ 右边，说明 <i>f</i>′ &lt; 0，系统是负光组。</p>
+    <p><b>作图</b>：由 <i>B</i> 作平行于光轴的光线，出射后发散，其<b>反向延长线</b>过 <i>F</i>′；由 <i>B</i> 作过 <i>F</i> 的光线，出射后平行于光轴。两条出射光线（或其延长线）的交点即 <i>B</i>′。</p>
+    <p><b>结果</b>：<b>虚像、正立、缩小</b>，位于 <i>F</i>′ 与 <i>H</i> 之间（物方），与物同侧。</p>
+    <div class="res"><b>答</b>：负光组、实物 → 虚像，落在 F′–H 之间，正立缩小。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q027">
+  <div class="hd"><span class="tag">2021-三-4</span><span class="ttl">已知 F、H、J、F′，求 H′ 与 J′</span></div>
+  <div class="stem">作图确定下面光组的基点 H′ 和 J。</div>
+  <figure><img src="figs/fig-2021-cardinal.png" alt="F、H、J、F′ 四点及 H 处的垂轴"><figcaption>源 PDF 第 53 页：给出 <i>F</i>、<i>H</i>、<i>J</i>、<i>F</i>′（题面写“H′ 和 J”，图中 J 已给出，按求 <i>H</i>′、<i>J</i>′ 作答）。</figcaption></figure>
+  <div class="ans">
+    <p><b>用到的两条关系</b>（记符号距离 + 向右为正）：</p>
+    <ul class="k">
+      <li><i>f</i> = <i>HF</i>，且 <i>HJ</i> = <i>H</i>′<i>J</i>′ = <i>f</i> + <i>f</i>′；</li>
+      <li>由上行推得 <i>f</i>′ = <i>HJ</i> − <i>HF</i> = <b><i>FJ</i></b>（从 F 到 J 的距离就是像方焦距）。</li>
+    </ul>
+    <p><b>作图步骤</b>：</p>
+    <ol style="margin:4px 0 0 1.2em;padding:0">
+      <li>量取 <i>FJ</i> 的长度，它就是 <i>f</i>′；</li>
+      <li>从 <i>F</i>′ 向系统方向量 <i>f</i>′，得到 <b><i>H</i>′</b>（<i>F</i>′<i>H</i>′ = <i>f</i>′）；</li>
+      <li>再从 <i>H</i>′ 向右量 <i>HJ</i> 的长度，得到 <b><i>J</i>′</b>（<i>H</i>′<i>J</i>′ = <i>HJ</i>）。</li>
+    </ol>
+    <p><b>验证</b>：<i>H</i>′ 应落在 <i>H</i> 与 <i>F</i>′ 之间，<i>J</i>′ 在 <i>H</i>′ 与 <i>F</i>′ 之间；用图上比例核对，吻合。</p>
+    <div class="res"><b>背</b>：f′ = FJ；H′ 在 F′ 左侧 f′ 处；H′J′ = HJ。题面“J”疑为“J′”的漏印。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q028">
+  <div class="hd"><span class="tag">2022-二-2</span><span class="ttl">负光组：作垂轴实物 AB 的像</span></div>
+  <div class="stem">作垂轴实物 AB 的像 A′B′</div>
+  <figure><img src="figs/fig-2022-neg-ab.png" alt="A、F′、H、H′、F（负光组）与物 AB"><figcaption>源 PDF 第 54 页：<i>A</i>、<i>F</i>′、<i>H</i>、<i>H</i>′、<i>F</i> 依次排列，负光组。</figcaption></figure>
+  <div class="ans">
+    <p><b>作图</b>：同 2021-三-3。平行于光轴的光线出射后反向延长过 <i>F</i>′；过 <i>F</i> 的光线出射后平行于光轴；两线延长交点 = <i>B</i>′，轴上得 <i>A</i>′。</p>
+    <p><b>结果</b>：<b>虚像、正立、缩小</b>，位于 <i>F</i>′ 与 <i>H</i> 之间，与物同侧。</p>
+    <div class="res"><b>答</b>：负光组实物 → 虚像（F′–H 之间），正立缩小。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q029">
+  <div class="hd"><span class="tag">2023-三-5</span><span class="ttl">定 A 的像</span></div>
+  <div class="stem">定 A 的像。</div>
+  <figure><img src="figs/fig-2023-aimg.png" alt="A、F、H、H′、F′（正光组）"><figcaption>源 PDF 第 55 页：<i>A</i> 在 <i>F</i> 左侧（物在物方焦点之外），正光组。</figcaption></figure>
+  <div class="ans">
+    <p><b>判断</b>：<i>F</i> 在 <i>H</i> 左侧、<i>F</i>′ 在 <i>H</i>′ 右侧 → 正光组；<i>A</i> 在 <i>F</i> 之外（|l| &gt; f），故像为<b>实像、倒立</b>，位于 <i>F</i>′ 以右。</p>
+    <p><b>作图</b>：<i>A</i> 在轴上，取轴外辅助光线：过 <i>A</i> 作一条光线交 <i>H</i> 于 <i>M</i>，在 <i>H</i>′ 取等高 <i>M</i>′；过 <i>F</i> 作与 <i>AM</i> 平行的辅助光线，出射后平行于光轴，它与 <i>M</i>′ 的出射光线交于 <i>A</i>′（轴上）。</p>
+    <p><b>结果</b>：<i>A</i>′ 在 <i>F</i>′ 右侧，实像；<i>A</i> 越靠近 <i>F</i>，<i>A</i>′ 越远、放大率越大。</p>
+    <div class="res"><b>答</b>：A′ 为实像，位于 F′ 以右（物在 F 外 → 实像倒立）。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q030">
+  <div class="hd"><span class="tag">2024-三-3</span><span class="ttl">画出 AB 所成的像</span></div>
+  <div class="stem">画出 AB 所成的像。</div>
+  <figure><img src="figs/fig-2024-neg-ab.png" alt="A、F′、H、H′、F（负光组）与物 AB"><figcaption>源 PDF 第 56 页：<i>A</i>、<i>F</i>′、<i>H</i>、<i>H</i>′、<i>F</i> 依次排列，负光组。</figcaption></figure>
+  <div class="ans">
+    <p><b>作图</b>：与 2021-三-3 同。注意 <i>F</i>′ 在左侧，平行光线的出射光线要往<b>左下方反向延长</b>才与 <i>F</i>′ 相交。</p>
+    <p><b>结果</b>：<b>虚像、正立、缩小</b>，在 <i>F</i>′ 与 <i>H</i> 之间。</p>
+    <div class="res"><b>答</b>：负光组 → 虚像（F′–H 之间），正立缩小。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== K ===== -->
+<h2 id="k">K · 棱镜系统的像方坐标系<span class="cnt">5 条</span></h2>
+<div class="lead">判两件事：<b>反射次数</b>定手性（奇数次 → 左手系；偶数次 → 右手系），<b>镜面走向</b>定坐标轴翻转。所有反射面法线都在同一平面内时，看光轴转了多少。</div>
+
+<div class="ans" style="margin-bottom:6px">
+  <p><b>判定规则（先背）</b></p>
+  <ul class="k">
+    <li>一次反射：<b>垂直于镜面</b>的那个坐标分量反向，手性改变（右手 → 左手）。</li>
+    <li><b>奇数次</b>反射 → 左手系（镜像）；<b>偶数次</b> → 右手系。</li>
+    <li><b>平行双镜</b>（潜望镜）：出射光轴与入射同向，坐标系不变。</li>
+    <li><b>垂直双镜</b>（角反射器）：出射光轴反向，沿两个镜面法线方向的两个轴都反向，第三轴不变。</li>
+    <li>反射面共面、且出射光轴与入射同向（偶数次）⇒ 三个轴都与物方同向。</li>
+  </ul>
+</div>
+
+<div class="q" id="q031">
+  <div class="hd"><span class="tag">2017-三-6</span><span class="ttl">平面镜 + 等腰直角棱镜（两反射面互垂）</span></div>
+  <div class="stem">已知物空间的右手坐标系 o-xyz，oz 为光轴方向，作平面镜与一个等腰直角棱镜构成系统的像方坐标系 o′-X′Y′Z′。</div>
+  <figure><img src="figs/fig-2017-prism-xyz.png" alt="右手坐标系、45° 平面镜（\）与直角棱镜（斜面 /）"><figcaption>源 PDF 第 49 页：平面镜为“\”，棱镜斜面为“/”，两面互成 90°。</figcaption></figure>
+  <div class="ans">
+    <p><b>光路</b>：光沿 +<i>z</i> 进入棱镜 → 在“/”斜面全反射，折向 +<i>y</i>（向上）→ 出射后打在“\”平面镜上 → 再反射，折回 −<i>z</i>（向左）。</p>
+    <p><b>反射次数</b>：2 次 → 手性不变，仍为<b>右手系</b>。</p>
+    <p><b>坐标轴</b>：两个镜面法线都在 <i>yz</i> 平面内，<i>x</i> 轴不变；两次反射把 <i>z</i>、<i>y</i> 各反一次：</p>
+    <div class="eqb"><i>X</i>′ = <i>x</i>，　<i>Y</i>′ = −<i>y</i>，　<i>Z</i>′ = −<i>z</i></div>
+    <p>即出射光轴与入射反向，像上下、前后都反，左右不变（角反射器效果）。</p>
+    <div class="res"><b>答</b>：出射沿 −z；X′ = x、Y′ = −y、Z′ = −z；两次反射，右手系。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q032">
+  <div class="hd"><span class="tag">2018-三-4</span><span class="ttl">直角棱镜 + 五角棱镜 + 直角棱镜（链）</span></div>
+  <div class="stem">已知物体为右手坐标系，oz 为光轴方向，作棱镜系统的像方成象坐标方向。</div>
+  <figure><img src="figs/fig-2018-prism-chain.png" alt="坐标系与三块棱镜组成的链"><figcaption>源 PDF 第 50 页：直角棱镜 → 五角棱镜 → 直角棱镜，光束沿链向下再折回 +z。</figcaption></figure>
+  <div class="ans">
+    <p><b>数反射</b>：直角棱镜 1 次 + 五角棱镜 2 次 + 直角棱镜 1 次 = <b>4 次</b> → 偶数次，<b>右手系</b>。</p>
+    <p><b>光轴</b>：入射 +<i>z</i> → 第一块折向下 → 中段两次反射改变光束位置/方向 → 末块折回 +<i>z</i>；出射光轴与入射<b>同向</b>（图中最下方棱镜右侧出射）。</p>
+    <p><b>坐标轴</b>：所有反射面法线都在图面内，<i>y</i>（垂直图面）不变；4 次反射且出射与入射同向 ⇒ <i>x</i>、<i>z</i> 也回到原方向：</p>
+    <div class="eqb"><i>X</i>′ = <i>x</i>，　<i>Y</i>′ = <i>y</i>，　<i>Z</i>′ = <i>z</i>（原点平移到出射点 o′）</div>
+    <div class="res"><b>答</b>：4 次反射 → 右手系；出射光轴与入射同向，三个轴与物方同向。<b>【待核】</b>：扫描件里中段棱镜的摆向较糊，若其中一块实际是屋脊棱镜（多两次反射），则有一个横向轴要反向 —— 以原题图为准，按“逐次镜像”重画一遍最稳。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q033">
+  <div class="hd"><span class="tag">2020-三-4</span><span class="ttl">同型链（直角 + 五角 + 直角）</span></div>
+  <div class="stem">已知物体为右手坐标系，oz 为光轴方向，作棱镜系统的像方成象坐标方向。</div>
+  <figure><img src="figs/fig-2020-prism-chain.png" alt="坐标系与三块棱镜组成的链"><figcaption>源 PDF 第 52 页：与 2018-三-4 同型。</figcaption></figure>
+  <div class="ans">
+    <p><b>同 2018-三-4</b>：三块棱镜共 4 次反射 → 右手系；出射光轴与入射同向（图中最下方棱镜右侧出射）⇒ 三个轴与物方同向。</p>
+    <div class="res"><b>答</b>：4 次反射，右手系；X′ = x、Y′ = y、Z′ = z。<b>【待核】</b>：同 2018-三-4，中段棱镜摆向以原图为准。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q034">
+  <div class="hd"><span class="tag">2022-二-1</span><span class="ttl">平面镜 + 直角棱镜（两反射面平行）</span></div>
+  <div class="stem">已知物体为右手坐标系，oz 为光轴方向，作棱镜系统的像方成象坐标方向。</div>
+  <figure><img src="figs/fig-2022-prism.png" alt="右手坐标系、45° 平面镜（\）与直角棱镜（斜面 \）"><figcaption>源 PDF 第 54 页：平面镜与棱镜斜面都是“\”，互相平行。</figcaption></figure>
+  <div class="ans">
+    <p><b>光路</b>：光沿 +<i>z</i> → 先经“\”平面镜反射，折向 −<i>x</i>（向下）→ 进入直角棱镜，在“\”斜面再反射 → 折回 +<i>z</i> 出射。</p>
+    <p><b>次数与手性</b>：2 次 → <b>右手系</b>。</p>
+    <p><b>坐标轴</b>：两面平行（潜望镜式），出射与入射同向，每个轴反射两次回到原方向：</p>
+    <div class="eqb"><i>X</i>′ = <i>x</i>，　<i>Y</i>′ = <i>y</i>，　<i>Z</i>′ = <i>z</i></div>
+    <p>只是光轴平移了一段距离（原点 o′ 在出射点）。</p>
+    <div class="res"><b>答</b>：两镜平行 → 出射沿 +z，三轴同向，右手系（与物方完全相同，只平移）。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q035">
+  <div class="hd"><span class="tag">2024-三-4</span><span class="ttl">物在一倍焦距前，画成像坐标系</span></div>
+  <div class="stem">物在透镜一倍焦距前，画出 xyz 的成像坐标系。</div>
+  <figure><img src="figs/fig-2024-prism.png" alt="右手坐标系、物（竖直箭头）、平面镜与直角棱镜"><figcaption>源 PDF 第 56 页：坐标系 + 竖直物箭头 + 平面镜“\” + 直角棱镜（斜面“\”）。</figcaption></figure>
+  <div class="ans">
+    <p><b>判读</b>：图中只有平面镜和直角棱镜（题面说“透镜”，图上没有透镜，按图作答；若真有一块 f′ 的透镜且物在其前焦点上，则物经透镜后成平行光，方向不变、只影响尺度）。</p>
+    <p><b>作图</b>：与 2022-二-1 同一系统 —— 平面镜与棱镜斜面平行，2 次反射，出射光轴 +<i>z</i>。</p>
+    <div class="eqb"><i>X</i>′ = <i>x</i>，　<i>Y</i>′ = <i>y</i>，　<i>Z</i>′ = <i>z</i>（右手系）</div>
+    <p>像（竖直箭头）相对物：上下、左右都不变（两次反射抵消），只是位置平移；若物恰在透镜前焦点，像在无穷远，仅方向有意义。</p>
+    <div class="res"><b>答</b>：三轴同向，右手系。<b>【待核】</b>：题面“物在透镜一倍焦距前”与图中无透镜不符，按图（平面镜 + 直角棱镜）作答。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== L ===== -->
+<h2 id="l">L · 施密特棱镜光路<span class="cnt">1 条</span></h2>
+
+<div class="q" id="q036">
+  <div class="hd"><span class="tag">2023-三-4</span><span class="ttl">施密特棱镜：过 A 的光路与 A′B′ 方向</span></div>
+  <div class="stem">施密特棱镜的入射面前面有一个物体 AB，画出图中经过物点 A 的入射光线的光路及其在出射光线上像 A′B′ 的方向。</div>
+  <figure><img src="figs/fig-2023-schmidt.png" alt="顶角 45° 的施密特棱镜与两条入射光线、内部虚线光路"><figcaption>源 PDF 第 55 页：棱镜顶角 45°，图中已给出两条入射光线与内部虚线光路。</figcaption></figure>
+  <div class="ans">
+    <p><b>画法</b>：</p>
+    <ol style="margin:4px 0 0 1.2em;padding:0">
+      <li>从物点 <i>A</i> 引一条光线，在前表面按折射定律（近轴可近似直线）进入棱镜；</li>
+      <li>在棱镜内遇到第一个反射面，按反射定律画出反射光线；再遇第二个反射面，再反射一次；</li>
+      <li>从出射面折射出射，标出出射光线方向；</li>
+      <li>在出射光束上定 <i>A</i>′，按像的倒转关系画出 <i>A</i>′<i>B</i>′ 的方向。</li>
+    </ol>
+    <p><b>像的方向</b>：施密特棱镜靠<b>屋脊（两个互相垂直的反射面）</b>工作，两次反射后像在垂直于屋脊的方向上倒转，故 <i>A</i>′<i>B</i>′ 与 <i>AB</i> <b>上下颠倒</b>（左右不变）。</p>
+    <div class="res"><b>答</b>：入射 → 两次反射 → 出射；A′B′ 为 AB 的上下倒像。<b>【待核】</b>：图中虚线是内部光路的示意，具体反射点位置以原题图为基准；判分点在“两次反射 + 一维倒像”这个结论。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+<!-- ===== M ===== -->
+<h2 id="m">M · 与《简答题·按章节》总表的对账<span class="cnt">回填用</span></h2>
+<div class="lead">下面这些考点，本文件覆盖了、而总表里<b>没有或只有零散一句</b>（按关键词检索：屋脊=0、施密特=0、放大镜=0、节点=0、出瞳/入窗/出窗=0、图解法=0、主面=0）。建议直接回填到总表对应章节。</div>
+
+<table class="g">
+  <tr><th>考点</th><th>对应真题</th><th class="l">总表现状</th><th class="l">回填建议位置</th></tr>
+  <tr><td>完善像与完善成像条件（等光程 + 正弦条件）</td><td>2017-2、2018-1、2019-1、2020-2、2024-1</td><td class="l">“完善”仅 3 处，无严格两条件</td><td class="l">七 · 几何光学基础</td></tr>
+  <tr><td>无穷远物点 → 抛物面；有限共轭 → 椭球面</td><td>2019-1、2021-1、2024-1</td><td class="l">无面形结论</td><td class="l">七 · 几何光学基础</td></tr>
+  <tr><td>格里高利望远镜次镜面形</td><td>2021-1</td><td class="l">0</td><td class="l">七 / 十 · 光学仪器</td></tr>
+  <tr><td>单个球面反射镜的完善成像点</td><td>2024-1</td><td class="l">0</td><td class="l">七 · 几何光学基础</td></tr>
+  <tr><td>几何像差分类（5 单色 + 2 色差）</td><td>2018-1、2020-2</td><td class="l">零散有，缺“清单”</td><td class="l">九 · 像差基础</td></tr>
+  <tr><td>位置色差 / 倍率色差及成因</td><td>2020-2</td><td class="l">“色差”仅 1 处</td><td class="l">九 · 像差基础</td></tr>
+  <tr><td>孔径光阑与入瞳/出瞳</td><td>2018-2</td><td class="l">入瞳 1 处，出瞳 0</td><td class="l">八 · 理想光学系统 / 光阑</td></tr>
+  <tr><td>视场光阑与入窗/出窗</td><td>2018-2</td><td class="l">入窗/出窗均 0</td><td class="l">八 · 理想光学系统 / 光阑</td></tr>
+  <tr><td>屋脊棱镜（定义、作用、平面表示图）</td><td>2019-4</td><td class="l">0</td><td class="l">十 · 光学仪器 / 棱镜</td></tr>
+  <tr><td>施密特棱镜光路与倒像</td><td>2023-4</td><td class="l">0</td><td class="l">十 · 光学仪器 / 棱镜</td></tr>
+  <tr><td>放大镜视角放大率、5× 焦距</td><td>2023-2</td><td class="l">0</td><td class="l">十 · 光学仪器</td></tr>
+  <tr><td>节点 J、J′ 的概念与作图</td><td>2017-5</td><td class="l">0</td><td class="l">八 · 理想光学系统</td></tr>
+  <tr><td>图解法三条特殊光线 + 主面等高</td><td>2017-4、2019-5、2021-3 等 11 题</td><td class="l">图解法/主面 均 0</td><td class="l">八 · 理想光学系统</td></tr>
+  <tr><td>虚物作图、负光组作图</td><td>2017-4、2019-5、2020-3、2021-3、2022-2、2024-3</td><td class="l">0</td><td class="l">八 · 理想光学系统</td></tr>
+  <tr><td>由 β=+1/β=−1 共轭面定基点</td><td>2019-6</td><td class="l">0</td><td class="l">八 · 理想光学系统</td></tr>
+  <tr><td>棱镜系统像方坐标系判定（奇偶反射/手性）</td><td>2017-6、2018-4、2020-4、2022-1、2024-4</td><td class="l">“棱镜” 5 处，无坐标系规则</td><td class="l">十 · 光学仪器 / 棱镜</td></tr>
+</table>
+
+<div class="warn">
+  <b>本文件未覆盖 / 需要别的文件补</b>：<br>
+  ① p55 的 2023-三-2（放大镜）与 2023-三-3（反射面方程）在《计算题-应用光学-解析法》附录 C 有完整推导，这里只给结论；<br>
+  ② 2019-三-4 屋脊棱镜的“平面表示图”是作图题，本文件给了四步画法，没有现成图可裁（原卷该题无图）；<br>
+  ③ 作图题的“标准答案图”本文件没有画（只给步骤与结论），复习时请自己按步骤在打印稿上画一遍。
+</div>
+
+<div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>进度</b>：本文件 34 道真题（36 条）· 20 张裁图 · 12 个考点；《计算题》第 1–3 章、应用光学解析法均已单独成文。</p>
+  <p><b>已知局限</b>：① 标注【待核】的 5 处：2021-2(b) 像散/场曲、2018-4 与 2020-4 的链式棱镜横向轴、2024-4 题面“透镜”与图不符、2023-4 施密特棱镜反射点；② 作图题给的是“步骤 + 结论”，不是成品图；③ 简答答案按教材口径整理，非机构答案册原文。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+  (function () {
+    var KEY = 'g851-appo-qa-p4956';
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var stat = document.getElementById('stat');
+    function refresh() {
+      stat.textContent = '已掌握 ' + document.querySelectorAll('.q.done').length + ' / ' + qs.length;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+    qs.forEach(function (q) {
+      var tag = q.querySelector('.tag'), hd = q.querySelector('.hd');
+      if (!tag || !hd) return;
+      var id = tag.textContent.trim();
+      var lab = document.createElement('label');
+      lab.className = 'mk';
+      lab.innerHTML = '<input type="checkbox"> 已掌握';
+      var box = lab.querySelector('input');
+      box.checked = !!saved[id];
+      if (box.checked) q.classList.add('done');
+      box.addEventListener('change', function () {
+        if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+        else { delete saved[id]; q.classList.remove('done'); }
+        refresh();
+      });
+      hd.appendChild(lab);
+    });
+    refresh();
+    var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+    bAll.addEventListener('click', function () {
+      document.body.classList.remove('onlytodo');
+      bAll.classList.add('on'); bTodo.classList.remove('on');
+    });
+    bTodo.addEventListener('click', function () {
+      document.body.classList.add('onlytodo');
+      bTodo.classList.add('on'); bAll.classList.remove('on');
+    });
+  })();
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>

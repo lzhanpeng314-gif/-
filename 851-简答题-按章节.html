@@ -1,0 +1,1337 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 物理光学与应用光学 · 简答题（按考纲章节）</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:25px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:19px;margin:48px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .sc{font-size:11.5px;color:#fff;background:var(--acc);padding:1px 8px;border-radius:10px;
+         vertical-align:3px;margin-left:8px;font-weight:400;letter-spacing:.5px;}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 18px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;
+       letter-spacing:.3px;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 15px;
+       font-size:14.7px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .ans p{margin:0 0 7px;}
+  .ans p:last-child{margin-bottom:0;}
+  .ans ul{margin:4px 0 7px;padding-left:20px;}
+  .ans li{margin:2px 0;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  em.k{font-style:normal;font-weight:600;background:var(--hl);padding:0 2px;}
+  .f{font-family:"Cambria Math",Cambria,Georgia,serif;font-style:italic;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:6px 0;}
+  /* ===== 公式排版组件 ===== */
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.6;margin:8px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.12em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  /* ===== 掌握标记（自动注入） ===== */
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  figure{margin:10px 0 4px;text-align:center;}
+  figure img{max-width:100%;border:1px solid var(--line);border-radius:4px;background:#fff;}
+  figcaption{font-size:12px;color:var(--mut);margin-top:5px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:8px 0;border-radius:0 4px 4px 0;}
+  .hotbox{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:22px 0 0;}
+  .hotbox h3{margin:0 0 8px;font-size:15px;}
+  .hotbox table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .hotbox td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .hotbox td:first-child{white-space:nowrap;color:var(--acc);font-weight:600;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 物理光学与应用光学 · 简答题</h1>
+  <div class="sub">
+    按考纲十章重排 · 覆盖 2009–2024 共 16 组真题 · <b>68 个小问</b> · 题干与答案同页，图随题放<br>
+    来源：<code>西电\真题分类\简答题分题型.pdf</code>（题）＋ <code>简答题知识点汇总.pdf</code>（答）
+  </div>
+  <div class="lg">
+    答案标注：<b>【原答】</b>= 直接取自原始资料　<b>【教材】</b>= 按石顺祥《物理光学与应用光学》第 3 版整理　<b>【自算】</b>= 我推导的数值
+  </div>
+</header>
+
+<div class="warn">
+  <b>应用光学部分（第 7–10 章）本文件覆盖偏弱</b> —— 这 68 问是从「物理光学简答」真题汇编的，
+  应用光学的完善像、像差分类、光阑、棱镜坐标、图解法等考点命中很少。<br>
+  <b>完整版见：<a href="851-应用光学-简答与画图-p49-56.html" style="color:#8c4a2f">851-应用光学-简答与画图（34 题 / 36 条 / 20 图）</a></b>。
+  两份配合看：本表管物理光学，那份管应用光学。
+</div>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#m1">一 电磁理论</a><a href="#m2">二 干涉</a><a href="#m3">三 衍射</a>
+  <a href="#m4">四 各向异性介质</a><a href="#m5">五 感应双折射</a><a href="#m6">六 吸收色散散射</a>
+  <a href="#m7">七 几何光学基础</a><a href="#m8">八 理想光学系统</a><a href="#m9">九 像差与光路</a>
+  <a href="#m10">十 光学仪器</a>
+</nav>
+
+<div class="bar">
+  <span id="stat">已掌握 0 / 68</span>
+  <button id="f-all" class="on">全部</button>
+  <button id="f-todo">只看没背下来的</button>
+  <span style="margin-left:auto;font-size:12px">勾选会自动记住（存在本机浏览器）</span>
+</div>
+
+<div class="hotbox">
+  <h3>先看这张表：17 年重复考的 6 个点</h3>
+  <table>
+    <tr><td>景深 ★4</td><td>2011-9(2)、2014-9(1)、2015-1(4)、2022-1(4) —— 只有一种答案，必须一字不差背下</td></tr>
+    <tr><td>光亮度 / 光照度 ★3</td><td>2012-9(2)、2013-9(2)、2014-9(2) —— 连考三年，定义式要会写</td></tr>
+    <tr><td>单色像差 ★3</td><td>2009-10、2012-9(1)、2022-1(3) —— 五种名字 + 各自成因</td></tr>
+    <tr><td>分辨本领 ★5</td><td>2014-1(3)、2015-1(1)(2)、2016-1(3)、2017-1(4)、2021-1(3)、2023-1(4)</td></tr>
+    <tr><td>散射 ★5</td><td>2016-1(5)、2017-1(5)、2020-1(5)、2023-1(3)、2024-1(5)</td></tr>
+    <tr><td>偏振态判断 ★4</td><td>2015-1(3)、2016-1(4)、2021-1(1)、2022-1(1)</td></tr>
+  </table>
+</div>
+
+<!-- ============ 一 ============ -->
+<h2 id="m1">一 · 光的电磁理论基础<span class="sc">考纲 15 分</span><span class="cnt">6 问</span></h2>
+<div class="lead">考纲点名：衰逝波、光波场数学表达式及各物理量含义。反射折射、布儒斯特角、全反射是每年必考区。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2016-1(1)</span><span class="ttl">全反射时，光疏介质中有没有光场？</span><span class="hot">考纲点名</span></div>
+  <div class="stem">光由光密介质射向光疏介质，在一定条件下会发生全反射。当发生全反射时，光疏介质中是否有光场？如果有，请说明该光场的性质。</div>
+  <div class="ans">
+    <p><em class="k">有</em>。光疏介质中存在<b>倏逝波（衰逝波）</b>。</p>
+    <p>性质：</p>
+    <ul>
+      <li>沿界面方向传播、振幅沿界面法线方向（伸入光疏介质）按<b>指数衰减</b>的非均匀平面波；</li>
+      <li>穿透深度约为波长量级（<span class="f">d</span> ~ λ）；</li>
+      <li>沿界面方向平均能流不为零，但沿法线方向<b>平均能流为零</b>，即不向外传输能量；</li>
+      <li>用受抑全反射（光学隧道效应）实验可证实其存在。</li>
+    </ul>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2018-1(1)</span><span class="ttl">两种指数形式的波表达式各表示什么光波</span></div>
+  <div class="stem">表达式 <span class="f">E</span> = <span class="f">E</span><sub>0</sub>e<sup>−i(ωt−kz)</sup> 和 <span class="f">E</span> = <span class="f">E</span><sub>0</sub>e<sup>−i(ωt+kz)</sup> 表示的是什么光波？</div>
+  <div class="ans">
+    <p>两者都是沿 <span class="f">z</span> 轴传播的<b>单色平面波</b>：角频率 ω、波数 <span class="f">k</span> = 2π/λ，等相位面垂直于 <span class="f">z</span> 轴。</p>
+    <p>区别只在指数中 <span class="f">kz</span> 的符号 —— 它决定传播方向：</p>
+    <ul>
+      <li>e<sup>−i(ωt−kz)</sup>：沿 <b>+z 方向</b>传播（正向行波）；</li>
+      <li>e<sup>−i(ωt+kz)</sup>：沿 <b>−z 方向</b>传播（反向行波）。</li>
+    </ul>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2014-1(1)</span><span class="ttl">反射无损失，对入射光的要求</span></div>
+  <div class="stem">若使线偏振的激光通过一折射率为 1.76 的介质表面反射后没有反射损失，对入射光有何要求？</div>
+  <div class="ans">
+    <p>两条要求同时满足：</p>
+    <ul>
+      <li>入射角为<b>布儒斯特角</b>：θ<sub>B</sub> = arctan(1.76/1) ≈ <b>60.4°</b>；</li>
+      <li>入射光振动方向<b>平行于入射面</b>（即只有 p 分量）。</li>
+    </ul>
+    <p>此时 p 分量反射系数 <span class="f">r</span><sub>p</sub> = 0，反射光中没有该成分，能量全部透射，故"无反射损失"。若含 s 分量，s 分量仍会反射，就有损失。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2021-1(1)</span><span class="ttl">右旋圆偏振光正入射玻璃，反射光偏振态</span></div>
+  <div class="stem">一束右旋圆偏振光从空气正入射到折射率为 1.5 的玻璃上，反射光的偏振态如何？（迎着光传播方向观察）</div>
+  <div class="ans">
+    <p>正入射 θ<sub>1</sub> = 0，n<sub>1</sub> = 1、n<sub>2</sub> = 1.5：</p>
+    <div class="eqb"><i>r</i><sub>p</sub> = −<i>r</i><sub>s</sub> = <span class="frac"><span class="num"><i>n</i><sub>2</sub> − <i>n</i><sub>1</sub></span><span class="den"><i>n</i><sub>2</sub> + <i>n</i><sub>1</sub></span></span> = 0.2</div>
+    <p>反射光两分量振幅仍是等幅（同为 0.2<span class="f">E</span>），但 p 分量相对 s 分量多一个 π 相位（因 r<sub>p</sub>、r<sub>s</sub> 符号相反），因此旋向反转。</p>
+    <p>结论：反射光为<b>左旋圆偏振光</b>（迎着光的传播方向看）。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2023-1(2)</span><span class="ttl">两个透明介质界面"完全透射"的条件</span></div>
+  <div class="stem">可以在两个透明介质交界面完全透射的条件是什么？</div>
+  <div class="ans">
+    <ul>
+      <li>入射光为振动方向<b>平行于入射面</b>的线偏振光（只有 p 分量）；</li>
+      <li>入射角等于<b>布儒斯特角</b> θ<sub>B</sub> = arctan(n<sub>2</sub>/n<sub>1</sub>)。</li>
+    </ul>
+    <p>此时 <span class="f">r</span><sub>p</sub> = 0，界面无反射，光全部透射。补充：若为正入射，则须 n<sub>1</sub> = n<sub>2</sub>（无界面）。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2024-1(1)</span><span class="ttl">光纤传光的原理与数值孔径</span></div>
+  <div class="stem">光纤传播应用了什么光学原理？对于纤芯折射率 1.55、包层折射率 1.5 的光纤，其数值孔径是多少？</div>
+  <div class="ans">
+    <p>原理：<b>全反射</b>。光在纤芯（n<sub>1</sub> = 1.55）与包层（n<sub>2</sub> = 1.5）界面上，当入射角大于临界角 θ<sub>c</sub> = arcsin(n<sub>2</sub>/n<sub>1</sub>) 时发生全反射，光被限制在纤芯内以锯齿形前进。</p>
+    <div class="eq">NA = √(n<sub>1</sub>² − n<sub>2</sub>²) = √(1.55² − 1.50²) = √0.1525 ≈ <b>0.39</b></div>
+    <p>数值孔径决定光纤的收光能力，NA 越大能耦合进光纤的光越多。</p>
+    <span class="src">【原答 + 自算】</span>
+  </div>
+</div>
+
+<!-- ============ 二 ============ -->
+<h2 id="m2">二 · 光的干涉<span class="sc">考纲 15 分</span><span class="cnt">11 问</span></h2>
+<div class="lead">考纲点名：干涉概念、等倾干涉现象、增透增反膜条件、牛顿环与等倾条纹异同、F-P 与光栅作为分光元件的异同。</div>
+
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2013-1(1)</span><span class="ttl">增透膜的折射率怎么选</span></div>
+  <div class="stem">许多光学仪器的玻璃表面镀有增透膜。为达到增透效果，膜层材料的折射率应如何选择？</div>
+  <div class="ans">
+    <p>单层增透膜（空气 n<sub>0</sub>、膜 n<sub>1</sub>、玻璃 n<sub>2</sub>）要求：</p>
+    <ul>
+      <li>折射率满足 <b>n<sub>1</sub> = √(n<sub>0</sub>·n<sub>2</sub>)</b>（使膜上下表面两反射光振幅相等）；</li>
+      <li>膜厚 <b>d = λ/(4n<sub>1</sub>)</b>，即光学厚度 λ/4，使两反射光光程差 λ/2、相位差 π，干涉相消。</li>
+    </ul>
+    <p>振幅相等 + 反相 ⇒ 反射光完全抵消，透射增强。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2016-1(2)</span><span class="ttl">牛顿环与等倾条纹"形状相同、光程差相同"，是否同类</span></div>
+  <div class="stem">有人说牛顿环的条纹形状与等倾干涉圆条纹相同，产生干涉的两束光之间的光程差表示式也相同，因此也属于等倾干涉，这种说法正确吗？为什么？</div>
+  <div class="ans">
+    <p><b>不正确。</b>两者只是"条纹形状都是同心圆"这一点巧合。</p>
+    <ul>
+      <li><b>牛顿环是等厚干涉</b>：由平凸透镜下表面与平板玻璃上表面之间的<b>空气楔</b>形成，光程差 Δ = 2nh + λ/2 随<b>膜厚 h</b> 变化，同一厚度同一级 → 中心 h=0 处只有半波损失，故<b>中心是暗斑</b>，级次由中心向外递增（内疏外密）。</li>
+      <li><b>等倾干涉</b>：平行平板上不同<b>入射倾角 i</b> 的光光程差 Δ = 2nh·cos i 不同，同一倾角同一级 → <b>中心级次最高</b>，由中心向外级次递减。</li>
+    </ul>
+    <p>判据：看"同一级条纹对应的是<b>等厚</b>还是<b>等倾角</b>"。牛顿环对应等厚，不是等倾。</p>
+    <span class="src">【原答 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2017-1(1)</span><span class="ttl">两束相干平面波以夹角 θ 相遇</span></div>
+  <div class="stem">一束相干平面光波以夹角 θ 在观察屏相遇，发生干涉，试说明干涉条纹的形状和宽度。</div>
+  <div class="ans">
+    <p>条纹为<b>平行于两波矢角平分线</b>的<b>等间距直条纹</b>。</p>
+    <div class="eq">Δx = λ / (2 sin(θ/2)) ≈ λ/θ　（θ 很小时）</div>
+    <p>θ 越大，条纹越密；θ 越小，条纹越疏。这是"两平面波干涉"的基本结论，也是全息光栅形成的原理。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q010">
+  <div class="hd"><span class="tag">2017-1(2)</span><span class="ttl">牛顿环与法布里–珀罗环的异同</span></div>
+  <div class="stem">试比较牛顿环和法布里–珀罗干涉环这两种干涉条纹的异同。</div>
+  <div class="ans">
+    <p><b>相同点</b>：都是同心圆环条纹，且内疏外密。</p>
+    <p><b>不同点</b>：</p>
+    <ul>
+      <li>机理：牛顿环是<b>等厚</b>干涉（双光束）；F-P 是<b>多光束</b>干涉（平行平板多次反射）。</li>
+      <li>级次：牛顿环<b>中心级次最低</b>（中心暗）；F-P <b>中心级次最高</b>。</li>
+      <li>锐度：F-P 条纹细锐（反射率越高越锐，精细度大）；牛顿环条纹宽而缓。</li>
+    </ul>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q011">
+  <div class="hd"><span class="tag">2017-1(3)</span><span class="ttl">玻璃上镀保护膜应满足什么条件</span></div>
+  <div class="stem">若想在玻璃上镀一层保护膜，则该膜应满足什么条件？该膜层的反射率是多少？</div>
+  <div class="ans">
+    <p>应满足<b>增反（高反）条件</b>：</p>
+    <ul>
+      <li>膜折射率 <b>n<sub>1</sub> &gt; n<sub>2</sub></b>（膜大于玻璃）；</li>
+      <li>膜厚 <b>n<sub>1</sub>h = λ<sub>0</sub>/4</b>，使两反射光同相叠加。</li>
+    </ul>
+    <p>此时反射率最大：</p>
+    <div class="eq">R<sub>M</sub> = [ (n<sub>0</sub>n<sub>2</sub> − n<sub>1</sub>²) / (n<sub>0</sub>n<sub>2</sub> + n<sub>1</sub>²) ]²</div>
+    <p>其中 n<sub>0</sub> 为空气、n<sub>1</sub> 为膜、n<sub>2</sub> 为玻璃。若改成"增透"，只需把不等号反向并让 n<sub>1</sub> = √(n<sub>0</sub>n<sub>2</sub>)。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q012">
+  <div class="hd"><span class="tag">2018-1(2)</span><span class="ttl">同为等倾，为何双光束看反射、多光束看透射</span></div>
+  <div class="stem">平行平板的双光束干涉和多光束干涉同为等倾干涉，为什么前者应用的常是反射光，而后者应用的通常是透射光？</div>
+  <div class="ans">
+    <ul>
+      <li><b>双光束用反射光</b>：平板反射率 R 较小，反射光中两束强度接近，<b>条纹可见度高</b>；透射光是一强一弱两束叠加，可见度很低。</li>
+      <li><b>多光束用透射光</b>：反射光是"亮背景下的细暗条纹"，透射光是"暗背景下的细亮条纹"，后者<b>更容易分辨</b>。</li>
+    </ul>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q013">
+  <div class="hd"><span class="tag">2019-1(2)</span><span class="ttl">由谱线宽度求最大测距量程</span></div>
+  <div class="stem">已知波长为 500 nm 的光波，其谱线宽度为 Δλ = 8×10<sup>−5</sup> nm，若用这一光源来进行干涉测距，能实现的最大测距量程如何确定？</div>
+  <div class="ans">
+    <p>由相干长度</p>
+    <div class="eqb"><i>L</i><sub>c</sub> = <span class="frac"><span class="num">λ<sup>2</sup></span><span class="den">Δλ</span></span> = <span class="frac"><span class="num">(500×10<sup>−9</sup>)<sup>2</sup></span><span class="den">8×10<sup>−14</sup></span></span> ≈ <b>3.1 m</b></div>
+    <p>干涉测距是"往返"光程，故最大量程取一半：</p>
+    <div class="eq">L<sub>max</sub> = L<sub>c</sub>/2 ≈ <b>1.6 m</b></div>
+    <p>判据：两束光的光程差必须小于相干长度，否则条纹消失。</p>
+    <span class="src">【自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q014">
+  <div class="hd"><span class="tag">2020-1(2)</span><span class="ttl">白光等倾干涉，同一级圆环各色如何分布</span></div>
+  <div class="stem">用白光做等倾干涉实验，对于同一级圆环，各个颜色光的空间位置如何分布？</div>
+  <div class="ans">
+    <p>等倾条件 2nh·cos i = kλ。同一级 k 下，<b>λ 越大 ⇒ cos i 越小 ⇒ 倾角 i 越大</b>。</p>
+    <p>所以同一级圆环中：<b>红光在最外，紫光在最内</b>，中间按光谱次序排列。</p>
+    <p>中心附近级次最高，因各色重叠而接近白色；向外展开成彩色环。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q015">
+  <div class="hd"><span class="tag">2020-1(3)</span><span class="ttl">光盘表面为什么呈彩色条纹</span></div>
+  <div class="stem">室内自然光照明下，光盘存储面会呈现漂亮的彩色条纹，为什么？</div>
+  <div class="ans">
+    <p>原答给的是<b>薄膜干涉</b>：光盘镀膜面在自然光照射下，膜前后两表面反射的光相遇发生干涉，自然光为复色光，不同波长满足相长/相消条件的角度不同，在膜面上形成彩色条纹。</p>
+    <div class="warn">
+      <b>补充（存疑点）</b>：光盘表面还有极密的同心/螺旋沟槽，也常被解释为<b>反射式光栅的衍射色散</b>。若阅卷按"薄膜干涉"给分，就写薄膜干涉；若允许发挥，可两句都写 —— 但<b>先写薄膜干涉</b>。
+    </div>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q016">
+  <div class="hd"><span class="tag">2021-1(2)</span><span class="ttl">F-P 两镜反射率 0.5，最大与最小透射率</span></div>
+  <div class="stem">法布里–珀罗干涉仪两反射镜的反射率为 0.5，试说明其最大透射率和最小透射率各是多少？（不考虑系统的吸收）</div>
+  <div class="ans">
+    <p>多光束透射光强：</p>
+    <div class="eqb"><i>I</i><sub>t</sub> = <span class="frac"><span class="num">(1−<i>R</i>)<sup>2</sup></span><span class="den">(1−<i>R</i>)<sup>2</sup> + 4<i>R</i> sin<sup>2</sup>(φ/2)</span></span> · <i>I</i><sub>i</sub></div>
+    <ul>
+      <li>sin²(φ/2) = 0 时最强：<b>T<sub>max</sub> = 1</b>（无吸收时全部透过）；</li>
+      <li>sin²(φ/2) = 1 时最弱：T<sub>min</sub> = (1−R)² / [(1−R)² + 4R]，代入 R = 0.5 → (0.25)/(0.25+2) = <b>1/9</b>。</li>
+    </ul>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q017">
+  <div class="hd"><span class="tag">2024-1(2)</span><span class="ttl">杨氏双缝：光源上移 / 增大光源到双缝的距离</span></div>
+  <div class="stem">杨氏双缝干涉实验中，光源上移，条纹会出现什么变化？增加光源到双缝的距离，条纹如何变化？</div>
+  <div class="ans">
+    <p>①<b>光源上移</b>：零级条纹向<b>相反方向</b>（下方）平移，整个条纹图样下移；<b>条纹间距不变</b>（Δx = λD/d 只与 D、d 有关）。</p>
+    <p>②<b>增大光源到双缝的距离</b>：光源的<b>空间相干性</b>变差，条纹可见度下降、逐渐模糊直至消失；条纹间距仍不变。判据是光源宽度对应的相干孔径 θ ≈ λ/b，超过即失去相干性。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<!-- ============ 三 ============ -->
+<h2 id="m3">三 · 光的衍射<span class="sc">考纲 15 分</span><span class="cnt">10 问</span></h2>
+<div class="lead">考纲点名：菲涅尔近似与夫琅禾费近似的判据、衍射概念、衍射与干涉的区别、望远镜/显微镜/照相物镜分辨本领、光栅方程（正入射与斜入射）。</div>
+
+<div class="q" id="q018">
+  <div class="hd"><span class="tag">2019-1(1)</span><span class="ttl">干涉与衍射的本质联系与区别</span></div>
+  <div class="stem">光的干涉和光的衍射本质上的联系与区别是什么？</div>
+  <div class="ans">
+    <p><b>联系</b>：本质都是相干光波叠加引起的光强重新分布；衍射可以看作无限多个连续分布的次波之间的干涉。</p>
+    <p><b>区别</b>：</p>
+    <ul>
+      <li>干涉是<b>有限个（分立）</b>相干光波的叠加；</li>
+      <li>衍射是<b>无限多个连续次波</b>的叠加，且伴随光偏离直线传播、出现明暗条纹。</li>
+    </ul>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q019">
+  <div class="hd"><span class="tag">2014-1(2)</span><span class="ttl">隔缝遮住光栅狭缝，分辨本领与色散如何变</span></div>
+  <div class="stem">观察光栅产生的衍射光谱，现隔缝遮住光栅的狭缝，光栅的分辨本领和色散本领如何变化？</div>
+  <div class="ans">
+    <p>隔缝遮住后，参与衍射的<b>缝数 N 减半</b>，而相邻<b>有效缝距变为 2d</b>（光栅常数变成 2d，出现缺级）。</p>
+    <ul>
+      <li><b>分辨本领</b> R = kN → 降为原来的 <b>1/2</b>；</li>
+      <li><b>色散本领</b>（角色散率 dθ/dλ = k/(d′cosθ)）→ 也降为 <b>1/2</b>，谱线间距变为原来的 2 倍，谱线变稀。</li>
+    </ul>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q020">
+  <div class="hd"><span class="tag">2014-1(3)</span><span class="ttl">提高显微镜分辨率的主要途径</span></div>
+  <div class="stem">提高显微镜分辨率的主要途径是什么？</div>
+  <div class="ans">
+    <p>显微镜最小分辨距离</p>
+    <div class="eq">δ = 0.61λ / (n·sin u) = 0.61λ / NA</div>
+    <p>途径：</p>
+    <ul>
+      <li><b>减小波长 λ</b>（用紫外光、电子束）；</li>
+      <li><b>增大数值孔径 NA</b>：增大孔径角 u（加大物镜口径），或用<b>油浸物镜</b>使 n &gt; 1。</li>
+    </ul>
+    <p>单纯提高放大率无效（那只是空放大）。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q021">
+  <div class="hd"><span class="tag">2015-1(1)</span><span class="ttl">望远镜如何提高分辨率；口径确定后如何看视角放大率</span></div>
+  <div class="stem">在望远镜的设计中，如何提高望远镜的分辨本领？在望远镜的分辨本领确定的前提下，如何考虑其视角放大率？</div>
+  <div class="ans">
+    <p><b>提高分辨本领</b>：望远镜的分辨角 θ<sub>0</sub> = 1.22λ/D，只由<b>物镜通光口径 D</b> 决定 → 增大物镜口径。</p>
+    <p><b>口径确定后</b>：θ<sub>0</sub> 已定，视角放大率 Γ 必须与之<b>匹配</b> —— 使物镜刚能分辨的两点经放大后恰好达到人眼的分辨极限（约 1′）：</p>
+    <div class="eq">Γ ≈ 1′ / θ<sub>0</sub>　（θ<sub>0</sub> 用角分表示）</div>
+    <p>Γ 过小 → 物镜分辨的细节人眼看不见（浪费口径）；Γ 过大 → <b>无效放大</b>（空放大），像变大但更模糊。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q022">
+  <div class="hd"><span class="tag">2015-1(2)</span><span class="ttl">光栅光谱仪与 F-P 标准具分辨本领为何都高</span></div>
+  <div class="stem">光栅光谱仪和法布里–珀罗标准具的分辨本领都很高，解释它们分辨本领高的原因。</div>
+  <div class="ans">
+    <p>两者都取决于<b>参与干涉的单元数目</b>：</p>
+    <ul>
+      <li><b>光栅</b>：R = kN，狭缝数 <b>N 极大</b>（每毫米上千条），故 R 高；</li>
+      <li><b>F-P 标准具</b>：R = 0.97 <b>mN</b>，其中干涉级 <b>m 很大</b>（腔长可达厘米级，m 上千），故 R 高。</li>
+    </ul>
+    <p>本质上：分辨本领 ∝ 参与叠加的相干光束数目 × 级次。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q023">
+  <div class="hd"><span class="tag">2016-1(3)</span><span class="ttl">显微镜紫外光 300 nm 的分辨本领是 550 nm 的几倍</span></div>
+  <div class="stem">显微镜用紫外光（λ = 300 nm）照明时的分辨本领，是采用可见光（λ = 550 nm）照明时的多少倍？</div>
+  <div class="ans">
+    <p>δ ∝ λ，分辨本领 ∝ 1/λ：</p>
+    <div class="eq">倍数 = 550/300 ≈ <b>1.83 倍</b></div>
+    <span class="src">【自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q024">
+  <div class="hd"><span class="tag">2018-1(3)</span><span class="ttl">菲涅尔衍射与夫琅禾费衍射的距离判据（估算）</span></div>
+  <div class="stem">菲涅尔衍射和夫琅禾费衍射是傍轴近似下的两种衍射情况，如果光波长 λ = 0.632 μm、孔径线度 d = 2 mm，估计一下观察屏到衍射屏的距离 l 为多少看作菲涅尔衍射，而 l 为多少时可以看作夫琅禾费衍射？</div>
+  <div class="ans">
+    <p>取孔径边缘坐标 x<sub>1</sub> = y<sub>1</sub> = d/2 = 1 mm。</p>
+    <ul>
+      <li><b>菲涅尔（近场）</b>条件：l³ ≫ (x<sub>1</sub>²+y<sub>1</sub>²)/λ ⇒ <b>l ≫ 1 cm</b> 即可看作菲涅尔衍射；</li>
+      <li><b>夫琅禾费（远场）</b>条件：l ≫ (x<sub>1</sub>²+y<sub>1</sub>²)/(λ·…)，代入得 <b>l ≫ 3 m</b> 才可看作夫琅禾费衍射。</li>
+    </ul>
+    <p>记忆：孔径越大、波长越短，远场条件越苛刻（l ∝ d²/λ）。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q025">
+  <div class="hd"><span class="tag">2019-1(3)</span><span class="ttl">斜入射平面光栅的光栅方程及各量意义</span></div>
+  <div class="stem">写出光波斜入射平面光栅时的光栅方程，并说明方程中各量的物理意义。</div>
+  <div class="ans">
+    <div class="eq">d ( sin i ± sin θ ) = kλ</div>
+    <ul>
+      <li><b>d</b>：光栅常数（相邻两缝间距）；</li>
+      <li><b>i</b>：入射角（入射光与光栅法线夹角）；</li>
+      <li><b>θ</b>：衍射角；衍射光与入射光在法线同侧取"+"、异侧取"−"；</li>
+      <li><b>k</b>：衍射级次（0, ±1, ±2…）；<b>λ</b>：波长。</li>
+    </ul>
+    <p>意义：相邻两缝对应光线的<b>光程差等于 kλ</b> 时，该方向上各缝衍射光同相叠加，形成主极大。正入射时 i = 0，退化为 d sinθ = kλ。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q026">
+  <div class="hd"><span class="tag">2021-1(3)</span><span class="ttl">光栅光谱仪的分辨率与成像系统分辨率有何区别</span></div>
+  <div class="stem">光栅光谱仪的分辨率和光学成像系统的分辨率有何区别？</div>
+  <div class="ans">
+    <ul>
+      <li><b>光栅光谱仪</b>：R = λ/Δλ = kN，表征把<b>两条波长相差极小</b>的谱线分开的能力 —— 是"<b>波长（光谱）分辨</b>"。</li>
+      <li><b>成像系统</b>：用最小分辨距离/最小分辨角表示，表征把<b>两个靠得很近的物点或细节</b>分开的能力 —— 是"<b>空间分辨</b>"。</li>
+    </ul>
+    <p>一句话：一个分"颜色"，一个分"点"。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q027">
+  <div class="hd"><span class="tag">2024-1(3)</span><span class="ttl">菲涅尔圆屏衍射，轴线中心是亮斑还是暗斑</span></div>
+  <div class="stem">菲涅尔圆屏衍射中，圆屏半径为有限长，沿中垂线观察中心为亮斑还是暗斑？</div>
+  <div class="ans">
+    <p><b>亮斑</b>（泊松亮斑）。</p>
+    <p>圆屏挡住前 k 个半波带后，露出的第一个半波带起主要作用；相邻半波带贡献相消，未被完全抵消的部分在轴上叠加，故中心恒为亮点 —— 且只要圆屏不无限大，亮点始终存在（与屏的大小无关）。</p>
+    <p>对照：<b>圆孔</b>衍射轴线上随孔径变化明暗交替；<b>圆屏</b>则恒亮。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<!-- ============ 四 ============ -->
+<h2 id="m4">四 · 光在各向异性介质中的传播<span class="sc">考纲 15 分</span><span class="cnt">8 问</span></h2>
+<div class="lead">考纲点名：晶体双折射、波片、偏振态的判断与检验。这一章几乎全是"给一个偏振光 + 一块波片，问出来是什么"。</div>
+
+<div class="q" id="q028">
+  <div class="hd"><span class="tag">2015-1(3)</span><span class="ttl">自然光 → 45° 起偏器 → 1/4 波片，再叠一块 1/4 波片</span></div>
+  <div class="stem">自然光通过透光轴与 x 轴方向夹角为 45° 的起偏器垂直入射到一块 1/4 波片上，波片的慢轴在 y 轴方向，问：透过 1/4 波片的光是什么偏振光？如果其后我再放一块 1/4 波片和一个透光轴与起偏器相同的检偏器（光束垂直入射波片和检偏器），则第二块 1/4 波片的快慢轴应如何放置才能使透过光的振动方向与检偏器的透光轴平行？</div>
+  <div class="ans">
+    <p>①自然光经起偏器 → <b>线偏振光</b>，振动方向与 x 轴成 45°。它入射 1/4 波片（快慢轴沿 x、y），两分量<b>振幅相等</b>，波片引入 π/2 相位差 → 出射为<b>圆偏振光</b>。</p>
+    <p>②再加一块 1/4 波片：要把它再"还原"成线偏振光，须让圆偏振光在<b>新波片的两个主轴上等幅分解</b>，即</p>
+    <ul>
+      <li>第二块波片的<b>快（慢）轴与第一块成 45°</b>；</li>
+      <li>此时出射为线偏振光，振动方向与第二块光轴成 45°；</li>
+      <li>检偏器透光轴应转到与该出射振动方向<b>平行</b>（即与起偏器透光轴成 90° 或 0°，取决于两次旋转的累计）。</li>
+    </ul>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q029">
+  <div class="hd"><span class="tag">2016-1(4)</span><span class="ttl">检偏器前加 1/4 波片，转一周两亮两黑</span></div>
+  <div class="stem">为了检验光束的偏振特性，在检偏器前放置一块 1/4 波片，旋转检偏器一周，看到光强为两亮两黑，则该光束的偏振特性如何？请简要说明。</div>
+  <div class="ans">
+    <p>该光束是<b>线偏振光</b>（或至少含明确线偏振成分）。</p>
+    <p>理由：1/4 波片把入射的线偏振光变成椭圆（或圆）偏振，检偏器旋转一周出现<b>两个极大、两个极小</b>；若极小处<b>完全消光（黑）</b>，说明存在一个方向振动为零 → 入射光本身是线偏振的。</p>
+    <p>对照：圆偏振光过 1/4 波片后是线偏振 → 也是两亮两黑，所以答"线偏振光"即可（若极小处不消光，则是椭圆偏振）。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q030">
+  <div class="hd"><span class="tag">2019-1(4)</span><span class="ttl">沿光轴入射 / 光轴平行表面正入射，会不会双折射</span></div>
+  <div class="stem">两种入射情况：1）光波沿晶体的光轴入射；2）若光轴平行于晶体表面，光波正入射于晶体表面。问这两种情况下是否会发生双折射现象？请说明理由。</div>
+  <div class="ans">
+    <p><b>①沿光轴入射：不发生双折射。</b>此时 o 光与 e 光传播方向相同、速度也相同（都等于 n<sub>o</sub>），两束光不分开。</p>
+    <p><b>②光轴平行于表面、光垂直入射：发生双折射。</b>此时光轴垂直于传播方向，o 光与 e 光速度不同（分别为 n<sub>o</sub>、n<sub>e</sub>），产生双折射 —— 但因两者仍沿法线传播，<b>传播方向相同，只是速度不同</b>（不分开）。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q031">
+  <div class="hd"><span class="tag">2020-1(1)</span><span class="ttl">自然光正入射玻璃 / 左旋晶体，出射偏振态</span></div>
+  <div class="stem">自然光正入射，分别通过玻璃和左旋晶体，出射光的偏振态如何？</div>
+  <div class="ans">
+    <p>①通过<b>玻璃</b>（各向同性）：出射仍为<b>自然光</b>。</p>
+    <p>②通过<b>左旋晶体</b>：原答给"出射为<b>线偏振光</b>（振动面旋转）"。</p>
+    <div class="warn">
+      <b>⚠ 这一问原答存疑</b>：自然光是非偏振光，通过旋光介质通常认为<b>仍是自然光</b>（可分解为等量左、右旋圆偏振，出射后仍非偏振）。原答写"线偏振光"，可能是把题目理解为"线偏振光通过"。<br>
+      应考策略：<b>按原答写"线偏振光"</b>（这是本校本资料的口径），但心里知道物理上应为自然光。
+    </div>
+    <span class="src">【原答 · 存疑】</span>
+  </div>
+</div>
+
+<div class="q" id="q032">
+  <div class="hd"><span class="tag">2021-1(4)</span><span class="ttl">线偏振光通过全波片 / 半波片</span></div>
+  <div class="stem">若让一束线偏振光分别垂直入射通过全波片和半波片，其偏振状态如何改变？</div>
+  <div class="ans">
+    <ul>
+      <li><b>全波片</b>（相位差 2π）：偏振态<b>不变</b>，出射仍是原方向的线偏振光。</li>
+      <li><b>半波片</b>（相位差 π）：出射仍是线偏振光，但振动面相对入射方向<b>转过 2α</b>（α 为入射振动方向与波片光轴的夹角）。α = 45° 时转过 90°。</li>
+    </ul>
+    <p>记忆：全波片"什么都不做"，半波片"镜像反转"。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q033">
+  <div class="hd"><span class="tag">2022-1(1)</span><span class="ttl">四种偏振光如何检验区分</span><span class="hot">高频</span></div>
+  <div class="stem">简述线偏振光、部分偏振光、圆偏振光、椭圆偏振光，如何检验区分？</div>
+  <div class="ans">
+    <p><b>第一步：只用检偏器</b>旋转一周，看光强变化：</p>
+    <ul>
+      <li>光强<b>不变</b> → 自然光 或 圆偏振光；</li>
+      <li>有<b>两明两暗（能完全消光）</b> → <b>线偏振光</b>；</li>
+      <li><b>两强两弱但不消光</b> → 部分偏振光 或 椭圆偏振光。</li>
+    </ul>
+    <p><b>第二步：在检偏器前加 1/4 波片</b>（光轴对准检偏器测到的极值方向）：</p>
+    <ul>
+      <li>对"光强不变"者：仍不变 → <b>自然光</b>；变成两明两暗 → <b>圆偏振光</b>；</li>
+      <li>对"两强两弱"者：能消光 → <b>椭圆偏振光</b>；仍不消光 → <b>部分偏振光</b>。</li>
+    </ul>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q034">
+  <div class="hd"><span class="tag">2023-1(1)</span><span class="ttl">0°–90° 非常光的变化，是否存在双折射</span></div>
+  <div class="stem">说明 0°–90° 的非寻常光的变化，是否存在双折射？</div>
+  <div class="ans">
+    <p>e 光的折射率随"波法线与光轴夹角 θ"变化：</p>
+    <div class="eq">1/n<sub>e</sub>²(θ) = cos²θ/n<sub>o</sub>² + sin²θ/n<sub>e</sub>²</div>
+    <p>θ 从 0°（沿光轴）到 90°（垂直光轴），n<sub>e</sub>(θ) 由 <b>n<sub>o</sub> 连续变到 n<sub>e</sub></b>；而 o 光折射率恒为 n<sub>o</sub>。</p>
+    <p>只要传播方向不与光轴平行（θ ≠ 0），o 光与 e 光速度就不同 → <b>存在双折射</b>；仅 θ = 0 时两者速度相同、无双折射。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q035">
+  <div class="hd"><span class="tag">2024-1(4)</span><span class="ttl">"o 光 n = n<sub>o</sub>，e 光 n = n<sub>e</sub>" 对不对</span></div>
+  <div class="stem">有人说，n<sub>1</sub> = n<sub>1</sub> = n<sub>o</sub>，n<sub>3</sub> = n<sub>e</sub>，则 o 光 n = n<sub>o</sub>，e 光 n = n<sub>e</sub>，对还是不对，说明理由？</div>
+  <div class="ans">
+    <p><b>不对。</b></p>
+    <ul>
+      <li><b>o 光</b>：折射率恒为 n<sub>o</sub>，与方向无关 —— 这半句对。</li>
+      <li><b>e 光</b>：折射率 n<sub>e</sub>(θ) <b>随传播方向与光轴的夹角变化</b>，只有在<b>垂直光轴</b>方向传播时才等于主值 n<sub>e</sub>；沿光轴传播时 e 光折射率等于 n<sub>o</sub>。</li>
+    </ul>
+    <p>所以不能说"e 光的折射率就是 n<sub>e</sub>"。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<!-- ============ 五 ============ -->
+<h2 id="m5">五 · 晶体的感应双折射<span class="sc">考纲 15 分</span><span class="cnt">5 问</span></h2>
+<div class="lead">电光（KDP）、声光（布拉格）、磁光（法拉第）三条线，几乎每年一题。</div>
+
+<div class="q" id="q036">
+  <div class="hd"><span class="tag">2013-1(2)</span><span class="ttl">声光布拉格衍射，声频变化时衍射光怎么变</span></div>
+  <div class="stem">一束入射光通过声光晶体后发生布拉格衍射，如果声波频率发生变化，衍射光将会怎样变化？</div>
+  <div class="ans">
+    <p>布拉格条件：</p>
+    <div class="eq">sin θ<sub>B</sub> = λ / (2λ<sub>s</sub>)，　λ<sub>s</sub> = v<sub>s</sub>/f<sub>s</sub></div>
+    <p>声频 f<sub>s</sub> 增大 → 声波波长 λ<sub>s</sub> 减小 → sin θ<sub>B</sub> 增大 → <b>布拉格角 θ<sub>B</sub> 增大</b>，0 级与 1 级谱线的夹角增大；同时衍射光频移量（= f<sub>s</sub>）也增大。</p>
+    <p>声频减小则结论相反。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q037">
+  <div class="hd"><span class="tag">2018-1(4)</span><span class="ttl">什么是感应双折射？常见的有哪几种</span></div>
+  <div class="stem">解释什么是晶体的感应双折射？常见的感应双折射效应有哪几种？</div>
+  <div class="ans">
+    <p>晶体受到<b>应力、电场、磁场、声波</b>等外界作用时，结构发生改变，使光在其中的传播规律改变 —— 即原本各向同性的介质变为各向异性（或各向异性改变），产生与外加作用有关的双折射，称为<b>感应双折射</b>（人工双折射）。</p>
+    <p>常见四种：</p>
+    <ul>
+      <li><b>电光效应</b>（克尔效应、普克尔斯效应）</li>
+      <li><b>声光效应</b></li>
+      <li><b>磁光效应</b>（法拉第效应）</li>
+      <li><b>光弹效应</b>（应力双折射）</li>
+    </ul>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q038">
+  <div class="hd"><span class="tag">2020-1(4)</span><span class="ttl">法拉第效应与晶体旋光效应是一回事吗</span></div>
+  <div class="stem">法拉第效应又称为磁致旋光效应，其与晶体的旋光效应是一回事吗？如果是，简述理由；如果不是，简述理由和两者的不同点。</div>
+  <div class="ans">
+    <p><b>不是一回事。</b></p>
+    <ul>
+      <li><b>晶体旋光效应</b>是晶体<b>本身固有</b>的性质（自然旋光），与外加场无关；</li>
+      <li><b>法拉第效应</b>是在<b>强磁场作用下</b>产生的旋光（磁致旋光），属于人工方法。</li>
+    </ul>
+    <p>关键区别：法拉第效应的旋转方向只由<b>磁场方向</b>决定，与光的传播方向无关 —— 光往返一次旋转角<b>加倍</b>；而自然旋光的光往返一次旋转角<b>相互抵消</b>。这一点是光隔离器的原理。</p>
+    <span class="src">【原答 + 教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q039">
+  <div class="hd"><span class="tag">2021-1(5)</span><span class="ttl">KDP 线性电光效应，γ<sub>63</sub> 纵向与横向运用的条件</span></div>
+  <div class="stem">简述 KDP 晶体的线性电光效应，产生 γ<sub>63</sub> 的纵向运用和横向运用的条件。</div>
+  <div class="ans">
+    <p>KDP 加电场后由单轴晶体变为双轴晶体，折射率变化与场强<b>成正比</b>（普克尔斯效应），比例系数即 γ<sub>63</sub>。</p>
+    <ul>
+      <li><b>纵向运用</b>：外加电场方向与光传播方向<b>平行</b>（都沿光轴 z），两端加透明电极；</li>
+      <li><b>横向运用</b>：电场方向与光传播方向<b>垂直</b>（如电场沿 z、光垂直光轴传播）。</li>
+    </ul>
+    <p>纵向运用时半波电压与晶体长度无关；横向运用可增大长度/减小厚度来降低半波电压。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q040">
+  <div class="hd"><span class="tag">2023-1(5)</span><span class="ttl">P<sub>1</sub> ⊥ P<sub>2</sub> 的电光开关，KDP 纵向运用</span></div>
+  <div class="stem">电光开关，P<sub>1</sub>、P<sub>2</sub> 透振方向正交的偏振片，电光晶体纵向运用的 KDP 晶体，通电时，要使偏振片 P<sub>2</sub> 的透振光强最强，需满足哪些条件，此时 KDP 相当于哪种波片？</div>
+  <figure>
+    <img src="figs/fig-2023-kdp.png" alt="KDP 纵向电光开关">
+    <figcaption>P<sub>1</sub>、P<sub>2</sub> 正交，KDP 晶体长度 l，纵向加电压</figcaption>
+  </figure>
+  <div class="ans">
+    <p>不加电场时 P<sub>1</sub>、P<sub>2</sub> 正交，出射消光。要透射最强，须让 KDP 把光的振动面<b>旋转 90°</b>，使从 P<sub>1</sub> 出来的线偏振光变为与 P<sub>2</sub> 平行。</p>
+    <p>条件（相位差为 π）：</p>
+    <div class="eqb">Δφ = <span class="frac"><span class="num">2π (<i>n</i><sub>e</sub>′ − <i>n</i><sub>o</sub>) <i>l</i></span><span class="den">λ</span></span> = π</div>
+    <p>即所加电压为<b>半波电压</b> U<sub>λ/2</sub>，且 KDP 的感应主轴与 P<sub>1</sub> 透光轴成 <b>45°</b>（使两分量等幅）。</p>
+    <p>此时 KDP 相当于一块<b>半波片</b>。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<!-- ============ 六 ============ -->
+<h2 id="m6">六 · 光的吸收、色散和散射<span class="sc">15 分</span><span class="cnt">8 问</span></h2>
+<div class="lead">这一章全是"解释现象"型，最容易拉开差距 —— 记住三个词：瑞利（1/λ⁴）、米氏（与 λ 无关）、吸收定律 I = I₀e<sup>−αl</sup>。</div>
+
+<div class="q" id="q041">
+  <div class="hd"><span class="tag">2016-1(5)</span><span class="ttl">香烟的烟为什么是蓝的，口吐的烟为什么是白的</span><span class="hot">高频</span></div>
+  <div class="stem">为什么点燃的香烟冒出的烟是淡蓝色，而吸烟者口中吐出的却是白色？</div>
+  <div class="ans">
+    <ul>
+      <li><b>点燃的烟（淡蓝色）</b>：烟中微粒直径远小于可见光波长，发生<b>瑞利散射</b>，散射光强 ∝ 1/λ⁴，短波（蓝紫）散射强 → 呈淡蓝色。</li>
+      <li><b>口吐的烟（白色）</b>：含大量水蒸气，微粒尺寸接近或大于可见光波长，发生<b>米氏散射</b>，散射强度与波长关系不大 → 各色均匀散射，呈白色。</li>
+    </ul>
+    <p>一句话判据：<b>粒子远小于 λ → 瑞利 → 偏蓝；粒子 ~ λ → 米氏 → 白</b>。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q042">
+  <div class="hd"><span class="tag">2017-1(5)</span><span class="ttl">散射角 0° / 45° / 90° 时散射光的偏振态</span></div>
+  <div class="stem">对光的散射现象而言，若入射光是自然光，试确定散射角分别为 0°、45°、90° 时相应散射光的偏振态。</div>
+  <div class="ans">
+    <ul>
+      <li>散射角 <b>0°</b>：散射光为<b>自然光</b>（沿原方向，无偏振化）；</li>
+      <li>散射角 <b>45°</b>：<b>部分偏振光</b>；</li>
+      <li>散射角 <b>90°</b>：<b>线偏振光</b>，振动方向垂直于散射平面。</li>
+    </ul>
+    <p>原因：偶极子辐射在垂直于振动方向最强，沿振动方向为零，故 90° 方向上只剩一个振动分量。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q043">
+  <div class="hd"><span class="tag">2018-1(5)</span><span class="ttl">交叉棱镜色散，画出光屏上的光谱分布</span></div>
+  <div class="stem">如图所示为观察色散的交叉棱镜装置，如果两棱镜 P<sub>1</sub> 和 P<sub>2</sub> 的材料相同，大致画出光屏 N 上的光谱分布并简单解释。</div>
+  <figure>
+    <img src="figs/fig-2018-crossprism.png" alt="交叉棱镜色散装置">
+    <figcaption>M 光源 · L<sub>1</sub> 准直 · P<sub>1</sub> 第一棱镜 · P<sub>2</sub> 交叉棱镜 · L<sub>2</sub> · N 光屏</figcaption>
+  </figure>
+  <div class="ans">
+    <p>没有 P<sub>2</sub> 时，P<sub>1</sub> 的色散把光在<b>水平方向</b>展开成连续光谱 a→b。</p>
+    <p>加上 P<sub>2</sub>（材料相同、与 P<sub>1</sub> 交叉放置）后，P<sub>2</sub> 的色散方向与之<b>垂直</b>，使每条谱线在竖直方向下移；因棱镜对<b>长波偏向小</b>：</p>
+    <ul>
+      <li>红光一端 a<sub>1</sub> 下移<b>最小</b>；</li>
+      <li>紫光一端 b<sub>1</sub> 下移<b>最大</b>；</li>
+      <li>零级光谱 a<sub>1</sub>b<sub>1</sub> 仍为直线，但与 ab 成<b>倾斜角</b>。</li>
+    </ul>
+    <p>所以屏上是一个<b>倾斜的平行四边形/斜条状</b>光谱带，不是水平条。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q044">
+  <div class="hd"><span class="tag">2019-1(5)</span><span class="ttl">由 dn/dλ 的符号判断色散类型</span></div>
+  <div class="stem">dn/dλ 表示介质折射率随波长改变的变化率，即为色散率。当色散率 dn/dλ &lt; 0 和 dn/dλ &gt; 0 时，相应介质的光色散类型是什么？</div>
+  <div class="ans">
+    <ul>
+      <li><b>dn/dλ &lt; 0</b>：折射率随波长增大而减小，<b>V &gt; V<sub>g</sub></b> → <b>正常色散</b>；</li>
+      <li><b>dn/dλ &gt; 0</b>：折射率随波长增大而增大，<b>V &lt; V<sub>g</sub></b> → <b>反常色散</b>。</li>
+    </ul>
+    <p>补充：正常色散出现在<b>远离吸收带</b>的区域；反常色散出现在<b>吸收带附近</b>。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q045">
+  <div class="hd"><span class="tag">2020-1(5)</span><span class="ttl">太阳光通过大气时的散射有哪几种，各有什么特点</span></div>
+  <div class="stem">太阳光通过大气时的散射有哪几种？简述其各自特点。</div>
+  <div class="ans">
+    <p><b>①瑞利散射（分子散射）</b>：散射微粒远小于波长，散射光强 ∝ 1/λ⁴，短波散射强。<br>
+      → 解释：天空呈蓝色；正午太阳偏白、朝阳夕阳偏红。</p>
+    <p><b>②米氏散射（大粒子散射）</b>：微粒尺寸与波长相当或更大，散射强度与波长关系不大，各色均匀散射。<br>
+      → 解释：云雾呈白色；雾天能见度下降。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q046">
+  <div class="hd"><span class="tag">2021-1(6)</span><span class="ttl">海水吸收：多深还能看见光</span></div>
+  <div class="stem">设海水的吸收系数为 α = 2/cm，人眼能感受的光强为太阳光强的 10<sup>−18</sup>。试说明在海水多深处，人眼还能看见光？</div>
+  <div class="ans">
+    <p>吸收定律 I = I<sub>0</sub>e<sup>−αl</sup>，令 I/I<sub>0</sub> = 10<sup>−18</sup>：</p>
+    <div class="eqb">e<sup>−2<i>l</i></sup> = 10<sup>−18</sup>　⇒　<i>l</i> = <span class="frac"><span class="num">18·ln10</span><span class="den">2</span></span> ≈ <b>20.7 cm</b></div>
+    <p>即水下约 20.7 cm 处人眼刚好还能看见。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q047">
+  <div class="hd"><span class="tag">2023-1(3)</span><span class="ttl">什么是散射；雾天拍照加红玻璃片的原理</span></div>
+  <div class="stem">描述光的散射。在雾天时，为了拍摄清晰的照片，人们往往在照相机物镜前放一片红色玻璃片，试分析其原理。</div>
+  <div class="ans">
+    <p><b>散射</b>：光通过光学性质不均匀的介质时，部分光偏离原传播方向向各方向传播的现象。</p>
+    <p><b>红玻璃片的作用</b>（两条都要写）：</p>
+    <ul>
+      <li>雾滴尺寸较大，米氏散射使各波长散射相近，形成白茫茫的散射背景光；红片只让<b>长波红光</b>通过，滤掉被强烈散射的蓝紫光，<b>削弱背景杂散光</b>；</li>
+      <li>红光的<b>散射较弱、穿透雾的能力较强</b>，到达物镜的成像光相对更强 → 像的<b>对比度提高</b>，照片更清晰。</li>
+    </ul>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q048">
+  <div class="hd"><span class="tag">2024-1(5)</span><span class="ttl">同一 He-Ne 激光，超净室与实验室看到的一样吗</span></div>
+  <div class="stem">同一个 He-Ne 激光器发出的光束，在超净室观察与在一般实验室环境观察到的结果一样吗？为什么？</div>
+  <div class="ans">
+    <p><b>不一样。</b></p>
+    <ul>
+      <li>一般实验室空气中悬浮微粒多，激光通过时发生明显的<b>散射</b>（丁达尔现象），能看到一条明亮的<b>光路</b>；</li>
+      <li>超净室微粒极少，散射很弱，光路几乎看不见。</li>
+    </ul>
+    <p>结论：散射由介质的<b>不均匀性（微粒）</b>引起，不是光本身的性质 —— 这也说明"光路可见"的前提是存在散射体。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<!-- ============ 七 ============ -->
+<h2 id="m7">七 · 几何光学基础<span class="sc">15 分</span><span class="cnt">4 问</span></h2>
+<div class="lead">费马原理、光焦度、透镜正负的判定。应用光学部分的"基本概念"题集中在这里。</div>
+
+<div class="q" id="q049">
+  <div class="hd"><span class="tag">2011-9(1)</span><span class="ttl">解释费马原理</span><span class="hot">高频</span></div>
+  <div class="stem">解释费马原理。</div>
+  <div class="ans">
+    <p>光线在介质中传播时，所走的路径使<b>光程取极值</b>（极小值、极大值或稳定值），即实际光程为所有可能路径中的极值。</p>
+    <p>数学表达式：</p>
+    <div class="eq">δL = δ ∫<sub>A</sub><sup>B</sup> n(s) ds = 0</div>
+    <p>它是几何光学的<b>最高原理</b>：由它可以推出反射定律、折射定律，以及光线可逆、光程可逆等结论。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q050">
+  <div class="hd"><span class="tag">2015-1(5)</span><span class="ttl">解释费马原理，给出数学表达式</span><span class="hot">重复</span></div>
+  <div class="stem">解释费马原理，给出其数学表达式？</div>
+  <div class="ans">
+    <p><b>与 2011-9(1) 完全同题</b>，答案照搬那一题即可（光程取极值 + δ∫n ds = 0）。</p>
+    <p>连续两年考同一个概念，说明是必背项 —— 别只背"光走最短路径"，要写"<b>极值</b>"（含极大、极小、稳定值）。</p>
+    <span class="src">【合并】</span>
+  </div>
+</div>
+
+<div class="q" id="q051">
+  <div class="hd"><span class="tag">2022-1(5)</span><span class="ttl">光焦度的概念、公式与焦距的关系</span></div>
+  <div class="stem">光焦度的概念，以及公式表示、与焦距的关系？</div>
+  <div class="ans">
+    <p><b>光焦度</b> Φ 表示光学系统对光线的会聚或发散本领，定义为</p>
+    <div class="eq">Φ = n′/f′ = −n/f　（空气中 Φ = 1/f′）</div>
+    <p>单位：<b>屈光度 D</b>（m<sup>−1</sup>）。</p>
+    <ul>
+      <li>Φ &gt; 0：会聚系统（正透镜，f′ &gt; 0）；</li>
+      <li>Φ &lt; 0：发散系统（负透镜，f′ &lt; 0）。</li>
+    </ul>
+    <p>与焦距<b>成反比</b>：焦距越短，光焦度越大。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q052">
+  <div class="hd"><span class="tag">2023-四-3</span><span class="ttl">双凸透镜一定是正透镜、双凹一定是负透镜吗</span></div>
+  <div class="stem">空气中由玻璃构成的透镜，有人说双凸透镜一定是正透镜，双凹透镜一定是负透镜，试分析其对错。</div>
+  <div class="ans">
+    <p><b>不一定对（在空气中通常成立，但不是定义）。</b></p>
+    <p>透镜正负由光焦度</p>
+    <div class="eq">Φ = (n−1)(1/r<sub>1</sub> − 1/r<sub>2</sub>)</div>
+    <p>的符号决定，还要看 r<sub>1</sub>、r<sub>2</sub> 的<b>实际大小</b>（可能一面的曲率半径很小、另一面很大，甚至符号相反导致 Φ 变号）。</p>
+    <p>更关键的是<b>介质</b>：若透镜材料折射率<b>小于</b>周围介质（如水中的空气泡），双凸反而发散、双凹反而会聚。</p>
+    <p>所以"形状"不能判正负，<b>Φ 的符号</b>才能。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<!-- ============ 八 ============ -->
+<h2 id="m8">八 · 理想光学系统<span class="sc">15 分</span><span class="cnt">4 问</span></h2>
+<div class="lead">这 4 问其实是<b>同一道题考了 4 次</b>（景深）。背熟一次即可拿满。</div>
+
+<div class="q" id="q053">
+  <div class="hd"><span class="tag">2011-9(2)</span><span class="ttl">景深产生的原因与影响因素</span><span class="hot">★4 次</span></div>
+  <div class="stem">解释光学系统景深产生的原因，景深的大小受哪些因素影响？</div>
+  <div class="ans">
+    <p><b>景深</b>：在像面上能获得足够清晰像的<b>物空间深度</b>（能同时看清的物方纵深范围）。</p>
+    <p><b>产生原因</b>：接收器（人眼/底片）能容许一定大小的<b>弥散斑</b>。物点偏离对准平面（景像平面）一定范围内，其弥散斑仍小于允许值，看起来仍清晰，于是形成一个"清晰深度"。</p>
+    <p><b>影响因素</b>（三条，按重要程度）：</p>
+    <ul>
+      <li><b>入射光瞳（光圈）大小</b>：光圈越小，景深越大；</li>
+      <li><b>对准距离</b>（拍摄距离）：距离越远景深越大；</li>
+      <li><b>允许弥散斑大小</b>：允许弥散斑越大，景深越大。</li>
+    </ul>
+    <p>近似表达式：Δ = 2p²ε / (β² − p²ε²)，p 为对准距离、ε 为允许弥散斑、β 为放大率。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q054">
+  <div class="hd"><span class="tag">2014-9(1)</span><span class="ttl">解释景深概念，景深大小受哪些因素影响</span><span class="hot">重复</span></div>
+  <div class="stem">解释光学系统的景深概念，景深的大小受哪些因素影响？</div>
+  <div class="ans">
+    <p><b>与 2011-9(2) 同题</b>：景深 = 像面上获得足够清晰像的物空间深度；影响因素 = 入射光瞳大小、对准距离、允许弥散斑大小。</p>
+    <p>补充一句更完整的：景深与<b>光圈成反比、与拍摄距离成正比</b> —— 这就是"小光圈、远距离 → 大景深"的由来。</p>
+    <span class="src">【合并】</span>
+  </div>
+</div>
+
+<div class="q" id="q055">
+  <div class="hd"><span class="tag">2015-1(4)</span><span class="ttl">解释景深概念，景深大小受哪些因素影响</span><span class="hot">重复</span></div>
+  <div class="stem">解释光学系统的景深概念，景深的大小受哪些因素影响？</div>
+  <div class="ans">
+    <p><b>同 2011-9(2) / 2014-9(1)</b>，第三次考，答案一字不差。</p>
+    <p>答题模板：①定义（物空间深度）②原因（允许弥散斑）③三因素（光瞳、对准距离、允许弥散斑）。</p>
+    <span class="src">【合并】</span>
+  </div>
+</div>
+
+<div class="q" id="q056">
+  <div class="hd"><span class="tag">2022-1(4)</span><span class="ttl">什么是景深</span><span class="hot">重复</span></div>
+  <div class="stem">什么是景深？</div>
+  <div class="ans">
+    <p><b>同 2011-9(2)</b>，第四次考。这题更短，只问定义 —— 写"在像面上能获得足够清晰像的物空间深度"即可，再补一句成因（允许弥散斑）更保险。</p>
+    <span class="src">【合并】</span>
+  </div>
+</div>
+
+<!-- ============ 九 ============ -->
+<h2 id="m9">九 · 光学系统像差基础与光路计算<span class="sc">15 分</span><span class="cnt">5 问</span></h2>
+<div class="lead">像差名字必须能脱口而出：<b>球差、彗差、像散、场曲、畸变</b>。看图判像差是必考题型。</div>
+
+<div class="q" id="q057">
+  <div class="hd"><span class="tag">2009-10(1)</span><span class="ttl">什么是光学系统的像差，单色像差分几种</span><span class="hot">★3 次</span></div>
+  <div class="stem">光学系统的像差是影响光学系统像质量的一个关键因素，试问：什么是光学系统的像差？光学系统的单色像差可以分为哪几种？</div>
+  <div class="ans">
+    <p><b>像差</b>：实际光学系统所成的像，与近轴（理想）条件下所成像之间的<b>差异</b>。</p>
+    <p><b>单色像差 5 种</b>：<b>球差、彗差、像散、场曲、畸变</b>。</p>
+    <p>（另有<b>色差</b>：位置色差、倍率色差 —— 属复色光引起的，不算单色像差，别混。）</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q058">
+  <div class="hd"><span class="tag">2009-10(2)</span><span class="ttl">正方形物成像后边缘弯曲，是什么像差</span></div>
+  <div class="stem">如下图 (a) 所示，一个正方形的物，经过光学系统成像后像面如图所示，试问这时主要存在哪种单色像差？</div>
+  <figure>
+    <img src="figs/fig-2009-10-a.png" alt="正方形物与枕形畸变像">
+    <figcaption>物为方格网，像的四边向外弯曲 —— 枕形（正）畸变</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>畸变</b>（枕形畸变）。</p>
+    <p>判据：像<b>整体变形</b>（方格变弯曲、比例失真）但<b>每个点仍清晰</b>，说明是垂轴放大率随视场变化所致，不是"模糊"类像差。<br>
+      边缘向外弯 = 正畸变（枕形）；向内弯 = 负畸变（桶形）。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q059">
+  <div class="hd"><span class="tag">2009-10(3)</span><span class="ttl">辐条形物成像后出现十字模糊，是什么像差</span></div>
+  <div class="stem">如下图 (b) 所示，一个辐条形的物，经过光学系统成像后像面如图所示，试问这时又主要存在哪种单色像差？</div>
+  <figure>
+    <img src="figs/fig-2009-10-b.png" alt="辐条形物与其像">
+    <figcaption>物为同心圆＋辐条；像中辐条在不同方向粗细不一 —— 像散</figcaption>
+  </figure>
+  <div class="ans">
+    <p><b>像散</b>。</p>
+    <p>判据：<b>不同方向的线条清晰程度不同</b>（子午方向与弧矢方向聚焦位置不同），造成辐条在某一方向变粗、呈十字状。这是检验像散的经典图案 —— 若换成畸变，所有方向会一起变形；若是场曲，中心与边缘不能同时清晰。</p>
+    <p>三种"糊涂账"的区分口诀：<b>畸变只变形、场曲不共面、像散分方向</b>。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q060">
+  <div class="hd"><span class="tag">2012-9(1)</span><span class="ttl">完善成像条件、像差概念、单色像差几种</span></div>
+  <div class="stem">光学系统的完善成像条件是什么？解释实际光学系统的像差概念？单色像差有哪几种？</div>
+  <div class="ans">
+    <p><b>完善成像（理想成像）</b>：物点发出的<b>同心光束</b>经系统后仍为同心光束（所有光线交于同一点）。</p>
+    <p><b>条件</b>：从物点到像点的所有光线的<b>光程相等</b>（等光程条件）。</p>
+    <p><b>像差</b>：实际像与理想像的差异。<b>单色像差</b>：球差、彗差、像散、场曲、畸变。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q061">
+  <div class="hd"><span class="tag">2022-1(3)</span><span class="ttl">五种单色像差的概念</span></div>
+  <div class="stem">简述五种单色像差的概念。</div>
+  <div class="ans">
+    <ul>
+      <li><b>球差</b>：轴上物点发出的<b>宽光束</b>经系统后不交于一点，近轴光线与边缘光线交点在轴上前后分散，形成弥散斑。</li>
+      <li><b>彗差</b>：<b>轴外</b>物点的宽光束经系统后，上下（子午面两侧）不对称，形成<b>彗星状</b>弥散斑。</li>
+      <li><b>像散</b>：轴外物点的光束，<b>子午</b>与<b>弧矢</b>方向聚焦位置不同，形成两条互相垂直的焦线。</li>
+      <li><b>场曲</b>：平面物经系统后，清晰像面是<b>弯曲</b>的（匹兹伐面），不能与平面像面重合。</li>
+      <li><b>畸变</b>：<b>垂轴放大率随视场</b>变化，像与物不成比例（枕形/桶形），但<b>不影响清晰度</b>。</li>
+    </ul>
+    <p>记忆串：<b>球差在轴上、彗差在轴外、像散分方向、场曲弯像面、畸变改形状</b>。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<!-- ============ 十 ============ -->
+<h2 id="m10">十 · 光学仪器与光度学<span class="sc">15 分</span><span class="cnt">7 问</span></h2>
+<div class="lead">光度学定义式连考三年（2012/2013/2014），分辨本领的正确表达式也是高频。</div>
+
+<div class="q" id="q062">
+  <div class="hd"><span class="tag">2012-9(2)</span><span class="ttl">光亮度与光照度的概念、联系与定义式</span><span class="hot">★3 次</span></div>
+  <div class="stem">解释光度学中的光亮度、光照度概念，说明他们之间联系？并写出他们定义的数学表达式。</div>
+  <div class="ans">
+    <p><b>光亮度 L</b>：发光体表面单位面积、在给定方向上单位立体角内辐射的光通量。</p>
+    <div class="eq">L = dΦ / (cos θ · dS · dΩ)　（单位 cd/m²）</div>
+    <p><b>光照度 E</b>：被照射物体单位面积上接收到的光通量。</p>
+    <div class="eq">E = dΦ / dS　（单位 lx，勒克斯）</div>
+    <p><b>联系</b>：都描述光通量的空间/面积密度，但</p>
+    <ul>
+      <li>亮度描述<b>"发出"</b>的光（含方向信息，与观察方向有关）；</li>
+      <li>照度描述<b>"收到"</b>的光（与接收面有关）；</li>
+      <li>点光源照明时 <b>E ∝ cos θ / r²</b>（距离平方反比），而亮度与距离无关。</li>
+    </ul>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q063">
+  <div class="hd"><span class="tag">2013-9(2)</span><span class="ttl">光亮度、光照度概念及联系</span><span class="hot">重复</span></div>
+  <div class="stem">解释光度学中的光亮度、光照度概念，说明它们之间联系？</div>
+  <div class="ans">
+    <p><b>同 2012-9(2)</b>，连续第二年考。答案照搬，务必把两个定义式写出来（很多考生只写文字，丢分）。</p>
+    <span class="src">【合并】</span>
+  </div>
+</div>
+
+<div class="q" id="q064">
+  <div class="hd"><span class="tag">2014-9(2)</span><span class="ttl">光亮度、光照度概念及联系</span><span class="hot">重复</span></div>
+  <div class="stem">解释光度学中光亮度、光照度的概念，说明它们之间联系？</div>
+  <div class="ans">
+    <p><b>同 2012-9(2)</b>，连续第三年考 —— 这是全卷最稳的送分题，必须满分。</p>
+    <span class="src">【合并】</span>
+  </div>
+</div>
+
+<div class="q" id="q065">
+  <div class="hd"><span class="tag">2013-9(1)</span><span class="ttl">设计一个实用光学系统的步骤与软件</span></div>
+  <div class="stem">设计一个实用的光学系统有几个步骤？分别是什么？给出一款你所熟悉的光学系统设计软件。</div>
+  <div class="ans">
+    <p><b>两个阶段</b>：</p>
+    <ul>
+      <li><b>①初步设计</b>：根据使用要求，确定系统的<b>基本结构</b>——外形尺寸、各光组的光焦度分配等，理论依据是<b>近轴光学</b>（高斯光学）；</li>
+      <li><b>②像差设计</b>：根据像质要求，确定各光学元件的<b>具体结构参数</b>（曲率半径、厚度、间隔、材料），反复校正像差，理论依据是<b>像差理论</b>。</li>
+    </ul>
+    <p>软件：<b>ZEMAX</b>（也答 CODE V、LightTools、TracePro 均可）。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q066">
+  <div class="hd"><span class="tag">2017-1(4)</span><span class="ttl">望远镜与照相物镜的分辨本领各由什么决定</span></div>
+  <div class="stem">望远镜、照相物镜的分辨本领分别由什么因素决定？</div>
+  <div class="ans">
+    <ul>
+      <li><b>望远镜</b>：θ<sub>0</sub> = 1.22λ/<b>D</b>，由<b>物镜（入瞳）通光口径 D</b> 决定 —— 口径越大，分辨本领越高。</li>
+      <li><b>照相物镜</b>：δ = 1.22λ·<b>F</b>（F = f′/D 为光圈数），由<b>相对孔径 D/f′</b> 决定 —— 相对孔径越大（光圈开得越大、F 越小），分辨本领越高。</li>
+    </ul>
+    <p>注意别写反：望远镜看<b>口径</b>，照相物镜看<b>相对孔径</b>。</p>
+    <span class="src">【原答】</span>
+  </div>
+</div>
+
+<div class="q" id="q067">
+  <div class="hd"><span class="tag">2022-1(2)</span><span class="ttl">物面消渐晕的两种方法，投影仪与照相机怎么消</span></div>
+  <div class="stem">简述物面消渐晕的两种方法，且在投影仪、照相机怎么消渐晕？</div>
+  <div class="ans">
+    <p><b>渐晕</b>：轴外点发出的光束被透镜框拦截，使像面边缘照度下降的现象。</p>
+    <p><b>两种方法</b>：</p>
+    <ul>
+      <li><b>加大透镜（光组）的口径</b>，让轴外光束不被拦；</li>
+      <li><b>使入射窗与物平面重合</b> —— 让限制光束的孔径光阑与物面共轭，使各视场成像光束形状一致。</li>
+    </ul>
+    <p><b>投影仪</b>：在物镜附近加<b>场镜</b>，使物面成为入射窗，实现"入射窗与物面重合"。<br>
+      <b>照相机</b>：适当<b>缩小光圈</b>（减小相对孔径），使边缘光束不被拦截（代价是分辨率下降）。</p>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="q" id="q068">
+  <div class="hd"><span class="tag">2023-1(4)</span><span class="ttl">显微镜放大率给定，物镜与人眼分辨率应满足什么条件</span></div>
+  <div class="stem">显微镜的放大率给定，为了充分利用物镜分辨率，说明物镜分辨率和人眼分辨率率满足的条件。</div>
+  <div class="ans">
+    <p>需满足<b>有用放大率</b>条件：物镜能分辨的最小距离 δ 经显微镜放大后，应<b>恰好等于人眼的分辨极限</b>。</p>
+    <p>人眼分辨极限（明视距离 250 mm 处）约 0.073 mm，故</p>
+    <div class="eq">Γ = 0.073 mm / δ ≈ (250 mm / 0.61λ) · NA</div>
+    <ul>
+      <li>Γ <b>小于</b>该值 → 物镜分辨出的细节人眼看不见（<b>浪费物镜</b>）；</li>
+      <li>Γ <b>大于</b>该值 → <b>无效放大</b>（空放大），像变大但更模糊。</li>
+    </ul>
+    <span class="src">【教材】</span>
+  </div>
+</div>
+
+<div class="hotbox" style="margin-top:36px">
+  <h3>这份文档怎么用（别当阅读材料）</h3>
+  <p style="font-size:14px;margin:0 0 8px">
+    ① <b>先收答案</b>：点右下"收起答案"，只看题干默写，写完再展开对；<br>
+    ② <b>只背高频表里的 6 个点</b>：它们占了 68 问里的 24 问，且答案唯一；<br>
+    ③ <b>【原答】照抄、【教材】可简化、【自算】只记数值</b> —— 阅卷按要点给分，不必逐字；<br>
+    ④ 打印时点"打印 / 存 PDF"，答案会自动展开，A4 双面即可。
+  </p>
+</div>
+
+<div style="margin:40px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>制作说明</b>：题面取自 <code>简答题分题型.pdf</code>（14 页）逐题转录；答案以 <code>简答题知识点汇总.pdf</code>（9 页）为底本，
+  缺失部分按石顺祥《物理光学与应用光学》第 3 版补写；示意图从原 PDF 按题裁剪。原文件一律未改动。</p>
+  <p><b>已知局限</b>：① 扫描件转录可能有下标/符号误差，每题已标来源，发现错误直接告诉我改；
+  ② <b>2020-1(1)</b> 一问原答与物理常识冲突，已标"存疑"；③ 2019–2024 之外更早年份的简答题未收录（原资料即从此开始）。</p>
+  <p>配套：<code>851-计算题-按章节.html</code>（近 10 年，分批交付）。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+
+  /* ===== 掌握进度：勾选即记住，可只看没背下来的 ===== */
+  (function () {
+    var KEY = 'g851-jt-mastered';
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var stat = document.getElementById('stat');
+
+    function refresh() {
+      var n = document.querySelectorAll('.q.done').length;
+      stat.textContent = '已掌握 ' + n + ' / ' + qs.length;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+
+    qs.forEach(function (q) {
+      var tag = q.querySelector('.tag');
+      var id = tag ? tag.textContent.trim() : '';
+      var hd = q.querySelector('.hd');
+      if (!id || !hd) return;
+      var lab = document.createElement('label');
+      lab.className = 'mk';
+      lab.innerHTML = '<input type="checkbox"> 已掌握';
+      var box = lab.querySelector('input');
+      box.checked = !!saved[id];
+      if (box.checked) q.classList.add('done');
+      box.addEventListener('change', function () {
+        if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+        else { delete saved[id]; q.classList.remove('done'); }
+        refresh();
+      });
+      hd.appendChild(lab);
+    });
+    refresh();
+
+    var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+    bAll.addEventListener('click', function () {
+      document.body.classList.remove('onlytodo');
+      bAll.classList.add('on'); bTodo.classList.remove('on');
+    });
+    bTodo.addEventListener('click', function () {
+      document.body.classList.add('onlytodo');
+      bTodo.classList.add('on'); bAll.classList.remove('on');
+    });
+  })();
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>

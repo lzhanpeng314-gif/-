@@ -1,0 +1,16 @@
+{
+  "name": "851 物理光学与应用光学 · 复习库",
+  "short_name": "851复习",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fbfaf7",
+  "theme_color": "#8c4a2f",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

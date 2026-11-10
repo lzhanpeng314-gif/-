@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 计算题 · 第一章 光的电磁理论基础</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:46px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 18px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .ans p{margin:0 0 7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  /* ===== 公式排版组件 ===== */
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  em.k{font-style:normal;font-weight:600;background:var(--hl);padding:0 2px;}
+  .f{font-family:"Cambria Math",Cambria,Georgia,serif;font-style:italic;}
+  figure{margin:10px 0 4px;text-align:center;}
+  figure img{max-width:100%;border:1px solid var(--line);border-radius:4px;background:#fff;}
+  figcaption{font-size:12px;color:var(--mut);margin-top:5px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.8px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 8px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 计算题 · 第一章 光的电磁理论基础</h1>
+  <div class="sub">
+    近 10 年（2016–2024）+ 1 道考纲点名的 2015 题 · <b>9 道</b> · 每题给出完整解题步骤与数值结果<br>
+    来源：<code>西电\真题分类\计算题分题型.pdf</code> 第 1–6 页（第一章全部题目）
+  </div>
+  <div class="lg">
+    标注：<b>【真题】</b>= 题面照录　<b>【自算】</b>= 解得结果由我推导，未在原资料中找到现成答案
+  </div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#s1">一 光波场表达式</a>
+  <a href="#s2">二 布儒斯特角与偏振度</a>
+  <a href="#s3">三 菲涅尔公式与振动方向</a>
+  <a href="#s4">四 正入射与全反射</a>
+</nav>
+
+<div class="warn" style="margin-top:22px">
+  <b>这一章只有 4 类题</b>，17 年来没变过：<br>
+  ① 由相位分布求波矢/空间频率　② 布儒斯特角 + 偏振度　③ 菲涅尔公式求 R、振动方向　④ 正入射与全反射的光强/偏振态。<br>
+  把下面 9 道吃透，这一章就封顶了。
+</div>
+
+<div class="fbox">
+  <div class="fcard">
+    <div class="fname">布儒斯特角</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>θ</i><sub>B</sub> = arctan<span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>n</i><sub>1</sub></span></span></span></div>
+    <div class="fnote">此角入射时 r<sub>p</sub>=0，反射光只剩 s 分量，完全偏振。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">s 分量反射系数</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin(<i>θ</i><sub>i</sub> − <i>θ</i><sub>t</sub>)</span><span class="den">sin(<i>θ</i><sub>i</sub> + <i>θ</i><sub>t</sub>)</span></span></span></div>
+    <div class="fnote">永远为负 —— 反射时 s 分量必反相（半波损失）。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">p 分量反射系数</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan(<i>θ</i><sub>i</sub> − <i>θ</i><sub>t</sub>)</span><span class="den">tan(<i>θ</i><sub>i</sub> + <i>θ</i><sub>t</sub>)</span></span></span></div>
+    <div class="fnote">θ<sub>i</sub>+θ<sub>t</sub>=90° 时 tan 趋于无穷 ⇒ r<sub>p</sub>=0，就是布儒斯特角。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">正入射反射率</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>R</i> = <span class="frac bkt"><span class="num"><i>n</i><sub>2</sub> − <i>n</i><sub>1</sub></span><span class="den"><i>n</i><sub>2</sub> + <i>n</i><sub>1</sub></span></span><sup style="vertical-align:1.0em;font-size:.72em">2</sup></span></div>
+    <div class="fnote">n=1.5 时 R=4%。注意 R=r²，别把 r=0.2 当成光强比。</div>
+  </div>
+</div>
+
+<!-- ===== 一 ===== -->
+<h2 id="s1">一 · 光波场表达式与空间频率<span class="cnt">1 题 · 考纲点名</span></h2>
+<div class="lead">考纲原文写的是"空间频率计算"—— 这是第一章唯一必考的概念型计算题。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2015-3</span><span class="ttl">由相位分布求电场表示式、空间频率与波矢方向</span><span class="hot">考纲点名</span></div>
+  <div class="stem">
+    设空气中一单色平面光波的频率为 ν = 10<sup>14</sup> Hz，电场强度的振幅大小为 1 V/m。t = 0 时刻，在 xoy 平面（z = 0）上的相位分布如图所示，等相位线与 x 轴垂直，φ = 0 的等相位线坐标为 x = −5 μm，φ 随 x 线性增加，x 每增加 4 μm 相位增加 2π。求该光波电场强度大小的表示式、空间频率及波矢方向。
+  </div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>求波长与波数
+      <div class="eq">λ = c/ν = 3×10<sup>8</sup> / 10<sup>14</sup> = 3×10<sup>−6</sup> m = 3 μm，　k = 2π/λ = 2π/3 μm<sup>−1</sup></div>
+    </div>
+    <div class="step"><b class="n">2</b>由"等相位线与 x 轴垂直"定出 <span class="f">k<sub>y</sub></span> = 0 —— 波矢在 <b>xOz 平面</b>内。
+    </div>
+    <div class="step"><b class="n">3</b>由"x 每增加 4 μm 相位增加 2π"定出 <span class="f">k<sub>x</sub></span>（相位随 x <b>增加</b>，故取正）
+      <div class="eq">k<sub>x</sub> = 2π/4 μm = π/2 μm<sup>−1</sup>　⇒　空间频率 f<sub>x</sub> = k<sub>x</sub>/2π = <b>1/4 μm<sup>−1</sup></b></div>
+    </div>
+    <div class="step"><b class="n">4</b>由 <span class="f">k<sub>x</sub>²+k<sub>z</sub>² = k²</span> 求 <span class="f">k<sub>z</sub></span>（取沿 +z 传播）
+      <div class="eq">k<sub>z</sub> = √(k² − k<sub>x</sub>²) = √(4π²/9 − π²/4) = π√7/6 μm<sup>−1</sup> ≈ 1.386 μm<sup>−1</sup></div>
+    </div>
+    <div class="step"><b class="n">5</b>定初相位：φ = 0 在 x = −5 μm 处，故
+      <div class="eq">φ<sub>0</sub> = −k<sub>x</sub>·(−5) = 5π/2　（≡ π/2，即 cos 变为 −sin）</div>
+    </div>
+    <div class="res">
+      电场表示式（振幅 1 V/m）：<br>
+      <span class="f">E</span> = cos( (π/2)x + (π√7/6)z − 2π×10<sup>14</sup> t + 5π/2 ) V/m　（x、z 以 μm 计）<br>
+      空间频率：<span class="f">f<sub>x</sub></span> = 1/4 μm<sup>−1</sup>，总空间频率 <span class="f">f</span> = 1/λ = 1/3 μm<sup>−1</sup><br>
+      波矢方向：在 xOz 面内，与 z 轴夹角 θ = arccos(k<sub>z</sub>/k) = arccos(√7/4) ≈ <b>48.6°</b>
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== 二 ===== -->
+<h2 id="s2">二 · 布儒斯特角与偏振度<span class="cnt">3 题</span></h2>
+<div class="lead">套路固定：先算 θ<sub>B</sub> = arctan(n<sub>2</sub>/n<sub>1</sub>) → 再算 r<sub>s</sub>（此时 r<sub>p</sub> = 0）→ 用 I<sub>p</sub>、I<sub>s</sub> 各占一半求偏振度。</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2017-二-1</span><span class="ttl">红宝石表面反射光为全偏振光，求入射角、透射光强与偏振度</span></div>
+  <div class="stem">一束自然光由空气经红宝石（n = 1.76）的表面反射，若检测其反射光为全偏振光，则入射角应为多少？求此入射角入射条件下，透射光的强度和偏振度。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>反射光全偏振 ⇒ 入射角为布儒斯特角
+      <div class="eq">θ<sub>B</sub> = arctan 1.76 ≈ <b>60.4°</b>，　θ<sub>t</sub> = 90° − θ<sub>B</sub> = 29.6°</div>
+    </div>
+    <div class="step"><b class="n">2</b>此时 <span class="f">r<sub>p</sub></span> = 0，只需算 <span class="f">r<sub>s</sub></span>（θ<sub>i</sub>+θ<sub>t</sub> = 90°，sin = 1）
+      <div class="eq">r<sub>s</sub> = −sin(θ<sub>i</sub>−θ<sub>t</sub>) = −sin 30.8° = −0.512　⇒　R<sub>s</sub> = 0.262</div>
+    </div>
+    <div class="step"><b class="n">3</b>自然光两分量各占一半，分别过界面
+      <table class="g">
+        <tr><th>分量</th><th>入射光强</th><th>反射率 R</th><th>透射率 T = 1−R</th><th>透射光强</th></tr>
+        <tr><td>p</td><td>0.5 I<sub>0</sub></td><td>0</td><td>1</td><td>0.5 I<sub>0</sub></td></tr>
+        <tr><td>s</td><td>0.5 I<sub>0</sub></td><td>0.262</td><td>0.738</td><td>0.369 I<sub>0</sub></td></tr>
+      </table>
+    </div>
+    <div class="step"><b class="n">4</b>求偏振度
+      <div class="eq">P = (I<sub>p</sub> − I<sub>s</sub>)/(I<sub>p</sub> + I<sub>s</sub>) = (0.5 − 0.369)/(0.5 + 0.369) ≈ 0.151</div>
+    </div>
+    <div class="res">
+      入射角 <b>60.4°</b>（= arctan 1.76）｜反射光强 0.131 I<sub>0</sub>｜<b>透射光强 0.869 I<sub>0</sub></b>｜<b>透射光偏振度 ≈ 15%</b>
+    </div>
+    <p style="font-size:13.5px;color:#6d6d6d;margin-top:6px">
+      ⚠ 别把偏振度算成 100%：反射光完全偏振，但**透射光只是"部分偏振"**，它的 s 分量被反射走了一小部分而已。</p>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2019-二-1</span><span class="ttl">反射光强为零时，入射光的偏振态与入射角</span></div>
+  <div class="stem">一束光由空气经透明玻璃平板（n = 1.56）的表面反射，若检测到反射光强为零，求这束光的偏振态和入射角。（计算结果用反三角函数表示）</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>反射光强为零 ⇒ 满足布儒斯特条件，且入射光不能含 s 分量
+      <div class="eq">θ = θ<sub>B</sub> = <b>arctan 1.56 ≈ 57.3°</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>偏振态：<b>线偏振光，振动方向平行于入射面</b>（纯 p 分量）。</div>
+    <div class="res">
+      入射角 θ = arctan 1.56 ≈ 57.3°；入射光为振动面平行于入射面的线偏振光。
+    </div>
+    <p style="font-size:13.5px;color:#6d6d6d;margin-top:6px">
+      反向问法也常考：若问"反射光为全偏振光"，答案是<b>自然光或部分偏振光</b>（只要含 p、s，反射后只剩 s）。</p>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2016-二-2</span><span class="ttl">玻璃片：反射率、振动方向；以布儒斯特角入射并绕轴旋转一周</span></div>
+  <div class="stem">光强为 I<sub>0</sub> 的线偏振光以 θ<sub>i</sub> 角由空气斜入射到玻璃片 M（n = 1.50，背面涂黑）上，若入射线偏振光的振动平面与入射面的夹角为 45°，入射角 θ<sub>i</sub> = 30°，求玻璃片的反射率及反射光的振动方向；若入射光以布儒斯特角 θ<sub>B</sub> 入射，M 以入射光方向为轴旋转一周，试确定反射光强的变化规律及反射光的偏振度。</div>
+  <div class="ans">
+    <p><b>（1）θ<sub>i</sub> = 30°，n = 1.5</b></p>
+    <div class="step"><b class="n">1</b>折射角
+      <div class="eq">sin θ<sub>t</sub> = sin30°/1.5 = 1/3　⇒　θ<sub>t</sub> = 19.47°</div>
+    </div>
+    <div class="step"><b class="n">2</b>菲涅尔系数
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin(10.53°)</span><span class="den">sin(49.47°)</span></span> = −0.240　⇒　<i>R</i><sub>s</sub> = 5.78%</div>
+      <div class="eqb"><i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan(10.53°)</span><span class="den">tan(49.47°)</span></span> = +0.159　⇒　<i>R</i><sub>p</sub> = 2.53%</div>
+    </div>
+    <div class="step"><b class="n">3</b>振动面与入射面成 45° ⇒ E<sub>p</sub> = E<sub>s</sub>，两分量能量各半
+      <div class="eq">R = (R<sub>s</sub> + R<sub>p</sub>)/2 = <b>4.2%</b>　（反射光强 ≈ 0.042 I<sub>0</sub>）</div>
+    </div>
+    <div class="step"><b class="n">4</b>反射光振动方向（用振幅比，注意 r<sub>s</sub> 为负、r<sub>p</sub> 为正 ⇒ 反相）
+      <div class="eq">tan α′ = r<sub>s</sub>/r<sub>p</sub> = −0.240/0.159 = −1.512　⇒　α′ ≈ <b>−56.5°</b></div>
+      <p style="margin:4px 0 0">即反射光振动方向与入射面成 <b>56.5°</b>，且在<b>入射面的另一侧</b>（因 s 分量反相）。</p>
+    </div>
+
+    <p style="margin-top:14px"><b>（2）以布儒斯特角入射，并绕入射光轴旋转一周</b></p>
+    <div class="step"><b class="n">5</b>θ<sub>B</sub> = arctan 1.5 = <b>56.31°</b>，此时 r<sub>p</sub> = 0，反射光<b>只剩 s 分量</b>
+      <div class="eq">r<sub>s</sub> = −sin(56.31° − 33.69°) = −sin 22.62° = −0.3846　⇒　R<sub>s</sub> = <b>14.8%</b></div>
+    </div>
+    <div class="step"><b class="n">6</b>绕入射光轴旋转 ⇒ 入射面转，振动面与入射面的夹角 α 随之连续变化
+      <div class="eq">E<sub>s</sub> = E<sub>0</sub> sin α　⇒　I<sub>r</sub> = R<sub>s</sub> · I<sub>0</sub> sin²α = <b>0.148 I<sub>0</sub> sin²α</b></div>
+    </div>
+    <div class="res">
+      反射光强按 <b>sin²α 周期变化（周期 π）</b>：α = 90°、270° 时最强 0.148 I<sub>0</sub>；α = 0°、180° 时为零。<br>
+      反射光<b>始终是线偏振光</b>（振动垂直于入射面），故<b>偏振度恒为 1（100%）</b>（消光位置无光，不参与定义）。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== 三 ===== -->
+<h2 id="s3">三 · 菲涅尔公式、反射率与振动方向<span class="cnt">3 题</span></h2>
+<div class="lead">同一道题连考三次（2009 / 2022 / 2024 只改了折射率），必考。</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2022-三-1</span><span class="ttl">平行平板：上表面反射率与上下表面反射光的振动方向</span><span class="hot">★3 次</span></div>
+  <div class="stem">一平面光波以 30° 角由空气入射到折射率为 1.52 的平行平板上，其振动平面与入射面的夹角为 45°，试求该平板上表面的反射率和平板上、下表面反射光的振动方向。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>折射角
+      <div class="eq">sin θ<sub>t</sub> = sin30°/1.52 = 0.3289　⇒　θ<sub>t</sub> = 19.20°</div>
+    </div>
+    <div class="step"><b class="n">2</b>上表面菲涅尔系数
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin(10.80°)</span><span class="den">sin(49.20°)</span></span> = −0.2476　⇒　<i>R</i><sub>s</sub> = 6.13%</div>
+      <div class="eqb"><i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan(10.80°)</span><span class="den">tan(49.20°)</span></span> = +0.1647　⇒　<i>R</i><sub>p</sub> = 2.71%</div>
+    </div>
+    <div class="step"><b class="n">3</b>振动面与入射面成 45° ⇒ 两分量等幅
+      <div class="eq">R = (R<sub>s</sub> + R<sub>p</sub>)/2 = <b>4.42%</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>上表面反射光振动方向
+      <div class="eq">tan α<sub>1</sub> = r<sub>s</sub>/r<sub>p</sub> = −1.503　⇒　α<sub>1</sub> ≈ <b>−56.4°</b></div>
+      <p style="margin:4px 0 0">即与入射面成 56.4°，偏向 s 一侧（另一侧）。</p>
+    </div>
+    <div class="step"><b class="n">5</b>下表面反射光：由斯托克斯倒逆关系 r<sub>s</sub>′ = −r<sub>s</sub>、r<sub>p</sub>′ = −r<sub>p</sub>，再乘往返透射系数 T<sub>s</sub> = 1−R<sub>s</sub>、T<sub>p</sub> = 1−R<sub>p</sub>
+      <div class="eq">tan α<sub>2</sub> = (T<sub>s</sub>·|r<sub>s</sub>|)/(T<sub>p</sub>·|r<sub>p</sub>|) = (0.939×0.2476)/(0.973×0.1647) ≈ −1.45　⇒　α<sub>2</sub> ≈ <b>−55.4°</b></div>
+    </div>
+    <div class="res">
+      上表面反射率 <b>4.4%</b>；上表面反射光振动方向与入射面成 <b>56.4°</b>，下表面反射光与之<b>几乎同向（≈55.4°）</b> —— 两者接近但不相等，差别来自两次透射对 s、p 的衰减不同。
+    </div>
+    <div class="warn">
+      <b>这一问的答案不太统一</b>：各资料对"下表面"的取值口径不同（是否计入往返透射）。<b>考场策略</b>：把上表面算准（4.4% / 56.4°），下表面写出"r′ = −r + 往返透射"的方法与数值即可，阅卷通常给方法分。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2024-二-2</span><span class="ttl">45° 线偏振光 30° 入射 n = 1.5 玻璃</span><span class="hot">★3 次</span></div>
+  <div class="stem">振动方向与入射面夹角为 45° 的线偏振光，30° 角入射时，n = 1.5 的玻璃，求反射光的反射率 R 和振动方向。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>θ<sub>t</sub>：sin θ<sub>t</sub> = 1/3 ⇒ θ<sub>t</sub> = 19.47°</div>
+    <div class="step"><b class="n">2</b>
+      <div class="eq">R<sub>s</sub> = 5.78%，　R<sub>p</sub> = 2.53%</div>
+    </div>
+    <div class="step"><b class="n">3</b>等幅两分量 ⇒
+      <div class="eq">R = (R<sub>s</sub> + R<sub>p</sub>)/2 = <b>4.2%</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>
+      <div class="eq">tan α′ = r<sub>s</sub>/r<sub>p</sub> = −0.240/0.159 = −1.512　⇒　α′ ≈ <b>−56.5°</b></div>
+    </div>
+    <div class="res">R ≈ <b>4.2%</b>；反射光振动方向与入射面成 <b>56.5°</b>（因 r<sub>s</sub> 反相，偏向入射面另一侧）。</div>
+    <p style="font-size:13.5px;color:#6d6d6d;margin-top:6px">
+      速记：<b>45° 入射 + r<sub>s</sub>、r<sub>p</sub> 异号 ⇒ 反射光振动面对称"翻转"</b>，角度从 45° 变到 ≈56.5°。</p>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2018-二-1</span><span class="ttl">20° 入射晶体的反射率与偏振度；加电场后线偏振光垂直入射</span></div>
+  <div class="stem">自然光以 20° 角方向入射到某种晶体上，n = 1.52。<br>
+    （1）求晶体表面的反射率和反射光的偏振度；<br>
+    （2）给晶体外加一电场时，晶体由各向同性变为单轴晶体，且光轴平行于晶体表面，此时线偏振光垂直入射晶体后会以什么样的情况出射？</div>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>sin θ<sub>t</sub> = sin20°/1.52 = 0.2250 ⇒ θ<sub>t</sub> = 13.00°</div>
+    <div class="step"><b class="n">2</b>
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin 7°</span><span class="den">sin 33°</span></span> = −0.2238　⇒　<i>R</i><sub>s</sub> = 5.01%</div>
+      <div class="eqb"><i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan 7°</span><span class="den">tan 33°</span></span> = +0.1891　⇒　<i>R</i><sub>p</sub> = 3.58%</div>
+    </div>
+    <div class="step"><b class="n">3</b>自然光两分量各半
+      <div class="eq">R = (R<sub>s</sub> + R<sub>p</sub>)/2 = <b>4.29%</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>反射光偏振度
+      <div class="eq">P = (R<sub>s</sub> − R<sub>p</sub>)/(R<sub>s</sub> + R<sub>p</sub>) = (5.01−3.58)/(5.01+3.58) ≈ <b>16.7%</b></div>
+      <p style="margin:4px 0 0">（自然光入射时，两分量入射强度相同，偏振度可直接用 R 之差与 R 之和的比。）</p>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">5</b>光轴平行表面 + 垂直入射 ⇒ 光沿<b>垂直于光轴</b>方向传播，o 光与 e 光速度不同（n<sub>o</sub> ≠ n<sub>e</sub>），但<b>传播方向相同、不分开</b>。</div>
+    <div class="step"><b class="n">6</b>两者之间累积相位差
+      <div class="eq">Δφ = 2π(n<sub>e</sub> − n<sub>o</sub>)d/λ</div>
+    </div>
+    <div class="res">
+      出射光<b>仍是同方向传播，不发生双折射分离</b>，但偏振态改变：一般为<b>椭圆偏振光</b>；当 Δφ = 2kπ 时恢复原线偏振，Δφ = (2k+1)π 时振动面转过 90°。<br>
+      这正是<b>电光调制 / 电光开关</b>的工作原理（KDP 普克尔斯盒）。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== 四 ===== -->
+<h2 id="s4">四 · 正入射与全反射<span class="cnt">2 题</span></h2>
+<div class="lead">正入射只有三个公式：r = (n<sub>2</sub>−n<sub>1</sub>)/(n<sub>2</sub>+n<sub>1</sub>)、R = r²、r<sub>p</sub> 与 r<sub>s</sub> 反号（圆偏振旋向反转）。</div>
+
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2020-二-1</span><span class="ttl">左旋圆偏振光正入射，求反射光偏振态与光强</span></div>
+  <div class="stem">迎着光传播方向观察，一束左旋圆偏振光的光强为 I<sub>0</sub>，由空气垂直入射到折射率为 1.5 的玻璃上，求反射光的偏振态和光强。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>正入射反射系数
+      <div class="eq">r = (n<sub>2</sub>−n<sub>1</sub>)/(n<sub>2</sub>+n<sub>1</sub>) = (1.5−1)/(1.5+1) = 0.2</div>
+    </div>
+    <div class="step"><b class="n">2</b>反射率
+      <div class="eq">R = r² = 0.04　⇒　I<sub>r</sub> = <b>0.04 I<sub>0</sub></b></div>
+    </div>
+    <div class="step"><b class="n">3</b>偏振态：正入射时 r<sub>p</sub> = −r<sub>s</sub>，两分量都反号但<b>相对相位差增加 π</b>，圆偏振的旋向反转
+      <div class="eq">左旋 → <b>右旋圆偏振光</b></div>
+    </div>
+    <div class="res">反射光为<b>右旋圆偏振光</b>，光强 <b>0.04 I<sub>0</sub></b>。</div>
+    <div class="warn">
+      <b>易错点</b>：① 忘记 r<sub>p</sub>、r<sub>s</sub> 反号，答"仍是左旋"；② 把光强算成 0.2 I<sub>0</sub>（那是振幅比，不是光强比）。<br>
+      记忆：<b>圆偏振光正入射反射，旋向必反转</b>；斜入射时不一定。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2023-二-1</span><span class="ttl">棱镜内两次反射后反向射出，求出射光强</span></div>
+  <div class="stem">如图，经两侧面反射后从斜面反方向射出，入射光强 I<sub>0</sub>，求 I。</div>
+  <figure>
+    <img src="figs/fig-2023-prism.png" alt="棱镜两次全反射">
+    <figcaption>光垂直入射左表面，在两个斜面上各发生一次全反射，最后从入射面反向平行射出</figcaption>
+  </figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>光路分解：正入射进入（一次透射）→ 两个侧面各<b>全反射</b>一次 → 再正入射射出（一次透射）。</div>
+    <div class="step"><b class="n">2</b>全反射时若无吸收、无散射，<b>反射率 = 1</b>，两次全反射不损失能量（这是全反射的特点，也是它被用作反射棱镜的原因）。</div>
+    <div class="step"><b class="n">3</b>进、出两个表面都是正入射，各有一次反射损失。设棱镜折射率 n：
+      <div class="eq">R = [(n−1)/(n+1)]²，　透射率 T = 1 − R</div>
+      <div class="eq">I = I<sub>0</sub> · T · 1 · 1 · T = I<sub>0</sub>(1 − R)²</div>
+    </div>
+    <div class="res">
+      理想情形（忽略表面反射损失、全反射无损耗）：<b>I ≈ I<sub>0</sub></b>。<br>
+      计入两表面反射：<b>I = I<sub>0</sub>[1 − ((n−1)/(n+1))²]²</b>（n = 1.5 时约 0.92 I<sub>0</sub>；n = 1.52 时约 0.919 I<sub>0</sub>）。
+    </div>
+    <p style="font-size:13.5px;color:#6d6d6d;margin-top:6px">
+      题干未给 n，两种写法都留——先写"全反射无损失 ⇒ I ≈ I<sub>0</sub>"，再补"若计表面反射则为 …"，不会丢分。</p>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div style="margin:40px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>批次说明</b>：本文件是计算题的第 1 批（第一章，9 题）。后续按考纲分值逐章交付：第二章 干涉 → 第三章 衍射 → 第四章 各向异性 → 第五章 感应双折射 → 应用光学（几何光学/理想系统/像差）。</p>
+  <p><b>已知局限</b>：① 所有题都是"题目 + 我推导的解答"，<code>计算题分题型.pdf</code> 与 <code>分类总结真题.pdf</code> 中未逐题核对标准答案，
+  故结果标 <b>【自算】</b>，若与真题本不一致以真题本为准；② 2022-三-1 的"下表面振动方向"各资料口径不一，已在题内说明；③ 2015-3 超出"近 10 年"范围，因是<b>考纲唯一点名</b>的空间频率题而收入。</p>
+  <p>原文件未做任何修改。配套：<code>851-简答题-按章节.html</code>。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>

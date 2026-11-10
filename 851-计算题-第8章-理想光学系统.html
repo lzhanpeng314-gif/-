@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 计算题 · 第八章 理想光学系统</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 计算题 · 第八章 理想光学系统</h1>
+  <div class="sub">
+    近 10 年（2016–2024）· <b>5 道</b> · 双光组组合 4、高斯公式·二次成像 1<br>
+    来源：<code>计算题分题型.pdf</code> 第 67–69 页
+  </div>
+  <div class="lg">标注：<b>【真题】</b> 题面照录　<b>【自算】</b> 解答由我推导</div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#a">A 双光组组合</a><a href="#b">B 高斯公式与二次成像</a>
+</nav>
+
+<div class="bar">
+  <span id="stat">已掌握 0 / 5</span>
+  <button id="f-all" class="on">全部</button>
+  <button id="f-todo">只看没掌握的</button>
+  <span style="margin-left:auto;font-size:12px">勾选自动记住</span>
+</div>
+
+<div class="warn" style="margin-top:20px">
+  <b>这一章只有两条路</b>：① 给"总焦距 <i>f</i>′ / 总长 <i>L</i> / 后截距 <i>l</i>′<sub>F</sub>"中的几个，反求 <i>f</i><sub>1</sub>′、<i>f</i><sub>2</sub>′、<i>d</i> —— 三个方程解三个未知数；
+  ② 物像关系题，<b>β = <i>l</i>′/<i>l</i></b> 与高斯公式联立，一律"分段成像"：先第二组反推第一组，或从物方逐面推过去。
+  另外两条换算别记反：<b>总长 <i>L</i> = <i>d</i> + 后截距</b>；<b><i>f</i> = −<i>f</i>′</b>（空气中）。
+</div>
+
+<div class="fbox">
+  <div class="fcard">
+    <div class="fname">双光组组合焦距</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>1</sub>′</span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>2</sub>′</span></span> − <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i><sub>1</sub>′<i>f</i><sub>2</sub>′</span></span></span></div>
+    <div class="fnote">等价式 <i>f</i>′ = <i>f</i><sub>1</sub>′<i>f</i><sub>2</sub>′/(<i>f</i><sub>1</sub>′+<i>f</i><sub>2</sub>′−<i>d</i>)。分母可正可负 ⇒ <i>f</i>′ 可以为负。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">后截距（像方焦点位置）</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>l</i>′<sub>F</sub> = <i>f</i>′<span class="bkt">1 − <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i><sub>1</sub>′</span></span></span></span></div>
+    <div class="fnote">从<b>第二组</b>量起。<i>d</i> &gt; <i>f</i><sub>1</sub>′ 时为负 ⇒ 焦点跑到第二组左侧（长焦/反远距结构）。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">高斯公式（符号法则）</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span>　　β = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span></span></div>
+    <div class="fnote">光线从左来、<i>l</i> 向左为负。<i>β</i> &lt; 0 倒立，<i>β</i> &gt; 0 正立。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">总长与主面</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>L</i> = <i>d</i> + <i>l</i>′<sub>F</sub>　　<i>l</i>′<sub>H</sub> = <i>l</i>′<sub>F</sub> − <i>f</i>′</span></div>
+    <div class="fnote">"总长"一律指第一组到像方焦点的距离，不是间隔 <i>d</i>。四个题都在这条上设过坑。</div>
+  </div>
+</div>
+
+<!-- ===== A ===== -->
+<h2 id="a">A · 双光组组合<span class="cnt">4 题</span></h2>
+<div class="lead">四道题的已知量组合各不相同，但都能从上面三条式里挑两条解出。<b>先定 <i>d</i></b>，再用后截距定 <i>f</i><sub>1</sub>′，最后用组合焦距定 <i>f</i><sub>2</sub>′。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2022-三-5</span><span class="ttl">双光组：已知像距与像高，反求物面位置与物高</span></div>
+  <div class="stem">一个光学系统由两个薄透镜构成，两个薄透镜的焦距依次为 60mm 和 40mm，两者相距 150mm，已知一个物体成正立的实像，像位于第二个透镜后 168mm 处，像高为 5mm，试计算物体的位置和物高。</div>
+  <div class="ans">
+    <p style="margin:0 0 8px"><b>思路</b>：像在最后，只能"从像方往回推"——先过第二透镜得到中间像，再过第一透镜得到物。</p>
+    <div class="step"><b class="n">1</b>对第二透镜：<i>l</i><sub>2</sub>′ = 168 mm，<i>f</i><sub>2</sub>′ = 40 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">168</span></span> − <span class="frac"><span class="num">1</span><span class="den">40</span></span> = <span class="frac"><span class="num">40 − 168</span><span class="den">168 × 40</span></span> = −<span class="frac"><span class="num">1</span><span class="den">52.5</span></span>　⇒　<i>l</i><sub>2</sub> = −52.5 mm</div>
+    </div>
+    <div class="step"><b class="n">2</b>即第一透镜所成的中间像在第二透镜<b>前 52.5 mm</b>，所以它对第一透镜的像距
+      <div class="eqb"><i>l</i><sub>1</sub>′ = <i>d</i> + <i>l</i><sub>2</sub> = 150 − 52.5 = 97.5 mm</div>
+    </div>
+    <div class="step"><b class="n">3</b>第二透镜的放大率
+      <div class="eqb">β<sub>2</sub> = <span class="frac"><span class="num"><i>l</i><sub>2</sub>′</span><span class="den"><i>l</i><sub>2</sub></span></span> = <span class="frac"><span class="num">168</span><span class="den">−52.5</span></span> = −3.2</div>
+    </div>
+    <div class="step"><b class="n">4</b>对第一透镜：<i>l</i><sub>1</sub>′ = 97.5 mm，<i>f</i><sub>1</sub>′ = 60 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">97.5</span></span> − <span class="frac"><span class="num">1</span><span class="den">60</span></span> = 0.01026 − 0.01667 = −0.00641 = −<span class="frac"><span class="num">1</span><span class="den">156</span></span>　⇒　<i>l</i><sub>1</sub> = −156 mm</div>
+    </div>
+    <div class="step"><b class="n">5</b>β<sub>1</sub> = 97.5/(−156) = −0.625，于是
+      <div class="eqb">β = β<sub>1</sub>β<sub>2</sub> = (−0.625)(−3.2) = <b>+2.0</b> &gt; 0 ✓（题设"正立"）</div>
+    </div>
+    <div class="step"><b class="n">6</b>物高
+      <div class="eqb"><i>y</i> = <span class="frac"><span class="num"><i>y</i>′</span><span class="den">β</span></span> = <span class="frac"><span class="num">5</span><span class="den">2</span></span> = 2.5 mm</div>
+    </div>
+    <div class="res">物在透镜 1 前 <b>156 mm</b>（<i>l</i><sub>1</sub> = −156 mm），物高 <b>2.5 mm</b>；中间像在透镜 1 后 97.5 mm、透镜 2 前 52.5 mm，系统放大率 <b>+2</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2017-四-2</span><span class="ttl">短焦距照相物镜：由 <i>f</i>′、工作距离、总长反求两片焦距</span></div>
+  <div class="stem">一个由两个薄透镜构成的短焦距照相物镜，已知焦距 <i>f</i>′ = 28mm，工作距离 <i>l</i>′ = 40mm，总长度（第一透镜到物镜像方焦点的距离）<i>L</i> = 55mm，试求这两个薄透镜的焦距 <i>f</i><sub>1</sub>′ 和 <i>f</i><sub>2</sub>′ 及其它们的间距 <i>d</i>。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>"工作距离"就是后截距 <i>l</i>′<sub>F</sub>（最后一片到像方焦点）。总长 = 间隔 + 后截距：
+      <div class="eqb"><i>d</i> = <i>L</i> − <i>l</i>′<sub>F</sub> = 55 − 40 = <b>15 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>代入后截距公式
+      <div class="eqb">40 = 28<span class="bkt">1 − <span class="frac"><span class="num">15</span><span class="den"><i>f</i><sub>1</sub>′</span></span></span>　⇒　1 − <span class="frac"><span class="num">15</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = <span class="frac"><span class="num">10</span><span class="den">7</span></span>　⇒　<span class="frac"><span class="num">15</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = −<span class="frac"><span class="num">3</span><span class="den">7</span></span>　⇒　<i>f</i><sub>1</sub>′ = <b>−35 mm</b></div>
+      <p style="margin:4px 0 0">负值说明<b>第一片是负透镜</b>：后截距 40 mm 比焦距 28 mm 还长，只有"负–正"结构才做得到。</p>
+    </div>
+    <div class="step"><b class="n">3</b>再用组合焦距式求 <i>f</i><sub>2</sub>′
+      <div class="eqb">28 = <span class="frac"><span class="num">(−35)<i>f</i><sub>2</sub>′</span><span class="den">−35 + <i>f</i><sub>2</sub>′ − 15</span></span> = <span class="frac"><span class="num">−35<i>f</i><sub>2</sub>′</span><span class="den"><i>f</i><sub>2</sub>′ − 50</span></span></div>
+      <div class="eqb">28<i>f</i><sub>2</sub>′ − 1400 = −35<i>f</i><sub>2</sub>′　⇒　63<i>f</i><sub>2</sub>′ = 1400　⇒　<i>f</i><sub>2</sub>′ = <b>22.2 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>验算
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = −<span class="frac"><span class="num">1</span><span class="den">35</span></span> + <span class="frac"><span class="num">1</span><span class="den">22.22</span></span> − <span class="frac"><span class="num">15</span><span class="den">(−35)(22.22)</span></span> = −0.02857 + 0.04500 + 0.01929 = 0.03571 ✓</div>
+    </div>
+    <div class="res"><i>f</i><sub>1</sub>′ = <b>−35 mm</b>（负透镜在前）、<i>f</i><sub>2</sub>′ ≈ <b>22.2 mm</b>、<i>d</i> = <b>15 mm</b>。属反远距（retrofocus）型：工作距离 40 mm &gt; <i>f</i>′ = 28 mm。</div>
+    <div class="warn"><b>易错</b>：总长 <i>L</i> = <i>d</i> + 后截距，直接令 <i>d</i> = 55 会连锁错到底。另外 <i>f</i><sub>1</sub>′ 解出负值时不要慌，这正是"短焦 + 长后截距"的必然结果。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2018-四-1</span><span class="ttl">已知 <i>f</i>′、总长、后截距，反求双光组</span></div>
+  <div class="stem">已知双光组组合，合成光组焦距为 <i>f</i>′ = 1000mm，总长（第一光组到系统像方焦点的距离）<i>L</i> = 700mm，总焦点 <i>l</i>′<sub>F</sub> = 400mm，求组成该系统的双光组焦距及其间隔。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>间隔
+      <div class="eqb"><i>d</i> = <i>L</i> − <i>l</i>′<sub>F</sub> = 700 − 400 = <b>300 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>后截距定 <i>f</i><sub>1</sub>′
+      <div class="eqb">400 = 1000<span class="bkt">1 − <span class="frac"><span class="num">300</span><span class="den"><i>f</i><sub>1</sub>′</span></span></span>　⇒　1 − <span class="frac"><span class="num">300</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = 0.4　⇒　<i>f</i><sub>1</sub>′ = <b>500 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>组合焦距定 <i>f</i><sub>2</sub>′
+      <div class="eqb">1000 = <span class="frac"><span class="num">500<i>f</i><sub>2</sub>′</span><span class="den">500 + <i>f</i><sub>2</sub>′ − 300</span></span>　⇒　1000(200 + <i>f</i><sub>2</sub>′) = 500<i>f</i><sub>2</sub>′</div>
+      <div class="eqb">200000 + 1000<i>f</i><sub>2</sub>′ = 500<i>f</i><sub>2</sub>′　⇒　500<i>f</i><sub>2</sub>′ = −200000　⇒　<i>f</i><sub>2</sub>′ = <b>−400 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>验算
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">500</span></span> − <span class="frac"><span class="num">1</span><span class="den">400</span></span> + <span class="frac"><span class="num">300</span><span class="den">500 × 400</span></span> = 0.002 − 0.0025 + 0.0015 = 0.001 ✓（<i>f</i>′ = 1000）</div>
+    </div>
+    <div class="res"><i>f</i><sub>1</sub>′ = <b>500 mm</b>、<i>f</i><sub>2</sub>′ = <b>−400 mm</b>、<i>d</i> = <b>300 mm</b>。后组为负 ⇒ 主面被"拉"到系统外面，属望远型（telephoto）结构。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2020-四-2</span><span class="ttl">已知间隔、放大率、共轭距，反求两光组焦距</span></div>
+  <div class="stem">已知两个薄透镜光组组合，两个薄透镜的主点之间的间隔 <i>d</i> = 50mm，β = −5，共轭距为 <i>L</i> = 150mm，物距 <i>l</i><sub>1</sub> = −35mm，求两个光组的焦距。</div>
+  <div class="ans">
+    <figure style="margin:12px 0;text-align:center">
+      <img src="figs/fig-851-p69-doublet.png" alt="2020-四-2 双光组光路图" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
+      <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">原题图（第 69 页）：−<i>l</i><sub>1</sub> 从物面量到 <i>H</i><sub>1</sub>，<i>d</i> 从 <i>H</i><sub>1</sub> 量到 <i>H</i><sub>2</sub>，<i>L</i> 从<b>物面</b>量到<b>像面</b>。</figcaption>
+    </figure>
+    <div class="step"><b class="n">1</b>共轭距 = 物面到像面，按图拆成三段
+      <div class="eqb"><i>L</i> = |<i>l</i><sub>1</sub>| + <i>d</i> + <i>l</i><sub>2</sub>′　⇒　<i>l</i><sub>2</sub>′ = 150 − 35 − 50 = <b>65 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>放大率用两段串起来：β = (<i>l</i><sub>1</sub>′/<i>l</i><sub>1</sub>)(<i>l</i><sub>2</sub>′/<i>l</i><sub>2</sub>)，且 <i>l</i><sub>2</sub> = <i>l</i><sub>1</sub>′ − <i>d</i>
+      <div class="eqb">−5 = <span class="frac"><span class="num"><i>l</i><sub>1</sub>′</span><span class="den">−35</span></span> · <span class="frac"><span class="num">65</span><span class="den"><i>l</i><sub>1</sub>′ − 50</span></span></div>
+      <div class="eqb">65<i>l</i><sub>1</sub>′ = 175(<i>l</i><sub>1</sub>′ − 50)　⇒　110<i>l</i><sub>1</sub>′ = 8750　⇒　<i>l</i><sub>1</sub>′ = <b>79.55 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>于是 <i>l</i><sub>2</sub> = 79.55 − 50 = <b>29.55 mm</b>（对第二光组是虚物，落在它右侧）
+    </div>
+    <div class="step"><b class="n">4</b>两个光组分别用高斯公式
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">79.55</span></span> + <span class="frac"><span class="num">1</span><span class="den">35</span></span> = 0.01257 + 0.02857 = 0.04114　⇒　<i>f</i><sub>1</sub>′ = <b>24.3 mm</b></div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">65</span></span> − <span class="frac"><span class="num">1</span><span class="den">29.55</span></span> = 0.01538 − 0.03385 = −0.01846　⇒　<i>f</i><sub>2</sub>′ = <b>−54.2 mm</b></div>
+    </div>
+    <div class="step"><b class="n">5</b>验算
+      <div class="eqb">β<sub>1</sub> = <span class="frac"><span class="num">79.55</span><span class="den">−35</span></span> = −2.273，β<sub>2</sub> = <span class="frac"><span class="num">65</span><span class="den">29.55</span></span> = +2.2，β = −5.0 ✓</div>
+      <p style="margin:4px 0 0">组合焦距 <i>f</i>′ = 16.5 mm，物方主面在 <i>H</i><sub>1</sub> 左侧 15.2 mm 处（所以题给的 <i>l</i><sub>1</sub> 只能配 <b>分段</b>算法，不能直接套到整个系统上）。</p>
+    </div>
+    <div class="res"><i>f</i><sub>1</sub>′ ≈ <b>24.3 mm</b>、<i>f</i><sub>2</sub>′ ≈ <b>−54.2 mm</b>（组合 <i>f</i>′ ≈ 16.5 mm）。精确值：<i>f</i><sub>1</sub>′ = 875/36 mm、<i>f</i><sub>2</sub>′ = −325/6 mm。</div>
+    <div class="warn"><b>口径提醒</b>：本题"共轭距 150 mm"按图上标注（物面 ↔ 像面）取，所以 <i>l</i><sub>2</sub>′ = 65 mm。若按"从 <i>H</i><sub>1</sub> 量到像面 150 mm"理解，则 <i>l</i><sub>2</sub>′ = 100 mm，解出 <i>f</i><sub>1</sub>′ = 26.9 mm、<i>f</i><sub>2</sub>′ = −200 mm。两种口径都自洽，答题时把定义写清楚。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== B ===== -->
+<h2 id="b">B · 高斯公式与二次成像<span class="cnt">1 题</span></h2>
+<div class="lead">"二次成像测焦距"是实验题的计算版：同一系统两次成像，两次的 β 与两次的物像距差联立即可。</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2021-四-2</span><span class="ttl">二次成像法：由两次像高反求 <i>f</i>′ 与物移动量</span></div>
+  <div class="stem">采用二次成像法可以测量光学系统的焦距。已知将一个高为 10cm 的物置于一个光学系统的前方，在光学系统的后方得到一高为 4.0cm 倒立的实像；当将物沿光轴向光学系统方向移动一段距离，像远离光学系统沿光轴移动了 10cm，像仍为倒立的实像、高变为 14.0cm，试<br>（1）确定该光学系统的像方焦距；<br>（2）物沿光轴移动的距离。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>第一次：记物距 −<i>a</i>、像距 <i>b</i>，像高 4.0 / 物高 10 ⇒ β<sub>1</sub> = −0.4
+      <div class="eqb">β<sub>1</sub> = <span class="frac"><span class="num"><i>b</i></span><span class="den">−<i>a</i></span></span> = −0.4　⇒　<i>b</i> = 0.4<i>a</i></div>
+    </div>
+    <div class="step"><b class="n">2</b>第二次：像高 14.0 / 10 ⇒ β<sub>2</sub> = −1.4；物向内移 Δ（物距 −(<i>a</i>−Δ)），像向外移 10 cm（像距 <i>b</i>+10）
+      <div class="eqb">−1.4 = <span class="frac"><span class="num"><i>b</i> + 10</span><span class="den">−(<i>a</i> − Δ)</span></span>　⇒　<i>b</i> + 10 = 1.4(<i>a</i> − Δ)</div>
+      <div class="eqb">代入 <i>b</i> = 0.4<i>a</i>：　0.4<i>a</i> + 10 = 1.4<i>a</i> − 1.4Δ　⇒　<i>a</i> − Δ = <span class="frac"><span class="num">0.4<i>a</i> + 10</span><span class="den">1.4</span></span></div>
+    </div>
+    <div class="step"><b class="n">3</b>两次都满足高斯公式，焦距不变，把两式写成同一形式
+      <div class="eqb">第一次：<span class="frac"><span class="num">1</span><span class="den"><i>a</i></span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>b</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>a</i></span></span> + <span class="frac"><span class="num">1</span><span class="den">0.4<i>a</i></span></span> = <span class="frac"><span class="num">3.5</span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span></div>
+      <div class="eqb">第二次：<span class="frac"><span class="num">1</span><span class="den">0.4<i>a</i> + 10</span></span> + <span class="frac"><span class="num">1.4</span><span class="den">0.4<i>a</i> + 10</span></span> = <span class="frac"><span class="num">2.4</span><span class="den">0.4<i>a</i> + 10</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span></div>
+      <div class="eqb"><span class="frac"><span class="num">3.5</span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num">2.4</span><span class="den">0.4<i>a</i> + 10</span></span>　⇒　1.4<i>a</i> + 35 = 2.4<i>a</i>　⇒　<i>a</i> = <b>35 cm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>焦距与像距
+      <div class="eqb"><i>f</i>′ = <span class="frac"><span class="num"><i>a</i></span><span class="den">3.5</span></span> = 10 cm，　<i>b</i> = 0.4 × 35 = 14 cm</div>
+    </div>
+    <div class="step"><b class="n">5</b>物移动量
+      <div class="eqb">Δ = <i>a</i> − <span class="frac"><span class="num">0.4<i>a</i> + 10</span><span class="den">1.4</span></span> = 35 − <span class="frac"><span class="num">24</span><span class="den">1.4</span></span> = 35 − 17.14 = <b>17.86 cm</b></div>
+      <p style="margin:4px 0 0">回代检查：<i>l</i><sub>2</sub> = −(35−17.86) = −17.14 cm，<i>l</i><sub>2</sub>′ = 24 cm，1/24 + 1/17.14 = 0.0417 + 0.0583 = 0.1 ⇒ <i>f</i>′ = 10 cm ✓；β<sub>2</sub> = 24/(−17.14) = −1.4 ✓。</p>
+    </div>
+    <div class="res">（1）<i>f</i>′ = <b>10 cm</b>（100 mm）；（2）物沿光轴<b>移近 17.9 cm</b>（35 cm → 17.1 cm，像距 14 cm → 24 cm）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>未收录</b>（2016 年以前，按"只收近 10 年"的规则跳过）：2009-9 双光组·焦点主点（第 67 页）、2015-9 双光组·焦点主点（第 67 页）、2010-10 双光组·像方焦距与间隔（第 68 页）。</p>
+  <p><b>本文件范围</b>：第八章在源 PDF 中<b>没有打印章标题</b>，只有"双光组"这类题型标签（第 67–69 页）。同属应用光学"解析法"的薄透镜＋棱镜题在<b>第 9 章</b>文件里，别翻错。</p>
+  <p><b>已知局限</b>：① 全部结果为教材推导（【自算】），未与机构答案册逐题比对；② 2020-四-2 的"共轭距"口径有两种读法（见该题"口径提醒"），正文取图上标注那一种；③ 双光组公式的符号约定（<i>l</i>′ 向右为正、<i>f</i> = −<i>f</i>′）与石顺祥教材一致，若用郁道银的旧符号体系，只需整体换号。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+  (function () {
+    var KEY = 'g851-c8-mastered';
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var stat = document.getElementById('stat');
+    function refresh() {
+      stat.textContent = '已掌握 ' + document.querySelectorAll('.q.done').length + ' / ' + qs.length;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+    qs.forEach(function (q) {
+      var tag = q.querySelector('.tag'), hd = q.querySelector('.hd');
+      if (!tag || !hd) return;
+      var id = tag.textContent.trim();
+      var lab = document.createElement('label');
+      lab.className = 'mk';
+      lab.innerHTML = '<input type="checkbox"> 已掌握';
+      var box = lab.querySelector('input');
+      box.checked = !!saved[id];
+      if (box.checked) q.classList.add('done');
+      box.addEventListener('change', function () {
+        if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+        else { delete saved[id]; q.classList.remove('done'); }
+        refresh();
+      });
+      hd.appendChild(lab);
+    });
+    refresh();
+    var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+    bAll.addEventListener('click', function () {
+      document.body.classList.remove('onlytodo');
+      bAll.classList.add('on'); bTodo.classList.remove('on');
+    });
+    bTodo.addEventListener('click', function () {
+      document.body.classList.add('onlytodo');
+      bTodo.classList.add('on'); bAll.classList.remove('on');
+    });
+  })();
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 计算题 · 第二章 光的干涉</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:46px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 18px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  /* ===== 公式排版组件 ===== */
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  em.k{font-style:normal;font-weight:600;background:var(--hl);padding:0 2px;}
+  .f{font-family:"Cambria Math",Cambria,Georgia,serif;font-style:italic;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 计算题 · 第二章 光的干涉</h1>
+  <div class="sub">
+    近 10 年（2016–2024）· <b>10 道</b> · 每题完整步骤与数值<br>
+    来源：<code>计算题分题型.pdf</code> 第 7–15 页（第二章全部题目）
+  </div>
+  <div class="lg">
+    标注：<b>【真题】</b> 题面照录　<b>【自算】</b> 解答由我推导
+  </div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a>
+  <a href="#a">A 双缝</a><a href="#b">B 两平面波</a><a href="#c">C 劈尖等厚</a>
+  <a href="#d">D F-P 与滤光片</a><a href="#e">E 光学薄膜</a>
+</nav>
+
+<div class="warn" style="margin-top:22px">
+  <b>关于答案</b>：你说 <code>…2009-2023年真题及答案</code> 等文件有各年答案，但那是<b>机构版、不保证正确</b>。
+  本批答案仍以教材推导为准，标 <b>【自算】</b>。若你的答案册数值与此不同：<b>先看推导步骤，再决定信谁</b>，并把差异告诉我，我复核。<br><br>
+</div>
+
+<div class="fbox">
+  <div class="fcard">
+    <div class="fname">双缝条纹间距</div>
+    <div class="fml"><span class="eqb" style="margin:0">Δ<i>x</i> = <span class="frac"><span class="num">λ<i>D</i></span><span class="den"><i>d</i></span></span></span></div>
+    <div class="fnote">波长 × 屏距 ÷ 缝距。屏越远、缝越密，条纹越宽。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">相干长度</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>L</i><sub>c</sub> = <span class="frac"><span class="num">λ<sup>2</sup></span><span class="den">Δλ</span></span></span></div>
+    <div class="fnote">波长的平方 ÷ 谱线宽度。谱线越窄，能相干的距离越长。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">斜入射等厚干涉极大</div>
+    <div class="fml"><span class="eqb" style="margin:0">2<i>nd</i> cos<i>θ</i> = <i>k</i>λ</span></div>
+    <div class="fnote">斜着看，光程差要乘 cos θ —— 最容易漏的一项。</div>
+  </div>
+  <div class="fcard">
+    <div class="fname">λ/4 膜反射率</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>R</i> = <span class="frac bkt"><span class="num"><i>n</i><sub>0</sub><i>n</i><sub>g</sub> − <i>n</i><sub>f</sub><sup>2</sup></span><span class="den"><i>n</i><sub>0</sub><i>n</i><sub>g</sub> + <i>n</i><sub>f</sub><sup>2</sup></span></span><sup style="vertical-align:1.0em;font-size:.72em">2</sup></span></div>
+    <div class="fnote">n<sub>f</sub> 膜、n<sub>g</sub> 玻璃、n<sub>0</sub> 空气；n<sub>f</sub>=√n<sub>g</sub> 时 R=0。</div>
+  </div>
+</div>
+
+<!-- ===== A ===== -->
+<h2 id="a">A · 杨氏双缝<span class="cnt">4 题</span></h2>
+<div class="lead">四道题考的是同一个骨架：条纹间距 → 光程差/移动 → 相干长度/可见度。参数换来换去而已。</div>
+
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2016-二-1</span><span class="ttl">由 10 个条纹间距反求波长；白光时条纹如何变</span></div>
+  <div class="stem">在双缝干涉实验中，缝间距为 0.5 mm，观察屏距离缝 1.2 m，现用读数显微镜测得 10 个干涉条纹（准确说是 11 个亮条或暗条）之间的距离为 12 mm，试求所用光的波长。用白光实验时，干涉条纹有什么变化？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>11 个亮条之间是 <b>10 个</b>间距
+      <div class="eq">Δx = 12 mm / 10 = 1.2 mm</div>
+    </div>
+    <div class="step"><b class="n">2</b>
+      <div class="eq">λ = Δx·d/D = 1.2×10<sup>−3</sup> × 0.5×10<sup>−3</sup> / 1.2 = 5.0×10<sup>−7</sup> m</div>
+    </div>
+    <div class="res">λ = <b>500 nm</b>；白光时：中央（k=0）仍是白光，两侧形成彩色条纹，因 Δx ∝ λ 使红光条纹最宽、紫光最窄，高级次处各色重叠 → <b>只能看到少数几级彩色，再往外模糊成白色</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2017-二-2</span><span class="ttl">贴薄片后条纹移动距离；多厚才使条纹消失</span></div>
+  <div class="stem">S<sub>1</sub>、S<sub>2</sub> 小孔的间距为 0.5 mm，光屏离小孔的距离为 50 cm，当以厚度为 1.667×10<sup>−2</sup> mm、折射率为 1.60 的透明薄片贴住小孔 S<sub>1</sub> 时，发现屏上的条纹有移动。<br>（1）试确定条纹移动的距离；（2）如果入射光的波长宽度为 0.04 nm、平均波长为 500 nm，则该透明薄片多厚可使观察屏上 P<sub>0</sub> 点附近的干涉条纹消失？</div>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>薄片引入的附加光程
+      <div class="eq">(n−1)t = 0.60 × 1.667×10<sup>−2</sup> mm = 1.0×10<sup>−2</sup> mm = 10 μm</div>
+    </div>
+    <div class="step"><b class="n">2</b>相当于条纹平移了多少级
+      <div class="eq">N = (n−1)t / λ = 10×10<sup>−6</sup> / 500×10<sup>−9</sup> = 20 级</div>
+    </div>
+    <div class="step"><b class="n">3</b>条纹间距与移动距离
+      <div class="eq">Δx = λD/d = 500×10<sup>−9</sup>×0.5 / 0.5×10<sup>−3</sup> = 0.5 mm<br>
+      Δy = N·Δx = 20 × 0.5 mm = <b>10 mm</b></div>
+      <p style="margin:4px 0 0">方向：<b>向 S<sub>1</sub> 一侧（向上）移动</b> —— 光程增加的那一侧，条纹朝它移。</p>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">4</b>相干长度
+      <div class="eqb"><i>L</i><sub>c</sub> = <span class="frac"><span class="num">λ<sup>2</sup></span><span class="den">Δλ</span></span> = <span class="frac"><span class="num">(500 nm)<sup>2</sup></span><span class="den">0.04 nm</span></span> = 6.25×10<sup>−3</sup> m = 6.25 mm</div>
+    </div>
+    <div class="step"><b class="n">5</b>附加光程差 ≥ 相干长度时条纹消失
+      <div class="eq">(n−1)t ≥ L<sub>c</sub>　⇒　t ≥ 6.25/0.60 ≈ <b>10.4 mm</b></div>
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2021-二-1</span><span class="ttl">条纹间距、水中变化、消失级次、光源临界宽度</span><span class="hot">四问综合</span></div>
+  <div class="stem">杨氏双缝实验中，双缝间距 d = 0.5 mm，接收屏距双缝 D = 1 m，点光源距双缝 l = 30 cm，点光源发射波长为 500 nm 的单色光，试求：<br>（1）屏上的条纹间距，若把整个装置放入水中，条纹间距如何变化；<br>（2）若点光源发出的光波长为（500 ± 2.5）nm 范围内的准单色光，求接收屏上干涉条纹消失时的级次；<br>（3）若光源具有一定的宽度，屏上干涉条纹消失时，它的临界宽度是多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>（1）空气中
+      <div class="eqb">Δ<i>x</i> = <span class="frac"><span class="num">λ<i>D</i></span><span class="den"><i>d</i></span></span> = <span class="frac"><span class="num">500×10<sup>−9</sup>×1</span><span class="den">0.5×10<sup>−3</sup></span></span> = <b>1 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>入水后波长变短 λ′ = λ/n（n ≈ 1.33）
+      <div class="eq">Δx′ = Δx/n ≈ 1/1.33 ≈ <b>0.75 mm</b>　（条纹变密）</div>
+    </div>
+    <div class="step"><b class="n">3</b>（2）波列长度有限，级次太高则两束不再相干。判据：kΔλ ≥ λ/2
+      <div class="eq">k<sub>max</sub> = λ/(2Δλ) = 500/(2×5) = <b>50 级</b></div>
+      <p style="margin:4px 0 0">Δλ = 2.5×2 = 5 nm（"±2.5"是半宽，全宽为 5 nm）。第 50 级以后条纹消失。</p>
+    </div>
+    <div class="step"><b class="n">4</b>（3）光源宽度使两侧边缘的条纹错开半个间距
+      <div class="eq">b·d/l = λ/2　⇒　b = λl/(2d) = 500×10<sup>−9</sup>×0.30 / (2×0.5×10<sup>−3</sup>) = <b>0.15 mm</b></div>
+    </div>
+    <div class="res">Δx = 1 mm；水中 0.75 mm；条纹消失级次 ≈ <b>50 级</b>；光源临界宽度 ≈ <b>0.15 mm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2023-二-2</span><span class="ttl">p 点光强比；圆形光源下的最大孔距</span></div>
+  <div class="stem">杨氏干涉实验中，用波长为 640 nm 的光垂直照射间距为 0.4 mm 的两个小孔，小孔离接受屏幕 50 cm，求：<br>（1）距离中央条纹 0.1 mm 处的 p 点的光强和中央点的光强之比。<br>（2）若照明两小孔的光源为一直径为 2 mm 的圆形光源，能观察到干涉现象时两小孔的最大距离是多少？</div>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>该点对应的相位差
+      <div class="eq">δ = 2π·d·y/(λD) = 2π × 0.4×10<sup>−3</sup> × 0.1×10<sup>−3</sup> / (640×10<sup>−9</sup> × 0.5) = 0.25π</div>
+    </div>
+    <div class="step"><b class="n">2</b>双缝干涉光强分布 I = 4I<sub>1</sub>cos²(δ/2)，中央 I<sub>0</sub> = 4I<sub>1</sub>
+      <div class="eq">I<sub>p</sub>/I<sub>0</sub> = cos²(0.125π) = cos²22.5° ≈ <b>0.854</b></div>
+    </div>
+    <p style="margin-top:14px"><b>（2）</b></p>
+    <div class="step"><b class="n">3</b>空间相干要求光源对双缝的张角不超过 λ/a，即
+      <div class="eq">d<sub>max</sub> = λ·l/a = 640×10<sup>−9</sup>·l / 2×10<sup>−3</sup> = 3.2×10<sup>−4</sup>·l</div>
+    </div>
+    <div class="res">
+      I<sub>p</sub>/I<sub>0</sub> ≈ <b>0.854</b>（即 85.4%）。<br>
+      第（2）问<b>题面缺"光源到双缝的距离 l"</b>，无法给唯一数值。通式 <b>d<sub>max</sub> = λl/a</b>；若按 l = D = 0.5 m 代入，得 d<sub>max</sub> ≈ 0.16 mm。
+    </div>
+    <div class="warn">
+      <b>这题请回原卷核对</b>：若答案册给出具体数字，说明原题还给了 l（或"光源紧贴双缝"之类的条件），你补给我，我改。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== B ===== -->
+<h2 id="b">B · 两束平面波干涉<span class="cnt">2 题</span></h2>
+<div class="lead">这一类只考"波矢差 → 条纹间距"，一个公式通吃：<b>Δx = 2π/|Δk<sub>x</sub>|</b>。</div>
+
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2022-三-2</span><span class="ttl">两平面波分居 z 轴两侧，z 平面上条纹形状与间距</span><span class="hot">同 2010-1</span></div>
+  <div class="stem">如图所示，两相干平面光波，其一在 xz 平面沿与 z 轴夹角 θ<sub>1</sub> 方向传播，其二在 xz 平面沿与 z 轴夹角 θ<sub>2</sub> 方向传播，试求该二光波在 z 平面上的干涉条纹形状和条纹间距。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>两波矢（分居 z 轴两侧时 x 分量反号）
+      <div class="eq">k<sub>1</sub> = k(sin θ<sub>1</sub>, 0, cos θ<sub>1</sub>)，　k<sub>2</sub> = k(−sin θ<sub>2</sub>, 0, cos θ<sub>2</sub>)</div>
+    </div>
+    <div class="step"><b class="n">2</b>在 z = 0 平面上相位差只随 x 变
+      <div class="eq">Δφ = (k<sub>1x</sub> − k<sub>2x</sub>)·x = k(sin θ<sub>1</sub> + sin θ<sub>2</sub>)·x</div>
+    </div>
+    <div class="step"><b class="n">3</b>条纹间距
+      <div class="eqb">Δ<i>x</i> = <span class="frac"><span class="num">2π</span><span class="den">|Δ<i>k</i><sub>x</sub>|</span></span> = <span class="frac"><span class="num">λ</span><span class="den">sin<i>θ</i><sub>1</sub> + sin<i>θ</i><sub>2</sub></span></span></div>
+    </div>
+    <div class="res">
+      <b>形状</b>：一组<b>平行于 y 轴</b>（垂直于 xz 平面）的<b>等间距直条纹</b>；<br>
+      <b>间距</b>：Δx = λ/(sin θ<sub>1</sub> + sin θ<sub>2</sub>)（两波在 z 轴同侧时改为 λ/|sin θ<sub>1</sub> − sin θ<sub>2</sub>|）。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2024-二-3</span><span class="ttl">两相互垂直的光波，z = 0 平面上的条纹</span></div>
+  <div class="stem">如图所示，两相互垂直光波在 xz 平面传播，其一在 xz 平面沿与 z 轴夹角 θ<sub>1</sub> 方向传播，其二在 xz 平面沿与 z 轴夹角 θ<sub>2</sub> 方向传播，求该二光波在 z = 0 平面上的干涉条纹形状和条纹间距。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>先分清"垂直"指什么 —— 这是本题的陷阱，两种理解答案完全不同：</div>
+    <div class="step"><b class="n">2</b><b>情形一：两波振动方向相互垂直（正交偏振）</b> —— 不满足干涉条件（振动方向必须不垂直）。
+      <div class="eq">I = I<sub>1</sub> + I<sub>2</sub>　（无干涉项）</div>
+      <p style="margin:4px 0 0">此时屏上<b>没有条纹</b>，光强均匀分布。这是 851 常考的概念陷阱。</p>
+    </div>
+    <div class="step"><b class="n">3</b><b>情形二：两波振动方向平行</b>（都垂直于 xz 面，即 s 偏振）—— 正常干涉
+      <div class="eq">Δx = λ / (sin θ<sub>1</sub> + sin θ<sub>2</sub>)</div>
+      <p style="margin:4px 0 0">条纹为平行于 y 轴的直条纹，与上一题同形。</p>
+    </div>
+    <div class="res">
+      答题建议：<b>先写"振动方向垂直 ⇒ 不产生干涉条纹，I = I<sub>1</sub>+I<sub>2</sub>，屏上均匀照明"</b>，再补一句"若两波振动方向平行，则条纹间距为 λ/(sinθ<sub>1</sub>+sinθ<sub>2</sub>)"。两手都写，稳拿分。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== C ===== -->
+<h2 id="c">C · 劈尖等厚干涉<span class="cnt">1 题</span></h2>
+
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2018-二-2</span><span class="ttl">斜入射劈尖的条纹数；换成空气劈尖后是多少</span></div>
+  <div class="stem">如图所示的劈尖薄膜，右端厚度 h 为 0.05 mm，折射率为 1.5，波长为 707 nm 的光以 30° 角入射到上表面，求在这个面上产生的条纹数。若以两块玻璃片形成的空气尖劈代替，将产生多少个条纹？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>膜内折射角（空气 → 膜）
+      <div class="eq">sin θ<sub>t</sub> = sin30°/1.5 = 1/3　⇒　θ<sub>t</sub> = 19.47°，cos θ<sub>t</sub> = 0.9428</div>
+    </div>
+    <div class="step"><b class="n">2</b>斜入射的光程差是 <b>2n t cos θ<sub>t</sub></b>（不是 2nt！）
+      <div class="eqb">Δ = 2<i>n h</i> cos<i>θ</i><sub>t</sub> + <span class="frac"><span class="num">λ</span><span class="den">2</span></span></div>
+    </div>
+    <div class="step"><b class="n">3</b>条纹数 = 最大光程差对应的级数
+      <div class="eqb"><i>N</i> = <span class="frac"><span class="num">2<i>n h</i> cos<i>θ</i><sub>t</sub></span><span class="den">λ</span></span> = <span class="frac"><span class="num">2×1.5×0.05×10<sup>−3</sup>×0.9428</span><span class="den">707×10<sup>−9</sup></span></span> ≈ <b>200 条</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>换成空气劈尖（n = 1，同 30° 入射，cos θ<sub>t</sub> = cos30° = 0.866）
+      <div class="eq">N′ = 2 h cos30° / λ = 2×0.05×10<sup>−3</sup>×0.866 / 707×10<sup>−9</sup> ≈ <b>122 条</b></div>
+    </div>
+    <div class="res">玻璃膜劈尖 <b>200 条</b>；空气劈尖约 <b>122 条</b>（若按正入射则 N′ = 2h/λ ≈ 141 条）。</div>
+    <div class="warn">
+      <b>易错</b>：① 斜入射忘了 cos θ<sub>t</sub>；② 把 θ = 30° 直接当膜内角；③ 空气劈尖若也按 30° 斜入射，是 122 条而不是 141 条 —— 取决于题目是否保持同一入射角，两种都写更稳。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== D ===== -->
+<h2 id="d">D · F-P 干涉仪与干涉滤光片<span class="cnt">2 题</span></h2>
+
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2019-二-2</span><span class="ttl">由条纹错位求波长差；求分辨本领</span></div>
+  <div class="stem">某光源发出波长很接近的两单色光，平均波长为 600 nm，通过间隔 d = 10 mm、腔镜反射率为 0.98 的法布里–珀罗干涉仪观察时，看到波长为 λ<sub>1</sub> 的光所产生的干涉条纹正好在波长为 λ<sub>2</sub> 的光所产生干涉条纹的中间，试求：两单色光的波长差；在接近正入射时，此干涉仪的分辨本领？（取平均波长为 600 nm）</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>正入射时 2d = kλ，级次
+      <div class="eq">k = 2d/λ = 2×10×10<sup>−3</sup> / 600×10<sup>−9</sup> ≈ 3.33×10<sup>4</sup></div>
+    </div>
+    <div class="step"><b class="n">2</b>"λ<sub>1</sub> 的条纹在 λ<sub>2</sub> 两条纹中间" ⇒ 两波长对应的级次差 1/2
+      <div class="eqb">k·Δλ = <span class="frac"><span class="num">λ</span><span class="den">2</span></span>　⇒　Δλ = <span class="frac"><span class="num">λ</span><span class="den">2<i>k</i></span></span> = <span class="frac"><span class="num">600 nm</span><span class="den">2×3.33×10<sup>4</sup></span></span> ≈ <b>0.009 nm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>分辨本领 = 级次 × 精细度 F
+      <div class="eqb"><i>F</i> = <span class="frac"><span class="num">π√<i>R</i></span><span class="den">1 − <i>R</i></span></span> = <span class="frac"><span class="num">π√0.98</span><span class="den">1 − 0.98</span></span> ≈ 155.5</div>
+      <div class="eqb"><i>R</i><sub>p</sub> = <i>k</i>·<i>F</i> ≈ 3.33×10<sup>4</sup> × 155.5 ≈ <b>5.2×10<sup>6</sup></b></div>
+    </div>
+    <div class="res">波长差 Δλ ≈ <b>0.009 nm</b>；分辨本领 ≈ <b>5.2×10<sup>6</sup></b>（相当于能分辨 1.2×10<sup>−4</sup> nm）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2020-二-2</span><span class="ttl">干涉滤光片的中心波长、半宽度、斜入射透射波长</span></div>
+  <div class="stem">今有一干涉滤光片，其间隔层厚度为 2×10<sup>−4</sup> mm，折射率 n = 1.5，高反膜的反射率 R = 0.9，试求：光波垂直入射，滤光片在可见光区的中心波长及其透射带波长半宽度；当光波以 10° 角斜入射时，滤光片在可见光区的透射光波长。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>正入射中心波长（取 k = 1 落在可见区）
+      <div class="eq">2nd = 2×1.5×2×10<sup>−4</sup> mm = 6×10<sup>−4</sup> mm = 600 nm　⇒　λ<sub>0</sub> = <b>600 nm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>透射带半宽度
+      <div class="eqb">δλ = <span class="frac"><span class="num">λ<sub>0</sub>(1 − <i>R</i>)</span><span class="den"><i>k</i>π√<i>R</i></span></span> = <span class="frac"><span class="num">600 × 0.1</span><span class="den">π×0.949</span></span> ≈ <b>20 nm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>10° 斜入射：膜内角由折射定律
+      <div class="eq">sin θ<sub>t</sub> = sin10°/1.5 = 0.1158　⇒　θ<sub>t</sub> = 6.65°，cos θ<sub>t</sub> = 0.9933</div>
+      <div class="eq">λ′ = 2nd·cos θ<sub>t</sub> = 600 × 0.9933 ≈ <b>596 nm</b></div>
+    </div>
+    <div class="res">中心波长 <b>600 nm</b>，半宽度 ≈ <b>20 nm</b>；10° 斜入射时透射波长移到 <b>596 nm</b>（向短波方向移 4 nm）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<!-- ===== E ===== -->
+<h2 id="e">E · 光学薄膜<span class="cnt">1 题</span></h2>
+
+<div class="q" id="q010">
+  <div class="hd"><span class="tag">2021-二-3</span><span class="ttl">氟化镁增透膜的厚度、最小反射率、与未镀膜比较</span></div>
+  <div class="stem">在折射率 n = 1.6 的光学玻璃基底上镀氟化镁膜层 n = 1.38，要求对波长为 500 nm 的光在正入射时给出最小反射率，试求：镀膜材料氟化镁膜层厚度及相应的最小反射率；与没有镀膜时的反射率相比较，变化了多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>λ/4 膜厚
+      <div class="eq">d = λ/(4n<sub>f</sub>) = 500/(4×1.38) ≈ <b>90.6 nm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>λ/4 膜正入射反射率公式
+      <div class="eqb"><i>R</i> = <span class="frac bkt"><span class="num"><i>n</i><sub>0</sub><i>n</i><sub>g</sub> − <i>n</i><sub>f</sub><sup>2</sup></span><span class="den"><i>n</i><sub>0</sub><i>n</i><sub>g</sub> + <i>n</i><sub>f</sub><sup>2</sup></span></span><sup style="vertical-align:1.0em;font-size:.72em">2</sup>
+        = <span class="frac bkt"><span class="num">1×1.6 − 1.38<sup>2</sup></span><span class="den">1×1.6 + 1.38<sup>2</sup></span></span><sup style="vertical-align:1.0em;font-size:.72em">2</sup>
+        = <span class="frac bkt"><span class="num">−0.3044</span><span class="den">3.5044</span></span><sup style="vertical-align:1.0em;font-size:.72em">2</sup> ≈ <b>0.75%</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>未镀膜时
+      <div class="eq">R<sub>0</sub> = [(n<sub>g</sub>−n<sub>0</sub>)/(n<sub>g</sub>+n<sub>0</sub>)]² = (0.6/2.6)² ≈ <b>5.33%</b></div>
+    </div>
+    <div class="res">
+      膜厚 <b>90.6 nm</b>；最小反射率 <b>0.75%</b>；未镀膜 5.33% → <b>降低约 4.6 个百分点（相对下降 86%）</b>。
+    </div>
+    <div class="warn">
+      <b>本题的"坑"</b>：理想增透要求 n<sub>f</sub> = √n<sub>g</sub> = √1.6 = 1.265，而氟化镁是 1.38，<b>不满足</b> —— 所以反射率只能降到 0.75%，<b>不能降到 0</b>。答题时要写这句判断，比只算数值加分。
+    </div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div style="margin:40px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>批次说明</b>：本文件是计算题第 2 批（第二章，10 题）。已完成：第 1 章电磁理论（9 题）、第 2 章干涉（10 题）。后续：第三章 衍射 → 第四章 各向异性 → 第五章 感应双折射 → 应用光学四章。</p>
+  <p><b>已知局限</b>：① 全部结果为<b>教材推导</b>，未逐题比对机构答案册（你已说明那不是官方答案）；② <b>2023-二-2 第（2）问题面缺"光源到双缝距离"</b>，只能给通式，请回原卷核对；③ <b>2024-二-3</b>"相互垂直"有歧义，两种理解都给了答案；④ 本章题目的示意图为标准光路，已在题干文字中描述，未单独插图。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>
