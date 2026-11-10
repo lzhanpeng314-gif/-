@@ -148,6 +148,7 @@
 <div class="q" id="q001">
   <div class="hd"><span class="tag">2016-四-3</span><span class="ttl">薄透镜＋二次反射五角棱镜：像的位置与大小</span></div>
   <div class="stem">如图，一个由焦距为 100mm 的薄透镜和一个二次反射五角棱镜（介质折射率为 1.5，两个直角边长均为 60mm）构成的光学系统，在透镜前 150mm 处有一个 1mm 高的物体，试确定像的位置和大小。</div>
+    <figure><img src="figs/fig-auto-2016-四-3-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p63 插图（自动裁自真题 PDF）</figcaption></figure>
   <div class="ans">
     <figure style="margin:12px 0;text-align:center">
       <img src="figs/fig-851-p63-pentaprism.png" alt="2016-四-3 薄透镜＋五角棱镜光路图" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
@@ -179,6 +180,7 @@
 <div class="q" id="q002">
   <div class="hd"><span class="tag">2022-三-3</span><span class="ttl">同一结构的重复题（数据与 2016-四-3 完全相同）</span></div>
   <div class="stem">如图，一个由焦距为 100mm 的薄透镜和一个二次反射五角棱镜（介质折射率为 1.5，两个直角边长均为 60mm）构成的光学系统，在透镜前 150mm 处有一个 1mm 高的物体，试确定像的位置和大小。</div>
+    <figure><img src="figs/fig-auto-2022-三-3-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p64 插图（自动裁自真题 PDF）</figcaption></figure><figure><img src="figs/fig-auto-2022-三-3-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p64 插图（自动裁自真题 PDF）</figcaption></figure>
   <div class="ans">
     <figure style="margin:12px 0;text-align:center">
       <img src="figs/fig-851-p64-pentaprism.png" alt="2022-三-3 薄透镜＋五角棱镜光路图" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
@@ -202,6 +204,7 @@
 <div class="q" id="q003">
   <div class="hd"><span class="tag">2018-四-2</span><span class="ttl">棱镜挪到 100mm 处：像距随之变</span></div>
   <div class="stem">如图，一个由焦距为 100mm 的薄透镜和一个二次反射五角棱镜（介质折射率 1.5，两个直角边长均为 60mm）构成的光学系统，在透镜前 150mm 处有一个 2mm 高的物体，试确定像的位置和大小。</div>
+    <figure><img src="figs/fig-auto-2018-四-2-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p65 插图（自动裁自真题 PDF）</figcaption></figure>
   <div class="ans">
     <figure style="margin:12px 0;text-align:center">
       <img src="figs/fig-851-p65-pentaprism100.png" alt="2018-四-2 薄透镜＋五角棱镜（棱镜距 100mm）光路图" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
@@ -229,6 +232,7 @@
 <div class="q" id="q004">
   <div class="hd"><span class="tag">2021-四-3</span><span class="ttl">透镜＋45° 平面镜＋一次反射直角棱镜：像在哪、多大</span></div>
   <div class="stem">如图，焦距为 10cm 的薄透镜放在与水平方向成 45° 的平面镜前 5cm 处，在平面镜下方 10cm 处有一个一次反射等腰直角棱镜，棱镜材料折射率为 1.5，其通光孔径为 6cm。现有一个高为 2mm 的物体位于薄透镜前 15cm 处。求物体经过该系统成像后像的位置和大小，并在图中画出像。</div>
+    <figure><img src="figs/fig-auto-2021-四-3-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p66 插图（自动裁自真题 PDF）</figcaption></figure>
   <div class="ans">
     <figure style="margin:12px 0;text-align:center">
       <img src="figs/fig-851-p66-lens-mirror-prism.png" alt="2021-四-3 透镜＋45°平面镜＋直角棱镜光路图" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
@@ -385,6 +389,13 @@
                         border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
   #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
   #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回顶端 */
+  #totop{position:fixed;right:16px;bottom:72px;z-index:21;display:none;width:40px;height:40px;
+         border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
+         text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92;}
+  #totop.show{display:block;}
+  #totop:hover{opacity:1;}
+  @media print{ #totop{display:none;} }
   /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
   nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
                border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
@@ -526,6 +537,18 @@
     if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
     if (e.key === 'ArrowRight') next();
   });
+})();
+</script>
+<script>
+/* 返回顶端 */
+(function(){
+  if (document.getElementById('totop')) return;
+  var b = document.createElement('button');
+  b.id = 'totop'; b.title = '返回顶端'; b.textContent = '\u2191';
+  document.body.appendChild(b);
+  function upd(){ if (window.scrollY > 400) b.classList.add('show'); else b.classList.remove('show'); }
+  window.addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 })();
 </script>
 <script>/* SWREG */

@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 计算题 · 早年真题 Part 1（第 1–28 页）</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  .check{background:#eef6ff;border-left:3px solid #2563eb;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+</style>
+<meta name="theme-color" content="#8c4a2f">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>851 计算题 · 早年真题 2009–2015</h1>
+  <div class="sub">按考纲十章重排 · 72 题 · 已补原卷插图 · 点上方章节可跳转</div>
+  <div class="lg">标注：<b>【真题】</b> 题面照录（原卷原文）　<b>【自算】</b> 解答由我推导　<b>【待核】</b> 题面/约定拿不准</div>
+</header>
+
+<nav>
+  <a id="idxlink" href="index.html">← 总目录</a><a id="searchlink" href="搜索.html">搜索</a>
+  <a href="#ch1">电磁</a>
+  <a href="#ch2">干涉</a>
+  <a href="#ch3">衍射</a>
+  <a href="#ch4">各向异性</a>
+  <a href="#ch5">感应双折射</a>
+  <a href="#ch6">几何</a>
+  <a href="#ch7">理想系统</a>
+  <a href="#ch8">光路</a>
+  <a href="#ch9">仪器</a>
+</nav>
+<h2 id="ch1">第一章 · 光的电磁理论基础<span class="cnt">10 题</span></h2>
+<div class="q" id="q106">
+  <div class="hd"><span class="tag">2009-1</span><span class="ttl">45° 振动的光 30° 入射平行平板：上表面反射率与上下表面反射光的振动方向</span></div>
+  <div class="stem">一平面光波以 30° 角由空气入射到折射率为 1.52 的平行平板上，其振动平面与入射面的夹角为 45°，试求该平板上表面的反射率和平板上、下表面反射光的振动方向。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>折射角：sin θ<sub>2</sub> = sin30°/1.52 = 0.329 ⇒ θ<sub>2</sub> = 19.2°，θ<sub>1</sub>+θ<sub>2</sub> = 49.2°，θ<sub>1</sub>−θ<sub>2</sub> = 10.8°
+    </div>
+    <div class="step"><b class="n">2</b>菲涅尔系数（空气→玻璃）
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin10.8°</span><span class="den">sin49.2°</span></span> = −0.2474，　<i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan10.8°</span><span class="den">tan49.2°</span></span> = +0.1646</div>
+      <div class="eqb"><i>R</i><sub>s</sub> = 6.12%，　<i>R</i><sub>p</sub> = 2.71%</div>
+    </div>
+    <div class="step"><b class="n">3</b>振动方向与入射面成 45° ⇒ 两分量振幅相等（<i>A</i><sub>p</sub> = <i>A</i><sub>s</sub>），故上表面反射率
+      <div class="eqb"><i>R</i> = <span class="frac"><span class="num"><i>R</i><sub>p</sub>+<i>R</i><sub>s</sub></span><span class="den">2</span></span> = <span class="frac"><span class="num">0.0271+0.0612</span><span class="den">2</span></span> = <b>4.4%</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>振动方向：反射光方位角 α′（相对入射面）
+      <div class="eqb">tan α′ = <span class="frac"><span class="num">|<i>r</i><sub>s</sub>|</span><span class="den">|<i>r</i><sub>p</sub>|</span></span> tan45° = <span class="frac"><span class="num">0.2474</span><span class="den">0.1646</span></span> = 1.503 ⇒ α′ = <b>56.4°</b></div>
+      <p style="margin:4px 0 0"><i>r</i><sub>s</sub> &lt; 0、<i>r</i><sub>p</sub> &gt; 0 ⇒ 两分量有 π 相位差，振动面<u>转到入射面的另一侧</u>（相对入射光发生"镜像翻转"）。</p>
+    </div>
+    <div class="step"><b class="n">5</b>下表面（玻璃→空气，入射角 19.2°）是同一对角度反过来：|<i>r</i><sub>s</sub>′| = 0.2474、|<i>r</i><sub>p</sub>′| = 0.1646，但符号反过来（<i>r</i><sub>s</sub>′ &gt; 0、<i>r</i><sub>p</sub>′ &lt; 0）。透射不改变两分量相位差，故
+      <div class="eqb">tan α″ = <span class="frac"><span class="num"><i>t</i><sub>s</sub>|<i>r</i><sub>s</sub>′|</span><span class="den"><i>t</i><sub>p</sub>|<i>r</i><sub>p</sub>′|</span></span> = <span class="frac"><span class="num">0.752</span><span class="den">0.766</span></span>×1.503 = 1.476 ⇒ α″ = <b>55.9°</b>，同样翻到另一侧</div>
+    </div>
+    <div class="res">上表面反射率 <b><i>R</i> ≈ 4.4%</b>（<i>R</i><sub>s</sub> = 6.1%、<i>R</i><sub>p</sub> = 2.7%）；上表面反射光振动方向与入射面成 <b>≈56°</b>，下表面反射光与之<b>几乎相同（≈56°）</b>，两者都在入射面的同一侧、即与入射光振动面（45°）分处入射面两侧。</div>
+    <div class="check"><b>自检</b>：α′ = 56.4° 与 45° 的偏离方向由 <i>r</i><sub>s</sub>/<i>r</i><sub>p</sub> 的符号决定；两面反射系数绝对值相等（角度互补），所以只差 <i>t</i><sub>s</sub>/<i>t</i><sub>p</sub> = 0.98 这一点点，方位角差不到 1°。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q107">
+  <div class="hd"><span class="tag">2010-2</span><span class="ttl">自然光 30° 入射 n=1.5 玻璃：反射率与反射光偏振度</span></div>
+  <div class="stem">一束自然光从空气入射到折射率为 1.5 的玻璃上，入射角 θ<sub>1</sub> = 30°，求反射率以及反射光的偏振度。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>折射角：sin θ<sub>2</sub> = sin30°/1.5 = 0.3333 ⇒ θ<sub>2</sub> = 19.47°，θ<sub>1</sub>−θ<sub>2</sub> = 10.53°，θ<sub>1</sub>+θ<sub>2</sub> = 49.47°
+    </div>
+    <div class="step"><b class="n">2</b>菲涅尔系数
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin10.53°</span><span class="den">sin49.47°</span></span> = −0.2404 ⇒ <i>R</i><sub>s</sub> = 5.78%</div>
+      <div class="eqb"><i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan10.53°</span><span class="den">tan49.47°</span></span> = 0.1589 ⇒ <i>R</i><sub>p</sub> = 2.52%</div>
+    </div>
+    <div class="step"><b class="n">3</b>自然光两分量等强
+      <div class="eqb"><i>R</i> = <span class="frac"><span class="num"><i>R</i><sub>s</sub>+<i>R</i><sub>p</sub></span><span class="den">2</span></span> = <span class="frac"><span class="num">0.0578+0.0252</span><span class="den">2</span></span> = <b>4.2%</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>反射光偏振度（反射光里 s、p 强度就是 R<sub>s</sub>I<sub>0</sub>/2、R<sub>p</sub>I<sub>0</sub>/2）
+      <div class="eqb"><i>P</i> = <span class="frac"><span class="num"><i>R</i><sub>s</sub>−<i>R</i><sub>p</sub></span><span class="den"><i>R</i><sub>s</sub>+<i>R</i><sub>p</sub></span></span> = <span class="frac"><span class="num">0.0578−0.0252</span><span class="den">0.0578+0.0252</span></span> = <b>39%</b></div>
+    </div>
+    <div class="res">反射率 <b><i>R</i> ≈ 4.2%</b>；反射光偏振度 <b><i>P</i> ≈ 39%</b>，是振动方向以 <b>⊥入射面的 s 分量为主</b>的部分偏振光（30° 远未到布儒斯特角 arctan1.5 = 56.3°，所以 P 只有 39%）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q104">
+  <div class="hd"><span class="tag">2011-1</span><span class="ttl">红宝石表面无反射损失：对入射光的要求与入射角</span></div>
+  <div class="stem">若要使线偏振光在红宝石晶体（n = 1.76）表面没有反射损失，对入射光有何要求？入射角应为多大？</div>
+    <figure><img src="figs/emb-2011-1-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p2 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>介质界面反射率为零的唯一途径（空气→介质）是 <b>布儒斯特角入射</b>，此时反射光只留 s 分量、p 分量反射率为 0。所以要求：线偏振光的<b>振动方向在入射面内</b>（纯 p 偏振），且<b>入射角等于布儒斯特角</b>。
+    </div>
+    <div class="step"><b class="n">2</b>布儒斯特角（n<sub>1</sub> = 1，n<sub>2</sub> = 1.76）
+      <div class="eqb">tan θ<sub>B</sub> = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>n</i><sub>1</sub></span></span> = 1.76 ⇒ θ<sub>B</sub> = <b>60.4°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>此时的折射角（反射光⊥折射光的必然结果）
+      <div class="eqb">θ<sub>2</sub> = 90° − θ<sub>B</sub> = <b>29.6°</b></div>
+    </div>
+    <div class="res">入射光须为<b>振动方向平行于入射面的线偏振光（p 分量）</b>，入射角取 <b>θ<sub>B</sub> = arctan1.76 ≈ 60.4°</b>（折射角 29.6°）。此时 R<sub>p</sub> = 0，反射损失为零。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q102">
+  <div class="hd"><span class="tag">2011-10</span><span class="ttl">给入射方向与界面法线，求反射、折射光线的方向矢量</span></div>
+  <div class="stem">沿 <b>A</b><sub>0</sub> = <b>i</b> 方向的光线，从 n = 1 的介质入射到 n′ = √3 的介质中，已知界面的法线方向为 <b>n</b><sub>0</sub> = −½<b>i</b> + (√3/2)<b>j</b>，求反射和折射光线的方向矢量。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>入射角：cos θ<sub>1</sub> = |<b>A</b><sub>0</sub>·<b>n</b><sub>0</sub>| = |−½| = 0.5 ⇒ θ<sub>1</sub> = 60°
+    </div>
+    <div class="step"><b class="n">2</b>反射定律（矢量式）：<b>A</b>′ = <b>A</b><sub>0</sub> − 2(<b>A</b><sub>0</sub>·<b>n</b><sub>0</sub>)<b>n</b><sub>0</sub>，代入 <b>A</b><sub>0</sub>·<b>n</b><sub>0</sub> = −½
+      <div class="eqb"><b>A</b>′ = <b>i</b> + (−½<b>i</b> + √3/2<b>j</b>) = <b>½i + (√3/2)j</b></div>
+      <p style="margin:4px 0 0">|A′| = √(¼ + ¾) = 1 ✓，且与 <b>A</b><sub>0</sub> 关于界面（垂直于 <b>n</b><sub>0</sub>）对称。</p>
+    </div>
+    <div class="step"><b class="n">3</b>折射定律：n sin θ<sub>1</sub> = n′ sin θ<sub>2</sub>
+      <div class="eqb">1 × <span class="frac"><span class="num">√3</span><span class="den">2</span></span> = √3 · sin θ<sub>2</sub> ⇒ sin θ<sub>2</sub> = ½ ⇒ θ<sub>2</sub> = 30°</div>
+    </div>
+    <div class="step"><b class="n">4</b>在入射面（xoy 面）内取与界面平行的单位矢量 <b>t</b> = (√3/2)<b>i</b> + ½<b>j</b>（<b>t</b>⊥<b>n</b><sub>0</sub>，切向分量方向），令指向介质 2 的法线为 −<b>n</b><sub>0</sub>，则
+      <div class="eqb"><b>A</b>″ = cos30°·(−<b>n</b><sub>0</sub>) + sin30°·<b>t</b> = (0.433,−0.750) + (0.433,0.250)</div>
+      <div class="eqb"><b>A</b>″ = <b>(√3/2)i − ½j</b>（|A″| = 1 ✓）</div>
+    </div>
+    <div class="res">反射光线方向 <b>½<b>i</b> + (√3/2)<b>j</b></b>；折射光线方向 <b>(√3/2)<b>i</b> − ½<b>j</b></b>（θ<sub>1</sub> = 60°，θ<sub>2</sub> = 30°，全在 xoy 面内）。</div>
+    <div class="check"><b>自检</b>：两矢量都是单位矢量；折射光线与 −<b>n</b><sub>0</sub> 的夹角 = 30° = θ<sub>2</sub> ✓；切向分量之比 = sin60°/sin30°... 应比较 n·sinθ：1×sin60° = √3/2 = √3×sin30° ✓。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q103">
+  <div class="hd"><span class="tag">2011-11</span><span class="ttl">双平面镜：入射平行一镜、出射平行另一镜，求夹角</span></div>
+  <div class="stem">有一双平面镜系统，光线与其中的一个镜面平行入射，经两次反射后，出射光线与另一镜面平行，问两平面镜的夹角为多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>双平面镜的基本结论：入射光线经两镜依次反射后，<b>偏向角</b> δ = 2α（α 为两镜夹角，取主截面内计算），且 δ 与入射角无关。
+    </div>
+    <div class="step"><b class="n">2</b>题设"入射光线 ∥ 镜 1、出射光线 ∥ 镜 2"。出射方向相对入射方向转过的角度，正是两镜方向之间的夹角 —— 但它是 <b>180° − α</b>（出射光被"折回"到另一侧），不是 α。
+      <div class="eqb">δ = 2α = 180° − α</div>
+    </div>
+    <div class="step"><b class="n">3</b>解出
+      <div class="eqb">3α = 180° ⇒ α = <b>60°</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>验算（α = 60°，镜 1 取 x 轴、镜 2 与它成 60°）：入射 (1,0) 先在镜 2 上反射得 (cos120°, sin120°)，再在镜 1 上反射得 (cos120°, −sin120°) ∝ −(½, √3/2)，恰与镜 2 的方向 (½, √3/2) 平行 ✓
+    </div>
+    <div class="res">两平面镜夹角 <b>α = 60°</b>（此时偏向角 δ = 120°，出射光与入射光反向偏折 120°）。</div>
+    <div class="warn"><b>易错</b>：直接写"δ = 2α 且 δ = α ⇒ α = 0"是漏了方向。α = 0 是两镜重合的退化情形，不算解；本题按"光线先被与它成 α 的那面镜反射"取几何，唯一非退化解是 60°。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q105">
+  <div class="hd"><span class="tag">2012-2</span><span class="ttl">红宝石→空气布儒斯特角入射：反射率、透射率、两边偏振度</span></div>
+  <div class="stem">一束自然光由红宝石（n = 1.76）以布儒斯特角斜入射到空气中，试求界面反射率、透射率及反射光、透射光的偏振度。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>注意方向是<b>光密→光疏</b>（1.76 → 1）：布儒斯特角
+      <div class="eqb">tan θ<sub>B</sub> = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>n</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">1.76</span></span> = 0.568 ⇒ θ<sub>B</sub> = <b>29.6°</b>，θ<sub>2</sub> = 60.4°</div>
+      <p style="margin:4px 0 0">（临界角 arcsin(1/1.76) = 34.6° &gt; 29.6°，所以不发生全反射，布儒斯特角仍成立。）</p>
+    </div>
+    <div class="step"><b class="n">2</b>布儒斯特角下 R<sub>p</sub> = 0；s 分量
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin(θ<sub>1</sub>−θ<sub>2</sub>)</span><span class="den">sin(θ<sub>1</sub>+θ<sub>2</sub>)</span></span> = −<span class="frac"><span class="num">sin(−30.8°)</span><span class="den">sin90°</span></span> = 0.512 ⇒ <i>R</i><sub>s</sub> = <b>26.2%</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>自然光两个分量各占一半
+      <div class="eqb"><i>R</i> = <span class="frac"><span class="num"><i>R</i><sub>s</sub>+<i>R</i><sub>p</sub></span><span class="den">2</span></span> = <span class="frac"><span class="num">0.262+0</span><span class="den">2</span></span> = <b>13.1%</b>，　<i>T</i> = 1 − <i>R</i> = <b>86.9%</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>反射光偏振度：只有 s 分量被反射 ⇒ <b>P = 100%</b>，完全线偏振，振动面⊥入射面
+    </div>
+    <div class="step"><b class="n">5</b>透射光：两分量透射率 <i>T</i><sub>p</sub> = 1，<i>T</i><sub>s</sub> = 1 − 0.262 = 0.738
+      <div class="eqb"><i>P</i> = <span class="frac"><span class="num"><i>T</i><sub>p</sub>−<i>T</i><sub>s</sub></span><span class="den"><i>T</i><sub>p</sub>+<i>T</i><sub>s</sub></span></span> = <span class="frac"><span class="num">1−0.738</span><span class="den">1+0.738</span></span> = <b>15.1%</b></div>
+    </div>
+    <div class="res">反射率 <b>13.1%</b>（其中 <i>R</i><sub>s</sub> = 26.2%、<i>R</i><sub>p</sub> = 0）；透射率 <b>86.9%</b>；反射光偏振度 <b>100%</b>（纯 s，⊥入射面），透射光偏振度 <b>15.1%</b>（以 p 分量为主的部分偏振光）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q110">
+  <div class="hd"><span class="tag">2013-2</span><span class="ttl">玻璃→空气：正入射反射率，30° 入射的反射率与偏振度</span></div>
+  <div class="stem">一束自然光从玻璃垂直入射到空气，求玻璃表面的反射率。若光束以 30° 角入射，求此时的反射率和反射光的偏振度。（已知玻璃的折射率为 1.5）</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>正入射（θ<sub>1</sub> = 0，两分量简并）
+      <div class="eqb"><i>R</i> = <span class="bkt"><span class="frac"><span class="num"><i>n</i><sub>2</sub>−<i>n</i><sub>1</sub></span><span class="den"><i>n</i><sub>2</sub>+<i>n</i><sub>1</sub></span></span></span><sup>2</sup> = <span class="bkt"><span class="frac"><span class="num">1−1.5</span><span class="den">1+1.5</span></span></span><sup>2</sup> = (−0.2)² = <b>4%</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>30° 斜入射（玻璃→空气）：sin θ<sub>2</sub> = 1.5×sin30° = 0.75 ⇒ θ<sub>2</sub> = 48.59°（临界角 41.8° 未达，无全反射）
+    </div>
+    <div class="step"><b class="n">3</b>菲涅尔系数
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin(30°−48.59°)</span><span class="den">sin(30°+48.59°)</span></span> = +0.3252 ⇒ <i>R</i><sub>s</sub> = 10.58%</div>
+      <div class="eqb"><i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan(−18.59°)</span><span class="den">tan78.59°</span></span> = −0.0679 ⇒ <i>R</i><sub>p</sub> = 0.46%</div>
+    </div>
+    <div class="step"><b class="n">4</b>自然光
+      <div class="eqb"><i>R</i> = <span class="frac"><span class="num"><i>R</i><sub>s</sub>+<i>R</i><sub>p</sub></span><span class="den">2</span></span> = <b>5.5%</b>，　<i>P</i> = <span class="frac"><span class="num"><i>R</i><sub>s</sub>−<i>R</i><sub>p</sub></span><span class="den"><i>R</i><sub>s</sub>+<i>R</i><sub>p</sub></span></span> = <span class="frac"><span class="num">0.1058−0.0046</span><span class="den">0.1058+0.0046</span></span> = <b>91.7%</b></div>
+    </div>
+    <div class="res">正入射反射率 <b>4%</b>；30° 斜入射时反射率 <b>5.5%</b>，反射光偏振度 <b>≈92%</b>（几乎是纯 s 偏振，⊥入射面）——因为光密→光疏时布儒斯特角只有 arctan(1/1.5) = 33.7°，30° 已经逼近它。</div>
+    <div class="check"><b>对比</b>：同是 30° 入射，空气→玻璃（2010-2）<i>P</i> 只有 39%，玻璃→空气却达 92%。布儒斯特角小，是因为 arctan(n<sub>疏</sub>/n<sub>密</sub>) = 33.7° &lt; 56.3°。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q109">
+  <div class="hd"><span class="tag">2014-2</span><span class="ttl">45° 振动面偏振光 30° 入射：反射光振动方向与反射强度</span></div>
+  <div class="stem">现有一振动平面与入射面成 45° 的平面偏振光，入射到两种透明介质的分界面上，若入射角 θ<sub>1</sub> = 30°，n<sub>1</sub> = 1，n<sub>2</sub> = 1.46，求<br>（1）反射光的光矢量与入射面的夹角；（2）反射光的强度。</div>
+    <figure><img src="figs/emb-2014-2-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p5 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>折射角：sin θ<sub>2</sub> = sin30°/1.46 = 0.3425 ⇒ θ<sub>2</sub> = 20.03°，θ<sub>1</sub>−θ<sub>2</sub> = 9.97°，θ<sub>1</sub>+θ<sub>2</sub> = 50.03°
+    </div>
+    <div class="step"><b class="n">2</b>菲涅尔系数
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin9.97°</span><span class="den">sin50.03°</span></span> = −0.2260，　<i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan9.97°</span><span class="den">tan50.03°</span></span> = +0.1474</div>
+    </div>
+    <div class="step"><b class="n">3</b>入射振动面与入射面成 45° ⇒ <i>A</i><sub>p</sub> = <i>A</i><sub>s</sub>。反射光的方位角 α′（相对入射面）
+      <div class="eqb">tan α′ = <span class="frac"><span class="num"><i>r</i><sub>s</sub><i>A</i><sub>s</sub></span><span class="den"><i>r</i><sub>p</sub><i>A</i><sub>p</sub></span></span> = <span class="frac"><span class="num"><i>r</i><sub>s</sub></span><span class="den"><i>r</i><sub>p</sub></span></span> = −<span class="frac"><span class="num">0.2260</span><span class="den">0.1474</span></span> ⇒ |tan α′| = 1.533 ⇒ α′ = <b>56.9°</b></div>
+      <p style="margin:4px 0 0">负号表示 <i>r</i><sub>s</sub> 与 <i>r</i><sub>p</sub> 反相（差 π）⇒ 反射光振动面翻到入射面的<b>另一侧</b>。</p>
+    </div>
+    <div class="step"><b class="n">4</b>反射光强度（入射强度 <i>I</i><sub>0</sub>，两分量各占一半）
+      <div class="eqb"><i>I</i><sub>r</sub> = (<i>R</i><sub>p</sub> + <i>R</i><sub>s</sub>)·<span class="frac"><span class="num"><i>I</i><sub>0</sub></span><span class="den">2</span></span> = <span class="frac"><span class="num">0.0217+0.0511</span><span class="den">2</span></span><i>I</i><sub>0</sub> = <b>0.0364 <i>I</i><sub>0</sub></b></div>
+      <div class="eqb">即总反射率 <i>R</i> = <span class="frac"><span class="num"><i>R</i><sub>s</sub>+<i>R</i><sub>p</sub></span><span class="den">2</span></span> = <b>3.6%</b></div>
+    </div>
+    <div class="res">（1）反射光光矢量与入射面成 <b>56.9°</b>，在入射面的<b>另一侧</b>（相对入射光的 45° 翻转）；（2）反射光强度 <b><i>I</i><sub>r</sub> ≈ 0.036 <i>I</i><sub>0</sub></b>（<i>R</i> = 3.6%，其中 <i>R</i><sub>s</sub> = 5.1%、<i>R</i><sub>p</sub> = 2.2%）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q108">
+  <div class="hd"><span class="tag">2015-2</span><span class="ttl">左旋圆偏振光 50° 入射空气—玻璃：反射光与透射光的偏振态</span></div>
+  <div class="stem">一左旋圆偏振光以 50° 角入射到空气—玻璃界面上，如图所示，试分析反射光和透射光的偏振状态？（玻璃的折射率 n = 1.52）</div>
+    <figure><img src="figs/fig-auto-2015-2-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p4 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>空气→玻璃，θ<sub>1</sub> = 50°：sin θ<sub>2</sub> = sin50°/1.52 = 0.504 ⇒ θ<sub>2</sub> = 30.3°；θ<sub>1</sub>+θ<sub>2</sub> = 80.3° &lt; 90°（未过布儒斯特角 56.7°）
+    </div>
+    <div class="step"><b class="n">2</b>反射系数
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin19.7°</span><span class="den">sin80.3°</span></span> = −0.343，　<i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan19.7°</span><span class="den">tan80.3°</span></span> = +0.0616</div>
+      <p style="margin:4px 0 0">两者不等且<b>符号相反</b>（相差 π）：入射时 p、s 等幅、相差 90°，反射后幅度比变成 <b>|<i>r</i><sub>p</sub>/<i>r</i><sub>s</sub>| = 0.180</b>，相位差变成 90°+180°，故 <b>反射光为椭圆偏振光</b>，长短轴比 0.18（长轴接近 s 方向），且多出的 π 使<b>旋向反转</b>（左旋→右旋，相对其传播方向）。</p>
+    </div>
+    <div class="step"><b class="n">3</b>透射系数（均为正实数，不引入额外相位差）
+      <div class="eqb"><i>t</i><sub>p</sub> = <span class="frac"><span class="num">2cos50°</span><span class="den">1.52cos50°+cos30.3°</span></span> = 0.698，　<i>t</i><sub>s</sub> = <span class="frac"><span class="num">2cos50°</span><span class="den">cos50°+1.52cos30.3°</span></span> = 0.657</div>
+      <div class="eqb"><i>t</i><sub>s</sub>/<i>t</i><sub>p</sub> = 0.941 ⇒ <b>透射光仍是椭圆偏振光</b>，长短轴比 0.94（很接近圆），相位差仍是 90°，<b>旋向不变</b>（仍左旋）</div>
+    </div>
+    <div class="res"><b>反射光</b>：椭圆偏振光，长短轴比 ≈ 0.18（长轴近 s 方向），旋向反转；<b>透射光</b>：椭圆偏振光，长短轴比 ≈ 0.94（近圆），旋向不变。二者都<b>不再是圆偏振</b>，因为反射/透射对 p、s 两分量的衰减不同。</div>
+    <div class="warn"><b>【待核】两处</b>：① 题干写"50°"，但原 PDF 该题配图上标的是 30°（图上还有圆偏振的旋向小箭头），<b>角度以题干 50° 为准做的计算</b>，若实际是 30° 数值需重算；② "左旋/右旋"依"迎着光看"还是"沿传播方向看"约定不同，<b>旋向的具体标签请按教材约定核对</b>（幅度比、是否线/椭圆这两点是确定的）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q101">
+  <div class="hd"><span class="tag">2015-3</span><span class="ttl">由 t=0 时刻 z=0 面的相位分布反求波场表达式</span></div>
+  <div class="stem">设空气中一单色平面光波的频率为 ν = 10<sup>14</sup> Hz，电场强度的振幅大小为 1 V/m。t = 0 时刻，在 xoy 平面（z = 0）上的相位分布如图所示。等相位线与 x 轴垂直，φ = 0 的等相位线坐标为 x = −5 μm，φ 随 x 线性增加，x 每增加 4 μm 相位增加 2π。求该光波电场强度大小的表示式、空间频率及波矢方向。</div>
+    <figure><img src="figs/emb-2015-3-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p1 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>由频率定波长（真空中 c = 3×10<sup>8</sup> m/s）
+      <div class="eqb">λ = <span class="frac"><span class="num"><i>c</i></span><span class="den">ν</span></span> = <span class="frac"><span class="num">3×10<sup>8</sup></span><span class="den">10<sup>14</sup></span></span> = 3 μm，　|<i>k</i>| = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span> = 2.094×10<sup>6</sup> m<sup>−1</sup></div>
+    </div>
+    <div class="step"><b class="n">2</b>等相位线与 x 轴垂直 ⇒ 相位只随 x 变 ⇒ <i>k</i><sub>y</sub> = 0，波矢在 <b>xoz 面</b>内。x 每 4 μm 相位增 2π ⇒ 沿 x 的"空间周期"λ<sub>x</sub> = 4 μm
+      <div class="eqb"><i>f</i><sub>x</sub> = <span class="frac"><span class="num">1</span><span class="den">λ<sub>x</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">4 μm</span></span> = <b>0.25 μm<sup>−1</sup> = 2.5×10<sup>5</sup> m<sup>−1</sup></b></div>
+    </div>
+    <div class="step"><b class="n">3</b>波矢分量：|<i>k</i><sub>x</sub>| = 2π/λ<sub>x</sub> = 1.571×10<sup>6</sup> m<sup>−1</sup>，<i>k</i><sub>y</sub> = 0
+      <div class="eqb"><i>k</i><sub>z</sub> = ±√(<i>k</i>² − <i>k</i><sub>x</sub>²) = √(2.094² − 1.571²)×10<sup>6</sup> = 1.385×10<sup>6</sup> m<sup>−1</sup></div>
+      <p style="margin:4px 0 0">方向：cos α = |<i>k</i><sub>x</sub>|/|<i>k</i>| = 1.571/2.094 = λ/λ<sub>x</sub> = 3/4 ⇒ 与 <b>x 轴成 41.4°</b>。因相位随 <i>x</i> 增大而增大（相当于 e<sup>i(ωt−k·r)</sup> 中 −<i>k</i><sub>x</sub><i>x</i> &gt; 0）⇒ <b><i>k</i><sub>x</sub> &lt; 0</b>，即与 +x 轴成 <b>138.6°</b>。</p>
+    </div>
+    <div class="step"><b class="n">4</b>初相：t = 0、z = 0、x = −5 μm 处 φ = 0
+      <div class="eqb">φ<sub>0</sub> = <i>k</i><sub>x</sub>·(−5 μm) + φ<sub>0</sub> = 0 ⇒ 1.571×10<sup>6</sup>×(−5×10<sup>−6</sup>) = −2.5π ⇒ φ<sub>0</sub> = <span class="frac"><span class="num">π</span><span class="den">2</span></span></div>
+    </div>
+    <div class="step"><b class="n">5</b>取 <i>k</i><sub>z</sub> &gt; 0（向 +z 传播），波矢 <b>k</b> = (−1.571, 0, 1.385)×10<sup>6</sup> m<sup>−1</sup>，于是
+      <div class="eqb"><i>E</i> = 1·cos(2π×10<sup>14</sup><i>t</i> + 1.571×10<sup>6</sup><i>x</i> − 1.385×10<sup>6</sup><i>z</i> + π/2)　V/m</div>
+    </div>
+    <div class="res">λ = 3 μm；空间频率 <b><i>f</i><sub>x</sub> = 2.5×10<sup>5</sup> m<sup>−1</sup></b>；波矢在 xoz 面内，与 +x 轴成 <b>138.6°</b>（与 −x 轴成 41.4°，偏向 +z）；<i>E</i> 见上式（振幅 1 V/m）。</div>
+    <div class="warn"><b>两个约定要小心</b>：① <i>k</i><sub>z</sub> 的正负在 z = 0 这一张图上<u>定不出来</u>，取 +z 是"波朝观察者来"的习惯；② 相位"随 x 增大而增大"对应传播方向指向 −x，这是 e<sup>i(ωt−k·r)</sup> 约定下的结论，若教材用 e<sup>i(k·r−ωt)</sup>，则改为 +x 一侧。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<h2 id="ch2">第二章 · 光的干涉<span class="cnt">12 题</span></h2>
+<div class="q" id="q206">
+  <div class="hd"><span class="tag">2009-2</span><span class="ttl">两束平行光与屏法线夹角 θ<sub>O</sub>、θ<sub>R</sub>：图样形状与周期</span></div>
+  <div class="stem">如右图所示，两束相干平行光与观察屏法线的夹角分别为 θ<sub>O</sub> 和 θ<sub>R</sub>，试推导确定 z = 0 处观察屏上干涉图样的形状，并求出干涉图样的周期。</div>
+    <figure><img src="figs/fig-auto-2009-2-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p11 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>屏为 z = 0，法线为 z 轴。两波矢在入射面（xz 面）内、位于法线<b>两侧</b>
+      <div class="eqb"><b>k</b><sub>O</sub> = <i>k</i>(sinθ<sub>O</sub>, 0, cosθ<sub>O</sub>)，　<b>k</b><sub>R</sub> = <i>k</i>(−sinθ<sub>R</sub>, 0, cosθ<sub>R</sub>)</div>
+    </div>
+    <div class="step"><b class="n">2</b>
+      <div class="eqb">Δφ = (<b>k</b><sub>R</sub>−<b>k</b><sub>O</sub>)·<b>r</b> = −<i>k x</i>(sinθ<sub>O</sub>+sinθ<sub>R</sub>)</div>
+    </div>
+    <div class="step"><b class="n">3</b>Δφ 与 y 无关 ⇒ 条纹为<b>平行直条纹</b>，其走向垂直于两波矢所在平面（在图上是"垂直纸面"的竖条纹）
+      <div class="eqb">Λ = <span class="frac"><span class="num">2π</span><span class="den"><i>k</i>(sinθ<sub>O</sub>+sinθ<sub>R</sub>)</span></span> = <span class="frac"><span class="num">λ</span><span class="den">sinθ<sub>O</sub>+sinθ<sub>R</sub></span></span></div>
+    </div>
+    <div class="res">图样形状：<b>等间距的平行直条纹</b>（垂直于两光束入射面）；周期 <b>Λ = λ/(sinθ<sub>O</sub>+sinθ<sub>R</sub>)</b>。若两束在法线同侧则为 λ/|sinθ<sub>O</sub>−sinθ<sub>R</sub>|；θ<sub>O</sub> = θ<sub>R</sub> = θ 时 Λ = λ/(2sinθ)。</div>
+    <div class="check"><b>这就是全息图的记录公式</b>：物光与参考光的夹角越大，干涉条纹（光栅）越密。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q209">
+  <div class="hd"><span class="tag">2009-3</span><span class="ttl">双光束（片 1 上下表面反射）干涉：相干长度限制下求片 2 的厚度</span></div>
+  <div class="stem">右图为一双光束干涉实验示意图。一束波长为 λ = 10 μm、相干长度 l<sub>c</sub> = 5λ 的细光束，以 60° 角入射到厚度为 h = 10 μm、折射率为 n<sub>1</sub> = √3 的介质片 1 上，由其下表面反射的光束经厚度为 d、折射率为 n<sub>2</sub> = 1.5 的介质片 2 后，被透镜聚焦在 P<sub>0</sub> 点，与介质片 1 上表面的反射光干涉。若 P<sub>0</sub> 点恰为亮点，求介质片 2 的厚度 d 为多大？</div>
+    <figure><img src="figs/emb-2009-3-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p13 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>片 1 内的折射角：sin θ<sub>2</sub> = sin60°/√3 = 0.5 ⇒ θ<sub>2</sub> = 30°；片 2 与出射光束垂直（图上如此），光在片 2 中<b>正入射</b>
+    </div>
+    <div class="step"><b class="n">2</b>两束光的光程差 = 片 1 内往返的光程差 + 片 2 多出的光程
+      <div class="eqb">Δ = 2<i>n</i><sub>1</sub><i>h</i> cosθ<sub>2</sub> + (<i>n</i><sub>2</sub> − 1)<i>d</i> = 2√3×10×<span class="frac"><span class="num">√3</span><span class="den">2</span></span> + 0.5<i>d</i> = <b>30 + 0.5<i>d</i></b>（μm）</div>
+    </div>
+    <div class="step"><b class="n">3</b>P<sub>0</sub> 为亮点：Δ = kλ = 10k（μm）
+      <div class="eqb">30 + 0.5<i>d</i> = 10<i>k</i> ⇒ <i>d</i> = 20(<i>k</i> − 3) μm</div>
+    </div>
+    <div class="step"><b class="n">4</b>可干涉的前提（本题的关键）：光程差 ≤ 相干长度 l<sub>c</sub> = 5λ = 50 μm
+      <div class="eqb">30 + 0.5<i>d</i> ≤ 50 ⇒ <i>d</i> ≤ 40 μm ⇒ 只能取 <i>k</i> = 4，<i>d</i> = <b>20 μm</b></div>
+    </div>
+    <div class="res">介质片 2 的厚度 <b><i>d</i> = 20 μm</b>（此时 Δ = 40 μm = 4λ，仍在相干长度 50 μm 之内；<i>k</i> = 3 对应 <i>d</i> = 0，无片 2，不算）。</div>
+    <div class="warn"><b>【待核】两处</b>：① 若把上表面反射的<b>半波损失</b>算进去（空气→n<sub>1</sub> 反射有 π 相位跃变，下表面 n<sub>1</sub>→空气 没有），则 Δ = 35 + 0.5<i>d</i>，亮点条件给 <i>d</i> = 10 μm 或 30 μm；② 若"≤相干长度"取等号，<i>d</i> = 40 μm（Δ = 50 μm）也勉强成立。本题按"不计半波损失、取第一个满足值"给 <b>20 μm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q207">
+  <div class="hd"><span class="tag">2010-1</span><span class="ttl">两束在 xz 面内与 z 轴成 θ<sub>1</sub>、θ<sub>2</sub>：z=0 面上条纹形状与间距</span></div>
+  <div class="stem">如图所示，两相干平面光波其一在 xz 平面沿与 z 轴夹角 θ<sub>1</sub> 方向传播，其二在 xz 平面沿与 z 轴夹角 θ<sub>2</sub> 方向传播，试求二光波在 z = 0 平面上的干涉条纹形状和条纹间距。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>由图上两波分居 z 轴两侧
+      <div class="eqb"><b>k</b><sub>1</sub> = <i>k</i>(−sinθ<sub>1</sub>, 0, cosθ<sub>1</sub>)，　<b>k</b><sub>2</sub> = <i>k</i>(sinθ<sub>2</sub>, 0, cosθ<sub>2</sub>)</div>
+    </div>
+    <div class="step"><b class="n">2</b>观察面 z = 0，<b>r</b> = (x, y, 0)
+      <div class="eqb">Δφ = (<b>k</b><sub>2</sub>−<b>k</b><sub>1</sub>)·<b>r</b> = <i>k x</i>(sinθ<sub>1</sub>+sinθ<sub>2</sub>)</div>
+    </div>
+    <div class="step"><b class="n">3</b>与 y 无关 ⇒ 沿 y 方向的直条纹，间距
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">λ</span><span class="den">sinθ<sub>1</sub>+sinθ<sub>2</sub></span></span></div>
+    </div>
+    <div class="res">条纹为<b>平行于 y 轴（垂直于 xOz 面）的等间距直条纹</b>，间距 <b>d = λ/(sinθ<sub>1</sub>+sinθ<sub>2</sub>)</b>。若两波在 z 轴同侧，则改为 <b>d = λ/|sinθ<sub>1</sub>−sinθ<sub>2</sub>|</b>（此时 θ<sub>1</sub> = θ<sub>2</sub> 就没有条纹了）。</div>
+    <div class="warn"><b>【待核】</b>原题只说"夹角 θ<sub>1</sub>、θ<sub>2</sub>"，配图上两束光交叉而过（异侧），故取"+"号；若按同侧理解则用"−"号，答案不同。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q201">
+  <div class="hd"><span class="tag">2010-5</span><span class="ttl">双缝条纹间距；光源移 2 mm 条纹移多少；±2.5 nm 的最大干涉级次</span></div>
+  <div class="stem">在杨氏双缝干涉实验装置中，双缝相距 0.5 mm，接收屏距双缝 1 m，点光源距双缝 30 cm，它发射 λ = 500 nm 的单色光。试求：<br>（1）屏上干涉条纹的间距。<br>（2）若点光源由轴上下移 2 mm，屏上干涉条纹向什么方向移动？移动多少距离？<br>（3）若点光源发出的光波为（500 ± 2.5）nm 范围内的准单色光，求屏上能看到的最大干涉级次。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>条纹间距（d = 0.5 mm，D = 1 m）
+      <div class="eqb">Δ<i>x</i> = <span class="frac"><span class="num"><i>D</i>λ</span><span class="den"><i>d</i></span></span> = <span class="frac"><span class="num">1 × 500×10<sup>−9</sup></span><span class="den">0.5×10<sup>−3</sup></span></span> = 10<sup>−3</sup> m = <b>1 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>光源横移 <i>y</i><sub>s</sub> 时，屏上零级移到 <i>x</i> = −<i>y</i><sub>s</sub><i>D</i>/<i>l</i>（点光源距缝 <i>l</i> = 30 cm），即条纹向<b>相反方向</b>平移
+      <div class="eqb">Δ<i>x</i>′ = <span class="frac"><span class="num"><i>y</i><sub>s</sub><i>D</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">2 mm × 1 m</span><span class="den">0.30 m</span></span> = <b>6.7 mm</b></div>
+      <p style="margin:4px 0 0">光源<b>向下</b>移 2 mm ⇒ 条纹<b>向上</b>移 6.7 mm（≈ 6.7 个条纹间距，中央亮纹不再是零级）。</p>
+    </div>
+    <div class="step"><b class="n">3</b>准单色光的谱宽 Δλ = 2×2.5 = 5 nm，相干长度 <i>L</i><sub>c</sub> = λ²/Δλ 对应的最大级次
+      <div class="eqb"><i>k</i><sub>max</sub> = <span class="frac"><span class="num">λ</span><span class="den">Δλ</span></span> = <span class="frac"><span class="num">500</span><span class="den">5</span></span> = <b>100</b></div>
+    </div>
+    <div class="res">（1）Δ<i>x</i> = <b>1 mm</b>；（2）条纹向光源移动的<b>反方向</b>平移 <b>6.7 mm</b>；（3）最大干涉级次 <b>k<sub>max</sub> = 100</b>。</div>
+    <div class="warn"><b>【待核】</b>第（3）问的 Δλ 取法：本题波长写成 500±2.5 nm，<b>谱线全宽 Δλ = 5 nm</b>，故 k<sub>max</sub> = λ/Δλ = 100；若按"半宽 2.5 nm"的约定则应取 200。作答时把 Δλ 的定义写清楚即可。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2010-6</span><span class="ttl">正交偏振器间插 λ/2 片转一周；换成全波片</span></div>
+  <div class="stem">在两个正交偏振器之间插入一块 λ/2 片，强度为 <i>I</i><sub>0</sub> 的单色光通过这一系统。如果将波片绕光的传播方向旋转一周，问：（1）将看到几个光强的极大和极小值？相应的波片方位及光强数值；（2）用全波片代替 λ/2 片，情况如何？</div>
+    <figure><img src="figs/emb-2010-6-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p30 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>正交偏振器（P₁ ⊥ P₂）夹波片，设波片主轴与 P₁ 透光轴成 α，出射强度
+      <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup>(2<i>α</i>) sin<sup>2</sup><span class="frac"><span class="num"><i>δ</i></span><span class="den">2</span></span></div>
+      <p style="margin:4px 0 0">（<i>I</i><sub>0</sub> 取"经 P₁ 后进入系统的强度"；若按入射到 P₁ 之前的强度记，则全式再乘 1/2，极大值改为 <i>I</i><sub>0</sub>/2，<b>极大极小的个数与方位不变</b>。）</p>
+    </div>
+    <div class="step"><b class="n">2</b>（1）λ/2 片：<i>δ</i> = π ⇒ sin²(δ/2) = 1，只剩 <i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup>2α
+      <div class="eqb">极大：sin<sup>2</sup>2<i>α</i> = 1 ⇒ <i>α</i> = 45°, 135°, 225°, 315°，<i>I</i> = <b><i>I</i><sub>0</sub></b></div>
+      <div class="eqb">极小：sin<sup>2</sup>2<i>α</i> = 0 ⇒ <i>α</i> = 0°, 90°, 180°, 270°，<i>I</i> = <b>0</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>sin²2α 的周期是 90°，转一周（360°）正好 4 个周期 ⇒ <b>4 个极大、4 个极小，交替出现</b>，相邻极值相隔 45°。
+    </div>
+    <div class="step"><b class="n">4</b>（2）全波片：<i>δ</i> = 2π ⇒ sin²(δ/2) = 0
+      <div class="eqb"><i>I</i> = 0（任意 <i>α</i>）</div>
+    </div>
+    <div class="res">（1）转一周见 <b>4 个极大</b>（α = 45°、135°、225°、315°，<i>I</i> = <i>I</i><sub>0</sub>）与 <b>4 个极小</b>（α = 0°、90°、180°、270°，<i>I</i> = 0）；（2）换全波片后<b>视场始终全暗、无极大极小</b> —— 全波片不改变偏振态，正交偏振器下必然消光。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q205">
+  <div class="hd"><span class="tag">2011-2</span><span class="ttl">两波夹角 2α、屏垂直于角平分线：条纹间距与形状</span></div>
+  <div class="stem">如图所示的两相干平面光波夹角 2α，在垂直于角平分线放置一观察屏，两光波在 z = 0 处，求出屏上的干涉条纹的间距和形状（波长 λ）。</div>
+    <figure><img src="figs/emb-2011-2-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p10 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>取角平分线为 z 轴（屏的法线就是它），两波对称：<b>k</b><sub>1,2</sub> = <i>k</i>(±sinα, 0, cosα)，屏在 z = 0
+    </div>
+    <div class="step"><b class="n">2</b>
+      <div class="eqb">Δφ = (<b>k</b><sub>2</sub>−<b>k</b><sub>1</sub>)·<b>r</b> = −2<i>k x</i> sinα ⇒ <i>I</i> = 2<i>I</i><sub>0</sub>[1 + cos(2<i>k x</i> sinα)]</div>
+    </div>
+    <div class="step"><b class="n">3</b>条纹间距（亮纹条件 2<i>k x</i> sinα = 2<i>m</i>π）
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">2π</span><span class="den">2<i>k</i> sinα</span></span> = <span class="frac"><span class="num">λ</span><span class="den">2 sinα</span></span></div>
+    </div>
+    <div class="res">形状：<b>一组等间距平行直条纹</b>（垂直于两波矢所在平面、即沿屏上 y 方向延伸）；间距 <b>d = λ/(2sinα)</b>。α 很小时 d ≈ λ/(2α) —— 这就是双光束干涉"夹角越小条纹越疏"的定量表述。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q202">
+  <div class="hd"><span class="tag">2011-3</span><span class="ttl">插玻璃片使中央亮纹移到原第 5 级：求厚度</span></div>
+  <div class="stem">把折射率为 1.5 的玻璃片插入杨氏干涉实验的一束光路中，光屏上中央亮条纹移动至原来第 5 级亮条纹所在位置，求插入玻璃片的厚度。已知光波长为 600 nm。</div>
+    <figure><img src="figs/emb-2011-3-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p8 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>插入玻璃片后，该束光多走的光程（几何厚度 t 换成 (n−1)t）
+      <div class="eqb">Δ = (<i>n</i> − 1)<i>t</i></div>
+    </div>
+    <div class="step"><b class="n">2</b>"中央亮纹（零级）移到原第 5 级处" ⇒ 附加光程差恰好等于 5 个波长
+      <div class="eqb">(<i>n</i> − 1)<i>t</i> = 5λ ⇒ <i>t</i> = <span class="frac"><span class="num">5λ</span><span class="den"><i>n</i>−1</span></span> = <span class="frac"><span class="num">5 × 600 nm</span><span class="den">0.5</span></span> = <b>6000 nm = 6 μm</b></div>
+    </div>
+    <div class="res">玻璃片厚度 <b><i>t</i> = 6 μm</b>（此时附加光程差 3000 nm = 5λ，零级亮纹平移到原第 5 级位置）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q204">
+  <div class="hd"><span class="tag">2012-1</span><span class="ttl">一束沿 z 轴、一束与 z 轴成 θ：z=0 面上的条纹形状与间距</span></div>
+  <div class="stem">如图所示，两相干平面光波其一在 xz 平面沿与 z 轴夹角 θ 方向传播，其二在 xz 平面沿 z 轴方向传播。试求该二光波在 z = 0 平面上干涉条纹的形状和间距。</div>
+    <figure><img src="figs/emb-2012-1-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p10 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>两个波矢（都在 xz 面内，与 y 无关）
+      <div class="eqb"><b>k</b><sub>1</sub> = <i>k</i>(sinθ, 0, cosθ)，　<b>k</b><sub>2</sub> = <i>k</i>(0, 0, 1)，　<i>k</i> = 2π/λ</div>
+    </div>
+    <div class="step"><b class="n">2</b>相位差只由"波矢差"决定：Δφ = (<b>k</b><sub>2</sub> − <b>k</b><sub>1</sub>)·<b>r</b>，在观察面 z = 0 上 <b>r</b> = (x, y, 0)
+      <div class="eqb">Δφ = −<i>k x</i> sinθ ⇒ <i>I</i> = 2<i>I</i><sub>0</sub>[1 + cos(<i>k x</i> sinθ)]</div>
+    </div>
+    <div class="step"><b class="n">3</b>Δφ 只随 x 变、与 y 无关 ⇒ 条纹是<b>平行于 y 轴</b>的直条纹（即与 xOz 面垂直的那些直条）；亮纹条件 <i>k x</i> sinθ = 2<i>m</i>π
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">2π</span><span class="den"><i>k</i> sinθ</span></span> = <span class="frac"><span class="num">λ</span><span class="den">sinθ</span></span></div>
+    </div>
+    <div class="res">条纹为<b>平行于 y 轴、等间距的直条纹</b>，间距 <b>d = λ/sinθ</b>（θ 越小条纹越疏；θ→0 时两波同向，屏上不再有明暗变化）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q208">
+  <div class="hd"><span class="tag">2013-3</span><span class="ttl">三束平面波（θ、0、−θ，振幅 A、2A、A）：光强分布与条纹</span></div>
+  <div class="stem">如图所示，三束相干平面光波在 xOz 平面内传播，在 O 点的相位均为 0，其与 z 轴的夹角分别为 θ、0 和 −θ，振幅分别为 A、2A 和 A。求（1）xy 平面上的光强分布；（2）干涉条纹的间距、形状和取向。</div>
+    <figure><img src="figs/fig-auto-2013-3-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p12 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>三波矢（均无 y 分量）
+      <div class="eqb"><b>k</b><sub>±</sub> = <i>k</i>(±sinθ, 0, cosθ)，<b>k</b><sub>0</sub> = <i>k</i>(0,0,1)</div>
+    </div>
+    <div class="step"><b class="n">2</b>在 z = 0 面上（<b>r</b> = (x,y,0)）三波的相位分别是 ±<i>kx</i>sinθ 和 0，O 点相位 0，故
+      <div class="eqb"><i>E</i> = <i>A</i>e<sup>i<i>kx</i>sinθ</sup> + 2<i>A</i> + <i>A</i>e<sup>−i<i>kx</i>sinθ</sup> = 2<i>A</i>(1 + cos<i>kx</i>sinθ)</div>
+    </div>
+    <div class="step"><b class="n">3</b>光强
+      <div class="eqb"><i>I</i> = |<i>E</i>|<sup>2</sup> = 4<i>A</i><sup>2</sup>(1 + cos<i>kx</i>sinθ)<sup>2</sup> = 16<i>A</i><sup>2</sup>cos<sup>4</sup><span class="bkt"><span class="frac"><span class="num">π<i>x</i> sinθ</span><span class="den">λ</span></span></span></div>
+      <p style="margin:4px 0 0">最大值 16<i>A</i><sup>2</sup>（三波同相，振幅相加 4<i>A</i>），最小值 0。</p>
+    </div>
+    <div class="step"><b class="n">4</b>条纹：<i>I</i> 只随 x 变 ⇒ 沿 y 方向的直条纹；cos<sup>4</sup>(π<i>x</i>sinθ/λ) 的周期就是亮纹间距
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">λ</span><span class="den">sinθ</span></span>（亮纹在 <i>kx</i>sinθ = 2<i>m</i>π，<i>I</i> = 16<i>A</i><sup>2</sup>）</div>
+    </div>
+    <div class="res">（1）<b><i>I</i>(<i>x</i>) = 4<i>A</i><sup>2</sup>(1+cos<i>kx</i>sinθ)<sup>2</sup> = 16<i>A</i><sup>2</sup>cos<sup>4</sup>(π<i>x</i>sinθ/λ)</b>，峰值 16<i>A</i><sup>2</sup>、谷值 0；（2）<b>平行于 y 轴（垂直于 xOz 面）的直条纹</b>，间距 <b><i>d</i> = λ/sinθ</b>，但亮纹比两束光时<b>细锐得多</b>（cos<sup>4</sup> 形），暗区变宽。</div>
+    <div class="check"><b>为什么不是 λ/(2sinθ)</b>：±θ 那一对单独干涉时确实给出 λ/(2sinθ) 的细条纹，但中间那束 2<i>A</i> 把它"合并"成了 <i>E</i> = 2<i>A</i>(1+cos α) 的形式，|<i>E</i>|<sup>2</sup> 只剩 α 的 2π 周期（α = <i>kx</i>sinθ）。验证：<i>I</i> = 4<i>A</i><sup>2</sup>(1+cosα)<sup>2</sup> 在 α = π 处恰为 <b>0</b>，中间没有次极大，所以亮纹间距就是 λ/sinθ。若三束振幅全相等则变成 <i>A</i>(1+2cosα)，那时才会出现"主峰 + 次峰"的双峰结构。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q210">
+  <div class="hd"><span class="tag">2014-3</span><span class="ttl">由相干长度估算线宽与频宽</span></div>
+  <div class="stem">某种放电管产生的镉红光，其中波长 λ = 644 nm，相干长度 L = 200 mm，试估计红光的线宽 Δλ 和频宽 Δν。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>相干长度与谱宽的关系 L = λ²/Δλ
+      <div class="eqb">Δλ = <span class="frac"><span class="num">λ²</span><span class="den"><i>L</i></span></span> = <span class="frac"><span class="num">(644×10<sup>−9</sup>)²</span><span class="den">0.200</span></span> = 2.07×10<sup>−12</sup> m ≈ <b>2.1×10<sup>−3</sup> nm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>频宽（Δν = cΔλ/λ² = c/L）
+      <div class="eqb">Δν = <span class="frac"><span class="num"><i>c</i></span><span class="den"><i>L</i></span></span> = <span class="frac"><span class="num">3×10<sup>8</sup></span><span class="den">0.200</span></span> = <b>1.5×10<sup>9</sup> Hz</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>自检：Δν·L = 1.5×10<sup>9</sup>×0.2 = 3×10<sup>8</sup> = c ✓（相干时间 τ = L/c = 6.7×10<sup>−10</sup> s）
+    </div>
+    <div class="res">线宽 <b>Δλ ≈ 2.1×10<sup>−3</sup> nm</b>（相对宽度 Δλ/λ ≈ 3.2×10<sup>−6</sup>）；频宽 <b>Δν ≈ 1.5 GHz</b>；相干时间 6.7×10<sup>−10</sup> s。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q203">
+  <div class="hd"><span class="tag">2014-5</span><span class="ttl">薄片放在缝与屏之间：P<sub>0</sub> 最强的条件；一条缝加宽一倍后的可见度</span></div>
+  <div class="stem">如图所示，在杨氏双缝实验装置中，波长为 λ 的单色平面光波入射到间距为 d 的双缝上，光屏离缝的距离为 D，把一块厚度为 t、折射率为 n 的透明薄片放在缝和屏之间，不讨论衍射效应。求：<br>（1）薄片厚度满足什么条件时，P<sub>0</sub> 点的光强最大；<br>（2）如果把位于轴上方的那条缝加宽一倍，此时的条纹可见度为多少？</div>
+    <figure><img src="figs/fig-auto-2014-5-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p8 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>P<sub>0</sub> 是屏上的轴对称点（几何光程差为 0）。薄片插在一条缝的光路里，使它多出光程 (n−1)t
+      <div class="eqb">δ = (<i>n</i> − 1)<i>t</i></div>
+    </div>
+    <div class="step"><b class="n">2</b>P<sub>0</sub> 光强最大 ⇔ δ 是 λ 的整数倍（同相叠加）
+      <div class="eqb">(<i>n</i> − 1)<i>t</i> = <i>k</i>λ　(<i>k</i> = 0, 1, 2, …)　⇒　<i>t</i> = <span class="frac"><span class="num"><i>k</i>λ</span><span class="den"><i>n</i>−1</span></span></div>
+    </div>
+    <div class="step"><b class="n">3</b>第（2）问：一条缝宽加倍 ⇒ 该缝透光面积加倍 ⇒ 振幅加倍。设原两缝振幅 <i>A</i><sub>1</sub>、<i>A</i><sub>2</sub> = <i>A</i><sub>1</sub> = <i>A</i>，加宽后 <i>A</i><sub>2</sub> = 2<i>A</i>
+      <div class="eqb"><i>V</i> = <span class="frac"><span class="num">2<i>A</i><sub>1</sub><i>A</i><sub>2</sub></span><span class="den"><i>A</i><sub>1</sub><sup>2</sup>+<i>A</i><sub>2</sub><sup>2</sup></span></span> = <span class="frac"><span class="num">2·1·2</span><span class="den">1+4</span></span> = <b>0.8</b></div>
+      <p style="margin:4px 0 0">（也可用强度：<i>I</i><sub>2</sub> = 4<i>I</i><sub>1</sub>，<i>V</i> = 2√(<i>I</i><sub>1</sub><i>I</i><sub>2</sub>)/(<i>I</i><sub>1</sub>+<i>I</i><sub>2</sub>) = 2×2/5 = 0.8。）</p>
+    </div>
+    <div class="res">（1）<b>(<i>n</i> − 1)<i>t</i> = <i>k</i>λ，<i>k</i> = 0,1,2,…</b> 时 P<sub>0</sub> 光强最大（<i>k</i> = 0 即 <i>t</i> = 0，无薄片）；（2）可见度 <b><i>V</i> = 0.8</b>。</div>
+    <div class="check"><b>旁注</b>：一条缝加宽一倍后，两缝的衍射中央峰宽度也不同（严格算还要乘各自的单缝衍射因子），但本题明确"不讨论衍射效应"，只按振幅比算可见度。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q211">
+  <div class="hd"><span class="tag">2015-4</span><span class="ttl">条纹清晰所允许的光源宽度最大值；屏上条纹间距</span></div>
+  <div class="stem">在杨氏干涉实验中，两个小孔间距为 1 mm，光源发光波长为 500 nm，离开两个小孔中点的距离为 500 mm，为了使观察屏上看到清晰条纹，求允许的光源宽度最大值，此时离开小孔 1 m 的观察屏上的条纹间距是多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>光源宽度 b 在双孔处张角 b/l，空间相干宽度 = λl/b；要能看到条纹须 <i>d</i> &lt; λ<i>l</i>/<i>b</i>
+      <div class="eqb"><i>b</i><sub>max</sub> = <span class="frac"><span class="num">λ<i>l</i></span><span class="den"><i>d</i></span></span> = <span class="frac"><span class="num">500×10<sup>−9</sup> × 0.5</span><span class="den">1×10<sup>−3</sup></span></span> = 2.5×10<sup>−4</sup> m = <b>0.25 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>屏上条纹间距（D = 1 m）
+      <div class="eqb">Δ<i>x</i> = <span class="frac"><span class="num"><i>D</i>λ</span><span class="den"><i>d</i></span></span> = <span class="frac"><span class="num">1 × 500×10<sup>−9</sup></span><span class="den">1×10<sup>−3</sup></span></span> = <b>0.5 mm</b></div>
+    </div>
+    <div class="res">光源宽度最大 <b>0.25 mm</b>（超过则条纹对比度下降到看不清）；此时屏上条纹间距 <b>0.5 mm</b>。</div>
+    <div class="check"><b>物理含义</b>：光源越宽，它上面各点各自产生一套条纹、彼此错开，错开量达到半个条纹间距时对比度归零。所以"光源宽度上限"与"条纹间距"是同一件事的两种说法。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<h2 id="ch3">第三章 · 光的衍射<span class="cnt">10 题</span></h2>
+<div class="q" id="q301">
+  <div class="hd"><span class="tag">2009-4</span><span class="ttl">由条纹间距和缺级求缝距缝宽；第 1、2 级相对强度</span></div>
+  <div class="stem">在双缝夫朗和费衍射实验中，光波长 λ = 0.532 μm，透镜的焦距 f = 50 cm，在观察屏上相邻亮条纹的间距 l = 1.5 mm，且第四级亮纹缺级，试求：<br>（1）该双缝的缝距和缝宽；（2）第 1、2 级亮条纹的相对强度。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>干涉亮纹间距 l = λf/d ⇒ 缝距
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">λ<i>f</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">0.532×10<sup>−6</sup> × 0.5</span><span class="den">1.5×10<sup>−3</sup></span></span> = 1.773×10<sup>−4</sup> m ≈ <b>0.177 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>第四级缺级 ⇒ 第 4 级干涉极大落在单缝第一极小上 ⇒ d/a = 4
+      <div class="eqb"><i>a</i> = <span class="frac"><span class="num"><i>d</i></span><span class="den">4</span></span> = <b>0.0443 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>双缝强度 I = 4I<sub>0</sub>(sinu/u)²cos²(δ/2)，其中 u = πa sinθ/λ = π(a/d)k = πk/4，且 cos 项在亮纹处为 1
+      <div class="eqb"><i>k</i> = 1：<i>u</i> = π/4 ⇒ <i>I</i><sub>1</sub>/4<i>I</i><sub>0</sub> = <span class="bkt"><span class="frac"><span class="num">sin(π/4)</span><span class="den">π/4</span></span></span><sup>2</sup> = <span class="bkt"><span class="frac"><span class="num">0.7071</span><span class="den">0.7854</span></span></span><sup>2</sup> = <b>0.811</b></div>
+      <div class="eqb"><i>k</i> = 2：<i>u</i> = π/2 ⇒ <i>I</i><sub>2</sub>/4<i>I</i><sub>0</sub> = <span class="bkt"><span class="frac"><span class="num">1</span><span class="den">π/2</span></span></span><sup>2</sup> = <b>0.405</b></div>
+    </div>
+    <div class="res">（1）缝距 <b><i>d</i> = 0.177 mm</b>，缝宽 <b><i>a</i> = 0.0443 mm</b>（<i>d</i>/<i>a</i> = 4）；（2）<i>I</i><sub>1</sub> = <b>0.81 × 4<i>I</i><sub>0</sub></b>、<i>I</i><sub>2</sub> = <b>0.41 × 4<i>I</i><sub>0</sub></b>，两者之比 <b><i>I</i><sub>1</sub> : <i>I</i><sub>2</sub> = 2 : 1</b>。</div>
+    <div class="check"><b>为什么正好 2:1</b>：sin(π/2)/(π/2) = 2/π，sin(π/4)/(π/4) = 2√2/π，平方后 <i>I</i><sub>1</sub>/<i>I</i><sub>2</sub> = (2√2)²/(2)² = 8/4 = 2。只要 d/a = 4，这个比例就固定为 2。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q305">
+  <div class="hd"><span class="tag">2010-3</span><span class="ttl">D=100 mm 望远镜：放大率取多少、1000 km 处能分辨多远</span></div>
+  <div class="stem">一天文望远镜的物镜直径 D = 100 mm，人眼瞳孔的直径 d = 2 mm，用该望远镜观察发射波长为 λ = 500 nm 光的物体。为充分利用物镜的分辨本领，试确定该望远镜物镜的放大率 M 应取多大为宜？用该望远镜恰能分辨 1000 km 处的两个物体间的距离为多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>"充分利用分辨本领"⇒ 物镜的出射光瞳（= D/M）缩到等于人眼瞳孔 d
+      <div class="eqb"><i>M</i> = <span class="frac"><span class="num"><i>D</i></span><span class="den"><i>d</i></span></span> = <span class="frac"><span class="num">100</span><span class="den">2</span></span> = <b>50×</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>物镜的最小分辨角
+      <div class="eqb"><i>θ</i><sub>min</sub> = 1.22<span class="frac"><span class="num">λ</span><span class="den"><i>D</i></span></span> = 1.22 × <span class="frac"><span class="num">500×10<sup>−9</sup></span><span class="den">0.1</span></span> = 6.1×10<sup>−6</sup> rad</div>
+    </div>
+    <div class="step"><b class="n">3</b>1000 km 处对应的线距离
+      <div class="eqb"><i>s</i> = <i>L θ</i><sub>min</sub> = 1.0×10<sup>6</sup> × 6.1×10<sup>−6</sup> ≈ <b>6.1 m</b></div>
+    </div>
+    <div class="res">放大率宜取 <b>M = 50×</b>（此时出瞳 2 mm，正好不浪费口径也不过剩）；1000 km 处恰能分辨的两点相距约 <b>6.1 m</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q307">
+  <div class="hd"><span class="tag">2010-4</span><span class="ttl">400 条/mm 光栅：一级角色散率；30° 斜入射时的最小波长差</span></div>
+  <div class="stem">试求一宽为 5 cm、每毫米内有 400 条刻线的光栅，对于波长为 500 nm 入射光的一级角色散率。今若入射光与栅平面法线成 30° 方向斜入射，求该光栅能分辨的谱线的最小波长差是多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>光栅常数与总刻线数
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">1</span><span class="den">400</span></span> mm = 2.5 μm，　<i>N</i> = 400 条/mm × 50 mm = <b>20000</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>一级衍射角：sinθ = λ/d = 0.5/2.5 = 0.2 ⇒ θ = 11.54°，cosθ = 0.9798
+      <div class="eqb"><span class="frac"><span class="num">dθ</span><span class="den">dλ</span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>d</i> cosθ</span></span> = <span class="frac"><span class="num">1</span><span class="den">2.5×10<sup>−6</sup> × 0.9798</span></span> = <b>4.08×10<sup>5</sup> rad/m</b>（= 0.0408 rad/nm）</div>
+    </div>
+    <div class="step"><b class="n">3</b>斜入射只改变衍射角（<i>d</i>(sinθ ± sin30°) = <i>k</i>λ），<b>不改变</b>分辨本领 R = kN
+      <div class="eqb"><i>R</i> = <i>kN</i> = 1 × 20000 = 2×10<sup>4</sup> ⇒ δλ = <span class="frac"><span class="num">λ</span><span class="den"><i>R</i></span></span> = <span class="frac"><span class="num">500 nm</span><span class="den">2×10<sup>4</sup></span></span> = <b>0.025 nm</b></div>
+    </div>
+    <div class="res">（1）一级角色散率 <b>4.08×10<sup>5</sup> rad/m</b>（≈0.041 rad/nm）；（2）30° 斜入射时一级能分辨的最小波长差 <b>δλ = 0.025 nm</b>（R = kN 与入射角无关）。</div>
+    <div class="warn"><b>【待核】</b>若把"最小波长差"理解为"可用最高级次下的最小波长差"，斜入射使 k<sub>max</sub> = d(sinθ<sub>出</sub>+sin30°)/λ = 2.5×1.5/0.5 = 7.5 ⇒ k = 7，则 δλ = 500/(7×2×10<sup>4</sup>) = 3.6×10<sup>−3</sup> nm。本页按"一级（与上一问对应）"给 0.025 nm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q303">
+  <div class="hd"><span class="tag">2011-4</span><span class="ttl">电子显微镜的最小分辨距离与所需放大倍数</span></div>
+  <div class="stem">电子显微镜的孔径角为 2u = 8°，电子束的波长为 10 nm，试求其最小分辨距离。若人眼在明视距离处能分辨 67 μm 的距离，则此显微镜的放大倍数是多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>孔径角 2u = 8° ⇒ 半孔径角 u = 4°，数值孔径 NA = sin4° = 0.0698（电子显微镜在真空中，n = 1）
+    </div>
+    <div class="step"><b class="n">2</b>最小分辨距离
+      <div class="eqb">δ = <span class="frac"><span class="num">0.61λ</span><span class="den">n sin<i>u</i></span></span> = <span class="frac"><span class="num">0.61 × 10 nm</span><span class="den">sin4°</span></span> = <span class="frac"><span class="num">6.1</span><span class="den">0.0698</span></span> ≈ <b>87 nm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>放大倍数 = 人眼能分辨的细节 / 显微镜能分辨的细节
+      <div class="eqb"><i>M</i> = <span class="frac"><span class="num">67 μm</span><span class="den">87 nm</span></span> = <b>≈ 770×</b></div>
+    </div>
+    <div class="res">最小分辨距离 <b>δ ≈ 0.087 μm（87 nm）</b>；要把这个细节放大到人眼在明视距离能分辨（67 μm），需 <b>M ≈ 770×</b>（再大就是"无效放大"）。</div>
+    <div class="warn"><b>【待核】</b>原题给"电子束波长 10 nm"偏大（10 nm 对应约 15 eV 的电子，实际电镜常在 0.001–0.01 nm）。数值照题面算；若原题实为 10 pm，则 δ ≈ 0.087 nm、M ≈ 7.7×10<sup>5</sup>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q309">
+  <div class="hd"><span class="tag">2011-5</span><span class="ttl">单缝中央亮纹角宽；其中能装几级谱线；谱线半角宽度</span></div>
+  <div class="stem">用波长为 624 nm 的单色光照射缝宽为 0.012 mm、不透明部分的宽度为 0.029 mm、缝数为 1000 条的光栅，试求：（1）单缝衍射图样的中央亮纹角宽度；（2）单缝衍射图样中央亮纹宽度内能看到多少级谱线；（3）谱线的半角宽度为多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>a = 0.012 mm，b = 0.029 mm ⇒ d = a + b = 0.041 mm，d/a = 3.417（<b>不是整数 ⇒ 不缺级</b>）
+    </div>
+    <div class="step"><b class="n">2</b>（1）单缝衍射中央亮纹的角宽度（两侧第一极小之间）
+      <div class="eqb">Δθ<sub>0</sub> = <span class="frac"><span class="num">2λ</span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num">2 × 624×10<sup>−9</sup></span><span class="den">0.012×10<sup>−3</sup></span></span> = <b>0.104 rad ≈ 5.96°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>（2）主极大在 sinθ = kλ/d，中央亮纹边界在 sinθ = ±λ/a
+      <div class="eqb">|<i>k</i>| ≤ <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>a</i></span></span> = 3.42 ⇒ <i>k</i> = 0, ±1, ±2, ±3，共 <b>7 条</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>（3）谱线半角宽度（以一级为例，sinθ = 0.0152 ⇒ cosθ ≈ 1）
+      <div class="eqb">Δθ = <span class="frac"><span class="num">λ</span><span class="den"><i>N d</i> cosθ</span></span> = <span class="frac"><span class="num">624×10<sup>−9</sup></span><span class="den">1000 × 0.041×10<sup>−3</sup></span></span> = <b>1.5×10<sup>−5</sup> rad</b></div>
+    </div>
+    <div class="res">（1）中央亮纹角宽度 <b>0.104 rad（5.96°）</b>；（2）其中可见 <b>7 条</b>谱线（k = 0、±1、±2、±3）；（3）谱线半角宽度 <b>≈1.5×10<sup>−5</sup> rad</b>（低阶时几乎与级次无关）。</div>
+    <div class="check"><b>为什么第 4 级看不到</b>：d/a = 3.42，第 4 级主极大的 sinθ = 0.0609 已超出单缝中央亮纹边界 λ/a = 0.052，落在单缝衍射因子的零区之外。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q306">
+  <div class="hd"><span class="tag">2012-3</span><span class="ttl">M=50 望远镜：物镜最小直径与 500 km 处的分辨距离</span></div>
+  <div class="stem">一天文望远镜的放大倍数为 M = 50，用该望远镜观察发射波长为 λ = 500 nm 光的物体。试确定该望远镜物镜的最小直径 D<sub>min</sub>，设人眼瞳孔的直径 d = 2 mm。用该望远镜恰能分辨 500 km 处的两个物体间的距离为多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>要"不浪费"分辨本领，出瞳不能小于人眼瞳孔：D/M ≥ d
+      <div class="eqb"><i>D</i><sub>min</sub> = <i>M d</i> = 50 × 2 mm = <b>100 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>分辨角（按 D = 100 mm 计）
+      <div class="eqb"><i>θ</i><sub>min</sub> = 1.22<span class="frac"><span class="num">500×10<sup>−9</sup></span><span class="den">0.1</span></span> = 6.1×10<sup>−6</sup> rad</div>
+    </div>
+    <div class="step"><b class="n">3</b>500 km 处
+      <div class="eqb"><i>s</i> = 5.0×10<sup>5</sup> × 6.1×10<sup>−6</sup> ≈ <b>3.0 m</b></div>
+    </div>
+    <div class="res">物镜最小直径 <b>D<sub>min</sub> = 100 mm</b>（M·d = 50×2 mm）；500 km 处恰能分辨的距离约 <b>3.0 m</b>。</div>
+    <div class="check"><b>与 2010-3 对比</b>：两题是同一组参数的正反问法（D = 100 mm ↔ M = 50）。<i>s</i> 正比于距离、反比于 D，所以 500 km 给出 3.05 m 正好是 1000 km 那题 6.1 m 的一半。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q308">
+  <div class="hd"><span class="tag">2012-4</span><span class="ttl">晶片 Q + 光栅 R：一级光谱散开的角度；632.8 nm 的角色散率</span></div>
+  <div class="stem">图示 Q 为垂直光轴切割、表面平行的单轴晶片，R 为光栅常数 d = 1/600 mm 的衍射光栅，试求垂直入射的可见光（400 ~ 760 nm）由 R 出射后的一级光谱散开的角度；当用波长 λ = 632.8 nm 的激光照射时，其一级光谱的角色散率为多大？</div>
+    <figure><img src="figs/emb-2012-4-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p21 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>Q 是"垂直光轴切割"的平行平板，光沿光轴传播 ⇒ 无双折射，方向与偏振态都不变（这一问只是说明 Q 等效于空气）
+    </div>
+    <div class="step"><b class="n">2</b>光栅常数 d = 1/600 mm = 1.667 μm；一级衍射 sinθ = λ/d
+      <div class="eqb">λ = 400 nm：sinθ<sub>1</sub> = <span class="frac"><span class="num">0.400</span><span class="den">1.667</span></span> = 0.240 ⇒ θ<sub>1</sub> = <b>13.9°</b></div>
+      <div class="eqb">λ = 760 nm：sinθ<sub>2</sub> = <span class="frac"><span class="num">0.760</span><span class="den">1.667</span></span> = 0.456 ⇒ θ<sub>2</sub> = <b>27.1°</b></div>
+      <p style="margin:4px 0 0">散开角 = arcsin0.240 ～ arcsin0.456，宽 <b>≈13.2°</b>（紫在内、红在外）。</p>
+    </div>
+    <div class="step"><b class="n">3</b>632.8 nm 的一级衍射角：sinθ = 0.6328/1.667 = 0.3797 ⇒ θ = 22.32°，cosθ = 0.9252
+      <div class="eqb"><span class="frac"><span class="num">dθ</span><span class="den">dλ</span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>d</i>cosθ</span></span> = <span class="frac"><span class="num">1</span><span class="den">1.667×10<sup>−6</sup>×0.9252</span></span> = <b>6.5×10<sup>5</sup> rad/m</b></div>
+    </div>
+    <div class="res">（1）一级光谱散开 <b>arcsin0.240 ～ arcsin0.456</b>（13.9°～27.1°，宽 13.2°）；（2）632.8 nm 一级角色散率 <b>≈6.5×10<sup>5</sup> rad/m</b>（≈0.065 rad/nm）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q304">
+  <div class="hd"><span class="tag">2013-4</span><span class="ttl">NA=1.32 显微镜：分辨距离、有效放大率、光学筒长</span></div>
+  <div class="stem">已知一显微镜的数值孔径 NA = 1.32，物镜焦距 f<sub>0</sub> = 1.91 mm，目镜焦距 f<sub>e</sub> = 50 mm，求：（1）此显微镜的最小分辨距离；（2）有效放大率；（3）光学筒长。（取光波长为 550 nm，人眼明视距离为 25 cm，人眼最小分辨角约为 1′）</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>最小分辨距离
+      <div class="eqb">δ = <span class="frac"><span class="num">0.61λ</span><span class="den">NA</span></span> = <span class="frac"><span class="num">0.61 × 550 nm</span><span class="den">1.32</span></span> = <b>254 nm ≈ 0.25 μm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>人眼在明视距离（250 mm）处能分辨的最小距离（1′ = 2.91×10<sup>−4</sup> rad）
+      <div class="eqb"><i>y</i><sub>眼</sub> = 250 mm × 2.91×10<sup>−4</sup> = 0.0727 mm = 72.7 μm</div>
+    </div>
+    <div class="step"><b class="n">3</b>有效放大率：把 δ 放大到 <i>y</i><sub>眼</sub>
+      <div class="eqb"><i>M</i> = <span class="frac"><span class="num"><i>y</i><sub>眼</sub></span><span class="den">δ</span></span> = <span class="frac"><span class="num">72.7 μm</span><span class="den">0.254 μm</span></span> ≈ <b>286×</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>光学筒长：显微镜总放大率 <i>M</i> = (Δ/<i>f</i><sub>0</sub>)(250/<i>f</i><sub>e</sub>)
+      <div class="eqb">Δ = <span class="frac"><span class="num"><i>M f</i><sub>0</sub><i>f</i><sub>e</sub></span><span class="den">250</span></span> = <span class="frac"><span class="num">286 × 1.91 × 50</span><span class="den">250</span></span> ≈ <b>109 mm</b>（约 110 mm）</div>
+    </div>
+    <div class="res">（1）δ ≈ <b>0.25 μm</b>；（2）有效放大率 <b>M ≈ 286×</b>（通常写 280–290× 均可）；（3）光学筒长 <b>Δ ≈ 109 mm</b>。</div>
+    <div class="check"><b>量级检验</b>：显微镜的经验规则是"有效放大率 = 500NA ~ 1000NA" = 660–1320×，本题按人眼 1′ 严格算得 286×，偏小是因为 1′ 对应的 <i>y</i><sub>眼</sub> 取得保守；两种口径都能自圆其说，答题时写清"按 1′、250 mm 计算"即可。</div>
+    <div class="warn"><b>【待核】</b>"有效放大率"在不同教材里分别按 1′、2′ 或经验系数 500NA 计算，三者数值可差 2–4 倍。本页按题干给的 1′ 与 25 cm 计算。<b>光学筒长</b>的名称也有教材称"光学间隔"（物镜像方焦点到目镜物方焦点的距离），这里就是 Δ。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q310">
+  <div class="hd"><span class="tag">2013-6</span><span class="ttl">1000 条/mm 光栅的一级角色散率；与 F-P 标准具比分辨本领</span></div>
+  <div class="stem">一块光栅面积为 5 cm×5 cm、每毫米内有 1000 条刻痕。求（1）此光栅对波长为 600 nm 光的一级角色散率；（2）比较此光栅与空气间隔为 5 cm、两镜面反射率均为 90% 的 F-P 标准具的分辨能力。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>d = 1/1000 mm = 1 μm，N = 1000 条/mm × 50 mm = 5×10<sup>4</sup>；一级衍射 sinθ = 0.6/1 = 0.6 ⇒ θ = 36.87°，cosθ = 0.8
+      <div class="eqb"><span class="frac"><span class="num">dθ</span><span class="den">dλ</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>d</i>cosθ</span></span> = <span class="frac"><span class="num">1</span><span class="den">1×10<sup>−6</sup>×0.8</span></span> = <b>1.25×10<sup>6</sup> rad/m</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>光栅分辨本领（一级）
+      <div class="eqb"><i>R</i><sub>光栅</sub> = <i>kN</i> = 1 × 5×10<sup>4</sup> = <b>5×10<sup>4</sup></b>，　δλ = <span class="frac"><span class="num">600 nm</span><span class="den">5×10<sup>4</sup></span></span> = 0.012 nm</div>
+    </div>
+    <div class="step"><b class="n">3</b>F-P 标准具：间距 h = 5 cm，级次 k = 2h/λ = 2×0.05/600×10<sup>−9</sup> = 1.67×10<sup>5</sup>；细度（镜面反射率 R = 0.9）
+      <div class="eqb"><i>F</i> = <span class="frac"><span class="num">π√R</span><span class="den">1−R</span></span> = <span class="frac"><span class="num">π×0.9487</span><span class="den">0.1</span></span> = 29.8</div>
+      <div class="eqb"><i>R</i><sub>F-P</sub> = <i>kF</i> = 1.67×10<sup>5</sup> × 29.8 = <b>5.0×10<sup>6</sup></b>，　δλ = <span class="frac"><span class="num">600 nm</span><span class="den">5×10<sup>6</sup></span></span> = 1.2×10<sup>−4</sup> nm</div>
+    </div>
+    <div class="res">（1）一级角色散率 <b>1.25×10<sup>6</sup> rad/m</b>；（2）光栅 <b>R = 5×10<sup>4</sup></b>（δλ = 0.012 nm），F-P <b>R = 5×10<sup>6</sup></b>（δλ = 1.2×10<sup>−4</sup> nm），<b>F-P 的分辨本领约为光栅的 100 倍</b>。</div>
+    <div class="check"><b>差别在哪</b>：光栅的 R 靠"刻线总数 N"（受尺寸限制，最多几万）；F-P 的 R 靠"级次 k = 2h/λ"（h = 5 cm 就给出 10<sup>5</sup> 级）再乘细度 F。所以高分辨光谱都用 F-P 而不用光栅。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q302">
+  <div class="hd"><span class="tag">2015-5</span><span class="ttl">λ=632.8 nm 同型题：缝距缝宽 + 一级与零级强度比</span></div>
+  <div class="stem">在双缝夫朗和费衍射实验中，所用波长 λ = 632.8 nm，透镜焦距 f = 50 cm，观察到两相邻亮条纹间距 e = 1.5 mm，且第四级亮纹缺级，试求：<br>（1）双缝的缝距和缝宽；（2）第 1 级亮纹与零级主条纹的强度之比。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>缝距
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">λ<i>f</i></span><span class="den"><i>e</i></span></span> = <span class="frac"><span class="num">632.8×10<sup>−9</sup> × 0.5</span><span class="den">1.5×10<sup>−3</sup></span></span> = 2.109×10<sup>−4</sup> m ≈ <b>0.211 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>第四级缺级 ⇒ d/a = 4
+      <div class="eqb"><i>a</i> = <span class="frac"><span class="num"><i>d</i></span><span class="den">4</span></span> = <b>0.0527 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>零级：u = 0，(sinu/u)² = 1，cos 项 = 1 ⇒ <i>I</i><sub>0级</sub> = 4<i>I</i><sub>0</sub>；一级：u = π/4
+      <div class="eqb"><span class="frac"><span class="num"><i>I</i><sub>1</sub></span><span class="den"><i>I</i><sub>0级</sub></span></span> = <span class="bkt"><span class="frac"><span class="num">sin(π/4)</span><span class="den">π/4</span></span></span><sup>2</sup> = <b>0.811 ≈ 81%</b></div>
+    </div>
+    <div class="res">（1）缝距 <b><i>d</i> = 0.211 mm</b>、缝宽 <b><i>a</i> = 0.0527 mm</b>；（2）第 1 级亮纹强度是零级的 <b>81%</b>（<i>I</i><sub>1</sub> = 3.24<i>I</i><sub>0</sub>，零级 = 4<i>I</i><sub>0</sub>）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<h2 id="ch4">第四章 · 光在各向异性介质中的传播特性<span class="cnt">7 题</span></h2>
+<div class="q" id="q401">
+  <div class="hd"><span class="tag">2009-5</span><span class="ttl">0.081 mm 方解石波片（θ = 26.57°）出射光的偏振状态</span></div>
+  <div class="stem">如图所示，一入射线偏振光的振动方向与晶片光轴方向的夹角为 θ = 26.57°，试问该光经过厚度为 0.081 mm 的晶片后，其偏振状态如何？（入射光波长 λ = 589 nm，n<sub>o</sub> = 1.5442，n<sub>e</sub> = 1.5533）</div>
+    <figure><img src="figs/emb-2009-5-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p24 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>光垂直入射，沿光轴的分量（e 光）与垂直光轴的分量（o 光）方向相同，只累积相位差
+      <div class="eqb">Δ = (<i>n</i><sub>e</sub> − <i>n</i><sub>o</sub>)<i>d</i> = (1.5533 − 1.5442) × 0.081 mm = 9.1×10<sup>−3</sup> × 81 μm = <b>0.737 μm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>折合成波长数
+      <div class="eqb"><span class="frac"><span class="num">Δ</span><span class="den">λ</span></span> = <span class="frac"><span class="num">0.737</span><span class="den">0.589</span></span> = 1.25 ⇒ Δφ = 2π×1.25 = 2.5π ≡ <span class="frac"><span class="num">π</span><span class="den">2</span></span>（450°）</div>
+      <p style="margin:4px 0 0">这片 0.081 mm 的方解石<b>相当于一块 λ/4 波片</b>（多出一个整波长的附加延迟）。</p>
+    </div>
+    <div class="step"><b class="n">3</b>两分量的振幅（tanθ = tan26.57° = 0.5）
+      <div class="eqb"><i>A</i><sub>e</sub> = <i>A</i>cosθ = 0.894<i>A</i>，　<i>A</i><sub>o</sub> = <i>A</i>sinθ = 0.447<i>A</i> ⇒ <i>A</i><sub>e</sub> : <i>A</i><sub>o</sub> = <b>2 : 1</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>振幅不等 + 相位差 π/2 ⇒ 出射为<b>正椭圆偏振光</b>，椭圆两轴正好沿光轴方向与垂直光轴方向，长短轴比 2 : 1
+    </div>
+    <div class="res">出射光为<b>椭圆偏振光</b>（既不是圆偏振也不是线偏振）：椭圆长轴沿<b>光轴（e 光振动）方向</b>，长短轴比 <b>2 : 1</b>，相位差 ≈ π/2（因 Δ = 1.25λ，相当于 λ/4 波片）。</div>
+    <div class="warn"><b>【待核】</b>旋向（左旋/右旋）取决于"n<sub>e</sub> &gt; n<sub>o</sub> 时 e 光落后"这一约定方向，请按教材符号核对；"椭圆（长短轴 2:1、长轴沿光轴）"这个结论是稳的。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q404">
+  <div class="hd"><span class="tag">2009-6</span><span class="ttl">格兰-傅科棱镜的底角 θ 范围与失效入射角</span></div>
+  <div class="stem">图示方解石棱镜的主折射率为 n<sub>0</sub> = 1.6408，n<sub>e</sub> = 1.4790。<br>（1）若要使其成为格兰科棱镜工作，其直角棱镜底角 θ 应为多大？画出光自空气正入射时的传输光路及光的偏振状态。<br>（2）当如图斜射入一平行光时，入射角 φ 为多大时该格兰-付科棱镜工作失效。</div>
+    <figure><img src="figs/emb-2009-6-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p27 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>格兰-傅科棱镜：两块方解石直角棱镜间夹空气隙，<b>光轴垂直于入射面</b>。于是振动 ⊥入射面的分量是 e 光（n<sub>e</sub> 小、临界角大），振动 ∥入射面的分量是 o 光（n<sub>o</sub> 大、临界角小）
+    </div>
+    <div class="step"><b class="n">2</b>要求：o 光在空气隙上全反射，e 光透射（光路：正入射 → 直行到斜隙 → o 光被全反射偏向侧面出射，e 光透过后自第二块棱镜正出射）
+      <div class="eqb">o 全反射：sinθ &gt; <span class="frac"><span class="num">1</span><span class="den"><i>n</i><sub>o</sub></span></span> ⇒ θ &gt; arcsin<span class="frac"><span class="num">1</span><span class="den">1.6408</span></span> = <b>37.5°</b></div>
+      <div class="eqb">e 透射：sinθ &lt; <span class="frac"><span class="num">1</span><span class="den"><i>n</i><sub>e</sub></span></span> ⇒ θ &lt; arcsin<span class="frac"><span class="num">1</span><span class="den">1.4790</span></span> = <b>42.5°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>所以底角范围 <b>37.5° &lt; θ &lt; 42.5°</b>；出射光是<b>振动方向垂直于入射面的线偏振光</b>（e 光）
+    </div>
+    <div class="step"><b class="n">4</b>（2）斜入射 φ 时，折入棱镜后斜隙上的入射角变成 θ′ = θ + r（r 为入射面折射角，sinφ = n sin r）。工作失效发生在 e 光也达到临界角时
+      <div class="eqb">θ + <i>r</i> = arcsin<span class="frac"><span class="num">1</span><span class="den"><i>n</i><sub>e</sub></span></span> ⇒ <i>r</i> = 42.5° − θ ⇒ φ = arcsin[n<sub>e</sub> sin(42.5° − θ)]</div>
+      <p style="margin:4px 0 0">取 θ = 40°（落在工作范围内）：r = 2.5°，φ = arcsin(1.479×0.0436) ≈ <b>3.7°</b>。</p>
+    </div>
+    <div class="res">（1）<b>37.5° &lt; θ &lt; 42.5°</b>（常取 40° 左右），出射为振动 ⊥入射面的线偏振光（o 光在空气隙上全反射被弃）；（2）斜入射时视场很小，失效角 <b>φ ≈ arcsin[n<sub>e</sub>sin(42.5°−θ)]</b>，θ = 40° 时约 <b>3.7°</b>。</div>
+    <div class="warn"><b>【待核】</b>（2）的"失效"有两种理解：① e 光也被全反射（视场上限，上面按这个算）；② o 光不再全反射、混进出射光。两者符号相反、数值不同。题干未给 θ 的具体值，故只能给公式 + 示例。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q405">
+  <div class="hd"><span class="tag">2011-7</span><span class="ttl">两种光轴取向的格兰-傅科棱镜：θ 范围、出射强度对比</span></div>
+  <div class="stem">方解石制成两个带有空气间隙的偏振棱镜，其中棱镜 1 的光轴垂直于入射面，光线按图示方向入射，已知 n<sub>o</sub> = 1.658，n<sub>e</sub> = 1.486。<br>（1）求 θ 角在多大范围内，才能使入射的自然光经棱镜后变为线偏振光。<br>（2）若入射光强度相同，哪个棱镜射出线偏振光强。<br>（3）画出自然光入射时的传输光路及光的偏振状态。</div>
+    <figure><img src="figs/fig-auto-2011-7-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p28 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>棱镜 1（光轴 ⊥入射面）：振动 ⊥入射面 = e 光（n<sub>e</sub> = 1.486），振动 ∥入射面 = o 光（n<sub>o</sub> = 1.658）
+    </div>
+    <div class="step"><b class="n">2</b>（1）o 光全反射、e 光透射
+      <div class="eqb">arcsin<span class="frac"><span class="num">1</span><span class="den">1.658</span></span> = <b>37.1°</b> &lt; θ &lt; arcsin<span class="frac"><span class="num">1</span><span class="den">1.486</span></span> = <b>42.3°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>（2）棱镜 2 若为光轴 ∥入射面（另一支偏振作 e 光），则透过的是 o 光（n<sub>o</sub> = 1.658 大、临界角小）—— 此时 θ 的允许范围必须让 <b>o 光透射、e 光全反射</b>，即 37.1° 与 42.3° 的角色互换，允许的 θ 更窄
+      <div class="eqb">两镜出射的都是"自然光的一半强" ⇒ 单个理想棱镜的透过率都是 <b>≈50%</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>（3）光路（文字描述）：自然光正入射第一块直角棱镜 → 到空气隙时 o 光发生全反射、折向侧面（或从侧面漏出），e 光穿过空气隙进入第二块棱镜 → 正出射，出射光为振动<b>垂直于入射面</b>的线偏振光
+    </div>
+    <div class="res">（1）棱镜 1 需 <b>37.1° &lt; θ &lt; 42.3°</b>（取 40° 附近）；（2）入射强度相同时，两镜出射的线偏振光强<b>基本相同（各约为入射自然光的一半）</b>，差别只来自界面反射损失，实际以"反射损失小的那支（透射 e 光、n 较小的支路）"略强；（3）出射为振动 ⊥入射面的线偏振光。</div>
+    <div class="warn"><b>【待核】</b>原题只说"棱镜 1 的光轴垂直于入射面"，<b>未说明棱镜 2 的光轴取向</b>（图上只画了 θ）。若棱镜 2 是"光轴 ∥入射面"，则第（2）问的强弱关系要按两支的反射率/透过率细算（本页只给"≈50%、量级相同"的结论）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2012-5</span><span class="ttl">对 800 nm 是 λ/4 片的片子，对 400 nm 起什么作用</span></div>
+  <div class="stem">一波长为 400 nm 的线偏振光照射在相对于波长 800 nm 的光是四分之一波片上，其光电场振动方向与波片光轴成 45° 角，试确定该光经波片后的偏振状态变化。（不计波片的色散效应）</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>波片相位差 <i>δ</i> = (2π/λ)(<i>n</i><sub>e</sub>−<i>n</i><sub>o</sub>)<i>d</i>。同一块片子 (<i>n</i><sub>e</sub>−<i>n</i><sub>o</sub>)<i>d</i> 是常数，所以 δ 与 λ 成反比
+      <div class="eqb">(<i>n</i><sub>e</sub>−<i>n</i><sub>o</sub>)<i>d</i> = <span class="frac"><span class="num">800</span><span class="den">4</span></span> = 200 nm</div>
+    </div>
+    <div class="step"><b class="n">2</b>对 λ = 400 nm 的光，光程差 200 nm 恰好是半个波长 ⇒ 相当于 λ/2 片
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">400</span></span> × 200 = π</div>
+    </div>
+    <div class="step"><b class="n">3</b>λ/2 片对线偏振光：入射振动与主轴成 α，出射仍是线偏振，方位转 2α
+      <div class="eqb">α = 45° ⇒ 2α = 90°</div>
+    </div>
+    <div class="res">出射光<b>仍是线偏振光</b>，振动方向相对入射方向<b>转过 90°</b>（原光轴方向变 45°→135°），强度不变。只要不是 45° 入射，转角一律是 2α，偏振度不变。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q403">
+  <div class="hd"><span class="tag">2012-6</span><span class="ttl">光轴与法线成 45°、d=1 cm：o/e 两束的间距、相位差、间距最大条件</span></div>
+  <div class="stem">图示晶体的主折射率 n<sub>o</sub> = 1.5246，n<sub>e</sub> = 1.4792，光轴方向与通光面法线成 45° 角，晶体厚度 d = 1 cm。一束波长 λ = 500 nm 自然光垂直入射到该晶体上，求由晶体后表面出射时二光线的间距和相位差，并绘出光路图及光的振动方向。为使出射二光线的间距最大，光轴方向应如何选取。</div>
+    <figure><img src="figs/emb-2012-6-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p26 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>自然光正入射：o 光沿原方向直行；e 光偏离波法线，偏角 α（走离角）
+      <div class="eqb">tanα = <span class="frac"><span class="num">(<i>n</i><sub>o</sub><sup>2</sup>−<i>n</i><sub>e</sub><sup>2</sup>) tanθ</span><span class="den"><i>n</i><sub>o</sub><sup>2</sup>+<i>n</i><sub>e</sub><sup>2</sup> tan<sup>2</sup>θ</span></span>，θ = 45° ⇒ tanα = <span class="frac"><span class="num">2.3244−2.1840</span><span class="den">2.3244+2.1840</span></span> = 0.03114</div>
+      <div class="eqb">α = 1.78°，　<b>间距 <i>s</i> = <i>d</i> tanα = 10 mm × 0.03114 = 0.31 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>相位差：e 光在 45° 方向的有效折射率
+      <div class="eqb"><i>n</i><sub>e</sub>(45°) = <span class="frac"><span class="num"><i>n</i><sub>o</sub><i>n</i><sub>e</sub></span><span class="den">√(<i>n</i><sub>o</sub><sup>2</sup>sin<sup>2</sup>45°+<i>n</i><sub>e</sub><sup>2</sup>cos<sup>2</sup>45°)</span></span> = 1.5021</div>
+      <div class="eqb">Δ<i>n</i> = 1.5246 − 1.5021 = 0.0225 ⇒ Δ = Δ<i>n</i>·<i>d</i> = 0.225 mm = <b>449λ</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>相位差 δ = 2π×449.2 ≈ 2822 rad，折回 [0,2π)：
+      <div class="eqb">δ ≡ 0.2×2π = <b>0.4π ≈ 72°</b>（≈1.26 rad）</div>
+    </div>
+    <div class="step"><b class="n">4</b>求 s 最大：tanα = (<i>n</i><sub>o</sub><sup>2</sup>−<i>n</i><sub>e</sub><sup>2</sup>)<i>t</i>/(<i>n</i><sub>o</sub><sup>2</sup>+<i>n</i><sub>e</sub><sup>2</sup><i>t</i><sup>2</sup>)（<i>t</i> = tanθ），对 t 求极值得 t = n<sub>o</sub>/n<sub>e</sub>
+      <div class="eqb">tanθ = <span class="frac"><span class="num">1.5246</span><span class="den">1.4792</span></span> = 1.0307 ⇒ θ = <b>45.9°</b>（此时 tanα = 0.0312，与 45° 几乎相同）</div>
+    </div>
+    <div class="res">间距 <b><i>s</i> ≈ 0.31 mm</b>（o 光不偏折、e 光偏 1.78°）；相位差 <b>δ ≈ 0.4π（72°）</b>；要让间距最大，光轴应与通光面法线成 <b>θ = arctan(n<sub>o</sub>/n<sub>e</sub>) ≈ 45.9°</b>（即光轴与晶体表面约成 44°）。</div>
+    <div class="warn"><b>【待核】</b>相位差若按"主折射率之差"简化成 (<i>n</i><sub>o</sub>−<i>n</i><sub>e</sub>)<i>d</i> = 0.454 mm = 908λ，则 δ ≡ 0（整数级），与按 <i>n</i><sub>e</sub>(45°) 算的 0.4π 不同。本页用有效折射率（严格做法），简化做法请按教材约定选一个。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q402">
+  <div class="hd"><span class="tag">2013-5</span><span class="ttl">0.05 mm 晶片（光轴∥x）：θ=45° 与 θ=120° 的出射偏振态</span></div>
+  <div class="stem">如图所示，一线偏振光（λ = 600 nm）通过一块厚度为 0.05 mm 的晶片（n<sub>o</sub> = 1.544，n<sub>e</sub> = 1.553）后，光轴沿 x 轴，入射线偏振光的振动方向与 x 轴的夹角为 θ。求 θ = 45° 或 θ = 120° 时出射光偏振态。</div>
+    <figure><img src="figs/emb-2013-5-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p25 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>光沿 z 方向（垂直于晶片）传播，光轴沿 x ⇒ x 分量是 e 光、y 分量是 o 光，二者同方向传播，只差相位
+      <div class="eqb">Δ = (<i>n</i><sub>e</sub> − <i>n</i><sub>o</sub>)<i>d</i> = 0.009 × 0.05 mm = 4.5×10<sup>−4</sup> mm = <b>0.45 μm</b></div>
+      <div class="eqb"><span class="frac"><span class="num">Δ</span><span class="den">λ</span></span> = <span class="frac"><span class="num">0.45</span><span class="den">0.60</span></span> = 0.75 ⇒ Δφ = 2π×0.75 = <b>270°（≡ −90°）</b></div>
+    </div>
+    <div class="step"><b class="n">2</b><b>θ = 45°</b>：两分量振幅相等（<i>A</i><sub>x</sub> = <i>A</i><sub>y</sub> = 0.707<i>A</i>），相位差 90°
+      <div class="eqb">等幅 + 90° ⇒ <b>圆偏振光</b>（旋向由 Δφ 的符号定，等效于 λ/4 波片）</div>
+    </div>
+    <div class="step"><b class="n">3</b><b>θ = 120°</b>：|<i>A</i><sub>x</sub>| = |cos120°|<i>A</i> = 0.5<i>A</i>，<i>A</i><sub>y</sub> = sin120°<i>A</i> = 0.866<i>A</i>（负号相当于多 180°，仍是 90° 相位差）
+      <div class="eqb">不等幅 + 90° ⇒ <b>椭圆偏振光</b>，正椭圆：长轴沿 <b>y 轴（⊥光轴，o 光）</b>，长短轴比 = 0.866 : 0.5 = <b>√3 : 1</b></div>
+    </div>
+    <div class="res">θ = 45°：出射为<b>圆偏振光</b>；θ = 120°：出射为<b>椭圆偏振光</b>（长轴沿 y、即垂直光轴方向，长短轴比 √3 : 1）。两问的相位差都是 Δφ = 270°（Δ = 0.75λ）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q406">
+  <div class="hd"><span class="tag">2014-6</span><span class="ttl">石英涅拉斯顿棱镜（α=30°）：两束夹角；换成 n=n<sub>o</sub> 玻璃后</span></div>
+  <div class="stem">如图所示为顶角 α = 30° 的两块石英晶体直角三棱镜组成的晶体偏振棱镜，光轴方向如图中所示，自然光垂直入射该棱镜，石英对 o 光和 e 光的折射率分别为 n<sub>o</sub> = 1.544，n<sub>e</sub> = 1.553，试<br>（1）画出光在棱镜内和出射棱镜后光的传播方向，并标示出光矢量的振动方向；<br>（2）求棱镜 ADC 内两光束的夹角；<br>（3）若棱镜 ABC 被换成一个玻璃直角棱镜，该玻璃棱镜的折射率 n = n<sub>o</sub>，画出光在棱镜内和出射棱镜后光的传播方向，并标示出光矢量的振动方向。</div>
+    <figure><img src="figs/emb-2014-6-3.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p28 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>结构（文字图）：ABC 与 ADC 两块直角三棱镜沿 AC 面胶合，顶角 α = 30°（B、D 为直角）。棱镜 ABC 的光轴平行于 AB（即平行于通光面），ADC 的光轴垂直于 ABC 的光轴。自然光正入射 AB 面时两支光同方向传播但折射率不同：一支在 ABC 中是 o 光（1.544）、另一支是 e 光（1.553）
+    </div>
+    <div class="step"><b class="n">2</b>在胶合面 AC 上（对法线的入射角 = α = 30°）两支光互换角色并折射（斯涅尔定律）
+      <div class="eqb">o→e：<i>n</i><sub>o</sub>sin30° = <i>n</i><sub>e</sub>sinβ ⇒ sinβ = <span class="frac"><span class="num">1.544×0.5</span><span class="den">1.553</span></span> = 0.4971 ⇒ β = 29.80°，偏 <b>0.20°</b>（向法线）</div>
+      <div class="eqb">e→o：<i>n</i><sub>e</sub>sin30° = <i>n</i><sub>o</sub>sinβ′ ⇒ sinβ′ = <span class="frac"><span class="num">1.553×0.5</span><span class="den">1.544</span></span> = 0.5029 ⇒ β′ = 30.19°，偏 <b>0.19°</b>（离法线）</div>
+    </div>
+    <div class="step"><b class="n">3</b>（2）ADC 内两光束夹角 = 两次偏折之和
+      <div class="eqb">γ = (30° − 29.80°) + (30.19° − 30°) ≈ <b>0.39° ≈ 23′</b></div>
+      <p style="margin:4px 0 0">出射 DC 面后（空气）偏角按斯涅尔定律再放大 n<sub>o,e</sub> 倍，约 0.58°；振动方向：两束都是线偏振，振动互相垂直且分别 ⊥ 与 ∥ 于纸面。</p>
+    </div>
+    <div class="step"><b class="n">4</b>（3）ABC 换成 n = n<sub>o</sub> = 1.544 的玻璃：在 ABC 内是各向同性介质，两支光都以 n<sub>o</sub> 传播、<b>不分开</b>；进入 ADC 后，振动 ∥ 光轴的一支变 o 光（n<sub>o</sub>，与原折射率相同 ⇒ <b>不偏折</b>），另一支变 e 光（n<sub>e</sub>）
+      <div class="eqb">1.544 sin30° = 1.553 sinβ ⇒ β = 29.80° ⇒ 只有这一支出射后偏 <b>0.20°</b></div>
+    </div>
+    <div class="res">（2）ADC 内两光束夹角 <b>≈0.39°（23′）</b>；（3）换成 n = n<sub>o</sub> 的玻璃后，<b>o 光不偏折直出</b>，e 光在胶合面上偏折 <b>0.20°</b>（出射到空气后约 0.31°）—— 棱镜仍把两束分开，但只有一束被偏折，分束角减半。</div>
+    <div class="check"><b>为什么角这么小</b>：石英的 Δn = 0.009 很小（方解石的 Δn ≈ 0.17，同样的 Wollaston 能给出 ~20° 的分束角）。这也是石英 Wollaston 只用于需要小分束角、高精度的场合的原因。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<h2 id="ch5">第五章 · 晶体的感应双折射<span class="cnt">7 题</span></h2>
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2009-7</span><span class="ttl">KDP 半波电压、电光延迟、出射偏振态</span></div>
+  <div class="stem">图中 A 为纵向运用的电光晶体 KDP，在 λ = 0.55 μm 时 <i>n</i><sub>0</sub> = 1.512，<i>γ</i><sub>63</sub> = 10.6×10<sup>−10</sup> cm/V，试计算其半波电压、相应于该电压时的电光延迟及图示入射光线偏振光的输出光偏振状态。</div>
+    <figure><img src="figs/emb-2009-7-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p33 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>纵向运用（E ∥ 光轴 ∥ 传播方向），相位差只由电压定
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>U</i>，　令 <i>δ</i> = π 得 <i>U</i><sub>π</sub> = <span class="frac"><span class="num">λ</span><span class="den">2<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub></span></span></div>
+    </div>
+    <div class="step"><b class="n">2</b>代入 <i>n</i><sub>0</sub><sup>3</sup> = 1.512<sup>3</sup> = 3.457
+      <div class="eqb"><i>U</i><sub>π</sub> = <span class="frac"><span class="num">550×10<sup>−9</sup></span><span class="den">2×3.457×1.06×10<sup>−11</sup></span></span> = <span class="frac"><span class="num">550×10<sup>−9</sup></span><span class="den">7.33×10<sup>−11</sup></span></span> ≈ <b>7.5×10<sup>3</sup> V</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>该电压下的电光延迟（相位延迟与光程差）
+      <div class="eqb"><i>δ</i> = π（半波），　Δ = <i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>U</i> = <span class="frac"><span class="num">λ</span><span class="den">2</span></span> = 0.275 μm</div>
+    </div>
+    <div class="step"><b class="n">4</b>入射为线偏振，其振动方向与感应主轴 <i>x</i><sub>1</sub>′、<i>x</i><sub>2</sub>′ 成 45°（题图），两分量等幅；出射时相位差为 π，合成仍为线偏振，方位转 2×45° = 90°
+      <div class="eqb">输出：<b>线偏振</b>，振动面相对入射转过 <b>90°</b>（由 <i>x</i><sub>1</sub>′ 方向转到 <i>x</i><sub>2</sub>′ 方向），强度不变</div>
+    </div>
+    <div class="res">半波电压 <b><i>U</i><sub>π</sub> ≈ 7.5 kV</b>；此时电光延迟 <b><i>δ</i> = π</b>（光程差 0.275 μm，即半个波长）；输出是<b>振动方向转过 90° 的线偏振光</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2010-7</span><span class="ttl">KDP（A）+ 方解石（B）：λ/2 电压、两束光间距与相位差</span></div>
+  <div class="stem">A 为纵向运用的电光晶体 KDP（<i>n</i><sub>0</sub> = 1.512，<i>γ</i><sub>63</sub> = 10.6×10<sup>−10</sup> cm/V），B 为厚度 <i>d</i> = 10 mm 的方解石晶体（<i>n</i><sub>o</sub> = 1.5246，<i>n</i><sub>e</sub> = 1.4792，光轴方向与通光面的法线方向成 45° 夹角），A、B 晶体平行放置。试计算一束波长 λ = 550 nm 的线偏振光（光电场振动方向沿晶体主轴方向）垂直入射 KDP 时，晶体的 <i>U</i><sub>λ/2</sub> 为多大？绘出相应于电压 <i>U</i> = 0 和 <i>U</i> = <i>U</i><sub>λ/2</sub> 时 A、B 晶体的传输光路及光振动方向，并计算由 B 晶体输出的二个光的间距、相位差。</div>
+    <figure><img src="figs/emb-2010-7-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p34 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>KDP 纵向：<i>U</i><sub>λ/2</sub> = λ/(2<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub>) = 550×10<sup>−9</sup>/(2×3.457×1.06×10<sup>−11</sup>) ≈ <b>7.5×10<sup>3</sup> V</b>
+    </div>
+    <div class="step"><b class="n">2</b><i>U</i> = 0：A 内 δ = 0，出射振动方向不变（沿 <i>x</i><sub>1</sub>，在纸面内）。B 的光轴在纸面内与法线成 45°，故入射振动与光轴成 45° ⇒ 在 B 内分成 o 光（原方向直行）与 e 光（偏折走离角 ρ），出射后两束平行
+      <div class="eqb">tan ρ = <span class="frac"><span class="num">(<i>n</i><sub>o</sub><sup>2</sup> − <i>n</i><sub>e</sub><sup>2</sup>) tan45°</span><span class="den"><i>n</i><sub>o</sub><sup>2</sup>tan<sup>2</sup>45° + <i>n</i><sub>e</sub><sup>2</sup></span></span> = <span class="frac"><span class="num">2.3244 − 2.1880</span><span class="den">2.3244 + 2.1880</span></span> = 0.03022</div>
+    </div>
+    <div class="step"><b class="n">3</b>间距（走离量）
+      <div class="eqb">Δ<i>s</i> = <i>d</i> tan ρ = 10 mm × 0.03022 ≈ <b>0.30 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>相位差：e 光取 45° 方向的折射率，1/<i>n</i><sub>e</sub>(45°)<sup>2</sup> = 0.5/<i>n</i><sub>o</sub><sup>2</sup> + 0.5/<i>n</i><sub>e</sub><sup>2</sup> ⇒ <i>n</i><sub>e</sub>(45°) = 1.5014
+      <div class="eqb">Δ<i>n</i> = 1.5246 − 1.5014 = 0.0232，　Δ = Δ<i>n</i>·<i>d</i> = 0.232 mm　⇒　<i>δ</i> = <span class="frac"><span class="num">2πΔ</span><span class="den">λ</span></span> = 2π×<span class="frac"><span class="num">0.232 mm</span><span class="den">550 nm</span></span> ≈ <b>2.65×10<sup>3</sup> rad</b>（≈422λ，余 0.25λ ≈ π/2）</div>
+    </div>
+    <div class="step"><b class="n">5</b><i>U</i> = <i>U</i><sub>λ/2</sub>：A 内 δ = π，出射振动方向转 90°（由 <i>x</i><sub>1</sub> 转为 <i>x</i><sub>2</sub>，即<b>垂直于纸面、垂直于 B 的主截面</b>）。垂直于主截面的振动在 B 中只有 o 光 ⇒ <b>不再分束</b>，出射一束，间距为 0，也无两束间的相位差可言
+    </div>
+    <div class="res">（1）<b><i>U</i><sub>λ/2</sub> ≈ 7.5 kV</b>；（2）<i>U</i> = 0 时 B 出射<b>两束</b>，间距 <b>Δ<i>s</i> ≈ 0.30 mm</b>，相位差 <b>δ ≈ 2.65×10<sup>3</sup> rad</b>（相当于 422.25 个波长）；<i>U</i> = <i>U</i><sub>λ/2</sub> 时振动转 90°，B 中只剩 o 光，<b>出射单束、间距 0</b>。A 内为一直行单束，B 内 o 直行 / e 偏离 ρ ≈ 1.73°，出射后两束平行。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2011-6</span><span class="ttl">双楔形 KDP 电光偏转器的偏转角</span></div>
+  <div class="stem">如图所示的电光偏转器由两块楔形 KDP 棱镜组成，其中 <i>h</i> 为 <i>x</i><sub>3</sub> 方向的晶体宽度，<i>l</i> 为沿光传播方向晶体的长度，<i>D</i> 为楔形棱镜的最大厚度。棱镜外加电压 <i>U</i> 沿图示 <i>x</i><sub>3</sub> 方向，两块棱镜的光轴方向（<i>x</i><sub>3</sub>）相反，<i>x</i><sub>1</sub>′、<i>x</i><sub>2</sub>′ 为感应主轴方向。若光线沿 <i>x</i><sub>2</sub> 轴方向入射，光振动沿 <i>x</i><sub>1</sub>′ 方向，试求光束穿过偏转器后的偏转角度 θ。</div>
+    <figure><img src="figs/fig-auto-2011-6-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p37 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>每块棱镜内：E ∥ <i>x</i><sub>3</sub>，<i>E</i> = <i>U</i>/<i>h</i>，椭球出现 <i>x</i><sub>1</sub><i>x</i><sub>2</sub> 交叉项 2<i>r</i><sub>63</sub><i>E x</i><sub>1</sub><i>x</i><sub>2</sub>，主轴转 45° 成 <i>x</i><sub>1</sub>′、<i>x</i><sub>2</sub>′
+      <div class="eqb"><i>n</i><sub>1</sub>′ = <i>n</i><sub>0</sub> + <span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>E</i>，　<i>n</i><sub>2</sub>′ = <i>n</i><sub>0</sub> − <span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>E</i></div>
+    </div>
+    <div class="step"><b class="n">2</b>两块棱镜光轴相反 ⇒ 同一振动方向 <i>x</i><sub>1</sub>′ 在棱镜 1 中看到 <i>n</i><sub>0</sub>+Δ/2、在棱镜 2 中看到 <i>n</i><sub>0</sub>−Δ/2，其中
+      <div class="eqb">Δ = <i>n</i><sub>1</sub>′ − <i>n</i><sub>1</sub>″ = <i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>E</i> = <i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><span class="frac"><span class="num"><i>U</i></span><span class="den"><i>h</i></span></span></div>
+    </div>
+    <div class="step"><b class="n">3</b>几何：光束在横向（沿 <i>x</i><sub>3</sub>，全宽 <i>D</i>）移动 <i>y</i>，在棱镜 1 中的路程就改变 (<i>l</i>/<i>D</i>)<i>y</i>，全程光程随横向位置线性变化
+      <div class="eqb">d(OPD)/d<i>y</i> = Δ · <span class="frac"><span class="num"><i>l</i></span><span class="den"><i>D</i></span></span></div>
+    </div>
+    <div class="step"><b class="n">4</b>波前倾斜角（= 偏转角）= 相位梯度 × λ/2π
+      <div class="eqb">θ = <span class="frac"><span class="num">λ</span><span class="den">2π</span></span>·<span class="frac"><span class="num">2π</span><span class="den">λ</span></span>·<span class="frac"><span class="num">d(OPD)</span><span class="den">d<i>y</i></span></span> = <span class="frac"><span class="num"><i>l</i></span><span class="den"><i>D</i></span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><span class="frac"><span class="num"><i>U</i></span><span class="den"><i>h</i></span></span></div>
+    </div>
+    <div class="res">偏转角 <b>θ = (<i>l</i>/<i>D</i>)·<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub>·(<i>U</i>/<i>h</i>)</b>。特点：θ 与电压 <b>成正比</b>、与晶体宽度 <i>h</i> 成反比、与 <i>l</i>/<i>D</i> 成正比 —— 所以晶体要做得"长而薄、电极窄"；改变 <i>U</i> 即可连续扫描光束，这正是电光扫描/偏转的原理。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2012-7</span><span class="ttl">电光调制器：半波电压、U = 0 与 U<sub>λ/2</sub> 时的输出光强</span></div>
+  <div class="stem">图示为一电光调制器。A 为纵向运用的电光晶体 KDP（<i>n</i><sub>0</sub> = 1.512，<i>γ</i><sub>63</sub> = 10.6×10<sup>−10</sup> cm/V），P 为偏振器，入射的线偏振光波长 λ = 550 nm，试求：（1）KDP 晶体的半波电压 <i>U</i><sub>λ/2</sub>；（2）电源电压 <i>U</i> = 0 和 <i>U</i> = <i>U</i><sub>λ/2</sub> 时的输出光强，并绘出光路图、标示通过 A 后的光振动方向。</div>
+    <figure><img src="figs/fig-auto-2012-7-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p35 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>（1）与 2009-7 同一公式，数值相同
+      <div class="eqb"><i>U</i><sub>λ/2</sub> = <span class="frac"><span class="num">λ</span><span class="den">2<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub></span></span> = <span class="frac"><span class="num">550×10<sup>−9</sup></span><span class="den">2×3.457×1.06×10<sup>−11</sup></span></span> ≈ <b>7.5×10<sup>3</sup> V</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>（2）入射振动与 P 的透光轴正交（题图：入射振动在纸面内，P 的透光轴竖直），偏振器 P 作检偏，输出
+      <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup><span class="frac"><span class="num"><i>δ</i></span><span class="den">2</span></span>，　<i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>U</i></div>
+    </div>
+    <div class="step"><b class="n">3</b><i>U</i> = 0：δ = 0，A 内无相位差，出射振动方向不变（仍与 P 正交）⇒ 被 P 完全挡掉
+      <div class="eqb"><i>I</i>(0) = <b>0</b>（消光）</div>
+    </div>
+    <div class="step"><b class="n">4</b><i>U</i> = <i>U</i><sub>λ/2</sub>：δ = π，出射振动方向转过 90°（由与 P 正交变成与 P 平行）
+      <div class="eqb"><i>I</i>(<i>U</i><sub>λ/2</sub>) = <i>I</i><sub>0</sub> sin<sup>2</sup>(π/2) = <b><i>I</i><sub>0</sub></b>（全透过）</div>
+    </div>
+    <div class="res">（1）<b><i>U</i><sub>λ/2</sub> ≈ 7.5 kV</b>；（2）<i>U</i> = 0 时 <b>I = 0</b>，<i>U</i> = <i>U</i><sub>λ/2</sub> 时 <b>I = I<sub>0</sub></b>。光振动方向：U = 0 时与入射相同，U = <i>U</i><sub>λ/2</sub> 时转过 90°。若题设 P 的透光轴与入射振动<b>平行</b>，则两值互换（0 变 I₀、I₀ 变 0）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2013-7</span><span class="ttl">LiNbO₃ 产生 π/2 延迟的外加电压；偏振器与 x₁ 的夹角</span></div>
+  <div class="stem">如图，LiNbO<sub>3</sub> 晶体的长厚比 <i>l</i>/<i>d</i> = 2，其在 λ = 530 nm 时 <i>n</i><sub>o</sub> = 2.33，<i>n</i><sub>e</sub> = 2.23，<i>γ</i><sub>22</sub> = 3.4×10<sup>−12</sup> cm/V。<br>（1）为使该晶体产生 π/2 的相位延迟，外加电压应为多少？<br>（2）若此装置用于电光强度调制，晶体前偏振器的偏振化方向与 <i>x</i><sub>1</sub> 应成什么角度？为什么？</div>
+    <figure><img src="figs/fig-auto-2013-7-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p36 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>光沿光轴 <i>x</i><sub>3</sub> 传播（两模都取 <i>n</i><sub>o</sub>），电场沿 <i>x</i><sub>2</sub>：<i>E</i> = <i>U</i>/<i>d</i>，横向运用。折射率椭球在 <i>x</i><sub>1</sub><i>x</i><sub>2</sub> 截面变为
+      <div class="eqb"><i>x</i><sub>1</sub><sup>2</sup>(1/<i>n</i><sub>o</sub><sup>2</sup> − <i>γ</i><sub>22</sub><i>E</i>) + <i>x</i><sub>2</sub><sup>2</sup>(1/<i>n</i><sub>o</sub><sup>2</sup> + <i>γ</i><sub>22</sub><i>E</i>) = 1</div>
+      <p style="margin:4px 0 0">主轴仍是 <i>x</i><sub>1</sub>、<i>x</i><sub>2</sub>（不变），只是两个折射率一增一减。</p>
+    </div>
+    <div class="step"><b class="n">2</b>两模折射率差与相位差
+      <div class="eqb">Δ<i>n</i> = <i>n</i><sub>1</sub> − <i>n</i><sub>2</sub> = <i>n</i><sub>o</sub><sup>3</sup><i>γ</i><sub>22</sub><i>E</i>，　<i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>o</sub><sup>3</sup><i>γ</i><sub>22</sub><i>U</i><span class="frac"><span class="num"><i>l</i></span><span class="den"><i>d</i></span></span></div>
+    </div>
+    <div class="step"><b class="n">3</b>令 δ = π/2，<i>n</i><sub>o</sub><sup>3</sup> = 2.33<sup>3</sup> = 12.65
+      <div class="eqb"><i>U</i> = <span class="frac"><span class="num">λ</span><span class="den">4<i>n</i><sub>o</sub><sup>3</sup><i>γ</i><sub>22</sub>(<i>l</i>/<i>d</i>)</span></span> = <span class="frac"><span class="num">530×10<sup>−9</sup></span><span class="den">4×12.65×3.4×10<sup>−12</sup>×2</span></span> = <span class="frac"><span class="num">530×10<sup>−9</sup></span><span class="den">3.44×10<sup>−10</sup></span></span> ≈ <b>1.54×10<sup>3</sup> V</b></div>
+    </div>
+    <p><b>（2）</b></p>
+    <div class="step"><b class="n">4</b>加电场后 <i>x</i><sub>1</sub>、<i>x</i><sub>2</sub> 仍是主轴，两本征模振动方向分别沿 <i>x</i><sub>1</sub>、<i>x</i><sub>2</sub>。偏振器要与 <i>x</i><sub>1</sub> 成 <b>45°</b>，入射光才在两个本征模上<b>等幅分解</b>，两者干涉时对比度最大（调制深度 100%）。
+    </div>
+    <div class="step"><b class="n">5</b>若偏振方向平行 <i>x</i><sub>1</sub>（0° 或 90°），光只激发一个本征模，出射偏振态不随电压变，<b>检偏后光强恒定、无法调制</b>。
+    </div>
+    <div class="res">（1）<b><i>U</i> ≈ 1.54×10<sup>3</sup> V（≈1.5 kV）</b>，比 KDP 的 7.5 kV 低得多，靠的就是 <i>l</i>/<i>d</i> = 2 的横向运用；（2）偏振器应与 <i>x</i><sub>1</sub> 成 <b>45°</b> —— 使两本征模等幅激发，才能得到最大调制深度。</div>
+    <div class="warn"><b>【待核】</b>Δ<i>n</i> 的写法有教材差异：本页按 Δ<i>n</i> = <i>n</i><sub>o</sub><sup>3</sup><i>γ</i><sub>22</sub><i>E</i>（两个主轴各变 ±<i>n</i><sub>o</sub><sup>3</sup><i>γ</i><sub>22</sub><i>E</i>/2，差值取其 1 倍）得 1.54 kV；若课上把 Δ<i>n</i> 记作 (1/2)<i>n</i><sub>o</sub><sup>3</sup><i>γ</i><sub>22</sub><i>E</i>，则电压翻倍为 <b>3.08 kV</b>。数值差 2 倍，按课程约定取用。另：<i>n</i><sub>e</sub> = 2.23 在此几何下用不到（两模都走 <i>n</i><sub>o</sub>），应属干扰项。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2014-7</span><span class="ttl">KDP 强度调制原理；λ/4 电压有多大</span></div>
+  <div class="stem">如图所示的电光调制器，一块长方体的 KDP 晶体放在两正交偏振器 P₁、P₂ 之间，调制器电压加在晶体的两个正方形端面之间，两正方形端面与光轴垂直，在两端面间形成一个强电场。若 KDP 晶体内二特许线偏振光的光矢量方向与两线偏振器的透光轴成 45° 角。<br>（1）试计算说明该调制器实现光束光强调制的原理；<br>（2）要使该调制器线性工作，可在 KDP 晶体外加一个 <i>U</i><sub>λ/4</sub>。若入射光波长为 550 nm，KDP 晶体的电光系数为（<i>n</i><sub>0</sub> = 1.512，<i>γ</i><sub>63</sub> = 10.6×10<sup>−10</sup> cm/V），试计算 <i>U</i><sub>λ/4</sub> 的大小。</div>
+    <figure><img src="figs/emb-2014-7-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p30 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <p><b>（1）</b></p>
+    <div class="step"><b class="n">1</b>纵向加压：电场沿光轴 <i>x</i><sub>3</sub>，<i>E</i><sub>3</sub> = <i>U</i>/<i>l</i>。KDP 由单轴变双轴，感应主轴 <i>x</i><sub>1</sub>′、<i>x</i><sub>2</sub>′ 绕光轴转 45°，两本征模折射率差
+      <div class="eqb">Δ<i>n</i> = <i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>E</i><sub>3</sub>，　<i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>Δ<i>n</i>·<i>l</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>U</i></div>
+      <p style="margin:4px 0 0"><i>l</i> 被约掉 —— 这是纵向运用的关键：<b>相位差只由电压决定</b>。</p>
+    </div>
+    <div class="step"><b class="n">2</b>入射的线偏振光与 <i>x</i><sub>1</sub>′（= 与 P₁ 透光轴成 45°）成 45°，分解为两个等幅本征模；出射后经 P₂（与 P₁ 正交，也与 <i>x</i><sub>1</sub>′ 成 45°）投影，两分量同向叠加
+      <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup><span class="frac"><span class="num"><i>δ</i></span><span class="den">2</span></span> = <i>I</i><sub>0</sub> sin<sup>2</sup><span class="frac bkt"><span class="num">π<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>U</i></span><span class="den">λ</span></span></div>
+    </div>
+    <div class="step"><b class="n">3</b>U = 0 时 δ = 0，<i>I</i> = 0（全关）；U 增大则 <i>I</i> 单调升，U = <i>U</i><sub>π</sub> = λ/(2<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub>) 时 <i>I</i> = <i>I</i><sub>0</sub>（全开）。改变外加电压即连续改变输出光强，这就是电光强度调制。
+    </div>
+    <p><b>（2）</b></p>
+    <div class="step"><b class="n">4</b>λ/4 电压要求 δ = π/2：
+      <div class="eqb"><i>U</i><sub>λ/4</sub> = <span class="frac"><span class="num">λ</span><span class="den">4<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub></span></span>，　<i>n</i><sub>0</sub><sup>3</sup> = 1.512<sup>3</sup> = 3.457</div>
+    </div>
+    <div class="step"><b class="n">5</b>代入（<i>γ</i><sub>63</sub> = 10.6×10<sup>−10</sup> cm/V = 1.06×10<sup>−11</sup> m/V）
+      <div class="eqb"><i>U</i><sub>λ/4</sub> = <span class="frac"><span class="num">550×10<sup>−9</sup></span><span class="den">4×3.457×1.06×10<sup>−11</sup></span></span> = <span class="frac"><span class="num">550×10<sup>−9</sup></span><span class="den">1.466×10<sup>−10</sup></span></span> ≈ <b>3.75×10<sup>3</sup> V</b></div>
+    </div>
+    <div class="res">（1）<b><i>I</i> = <i>I</i><sub>0</sub> sin<sup>2</sup>(π<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>U</i>/λ)</b>，δ ∝ U 且与晶体长度无关，调压即调光强；（2）<b><i>U</i><sub>λ/4</sub> ≈ 3.75 kV</b>（对应 <i>U</i><sub>π</sub> ≈ 7.5 kV）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2015-6</span><span class="ttl">KDP（A）+ 石英（B）：半波电压、两束光间距</span></div>
+  <div class="stem">图中 A 为纵向运用的电光晶体 KDP（<i>n</i><sub>0</sub> = 1.512，<i>γ</i><sub>63</sub> = 10.6×10<sup>−10</sup> cm/V），B 为厚度 10 mm 的石英晶体（<i>n</i><sub>o</sub> = 1.54422，<i>n</i><sub>e</sub> = 1.5533，光轴方向与通光面的法线成 45°），A、B 晶体平行放置。一束波长 λ = 0.55 μm 的线偏振光（电场振动方向沿晶体主轴方向）垂直入射到 KDP 晶体上，试计算（1）KDP 晶体的半波电压；（2）电压 <i>U</i> = 0 和 <i>U</i> = <i>U</i><sub>λ/2</sub> 两种情况下由 B 输出的两束光之间的间距，并绘出光路。</div>
+    <figure><img src="figs/emb-2015-6-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p34 插图（自动裁自真题 PDF）</figcaption></figure>
+    <div class="ans">
+    <div class="step"><b class="n">1</b>（1）同前：<i>U</i><sub>λ/2</sub> = λ/(2<i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub>) ≈ <b>7.5×10<sup>3</sup> V</b>
+    </div>
+    <div class="step"><b class="n">2</b>（2）石英是<b>正</b>晶体（<i>n</i><sub>e</sub> &gt; <i>n</i><sub>o</sub>），走离方向与方解石相反，但间距只取绝对值
+      <div class="eqb">tan ρ = <span class="frac"><span class="num">|<i>n</i><sub>o</sub><sup>2</sup> − <i>n</i><sub>e</sub><sup>2</sup>|</span><span class="den"><i>n</i><sub>o</sub><sup>2</sup> + <i>n</i><sub>e</sub><sup>2</sup></span></span> = <span class="frac"><span class="num">2.41274 − 2.38462</span><span class="den">2.38462 + 2.41274</span></span> = <span class="frac"><span class="num">0.02812</span><span class="den">4.79736</span></span> = 5.86×10<sup>−3</sup></div>
+    </div>
+    <div class="step"><b class="n">3</b><i>U</i> = 0（振动在纸面内，与 B 光轴成 45°）：分成 o、e 两束
+      <div class="eqb">Δ<i>s</i> = <i>d</i> tan ρ = 10 mm × 5.86×10<sup>−3</sup> ≈ <b>0.059 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b><i>U</i> = <i>U</i><sub>λ/2</sub>：A 使振动转 90°（垂直于纸面 = 垂直于 B 的主截面）⇒ B 中只有 o 光，<b>出射单束，间距 0</b>
+    </div>
+    <div class="res">（1）<b><i>U</i><sub>λ/2</sub> ≈ 7.5×10<sup>3</sup> V</b>；（2）<i>U</i> = 0 时两束光间距 <b>≈ 0.059 mm</b>（走离角仅 0.34°，石英双折射太小），<i>U</i> = <i>U</i><sub>λ/2</sub> 时<b>间距为 0</b>（只剩 o 光）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<h2 id="ch6">第七章 · 几何光学基础<span class="cnt">4 题</span></h2>
+<div class="q" id="q010">
+  <div class="hd"><span class="tag">2012-10</span><span class="ttl">β = −1 加贴第二块透镜后像移 20 mm、放大率变 3/4，求两焦距</span></div>
+  <div class="stem">一个薄透镜对某物体成实像，放大率为 −1，今以另一个薄透镜紧贴在第一透镜上，则发现像向透镜方向移动了 20 mm，放大率为原来的 3/4，求两块透镜的焦距。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>单个透镜：β = <i>l</i>′/<i>l</i> = −1 ⇒ <i>l</i>′ = −<i>l</i>，代入高斯式
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den">−<i>l</i>′</span></span> = <span class="frac"><span class="num">2</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>1</sub>′</span></span> ⇒ <i>l</i>′ = 2<i>f</i><sub>1</sub>′，<i>l</i> = −2<i>f</i><sub>1</sub>′</div>
+    </div>
+    <div class="step"><b class="n">2</b>贴第二块后：物距不变（<i>l</i> = −2<i>f</i><sub>1</sub>′），新放大率 β′ = −3/4
+      <div class="eqb"><i>l</i>″ = β′·<i>l</i> = (−0.75)(−2<i>f</i><sub>1</sub>′) = 1.5<i>f</i><sub>1</sub>′</div>
+    </div>
+    <div class="step"><b class="n">3</b>像向透镜移动 20 mm：原 <i>l</i>′ = 2<i>f</i><sub>1</sub>′ → 新 1.5<i>f</i><sub>1</sub>′
+      <div class="eqb">2<i>f</i><sub>1</sub>′ − 1.5<i>f</i><sub>1</sub>′ = 0.5<i>f</i><sub>1</sub>′ = 20 mm ⇒ <i>f</i><sub>1</sub>′ = <b>40 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>组合焦距：<i>l</i> = −80 mm、<i>l</i>″ = 60 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> + <span class="frac"><span class="num">1</span><span class="den">80</span></span> = <span class="frac"><span class="num">7</span><span class="den">240</span></span> ⇒ <i>f</i>′ = 34.3 mm</div>
+    </div>
+    <div class="step"><b class="n">5</b>密接组合：1/<i>f</i>′ = 1/<i>f</i><sub>1</sub>′ + 1/<i>f</i><sub>2</sub>′
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">7</span><span class="den">240</span></span> − <span class="frac"><span class="num">1</span><span class="den">40</span></span> = <span class="frac"><span class="num">1</span><span class="den">240</span></span> ⇒ <i>f</i><sub>2</sub>′ = <b>240 mm</b></div>
+    </div>
+    <div class="res">第一块透镜 <b><i>f</i><sub>1</sub>′ = 40 mm</b>，第二块透镜 <b><i>f</i><sub>2</sub>′ = 240 mm</b>（两块都是正透镜，密接后组合焦距 34.3 mm）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q011">
+  <div class="hd"><span class="tag">2013-10</span><span class="ttl">共轭距 250 mm、β = −4，实物与虚物两种情形</span></div>
+  <div class="stem">要使一个薄透镜成像时，共轭距（物像间的距离）为 250 mm，垂轴放大率 β = −4，当物体分别为实物和虚物时，薄透镜的焦距各为多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>通用式：β = <i>l</i>′/<i>l</i>，1/<i>l</i>′ − 1/<i>l</i> = 1/<i>f</i>′，共轭距 |<i>l</i>′ − <i>l</i>| = 250 mm
+    </div>
+    <div class="step"><b class="n">2</b><b>实物</b>（<i>l</i> &lt; 0）：β = −4 ⇒ <i>l</i>′ = −4<i>l</i> 且 <i>l</i>′ &gt; 0
+      <div class="eqb"><i>l</i>′ − <i>l</i> = −5<i>l</i> = 250 ⇒ <i>l</i> = −50 mm，<i>l</i>′ = 200 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">200</span></span> + <span class="frac"><span class="num">1</span><span class="den">50</span></span> = <span class="frac"><span class="num">1</span><span class="den">40</span></span> ⇒ <i>f</i>′ = <b>40 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b><b>虚物</b>（<i>l</i> &gt; 0）：<i>l</i>′ = −4<i>l</i> &lt; 0（成像在物方，虚像）
+      <div class="eqb"><i>l</i> − <i>l</i>′ = 5<i>l</i> = 250 ⇒ <i>l</i> = 50 mm，<i>l</i>′ = −200 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = −<span class="frac"><span class="num">1</span><span class="den">200</span></span> − <span class="frac"><span class="num">1</span><span class="den">50</span></span> = −<span class="frac"><span class="num">1</span><span class="den">40</span></span> ⇒ <i>f</i>′ = <b>−40 mm</b></div>
+    </div>
+    <div class="res">实物时 <b><i>f</i>′ = +40 mm</b>（会聚透镜，物在 −50 mm、像在 +200 mm）；虚物时 <b><i>f</i>′ = −40 mm</b>（发散透镜，物在 +50 mm、像在 −200 mm）。同样的共轭距和放大率，实物/虚物给出的焦距<b>等值反号</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q013">
+  <div class="hd"><span class="tag">2014-10</span><span class="ttl">球形鱼缸里金鱼的实际位置与实际速度</span></div>
+  <div class="stem">一个由很薄的均匀玻璃构成半径为 100 cm 的球形鱼缸，其中水的折射率为 4/3，缸内有一条金鱼游向缸壁，某人从缸壁外观察到金鱼沿水平方向游过鱼缸壁的曲率中心，此时速度为 2 cm/s，试问金鱼实际的位置和速度。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>折射球面公式（水 n = 4/3 → 空气 n′ = 1，缸壁极薄可忽略，<i>r</i> = −100 cm，球心在物方）
+      <div class="eqb"><span class="frac"><span class="num"><i>n</i>′</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i>′ − <i>n</i></span><span class="den"><i>r</i></span></span></div>
+    </div>
+    <div class="step"><b class="n">2</b>观察到的像在曲率中心（缸壁内 100 cm）⇒ <i>l</i>′ = −100 cm，代入
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den">−100</span></span> − <span class="frac"><span class="num">4/3</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1 − 4/3</span><span class="den">−100</span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span> ⇒ <span class="frac"><span class="num">4/3</span><span class="den"><i>l</i></span></span> = −<span class="frac"><span class="num">1</span><span class="den">75</span></span> ⇒ <i>l</i> = <b>−100 cm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>即 <i>l</i> = <i>l</i>′ = <i>r</i> —— 鱼就在<b>球心</b>（距缸壁 100 cm）。这一点不用算也成立：过球心的光线法线入射、方向不变，曲率中心永远与自己的像重合。
+    </div>
+    <div class="step"><b class="n">4</b>速度用纵向放大率：β = <i>nl</i>′/(<i>n</i>′<i>l</i>) = 4/3，α = <i>dl</i>′/<i>dl</i> = (<i>n</i>′/<i>n</i>)β<sup>2</sup>
+      <div class="eqb">α = <span class="frac"><span class="num">3</span><span class="den">4</span></span> × <span class="frac bkt"><span class="num">4</span><span class="den">3</span></span><sup>2</sup> = <span class="frac"><span class="num">4</span><span class="den">3</span></span>，　<i>v</i><sub>视</sub> = α·<i>v</i><sub>实</sub> ⇒ <i>v</i><sub>实</sub> = <span class="frac"><span class="num">2</span><span class="den">4/3</span></span> = <b>1.5 cm/s</b></div>
+    </div>
+    <div class="res">金鱼实际位置就在<b>鱼缸壁的曲率中心处（距缸壁 100 cm，即缸心）</b>；实际速度 <b>1.5 cm/s</b>（观察到的 2 cm/s 被放大了 4/3 倍，因为此处 β = 4/3、α = 4/3）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q012">
+  <div class="hd"><span class="tag">2015-7</span><span class="ttl">共轭距 160 mm、β = −3，实物与虚物两种情形</span></div>
+  <div class="stem">要使一个薄透镜成像时，共轭距（物像间的距离）为 160 mm，垂轴放大率 β = −3，当物体分别为实物和虚物时，薄透镜的焦距各为多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b><b>实物</b>（<i>l</i> &lt; 0）：<i>l</i>′ = −3<i>l</i> &gt; 0，<i>l</i>′ − <i>l</i> = −4<i>l</i> = 160
+      <div class="eqb"><i>l</i> = −40 mm，<i>l</i>′ = 120 mm</div>
+    </div>
+    <div class="step"><b class="n">2</b>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">120</span></span> + <span class="frac"><span class="num">1</span><span class="den">40</span></span> = <span class="frac"><span class="num">1</span><span class="den">30</span></span> ⇒ <i>f</i>′ = <b>30 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b><b>虚物</b>（<i>l</i> &gt; 0）：<i>l</i>′ = −3<i>l</i> &lt; 0，<i>l</i> − <i>l</i>′ = 4<i>l</i> = 160
+      <div class="eqb"><i>l</i> = 40 mm，<i>l</i>′ = −120 mm，　<span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = −<span class="frac"><span class="num">1</span><span class="den">120</span></span> − <span class="frac"><span class="num">1</span><span class="den">40</span></span> = −<span class="frac"><span class="num">1</span><span class="den">30</span></span></div>
+    </div>
+    <div class="res">实物时 <b><i>f</i>′ = +30 mm</b>；虚物时 <b><i>f</i>′ = −30 mm</b>（发散透镜）。与 2013-10（250 mm、β=−4 → ±40 mm）是同一模板的两组数，记住通式：<i>f</i>′ = ±共轭距/(|β|+2+1/|β|) 型，直接代 <i>l</i>、<i>l</i>′ 更稳。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<h2 id="ch7">第八章 · 理想光学系统<span class="cnt">3 题</span></h2>
+<div class="q" id="q007">
+  <div class="hd"><span class="tag">2009-9</span><span class="ttl">f₁′ = 90 cm、f₂′ = 30 cm、d = 60 cm 的双光组</span></div>
+  <div class="stem">空气中由两个像方焦距依次为 90 cm 和 30 cm 的薄透镜构成光学系统，两个透镜的空间间隔为 60 cm：<br>
+  （1）试求系统等效光组的焦点和主点的位置，并画图表示基点与两个透镜的相对位置；<br>
+  （2）如果在第一个透镜前 45 cm 处放置一个物体，试求像面的位置。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>等效光焦度与焦距
+      <div class="eqb">Φ = <span class="frac"><span class="num">1</span><span class="den">90</span></span> + <span class="frac"><span class="num">1</span><span class="den">30</span></span> − 60 × <span class="frac"><span class="num">1</span><span class="den">90</span></span> × <span class="frac"><span class="num">1</span><span class="den">30</span></span> = 0.01111 + 0.03333 − 0.02222 = 0.02222</div>
+      <div class="eqb"><i>f</i>′ = <b>+45 cm</b>（会聚系统）</div>
+    </div>
+    <div class="step"><b class="n">2</b>主点位置（相对各自透镜，右正）
+      <div class="eqb"><i>l</i><sub>H</sub> = <span class="frac"><span class="num"><i>f</i>′<i>d</i></span><span class="den"><i>f</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">45 × 60</span><span class="den">30</span></span> = +90 cm　（H 在第一透镜右方 90 cm，即第二透镜右方 30 cm）</div>
+      <div class="eqb"><i>l</i><sub>H</sub>′ = −<span class="frac"><span class="num"><i>f</i>′<i>d</i></span><span class="den"><i>f</i><sub>1</sub>′</span></span> = −<span class="frac"><span class="num">45 × 60</span><span class="den">90</span></span> = −30 cm　（H′ 在第二透镜左方 30 cm，即第一透镜右方 30 cm）</div>
+    </div>
+    <div class="step"><b class="n">3</b>焦点位置
+      <div class="eqb"><i>l</i><sub>F</sub>′ = <i>f</i>′<span class="bkt">1 − <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i><sub>1</sub>′</span></span></span> = 45<span class="bkt">1 − <span class="frac"><span class="num">60</span><span class="den">90</span></span></span> = <b>+15 cm</b>　（F′ 在第二透镜右方 15 cm）</div>
+      <div class="eqb"><i>l</i><sub>F</sub> = −<i>f</i>′<span class="bkt">1 − <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i><sub>2</sub>′</span></span></span> = −45<span class="bkt">1 − <span class="frac"><span class="num">60</span><span class="den">30</span></span></span> = <b>+45 cm</b>　（F 在第一透镜右方 45 cm，即第二透镜左方 15 cm）</div>
+      <p style="margin:2px 0 0">核对：<i>l</i><sub>H</sub>′ + <i>f</i>′ = 30 + 45 = 75 cm（第一透镜右方）= 第二透镜右方 15 cm ✓；<i>l</i><sub>H</sub> − <i>f</i>′ = 90 − 45 = 45 cm ✓。</p>
+    </div>
+    <div class="step"><b class="n">4</b>（2）物在第一透镜前 45 cm，换算到 H 为 <i>l</i> = −(45 + 90) = −135 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">45</span></span> + <span class="frac"><span class="num">1</span><span class="den">−135</span></span> = <span class="frac"><span class="num">2</span><span class="den">135</span></span>　⇒　<i>l</i>′ = +67.5 cm（自 H′）</div>
+      <p style="margin:2px 0 0">换回原坐标：67.5 + 30 = 97.5 cm（第一透镜右方），即<b>第二透镜右方 37.5 cm</b>；<i>β</i> = 67.5/(−135) = −0.5。</p>
+    </div>
+    <div class="res">（1）<i>f</i>′ = <b>45 cm</b>；F′ 在第二透镜右 15 cm，F 在第一透镜右 45 cm；H 在第一透镜右 90 cm，H′ 在第一透镜右 30 cm（H 在 H′ 右侧，属"负间隔"型基点排列）。<br>（2）像在<b>第二透镜右方 37.5 cm</b>，实像，倒立，<i>β</i> = −0.5。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q009">
+  <div class="hd"><span class="tag">2010-10</span><span class="ttl">已知 f′、总长度 L、后焦距 l<sub>F</sub>′，反求两个焦距与间隔</span></div>
+  <div class="stem">已知两个薄透镜组合，组合系统焦距 <i>f</i>′ = 1000 mm，总长度（第一薄透镜到系统像方焦点的距离）<i>L</i> = 700 mm，总焦点位置 <i>l</i><sub>F</sub>′ = 400 mm，求组成此系统的两个薄透镜像方焦距及其间隔。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>"总长度"就是第一透镜到 F′ 的距离，而 <i>l</i><sub>F</sub>′ 是第二透镜到 F′ 的距离，故间隔直接可定
+      <div class="eqb"><i>L</i> = <i>d</i> + <i>l</i><sub>F</sub>′　⇒　<i>d</i> = 700 − 400 = <b>300 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>由 <i>l</i><sub>F</sub>′ = <i>f</i>′(1 − <i>d</i>/<i>f</i><sub>1</sub>′) 解第一透镜
+      <div class="eqb">400 = 1000<span class="bkt">1 − <span class="frac"><span class="num">300</span><span class="den"><i>f</i><sub>1</sub>′</span></span></span>　⇒　<span class="frac"><span class="num">300</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = 0.6　⇒　<i>f</i><sub>1</sub>′ = <b>500 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>由光焦度公式解第二透镜
+      <div class="eqb">Φ = <span class="frac"><span class="num">1</span><span class="den">1000</span></span> = <span class="frac"><span class="num">1</span><span class="den">500</span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>2</sub>′</span></span> − <span class="frac"><span class="num">300</span><span class="den">500 <i>f</i><sub>2</sub>′</span></span></div>
+      <div class="eqb">0.001 = 0.002 + <span class="frac"><span class="num">0.4</span><span class="den"><i>f</i><sub>2</sub>′</span></span>　⇒　<i>f</i><sub>2</sub>′ = <b>−400 mm</b>（负透镜）</div>
+    </div>
+    <div class="step"><b class="n">4</b>验算：<i>l</i><sub>F</sub>′ = 1000(1 − 300/500) = 400 ✓；<i>L</i> = 300 + 400 = 700 ✓；<i>l</i><sub>F</sub> = −1000(1 − 300/(−400)) = −1750 mm。
+    </div>
+    <div class="res"><b><i>f</i><sub>1</sub>′ = 500 mm，<i>f</i><sub>2</sub>′ = −400 mm，<i>d</i> = 300 mm</b>。这是一个典型的<b>摄远（远摄）物镜</b>：正组在前、负组在后，筒长 300 mm 却给出 1000 mm 的焦距，物方焦点在系统前 1750 mm。</div>
+    <div class="warn"><b>关键在读题</b>：题面写的是 <i>l</i><sub>F</sub>′（像方焦点的位置，从第二个透镜量），不是 <i>l</i><sub>F</sub>。若误当 <i>l</i><sub>F</sub> = 400 去算，会得到 <i>d</i> = 1200 mm &gt; <i>L</i> = 700 mm 的矛盾结果。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q008">
+  <div class="hd"><span class="tag">2015-9</span><span class="ttl">两个 f′ = 60 mm、间隔 40 mm 的透镜组成的目镜</span></div>
+  <div class="stem">用焦距同为 60 mm 的两个薄透镜在空气中构成一个目镜，两个薄透镜的空间间隔为 40 mm，试问：（1）该目镜等效光组的焦点和主点的位置；（2）如果在第一个透镜前 10 mm 处放置一个物体，试求像面的位置。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>等效焦距（<i>f</i><sub>1</sub>′ = <i>f</i><sub>2</sub>′ = 60，<i>d</i> = 40）
+      <div class="eqb"><i>f</i>′ = <span class="frac"><span class="num"><i>f</i><sub>1</sub>′<i>f</i><sub>2</sub>′</span><span class="den"><i>f</i><sub>1</sub>′ + <i>f</i><sub>2</sub>′ − <i>d</i></span></span> = <span class="frac"><span class="num">3600</span><span class="den">80</span></span> = <b>45 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>主点
+      <div class="eqb"><i>l</i><sub>H</sub> = <span class="frac"><span class="num">45 × 40</span><span class="den">60</span></span> = +30 mm，　<i>l</i><sub>H</sub>′ = −<span class="frac"><span class="num">45 × 40</span><span class="den">60</span></span> = −30 mm</div>
+      <p style="margin:2px 0 0">H 在第一透镜右 30 mm（= 第二透镜左 10 mm）；H′ 在第二透镜左 30 mm（= 第一透镜右 10 mm）。</p>
+    </div>
+    <div class="step"><b class="n">3</b>焦点
+      <div class="eqb"><i>l</i><sub>F</sub>′ = 45<span class="bkt">1 − <span class="frac"><span class="num">40</span><span class="den">60</span></span></span> = +15 mm，　<i>l</i><sub>F</sub> = −45<span class="bkt">1 − <span class="frac"><span class="num">40</span><span class="den">60</span></span></span> = −15 mm</div>
+      <p style="margin:2px 0 0">F′ 在第二透镜右 15 mm；F 在第一透镜左 15 mm。</p>
+    </div>
+    <div class="step"><b class="n">4</b>（2）物在第一透镜前 10 mm，对 H 取 <i>l</i> = −(10 + 30) = −40 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">45</span></span> + <span class="frac"><span class="num">1</span><span class="den">−40</span></span> = −<span class="frac"><span class="num">1</span><span class="den">360</span></span>　⇒　<i>l</i>′ = −360 mm</div>
+      <p style="margin:2px 0 0"><i>l</i>′ &lt; 0 ⇒ 像在 H′ 左方 360 mm，而 H′ 在第一透镜右 10 mm，故像在<b>第一透镜左方 350 mm</b>；<i>β</i> = −360/(−40) = <b>+9</b>。</p>
+    </div>
+    <div class="res">（1）<i>f</i>′ = <b>45 mm</b>；F′ 在第二透镜右 15 mm，F 在第一透镜左 15 mm；H 在第一透镜右 30 mm，H′ 在第一透镜右 10 mm。<br>（2）像在<b>第一透镜前方 350 mm</b>，<b>正立虚像</b>，<i>β</i> = +9。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<h2 id="ch8">第九章 · 光学系统像差与光路计算<span class="cnt">8 题</span></h2>
+<div class="q" id="q001">
+  <div class="hd"><span class="tag">2009-8</span><span class="ttl">厚平凸透镜；加直角棱镜；后表面镀高反膜</span></div>
+  <div class="stem">一个由折射率为 1.5 的玻璃构成的平凸透镜，其前凸面为曲率半径为 30 cm 的球面，透镜的厚度为 15 cm。如果在透镜前 90 cm 有一个高为 5 mm 的物体：<br>
+  （1）试求透镜对物体直接成像时，像的位置和大小；<br>
+  （2）如果紧贴透镜的后平面放置一个一次反射等腰直角棱镜，其中构成棱镜的介质的折射率也是 1.5，棱镜的通光口径为 60 cm，试求这时系统的像的位置和大小；<br>
+  （3）如果在透镜的后平面上直接镀一层高反射膜，试求这时系统的像的位置和大小。</div>
+  <div class="ans">
+    <p><b>（1）厚透镜直接成像</b></p>
+    <div class="step"><b class="n">1</b>前凸面 <i>r</i><sub>1</sub> = +30 cm，后平面 <i>r</i><sub>2</sub> = ∞，<i>n</i> = 1.5，<i>d</i> = 15 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = (<i>n</i>−1)<span class="bkt"><span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span></span> = <span class="frac"><span class="num">0.5</span><span class="den">30</span></span>　⇒　<i>f</i>′ = <b>60 cm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>主面：<i>l</i><sub>H</sub> = 0（<i>r</i><sub>2</sub> = ∞，H 在前顶点）；<i>l</i><sub>H</sub>′ = −<i>f</i>′(<i>n</i>−1)<i>d</i>/(<i>n r</i><sub>1</sub>) = −60×0.5×15/(1.5×30) = −10 cm，即 H′ 在后顶点左方 10 cm（前顶点右方 5 cm）。
+    </div>
+    <div class="step"><b class="n">3</b>物在前 90 cm，对 H 取 <i>l</i> = −90
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> + <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">1</span><span class="den">180</span></span>　⇒　<i>l</i>′ = +180 cm（自 H′）</div>
+      <p style="margin:2px 0 0">换算到后顶点：180 − 10 = <b>170 cm</b>；<i>β</i> = 180/(−90) = −2，像高 10 mm。</p>
+    </div>
+    <div class="res">（1）像在后表面<b>右方 170 cm</b>，<b>倒立实像</b>，高 <b>10 mm</b>（<i>β</i> = −2）。</div>
+
+    <p style="margin-top:16px"><b>（2）紧贴直角棱镜：整体变成一块 75 cm 厚的玻璃板 + 折转 90°</b></p>
+    <div class="step"><b class="n">4</b>棱镜与前表面同折射率 1.5，界面不折射；一次反射直角棱镜沿光轴的光路长 = 直角边长，所以玻璃总厚 <i>d</i> = 15 + 60 = 75 cm，出射面在折转后的光轴上距前表面 75 cm。
+    </div>
+    <div class="step"><b class="n">5</b>先算玻璃内光束本会聚于何处（只经第一面折射）
+      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> − <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">0.5</span><span class="den">30</span></span>　⇒　<i>l</i><sub>1</sub>′ = 270 cm</div>
+    </div>
+    <div class="step"><b class="n">6</b>到出射面还差 270 − 75 = 195 cm（仍在玻璃内），由平面出射面折射进空气
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1.5</span><span class="den">195</span></span>　⇒　<i>l</i>′ = <b>130 cm</b></div>
+    </div>
+    <div class="res">（2）像在<b>棱镜出射面后 130 cm</b>（沿折转后的光轴），<b>倒立实像</b>，高 <b>10 mm</b>。平板放大率为 1，故与（1）同大。</div>
+
+    <p style="margin-top:16px"><b>（3）后平面镀高反膜：折射 → 反射 → 再折射</b></p>
+    <div class="step"><b class="n">7</b>第一步同（2）：<i>l</i><sub>1</sub>′ = 270 cm，<i>β</i><sub>1</sub> = (1×270)/(1.5×(−90)) = −2。
+    </div>
+    <div class="step"><b class="n">8</b>平面镜在后表面（距前顶点 15 cm）。会聚点在镜后 270 − 15 = 255 cm，即虚物 <i>l</i><sub>2</sub> = +255
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">2</span><span class="den">∞</span></span> − <span class="frac"><span class="num">1</span><span class="den">255</span></span>　⇒　<i>l</i><sub>2</sub>′ = −255 cm，　<i>β</i><sub>2</sub> = −<span class="frac"><span class="num">−255</span><span class="den">255</span></span> = +1</div>
+      <p style="margin:2px 0 0">即反射后光束会聚在镜前 255 cm，也就是前表面之前 240 cm。</p>
+    </div>
+    <div class="step"><b class="n">9</b>回穿前凸面（反向：<i>r</i><sub>3</sub> = −30，<i>n</i> = 1.5 → 1）。该会聚点已在出射方向上，故为虚物 <i>l</i><sub>3</sub> = +240
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>3</sub>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">240</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i><sub>3</sub>′ = <b>43.6 cm</b></div>
+      <div class="eqb"><i>β</i><sub>3</sub> = <span class="frac"><span class="num">1.5 × 43.64</span><span class="den">1 × 240</span></span> = 0.273</div>
+    </div>
+    <div class="step"><b class="n">10</b>连乘：<i>β</i> = (−2)(+1)(0.273) = −0.545，像高 5 × 0.545 = 2.73 mm。
+    </div>
+    <div class="res">（3）像在<b>前凸面之前 43.6 cm</b>（与物同侧，距物 90 − 43.6 = 46.4 cm），<b>实像</b>，<b>倒立</b>，高 <b>2.73 mm</b>。</div>
+    <div class="warn"><b>易错</b>：第 8 步的反射面是<b>平面</b>，<i>r</i> = ∞，只剩 <i>l</i><sub>2</sub>′ = −<i>l</i><sub>2</sub>；回穿凸面时曲率半径必须变号（+30 → −30），否则 43.6 cm 会算成 11 cm 一类的怪值。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q014">
+  <div class="hd"><span class="tag">2010-9</span><span class="ttl">n = 1.5、r₁ = 10、r₂ = −50、d = 5 的厚透镜成像</span></div>
+  <div class="stem">已知空气中一个由折射率为 1.5 的介质构成的透镜结构参数如下（单位是 mm）：<i>r</i><sub>1</sub> = 10，<i>r</i><sub>2</sub> = −50，<i>d</i><sub>1</sub> = 5，高度 <i>y</i><sub>1</sub> = 5 mm 的物体位于透镜前 <i>l</i><sub>1</sub> = −120 处，求像的位置和大小。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>第一面（<i>n</i> = 1 → <i>n</i>′ = 1.5，<i>r</i><sub>1</sub> = 10）
+      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> − <span class="frac"><span class="num">1</span><span class="den">−120</span></span> = <span class="frac"><span class="num">0.5</span><span class="den">10</span></span> ⇒ <span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> = 0.04167 ⇒ <i>l</i><sub>1</sub>′ = 36 mm</div>
+    </div>
+    <div class="step"><b class="n">2</b>转面：<i>l</i><sub>2</sub> = <i>l</i><sub>1</sub>′ − <i>d</i> = 36 − 5 = <b>+31 mm</b>（在第二面右侧 ⇒ 对第二面是<b>虚物</b>）
+    </div>
+    <div class="step"><b class="n">3</b>第二面（<i>n</i> = 1.5 → <i>n</i>′ = 1，<i>r</i><sub>2</sub> = −50）
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">31</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−50</span></span> = 0.01 ⇒ <span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub>′</span></span> = 0.05839 ⇒ <i>l</i><sub>2</sub>′ = <b>17.1 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>两次放大率相乘
+      <div class="eqb">β<sub>1</sub> = <span class="frac"><span class="num"><i>n</i><sub>1</sub><i>l</i><sub>1</sub>′</span><span class="den"><i>n</i><sub>1</sub>′<i>l</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1×36</span><span class="den">1.5×(−120)</span></span> = −0.200，　β<sub>2</sub> = <span class="frac"><span class="num">1.5×17.1</span><span class="den">1×31</span></span> = 0.828</div>
+      <div class="eqb">β = β<sub>1</sub>β<sub>2</sub> = −0.166，　<i>y</i>′ = β<i>y</i> = −0.166×5 = <b>−0.83 mm</b></div>
+    </div>
+    <div class="step"><b class="n">5</b>验算（光焦度法）：Φ = Φ<sub>1</sub>+Φ<sub>2</sub>−(d/n)Φ<sub>1</sub>Φ<sub>2</sub> = 0.05+0.01−0.00167 = 0.05833 ⇒ <i>f</i>′ = 17.1 mm，与 <i>l</i><sub>2</sub>′ 自洽
+    </div>
+    <div class="res">像在<b>第二面后 17.1 mm</b>（即距第一面 22.1 mm），是<b>倒立、缩小的实像</b>，像高 <b>|y′| ≈ 0.83 mm</b>（β ≈ −0.166）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q002">
+  <div class="hd"><span class="tag">2010-11</span><span class="ttl">f′ = 100 mm 薄透镜 + 90 mm 直角棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个一次反射等腰直角棱镜（介质折射率为 1.5，直角边长为 90 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图：透镜光轴水平，棱镜的竖直直角面在透镜右方 200 mm 处，光轴垂直射入该面，经斜边反射后向下折转 90° 射出，水平直角边 90 mm。）</span></div>
+    <figure><img src="figs/fig-auto-2010-11-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p58 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜单独成像（<i>l</i> = −150，<i>f</i>′ = 100）
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">100</span></span> + <span class="frac"><span class="num">1</span><span class="den">−150</span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span>　⇒　<i>l</i>′ = 300 mm，　<i>β</i> = −2</div>
+      <p style="margin:2px 0 0">即会聚点在透镜右方 300 mm，而棱镜入射面在 200 mm 处，所以光束是<b>会聚着进棱镜</b>的。</p>
+    </div>
+    <div class="step"><b class="n">2</b>棱镜展开：一次反射直角棱镜沿光轴的光路长 <i>L</i> = 直角边长 = 90 mm（与入射高度无关：斜边两侧的入、出两段之和恒为 <i>a</i>），折射率 1.5。
+    </div>
+    <div class="step"><b class="n">3</b>把棱镜换成"空气等效板"：等价于把像点沿光轴再推远
+      <div class="eqb">Δ = <i>L</i><span class="bkt">1 − <span class="frac"><span class="num">1</span><span class="den">1.5</span></span></span> = <span class="frac"><span class="num">90</span><span class="den">3</span></span> = 30 mm</div>
+    </div>
+    <div class="step"><b class="n">4</b>会聚点距入射面 300 − 200 = 100 mm，被推到 100 + 30 = 130 mm；出射面在光路上距入射面 90 mm
+      <div class="eqb">像距出射面 = 130 − 90 = <b>40 mm</b></div>
+    </div>
+    <div class="res">像在<b>棱镜出射面外 40 mm</b>（沿向下折转 90° 后的光轴），<b>实像</b>，<b>倒立</b>，高 <b>2 mm</b>（平板 <i>β</i> = 1，总 <i>β</i> = −2）。</div>
+    <div class="warn"><b>捷径公式</b>：像距出射面 = (<i>l</i>′<sub>透镜</sub> − 入射面距离) + <i>L</i>/3 − <i>L</i> = (300−200) + 30 − 90 = 40 mm。后面几道棱镜题都套这个式子。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q010">
+  <div class="hd"><span class="tag">2010-12</span><span class="ttl">物在 −∞ 与 −300 mm 时的光阑、入瞳、出瞳</span></div>
+  <div class="stem">焦距为 <i>f</i>′ = 120 mm 的薄透镜，直径 <i>D</i><sub>0</sub> = 40 mm，在透镜前 50 mm 处有一光孔，直径 <i>D</i><sub>p</sub> = 35 mm。试问物体在 −∞ 和 −300 mm 处时，孔径光阑、入瞳和出瞳的位置和大小。</div>
+  <div class="ans">
+    <p><b>（1）物在 −∞</b></p>
+    <div class="step"><b class="n">1</b>平行光入射，光线在各面上的高度相同，故只看通光直径：光孔 35 mm &lt; 透镜框 40 mm
+      <div class="eqb">⇒ <b>孔径光阑 = 光孔</b>（透镜前 50 mm，直径 35 mm）</div>
+    </div>
+    <div class="step"><b class="n">2</b>入瞳 = 光孔经其前方元件所成的像。光孔前方无元件，故入瞳就是光孔本身
+      <div class="eqb">入瞳：透镜前 50 mm，<b>D = 35 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>出瞳 = 光孔经其后方元件（透镜）所成的像。<i>l</i> = −50 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">120</span></span> + <span class="frac"><span class="num">1</span><span class="den">−50</span></span> = −0.011667　⇒　<i>l</i>′ = −85.7 mm</div>
+      <div class="eqb"><i>β</i> = <span class="frac"><span class="num">−85.7</span><span class="den">−50</span></span> = +1.71　⇒　<i>D</i>′ = 35 × 1.71 ≈ <b>60 mm</b></div>
+      <p style="margin:2px 0 0"><i>l</i>′ &lt; 0 ⇒ 出瞳在透镜<b>前</b>方 85.7 mm，是<b>虚出瞳</b>。</p>
+    </div>
+    <p style="margin-top:16px"><b>（2）物在 −300 mm</b></p>
+    <div class="step"><b class="n">4</b>从轴上物点看两个光孔的半张角（张角小者为光阑）
+      <div class="eqb">光孔：tan<i>U</i> = <span class="frac"><span class="num">17.5</span><span class="den">300 − 50</span></span> = 0.0700　　</div>
+      <div class="eqb">透镜框：tan<i>U</i> = <span class="frac"><span class="num">20</span><span class="den">300</span></span> = 0.0667　&lt; 0.0700</div>
+      <p style="margin:2px 0 0">⇒ <b>孔径光阑 = 透镜框</b>。物移近后，原本"更小"的光孔反而张角更大，光阑换人了 —— 这是本题的考点。</p>
+    </div>
+    <div class="step"><b class="n">5</b>透镜框前方、后方都没有别的元件，故入瞳、出瞳都与之重合
+      <div class="eqb">入瞳 = 出瞳 = <b>透镜框本身</b>：位于透镜处，<b>D = 40 mm</b></div>
+    </div>
+    <div class="res">物在 <b>−∞</b>：光阑为光孔（前 50 mm、Ø35），入瞳同处 Ø35，出瞳在透镜前 85.7 mm、Ø60（虚）。<br>
+      物在 <b>−300 mm</b>：光阑为透镜框，入瞳 = 出瞳 = 透镜框（Ø40，位于透镜处）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q003">
+  <div class="hd"><span class="tag">2011-12</span><span class="ttl">f′ = 100 mm 薄透镜 + 60 mm 直角棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个一次等腰直角棱镜（介质折射率为 1.5，直角边长为 60 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图与 2010-11 相同：棱镜竖直直角面距透镜 200 mm。）</span></div>
+    <figure><img src="figs/fig-auto-2011-12-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p59 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜成像与 2010-11 完全一样：<i>l</i>′ = 300 mm，<i>β</i> = −2，会聚点距棱镜入射面 100 mm。
+    </div>
+    <div class="step"><b class="n">2</b><i>L</i> = 60 mm，平板位移
+      <div class="eqb">Δ = <span class="frac"><span class="num">60</span><span class="den">3</span></span> = 20 mm　⇒　会聚点被推到 100 + 20 = 120 mm（自入射面）</div>
+    </div>
+    <div class="step"><b class="n">3</b>出射面距入射面 60 mm
+      <div class="eqb">像距出射面 = 120 − 60 = <b>60 mm</b></div>
+    </div>
+    <div class="res">像在<b>棱镜出射面外 60 mm</b>，<b>倒立实像</b>，高 <b>2 mm</b>。棱镜变短（90→60），像离出射面反而更远 —— 因为总位移少了 10 mm、出射面又前移了 30 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q004">
+  <div class="hd"><span class="tag">2012-11</span><span class="ttl">f′ = 60 mm 薄透镜 + 60 mm 直角棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 60 mm 的薄透镜和一个一次等腰直角棱镜（介质折射率为 1.5，直角边长为 60 mm）构成的光学系统，在透镜前 90 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图：棱镜竖直直角面距透镜 120 mm，水平直角边 60 mm。）</span></div>
+    <figure><img src="figs/fig-auto-2012-11-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p60 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜成像（<i>l</i> = −90，<i>f</i>′ = 60）
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> + <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">1</span><span class="den">180</span></span>　⇒　<i>l</i>′ = 180 mm，　<i>β</i> = −2</div>
+    </div>
+    <div class="step"><b class="n">2</b>会聚点距入射面 180 − 120 = 60 mm；<i>L</i> = 60 mm，Δ = 20 mm
+      <div class="eqb">会聚点被推到 60 + 20 = 80 mm（自入射面）</div>
+    </div>
+    <div class="step"><b class="n">3</b>出射面在 60 mm 处
+      <div class="eqb">像距出射面 = 80 − 60 = <b>20 mm</b></div>
+    </div>
+    <div class="res">像在<b>棱镜出射面外 20 mm</b>，<b>倒立实像</b>，高 <b>2 mm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q005">
+  <div class="hd"><span class="tag">2013-11</span><span class="ttl">f′ = 100 mm 薄透镜 + 二次反射五棱镜</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个二次反射五棱镜（介质折射率为 1.5，两个直角边长均为 60 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题图：五棱镜左端竖直直角面距透镜 150 mm，顶面 60 mm，右上内角 112.5°；光轴垂直射入竖直面，两次反射后向下折转 90° 射出。）</span></div>
+    <figure><img src="figs/fig-auto-2013-11-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p61 插图（自动裁自真题 PDF）</figcaption></figure><figure><img src="figs/fig-auto-2013-11-2.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p61 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>透镜成像：同 2010-11，<i>l</i>′ = 300 mm，<i>β</i> = −2，会聚点距棱镜入射面 300 − 150 = 150 mm。
+    </div>
+    <div class="step"><b class="n">2</b>二次反射五棱镜按两个反射面展开成一块玻璃板，展开厚度（沿光轴的光路长）按标准五棱镜取
+      <div class="eqb"><i>L</i> = (2 + √2)<i>a</i> = 3.414 × 60 ≈ 205 mm</div>
+    </div>
+    <div class="step"><b class="n">3</b>平板位移 Δ = <i>L</i>(1 − 1/1.5) = 205/3 ≈ 68 mm；会聚点被推到 150 + 68 = 218 mm
+    </div>
+    <div class="step"><b class="n">4</b>出射面在光路上距入射面 <i>L</i> = 205 mm
+      <div class="eqb">像距出射面 = 218 − 205 ≈ <b>13 mm</b>　（通式：150 − <span class="frac"><span class="num">2<i>L</i></span><span class="den">3</span></span>）</div>
+    </div>
+    <div class="res">像在<b>五棱镜出射面外约 13 mm</b>（沿折转 90° 后的光轴），<b>倒立实像</b>，高 <b>2 mm</b>。</div>
+    <div class="warn"><b>【待核】</b>这题唯一不确定的量是五棱镜的<b>展开厚度 <i>L</i></b>：它取决于五边形各边长度，而题面只给了"两个直角边长 60 mm"与"112.5°"。本页按标准五棱镜 <i>L</i> = (2+√2)<i>a</i> ≈ 205 mm 计算。若课上取 <i>L</i> = 2<i>a</i> = 120 mm，则像距出射面 = 150 − 80 = <b>70 mm</b>；取 <i>L</i> = <i>a</i>(1+√2) = 145 mm，则为 <b>53 mm</b>。通式 150 − 2<i>L</i>/3 已给出，换 <i>L</i> 即得。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+<div class="q" id="q006">
+  <div class="hd"><span class="tag">2014-11</span><span class="ttl">与 2013-11 参数完全相同的五棱镜题</span></div>
+  <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个二次反射五棱镜（介质折射率为 1.5，两个直角边长均为 60 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
+  <span style="color:#6d6d6d;font-size:13.5px">（题面与 2013-11 逐字相同，题图也相同：五棱镜距透镜 150 mm、顶面 60 mm、内角 112.5°。）</span></div>
+    <figure><img src="figs/fig-auto-2014-11-1.png" alt="原卷插图" loading="lazy"><figcaption>原卷 p62 插图（自动裁自真题 PDF）</figcaption></figure>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>数据与 2013-11 完全一致，直接沿用其结论：透镜 <i>l</i>′ = 300 mm、<i>β</i> = −2；<i>L</i> ≈ 205 mm、Δ ≈ 68 mm。
+    </div>
+    <div class="step"><b class="n">2</b>
+      <div class="eqb">像距出射面 = (300 − 150) + 68 − 205 ≈ <b>13 mm</b>，　像高 = 2 mm</div>
+    </div>
+    <div class="res">与 <b>2013-11 答案相同</b>：像在<b>出射面外约 13 mm</b>，倒立实像，高 2 mm。两年同一道题、同一组数。</div>
+    <div class="warn"><b>【待核】</b>同 2013-11：不确定的只是五棱镜展开厚度 <i>L</i> 的取法。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+<h2 id="ch9">第十章 · 光学仪器<span class="cnt">11 题</span></h2>
+<div class="q" id="q019">
+  <div class="hd"><span class="tag">2009-11</span><span class="ttl">10× 、f₁′ = 20 cm：目镜焦距、物镜口径、出射光束宽度</span></div>
+  <div class="stem">想设计一个由两个正的薄透镜构成的放大倍率为 10× 的望远镜，如果物镜的像方焦距为 20 cm：<br>
+  （1）试问应该选择焦距为多大的目镜？<br>
+  （2）如果眼的角分辨极限为 1′，要求通过该望远镜观察时不出现明显的假象，试问选择的物镜的口径至少为多大？（以波长为 555 nm 的光波为准）<br>
+  （3）用该望远镜系统对光束进行变换，如果入射光束的宽度为 <i>D</i>，试求出射光束的宽度为多少？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>放大率 <i>Γ</i> = <i>f</i><sub>1</sub>′/<i>f</i><sub>2</sub>′
+      <div class="eqb"><i>f</i><sub>2</sub>′ = <span class="frac"><span class="num"><i>f</i><sub>1</sub>′</span><span class="den">Γ</span></span> = <span class="frac"><span class="num">200</span><span class="den">10</span></span> = <b>20 mm</b>（筒长 220 mm）</div>
+    </div>
+    <div class="step"><b class="n">2</b>"不出现明显假象"= 望远镜的分辨角被放大后仍不大于人眼极限，否则是空放大
+      <div class="eqb"><i>Γ</i> · <span class="frac"><span class="num">1.22λ</span><span class="den"><i>D</i></span></span> ≤ 1′ = 2.91×10<sup>−4</sup> rad</div>
+      <div class="eqb"><i>D</i> ≥ <span class="frac"><span class="num">1.22 × 555×10<sup>−9</sup> × 10</span><span class="den">2.91×10<sup>−4</sup></span></span> = <b>23.3 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>望远镜是"光束压缩器"：入射宽度 <i>D</i> 被压缩 <i>Γ</i> 倍
+      <div class="eqb"><i>D</i>′ = <span class="frac"><span class="num"><i>D</i></span><span class="den">Γ</span></span> = <b>0.1<i>D</i></b></div>
+      <p style="margin:2px 0 0">这也就是出瞳直径：<i>D</i> = 23.3 mm 时出瞳仅 2.3 mm，正好与人眼瞳孔匹配。</p>
+    </div>
+    <div class="res">（1）目镜 <b><i>f</i><sub>2</sub>′ = 20 mm</b>；（2）物镜口径 <b><i>D</i> ≥ 23 mm</b>；（3）出射光束宽度 <b><i>D</i>′ = <i>D</i>/10 = 0.1<i>D</i></b>。</div>
+    <div class="warn"><b>【待核】</b>另有"有效放大率"经验式 <i>Γ</i> ≤ 2<i>D</i>(mm)，得 <i>D</i> ≥ 5 mm，与本页的衍射判据差 4 倍。本题特意给了波长 555 nm，应以 1.22λ/<i>D</i> 为准。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+<div class="q" id="q013">
+  <div class="hd"><span class="tag">2010-13</span><span class="ttl">β₁ = −40、Γ₂ = 15、共轭距 195 mm 的显微镜</span></div>
+  <div class="stem">有一显微镜系统，物镜的放大率为 −40，目镜的倍率为 15（设均为薄透镜），物镜的共轭距为 195 mm，求物镜和目镜的焦距、物体的位置和光学筒长、物镜与目镜的间距、系统等效焦距与总倍率。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>物镜：共轭距 = <i>l</i>′ − <i>l</i> = 195，且 <i>β</i><sub>1</sub> = <i>l</i>′/<i>l</i> = −40 ⇒ <i>l</i>′ = −40<i>l</i>
+      <div class="eqb">−40<i>l</i> − <i>l</i> = 195　⇒　<i>l</i> = <b>−4.76 mm</b>，　<i>l</i>′ = <b>+190.2 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>物镜焦距
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><sub>1</sub>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">190.2</span></span> − <span class="frac"><span class="num">1</span><span class="den">−4.76</span></span> = 0.00526 + 0.21008 = 0.21534　⇒　<i>f</i><sub>1</sub>′ = <b>4.64 mm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>目镜视角放大率 15 ⇒ <i>f</i><sub>2</sub>′ = 250/15 = <b>16.7 mm</b>
+    </div>
+    <div class="step"><b class="n">4</b>光学筒长（物镜像方焦点到目镜物方焦点）
+      <div class="eqb">Δ = <i>l</i>′ − <i>f</i><sub>1</sub>′ = 190.2 − 4.64 = <b>185.6 mm</b></div>
+      <p style="margin:2px 0 0">验算：<i>Γ</i><sub>物</sub> = −Δ/<i>f</i><sub>1</sub>′ = −185.6/4.64 = −40 ✓</p>
+    </div>
+    <div class="step"><b class="n">5</b>两镜间距 = <i>l</i>′ + <i>f</i><sub>2</sub>′ = 190.2 + 16.7 = <b>206.9 mm</b>
+    </div>
+    <div class="step"><b class="n">6</b>系统等效焦距与总倍率
+      <div class="eqb"><i>f</i>′ = −<span class="frac"><span class="num"><i>f</i><sub>1</sub>′<i>f</i><sub>2</sub>′</span><span class="den">Δ</span></span> = −<span class="frac"><span class="num">4.64 × 16.7</span><span class="den">185.6</span></span> = <b>−0.417 mm</b>，　<i>Γ</i> = (−40)(15) = <b>−600×</b></div>
+    </div>
+    <div class="res">物镜 <b><i>f</i><sub>1</sub>′ = 4.64 mm</b>、目镜 <b><i>f</i><sub>2</sub>′ = 16.7 mm</b>；物在物镜前 <b>4.76 mm</b>（<i>l</i> = −4.76）；光学筒长 <b>185.6 mm</b>；镜间距 <b>206.9 mm</b>；<i>f</i>′ = <b>−0.417 mm</b>，总倍率 <b>Γ = −600×</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q020">
+  <div class="hd"><span class="tag">2011-13</span><span class="ttl">10 km 处 50 mm 两点：倍率、焦距、口径</span></div>
+  <div class="stem">欲看清 10 km 处相隔 50 mm 的两个物点，用开普勒望远镜。试求：<br>
+  （1）望远镜至少应选用多大倍率（正常倍率）；<br>
+  （2）当筒长为 465 mm 时，物镜和目镜的焦距；<br>
+  （3）保证人眼极限分辨角为 1′ 时，物镜和目镜的口径 <i>D</i><sub>1</sub> 和 <i>D</i><sub>2</sub>。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>两物点对物镜的张角
+      <div class="eqb"><i>θ</i> = <span class="frac"><span class="num">50</span><span class="den">10 × 10<sup>3</sup></span></span> = 5×10<sup>−6</sup> rad = 1.03″</div>
+      <p style="margin:2px 0 0">要"看清"，放大后须达到人眼极限 1′ = 60″。</p>
+    </div>
+    <div class="step"><b class="n">2</b>正常倍率
+      <div class="eqb"><i>Γ</i> ≥ <span class="frac"><span class="num">60″</span><span class="den">1.03″</span></span> ≈ <b>58×</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>筒长 = <i>f</i><sub>1</sub>′ + <i>f</i><sub>2</sub>′ = 465，且 <i>f</i><sub>1</sub>′/<i>f</i><sub>2</sub>′ = 58.2
+      <div class="eqb"><i>f</i><sub>2</sub>′ = <span class="frac"><span class="num">465</span><span class="den">58.2 + 1</span></span> = <b>7.86 mm</b>，　<i>f</i><sub>1</sub>′ = 465 − 7.86 = <b>457 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>物镜口径：分辨角要被放大到 1′
+      <div class="eqb"><i>D</i><sub>1</sub> ≥ <span class="frac"><span class="num">1.22λΓ</span><span class="den">1′</span></span> = <span class="frac"><span class="num">1.22 × 555×10<sup>−9</sup> × 58.2</span><span class="den">2.91×10<sup>−4</sup></span></span> = 0.136 m ≈ <b>136 mm</b></div>
+    </div>
+    <div class="step"><b class="n">5</b>目镜口径：至少要能放过出瞳
+      <div class="eqb"><i>D</i><sub>2</sub> ≥ <span class="frac"><span class="num"><i>D</i><sub>1</sub></span><span class="den">Γ</span></span> = <span class="frac"><span class="num">136</span><span class="den">58.2</span></span> ≈ <b>2.3 mm</b></div>
+    </div>
+    <div class="res">（1）<b>Γ ≥ 58×</b>；（2）<i>f</i><sub>1</sub>′ = <b>457 mm</b>、<i>f</i><sub>2</sub>′ = <b>7.9 mm</b>（筒长 465 mm）；（3）<i>D</i><sub>1</sub> ≥ <b>136 mm</b>、<i>D</i><sub>2</sub> ≥ <b>2.3 mm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q017">
+  <div class="hd"><span class="tag">2012-12</span><span class="ttl">f′ = 75 mm、F = 16，远景到无穷远时的对准平面与近景面</span></div>
+  <div class="stem">如果照相物镜的对准平面以后的整个空间都能在景像平面上成清晰像，物镜的焦距 <i>f</i>′ = 75 mm，所用光圈数 <i>F</i> = 16。求对准平面位置和近景面的位置。如果调焦于无限远处，即 <i>p</i> = ∞，求近景位置。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>取容许弥散圆 <i>z</i> = 0.03 mm，则孔径 <i>D</i> = <i>f</i>′/<i>F</i> = 75/16 = 4.69 mm，判据为
+      <div class="eqb"><span class="frac"><span class="num"><i>z</i></span><span class="den"><i>D</i></span></span> = <span class="frac"><span class="num"><i>z F</i></span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">0.03 × 16</span><span class="den">75</span></span> = 0.0064</div>
+    </div>
+    <div class="step"><b class="n">2</b>"对准平面以后全部清晰" ⇒ 远景 <i>p</i><sub>1</sub> = ∞，其像正好落在景像平面上，即像距
+      <div class="eqb"><i>p</i>′ = <i>f</i>′ + <i>zF</i> = 75 + 0.48 = 75.48 mm</div>
+    </div>
+    <div class="step"><b class="n">3</b>由像距反求对准平面
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>p</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">75</span></span> − <span class="frac"><span class="num">1</span><span class="den">75.48</span></span> = 8.479×10<sup>−5</sup>　⇒　<i>p</i> = <b>11.8 m</b></div>
+      <p style="margin:2px 0 0">等价写法：<i>p</i> = <i>f</i>′<sup>2</sup>/(<i>zF</i>) + <i>f</i>′ = 5625/0.48 + 75 = 11794 mm。</p>
+    </div>
+    <div class="step"><b class="n">4</b>近景面：弥散斑同样为 <i>z</i> 时，近物的像距 <i>p</i><sub>2</sub>′ = <i>p</i>′/(1 − 0.0064) = 75.966 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>p</i><sub>2</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">75</span></span> − <span class="frac"><span class="num">1</span><span class="den">75.966</span></span> = 1.696×10<sup>−4</sup>　⇒　<i>p</i><sub>2</sub> = <b>5.9 m</b></div>
+      <p style="margin:2px 0 0">"远景到 ∞"时恒有 <i>p</i> = 2<i>p</i><sub>2</sub> 这一好用的结论，可用来秒验。</p>
+    </div>
+    <div class="step"><b class="n">5</b>调焦于无穷远（<i>p</i> = ∞，<i>p</i>′ = <i>f</i>′ = 75 mm）：近景像距 75.483 mm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>p</i><sub>2</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">75</span></span> − <span class="frac"><span class="num">1</span><span class="den">75.483</span></span> = 8.55×10<sup>−5</sup>　⇒　<i>p</i><sub>2</sub> = <b>11.7 m</b></div>
+    </div>
+    <div class="res">对准平面 <b>11.8 m</b>，近景面 <b>5.9 m</b>（景深 5.9 m → ∞）；调焦无穷远时近景 <b>11.7 m</b>。</div>
+    <div class="warn"><b>【待核】</b>题面未给容许弥散圆，本页取 <i>z</i> = 0.03 mm。若你们课程取 <i>z</i> = 0.05 mm，则 <i>zF</i> = 0.8，<i>p</i> = 5625/0.8 + 75 = 7.1 m，<i>p</i><sub>2</sub> = 3.5 m，<i>p</i><sub>2</sub>(∞) = 7.0 m。</div>
+    <span class="src">【真题 + 自算】【待核】</span>
+  </div>
+</div>
+<div class="q" id="q014">
+  <div class="hd"><span class="tag">2012-13</span><span class="ttl">Γ = −300×、目镜 20 mm：物镜倍率与最小分辨距离</span></div>
+  <div class="stem">已知显微镜的视角放大率为 −300×，目镜的焦距为 20 mm，求显微镜物镜的倍率。假定人眼的视角分辨率为 60″，问使用该显微镜观察时，能分辨的两物点的最小距离等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>目镜的视角放大率
+      <div class="eqb"><i>Γ</i><sub>2</sub> = <span class="frac"><span class="num">250</span><span class="den"><i>f</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">250</span><span class="den">20</span></span> = 12.5×</div>
+    </div>
+    <div class="step"><b class="n">2</b>总倍率是两级相乘
+      <div class="eqb"><i>Γ</i><sub>1</sub> = <span class="frac"><span class="num">Γ</span><span class="den"><i>Γ</i><sub>2</sub></span></span> = <span class="frac"><span class="num">−300</span><span class="den">12.5</span></span> = <b>−24×</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>分辨判据：把物方间隔 <i>δ</i> 放大 <i>Γ</i> 倍后（相对明视距离 250 mm）恰等于人眼分辨角
+      <div class="eqb">60″ = 2.91×10<sup>−4</sup> rad，　<span class="frac"><span class="num">Γ<i>δ</i></span><span class="den">250</span></span> = 2.91×10<sup>−4</sup></div>
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">250 × 2.91×10<sup>−4</sup></span><span class="den">300</span></span> = 2.42×10<sup>−4</sup> mm ≈ <b>0.24 μm</b></div>
+    </div>
+    <div class="res">物镜倍率 <b>Γ₁ = −24×</b>；能分辨的两物点最小距离 <b>δ ≈ 0.24 μm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q011">
+  <div class="hd"><span class="tag">2013-12</span><span class="ttl">f′ = 40 mm、D₁ = 30 mm 的放大镜：光阑、入瞳、入窗、线视场</span></div>
+  <div class="stem">一个像方焦距为 40 mm，直径 <i>D</i><sub>1</sub> = 30 mm 的薄透镜做成放大镜，眼瞳位于透镜像方焦点 F′ 上，眼瞳直径 <i>D</i><sub>2</sub> = 4 mm，物面放在透镜物方焦平面上。试问：<br>
+  （1）哪一个是孔径光阑，哪一个是视场光阑；（2）入瞳在哪里，物方孔径角等于多少；（3）入窗在哪里，物方无渐晕的线视场等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>判孔径光阑：从轴上物点（在 F 上）看两个光孔的<b>像方张角</b>。
+      <div class="eqb">透镜框：tan<i>U</i> = <span class="frac"><span class="num">15</span><span class="den">40</span></span> = 0.375</div>
+      <p style="margin:2px 0 0">眼瞳在 F′ 上，从物方看它<b>经透镜成像于无穷远</b>，只能比"光束半宽"：物点在 F 上，出射光束平行于光轴，在透镜处的半宽就等于瞳孔半径 2 mm，即 tan<i>U</i> = 2/40 = 0.05。</p>
+      <div class="eqb">0.05 &lt; 0.375　⇒　<b>孔径光阑 = 眼瞳</b>，<b>视场光阑 = 放大镜框</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>入瞳 = 眼瞳经其前方元件（放大镜）所成的像。眼瞳在 F′，故像在物方无穷远
+      <div class="eqb">入瞳：位于物方<b>无穷远</b>，角半径 = <span class="frac"><span class="num"><i>D</i><sub>2</sub>/2</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">2</span><span class="den">40</span></span> = 0.05 rad</div>
+      <div class="eqb">物方孔径角 2<i>U</i> = <span class="frac"><span class="num"><i>D</i><sub>2</sub></span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">4</span><span class="den">40</span></span> = 0.1 rad ≈ <b>5.7°</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>入窗 = 视场光阑经其前方元件所成的像。放大镜框前方无元件，故入窗就是镜框本身
+      <div class="eqb">入窗：位于<b>放大镜处</b>，直径 <b>30 mm</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>线视场：物在物方焦平面，物高 <i>y</i> 的主光线过瞳孔中心（F′ 处轴上点），由相似三角形知它在透镜上的高度为 <i>y</i>/2；光束在透镜处的半宽 = 瞳孔半径 2 mm。无渐晕要求整束光都通过镜框（半径 15 mm）
+      <div class="eqb"><span class="frac"><span class="num"><i>y</i></span><span class="den">2</span></span> + 2 ≤ 15　⇒　<i>y</i> ≤ 26 mm　⇒　2<i>y</i> = <b>52 mm</b></div>
+    </div>
+    <div class="res">（1）孔径光阑 = <b>眼瞳</b>，视场光阑 = <b>放大镜框</b>；（2）入瞳在物方<b>无穷远</b>，物方孔径角 <b>0.1 rad（5.7°）</b>；（3）入窗在<b>放大镜处</b>（Ø30），物方无渐晕线视场 <b>2y = 52 mm</b>。</div>
+    <div class="warn"><b>说明</b>：若只算主光线、不计光束宽度（有的教材这么处理），则 <i>y</i>/2 ≤ 15 ⇒ 2<i>y</i> = 60 mm。本题明确说"<b>无渐晕</b>"，所以取 52 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q016">
+  <div class="hd"><span class="tag">2013-13</span><span class="ttl">Γ = −1000×、NA = 1.3、λ = 555 nm 的分辨距离</span></div>
+  <div class="stem">有一架显微镜，视角放大率 <i>Γ</i> = −1000×，目镜焦距为 25 mm，显微物镜的数值孔径为 1.3，求系统在物平面上能分辨的两物点的最小间隔以及在物镜像平面上能分辨的最小间隔（照明波长为 555 nm）。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>放大率分配：<i>Γ</i><sub>2</sub> = 250/25 = 10 ⇒ <i>Γ</i><sub>1</sub> = −1000/10 = <b>−100×</b>
+    </div>
+    <div class="step"><b class="n">2</b>物面分辨极限用数值孔径（瑞利判据）
+      <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">0.61λ</span><span class="den">NA</span></span> = <span class="frac"><span class="num">0.61 × 555</span><span class="den">1.3</span></span> nm = <b>260 nm = 0.26 μm</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>物镜像平面上的间隔 = 物镜放大 100 倍后的间隔
+      <div class="eqb"><i>δ</i>′ = |<i>Γ</i><sub>1</sub>| · <i>δ</i> = 100 × 0.26 = <b>26 μm</b></div>
+    </div>
+    <div class="res">物面上最小可分辨间隔 <b>δ ≈ 0.26 μm</b>；物镜像平面上最小可分辨间隔 <b>δ′ ≈ 26 μm</b>（恰好是 100 倍关系）。</div>
+    <div class="warn"><b>两种判据</b>：有的教材取 <i>δ</i> = 0.5λ/NA，则 δ = 0.21 μm、δ′ = 21 μm。本题给了 NA 和 λ，说明要用衍射判据而不是"人眼 60″"那一套。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q018">
+  <div class="hd"><span class="tag">2014-12</span><span class="ttl">0.6 m 的相机加近拍镜能拍 0.2 m，求近拍镜焦距</span></div>
+  <div class="stem">一台照相机只能够对其 0.6 m 以前的物体成像。通过增加近拍镜可以拍摄更近的物体，要使该照相机能够拍摄其 0.2 m 以前的物体，近拍镜的焦距应该为多少？（将近拍镜看作薄透镜）</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>相机调焦范围到 0.6 m 为止，说明它最靠近的位置对应"物在 0.6 m"。加近拍镜后相机仍按 0.6 m 调焦，所以要<b>让 0.2 m 处的物经近拍镜后，其像正好出现在 0.6 m 处</b>（虚像）。
+    </div>
+    <div class="step"><b class="n">2</b>对近拍镜：物 <i>l</i> = −200 mm，像 <i>l</i>′ = −600 mm（虚像、在物同侧）
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">−600</span></span> − <span class="frac"><span class="num">1</span><span class="den">−200</span></span> = <span class="frac"><span class="num">2</span><span class="den">600</span></span></div>
+      <div class="eqb"><i>f</i>′ = <b>+300 mm</b>（光焦度 +3.33 D）</div>
+    </div>
+    <div class="step"><b class="n">3</b>验算：近拍镜把 0.2 m 的物成 0.6 m 处的正立虚像，相机对 0.6 m 调焦即可拍清；放大率 <i>β</i> = −600/−200 = +3，画面中心仍是正立的。
+    </div>
+    <div class="res">近拍镜焦距 <b><i>f</i>′ = +300 mm</b>（即 +3.33 屈光度、俗称 No.3 近拍镜）。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q021">
+  <div class="hd"><span class="tag">2014-13</span><span class="ttl">用 −10、10、200 mm 三片与一个光阑设计无渐晕望远镜</span></div>
+  <div class="stem">现有焦距分别为 −10 mm、10 mm 和 200 mm 的三个薄透镜和一个光阑，试用其中的两个薄透镜和光阑设计一个无渐晕的望远镜系统：（1）画出光学系统的结构图；（2）该系统的视角放大率为多少；（3）如果要使物方全视场角为 2°，问光阑的孔径应该为多大？</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>取 <i>f</i><sub>1</sub>′ = 200 mm 作物镜、<i>f</i><sub>2</sub>′ = 10 mm 作目镜（两片正透镜，构成开普勒望远镜），−10 mm 那片留作场镜/不用。
+      <div class="eqb">筒长 = 200 + 10 = 210 mm，物镜框即孔径光阑</div>
+    </div>
+    <div class="step"><b class="n">2</b>视角放大率（放大率与物镜口径无关，只由两焦距定）
+      <div class="eqb"><i>Γ</i> = −<span class="frac"><span class="num"><i>f</i><sub>1</sub>′</span><span class="den"><i>f</i><sub>2</sub>′</span></span> = −<span class="frac"><span class="num">200</span><span class="den">10</span></span> = <b>−20×</b>（|Γ| = 20）</div>
+    </div>
+    <div class="step"><b class="n">3</b>"无渐晕"的关键：把光阑放在<b>物镜的像方焦面（也就是目镜的物方焦面、中间像面）</b>上，它天然是<b>视场光阑</b>——轴外光束的主光线都过它的中心，边缘光束不被切割。
+    </div>
+    <div class="step"><b class="n">4</b>物方全视场 2<i>ω</i> = 2°，半视场 <i>ω</i> = 1°。中间像面上像高
+      <div class="eqb"><i>y</i>′ = <i>f</i><sub>1</sub>′ tan<i>ω</i> = 200 × tan1° = 200 × 0.01746 = 3.49 mm</div>
+      <div class="eqb">光阑孔径 <b>2<i>y</i>′ = 6.98 mm ≈ 7.0 mm</b></div>
+    </div>
+    <div class="res">（1）结构：物镜 <i>f</i><sub>1</sub>′ = 200（Ø 兼作孔径光阑）— 210 mm 筒长 — 目镜 <i>f</i><sub>2</sub>′ = 10，光阑（Ø7）紧贴中间像面，即距物镜 200 mm、距目镜 10 mm；<br>
+      （2）<b><i>Γ</i> = −20×</b>；（3）光阑孔径 <b><i>D</i> = 2<i>f</i><sub>1</sub>′tan1° ≈ 7.0 mm</b>。</div>
+    <div class="warn"><b>为什么不用 −10 mm 那片</b>：−10 只能作场镜（放在中间像面附近把光束"压"进目镜），题目要求"两个薄透镜 + 光阑"，而光阑本身放在中间像面就已经满足无渐晕，故取 200 + 10 这一组。若改用 20× 以外的组合（例如 200 配 −10）会得到虚放大率的伽利略系统，但那样光阑无处安放、无法无渐晕。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q012">
+  <div class="hd"><span class="tag">2015-10</span><span class="ttl">与 2013-12 同参数的放大镜题</span></div>
+  <div class="stem">将一个像方焦距为 40 mm，直径 <i>D</i><sub>1</sub> = 30 mm 的薄透镜做成放大镜，眼瞳位于透镜像方焦点 F′ 上，眼瞳直径 <i>D</i><sub>2</sub> = 4 mm，物面放在透镜物方焦平面上。试问：（1）哪一个是孔径光阑，哪一个是视场光阑；（2）入瞳在哪里，物方孔径角等于多少；（3）入窗在哪里，物方无渐晕的线视场等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>与 2013-12 逐字相同，结论直接沿用：眼瞳张角 0.05 rad &lt; 镜框 0.375 rad，故<b>孔径光阑 = 眼瞳</b>、<b>视场光阑 = 镜框</b>。
+    </div>
+    <div class="step"><b class="n">2</b>入瞳在物方无穷远，物方孔径角 2<i>U</i> = <i>D</i><sub>2</sub>/<i>f</i>′ = 4/40 = 0.1 rad。
+    </div>
+    <div class="step"><b class="n">3</b>入窗 = 镜框本身（放大镜处，Ø30）；线视场 <i>y</i>/2 + 2 ≤ 15 ⇒ 2<i>y</i> = 52 mm。
+    </div>
+    <div class="res">同 <b>2013-12</b>：光阑为眼瞳（孔径）/镜框（视场），入瞳在无穷远、孔径角 0.1 rad，入窗在镜框处，无渐晕线视场 2<i>y</i> = <b>52 mm</b>。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div class="q" id="q015">
+  <div class="hd"><span class="tag">2015-11</span><span class="ttl">与 2012-13 同参数（−300×、目镜 20 mm、60″）</span></div>
+  <div class="stem">已知显微镜的视角放大率为 −300×，目镜的焦距为 20 mm，求显微镜物镜的倍率。假定人眼的视角分辨率为 60″，问使用该显微镜观察时，能分辨的两物点的最小距离等于多少。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b><i>Γ</i><sub>2</sub> = 250/20 = 12.5，<i>Γ</i><sub>1</sub> = −300/12.5 = <b>−24×</b>
+    </div>
+    <div class="step"><b class="n">2</b><i>δ</i> = 250 × (60/206265)/300 = 2.42×10<sup>−4</sup> mm ≈ <b>0.24 μm</b>
+    </div>
+    <div class="res">同 2012-13：物镜 <b>−24×</b>，最小分辨距离 <b>0.24 μm</b>。若改用衍射判据 0.61λ/NA（λ = 550 nm，NA ≈ 0.65）也落在 0.5 μm 量级，两法互相印证。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+<div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
+  <p><b>本片范围</b>：源 PDF 第 <b>1–28 页</b>（共 81 页），只收标签年份 <b>≤ 2015</b> 的计算题，共 <b>37 题</b>（第一章 10、第二章 11、第三章 10、第四章 6）。2016 及以后的题目（2016/2017/2018/2019/2020/2021/2022/2023/2024）已按分工排除，不在本文件内。</p>
+  <p><b>页码对照</b>：p1–p6 第一章（波场表达式、反射/折射定律、布儒斯特角、菲涅尔公式）｜p7–p12 第二章（杨氏双缝、双光束平面波干涉）｜p13–p16 第二章尾（光程差/相干长度/可见度）＋第三章开头｜p17–p22 第三章（分辨本领、光栅、F-P）｜p23–p28 第四章（波片、双折射、偏振棱镜）。</p>
+  <p><b>已知局限</b>：① 全部解答为【自算】，未逐题比对机构答案册。② 本片不做图，所有光路均用文字描述（棱镜、波片、双折射装置）。③ 共 <b>14 处【待核】</b>，集中在：2015-2（题干 50° 与配图 30° 冲突、旋向约定）、2009-3（半波损失）、2010-5（Δλ 取全宽还是半宽）、2010-1（两束同侧/异侧）、2010-4（"最小波长差"取一级还是最高级）、2011-4（电子束波长量级）、2013-4（有效放大率口径）、2009-5 / 2013-5（旋向）、2009-6 / 2011-7（棱镜失效方向、棱镜 2 的光轴未给）、2012-6（相位差用有效折射率还是简化式）。每处都写明了替代算法，按你们的约定替换即可。</p>
+  <p><b>标注</b>：<b>【真题】</b> 题面照录　<b>【自算】</b> 解答由我推导　<b>【待核】</b> 题面或约定拿不准，需按教材核对。</p>
+</div>
+
+</div>
+<div class="btnbar">
+  <button id="tg" class="alt">收起答案</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div>
+<script>
+  var tg = document.getElementById('tg');
+  tg.addEventListener('click', function () {
+    document.body.classList.toggle('hide');
+    tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+  });
+  (function () {
+    var KEY = 'g851-early-p1-mastered';
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+    var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var stat = document.getElementById('stat');
+    function refresh() {
+      stat.textContent = '已掌握 ' + document.querySelectorAll('.q.done').length + ' / ' + qs.length;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+    qs.forEach(function (q) {
+      var tag = q.querySelector('.tag'), hd = q.querySelector('.hd');
+      if (!tag || !hd) return;
+      var id = tag.textContent.trim();
+      var lab = document.createElement('label');
+      lab.className = 'mk';
+      lab.innerHTML = '<input type="checkbox"> 已掌握';
+      var box = lab.querySelector('input');
+      box.checked = !!saved[id];
+      if (box.checked) q.classList.add('done');
+      box.addEventListener('change', function () {
+        if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+        else { delete saved[id]; q.classList.remove('done'); }
+        refresh();
+      });
+      hd.appendChild(lab);
+    });
+    refresh();
+    var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+    bAll.addEventListener('click', function () {
+      document.body.classList.remove('onlytodo');
+      bAll.classList.add('on'); bTodo.classList.remove('on');
+    });
+    bTodo.addEventListener('click', function () {
+      document.body.classList.add('onlytodo');
+      bTodo.classList.add('on'); bAll.classList.remove('on');
+    });
+  })();
+</script>
+<style>
+  /* ===== 抽背模式 ===== */
+  #quizov{position:fixed;inset:0;z-index:99;background:rgba(20,18,16,.55);
+          display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;
+          backdrop-filter:blur(3px);}
+  #quizov.on{display:flex;}
+  #quizov .qbox{background:#fff;max-width:760px;width:100%;border-radius:12px;
+                padding:22px 24px 18px;box-shadow:0 18px 60px rgba(0,0,0,.3);max-height:86vh;overflow:auto;}
+  #quizov .qmeta{display:flex;justify-content:space-between;font-size:12.5px;color:#6d6d6d;
+                 border-bottom:1px solid #e3dfd7;padding-bottom:8px;margin-bottom:14px;}
+  #quizov #qhd{font-size:12px;font-weight:700;color:#8c4a2f;margin-bottom:6px;}
+  #quizov #qstem{font-size:15.5px;line-height:1.9;}
+  #quizov #qans{margin-top:16px;border-top:1px dashed #e3dfd7;padding-top:14px;
+                font-size:14.7px;display:none;}
+  #quizov #qans.on{display:block;}
+  #quizov .qbtns{display:flex;gap:10px;margin-top:18px;}
+  #quizov .qbtns button{flex:1;border:1px solid #8c4a2f;background:#fff;color:#8c4a2f;
+                        border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
+  #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
+  #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 返回顶端 */
+  #totop{position:fixed;right:16px;bottom:72px;z-index:21;display:none;width:40px;height:40px;
+         border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
+         text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92;}
+  #totop.show{display:block;}
+  #totop:hover{opacity:1;}
+  @media print{ #totop{display:none;} }
+  /* 返回总目录（放进顶部 sticky 导航，不遮正文） */
+  nav #idxlink{display:inline-block;background:#8c4a2f;color:#fff;border:0;
+               border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
+               font-size:13px;text-decoration:none;}
+  nav #idxlink:hover{filter:brightness(1.1);}
+  nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
+                  border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
+  nav #searchlink:hover{background:#8c4a2f;color:#fff;}
+  @media print{ #quizov{display:none !important;} #quizbtn{display:none;} nav #idxlink{display:none;} }
+  /* ===== 手机端 ===== */
+  /* 关键：grid/flex 子项的 min-width 默认是 auto，长公式会把整页撑宽 */
+  .fbox,.fcard,.q,.ans{min-width:0;}
+  .wrap{overflow-x:hidden;max-width:100%;}
+  .sub,.lead{overflow-wrap:anywhere;word-break:break-word;}
+  body{overflow-x:hidden;}
+  @media (max-width:640px){
+    .wrap{padding:0 14px 80px;}
+    header.top{padding:22px 0 12px;}
+    h1{font-size:20px;line-height:1.4;}
+    h2{font-size:17px;}
+    .fbox{grid-template-columns:1fr;}
+    .fml{min-height:auto;line-height:2.4;}
+    .hd{gap:6px;}
+    nav{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+    nav a{margin-right:14px;}
+    .eqb{font-size:1.05em;line-height:2.4;overflow-x:auto;}
+    .ans{font-size:14px;padding:11px 12px;}
+    .bar{font-size:12px;gap:8px;flex-wrap:wrap;}
+    table.g{font-size:12.5px;}
+    .btnbar{right:10px;bottom:10px;gap:6px;}
+    .btnbar button{padding:8px 12px;font-size:12.5px;}
+  }
+</style>
+
+<div id="quizov">
+  <div class="qbox">
+    <div class="qmeta"><span id="qidx">—</span><span id="qtimer">0:00</span></div>
+    <div id="qhd"></div>
+    <div id="qstem"></div>
+    <div id="qans"></div>
+    <div class="qbtns">
+      <button id="qshow">显示答案</button>
+      <button id="qnext">下一题</button>
+      <button id="qclose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* QUIZMODE —— 抽背模式：随机抽题、先默写后对答案 */
+(function () {
+  if (window.__quizInit) return;
+  window.__quizInit = 1;
+  var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  if (!all.length) return;
+
+  var bar = document.querySelector('.btnbar');
+  var btn = document.createElement('button');
+  btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
+  if (bar) bar.insertBefore(btn, bar.firstChild);
+
+  var ov = document.getElementById('quizov');
+  var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
+      elAns = document.getElementById('qans'), elIdx = document.getElementById('qidx'),
+      elT = document.getElementById('qtimer');
+  var pool = [], cur = null, t0 = 0, timer = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* 复习记忆：记录每道题上次被抽到的时间；抽背时"最久没碰的先抽"（轻量间隔重复） */
+  var SEEN = (function () {
+    try { return JSON.parse(localStorage.getItem('g851-seen') || '{}'); } catch (e) { return {}; }
+  })();
+  function saveSeen() { try { localStorage.setItem('g851-seen', JSON.stringify(SEEN)); } catch (e) {} }
+  function keyOf(q) {
+    var t = q.querySelector('.tag');
+    return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
+  }
+
+  function build() {
+    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
+    var base = (todo.length ? todo : all).slice();
+    // 未抽过的最前；其余按上次抽到时间从旧到新
+    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
+    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    var i = 0;
+    while (i < base.length) {
+      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
+      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      if (j > i) {
+        var chunk = shuffle(base.slice(i, j + 1));
+        for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
+      }
+      i = j + 1;
+    }
+    pool = base;
+  }
+
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    elT.textContent = Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function show(q) {
+    cur = q;
+    var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
+        ans = q.querySelector('.ans');
+    elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
+    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
+    elAns.classList.remove('on');
+    document.getElementById('qshow').textContent = '显示答案';
+    t0 = Date.now(); stopTimer(); tick(); timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    if (!pool.length) build();
+    var q = pool.pop();
+    SEEN[keyOf(q)] = Date.now(); saveSeen();
+    show(q);
+  }
+
+  function open() { build(); next(); ov.classList.add('on'); }
+  function close() { stopTimer(); ov.classList.remove('on'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('qclose').addEventListener('click', close);
+  document.getElementById('qnext').addEventListener('click', next);
+  document.getElementById('qshow').addEventListener('click', function () {
+    var on = elAns.classList.toggle('on');
+    this.textContent = on ? '收起答案' : '显示答案';
+  });
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
+<script>
+/* 返回顶端 */
+(function(){
+  if (document.getElementById('totop')) return;
+  var b = document.createElement('button');
+  b.id = 'totop'; b.title = '返回顶端'; b.textContent = '\u2191';
+  document.body.appendChild(b);
+  function upd(){ if (window.scrollY > 400) b.classList.add('show'); else b.classList.remove('show'); }
+  window.addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+<script>/* SWREG */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>
