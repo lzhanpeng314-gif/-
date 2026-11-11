@@ -123,6 +123,7 @@
   <a href="#m7">七 几何光学基础</a><a href="#m8">八 理想光学系统</a><a href="#m9">九 像差与光路</a>
   <a href="#m10">十 光学仪器</a>
 </nav>
+<div class="rotcard"><b>旋向判定标准</b>（记住这一条就够）　<b>第一步·定轴</b>：让光朝你射来（观察者迎着光），取<b>向右为 x、向上为 y</b>，此时 x × y 恰指向你。δ 只能用<b>这两个轴</b>算：<b>δ = φ<sub>上</sub> − φ<sub>右</sub></b>。轴名取错，结论必反。　<b>第二步·判据</b>：<b>0 &lt; δ &lt; π → 右旋</b>（E 顺时针）；<b>−π &lt; δ &lt; 0 → 左旋</b>（逆时针）。速记 <b>+90° → 右旋，−90° → 左旋</b>。　<b>为什么老乱</b>：① 有些书写"沿传播方向看"，结论整体反过来；② 复数式 E<sub>y</sub>/E<sub>x</sub> = e<sup>±iπ/2</sup> 的正负取决于时间因子取 e<sup>iωt</sup> 还是 e<sup>−iωt</sup>，各书不一，<b>别背 ±i</b>；③ 最要命的是轴名——同一束光，x、y 换个叫法，δ 就变号。　<b>零风险判法</b>：写出 E<sub>右</sub> = A cos(ωt)、E<sub>上</sub> = A cos(ωt + δ)，代 ωt = 0° 与 30° 各画一个箭头，顺时针即右旋。不用记任何符号。</div>
 
 <div class="bar">
   <span id="stat">已掌握 0 / 68</span>
@@ -1199,6 +1200,14 @@
   .bar button{font-size:12.5px;border:1px solid #e3dfd7;background:#fff;color:#1b1b1b;
               border-radius:14px;padding:3px 11px;cursor:pointer;}
   .bar button.on{background:#8c4a2f;color:#fff;border-color:#8c4a2f;}
+  /* 旋向判定卡 */
+  .rotcard{margin:12px 0;padding:12px 14px;border-left:4px solid #8c4a2f;background:#fdf7f2;
+           border-radius:6px;font-size:13.5px;line-height:1.85;color:#3a3a3a;}
+  .rotcard b{color:#8c4a2f;}
+  /* 并排图 */
+  .figpair{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .figpair figure{flex:1 1 200px;max-width:280px;margin:0;text-align:center;}
+  .figpair img{max-width:100%;height:auto;}
   /* 可收起的原卷图 */
   details.figbox{margin:10px 0 4px;border:1px solid #e3dfd7;border-radius:6px;background:#fff;}
   details.figbox>summary{cursor:pointer;padding:6px 12px;font-size:12.5px;color:#8c4a2f;
