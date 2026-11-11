@@ -550,6 +550,29 @@
        padding:10px 12px;font:14px/1.7 inherit;background:transparent;color:#1b1b1b;}
   .notebox .hint{font-size:11.5px;color:#9a948a;padding:0 12px 8px;}
   @media print{ .notebox{display:none !important;} details.figbox{break-inside:avoid;} }
+  /* 手机不横向溢出 */
+  html{overflow-x:hidden;}
+  body{overflow-x:hidden;max-width:100%;}
+  .wrap{max-width:100% !important;box-sizing:border-box;}
+  nav{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .q,.ans,.stem,.res,.warn,.step,.rotcard,.bar{min-width:0;max-width:100%;}
+  .q *{overflow-wrap:break-word;word-break:break-word;}
+  @media (max-width:640px){
+    .wrap{padding-left:14px !important;padding-right:14px !important;}
+  }
+  /* 图片自适应（手机上不撑破版心） */
+  .q img, .ans img, .stem img, figure img, details.figbox img{max-width:100% !important;height:auto !important;}
+  figure{max-width:100%;margin:10px auto;text-align:center;overflow:hidden;}
+  .figpair figure{max-width:48%;}
+  @media (max-width:640px){ .figpair figure{max-width:100%;} }
+  /* 复制提问 */
+  .copybtn{background:none;border:0;cursor:pointer;font-size:14px;line-height:1;color:#cfc8bb;padding:0 3px;}
+  .copybtn:hover{color:#8c4a2f;}
+  #toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:40;background:#2b2b2b;
+         color:#fff;font-size:13px;padding:9px 16px;border-radius:20px;opacity:0;pointer-events:none;
+         transition:opacity .25s;max-width:86vw;}
+  #toast.on{opacity:.95;}
+  @media print{ #toast{display:none;} }
   /* 收藏 */
   .starbtn{background:none;border:0;cursor:pointer;font-size:16px;line-height:1;color:#cfc8bb;padding:0 3px;}
   .starbtn.on{color:#e0a300;}
@@ -836,6 +859,45 @@
   });
   bar.appendChild(b1); bar.appendChild(b2);
   document.body.appendChild(inp);
+})();
+</script>
+<script>
+/* 复制题目去提问 */
+(function(){
+  if (window.__copyInit) return; window.__copyInit = 1;
+  var toast = document.createElement('div'); toast.id = 'toast';
+  document.body.appendChild(toast);
+  function say(msg){
+    toast.textContent = msg; toast.classList.add('on');
+    clearTimeout(window.__tt); window.__tt = setTimeout(function(){ toast.classList.remove('on'); }, 1900);
+  }
+  function txt(el){ return el ? el.innerText.replace(/\s+\n/g,'\n').trim() : ''; }
+  [].slice.call(document.querySelectorAll('.q')).forEach(function(q){
+    var hd = q.querySelector('.hd'); if (!hd) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'copybtn'; b.title = '复制题目+答案（去问 AI）'; b.textContent = '\u2398';
+    b.addEventListener('click', function(ev){
+      ev.preventDefault();
+      var tag = txt(q.querySelector('.tag')), ttl = txt(q.querySelector('.ttl'));
+      var stem = txt(q.querySelector('.stem')), ans = txt(q.querySelector('.ans'));
+      var body = '【851 物理光学与应用光学】' + (tag ? tag + ' ' : '') + ttl + '\n\n'
+               + '题目：\n' + stem + '\n\n'
+               + '我手里已有的答案（可能有错，请一并判断）：\n' + ans.slice(0, 1600) + '\n\n'
+               + '请：1) 指出上面答案里可能的错误；2) 用更直白的方式重讲一遍关键步骤；3) 说明这道题最容易错在哪。';
+      var done = function(){ say('已复制，去 AI 里粘贴即可'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(body).then(done).catch(function(){ fallback(body); });
+      } else { fallback(body); }
+      function fallback(s){
+        var ta = document.createElement('textarea');
+        ta.value = s; ta.style.position = 'fixed'; ta.style.top = '-1000px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) { say('复制失败，请手动选择'); }
+        ta.remove();
+      }
+    });
+    hd.appendChild(b);
+  });
 })();
 </script>
 <script>/* SWREG */
