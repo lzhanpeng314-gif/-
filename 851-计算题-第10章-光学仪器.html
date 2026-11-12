@@ -101,7 +101,8 @@
 </header>
 
 <nav>
-  <a id="idxlink" href="index.html">← 总目录</a>
+  <a id="backlink" href="#">← 上一页</a>
+  <a id="idxlink" href="index.html">← 总目录</a><a id="searchlink" href="搜索.html">搜索</a>
   <a href="#a">A 人眼与照相机</a><a href="#b">B 放大镜</a><a href="#c">C 显微镜</a><a href="#d">D 望远镜</a>
 </nav>
 
@@ -664,6 +665,16 @@
                border-radius:12px;padding:2px 12px;margin:0 12px 0 0;
                font-size:13px;text-decoration:none;}
   nav #idxlink:hover{filter:brightness(1.1);}
+  nav #backlink{display:inline-block;background:#fff;color:#6d5a4a;border:1px solid #d8cbbb;
+                border-radius:12px;padding:2px 11px;margin:0 10px 0 0;font-size:13px;text-decoration:none;}
+  nav #backlink:hover{background:#6d5a4a;color:#fff;}
+  /* 抽背移到导航，搜索/返回下移到底部按钮栏 */
+  nav #quizbtn{display:inline-block;background:#8c4a2f;color:#fff;border:1px solid #8c4a2f;
+        border-radius:12px;padding:2px 12px;margin:0 10px 0 0;font-size:13px;cursor:pointer;}
+  nav #quizbtn:hover{filter:brightness(1.08);}
+  .btnbar a.fbtn{display:inline-block;font-size:13px;border:1px solid #e3dfd7;background:#fff;color:#1b1b1b;
+        border-radius:16px;padding:5px 14px;text-decoration:none;line-height:1.2;}
+  .btnbar a.fbtn:hover{background:#8c4a2f;color:#fff;border-color:#8c4a2f;}
   nav #searchlink{display:inline-block;background:#fff;color:#8c4a2f;border:1px solid #8c4a2f;
                   border-radius:12px;padding:2px 12px;margin:0 12px 0 0;font-size:13px;text-decoration:none;}
   nav #searchlink:hover{background:#8c4a2f;color:#fff;}
@@ -718,7 +729,8 @@
   var bar = document.querySelector('.btnbar');
   var btn = document.createElement('button');
   btn.id = 'quizbtn'; btn.className = 'alt'; btn.textContent = '抽背';
-  if (bar) bar.insertBefore(btn, bar.firstChild);
+  var navEl = document.querySelector('nav');
+  if (navEl) { navEl.insertBefore(btn, navEl.firstChild.nextSibling); } else if (bar) bar.insertBefore(btn, bar.firstChild);
 
   var ov = document.getElementById('quizov');
   var elHd = document.getElementById('qhd'), elStem = document.getElementById('qstem'),
@@ -980,6 +992,40 @@
     });
     hd.appendChild(b);
   });
+})();
+</script>
+<script>
+/* 返回上一页：直接打开（无历史）时隐藏 */
+(function(){
+  var a = document.getElementById('backlink');
+  if (!a) return;
+  if (history.length <= 1) { a.style.display = 'none'; }
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    if (history.length > 1) history.back(); else location.href = 'index.html';
+  });
+})();
+</script>
+<script>
+/* 搜索 / 返回上一页 移到底部浮动按钮栏；抽背移到顶部导航 */
+(function(){
+  if (window.__lankInit) return; window.__lankInit = 1;
+  ['backlink','searchlink'].forEach(function(id){
+    var el = document.getElementById(id); if (el && el.parentNode) el.parentNode.removeChild(el);
+  });
+  var bar = document.querySelector('.btnbar');
+  if (!bar) { bar = document.createElement('div'); bar.className = 'btnbar'; document.body.appendChild(bar); }
+  var sea = document.createElement('a');
+  sea.className = 'fbtn'; sea.href = '搜索.html'; sea.textContent = '搜索';
+  var back = document.createElement('a');
+  back.id = 'flback'; back.className = 'fbtn'; back.href = '#'; back.textContent = '← 上一页';
+  if (history.length <= 1) back.style.display = 'none';
+  back.addEventListener('click', function(e){
+    e.preventDefault();
+    if (history.length > 1) history.back(); else location.href = 'index.html';
+  });
+  bar.insertBefore(sea, bar.firstChild);
+  bar.insertBefore(back, bar.firstChild);
 })();
 </script>
 <script>/* SWREG */
