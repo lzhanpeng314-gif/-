@@ -141,7 +141,28 @@
 </div>
 
 <!-- ===== A ===== -->
+<div class="kbig">
+  <div class="kh">本章大点 · 四个“放大率”不是一回事<div class="knote"><b>口径差异</b>：有效放大率的判据各教材不完全一样（人眼 1′、2′、或经验式 Γ≤500NA～1000NA），同一题能差 2～4 倍。答题时<b>把所用判据写出来</b>，不要只写数值。</div><div class="knote"><b>两个容易混的定义</b>：<br><b>光学筒长</b> Δ = 物镜<b>后焦点</b>到目镜<b>前焦点</b>的距离（≠ 机械筒长，机械筒长是两镜框之间）。<br><b>视场光阑</b>：望远镜就是<b>物镜框</b>，它决定视场角，也是入窗；显微镜则常是专门的视场光阑（在中间像面附近）。</div></div>
+  <table>
+    <tr><th>仪器</th><th>放大率定义</th><th>公式</th></tr>
+    <tr><td>放大镜</td><td>角放大率（像对眼张角 / 物对眼张角）</td><td>Γ = 250/<i>f</i>′</td></tr>
+    <tr><td>显微镜</td><td>总角放大率 = 物镜 β × 目镜 Γ<sub>e</sub></td><td>Γ = −(Δ<i>l</i>/<i>f</i><sub>1</sub>′)(250/<i>f</i><sub>2</sub>′)</td></tr>
+    <tr><td>望远镜</td><td>角放大率 = 焦距比</td><td>Γ = −<i>f</i><sub>1</sub>′/<i>f</i><sub>2</sub>′ = <i>D</i>/<i>d</i></td></tr>
+    <tr><td>照相机</td><td>垂轴放大率</td><td>β = <i>l</i>′/<i>l</i></td></tr>
+  </table>
+  <ul>
+    <li><b>通用判据</b>：人眼能分辨 1′，所以有<b>有效放大率</b>——太小看不见细节，太大只是空放大。</li>
+    <li>显微镜 δ = 0.61λ/NA ⇒ 需 Γ 在 500NA～1000NA；望远镜 Γθ = 1′ ⇒ Γ ≥ 60″/θ<sub>分辨</sub>。</li>
+    <li><b>口径作用不同</b>：望远镜口径定分辨与光强；显微镜用数值孔径 NA 定分辨。</li>
+  </ul>
+</div>
 <h2 id="a">A · 人眼与照相机<span class="cnt">1 题</span></h2>
+<div class="kcard">
+<div class="kh">A · 人眼与照相机</div>
+<ul><li>人眼分辨约 1′</li><li>景深由容许弥散圆 z 与入瞳决定</li></ul>
+<div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>p</i><sub>2</sub></span></span>=<span class="frac"><span class="num">1</span><span class="den"><i>p</i></span></span>+<span class="frac"><span class="num"><i>z</i></span><span class="den"><i>f</i>′<i>D</i></span></span></div>
+</div>
+
 <div class="lead">屈光度 Φ = 1/<i>f</i>′（<i>f</i>′ 用 m）。远视眼配正透镜、近视眼配负透镜；判据永远是"物在明视距离 25 cm，像落在近点/远点"。</div>
 
 <div class="q" id="q001">
@@ -171,6 +192,12 @@
 
 <!-- ===== B ===== -->
 <h2 id="b">B · 放大镜<span class="cnt">2 题</span></h2>
+<div class="kcard">
+<div class="kh">B · 放大镜</div>
+<ul><li>角放大率，与物位置有关</li><li>正常放大：像在 250 mm</li></ul>
+<div class="eqb">Γ = <span class="frac"><span class="num">250</span><span class="den"><i>f</i>′</span></span></div>
+</div>
+
 <div class="lead">同一套装置的两年重复题（眼在 <i>F</i>′、物在 <i>F</i>），问法一个是"入瞳+视场+渐晕"，一个是"入/出瞳+入/出窗"。核心只有一条：<b>把每个孔径经其前面的元件成像，再比谁小</b>。</div>
 
 <div class="q" id="q002">
@@ -225,6 +252,14 @@
 
 <!-- ===== C ===== -->
 <h2 id="c">C · 显微镜<span class="cnt">5 题</span></h2>
+<div class="kcard">
+<div class="kh">C · 显微镜</div>
+<ul><li>总放大 = 物镜 β × 目镜 Γ</li><li>分辨由 NA 定，有有效放大率上下限</li></ul>
+<div class="eqb">Γ = −<span class="frac"><span class="num">Δ<i>l</i></span><span class="den"><i>f</i><sub>1</sub>′</span></span>·<span class="frac"><span class="num">250</span><span class="den"><i>f</i><sub>2</sub>′</span></span></div>
+<div class="eqb">δ = 0.61<span class="frac"><span class="num">λ</span><span class="den">NA</span></span></div><div class="knote">放大率再高也不会增加分辨本领，只是把已有的细节铺大；太低则人眼看不清。所以有效放大率有上下限。</div>
+  
+</div>
+
 <div class="lead">五道题分三类：① 给 <i>f</i><sub>o</sub>′、<i>f</i><sub>e</sub>′ 与倍率反求结构（2018/2024）；② 给共轭距或筒长求全套参数（2022/2019）；③ 分辨率（2016）。公式一张 <b>Γ = β<sub>o</sub>·Γ<sub>e</sub></b> 全打通。</div>
 
 <div class="q" id="q004">
@@ -346,6 +381,13 @@
 
 <!-- ===== D ===== -->
 <h2 id="d">D · 望远镜<span class="cnt">4 题</span></h2>
+<div class="kcard">
+<div class="kh">D · 望远镜</div>
+<ul><li>放大率取焦距比</li><li>口径定分辨本领，出瞳 = D/Γ</li></ul>
+<div class="eqb">Γ = <span class="frac"><span class="num"><i>f</i><sub>1</sub>′</span><span class="den"><i>f</i><sub>2</sub>′</span></span></div>
+<div class="eqb">θ<sub>min</sub> = 1.22<span class="frac"><span class="num">λ</span><span class="den"><i>D</i></span></span><div class="knote"><b>两种型式</b>：开普勒式（目镜正透镜）→ 像倒立、视场大；伽利略式（目镜负透镜）→ 像正立、视场小、无实出瞳。<br><b>物镜框就是视场光阑</b>（决定视场角），物镜口径决定分辨本领与光强。<br><b>出瞳</b> = <i>D</i>/Γ，位于目镜后，眼睛放在这里才能看全视场。</div></div>
+</div>
+
 <div class="lead">两题考光阑（2019、2023）、两题考设计（2021、2020）。望远镜题的固定套路：<b>Γ = −<i>f</i><sub>o</sub>′/<i>f</i><sub>e</sub>′</b>、<b><i>d</i> = <i>f</i><sub>o</sub>′ + <i>f</i><sub>e</sub>′</b>、<b>视场光阑放公共焦面</b>、<b>出瞳 = 物镜框经目镜成像</b>。</div>
 
 <div class="q" id="q009">
@@ -576,6 +618,30 @@
   @media (max-width:640px){
     .wrap{padding-left:14px !important;padding-right:14px !important;}
   }
+  /* 知识点旁的小图 */
+  figure.figside{float:right;width:230px;max-width:42%;margin:0 0 10px 14px;text-align:center;}
+  figure.figside img{max-width:100% !important;height:auto;}
+  figure.figside figcaption{font-size:11.5px;color:#6d6d6d;line-height:1.5;margin-top:4px;}
+  @media (max-width:640px){ figure.figside{float:none;width:100%;max-width:100%;margin:10px auto;} }
+  .knote{margin-top:6px;padding-top:6px;border-top:1px dashed #d9cfc4;font-size:12.5px;color:#6d5a4a;line-height:1.7;}
+  /* 章首大点卡 */
+  .kbig{margin:14px 0 18px;padding:14px 16px;border:1px solid #d8cbbb;border-left:6px solid #6d3a24;
+        border-radius:8px;background:#f4e9dd;font-size:14px;line-height:1.85;}
+  .kbig .kh{font-weight:800;color:#5d2f1c;font-size:15px;margin-bottom:8px;letter-spacing:.5px;}
+  .kbig ul{margin:6px 0 0 18px;padding:0;}
+  .kbig li{margin:4px 0;}
+  .kbig table{border-collapse:collapse;margin:8px 0 4px;font-size:13.5px;}
+  .kbig td,.kbig th{border:1px solid #d8cbbb;padding:4px 10px;text-align:left;}
+  .kbig th{background:#ecdccb;}
+  @media (max-width:640px){ .kbig{padding:11px 12px;} .kbig td,.kbig th{padding:3px 6px;} }
+  /* 考点必背卡 */
+  .kcard{margin:12px 0 16px;padding:12px 16px;border:1px solid #e3dfd7;border-left:4px solid #6d3a24;
+         border-radius:8px;background:#f7efe7;font-size:14px;line-height:1.85;}
+  .kcard .kh{font-weight:700;color:#6d3a24;margin-bottom:6px;font-size:14px;}
+  .kcard ul{margin:6px 0 0 18px;padding:0;}
+  .kcard li{margin:3px 0;}
+  .kcard .eqb{margin:8px 0 2px;line-height:2.4;}
+  @media (max-width:640px){ .kcard{padding:10px 12px;} }
   /* 图片自适应（手机上不撑破版心） */
   .q img, .ans img, .stem img, figure img, details.figbox img{max-width:100% !important;height:auto !important;}
   figure{max-width:100%;margin:10px auto;text-align:center;overflow:hidden;}

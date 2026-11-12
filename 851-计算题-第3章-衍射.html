@@ -141,7 +141,26 @@
 </div>
 
 <!-- ===== A ===== -->
+<div class="kbig">
+  <div class="kh">本章大点 · 三类衍射题，别用错公式</div>
+  <table>
+    <tr><th>题面特征</th><th>该用</th></tr>
+    <tr><td>“条纹分布 / 缺级 / 缝宽缝距”</td><td>双缝：I = 4I<sub>0</sub>(sinα/α)²cos²β，缺级 d/a = k/k′</td></tr>
+    <tr><td>“能否分辨 / 最小分辨距离”</td><td>圆孔 1.22λ/D（望远）或 0.61λ/NA（显微）</td></tr>
+    <tr><td>“谱线能否分开 / 色散”</td><td>光栅：d sinθ = kλ，R = kN</td></tr>
+  </table>
+  <ul>
+    <li><b>最常错</b>：问“最小可分辨波长差”时用了一级的 R——必须取<b>可用的最高级次</b>。</li>
+    <li><b>斜入射</b>：光栅方程改成 d(sinθ ± sinθ<sub>0</sub>) = kλ，符号看入射光与衍射光在法线同侧还是异侧。</li>
+  </ul>
+</div>
 <h2 id="a">A · 双缝夫琅和费衍射<span class="cnt">1 题</span></h2>
+<div class="kcard">
+<div class="kh">A · 双缝夫琅和费</div>
+<ul><li>单缝因子 × 双缝因子</li><li>d/a = k/k′ ⇒ 第 k′ 级缺级</li></ul>
+<div class="eqb"><i>I</i> = 4<i>I</i><sub>0</sub>(<span class="frac"><span class="num">sin<i>α</i></span><span class="den"><i>α</i></span></span>)<sup>2</sup>cos<sup>2</sup><i>β</i></div>
+</div>
+
 
 <div class="q" id="q001">
   <div class="hd"><span class="tag">2023-二-3</span><span class="ttl">单缝中央极大内有多少干涉极大；零级与一级强度</span></div>
@@ -172,6 +191,13 @@
 
 <!-- ===== B ===== -->
 <h2 id="b">B · 分辨本领<span class="cnt">3 题</span></h2>
+<div class="kcard">
+<div class="kh">B · 分辨本领</div>
+<ul><li>望远镜/人眼 1.22λ/D；显微镜 0.61λ/NA</li><li>有效放大率有上下限</li></ul>
+<div class="eqb">θ<sub>min</sub> = 1.22<span class="frac"><span class="num">λ</span><span class="den"><i>D</i></span></span></div>
+<div class="eqb">δ = 0.61<span class="frac"><span class="num">λ</span><span class="den">NA</span></span></div>
+</div>
+
 <div class="lead">人眼、望远镜、显微镜全用同一个 1.22λ/D，区别只在"D 是什么"和"要换算成什么"。</div>
 
 <div class="q" id="q002">
@@ -225,6 +251,13 @@
 
 <!-- ===== C ===== -->
 <h2 id="c">C · 光栅<span class="cnt">5 题</span></h2>
+<div class="kcard">
+<div class="kh">C · 光栅</div>
+<ul><li>d sinθ = kλ 定方向；R = kN 定能否分开</li><li>求最小波长差要用<b>最高级次</b></li></ul>
+<div class="eqb"><i>R</i> = <i>k</i><i>N</i> = <span class="frac"><span class="num">λ</span><span class="den">δλ</span></span></div>
+<div class="eqb"><span class="frac"><span class="num">dθ</span><span class="den">dλ</span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>d</i>cosθ</span></span></div>
+</div>
+
 <div class="lead">五道题的骨架完全一样：先由"缺级"定 <b>a</b> 或 <b>d</b>，再由 <b>N = 宽度/d</b> 算 <b>R</b> 和半角宽，最后用 <b>k<sub>max</sub> = d/λ</b> 数级数。</div>
 
 <div class="q" id="q005">
@@ -325,6 +358,11 @@
 
 
 <h2 id="a">A · 一块晶片 + 光栅<span class="cnt">1 题</span></h2>
+<div class="kcard">
+<div class="kh">A · 晶片 + 光栅</div>
+<ul><li>晶片只改偏振与相位，不改变衍射方向</li><li>分开讨论：方向用光栅方程，强度看偏振态</li></ul>
+<div class="eqb"><i>d</i>sinθ = <i>k</i>λ</div>
+</div>
 <div class="lead">这题的前两问其实不考光栅，考的是"光沿光轴走有没有双折射"；第三问才回到光栅的分辨本领。</div>
 
 <div class="q" id="q010">
@@ -333,7 +371,7 @@
     （1）垂直入射的平行可见光（380–780 nm）通过 Q 后，是否有变化，为什么？<br>
     （2）该入射的平行光通过 Q 后，由 R 出射后的一级光谱散开的角范围（用反三角表示）。<br>
     （3）钠原子的 D 线包含波长分别为 589.6 nm，589.0 nm 两条谱线，能否用此光栅的一级光谱分辨率？</div>
-    <details class="figbox" open><summary>原卷图 · 可收起</summary><figure><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjcAAAF5CAIAAADs8Jx4AAAQzklEQVR4nO3dwWub9/3A8a9+9Lo2inYaXWns9FbwoGo6SjKaQCYRdmhpmRMGu6SQ2TmsKSMOdmEtW8pkBu1GmzSlYZexJNDBDiPEHSSDeAMv6oihpYdEXjBhp2hytj/Agz7DPy92bNmzpc8jvV4nW3okfSPFevM8z/d5nsLi4mICgJD+r9sDAICHUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4nqk2wMA6HeFQiHl1uLi4rY+v0rB1sj1F02P2e7vTTrJFj8A4rIuBRBFjtYCC53aeKBS0L9fND3GRteeZIsfAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFKzizp073heIQKVgFb/4xS/279//u9/9zrsD3aVSsLo//vGPL730klZBd6kUrEWroLtUCtanVdAtKgXt0iroPJWCjdEq6CSVgs3QKuiMwuLiYmde6c0333zrrbc681rQST/+8Y9fe+21YrGY/dqxvykeUCgUcvoR5HHkhU6NuXOVghw5ceLEu+++u+5iL7zwwg9/+MMXX3wxp180PSa/H0EeR17o1Jgf2dZnh161vE/A9lEp2Bh9gk5SKWiXPkHnqRSsT5+gW1QK1qJP0F0qBavTJ4jATHRYxcLCwo4dO3p+MnGPye9HkMeRFxwvBfmSxy+aHpPfjyCPIy90aszOkARAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBb1s9+7d1Wp1dnZ2cw8/d+7cxMTEug8vFArVavXy5cubexVYQyFHFzCGyGJeFLxQKBSLxVu3bpVKpeW3N5vNu3fvDg0Nrf3wZ599tl6vVyqVM2fODAwMrLFYq9W6fft26qqYH0GvjrzgivJA+6anpx921549ex5IVErp/Pnz+/fvX3vtp9ls1uv1wcHBK1eurJGolFKpVNq9e7fPi+1gix/k3ujo6L59+0ZHR9tcfnZ2dmxsrNVq/elPf1pjsZmZmZTS8PDwFg0TNuORTT0KCOTYsWMXL148e/ZsSunMmTNrL9xsNl999dWU0oULFw4fPvzAvZOTk4899tj9+/dTSlevXk0ptVqtycnJlNITTzwxPz//yiuvrL1eBVtLpSD3hoaGrl279vLLL7cTquPHj9fr9VqttjJRKaWxsbEHbsmec8nzzz+vUnSSSkEvGBoampmZee6559YO1ejo6KVLl4aHh0+ePLnqAo1GI4vQ3Nzc4ODg+Pj46dOnly/QbDanp6f//Oc/L78xmzeRrXItsdbF1lgEtkKEv6mbN28Wi8WUUq1WWxpVpVLJfh4ZGUkplcvle/furftUH3zwQUrp5s2bK++6cOFCO98t169fX+y/j6B/Rp46NWazJ6DXNv0Vi8VKpbLqvdmEvZVT/lb66KOPyuXy0NDQxYsXq9XquXPnlu56/PHHH4hQ5UtLv9Zqta3+l9G/VAp6ytDQ0K1bt1Y9EOrYsWMzMzPtJGpubq5er2eTLObn56empr7+9a9vz3hhHfZLQV49sB/oYW7fvr3ukg/sQzp//nxK6eDBg0u3PProo//DSGHzVAryauV8vFU1Go11l1w+c6/ZbJ49e7ZSqZjLRwQqBXl17969VTffTU9P79u3r1KpXLlyJbtlcnJybGzsYWffaTaby389fvx4q9VaWlfLjpr6zW9+k83re+KJJ7L9UtAZKgV51c4epk08z8LCQkpp6ksrj5qqVCpvvPHG8m6tnImehQ22hEpBr/n8889TSgcOHNjcw7NjrZY292XrYdevX9+7d2+24vXFF1+sPNq3/S2QsCHm+EGvmZ+fTyk99thjm3v4wJfWXfEyE53OUCnoNZ988klK6Zvf/GaHT74O20GloKdkhzoVi8V1rx21IZ9//vnExMTOnTvfe++9LXxaWJf9UtBTPv7445TSqmeS3ahmszkzM5NNhfjBD36QnV3p+9///lYME9qlUtA7ms3mz372s5TSj370ozYfkp069ujRo9kOp7m5uT/84Q/z8/OffPJJvV5fWqxWqy0tY6MfnaRS0Du+973vtVqtkZGR9g/IvXv37tjY2NWrV7ODq/7+979nq00ppZGRke985zufffbZ2NjY888/v1UT32FDVAp6xOjo6NTU1ODg4E9+8pONTgh85plnsl/37t07MjLyrW996+DBg1mWPvvsszXmuy8/LnhpHevOnTv/2z8F/p9KQe7Nzc1liSoWi7/97W8fttIzPT2dHfO0ZHZ2NttC+N3vfnfpxnWv9ptZWuVasm/fvk0NH9aiUpBjly9f/v3vf58dYFsulz/66KNVp/Zlx05lp01auvH27duNRiOlNDw8vIkJgUvH+a6UHQi80SeEVakU5NLc3Fy5XM5OuPfA7IaVjh07dv/+/Q8//HD5SY+yy1C99NJLx44d69SoYcNUCnJpYGDg2rVrL7/88vDw8NGjR9edLnHyS1vy0tnp+/75z38+bIGnn366Vqt97Wtf25KXo88VHnaaZGBjf0uFQvaDv6luye9HkMeRFzo1ZueeACAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpWC3FhYWEj5dOfOnW4PgbxSKciBhYWFN998c9euXTn9ut+/f/+JEydyOni6S6UgH31666238rsulVJ69913d+3apVVslEpBUD3Tp+W0io1SKQinJ/u0nFbRPpWCQHq+T8tpFe1QKQihr/q0nFaxNpWCLuvbPi2nVTxMYXFx8aF3Am0rFArZDxv6m1pYWNi1a1ffxmmlHTt2/OpXv3rxxRc79hFEkMeRFzo1ZutS0E07duxotVrvvPNOm8v/7W9/W8yhJ598sp234oUXXrh27drmEkWvUinovtdee21xcbH9VvWYpT5du3btG9/4RreHQywqBVH0Yav0iXWpFMTSJ63SJ9qkUhBRD7dKn9gQlYK4eqxV+sQmqBRE1wOt0ic2zfFSkKfDRxYWFnbs2JHy5s6dO+1MRu/Do47yO/JCp8asUtC/XzQ9Jr8fQR5HXnBULwDYLwVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXI90ewDQa5auaAD+8/zvrEsBEJdKARCXa/UCEJd1KQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIp6Dtzc3Pnzp2rVqs7d+4sfGnnzp3VavXcuXPNZrPbo4P/UlhcXPzvW4BeNjEx8fbbb6eUisXinj17nnnmmZTSp59++pe//KXVahWLxVOnTp08ebLbw4T/UCnoF81ms1qt1uv1crn8zjvv7N2794EFLl68+MYbbzQajZGRkTNnznRpmPBfVAr6xejo6NmzZ4eHh99///1SqbR2ycbHx0+fPt3xMcKDVAr6wvT09L59+wYHB2dmZh6WqEyz2XzqqadarVaj0RgYGOjgGGEVZk9AX3jvvfdSSj/96U/XTlRKqVQqZZv7fv7zn3dqdGylycnJwmqq1erExMTc3Fy+3m7rUtAXCoVCsVj8xz/+0c7CzWbzq1/9avvLE8rk5OTY2FilUjlw4MDSjVevXr19+3aj0SgWi2fOnDl8+HDKiUe6PQBg201PT6eU9uzZ0+bypVKpUqlMTU3Nzs4ODQ1t8+jYFgcOHFg+VzP7+eLFi6Ojo0eOHHn88cdXTp+JyRY/6H13797Nvrbaf0i2R+pf//rXdo6LTjt8+PCvf/3rlNKJEyfy8u6rFPS++fn5jT7kySef3J6x0GWHDh0aHBys1+t5OYJbpQD6y+7du1NKX3zxRcoDlYLe9/TTT6eU7t+/3/5D/vrXv27niOi+r3zlKykPVAp636OPPpqdBqn9hzQajRx9kdG+ZrM5NTVVLBbzMi9GpaD3ZbO5pqam2twV0Ww26/V6jr7IaN/x48dTSqdOnUo5oVLQF0ZGRlJKH3/8cTsLnz9/PpsPtv3jokOazebly5efffbZS5culcvlHJ1Q2FG90EdnSCoWi7du3XKGpH44qjc9xPj4+Ouvv77uKUjicFQv9IW9e/eOj4+//fbb1Wr1ypUra59tttVqjY+PO4lfrlWWnXviww8/bDQaH3zwwSuvvJKjPv3HItAf7t27Vy6XU0qDg4MXLlxYucCFCxcGBwezzYPdGCBbo1arpZRqtdrSLdevX08plcvlPL7F9ktBvyiVSjdu3BgfH280GkeOHMmuzzvxpey6vUeOHGk0GuPj4y4u1ZNr0vV6fXJyMuWN/VLQd+bm5s6fP//pp59OTU0t3Vgul7/97W8fPXrUhr7e2C9Vq9WWT5FoNpvPPfdco9G4efNmvqZuWpeCvjMwMHD69OkrV65kW/myPeo3btw4ffq0RPWqUqn0y1/+MqX06quvplxRKehrBw8eLBaLZ8+ezd1lh9ioQ4cODQ8P5267n0pBXyuVSqdOnWq1WsPDw3k5/Sib9v777xeLxbGxsdnZ2ZQTKgX97uTJk+VyuV6vP/XUU4cPH56cnKxWq90eFNuiVCplV+7I0XY/lQLSjRs3arXa4ODgpUuXxsbGrFT1sEN52+5njh8AcVmXAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIIX1bz27tPFCFfrhAAAAAElFTkSuQmCC" alt="原卷插图"><figcaption>原卷 p21 插图（自动裁自真题 PDF）</figcaption></figure></details>
+    <details class="figbox" open><summary>原卷图 · 可收起</summary><figure><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjcAAAF5CAIAAADs8Jx4AAAQzklEQVR4nO3dwWub9/3A8a9+9Lo2inYaXWns9FbwoGo6SjKaQCYRdmhpmRMGu6SQ2TmsKSMOdmEtW8pkBu1GmzSlYZexJNDBDiPEHSSDeAMv6oihpYdEXjBhp2hytj/Agz7DPy92bNmzpc8jvV4nW3okfSPFevM8z/d5nsLi4mICgJD+r9sDAICHUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4nqk2wMA6HeFQiHl1uLi4rY+v0rB1sj1F02P2e7vTTrJFj8A4rIuBRBFjtYCC53aeKBS0L9fND3GRteeZIsfAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFKzizp073heIQKVgFb/4xS/279//u9/9zrsD3aVSsLo//vGPL730klZBd6kUrEWroLtUCtanVdAtKgXt0iroPJWCjdEq6CSVgs3QKuiMwuLiYmde6c0333zrrbc681rQST/+8Y9fe+21YrGY/dqxvykeUCgUcvoR5HHkhU6NuXOVghw5ceLEu+++u+5iL7zwwg9/+MMXX3wxp180PSa/H0EeR17o1Jgf2dZnh161vE/A9lEp2Bh9gk5SKWiXPkHnqRSsT5+gW1QK1qJP0F0qBavTJ4jATHRYxcLCwo4dO3p+MnGPye9HkMeRFxwvBfmSxy+aHpPfjyCPIy90aszOkARAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBb1s9+7d1Wp1dnZ2cw8/d+7cxMTEug8vFArVavXy5cubexVYQyFHFzCGyGJeFLxQKBSLxVu3bpVKpeW3N5vNu3fvDg0Nrf3wZ599tl6vVyqVM2fODAwMrLFYq9W6fft26qqYH0GvjrzgivJA+6anpx921549ex5IVErp/Pnz+/fvX3vtp9ls1uv1wcHBK1eurJGolFKpVNq9e7fPi+1gix/k3ujo6L59+0ZHR9tcfnZ2dmxsrNVq/elPf1pjsZmZmZTS8PDwFg0TNuORTT0KCOTYsWMXL148e/ZsSunMmTNrL9xsNl999dWU0oULFw4fPvzAvZOTk4899tj9+/dTSlevXk0ptVqtycnJlNITTzwxPz//yiuvrL1eBVtLpSD3hoaGrl279vLLL7cTquPHj9fr9VqttjJRKaWxsbEHbsmec8nzzz+vUnSSSkEvGBoampmZee6559YO1ejo6KVLl4aHh0+ePLnqAo1GI4vQ3Nzc4ODg+Pj46dOnly/QbDanp6f//Oc/L78xmzeRrXItsdbF1lgEtkKEv6mbN28Wi8WUUq1WWxpVpVLJfh4ZGUkplcvle/furftUH3zwQUrp5s2bK++6cOFCO98t169fX+y/j6B/Rp46NWazJ6DXNv0Vi8VKpbLqvdmEvZVT/lb66KOPyuXy0NDQxYsXq9XquXPnlu56/PHHH4hQ5UtLv9Zqta3+l9G/VAp6ytDQ0K1bt1Y9EOrYsWMzMzPtJGpubq5er2eTLObn56empr7+9a9vz3hhHfZLQV49sB/oYW7fvr3ukg/sQzp//nxK6eDBg0u3PProo//DSGHzVAryauV8vFU1Go11l1w+c6/ZbJ49e7ZSqZjLRwQqBXl17969VTffTU9P79u3r1KpXLlyJbtlcnJybGzsYWffaTaby389fvx4q9VaWlfLjpr6zW9+k83re+KJJ7L9UtAZKgV51c4epk08z8LCQkpp6ksrj5qqVCpvvPHG8m6tnImehQ22hEpBr/n8889TSgcOHNjcw7NjrZY292XrYdevX9+7d2+24vXFF1+sPNq3/S2QsCHm+EGvmZ+fTyk99thjm3v4wJfWXfEyE53OUCnoNZ988klK6Zvf/GaHT74O20GloKdkhzoVi8V1rx21IZ9//vnExMTOnTvfe++9LXxaWJf9UtBTPv7445TSqmeS3ahmszkzM5NNhfjBD36QnV3p+9///lYME9qlUtA7ms3mz372s5TSj370ozYfkp069ujRo9kOp7m5uT/84Q/z8/OffPJJvV5fWqxWqy0tY6MfnaRS0Du+973vtVqtkZGR9g/IvXv37tjY2NWrV7ODq/7+979nq00ppZGRke985zufffbZ2NjY888/v1UT32FDVAp6xOjo6NTU1ODg4E9+8pONTgh85plnsl/37t07MjLyrW996+DBg1mWPvvsszXmuy8/LnhpHevOnTv/2z8F/p9KQe7Nzc1liSoWi7/97W8fttIzPT2dHfO0ZHZ2NttC+N3vfnfpxnWv9ptZWuVasm/fvk0NH9aiUpBjly9f/v3vf58dYFsulz/66KNVp/Zlx05lp01auvH27duNRiOlNDw8vIkJgUvH+a6UHQi80SeEVakU5NLc3Fy5XM5OuPfA7IaVjh07dv/+/Q8//HD5SY+yy1C99NJLx44d69SoYcNUCnJpYGDg2rVrL7/88vDw8NGjR9edLnHyS1vy0tnp+/75z38+bIGnn366Vqt97Wtf25KXo88VHnaaZGBjf0uFQvaDv6luye9HkMeRFzo1ZueeACAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpWC3FhYWEj5dOfOnW4PgbxSKciBhYWFN998c9euXTn9ut+/f/+JEydyOni6S6UgH31666238rsulVJ69913d+3apVVslEpBUD3Tp+W0io1SKQinJ/u0nFbRPpWCQHq+T8tpFe1QKQihr/q0nFaxNpWCLuvbPi2nVTxMYXFx8aF3Am0rFArZDxv6m1pYWNi1a1ffxmmlHTt2/OpXv3rxxRc79hFE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" alt="原卷插图" style="max-width:100%;height:auto"><figcaption>原卷 p21 插图（自动裁自真题 PDF）</figcaption></figure></details>
 <div class="ans">
     <p><b>（1）</b></p>
     <div class="step"><b class="n">1</b>Q 是"垂直光轴切割"的平行平板 ⇒ 光轴就是通光面的法线；光又垂直入射，所以<b>光沿光轴传播</b>。沿光轴传播时 o 光与 e 光速度相同（都取 <i>n</i><sub>0</sub>），不存在双折射、也不发生双折射分束。
@@ -363,6 +401,12 @@
 </div>
 
 <h2 id="b">B · 设计光栅<span class="cnt">1 题</span></h2>
+<div class="kcard">
+<div class="kh">B · 设计光栅</div>
+<ul><li>由 λ、θ 上限定 d 的最小值</li><li>由缺级定 a；由分辨要求定总条数 N</li></ul>
+<div class="eqb"><i>d</i> ≥ <span class="frac"><span class="num"><i>k</i>λ</span><span class="den">sinθ<sub>max</sub></span></span></div>
+<div class="eqb"><i>N</i> = <span class="frac"><span class="num">λ</span><span class="den"><i>k</i>·δλ</span></span></div>
+</div>
 <div class="lead">"设计"题就是把四个条件翻译成四个不等式，取等号即可。这题的答案正好是 2017-二-3 的题给条件（<i>d</i> = 2.4 μm、<i>a</i> = 0.8 μm、宽 36 mm）。</div>
 
 <div class="q" id="q011">
@@ -515,6 +559,30 @@
   @media (max-width:640px){
     .wrap{padding-left:14px !important;padding-right:14px !important;}
   }
+  /* 知识点旁的小图 */
+  figure.figside{float:right;width:230px;max-width:42%;margin:0 0 10px 14px;text-align:center;}
+  figure.figside img{max-width:100% !important;height:auto;}
+  figure.figside figcaption{font-size:11.5px;color:#6d6d6d;line-height:1.5;margin-top:4px;}
+  @media (max-width:640px){ figure.figside{float:none;width:100%;max-width:100%;margin:10px auto;} }
+  .knote{margin-top:6px;padding-top:6px;border-top:1px dashed #d9cfc4;font-size:12.5px;color:#6d5a4a;line-height:1.7;}
+  /* 章首大点卡 */
+  .kbig{margin:14px 0 18px;padding:14px 16px;border:1px solid #d8cbbb;border-left:6px solid #6d3a24;
+        border-radius:8px;background:#f4e9dd;font-size:14px;line-height:1.85;}
+  .kbig .kh{font-weight:800;color:#5d2f1c;font-size:15px;margin-bottom:8px;letter-spacing:.5px;}
+  .kbig ul{margin:6px 0 0 18px;padding:0;}
+  .kbig li{margin:4px 0;}
+  .kbig table{border-collapse:collapse;margin:8px 0 4px;font-size:13.5px;}
+  .kbig td,.kbig th{border:1px solid #d8cbbb;padding:4px 10px;text-align:left;}
+  .kbig th{background:#ecdccb;}
+  @media (max-width:640px){ .kbig{padding:11px 12px;} .kbig td,.kbig th{padding:3px 6px;} }
+  /* 考点必背卡 */
+  .kcard{margin:12px 0 16px;padding:12px 16px;border:1px solid #e3dfd7;border-left:4px solid #6d3a24;
+         border-radius:8px;background:#f7efe7;font-size:14px;line-height:1.85;}
+  .kcard .kh{font-weight:700;color:#6d3a24;margin-bottom:6px;font-size:14px;}
+  .kcard ul{margin:6px 0 0 18px;padding:0;}
+  .kcard li{margin:3px 0;}
+  .kcard .eqb{margin:8px 0 2px;line-height:2.4;}
+  @media (max-width:640px){ .kcard{padding:10px 12px;} }
   /* 图片自适应（手机上不撑破版心） */
   .q img, .ans img, .stem img, figure img, details.figbox img{max-width:100% !important;height:auto !important;}
   figure{max-width:100%;margin:10px auto;text-align:center;overflow:hidden;}

@@ -1,4 +1,4 @@
-const CACHE = 'g851-inline-v1';
+const CACHE = 'g851-inline-v3';
 const ASSETS = [
  "./",
  "851-应用光学-简答与画图-p49-56.html",
