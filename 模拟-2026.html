@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 年 851 模拟卷 · 851 · 851 计算题 · 第三章 光的衍射</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head><body><div class="wrap"><style>
+ body{padding-top:0}
+ .tbar{position:sticky;top:0;z-index:30;background:#6d3a24;color:#fff;padding:9px 14px;display:flex;
+       gap:10px;align-items:center;font-size:14px;flex-wrap:wrap;}
+ .tbar b{font-size:17px;font-variant-numeric:tabular-nums;}
+ .tbar button{background:#fff;color:#6d3a24;border:0;border-radius:14px;padding:4px 12px;font-size:13px;cursor:pointer;}
+ .qindex{position:sticky;top:46px;z-index:25;background:rgba(251,250,247,.97);border-bottom:1px solid #e3dfd7;
+         padding:6px 14px;font-size:12.5px;overflow-x:auto;white-space:nowrap;}
+ .qindex a{display:inline-block;margin-right:6px;padding:2px 8px;border:1px solid #e3dfd7;border-radius:11px;
+           color:#1b1b1b;text-decoration:none;}
+ .qindex a:hover{background:#6d3a24;color:#fff;}
+ .qindex .sec{color:#8c4a2f;font-weight:700;margin:0 6px;}
+ .q:not(.show) .ans{display:none;}
+ .reveal{margin:8px 0 4px;display:flex;gap:8px;flex-wrap:wrap;}
+ .reveal button{background:#f4e9dd;border:1px solid #d8cbbb;color:#6d3a24;border-radius:14px;
+                padding:4px 14px;font-size:13px;cursor:pointer;}
+ .reveal button.sb{background:#fff;border-color:#d8cbbb;}
+ .reveal button.sb.sel{background:#2e7d32;border-color:#2e7d32;color:#fff;}
+ .reveal button.okb{background:#2e7d32;border-color:#2e7d32;color:#fff;}
+ .reveal button.nob{background:#b23b3b;border-color:#b23b3b;color:#fff;}
+ .scorer{margin:6px 0 2px;font-size:13px;}
+ .prow{display:flex;gap:6px;align-items:center;margin:3px 0;}
+ .pl{min-width:52px;color:#6d3a24;font-weight:600;}
+ .score{position:fixed;left:14px;bottom:16px;z-index:35;background:#fff;border:1px solid #e3dfd7;
+        border-radius:10px;padding:8px 12px;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.12);}
+ .score b{color:#6d3a24;font-size:15px;}
+ @media print{.tbar,.qindex,.reveal,.score{display:none;} .q:not(.show) .ans{display:block !important;}}
+</style><div class="tbar"><span>剩余</span><b id="clk">180:00</b><button id="tstart">开始</button><button id="treset">重置</button><span style="margin-left:auto;font-size:12.5px;opacity:.9">先做，再展开答案</span></div><div class="qindex"><span class="sec">物理光学 简</span><a href="#m2026物1">物-1</a><a href="#m2026物2">物-2</a><a href="#m2026物3">物-3</a><a href="#m2026物4">物-4</a><span class="sec">应用光学 简</span><a href="#m2026应1">应-1</a><a href="#m2026应2">应-2</a><a href="#m2026应3">应-3</a><a href="#m2026应4">应-4</a></div><h1 style="margin-top:16px">2026 年 851 模拟卷</h1><div class="sub">8 题 · 建议限时 180 分钟 · 做完按分值打分（简答 5 / 计算 10，可给半分）</div><p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="公式墙.html">公式墙</a></p><h2 id="sec1.5" style="margin:26px 0 10px">物理光学 简答题</h2><div id="m2026物1" data-parts="5" data-full="5"><div class="q" id="q260201">
+  <div class="hd"><span class="tag">2026-物-1</span><span class="ttl">什么影响反射、折射<span class="badge b-miss">题面仅一句</span></span></div>
+  <div class="stem">（回忆原文）<b>一、什么影响反射折射</b><br>
+    <span style="color:#6d6d6d;font-size:13px">复原猜测：问反射/折射（反射率、折射角、偏振状态）由哪些因素决定。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b><b>① 两侧介质的折射率</b>（相对折射率 n<sub>21</sub> = n<sub>2</sub>/n<sub>1</sub>）：决定折射角（n<sub>1</sub>sin i<sub>1</sub> = n<sub>2</sub>sin i<sub>2</sub>）与反射率的大小。
+    </div>
+    <div class="step"><b class="n">2</b><b>② 入射角 i<sub>1</sub></b>：反射率随 i<sub>1</sub> 单调增到 100%（掠入射）；i<sub>1</sub> &gt; 临界角且 n<sub>1</sub> &gt; n<sub>2</sub> 时发生<b>全反射</b>（临界角 sin i<sub>c</sub> = n<sub>2</sub>/n<sub>1</sub>）。
+    </div>
+    <div class="step"><b class="n">3</b><b>③ 波长（色散）</b>：n = n(λ)，故折射角、反射率都随波长变（棱镜分光、彩虹的成因）；金属的反射率还强烈依赖波长（所以金属有颜色）。
+    </div>
+    <div class="step"><b class="n">4</b><b>④ 偏振态</b>：菲涅耳公式给出 r<sub>s</sub>、r<sub>p</sub> 不同 ——
+      <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin(<i>i</i><sub>1</sub>−<i>i</i><sub>2</sub>)</span><span class="den">sin(<i>i</i><sub>1</sub>+<i>i</i><sub>2</sub>)</span></span>　，　<i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan(<i>i</i><sub>1</sub>−<i>i</i><sub>2</sub>)</span><span class="den">tan(<i>i</i><sub>1</sub>+<i>i</i><sub>2</sub>)</span></span></div>
+      <p style="margin:4px 0 0">在<b>布儒斯特角</b> i<sub>B</sub>（tan i<sub>B</sub> = n<sub>2</sub>/n<sub>1</sub>，此时 i<sub>1</sub>+i<sub>2</sub> = 90°）处 <b>r<sub>p</sub> = 0</b>，反射光成为纯 s 偏振的线偏振光 —— 这是"反射起偏"的原理。</p>
+    </div>
+    <div class="step"><b class="n">5</b><b>⑤ 界面状况</b>：粗糙度（漫反射 vs 镜面反射）、镀膜（多层膜可把 R 从 4% 调到 99.9%）、吸收（复折射率 n + iκ）、以及是否发生全反射。
+    </div>
+    <div class="res">五个因素：<b>折射率比、入射角、波长（色散）、偏振态（r<sub>s</sub>≠r<sub>p</sub>，布儒斯特角处 r<sub>p</sub>=0）、界面性质（粗糙度/镀膜/吸收）</b>。</div>
+    <span class="src"><span class="badge b-wait">待核</span> 【真题·回忆版 + 自算】原题问法未知，按"影响因素"五条作答最稳</span>
+  </div>
+</div>
+
+</div><div id="m2026物2" data-parts="5" data-full="5"><div class="q" id="q260202">
+  <div class="hd"><span class="tag">2026-物-2</span><span class="ttl">菲涅耳透镜与普通透镜的区别<span class="badge b-miss">题面仅一句</span></span></div>
+  <div class="stem">（回忆原文）<b>二、菲涅耳透镜和普通透镜的区别</b><br>
+    <span style="color:#6d6d6d;font-size:13px">复原猜测：比较菲涅耳（螺纹/环带）透镜与普通连续面透镜在结构、光学性能、用途上的差异。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b><b>结构</b>：普通透镜靠<b>连续曲面</b>的厚度变化积累相位；菲涅耳透镜把连续曲面"<b>塌陷</b>"成一系列<b>同心环带</b>（每一环带保留原曲面在该处的<b>倾角/相位</b>，只是把多余的厚度削掉），因此<b>厚度、重量、材料体积</b>都大幅减小。
+    </div>
+    <div class="step"><b class="n">2</b><b>光学性能</b>：
+      <div class="eqb">优点：可以做<b>很大口径</b>、<b>很轻</b>、<b>很便宜</b>（塑料压铸）；焦距由环带设计决定，可做到 f/D 很小</div>
+      <div class="eqb">缺点：环带的<b>台阶</b>造成遮光、杂散光、<b>衍射效率损失</b>（多级衍射），<b>成像质量/分辨率远不如</b>连续面透镜，且对斜入射更敏感（有"环带像差"）</div>
+    </div>
+    <div class="step"><b class="n">3</b><b>用途</b>：普通透镜用于成像（相机、显微镜、望远镜）；菲涅耳透镜多用于<b>聚光、照明、投影、太阳能聚光、灯塔、VR 头显</b>等"只要会聚、不要求成像质量"的场合。
+    </div>
+    <div class="step"><b class="n">4</b><b>一句话对比</b>：菲涅耳透镜 = "<b>用相位换厚度</b>"；普通透镜 = "用厚度换相位"。前者省材料、能做大；后者成像好。
+    </div>
+    <div class="res">结构：<b>环带（阶梯）vs 连续曲面</b>；性能：<b>轻/薄/大口径/便宜，但成像质量差、有台阶杂光</b>；用途：<b>聚光照明 vs 成像</b>。</div>
+    <span class="src"><span class="badge b-wait">待核</span> 【真题·回忆版 + 自算】</span>
+  </div>
+</div>
+
+</div><div id="m2026物3" data-parts="5" data-full="5"><div class="q" id="q260203">
+  <div class="hd"><span class="tag">2026-物-3</span><span class="ttl">光电调制的应用：至少说出四个器件名称<span class="badge b-miss">题面仅一句</span></span></div>
+  <div class="stem">（回忆原文）<b>三、光电调制的应用至少四个器件名称</b><br>
+    <span style="color:#6d6d6d;font-size:13px">复原猜测：列举利用电光效应（普克尔斯/克尔效应）工作的器件，至少四个。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b>先答"原理一句"：利用<b>电光效应</b>（折射率随外加电场线性变化 = 普克尔斯效应，二次方变化 = 克尔效应），通过电压改变晶体的相位延迟/双折射，从而控制光的强度、相位、方向或偏振。
+    </div>
+    <div class="step"><b class="n">2</b><b>四个（给六个更稳）</b>：
+      <div class="eqb">① <b>电光强度调制器</b>（EOM，如 KDP/LiNbO₃ 晶体 + 起检偏器）</div>
+      <div class="eqb">② <b>电光开关 / 电光 Q 开关</b>（调 Q 激光器，产生巨脉冲）</div>
+      <div class="eqb">③ <b>电光偏转器 / 电光扫描器</b>（激光扫描、打印、雷达）</div>
+      <div class="eqb">④ <b>空间光调制器（SLM）</b>（液晶/电光阵列，投影与全息）</div>
+      <div class="eqb">⑤ <b>电光滤波器 / 电光可调谐滤波器</b>（选频、光通信）</div>
+      <div class="eqb">⑥ <b>普克尔斯盒（Pockels cell）</b>、光波导电光调制器、电光相位调制器</div>
+    </div>
+    <div class="step"><b class="n">3</b>可补一句应用场景：光通信中的外调制、激光测距/雷达的 Q 开关、激光打印与投影的扫描、光计算与光互联。
+    </div>
+    <div class="res">至少四个：<b>电光强度调制器、电光 Q 开关、电光偏转（扫描）器、空间光调制器</b>（再加电光滤波器、普克尔斯盒）。</div>
+    <span class="src"><span class="badge b-wait">待核</span> 【真题·回忆版 + 自算】</span>
+  </div>
+</div>
+
+</div><div id="m2026物4" data-parts="5" data-full="5"><div class="q" id="q260204">
+  <div class="hd"><span class="tag">2026-物-4</span><span class="ttl">一般性吸收与选择性吸收<span class="badge b-miss">题面仅一句</span></span></div>
+  <div class="stem">（回忆原文）<b>四、一般性吸收和选择性吸收</b><br>
+    <span style="color:#6d6d6d;font-size:13px">复原猜测：区分介质对光的"一般（普遍）吸收"与"选择性吸收"，并各举一例。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b>共同规律：<b>朗伯定律</b> I = I<sub>0</sub>e<sup>−αd</sup>（α 为吸收系数，d 为厚度）。
+    </div>
+    <div class="step"><b class="n">2</b><b>一般吸收（普遍吸收）</b>：在考察的波段内 α <b>几乎不随波长变化</b>，对各色光"一视同仁"地吸收 ⇒ <b>透射光颜色不变，只是变暗</b>。
+      <div class="eqb">例：中性灰滤光片、大气对可见光的吸收（灰霾）、玻璃在可见光区的弱吸收</div>
+    </div>
+    <div class="step"><b class="n">3</b><b>选择性吸收</b>：α <b>随波长剧烈变化</b>，某些波段被强烈吸收（吸收带），其余波段透过 ⇒ <b>透射光呈剩余波段的颜色</b>。
+      <div class="eqb">例：红玻璃只透红光、彩色滤光片、晶体的本征吸收带（如半导体在带隙附近的本征吸收）、叶绿素吸收红光蓝光而呈绿色</div>
+    </div>
+    <div class="step"><b class="n">4</b>两者关系：任何介质都不可能"只选择"或"只一般"——通常一个波段内以选择性吸收为主（特征吸收带），带外表现为一般吸收；这也是"物体有颜色"的根本原因（吸收 + 反射的选择性）。
+    </div>
+    <div class="res"><b>一般吸收</b>：α 与 λ 无关、只变暗不变色（中性滤光片）；<b>选择性吸收</b>：α 随 λ 剧变、透射光带颜色（彩色玻璃/晶体吸收带）；定量都用 <b>I = I<sub>0</sub>e<sup>−αd</sup></b>。</div>
+    <span class="src"><span class="badge b-wait">待核</span> 【真题·回忆版 + 自算】</span>
+  </div>
+</div>
+
+</div><h2 id="sec3.5" style="margin:26px 0 10px">应用光学 简答题</h2><div id="m2026应1" data-parts="5" data-full="5"><div class="q" id="q260101">
+  <div class="hd"><span class="tag">2026-应-1</span><span class="ttl">投影仪器为什么能消除渐晕<span class="badge b-miss">题面仅一句</span></span></div>
+  <div class="stem">（回忆原文）<b>投影仪器为什么能消除渐晕</b><br>
+    <span style="color:#6d6d6d;font-size:13px">复原猜测：请说明投影（放映）仪器的照明系统为什么能消除像面渐晕，并指出消除渐晕的条件。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b><b>渐晕是什么</b>：轴外点发出的、充满孔径光阑的光束，在通过系统时被<b>镜框（或入窗/出窗）切割</b>，参与成像的光束截面变小 → 像面照度从中心向边缘迅速下降，这就是渐晕。
+    </div>
+    <div class="step"><b class="n">2</b><b>消除渐晕的充要条件</b>：<b>入射窗与物平面重合</b>（等价地：出射窗与像平面重合）。窗与物面重合时，轴外点与轴上点发出的光束<b>被同一个光阑限制、截面相同</b>，不再随视场增大而被切割。
+    </div>
+    <div class="step"><b class="n">3</b><b>投影仪怎么做到的</b>：投影仪的照明系统（聚光镜 + 光源）按<b>柯勒照明（Köhler illumination）</b>设计 —— 把<b>光源成像在投影物镜的孔径光阑（入瞳）处</b>，把<b>照明系统的出射窗成像在物平面（投影片）上</b>。于是：
+      <div class="eqb">① 物面被<b>均匀照明</b>（光源的像充满入瞳，各点孔径相同）</div>
+      <div class="eqb">② 物面上每一点都以<b>充满入瞳的光束</b>进入物镜 ⇒ 无切割 ⇒ <b>无渐晕、照度均匀</b></div>
+    </div>
+    <div class="step"><b class="n">4</b>对比记忆：<b>临界照明</b>把光源像成在物面上（亮但不均、易烧片）；<b>柯勒照明</b>把光源像成在入瞳上（均匀、无渐晕）—— 投影仪、显微镜都用柯勒。
+    </div>
+    <div class="res">因为投影仪用<b>柯勒照明</b>：光源成像在物镜入瞳、照明出射窗与物面重合 ⇒ 轴上轴外光束截面相同、不被镜框切割 ⇒ <b>消除渐晕</b>。判据一句话：<b>窗与物面重合</b>。</div>
+    <span class="src"><span class="badge b-wait">待核</span> 【真题·回忆版 + 自算】原题问法未知，按"为什么能消除渐晕"作答</span>
+  </div>
+</div>
+
+</div><div id="m2026应2" data-parts="5" data-full="5"><div class="q" id="q260102">
+  <div class="hd"><span class="tag">2026-应-2</span><span class="ttl">设计一个测量光学材料折射率的方法<span class="badge b-miss">题面仅一句</span></span></div>
+  <div class="stem">（回忆原文）<b>设计一个测光学材料折射率的方法</b><br>
+    <span style="color:#6d6d6d;font-size:13px">复原猜测：这是一道开放题，要求给出测量原理、光路、公式与注意事项。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b><b>方案 A（首选，精度最高）：最小偏向角法（棱镜法）</b>
+      <div class="eqb">把材料磨成顶角 <i>A</i> 的三棱镜，用单色平行光入射，转动棱镜找到<b>最小偏向角 δ<sub>min</sub></b></div>
+      <div class="eqb"><i>n</i> = <span class="frac"><span class="num">sin[(<i>A</i> + δ<sub>min</sub>)/2]</span><span class="den">sin(<i>A</i>/2)</span></span></div>
+      <p style="margin:4px 0 0">要点：最小偏向角时入射光与出射光对称（i<sub>1</sub> = i<sub>2</sub>′），读数最灵敏；精度可达 10<sup>−5</sup> 量级。测 n(λ) 时换不同波长的单色光即得色散曲线。</p>
+    </div>
+    <div class="step"><b class="n">2</b><b>方案 B（最快，适合平板/液体）：布儒斯特角法</b>
+      <div class="eqb">测 p 分量反射光<b>消光</b>时的入射角 <i>i</i><sub>B</sub>　⇒　<i>n</i> = tan<i>i</i><sub>B</sub></div>
+      <p style="margin:4px 0 0">要点：起偏器 + 检偏器，转动样品找反射光最暗；缺点是精度 ~10<sup>−3</sup>，且只能测表面。</p>
+    </div>
+    <div class="step"><b class="n">3</b><b>方案 C（工程常用）：全反射临界角法（阿贝折射仪）</b>
+      <div class="eqb">测临界角 <i>θ</i><sub>c</sub>：<i>n</i> = <span class="frac"><span class="num">1</span><span class="den">sin<i>θ</i><sub>c</sub></span></span>（相对空气）　或　<i>n</i><sub>x</sub> = <i>n</i><sub>0</sub> sin<i>θ</i><sub>c</sub>（相对已知标准棱镜 n<sub>0</sub>）</div>
+      <p style="margin:4px 0 0">要点：只需一小块抛光面，读数直接刻度化，适合快速测固体/液体。</p>
+    </div>
+    <div class="step"><b class="n">4</b><b>方案 D（薄膜/已加工件）：干涉法</b>——用迈克尔逊或 F-P 干涉测厚度 d 与光程差变化，由 Δ = 2n d 反解 n。
+    </div>
+    <div class="res">答题模板：<b>选最小偏向角法</b>（写清光路：单色平行光 → 顶角 A 的三棱镜 → 找最小偏向角 → n = sin[(A+δ<sub>min</sub>)/2]/sin(A/2)），再补一句"也可用布儒斯特角法 n = tan i<sub>B</sub> 或临界角法 n = 1/sinθ<sub>c</sub>" 显示知识面。</div>
+    <span class="src"><span class="badge b-wait">待核</span> 【真题·回忆版 + 自算】开放题，无标准答案；四种方案均为教材标准方法</span>
+  </div>
+</div>
+
+</div><div id="m2026应3" data-parts="5" data-full="5"><div class="q" id="q260103">
+  <div class="hd"><span class="tag">2026-应-3</span><span class="ttl">彗差的图像（弥散斑形状）<span class="badge b-miss">题面仅三字</span></span></div>
+  <div class="stem">（回忆原文）<b>慧差图像</b>（"慧差"即"彗差"）<br>
+    <span style="color:#6d6d6d;font-size:13px">复原猜测：要求画出/说明彗差的弥散斑图形，并解释其成因与特征。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b><b>图形</b>：轴外物点发出的<b>宽光束</b>经系统后，在像面上形成一个<b>彗星状</b>的弥散斑 —— 一端<b>尖而亮</b>（靠近主光线，能量集中），另一端<b>宽而暗</b>（像"彗尾"）；整体上小下大（或上下颠倒，取决于光阑在上/下方）。
+    </div>
+    <div class="step"><b class="n">2</b><b>成因（三步说清）</b>：
+      <div class="eqb">① 轴外点发出的光束对系统<b>上下不对称</b>（子午面内上、下光线的孔径不同）</div>
+      <div class="eqb">② 各环带（不同孔径 h）的光线在像面上交成一系列<b>半径不同的小圆</b></div>
+      <div class="eqb">③ 这些圆的<b>圆心沿一条直线依次偏移</b>（偏移量 ∝ h<sup>2</sup>），叠加起来就成了彗星状</div>
+    </div>
+    <div class="step"><b class="n">3</b><b>特征与规律</b>（考点密集）：
+      <div class="eqb">δ<i>y</i>′ ∝ <i>y</i>·<i>h</i><sup>2</sup>（<b>与视场一次方、孔径平方成正比</b>）</div>
+      <p style="margin:4px 0 0">—— 与球差（∝h²，轴上就有）不同，<b>彗差只在轴外出现</b>，且随视场线性增大；<b>对光阑位置极敏感</b>：移动光阑可使彗差为零（该位置称<b>不晕点/齐明点</b>），这也是"光阑放在透镜上"能消彗差的原因。</p>
+    </div>
+    <div class="step"><b class="n">4</b><b>与其它像差区分</b>：球差（轴上、圆对称光斑）／彗差（轴外、彗星状）／像散（轴外、子午与弧矢焦距不同，成两条焦线）／场曲（像面弯曲）／畸变（清晰但变形，无弥散斑）。
+    </div>
+    <div class="res">彗差弥散斑＝<b>彗星状</b>（一头尖亮、一头宽暗），由<b>轴外宽光束上下不对称 + 各环带圆心沿直线偏移</b>造成；<b>∝ y·h²</b>，只出现在轴外，可用光阑位置（不晕点）消除。</div>
+    <span class="src"><span class="badge b-wait">待核</span> 【真题·回忆版 + 自算】原题可能要求"画图"，此处无法代画，已给出形状的精确文字描述</span>
+  </div>
+</div>
+
+</div><div id="m2026应4" data-parts="5" data-full="5"><div class="q" id="q260104">
+  <div class="hd"><span class="tag">2026-应-4</span><span class="ttl">作图题（回忆：与课本例图差不多）<span class="badge b-miss">题面缺失</span></span></div>
+  <div class="stem">（回忆原文）<b>画图和课本例图差不多</b><br>
+    <span style="color:#6d6d6d;font-size:13px">—— 回忆者没有记下画的是什么图（可能是一次/二次反射棱镜光路、虚物/虚像作图、或节点/焦点作图之一）。</span></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="step"><b class="n">1</b><b>题面缺失，无法复原</b>。2026 这一题的具体图形、给点（F/H/H′/F′ 的排列）、要求（求像/求节点/画棱镜光路）全都没有记录。
+    </div>
+    <div class="step"><b class="n">2</b><b>应对策略</b>（按 2025 与往年规律押）：851 的应光作图题近年只考四类，把这四类的画法练熟即可覆盖：
+      <div class="eqb">① 轴上虚物/实物点的像（两条特殊光线 + 主平面等高过渡）</div>
+      <div class="eqb">② 节点 J、J′（n = n′ 时与 H、H′ 重合，γ = 1）</div>
+      <div class="eqb">③ 一次/二次反射棱镜光路（折转 90° / 180°，奇数次反射成镜像）</div>
+      <div class="eqb">④ 光阑、入瞳/出瞳、窗的判定与光路</div>
+    </div>
+    <div class="res"><span class="badge b-miss">题面缺失</span> 本题只能给出"押题范围"，<b>无法给出确定答案</b>。若后续拿到 2026 原卷，请补进本页。</div>
+    <span class="src">【真题·回忆版】题面缺失</span>
+  </div>
+</div>
+
+</div></div><div class="score" id="sc">得分 <b>0</b>/0</div><script>
+var KEY = "g851-mock-" + "2026", N = 8, MAX = 40;
+var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+function paint(){
+  var got = 0, done = 0;
+  document.querySelectorAll(".q").forEach(function(q){
+    var w = q.parentNode, id = w.id, parts = w.getAttribute("data-parts");
+    if (!parts) return;
+    var ms = parts.split("|").map(parseFloat), rec = st[id];
+    if (!rec) return;
+    var cnt = 0;
+    for (var i = 0; i < ms.length; i++) {
+      if (rec[i] !== undefined) { got += ms[i] * rec[i]; cnt++; }
+    }
+    if (cnt === ms.length) done++;
+  });
+  var s = "得分 <b>" + (Math.round(got*10)/10) + "</b>/" + MAX + "　整题判完 <b>" + done + "</b>/" + N;
+  if (done) {
+    var r = got / MAX;
+    s += "　得分率 <b>" + Math.round(r*100) + "%</b>　折算 <b>" + (Math.round(r*1500)/10) + "</b>/150";
+  }
+  document.getElementById("sc").innerHTML = s;
+}
+function mark(btn, f){
+  var q = btn.closest(".q"), w = q.parentNode, id = w.id, p = btn.getAttribute("data-p");
+  if (!st[id]) st[id] = {};
+  st[id][p] = f; save();
+  q.querySelectorAll('.sb[data-p="' + p + '"]').forEach(function(b){ b.classList.remove("sel"); });
+  btn.classList.add("sel"); paint();
+}
+document.querySelectorAll(".q").forEach(function(q){
+  var w = q.parentNode, id = w.id, rec = st[id];
+  if (!rec) return;
+  q.querySelectorAll(".sb").forEach(function(b){
+    var v = rec[b.getAttribute("data-p")];
+    if (v !== undefined && parseFloat(v) === parseFloat(b.getAttribute("data-f"))) b.classList.add("sel");
+  });
+});
+paint();
+var left = 180*60, tm = null;
+function show(){
+  var m = Math.floor(left/60), s = left%60;
+  document.getElementById("clk").textContent = m + ":" + ("0"+s).slice(-2);
+}
+document.getElementById("tstart").onclick = function(){
+  if (tm) { clearInterval(tm); tm = null; this.textContent = "继续"; return; }
+  this.textContent = "暂停";
+  tm = setInterval(function(){
+    left--;
+    if (left <= 0) { left = 0; clearInterval(tm); tm = null;
+      document.getElementById("clk").textContent = "时间到"; return; }
+    show();
+  }, 1000);
+};
+document.getElementById("treset").onclick = function(){
+  clearInterval(tm); tm = null; left = 180*60; show();
+  document.getElementById("tstart").textContent = "开始";
+};
+show();
+
+</script><style>#totop{position:fixed;right:14px;bottom:16px;z-index:40;display:none;width:40px;height:40px;
+border:0;border-radius:50%;background:#6d3a24;color:#fff;font-size:18px;line-height:40px;
+text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18)}#totop.show{display:block}
+@media print{#totop{display:none}}</style>
+<button id="totop" title="返&#22238;&#39030;&#31471;">&#8593;</button>
+<script>(function(){var b=document.getElementById('totop');if(!b)return;
+function u(){b.classList.toggle('show',window.scrollY>400)}
+addEventListener('scroll',u,{passive:true});u();
+b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script></body></html>

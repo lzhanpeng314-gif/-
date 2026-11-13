@@ -300,14 +300,7 @@
 <div class="q" id="q007">
   <div class="hd"><span class="tag">2019-二-3</span><span class="ttl">中央峰角宽度、可分辨的最小波长差</span></div>
   <div class="stem">平面透射光栅每毫米内 400 条刻线，光栅宽为 5 cm。当波长为 500 nm 的平行光垂直入射到该光栅，发现第 4 级衍射光谱处在单缝衍射的第一极小位置，试求：衍射中央峰的角宽度；正入射时光栅能分辨的谱线最小波长差。</div>
-  <div class="ans">
-    <div class="step"><b class="n">1</b>d = 2.5 μm，N = 400×50 = 20000
-      <div class="eqb">中央峰全角宽 = <span class="frac"><span class="num">2λ</span><span class="den"><i>Nd</i></span></span> = <span class="frac"><span class="num">2×500×10<sup>−9</sup></span><span class="den">0.05</span></span> ≈ <b>2×10<sup>−5</sup> rad</b></div>
-    </div>
-    <div class="step"><b class="n">2</b>一级（k=1）
-      <div class="eqb">δλ = <span class="frac"><span class="num">λ</span><span class="den"><i>kN</i></span></span> = <span class="frac"><span class="num">500 nm</span><span class="den">20000</span></span> = <b>0.025 nm</b></div>
-    </div>
-    <div class="res">中央峰角宽度 2×10<sup>−5</sup> rad（半宽 1×10<sup>−5</sup>）；<b>最小波长差按最高级次算</b>：m = 3（4 级缺级）、N = 20000 ⇒ δλ = λ/(mN) = 8.33×10<sup>−3</sup> nm。（若只取一级才是 0.025 nm，但"光栅能分辨的最小波长差"应取最高级次。）</div>
+  <div class="ans"><div class="step"><b class="n">1</b>光栅常数与缝宽：<i>d</i> = 1/400 mm = <b>2.5 μm</b>；第 4 级主极大落在单缝第一极小处，故 <i>d</i>/<i>a</i> = 4<div class="eqb"><i>a</i> = <i>d</i>/4 = <b>0.625 μm</b></div></div><div class="step"><b class="n">2</b><b>“衍射中央峰”指单缝衍射包络的中央明纹</b>（不是干涉主极大！），宽度由缝宽决定，与刻线总数 <i>N</i> 无关<div class="eqb">sin<i>θ</i><sub>1</sub> = λ/<i>a</i> = 0.5/0.625 = 0.8 ⇒ <i>θ</i><sub>1</sub> = 53.13°</div><div class="eqb">中央峰全角宽 = 2<i>θ</i><sub>1</sub> = <b>106.3° ≈ 1.86 rad</b></div><p style="margin:4px 0 0">答案册写的是 2λ/<i>a</i> = 1.6 rad —— 那是 sin<i>θ</i>≈<i>θ</i> 的近似。本题 <i>θ</i><sub>1</sub> 已达 53°，近似误差 16%。<b>考试按答案册写 1.6 rad 可得分，但要知道它是近似。</b></p></div><div class="step"><b class="n">3</b>能分辨的最小波长差：刻线总数 <i>N</i> = 400 × 50 = <b>20000</b>，分辨本领 <i>R</i> = <i>mN</i> 要用<b>最大级次</b><div class="eqb"><i>m</i><sub>max</sub> = 3（第 4 级缺级）⇒ <i>R</i> = 3 × 20000 = 6×10<sup>4</sup></div><div class="eqb">δλ = λ/<i>R</i> = 500 nm / 6×10<sup>4</sup> = <b>8.33×10<sup>−3</sup> nm</b></div></div><div class="res">（1）中央峰（单缝包络）全角宽 <b>106.3°</b>（≈1.86 rad；答案册近似值 1.6 rad）；（2）可分辨的最小波长差 <b>8.33×10<sup>−3</sup> nm</b>。<b>易错</b>：把“中央峰”当成干涉主极大，会用 2λ/(<i>Nd</i>) 得到 2×10<sup>−5</sup> rad 的荒谬结果。</div><div class="warn"><b>两种“宽”别混</b>：<br>· <b>单缝包络</b>中央明纹宽 = 2λ/<i>a</i>（精确为 2 arcsin(λ/<i>a</i>)）—— 由缝宽定，与 <i>N</i> 无关；<br>· <b>干涉主极大</b>半角宽 = λ/(<i>Nd</i>) —— 由总刻线数定，描述谱线“细不细”。<br>本题问“衍射中央峰”，取前者。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -973,6 +966,23 @@
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   navigator.serviceWorker.register('sw.js').catch(function(){});
 }
+</script>
+<style>
+#totop{position:fixed;right:16px;bottom:74px;z-index:40;display:none;width:40px;height:40px;
+  border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
+  text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92}
+#totop.show{display:block}
+#totop:hover{opacity:1}
+@media print{#totop{display:none}}
+</style>
+<button id="totop" title="返回顶端">↑</button>
+<script>
+(function(){
+  var b=document.getElementById('totop'); if(!b) return;
+  function upd(){ b.classList.toggle('show', window.scrollY>400); }
+  window.addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
 </script>
 </body>
 </html>

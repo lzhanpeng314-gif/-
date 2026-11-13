@@ -1,4 +1,4 @@
-const CACHE = 'g851-inline-v3';
+const CACHE = 'g851-inline-v4';
 const ASSETS = [
  "./",
  "851-应用光学-简答与画图-p49-56.html",
@@ -16,19 +16,32 @@ const ASSETS = [
  "851-计算题-第8章-理想光学系统.html",
  "851-计算题-第9章-光路计算.html",
  "index.html",
+ "公式墙.html",
  "按年份.html",
  "搜索.html",
+ "模拟-2009.html",
+ "模拟-2010.html",
+ "模拟-2011.html",
+ "模拟-2012.html",
+ "模拟-2013.html",
+ "模拟-2014.html",
+ "模拟-2015.html",
+ "模拟-2016.html",
+ "模拟-2017.html",
+ "模拟-2018.html",
+ "模拟-2019.html",
+ "模拟-2020.html",
+ "模拟-2021.html",
+ "模拟-2022.html",
+ "模拟-2023.html",
+ "模拟-2024.html",
+ "模拟-2025.html",
+ "模拟-2026.html",
+ "模拟-组卷1.html",
  "manifest.webmanifest",
  "icon.svg"
 ];
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
-});
-self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))
-    .then(() => self.clients.claim()));
-});
-self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  e.respondWith(caches.match(e.request).then(hit => hit || fetch(e.request).catch(() => caches.match('index.html'))));
-});
+self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())); });
+self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
+self.addEventListener('fetch', e => { if (e.request.method !== 'GET') return;
+  e.respondWith(caches.match(e.request).then(hit => hit || fetch(e.request).catch(() => caches.match('index.html')))); });

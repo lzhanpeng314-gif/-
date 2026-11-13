@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -310,10 +310,15 @@
   <div class="stem">平行平板的双光束干涉和多光束干涉同为等倾干涉，为什么前者应用的常是反射光，而后者应用的通常是透射光？</div>
   <div class="ans">
     <ul>
-      <li><b>双光束用反射光</b>：平板反射率 R 较小，反射光中两束强度接近，<b>条纹可见度高</b>；透射光是一强一弱两束叠加，可见度很低。</li>
-      <li><b>多光束用透射光</b>：反射光是"亮背景下的细暗条纹"，透射光是"暗背景下的细亮条纹"，后者<b>更容易分辨</b>。</li>
+      <li><b>双光束 → 看反射光</b>：平板反射率低时，反射光中两束（表面直接反射 + 一次内反射后出射）<b>强度接近</b>，
+        可见度 <i>V</i> = 2√(<i>I</i><sub>1</sub><i>I</i><sub>2</sub>) / (<i>I</i><sub>1</sub>+<i>I</i><sub>2</sub>) → 1；
+        而透射光是 <i>t</i><sup>2</sup> 与 <i>t</i><sup>2</sup><i>r</i><sup>2</sup> 一强一弱，<i>V</i> 很低。</li>
+      <li><b>多光束 → 看透射光</b>：高反射率腔里透射的一串光强相近，叠加后<b>条纹极细锐</b>
+        （半宽随 <i>R</i> 增大而变窄，精细度 <i>F</i> = π√<i>R</i> / (1−<i>R</i>) 上升）；
+        反射光是它的互补——“亮背景上的细暗线”，对比差。所以取透射。</li>
     </ul>
-    <span class="src">【原答】</span>
+    <p><b>一句话</b>：双光束拼的是<b>两束强度是否相称</b>（看可见度），多光束拼的是<b>条纹够不够锐</b>（看精细度）。</p>
+    <span class="src">【原答 + 补充】</span>
   </div>
 </div>
 
@@ -1652,6 +1657,23 @@
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   navigator.serviceWorker.register('sw.js').catch(function(){});
 }
+</script>
+<style>
+#totop{position:fixed;right:16px;bottom:74px;z-index:40;display:none;width:40px;height:40px;
+  border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
+  text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92}
+#totop.show{display:block}
+#totop:hover{opacity:1}
+@media print{#totop{display:none}}
+</style>
+<button id="totop" title="返回顶端">↑</button>
+<script>
+(function(){
+  var b=document.getElementById('totop'); if(!b) return;
+  function upd(){ b.classList.toggle('show', window.scrollY>400); }
+  window.addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
 </script>
 </body>
 </html>

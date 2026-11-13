@@ -208,21 +208,7 @@
 <div class="q" id="q003">
   <div class="hd"><span class="tag">2021-二-1</span><span class="ttl">条纹间距、水中变化、消失级次、光源临界宽度</span><span class="hot">四问综合</span></div>
   <div class="stem">杨氏双缝实验中，双缝间距 d = 0.5 mm，接收屏距双缝 D = 1 m，点光源距双缝 l = 30 cm，点光源发射波长为 500 nm 的单色光，试求：<br>（1）屏上的条纹间距，若把整个装置放入水中，条纹间距如何变化；<br>（2）若点光源发出的光波长为（500 ± 2.5）nm 范围内的准单色光，求接收屏上干涉条纹消失时的级次；<br>（3）若光源具有一定的宽度，屏上干涉条纹消失时，它的临界宽度是多少？</div>
-  <div class="ans">
-    <div class="step"><b class="n">1</b>（1）空气中
-      <div class="eqb">Δ<i>x</i> = <span class="frac"><span class="num">λ<i>D</i></span><span class="den"><i>d</i></span></span> = <span class="frac"><span class="num">500×10<sup>−9</sup>×1</span><span class="den">0.5×10<sup>−3</sup></span></span> = <b>1 mm</b></div>
-    </div>
-    <div class="step"><b class="n">2</b>入水后波长变短 λ′ = λ/n（n ≈ 1.33）
-      <div class="eq">Δx′ = Δx/n ≈ 1/1.33 ≈ <b>0.75 mm</b>　（条纹变密）</div>
-    </div>
-    <div class="step"><b class="n">3</b>（2）波列长度有限，级次太高则两束不再相干。判据：kΔλ ≥ λ/2
-      <div class="eq">k<sub>max</sub> = λ/(2Δλ) = 500/(2×5) = <b>50 级</b></div>
-      <p style="margin:4px 0 0">Δλ = 2.5×2 = 5 nm（"±2.5"是半宽，全宽为 5 nm）。第 50 级以后条纹消失。</p>
-    </div>
-    <div class="step"><b class="n">4</b>（3）光源宽度使两侧边缘的条纹错开半个间距
-      <div class="eq">b·d/l = λ/2　⇒　b = λl/(2d) = 500×10<sup>−9</sup>×0.30 / (2×0.5×10<sup>−3</sup>) = <b>0.15 mm</b></div>
-    </div>
-    <div class="res">Δx = 1 mm；水中 0.75 mm；条纹消失级次 ≈ <b>50 级</b>；光源临界宽度 ≈ <b>0.15 mm</b>。</div>
+  <div class="ans"><div class="step"><b class="n">1</b>（1）条纹间距<div class="eqb">Δ<i>x</i> = λ<i>D</i>/<i>d</i> = 500×10<sup>−9</sup> × 1 / (0.5×10<sup>−3</sup>) = <b>1 mm</b></div></div><div class="step"><b class="n">2</b>入水后波长变为 λ′ = λ/<i>n</i>（<i>n</i> ≈ 1.33），间距同比例缩小<div class="eqb">Δ<i>x</i>′ = Δ<i>x</i>/<i>n</i> ≈ 1/1.33 ≈ <b>0.75 mm</b>（条纹变密）</div></div><div class="step"><b class="n">3</b>（2）这是<b>连续谱带</b>（500±2.5 nm，全宽 Δλ = 5 nm），判据是<b>光程差超过相干长度</b>：<div class="eqb">Δ<i>l</i> = λ<sup>2</sup>/Δλ = (500 nm)<sup>2</sup>/5 nm = <b>50 μm</b></div><div class="eqb">Δ<i>l</i> = <i>m</i>λ ⇒ <i>m</i> = λ/Δλ = 500/5 = <b>100 级</b></div><p style="margin:4px 0 0"><b>别用 <i>m</i>Δλ = λ/2 那个判据</b>——那是“两条分离谱线”的错开条件，会得到 50 级，少一半。</p></div><div class="step"><b class="n">4</b>（3）光源宽度使<b>边缘两点</b>的条纹错开一个条纹间距，可见度降到零<div class="eqb"><i>b d</i>/<i>l</i> = λ ⇒ <i>b</i> = λ<i>l</i>/<i>d</i> = 500×10<sup>−9</sup> × 0.30 / (0.5×10<sup>−3</sup>) = <b>0.3 mm</b></div></div><div class="res">Δ<i>x</i> = <b>1 mm</b>；水中 <b>0.75 mm</b>；条纹消失级次 <b>100 级</b>；光源临界宽度 <b>0.3 mm</b>。</div><div class="warn"><b>两个判据别混</b>：<br>· <b>连续谱</b>（准单色光，宽度 Δλ）→ 相干长度 Δ<i>l</i> = λ<sup>2</sup>/Δλ，<i>m</i> = λ/Δλ；<br>· <b>两条谱线</b>（间隔 Δλ）→ 条纹错开半个间距，<i>m</i> = λ/(2Δλ)，且随后有“复现”。<br>本题是前者，答案 100 级。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -925,6 +911,23 @@
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   navigator.serviceWorker.register('sw.js').catch(function(){});
 }
+</script>
+<style>
+#totop{position:fixed;right:16px;bottom:74px;z-index:40;display:none;width:40px;height:40px;
+  border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
+  text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92}
+#totop.show{display:block}
+#totop:hover{opacity:1}
+@media print{#totop{display:none}}
+</style>
+<button id="totop" title="返回顶端">↑</button>
+<script>
+(function(){
+  var b=document.getElementById('totop'); if(!b) return;
+  function upd(){ b.classList.toggle('show', window.scrollY>400); }
+  window.addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
 </script>
 </body>
 </html>
