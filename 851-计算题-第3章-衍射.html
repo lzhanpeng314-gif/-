@@ -84,6 +84,7 @@
     .q{page-break-inside:avoid;border-left:2px solid #999;}
     .fcard,.ans{box-shadow:none;}
   }
+  .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -131,8 +132,8 @@
   </div>
   <div class="fcard">
     <div class="fname">缺级条件</div>
-    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num"><i>d</i></span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>k</i>′</span></span></span></div>
-    <div class="fnote">k′ 是单缝第几级极小。d/a = 3 ⇒ 第 ±3、±6、±9 级全缺。</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num"><i>d</i></span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>k</i><span class="pr">′</span></span></span></span></div>
+    <div class="fnote">k<span class="pr">′</span> 是单缝第几级极小。d/a = 3 ⇒ 第 ±3、±6、±9 级全缺。</div>
   </div>
   <div class="fcard">
     <div class="fname">光栅分辨本领</div>
@@ -146,7 +147,7 @@
   <div class="kh">本章大点 · 三类衍射题，别用错公式</div>
   <table>
     <tr><th>题面特征</th><th>该用</th></tr>
-    <tr><td>“条纹分布 / 缺级 / 缝宽缝距”</td><td>双缝：I = 4I<sub>0</sub>(sinα/α)²cos²β，缺级 d/a = k/k′</td></tr>
+    <tr><td>“条纹分布 / 缺级 / 缝宽缝距”</td><td>双缝：I = 4I<sub>0</sub>(sinα/α)²cos²β，缺级 d/a = k/k<span class="pr">′</span></td></tr>
     <tr><td>“能否分辨 / 最小分辨距离”</td><td>圆孔 1.22λ/D（望远）或 0.61λ/NA（显微）</td></tr>
     <tr><td>“谱线能否分开 / 色散”</td><td>光栅：d sinθ = kλ，R = kN</td></tr>
   </table>
@@ -158,7 +159,7 @@
 <h2 id="a">A · 双缝夫琅和费衍射<span class="cnt">1 题</span></h2>
 <div class="kcard">
 <div class="kh">A · 双缝夫琅和费</div>
-<ul><li>单缝因子 × 双缝因子</li><li>d/a = k/k′ ⇒ 第 k′ 级缺级</li></ul>
+<ul><li>单缝因子 × 双缝因子</li><li>d/a = k/k<span class="pr">′</span> ⇒ 第 k<span class="pr">′</span> 级缺级</li></ul>
 <div class="eqb"><i>I</i> = 4<i>I</i><sub>0</sub>(<span class="frac"><span class="num">sin<i>α</i></span><span class="den"><i>α</i></span></span>)<sup>2</sup>cos<sup>2</sup><i>β</i></div>
 </div>
 
@@ -242,7 +243,7 @@
       <div class="eqb"><i>M</i> = <span class="frac"><span class="num"><i>D</i></span><span class="den"><i>d</i></span></span> = <span class="frac"><span class="num">2500</span><span class="den">2</span></span> = <b>1250×</b></div>
     </div>
     <div class="step"><b class="n">3</b>验算：放大后要能被人眼分辨
-      <div class="eqb"><i>M</i> ≥ <span class="frac"><span class="num">1′</span><span class="den"><i>θ</i><sub>min</sub></span></span> = <span class="frac"><span class="num">2.91×10<sup>−4</sup></span><span class="den">2.68×10<sup>−7</sup></span></span> ≈ 1090</div>
+      <div class="eqb"><i>M</i> ≥ <span class="frac"><span class="num">1<span class="pr">′</span></span><span class="den"><i>θ</i><sub>min</sub></span></span> = <span class="frac"><span class="num">2.91×10<sup>−4</sup></span><span class="den">2.68×10<sup>−7</sup></span></span> ≈ 1090</div>
       <p style="margin:4px 0 0">1250 &gt; 1090 ✓，两个判据都满足。</p>
     </div>
     <div class="res">最小分辨角 <b>2.68×10<sup>−7</sup> rad（0.055″）</b>；放大率宜取 <b>1250×</b>。</div>
@@ -413,7 +414,7 @@
     <div class="step"><b class="n">2</b>条件二（色散尽量大）：角色散 <span class="frac"><span class="num">d<i>θ</i></span><span class="den">dλ</span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>d</i> cos<i>θ</i></span></span> 随 <i>d</i> 减小而增大 ⇒ 取 <i>d</i> 的下限
       <div class="eqb"><i>d</i> = <b>2.4 μm</b>（此时二级恰为 30°）</div>
     </div>
-    <div class="step"><b class="n">3</b>条件三（三级缺级）：缺级条件是 <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>k</i>′</span></span>，三级（<i>k</i> = 3）对应单缝第一极小（<i>k</i>′ = 1）
+    <div class="step"><b class="n">3</b>条件三（三级缺级）：缺级条件是 <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num"><i>k</i></span><span class="den"><i>k</i><span class="pr">′</span></span></span>，三级（<i>k</i> = 3）对应单缝第一极小（<i>k</i><span class="pr">′</span> = 1）
       <div class="eqb"><span class="frac"><span class="num"><i>d</i></span><span class="den"><i>a</i></span></span> = 3 ⇒ <i>a</i> = <span class="frac"><span class="num">2.4</span><span class="den">3</span></span> = <b>0.8 μm</b></div>
     </div>
     <div class="step"><b class="n">4</b>条件四（二级能分辨 0.02 nm）：<i>R</i> = <i>kN</i> = 2<i>N</i> ≥ <span class="frac"><span class="num">λ</span><span class="den">Δλ</span></span>

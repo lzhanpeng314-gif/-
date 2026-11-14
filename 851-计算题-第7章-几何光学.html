@@ -84,6 +84,7 @@
     .q{page-break-inside:avoid;border-left:2px solid #999;}
     .fcard,.ans{box-shadow:none;}
   }
+  .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -115,30 +116,30 @@
 </div>
 
 <div class="warn" style="margin-top:20px">
-  <b>这一章只有三件事</b>：高斯公式配 <b>β = l′/l</b>；厚透镜<b>逐面折射</b>（后一面的物距 = 前一面的像距 − 厚度 d）；单球面／平面折射的<b>视深 = 实深 × n₂/n₁</b>。
+  <b>这一章只有三件事</b>：高斯公式配 <b>β = l<span class="pr">′</span>/l</b>；厚透镜<b>逐面折射</b>（后一面的物距 = 前一面的像距 − 厚度 d）；单球面／平面折射的<b>视深 = 实深 × n₂/n₁</b>。
   考场上真正拉开差距的是"虚物/虚像"那一步 —— 2024-四-1、2016-四-1、2020-四-1 三道都把"实物 vs 虚物"当考点。
 </div>
 
 <div class="fbox">
   <div class="fcard">
     <div class="fname">高斯公式</div>
-    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span>，　<i>β</i> = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span></span></div>
-    <div class="fnote">实物 l&lt;0、实像 l′&gt;0、f′&gt;0 为会聚。共轭距 = |l′ − l|。</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span>，　<i>β</i> = <span class="frac"><span class="num"><i>l</i><span class="pr">′</span></span><span class="den"><i>l</i></span></span></span></div>
+    <div class="fnote">实物 l&lt;0、实像 l<span class="pr">′</span>&gt;0、f<span class="pr">′</span>&gt;0 为会聚。共轭距 = |l<span class="pr">′</span> − l|。</div>
   </div>
   <div class="fcard">
     <div class="fname">薄透镜焦距（两侧同介质）</div>
-    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = (<i>n</i>−1)<span class="bkt"><span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span></span></span></div>
-    <div class="fnote">双凸 r₁&gt;0、r₂&lt;0；后表面凸、球心在物方则 r₂ = −R，于是 f′ = R/(n−1)。</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = (<i>n</i>−1)<span class="bkt"><span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span></span></span></div>
+    <div class="fnote">双凸 r₁&gt;0、r₂&lt;0；后表面凸、球心在物方则 r₂ = −R，于是 f<span class="pr">′</span> = R/(n−1)。</div>
   </div>
   <div class="fcard">
     <div class="fname">两侧介质不同</div>
-    <div class="fml"><span class="eqb" style="margin:0">Φ = <span class="frac"><span class="num"><i>n</i>−<i>n</i><sub>1</sub></span><span class="den"><i>r</i><sub>1</sub></span></span> + <span class="frac"><span class="num"><i>n</i><sub>2</sub>−<i>n</i></span><span class="den"><i>r</i><sub>2</sub></span></span>，　<i>f</i>′ = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den">Φ</span></span>，<i>f</i> = −<span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den">Φ</span></span></span></div>
-    <div class="fnote">平面贴水面时 r₁ = ∞，只剩后表面一项。成像用 n₂/l′ − n₁/l = Φ。</div>
+    <div class="fml"><span class="eqb" style="margin:0">Φ = <span class="frac"><span class="num"><i>n</i>−<i>n</i><sub>1</sub></span><span class="den"><i>r</i><sub>1</sub></span></span> + <span class="frac"><span class="num"><i>n</i><sub>2</sub>−<i>n</i></span><span class="den"><i>r</i><sub>2</sub></span></span>，　<i>f</i><span class="pr">′</span> = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den">Φ</span></span>，<i>f</i> = −<span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den">Φ</span></span></span></div>
+    <div class="fnote">平面贴水面时 r₁ = ∞，只剩后表面一项。成像用 n₂/l<span class="pr">′</span> − n₁/l = Φ。</div>
   </div>
   <div class="fcard">
     <div class="fname">单球面折射</div>
-    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num"><i>n</i>′</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i>′−<i>n</i></span><span class="den"><i>r</i></span></span></span></div>
-    <div class="fnote">r = ∞ 退化为 n′/l′ = n/l ⇒ 视深 = 实深×n′/n；纵向放大 d<i>l</i>′/d<i>l</i> = (n/n′)(l′/l)²。</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num"><i>n</i><span class="pr">′</span></span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i><span class="pr">′</span>−<i>n</i></span><span class="den"><i>r</i></span></span></span></div>
+    <div class="fnote">r = ∞ 退化为 n<span class="pr">′</span>/l<span class="pr">′</span> = n/l ⇒ 视深 = 实深×n<span class="pr">′</span>/n；纵向放大 d<i>l</i><span class="pr">′</span>/d<i>l</i> = (n/n<span class="pr">′</span>)(l<span class="pr">′</span>/l)²。</div>
   </div>
 </div>
 
@@ -149,25 +150,25 @@
   <table>
     <tr><th>量</th><th>取正</th><th>取负</th></tr>
     <tr><td>物距 <i>l</i></td><td>虚物（在透镜右）</td><td>实物（在透镜左）</td></tr>
-    <tr><td>像距 <i>l</i>′</td><td>实像（在透镜右）</td><td>虚像（在透镜左）</td></tr>
+    <tr><td>像距 <i>l</i><span class="pr">′</span></td><td>实像（在透镜右）</td><td>虚像（在透镜左）</td></tr>
     <tr><td>曲率半径 <i>r</i></td><td>凸面（球心在右）</td><td>凹面（球心在左）</td></tr>
-    <tr><td><i>f</i>′</td><td>会聚（正透镜）</td><td>发散（负透镜）</td></tr>
+    <tr><td><i>f</i><span class="pr">′</span></td><td>会聚（正透镜）</td><td>发散（负透镜）</td></tr>
     <tr><td>β</td><td>正立</td><td>倒立</td></tr>
   </table>
   <ul>
-    <li><b>单球面折射</b>：<i>n</i>′/<i>l</i>′ − <i>n</i>/<i>l</i> = (<i>n</i>′−<i>n</i>)/<i>r</i>；<b>薄透镜（空气中）</b>：1/<i>l</i>′ − 1/<i>l</i> = 1/<i>f</i>′。</li>
-    <li><b>易错</b>：套公式前先把 <i>l</i>、<i>l</i>′、<i>r</i> 按上表写成带符号的数，再代数——凭直觉带绝对值必错。</li>
+    <li><b>单球面折射</b>：<i>n</i><span class="pr">′</span>/<i>l</i><span class="pr">′</span> − <i>n</i>/<i>l</i> = (<i>n</i><span class="pr">′</span>−<i>n</i>)/<i>r</i>；<b>薄透镜（空气中）</b>：1/<i>l</i><span class="pr">′</span> − 1/<i>l</i> = 1/<i>f</i><span class="pr">′</span>。</li>
+    <li><b>易错</b>：套公式前先把 <i>l</i>、<i>l</i><span class="pr">′</span>、<i>r</i> 按上表写成带符号的数，再代数——凭直觉带绝对值必错。</li>
   </ul>
 </div>
 <h2 id="a">A · 薄透镜成像<span class="cnt">4 题次</span></h2>
 <div class="kcard">
 <div class="kh">A · 薄透镜</div>
 <ul><li>物在左为负、像在右为正</li><li>实物成实像 β&lt;0</li></ul>
-<div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span>−<span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span>=<span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span></div>
-<div class="eqb">β = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span><div class="knote"><b>符号判别</b>：实物 <i>l</i>&lt;0、实像 <i>l</i>′&gt;0；虚物 <i>l</i>&gt;0、虚像 <i>l</i>′&lt;0。<br>β&gt;0 正立、β&lt;0 倒立、|β|&gt;1 放大。<br>共轭距 <i>L</i> = <i>l</i>′ − <i>l</i>，与 β 联立可直接解出 <i>f</i>′。</div></div>
-</div>
+<div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span>−<span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span>=<span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span></div>
+<div class="eqb">β = <span class="frac"><span class="num"><i>l</i><span class="pr">′</span></span><span class="den"><i>l</i></span></span></div>
+<div class="knote"><b>符号判别</b>：实物 <i>l</i>&lt;0、实像 <i>l</i><span class="pr">′</span>&gt;0；虚物 <i>l</i>&gt;0、虚像 <i>l</i><span class="pr">′</span>&lt;0。<br>β&gt;0 正立、β&lt;0 倒立、|β|&gt;1 放大。<br>共轭距 <i>L</i> = <i>l</i><span class="pr">′</span> − <i>l</i>，与 β 联立可直接解出 <i>f</i><span class="pr">′</span>。</div></div>
 
-<div class="lead">四道题共用一条主线：先由题给的"成像状态"定 β 与 l、l′，再回代求 f′ 或反过来求像。符号只记一条 —— 顺着光走为正。</div>
+<div class="lead">四道题共用一条主线：先由题给的"成像状态"定 β 与 l、l<span class="pr">′</span>，再回代求 f<span class="pr">′</span> 或反过来求像。符号只记一条 —— 顺着光走为正。</div>
 
 <div class="q" id="q001">
   <div class="hd"><span class="tag">2017-四-1</span><span class="ttl">平凸薄透镜：反推后表面曲率半径，再换物距成像</span></div>
@@ -177,21 +178,21 @@
   <div class="ans">
     <p><b>（1）</b></p>
     <div class="step"><b class="n">1</b>"实像 + 放大两倍"⇒ 必定倒立，<i>β</i> = −2。物在镜前 90 cm，即 <i>l</i> = −90 cm，于是
-      <div class="eqb"><i>l</i>′ = <i>βl</i> = (−2) × (−90) = 180 cm</div>
+      <div class="eqb"><i>l</i><span class="pr">′</span> = <i>βl</i> = (−2) × (−90) = 180 cm</div>
     </div>
     <div class="step"><b class="n">2</b>高斯公式求像方焦距
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">180</span></span> + <span class="frac"><span class="num">1</span><span class="den">90</span></span> = <span class="frac"><span class="num">3</span><span class="den">180</span></span>　⇒　<i>f</i>′ = 60 cm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">180</span></span> + <span class="frac"><span class="num">1</span><span class="den">90</span></span> = <span class="frac"><span class="num">3</span><span class="den">180</span></span>　⇒　<i>f</i><span class="pr">′</span> = 60 cm</div>
     </div>
     <div class="step"><b class="n">3</b>前表面为平面 <i>r</i><sub>1</sub> = ∞；"后表面为凸"指球心落在物方，按符号规则 <i>r</i><sub>2</sub> = −<i>R</i>。代入造镜公式
       <div class="eqb"><span class="frac"><span class="num">1</span><span class="den">60</span></span> = (1.5 − 1)<span class="bkt">0 + <span class="frac"><span class="num">1</span><span class="den"><i>R</i></span></span></span> = <span class="frac"><span class="num">0.5</span><span class="den"><i>R</i></span></span>　⇒　<i>R</i> = 30 cm</div>
     </div>
     <p style="margin-top:14px"><b>（2）</b></p>
-    <div class="step"><b class="n">4</b>同一个 <i>f</i>′ = 60 cm，物距换成 <i>l</i> = −30 cm
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> − <span class="frac"><span class="num">1</span><span class="den">30</span></span> = −<span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i>′ = −60 cm</div>
-      <p style="margin:4px 0 0"><i>l</i>′ &lt; 0 ⇒ 虚像，位于透镜<b>前</b> 60 cm。</p>
+    <div class="step"><b class="n">4</b>同一个 <i>f</i><span class="pr">′</span> = 60 cm，物距换成 <i>l</i> = −30 cm
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span> − <span class="frac"><span class="num">1</span><span class="den">30</span></span> = −<span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i><span class="pr">′</span> = −60 cm</div>
+      <p style="margin:4px 0 0"><i>l</i><span class="pr">′</span> &lt; 0 ⇒ 虚像，位于透镜<b>前</b> 60 cm。</p>
     </div>
     <div class="step"><b class="n">5</b>放大率与像高
-      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">−60</span><span class="den">−30</span></span> = +2　⇒　<i>h</i>′ = 2 × 1 cm = 2 cm</div>
+      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>l</i><span class="pr">′</span></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">−60</span><span class="den">−30</span></span> = +2　⇒　<i>h</i><span class="pr">′</span> = 2 × 1 cm = 2 cm</div>
     </div>
     <div class="res">后表面曲率半径 <b>R = 30 cm</b>；镜前 30 cm、高 1 cm 的物体成<b>正立、放大 2 倍的虚像</b>，像在透镜前 <b>60 cm</b>，像高 <b>2 cm</b>。</div>
     <span class="src">【真题 + 自算】</span>
@@ -207,25 +208,25 @@
 <div class="ans">
     <p><b>（1）</b></p>
     <div class="step"><b class="n">1</b>空气中两侧同为 n = 1，平面 <i>r</i><sub>1</sub> = ∞，凸面（球心在物方）<i>r</i><sub>2</sub> = −50 cm
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = (1.5 − 1)<span class="bkt">0 + <span class="frac"><span class="num">1</span><span class="den">50</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">100</span></span>　⇒　<i>f</i>′ = 100 cm</div>
-      <p style="margin:4px 0 0">即 <i>f</i>′ = <i>R</i>/(<i>n</i>−1) = 50/0.5 = 100 cm。</p>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = (1.5 − 1)<span class="bkt">0 + <span class="frac"><span class="num">1</span><span class="den">50</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">100</span></span>　⇒　<i>f</i><span class="pr">′</span> = 100 cm</div>
+      <p style="margin:4px 0 0">即 <i>f</i><span class="pr">′</span> = <i>R</i>/(<i>n</i>−1) = 50/0.5 = 100 cm。</p>
     </div>
     <p style="margin-top:14px"><b>（2）</b></p>
     <div class="step"><b class="n">2</b>平面贴水面后：物方介质 <i>n</i><sub>1</sub> = 4/3（水），像方 <i>n</i><sub>2</sub> = 1（空气），透镜 <i>n</i> = 1.5。先求光焦度
       <div class="eqb">Φ = <span class="frac"><span class="num"><i>n</i> − <i>n</i><sub>1</sub></span><span class="den"><i>r</i><sub>1</sub></span></span> + <span class="frac"><span class="num"><i>n</i><sub>2</sub> − <i>n</i></span><span class="den"><i>r</i><sub>2</sub></span></span> = 0 + <span class="frac"><span class="num">1 − 1.5</span><span class="den">−50</span></span> = 0.01 cm<sup>−1</sup></div>
     </div>
     <div class="step"><b class="n">3</b>两侧介质不同，物方与像方焦距不再对称
-      <div class="eqb"><i>f</i>′ = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den">Φ</span></span> = <span class="frac"><span class="num">1</span><span class="den">0.01</span></span> = <b>100 cm</b>，　<i>f</i> = −<span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den">Φ</span></span> = −<span class="frac"><span class="num">4/3</span><span class="den">0.01</span></span> = <b>−133.3 cm</b></div>
+      <div class="eqb"><i>f</i><span class="pr">′</span> = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den">Φ</span></span> = <span class="frac"><span class="num">1</span><span class="den">0.01</span></span> = <b>100 cm</b>，　<i>f</i> = −<span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den">Φ</span></span> = −<span class="frac"><span class="num">4/3</span><span class="den">0.01</span></span> = <b>−133.3 cm</b></div>
       <p style="margin:4px 0 0">物方焦点在透镜前 133.3 cm（水中），像方焦点仍在镜后 100 cm（空气中）。</p>
     </div>
     <div class="step"><b class="n">4</b>池底物体在镜前 2 m = 200 cm 处，<i>l</i> = −200 cm，用两侧介质不同的成像公式
-      <div class="eqb"><span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den"><i>l</i></span></span> = Φ　⇒　<span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = 0.01 + <span class="frac"><span class="num">4/3</span><span class="den">−200</span></span> = 0.01 − 0.00667 = 0.00333</div>
-      <div class="eqb"><i>l</i>′ = <span class="frac"><span class="num">1</span><span class="den">0.00333</span></span> = 300 cm</div>
+      <div class="eqb"><span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num"><i>n</i><sub>1</sub></span><span class="den"><i>l</i></span></span> = Φ　⇒　<span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> = 0.01 + <span class="frac"><span class="num">4/3</span><span class="den">−200</span></span> = 0.01 − 0.00667 = 0.00333</div>
+      <div class="eqb"><i>l</i><span class="pr">′</span> = <span class="frac"><span class="num">1</span><span class="den">0.00333</span></span> = 300 cm</div>
     </div>
-    <div class="step"><b class="n">5</b>验算（高斯型：f′/l′ + f/l = 1）
+    <div class="step"><b class="n">5</b>验算（高斯型：f<span class="pr">′</span>/l<span class="pr">′</span> + f/l = 1）
       <div class="eqb"><span class="frac"><span class="num">100</span><span class="den">300</span></span> + <span class="frac"><span class="num">−133.3</span><span class="den">−200</span></span> = 0.333 + 0.667 = 1 ✓</div>
     </div>
-    <div class="res">（1）像方焦距 <b>f′ = 100 cm</b>；（2）该成像系统中 <b>f′ = +100 cm、f = −133.3 cm</b>，池底 2 m 处的物体成像于<b>水面上方 300 cm</b>（空气中，实像）。</div>
+    <div class="res">（1）像方焦距 <b>f<span class="pr">′</span> = 100 cm</b>；（2）该成像系统中 <b>f<span class="pr">′</span> = +100 cm、f = −133.3 cm</b>，池底 2 m 处的物体成像于<b>水面上方 300 cm</b>（空气中，实像）。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -234,21 +235,21 @@
   <div class="hd"><span class="tag">2016-四-1</span><span class="ttl">共轭距 250 mm、β = 4，实物与虚物两种情形的焦距</span></div>
   <div class="stem">要使一个薄透镜成像时，共轭距（物像间的距离）为 250 mm，垂轴放大率 β = 4，当物体分别为实物和虚物时，薄透镜的焦距各为多少。</div>
   <div class="ans">
-    <div class="step"><b class="n">1</b>由 <i>β</i> = <i>l</i>′/<i>l</i> = 4 得 <i>l</i>′ = 4<i>l</i>；共轭距是两者之差的绝对值
-      <div class="eqb">|<i>l</i>′ − <i>l</i>| = |4<i>l</i> − <i>l</i>| = 3|<i>l</i>| = 250 mm</div>
+    <div class="step"><b class="n">1</b>由 <i>β</i> = <i>l</i><span class="pr">′</span>/<i>l</i> = 4 得 <i>l</i><span class="pr">′</span> = 4<i>l</i>；共轭距是两者之差的绝对值
+      <div class="eqb">|<i>l</i><span class="pr">′</span> − <i>l</i>| = |4<i>l</i> − <i>l</i>| = 3|<i>l</i>| = 250 mm</div>
     </div>
-    <div class="step"><b class="n">2</b><b>实物</b>：<i>l</i> &lt; 0 ⇒ <i>l</i>′ = 4<i>l</i> &lt; 0，成虚像（正立放大，正是放大镜的工作区间）
-      <div class="eqb"><i>l</i> = −<span class="frac"><span class="num">250</span><span class="den">3</span></span> = −83.3 mm，　<i>l</i>′ = −333.3 mm</div>
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">−333.3</span></span> − <span class="frac"><span class="num">1</span><span class="den">−83.3</span></span> = −0.003 + 0.012 = 0.009　⇒　<i>f</i>′ = 111.1 mm</div>
+    <div class="step"><b class="n">2</b><b>实物</b>：<i>l</i> &lt; 0 ⇒ <i>l</i><span class="pr">′</span> = 4<i>l</i> &lt; 0，成虚像（正立放大，正是放大镜的工作区间）
+      <div class="eqb"><i>l</i> = −<span class="frac"><span class="num">250</span><span class="den">3</span></span> = −83.3 mm，　<i>l</i><span class="pr">′</span> = −333.3 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">−333.3</span></span> − <span class="frac"><span class="num">1</span><span class="den">−83.3</span></span> = −0.003 + 0.012 = 0.009　⇒　<i>f</i><span class="pr">′</span> = 111.1 mm</div>
     </div>
-    <div class="step"><b class="n">3</b><b>虚物</b>：<i>l</i> &gt; 0 ⇒ <i>l</i>′ = 4<i>l</i> &gt; 0，成实像
-      <div class="eqb"><i>l</i> = +83.3 mm，　<i>l</i>′ = +333.3 mm</div>
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">333.3</span></span> − <span class="frac"><span class="num">1</span><span class="den">83.3</span></span> = 0.003 − 0.012 = −0.009　⇒　<i>f</i>′ = −111.1 mm</div>
+    <div class="step"><b class="n">3</b><b>虚物</b>：<i>l</i> &gt; 0 ⇒ <i>l</i><span class="pr">′</span> = 4<i>l</i> &gt; 0，成实像
+      <div class="eqb"><i>l</i> = +83.3 mm，　<i>l</i><span class="pr">′</span> = +333.3 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">333.3</span></span> − <span class="frac"><span class="num">1</span><span class="den">83.3</span></span> = 0.003 − 0.012 = −0.009　⇒　<i>f</i><span class="pr">′</span> = −111.1 mm</div>
     </div>
-    <div class="step"><b class="n">4</b>公式校验（共轭距 <i>L</i> = −<i>f</i>′(1−<i>β</i>)²/<i>β</i>）
-      <div class="eqb"><i>L</i> = −<i>f</i>′ · <span class="frac"><span class="num">(1 − 4)<sup>2</sup></span><span class="den">4</span></span> = −2.25<i>f</i>′ = −250　⇒　<i>f</i>′ = 111.1 mm ✓</div>
+    <div class="step"><b class="n">4</b>公式校验（共轭距 <i>L</i> = −<i>f</i><span class="pr">′</span>(1−<i>β</i>)²/<i>β</i>）
+      <div class="eqb"><i>L</i> = −<i>f</i><span class="pr">′</span> · <span class="frac"><span class="num">(1 − 4)<sup>2</sup></span><span class="den">4</span></span> = −2.25<i>f</i><span class="pr">′</span> = −250　⇒　<i>f</i><span class="pr">′</span> = 111.1 mm ✓</div>
     </div>
-    <div class="res"><b>实物</b>时 <b>f′ = +111.1 mm</b>（凸透镜，成正立放大虚像）；<b>虚物</b>时 <b>f′ = −111.1 mm</b>（凹透镜，成正立放大实像）。同一 β 下两种物态对应一正一负、数值相同的焦距。</div>
+    <div class="res"><b>实物</b>时 <b>f<span class="pr">′</span> = +111.1 mm</b>（凸透镜，成正立放大虚像）；<b>虚物</b>时 <b>f<span class="pr">′</span> = −111.1 mm</b>（凹透镜，成正立放大实像）。同一 β 下两种物态对应一正一负、数值相同的焦距。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -257,17 +258,17 @@
   <div class="hd"><span class="tag">2024-四-1</span><span class="ttl">共轭距 250 mm、β = −4，实物与虚物两种情形的焦距</span></div>
   <div class="stem">要使一个薄透镜成像时，共轭距（物像间的距离）为 250 mm，垂轴放大率 β = −4，当物体分别为实物和虚物时，薄透镜的焦距各为多少？</div>
   <div class="ans">
-    <div class="step"><b class="n">1</b><i>l</i>′ = <i>βl</i> = −4<i>l</i>，共轭距 |<i>l</i>′ − <i>l</i>| = |−5<i>l</i>| = 250 mm。</div>
-    <div class="step"><b class="n">2</b><b>实物</b> <i>l</i> &lt; 0 ⇒ <i>l</i>′ &gt; 0（倒立实像），<i>l</i>′ − <i>l</i> = 250
-      <div class="eqb">−5<i>l</i> = 250　⇒　<i>l</i> = −50 mm，<i>l</i>′ = +200 mm</div>
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">200</span></span> + <span class="frac"><span class="num">1</span><span class="den">50</span></span> = 0.005 + 0.02 = 0.025　⇒　<i>f</i>′ = 40 mm</div>
+    <div class="step"><b class="n">1</b><i>l</i><span class="pr">′</span> = <i>βl</i> = −4<i>l</i>，共轭距 |<i>l</i><span class="pr">′</span> − <i>l</i>| = |−5<i>l</i>| = 250 mm。</div>
+    <div class="step"><b class="n">2</b><b>实物</b> <i>l</i> &lt; 0 ⇒ <i>l</i><span class="pr">′</span> &gt; 0（倒立实像），<i>l</i><span class="pr">′</span> − <i>l</i> = 250
+      <div class="eqb">−5<i>l</i> = 250　⇒　<i>l</i> = −50 mm，<i>l</i><span class="pr">′</span> = +200 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">200</span></span> + <span class="frac"><span class="num">1</span><span class="den">50</span></span> = 0.005 + 0.02 = 0.025　⇒　<i>f</i><span class="pr">′</span> = 40 mm</div>
     </div>
-    <div class="step"><b class="n">3</b><b>虚物</b> <i>l</i> &gt; 0 ⇒ <i>l</i>′ = −4<i>l</i> &lt; 0（倒立虚像），<i>l</i> − <i>l</i>′ = 250
-      <div class="eqb">5<i>l</i> = 250　⇒　<i>l</i> = +50 mm，<i>l</i>′ = −200 mm</div>
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den">−200</span></span> − <span class="frac"><span class="num">1</span><span class="den">50</span></span> = −0.005 − 0.02 = −0.025　⇒　<i>f</i>′ = −40 mm</div>
+    <div class="step"><b class="n">3</b><b>虚物</b> <i>l</i> &gt; 0 ⇒ <i>l</i><span class="pr">′</span> = −4<i>l</i> &lt; 0（倒立虚像），<i>l</i> − <i>l</i><span class="pr">′</span> = 250
+      <div class="eqb">5<i>l</i> = 250　⇒　<i>l</i> = +50 mm，<i>l</i><span class="pr">′</span> = −200 mm</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">−200</span></span> − <span class="frac"><span class="num">1</span><span class="den">50</span></span> = −0.005 − 0.02 = −0.025　⇒　<i>f</i><span class="pr">′</span> = −40 mm</div>
     </div>
-    <div class="step"><b class="n">4</b>与 2016-四-1 对比：只把 β 从 +4 换成 −4，共轭距不变，焦距就从 ±111.1 mm 缩到 ±40 mm —— 因为 <i>L</i> = −<i>f</i>′(1−<i>β</i>)²/<i>β</i> 里 (1−<i>β</i>)² 从 9 变成 25。</div>
-    <div class="res"><b>实物</b>时 <b>f′ = +40 mm</b>（凸透镜，在物后 200 mm 成倒立实像）；<b>虚物</b>时 <b>f′ = −40 mm</b>（凹透镜，在物方 200 mm 处成倒立虚像）。</div>
+    <div class="step"><b class="n">4</b>与 2016-四-1 对比：只把 β 从 +4 换成 −4，共轭距不变，焦距就从 ±111.1 mm 缩到 ±40 mm —— 因为 <i>L</i> = −<i>f</i><span class="pr">′</span>(1−<i>β</i>)²/<i>β</i> 里 (1−<i>β</i>)² 从 9 变成 25。</div>
+    <div class="res"><b>实物</b>时 <b>f<span class="pr">′</span> = +40 mm</b>（凸透镜，在物后 200 mm 成倒立实像）；<b>虚物</b>时 <b>f<span class="pr">′</span> = −40 mm</b>（凹透镜，在物方 200 mm 处成倒立虚像）。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -277,7 +278,7 @@
 <div class="kcard">
 <div class="kh">B · 厚透镜与反射膜</div>
 <ul><li>厚透镜逐面算，不能套薄透镜公式</li><li>反射膜等价平面镜镜像</li></ul>
-<div class="eqb">Δ<i>l</i>′ = <i>d</i>(1−<span class="frac"><span class="num">1</span><span class="den"><i>n</i></span></span>)</div>
+<div class="eqb">Δ<i>l</i><span class="pr">′</span> = <i>d</i>(1−<span class="frac"><span class="num">1</span><span class="den"><i>n</i></span></span>)</div>
 </div>
 
 <div class="lead">厚度 15 cm 不能当薄透镜。做法只有一种：<b>逐面追迹</b>；镀膜后把反射当作"翻转光路"，第三面就是把第一面镜像过来（同一球面、半径反号）。</div>
@@ -290,29 +291,29 @@
   <div class="ans">
     <p><b>（1）</b></p>
     <div class="step"><b class="n">1</b>把透镜看成两个折射面：前表面 <i>r</i><sub>1</sub> = +30 cm（凸向物方，球心在右），后表面 <i>r</i><sub>2</sub> = ∞，<i>d</i> = 15 cm，<i>n</i> = 1.5。第一面（1 → 1.5，<i>l</i><sub>1</sub> = −90）
-      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> − <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">1.5 − 1</span><span class="den">30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i><sub>1</sub>′ = <b>270 cm</b></div>
-      <div class="eqb"><i>β</i><sub>1</sub> = <span class="frac"><span class="num"><i>n</i><sub>1</sub><i>l</i><sub>1</sub>′</span><span class="den"><i>n</i><sub>2</sub><i>l</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1 × 270</span><span class="den">1.5 × (−90)</span></span> = −2</div>
+      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1</span><span class="den">−90</span></span> = <span class="frac"><span class="num">1.5 − 1</span><span class="den">30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>l</i><sub>1</sub><span class="pr">′</span> = <b>270 cm</b></div>
+      <div class="eqb"><i>β</i><sub>1</sub> = <span class="frac"><span class="num"><i>n</i><sub>1</sub><i>l</i><sub>1</sub><span class="pr">′</span></span><span class="den"><i>n</i><sub>2</sub><i>l</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1 × 270</span><span class="den">1.5 × (−90)</span></span> = −2</div>
     </div>
     <div class="step"><b class="n">2</b>第二面：物距要减去厚度，<i>l</i><sub>2</sub> = 270 − 15 = 255 cm（对平面而言是虚物），1.5 → 1
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">255</span></span> = 0　⇒　<i>l</i><sub>2</sub>′ = <span class="frac"><span class="num">255</span><span class="den">1.5</span></span> = <b>170 cm</b></div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1.5</span><span class="den">255</span></span> = 0　⇒　<i>l</i><sub>2</sub><span class="pr">′</span> = <span class="frac"><span class="num">255</span><span class="den">1.5</span></span> = <b>170 cm</b></div>
       <div class="eqb"><i>β</i><sub>2</sub> = <span class="frac"><span class="num">1.5 × 170</span><span class="den">1 × 255</span></span> = 1，　<i>β</i> = <i>β</i><sub>1</sub><i>β</i><sub>2</sub> = −2</div>
     </div>
     <div class="step"><b class="n">3</b>像高
-      <div class="eqb"><i>h</i>′ = |<i>β</i>|·<i>h</i> = 2 × 5 mm = <b>10 mm</b></div>
+      <div class="eqb"><i>h</i><span class="pr">′</span> = |<i>β</i>|·<i>h</i> = 2 × 5 mm = <b>10 mm</b></div>
       <p style="margin:4px 0 0">像在后表面之后 170 cm，实像、倒立。</p>
     </div>
     <p style="margin-top:14px"><b>（2）</b>后平面镀全反射膜 ⇒ 光原路返回再经前表面出射，共三个"面"：前表面 → 平面镜 → 前表面（反向）。</p>
-    <div class="step"><b class="n">4</b>第一面结果同上：<i>l</i><sub>1</sub>′ = 270 cm，<i>β</i><sub>1</sub> = −2。</div>
+    <div class="step"><b class="n">4</b>第一面结果同上：<i>l</i><sub>1</sub><span class="pr">′</span> = 270 cm，<i>β</i><sub>1</sub> = −2。</div>
     <div class="step"><b class="n">5</b>平面镜在后表面处：会聚点在后表面之后 270 − 15 = 255 cm，是平面镜的虚物 ⇒ 反射后变为镜前 255 cm 的实像，即<b>前表面之前 255 − 15 = 240 cm</b>处；平面镜 <i>β</i> = +1（大小不变）。
       <div class="eqb"><i>l</i><sub>镜后</sub> = 240 cm（对前表面为虚物）</div>
     </div>
     <div class="step"><b class="n">6</b>反向通过前表面：此时光从玻璃射向空气，球心在物方的凸面在反向坐标系里 <i>r</i> = −30 cm
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">240</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">8</span><span class="den">480</span></span> + <span class="frac"><span class="num">3</span><span class="den">480</span></span> = <span class="frac"><span class="num">11</span><span class="den">480</span></span></div>
-      <div class="eqb"><i>l</i>′ = 43.6 cm，　<i>β</i><sub>3</sub> = <span class="frac"><span class="num">1.5 × 43.6</span><span class="den">1 × 240</span></span> = 0.273</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1.5</span><span class="den">240</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">8</span><span class="den">480</span></span> + <span class="frac"><span class="num">3</span><span class="den">480</span></span> = <span class="frac"><span class="num">11</span><span class="den">480</span></span></div>
+      <div class="eqb"><i>l</i><span class="pr">′</span> = 43.6 cm，　<i>β</i><sub>3</sub> = <span class="frac"><span class="num">1.5 × 43.6</span><span class="den">1 × 240</span></span> = 0.273</div>
     </div>
     <div class="step"><b class="n">7</b>总放大率与像高
-      <div class="eqb"><i>β</i> = <i>β</i><sub>1</sub><i>β</i><sub>镜</sub><i>β</i><sub>3</sub> = (−2)(1)(0.273) = −0.545　⇒　<i>h</i>′ = 5 × 0.545 = <b>2.7 mm</b></div>
-      <p style="margin:4px 0 0">用"展开光路"验算：玻璃内总光程 2<i>d</i> = 30 cm、第二面 <i>r</i> = −30 cm，得 <i>l</i>′ = 43.6 cm、<i>β</i> = −0.545，一致。</p>
+      <div class="eqb"><i>β</i> = <i>β</i><sub>1</sub><i>β</i><sub>镜</sub><i>β</i><sub>3</sub> = (−2)(1)(0.273) = −0.545　⇒　<i>h</i><span class="pr">′</span> = 5 × 0.545 = <b>2.7 mm</b></div>
+      <p style="margin:4px 0 0">用"展开光路"验算：玻璃内总光程 2<i>d</i> = 30 cm、第二面 <i>r</i> = −30 cm，得 <i>l</i><span class="pr">′</span> = 43.6 cm、<i>β</i> = −0.545，一致。</p>
     </div>
     <div class="res">（1）像在后表面之后 <b>170 cm</b>，实像、倒立，高 <b>10 mm</b>；（2）像在前表面之前 <b>43.6 cm</b>（物方，实像）、倒立，高约 <b>2.7 mm</b>。<br>
     <b>【待核】</b>题面"<b>平凹透镜</b>"与"<b>前凸面</b>"自相矛盾，此处按<b>前表面为凸球面（R = 30 cm）、后表面为平面</b>计算（会聚系统）。若原题实为前表面凹（<i>r</i><sub>1</sub> = −30 cm），则（1）成正立虚像于镜前 46 cm、像高 2 mm；（2）成虚像于前表面之后约 29 cm、像高约 1.0 mm。</div>
@@ -325,23 +326,23 @@
 <div class="kcard">
 <div class="kh">C · 单球面与视深</div>
 <ul><li>逐面传递，前一面像即后一面物</li></ul>
-<div class="eqb"><span class="frac"><span class="num"><i>n</i>′</span><span class="den"><i>l</i>′</span></span>−<span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span>=<span class="frac"><span class="num"><i>n</i>′−<i>n</i></span><span class="den"><i>r</i></span></span></div>
-<div class="eqb"><i>h</i>′ = <span class="frac"><span class="num"><i>h</i></span><span class="den"><i>n</i></span></span></div>
+<div class="eqb"><span class="frac"><span class="num"><i>n</i><span class="pr">′</span></span><span class="den"><i>l</i><span class="pr">′</span></span></span>−<span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span>=<span class="frac"><span class="num"><i>n</i><span class="pr">′</span>−<i>n</i></span><span class="den"><i>r</i></span></span></div>
+<div class="eqb"><i>h</i><span class="pr">′</span> = <span class="frac"><span class="num"><i>h</i></span><span class="den"><i>n</i></span></span></div>
 </div>
 
-<div class="lead">"看水里/看天上"三类题共用一条结论：<b>平面折射把深度按 n′/n 缩放，横向不变</b>。球形界面（鱼缸）则要用 <i>n</i>′/<i>l</i>′ − <i>n</i>/<i>l</i> = (<i>n</i>′−<i>n</i>)/<i>r</i>，且速度要再乘一次纵向放大率。</div>
+<div class="lead">"看水里/看天上"三类题共用一条结论：<b>平面折射把深度按 n<span class="pr">′</span>/n 缩放，横向不变</b>。球形界面（鱼缸）则要用 <i>n</i><span class="pr">′</span>/<i>l</i><span class="pr">′</span> − <i>n</i>/<i>l</i> = (<i>n</i><span class="pr">′</span>−<i>n</i>)/<i>r</i>，且速度要再乘一次纵向放大率。</div>
 
 <div class="q" id="q006">
   <div class="hd"><span class="tag">2023-四-1</span><span class="ttl">水中的铅球、空气中的气球，各看成什么形状多大</span></div>
   <div class="stem">水池中有一个直径为 16 cm 的铅球，试问站在水边的人观察到铅球的形状和大小。在空中有一直径为 30 cm 的气球，试问这时在水池中游泳的人观察到气球的形状和大小（<i>n</i><sub>水</sub> = 4/3）。</div>
   <div class="ans">
-    <div class="step"><b class="n">1</b>平面界面近轴成像：<i>n</i><sub>1</sub>/<i>s</i> + <i>n</i><sub>2</sub>/<i>s</i>′ = 0 ⇒ 视深 <i>s</i>′ = −(<i>n</i><sub>2</sub>/<i>n</i><sub>1</sub>)<i>s</i>，即"<b>看到的位置 = 真实位置 × n<sub>2</sub>/n<sub>1</sub></b>"（沿观察方向）；而横向放大率恒为 1。</div>
+    <div class="step"><b class="n">1</b>平面界面近轴成像：<i>n</i><sub>1</sub>/<i>s</i> + <i>n</i><sub>2</sub>/<i>s</i><span class="pr">′</span> = 0 ⇒ 视深 <i>s</i><span class="pr">′</span> = −(<i>n</i><sub>2</sub>/<i>n</i><sub>1</sub>)<i>s</i>，即"<b>看到的位置 = 真实位置 × n<sub>2</sub>/n<sub>1</sub></b>"（沿观察方向）；而横向放大率恒为 1。</div>
     <div class="step"><b class="n">2</b><b>水中的铅球</b>（水 → 空气，<i>n</i><sub>1</sub> = 4/3，<i>n</i><sub>2</sub> = 1）：球面上每一点沿竖直方向的视深都被压成 3/4
-      <div class="eqb">竖直方向：<i>D</i><sub>竖</sub>′ = 16 × <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <b>12 cm</b></div>
-      <div class="eqb">水平方向：<i>D</i><sub>横</sub>′ = 16 × 1 = <b>16 cm</b>（横向不变）</div>
+      <div class="eqb">竖直方向：<i>D</i><sub>竖</sub><span class="pr">′</span> = 16 × <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <b>12 cm</b></div>
+      <div class="eqb">水平方向：<i>D</i><sub>横</sub><span class="pr">′</span> = 16 × 1 = <b>16 cm</b>（横向不变）</div>
     </div>
     <div class="step"><b class="n">3</b><b>空气中的气球</b>（空气 → 水，<i>n</i><sub>1</sub> = 1，<i>n</i><sub>2</sub> = 4/3）：竖直方向被放大 4/3
-      <div class="eqb">竖直方向：<i>D</i><sub>竖</sub>′ = 30 × <span class="frac"><span class="num">4</span><span class="den">3</span></span> = <b>40 cm</b>，　水平方向仍为 <b>30 cm</b></div>
+      <div class="eqb">竖直方向：<i>D</i><sub>竖</sub><span class="pr">′</span> = 30 × <span class="frac"><span class="num">4</span><span class="den">3</span></span> = <b>40 cm</b>，　水平方向仍为 <b>30 cm</b></div>
     </div>
     <div class="step"><b class="n">4</b>两次都是"圆变椭圆"：竖直与水平方向缩放比不同 ⇒ 旋转椭球（近轴近似下）。
       <table class="g">
@@ -378,20 +379,20 @@
   <div class="hd"><span class="tag">2020-四-1 / 2022-三-4</span><span class="ttl">球形鱼缸：金鱼经过曲率中心时的实际位置与速度</span></div>
   <div class="stem">一个由很薄的均匀玻璃构成半径为 100 cm 的球形鱼缸，其中水的折射率为 4/3，缸内有一条金鱼游向缸壁，某人从缸壁外观察到金鱼沿水平方向游过鱼缸壁的曲率中心，此时速度为 2 cm/s，试问金鱼实际的位置和速度。</div>
   <div class="ans">
-    <div class="step"><b class="n">1</b>缸壁很薄，按单一球面折射处理：水 <i>n</i> = 4/3 → 空气 <i>n</i>′ = 1；球心在水一侧（入射方），故 <i>r</i> = −100 cm
-      <div class="eqb">Φ = <span class="frac"><span class="num"><i>n</i>′ − <i>n</i></span><span class="den"><i>r</i></span></span> = <span class="frac"><span class="num">1 − 4/3</span><span class="den">−100</span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span> cm<sup>−1</sup></div>
+    <div class="step"><b class="n">1</b>缸壁很薄，按单一球面折射处理：水 <i>n</i> = 4/3 → 空气 <i>n</i><span class="pr">′</span> = 1；球心在水一侧（入射方），故 <i>r</i> = −100 cm
+      <div class="eqb">Φ = <span class="frac"><span class="num"><i>n</i><span class="pr">′</span> − <i>n</i></span><span class="den"><i>r</i></span></span> = <span class="frac"><span class="num">1 − 4/3</span><span class="den">−100</span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span> cm<sup>−1</sup></div>
     </div>
-    <div class="step"><b class="n">2</b>观察者"看到金鱼经过曲率中心"⇒ 像在球心，<i>l</i>′ = −100 cm。代入
-      <div class="eqb"><span class="frac"><span class="num"><i>n</i>′</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = Φ　⇒　<span class="frac"><span class="num">1</span><span class="den">−100</span></span> − <span class="frac"><span class="num">4/3</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span></div>
+    <div class="step"><b class="n">2</b>观察者"看到金鱼经过曲率中心"⇒ 像在球心，<i>l</i><span class="pr">′</span> = −100 cm。代入
+      <div class="eqb"><span class="frac"><span class="num"><i>n</i><span class="pr">′</span></span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = Φ　⇒　<span class="frac"><span class="num">1</span><span class="den">−100</span></span> − <span class="frac"><span class="num">4/3</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">300</span></span></div>
       <div class="eqb"><span class="frac"><span class="num">4/3</span><span class="den"><i>l</i></span></span> = −<span class="frac"><span class="num">1</span><span class="den">100</span></span> − <span class="frac"><span class="num">1</span><span class="den">300</span></span> = −<span class="frac"><span class="num">4</span><span class="den">300</span></span>　⇒　<i>l</i> = <b>−100 cm</b></div>
       <p style="margin:4px 0 0">即金鱼真实位置也在<b>曲率中心</b>（距观察侧缸壁 100 cm，恰在鱼缸中心）——球心的物像重合，这是球面折射的必然结果。</p>
     </div>
     <div class="step"><b class="n">3</b>速度：纵向放大率由 Φ = 常数 微分得到
-      <div class="eqb"><span class="frac"><span class="num">d<i>l</i>′</span><span class="den">d<i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>n</i>′</span></span><span class="bkt"><span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span></span><sup>2</sup> = <span class="frac"><span class="num">4/3</span><span class="den">1</span></span> × 1<sup>2</sup> = <span class="frac"><span class="num">4</span><span class="den">3</span></span></div>
+      <div class="eqb"><span class="frac"><span class="num">d<i>l</i><span class="pr">′</span></span><span class="den">d<i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>n</i><span class="pr">′</span></span></span><span class="bkt"><span class="frac"><span class="num"><i>l</i><span class="pr">′</span></span><span class="den"><i>l</i></span></span></span><sup>2</sup> = <span class="frac"><span class="num">4/3</span><span class="den">1</span></span> × 1<sup>2</sup> = <span class="frac"><span class="num">4</span><span class="den">3</span></span></div>
       <div class="eqb"><i>v</i><sub>视</sub> = <span class="frac"><span class="num">4</span><span class="den">3</span></span> <i>v</i><sub>实</sub>　⇒　<i>v</i><sub>实</sub> = <span class="frac"><span class="num">3</span><span class="den">4</span></span> × 2 cm/s = <b>1.5 cm/s</b></div>
     </div>
     <div class="step"><b class="n">4</b>顺带一算横向放大率（鱼看起来的大小）
-      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>n l</i>′</span><span class="den"><i>n</i>′<i>l</i></span></span> = <span class="frac"><span class="num">(4/3)(−100)</span><span class="den">1 × (−100)</span></span> = <span class="frac"><span class="num">4</span><span class="den">3</span></span>（比实际大 1/3）</div>
+      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>n l</i><span class="pr">′</span></span><span class="den"><i>n</i><span class="pr">′</span><i>l</i></span></span> = <span class="frac"><span class="num">(4/3)(−100)</span><span class="den">1 × (−100)</span></span> = <span class="frac"><span class="num">4</span><span class="den">3</span></span>（比实际大 1/3）</div>
     </div>
     <div class="res">金鱼实际就在<b>缸壁的曲率中心</b>（距缸壁 100 cm，即鱼缸中心）；它真实的游动速度是 <b>1.5 cm/s</b>，方向仍沿水平指向缸壁（观察到的 2 cm/s 被放大了 4/3）。</div>
     <span class="src">【真题 + 自算】</span>
@@ -403,7 +404,7 @@
   其中 2014-10 与本章 2020-四-1 / 2022-三-4 是同一道鱼缸题，2013-10 与 2024-四-1 是同一道"共轭距 250 mm"题（β 由 −4 变 −4、数据互换），可作为补充练习。</p>
   <p><b>页码范围</b>：本章题目全部落在第 <b>38–42 页</b>，均在本人负责的 36–48 页之内，<b>完整覆盖</b>；第 38 页页首即"第七章-几何光学基础"标题。第 43 页起进入第八章"理想光学系统"。</p>
   <p><b>第八章边界</b>：第 43–48 页只有"图解法"段（2010-8、2011-8、2012-8、2013-8、2014-8、2015-8 作图题与 2016-三 的作图/简答混合题），<b>没有 2016–2024 年的计算题</b>，因此本文件不含第八章；第八章的 2016–2024 计算题在第 48 页之后，不在本人负责的 36–48 页范围内。</p>
-  <p><b>已知局限</b>：① 全部结果为教材推导（【自算】），未逐题比对机构答案册；② 符号约定采用"实物 <i>l</i>&lt;0、实像 <i>l</i>′&gt;0、f′&gt;0 会聚"，若所跟教材符号相反，只需整体取反；③ 2023-四-2 的"平凹／前凸面"矛盾已按前凸面计算并在题内给出凹面备选；④ 2023-四-1、2024-四-2 的"圆看成椭圆"是近轴近似结论，严格来说球面成像有像散。</p>
+  <p><b>已知局限</b>：① 全部结果为教材推导（【自算】），未逐题比对机构答案册；② 符号约定采用"实物 <i>l</i>&lt;0、实像 <i>l</i><span class="pr">′</span>&gt;0、f<span class="pr">′</span>&gt;0 会聚"，若所跟教材符号相反，只需整体取反；③ 2023-四-2 的"平凹／前凸面"矛盾已按前凸面计算并在题内给出凹面备选；④ 2023-四-1、2024-四-2 的"圆看成椭圆"是近轴近似结论，严格来说球面成像有像散。</p>
 </div>
 
 </div>

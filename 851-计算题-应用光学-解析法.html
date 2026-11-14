@@ -93,6 +93,7 @@
     .q{page-break-inside:avoid;border-left:2px solid #999;}
     .fcard,.ans{box-shadow:none;}
   }
+  .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -135,23 +136,23 @@
 <div class="fbox">
   <div class="fcard">
     <div class="fname">单球面折射</div>
-    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num"><i>n</i>′</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i>′ − <i>n</i></span><span class="den"><i>r</i></span></span></span></div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num"><i>n</i><span class="pr">′</span></span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i><span class="pr">′</span> − <i>n</i></span><span class="den"><i>r</i></span></span></span></div>
     <div class="fnote">逐次成像的主力公式。r 的符号看球心在顶点哪一侧：右为正、左为负。</div>
   </div>
   <div class="fcard">
     <div class="fname">球面反射镜</div>
-    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">2</span><span class="den"><i>r</i></span></span></span></div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">2</span><span class="den"><i>r</i></span></span></span></div>
     <div class="fnote">反射公式里不出现折射率。r &gt; 0 球心在镜后（凸面镜），r &lt; 0 为凹面镜。</div>
   </div>
   <div class="fcard">
     <div class="fname">薄透镜</div>
-    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span></span></div>
-    <div class="fnote">1/<i>f</i>′ = (<i>n</i>−1)(1/<i>r</i><sub>1</sub> − 1/<i>r</i><sub>2</sub>)。正弯月 <i>r</i><sub>1</sub>、<i>r</i><sub>2</sub> 同号且 <i>r</i><sub>1</sub> &lt; <i>r</i><sub>2</sub>，<i>f</i>′ &gt; 0。</div>
+    <div class="fml"><span class="eqb" style="margin:0"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span></span></div>
+    <div class="fnote">1/<i>f</i><span class="pr">′</span> = (<i>n</i>−1)(1/<i>r</i><sub>1</sub> − 1/<i>r</i><sub>2</sub>)。正弯月 <i>r</i><sub>1</sub>、<i>r</i><sub>2</sub> 同号且 <i>r</i><sub>1</sub> &lt; <i>r</i><sub>2</sub>，<i>f</i><span class="pr">′</span> &gt; 0。</div>
   </div>
   <div class="fcard">
     <div class="fname">横向放大率</div>
-    <div class="fml"><span class="eqb" style="margin:0"><i>β</i> = <span class="frac"><span class="num"><i>n l</i>′</span><span class="den"><i>n</i>′<i>l</i></span></span></span></div>
-    <div class="fnote">反射镜用 <i>β</i> = −<i>l</i>′/<i>l</i>。多次成像时 <i>β</i> 要<b>连乘</b>，符号决定正立/倒立。</div>
+    <div class="fml"><span class="eqb" style="margin:0"><i>β</i> = <span class="frac"><span class="num"><i>n l</i><span class="pr">′</span></span><span class="den"><i>n</i><span class="pr">′</span><i>l</i></span></span></span></div>
+    <div class="fnote">反射镜用 <i>β</i> = −<i>l</i><span class="pr">′</span>/<i>l</i>。多次成像时 <i>β</i> 要<b>连乘</b>，符号决定正立/倒立。</div>
   </div>
 </div>
 
@@ -160,7 +161,7 @@
   <div class="kh">本章大点 · 反射棱镜题的通用三步</div>
   <ul>
     <li><b>① 展开</b>：把棱镜按像空间展开成一块平行平板，求出展开厚度 <i>L</i>（光在玻璃中走过的总路程）。</li>
-    <li><b>② 位移</b>：平板只让像沿光轴移动，不改大小：Δ<i>l</i>′ = <i>L</i>(1 − 1/<i>n</i>)。</li>
+    <li><b>② 位移</b>：平板只让像沿光轴移动，不改大小：Δ<i>l</i><span class="pr">′</span> = <i>L</i>(1 − 1/<i>n</i>)。</li>
     <li><b>③ 定轴</b>：按展开后的光轴方向（棱镜把光轴折转的角度）量像的位置，再乘前面的 β 得像高。</li>
   </ul>
   <table>
@@ -170,14 +171,14 @@
   </table>
   <ul>
     <li><b>最常错</b>：把五棱镜的 <i>L</i> 记成 2<i>a</i>——差 √2<i>a</i>，像位置能差几十毫米。</li>
-    <li><b>自检</b>：<i>n</i>=1 时 Δ<i>l</i>′ 应为 0（无玻璃），否则公式代错。</li>
+    <li><b>自检</b>：<i>n</i>=1 时 Δ<i>l</i><span class="pr">′</span> 应为 0（无玻璃），否则公式代错。</li>
   </ul>
 </div>
 <h2 id="a">A · 薄透镜 + 全反射膜<span class="cnt">1 题</span></h2>
 <div class="kcard">
 <div class="kh">A · 薄透镜 + 全反射膜</div>
 <ul><li>膜 = 平面镜：先成像，再关于膜面对称</li><li>对称后按折转的光轴继续</li></ul>
-<div class="eqb">Δ<i>l</i>′ = <i>d</i>(1−<span class="frac"><span class="num">1</span><span class="den"><i>n</i></span></span>)</div>
+<div class="eqb">Δ<i>l</i><span class="pr">′</span> = <i>d</i>(1−<span class="frac"><span class="num">1</span><span class="den"><i>n</i></span></span>)</div>
 </div>
 <div class="lead">这道的骨架是"逐次成像"：第一面折射 → 第二面反射 → 再经第一面折射。三次都套同一个高斯公式，难点全在符号。</div>
 
@@ -193,17 +194,17 @@
     <p><b>（1）不镀膜：一次薄透镜成像</b></p>
 
     <div class="step"><b class="n">1</b>先定符号。正弯月透镜两个面同向弯曲，球心都在右侧，故 <i>r</i><sub>1</sub> = +5 cm、<i>r</i><sub>2</sub> = +15 cm；<i>n</i> = 1.5。
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> = (<i>n</i> − 1)<span class="bkt"><span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span></span> = 0.5 × <span class="bkt"><span class="frac"><span class="num">1</span><span class="den">5</span></span> − <span class="frac"><span class="num">1</span><span class="den">15</span></span></span> = 0.5 × 0.1333 = 0.06667 cm<sup>−1</sup></div>
-      <div class="eqb"><i>f</i>′ = <b>15 cm</b></div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = (<i>n</i> − 1)<span class="bkt"><span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span></span> = 0.5 × <span class="bkt"><span class="frac"><span class="num">1</span><span class="den">5</span></span> − <span class="frac"><span class="num">1</span><span class="den">15</span></span></span> = 0.5 × 0.1333 = 0.06667 cm<sup>−1</sup></div>
+      <div class="eqb"><i>f</i><span class="pr">′</span> = <b>15 cm</b></div>
     </div>
 
     <div class="step"><b class="n">2</b>物在透镜左方 30 cm，取 <i>l</i> = −30 cm，代高斯公式求像距。
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i>′</span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i>′</span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">15</span></span> + <span class="frac"><span class="num">1</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1</span><span class="den">30</span></span></div>
-      <div class="eqb"><i>l</i>′ = +30 cm　（正号 = 在透镜右方，实像）</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">1</span><span class="den">15</span></span> + <span class="frac"><span class="num">1</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1</span><span class="den">30</span></span></div>
+      <div class="eqb"><i>l</i><span class="pr">′</span> = +30 cm　（正号 = 在透镜右方，实像）</div>
     </div>
 
     <div class="step"><b class="n">3</b>像高由横向放大率定。
-      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>l</i>′</span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">30</span><span class="den">−30</span></span> = −1，　<i>y</i>′ = <i>β y</i> = −1 × 1 mm = −1 mm</div>
+      <div class="eqb"><i>β</i> = <span class="frac"><span class="num"><i>l</i><span class="pr">′</span></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num">30</span><span class="den">−30</span></span> = −1，　<i>y</i><span class="pr">′</span> = <i>β y</i> = −1 × 1 mm = −1 mm</div>
     </div>
 
     <div class="res">像在透镜<b>右方 30 cm</b>（与物对称），<b>实像</b>，<b>倒立</b>，高 <b>1 mm</b>。物在 2<i>f</i> 处、像也成在 2<i>f</i> 处，这组数正好凑成 β = −1。</div>
@@ -211,40 +212,40 @@
     <p style="margin-top:16px"><b>（2）右面镀全反射膜：折射 → 反射 → 再折射</b></p>
 
     <div class="step"><b class="n">4</b><b>第一次：第一面折射</b>（空气 → 玻璃，<i>n</i> = 1 → 1.5，<i>r</i><sub>1</sub> = +5 cm）
-      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> − <span class="frac"><span class="num">1</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1.5 − 1</span><span class="den">5</span></span> = 0.1</div>
-      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub>′</span></span> = 0.1 − 0.03333 = 0.06667　⇒　<i>l</i><sub>1</sub>′ = <b>+22.5 cm</b></div>
-      <div class="eqb"><i>β</i><sub>1</sub> = <span class="frac"><span class="num"><i>n</i><sub>1</sub><i>l</i><sub>1</sub>′</span><span class="den"><i>n</i><sub>1</sub>′<i>l</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1 × 22.5</span><span class="den">1.5 × (−30)</span></span> = −0.5</div>
+      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1</span><span class="den">−30</span></span> = <span class="frac"><span class="num">1.5 − 1</span><span class="den">5</span></span> = 0.1</div>
+      <div class="eqb"><span class="frac"><span class="num">1.5</span><span class="den"><i>l</i><sub>1</sub><span class="pr">′</span></span></span> = 0.1 − 0.03333 = 0.06667　⇒　<i>l</i><sub>1</sub><span class="pr">′</span> = <b>+22.5 cm</b></div>
+      <div class="eqb"><i>β</i><sub>1</sub> = <span class="frac"><span class="num"><i>n</i><sub>1</sub><i>l</i><sub>1</sub><span class="pr">′</span></span><span class="den"><i>n</i><sub>1</sub><span class="pr">′</span><i>l</i><sub>1</sub></span></span> = <span class="frac"><span class="num">1 × 22.5</span><span class="den">1.5 × (−30)</span></span> = −0.5</div>
       <p style="margin:2px 0 0">即玻璃里的光会聚在镜后 22.5 cm 处。</p>
     </div>
 
     <div class="step"><b class="n">5</b><b>第二次：第二面反射</b>。这面镜在玻璃里，半径仍取几何值 <i>r</i><sub>2</sub> = +15 cm。注意：球心在镜后（右侧），从玻璃里看它是<b>凸面镜</b>，不是凹面镜。会聚光落在镜面上，相当于"虚物" <i>l</i><sub>2</sub> = +22.5 cm。
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub>′</span></span> = <span class="frac"><span class="num">2</span><span class="den"><i>r</i><sub>2</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub></span></span> = <span class="frac"><span class="num">2</span><span class="den">15</span></span> − <span class="frac"><span class="num">1</span><span class="den">22.5</span></span> = 0.13333 − 0.04444 = 0.08889</div>
-      <div class="eqb"><i>l</i><sub>2</sub>′ = <b>+11.25 cm</b>，　<i>β</i><sub>2</sub> = −<span class="frac"><span class="num"><i>l</i><sub>2</sub>′</span><span class="den"><i>l</i><sub>2</sub></span></span> = −<span class="frac"><span class="num">11.25</span><span class="den">22.5</span></span> = −0.5</div>
-      <p style="margin:2px 0 0"><i>l</i><sub>2</sub>′ &gt; 0 表示像在镜后（虚像）。反射后光向左走，这束光看起来就是从镜后 11.25 cm 处发散的。</p>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub><span class="pr">′</span></span></span> = <span class="frac"><span class="num">2</span><span class="den"><i>r</i><sub>2</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>2</sub></span></span> = <span class="frac"><span class="num">2</span><span class="den">15</span></span> − <span class="frac"><span class="num">1</span><span class="den">22.5</span></span> = 0.13333 − 0.04444 = 0.08889</div>
+      <div class="eqb"><i>l</i><sub>2</sub><span class="pr">′</span> = <b>+11.25 cm</b>，　<i>β</i><sub>2</sub> = −<span class="frac"><span class="num"><i>l</i><sub>2</sub><span class="pr">′</span></span><span class="den"><i>l</i><sub>2</sub></span></span> = −<span class="frac"><span class="num">11.25</span><span class="den">22.5</span></span> = −0.5</div>
+      <p style="margin:2px 0 0"><i>l</i><sub>2</sub><span class="pr">′</span> &gt; 0 表示像在镜后（虚像）。反射后光向左走，这束光看起来就是从镜后 11.25 cm 处发散的。</p>
     </div>
 
     <div class="step"><b class="n">6</b><b>第三次：光向左再穿过第一面</b>。把光路反过来看：<i>n</i> = 1.5 → 1，曲率半径变号 <i>r</i><sub>3</sub> = −5 cm；那束光从镜后 11.25 cm 处发散出来，对第一面是 11.25 cm 处的实物，<i>l</i><sub>3</sub> = −11.25 cm。
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>3</sub>′</span></span> − <span class="frac"><span class="num">1.5</span><span class="den">−11.25</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−5</span></span> = 0.1</div>
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>3</sub>′</span></span> = 0.1 − 0.13333 = −0.03333　⇒　<i>l</i><sub>3</sub>′ = <b>−30 cm</b></div>
-      <div class="eqb"><i>β</i><sub>3</sub> = <span class="frac"><span class="num"><i>n</i><sub>3</sub><i>l</i><sub>3</sub>′</span><span class="den"><i>n</i><sub>3</sub>′<i>l</i><sub>3</sub></span></span> = <span class="frac"><span class="num">1.5 × (−30)</span><span class="den">1 × (−11.25)</span></span> = +4</div>
-      <p style="margin:2px 0 0">反向坐标里 <i>l</i><sub>3</sub>′ &lt; 0 是虚像，位置在"入射侧"。换回原坐标：透镜<b>右方 30 cm</b> —— 也就是观察者从左侧看进去，像在镜子后面 30 cm。</p>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>3</sub><span class="pr">′</span></span></span> − <span class="frac"><span class="num">1.5</span><span class="den">−11.25</span></span> = <span class="frac"><span class="num">1 − 1.5</span><span class="den">−5</span></span> = 0.1</div>
+      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><sub>3</sub><span class="pr">′</span></span></span> = 0.1 − 0.13333 = −0.03333　⇒　<i>l</i><sub>3</sub><span class="pr">′</span> = <b>−30 cm</b></div>
+      <div class="eqb"><i>β</i><sub>3</sub> = <span class="frac"><span class="num"><i>n</i><sub>3</sub><i>l</i><sub>3</sub><span class="pr">′</span></span><span class="den"><i>n</i><sub>3</sub><span class="pr">′</span><i>l</i><sub>3</sub></span></span> = <span class="frac"><span class="num">1.5 × (−30)</span><span class="den">1 × (−11.25)</span></span> = +4</div>
+      <p style="margin:2px 0 0">反向坐标里 <i>l</i><sub>3</sub><span class="pr">′</span> &lt; 0 是虚像，位置在"入射侧"。换回原坐标：透镜<b>右方 30 cm</b> —— 也就是观察者从左侧看进去，像在镜子后面 30 cm。</p>
     </div>
 
     <div class="step"><b class="n">7</b>三次放大率连乘，得总放大率和像高。
-      <div class="eqb"><i>β</i> = <i>β</i><sub>1</sub><i>β</i><sub>2</sub><i>β</i><sub>3</sub> = (−0.5) × (−0.5) × (+4) = +1，　<i>y</i>′ = +1 mm</div>
+      <div class="eqb"><i>β</i> = <i>β</i><sub>1</sub><i>β</i><sub>2</sub><i>β</i><sub>3</sub> = (−0.5) × (−0.5) × (+4) = +1，　<i>y</i><span class="pr">′</span> = +1 mm</div>
     </div>
 
     <div class="res">像在透镜<b>右方（镜后）30 cm</b>，<b>虚像</b>，<b>正立</b>，高 <b>1 mm</b>。与（1）相比：位置同样在右方 30 cm，但由实变虚、由倒变正。</div>
 
     <table class="g">
-      <tr><th>次序</th><th>作用</th><th>n → n′</th><th>r / cm</th><th>l / cm</th><th>l′ / cm</th><th>β</th></tr>
+      <tr><th>次序</th><th>作用</th><th>n → n<span class="pr">′</span></th><th>r / cm</th><th>l / cm</th><th>l<span class="pr">′</span> / cm</th><th>β</th></tr>
       <tr><td>①</td><td>第一面折射</td><td>1 → 1.5</td><td>+5</td><td>−30</td><td>+22.5</td><td>−0.5</td></tr>
       <tr><td>②</td><td>第二面反射</td><td>1.5 → 1.5</td><td>+15</td><td>+22.5</td><td>+11.25</td><td>−0.5</td></tr>
       <tr><td>③</td><td>再经第一面折射</td><td>1.5 → 1</td><td>−5</td><td>−11.25</td><td>−30</td><td>+4</td></tr>
       <tr><td colspan="5">合计</td><td>右方 30</td><td>+1</td></tr>
     </table>
 
-    <div class="step"><b class="n">8</b><b>验算（这题其实等效于一块平面镜）</b>：把反射按 <i>n</i>′ = −<i>n</i> 折成"折射"，三次作用折算到同一平面的总光焦度
+    <div class="step"><b class="n">8</b><b>验算（这题其实等效于一块平面镜）</b>：把反射按 <i>n</i><span class="pr">′</span> = −<i>n</i> 折成"折射"，三次作用折算到同一平面的总光焦度
       <div class="eqb">Φ = 2Φ<sub>1</sub> + Φ<sub>m</sub> = 2 × <span class="frac"><span class="num">1.5 − 1</span><span class="den">5</span></span> + <span class="frac"><span class="num">(−1.5) − 1.5</span><span class="den">15</span></span> = 0.2 − 0.2 = 0</div>
       <p style="margin:2px 0 0">总光焦度为 0、角放大率为 1 ⇒ 系统与<b>平面镜</b>等价 ⇒ 物像关于透镜对称：右方 30 cm、正立、等大。与逐步计算一致。<br>
       这就是本题两个曲率半径的"巧合"：(<i>n</i>−1)/<i>r</i><sub>1</sub> = 0.5/5 = 0.1，<i>n</i>/<i>r</i><sub>2</sub> = 1.5/15 = 0.1，正好相等。</p>
@@ -263,10 +264,10 @@
 <div class="lead">应用光学的解析法题，九成是同一个循环：过一面 → 解一次高斯公式 → 记下 β → 下一面。区别只在"这一面是折射还是反射"。</div>
 
 <div class="ans">
-  <div class="step"><b class="n">1</b>画光路、定符号：光从左向右，顶点为原点，向右为正；实物 <i>l</i> &lt; 0，实像 <i>l</i>′ &gt; 0。</div>
-  <div class="step"><b class="n">2</b>每一面写 <i>n</i>′/<i>l</i>′ − <i>n</i>/<i>l</i> = (<i>n</i>′−<i>n</i>)/<i>r</i>；遇到反射面换成 1/<i>l</i>′ + 1/<i>l</i> = 2/<i>r</i>，解出 <i>l</i>′。</div>
-  <div class="step"><b class="n">3</b>算 <i>β</i> = <i>n l</i>′/(<i>n</i>′<i>l</i>)（反射镜 <i>β</i> = −<i>l</i>′/<i>l</i>），并一路连乘。</div>
-  <div class="step"><b class="n">4</b>反射之后的第二次折射：<b>把光路反演</b> —— <i>r</i> 变号、<i>n</i> 与 <i>n</i>′ 互换，解完再把 <i>l</i>′ 的符号翻译回原坐标（"入射侧"= 虚像）。</div>
+  <div class="step"><b class="n">1</b>画光路、定符号：光从左向右，顶点为原点，向右为正；实物 <i>l</i> &lt; 0，实像 <i>l</i><span class="pr">′</span> &gt; 0。</div>
+  <div class="step"><b class="n">2</b>每一面写 <i>n</i><span class="pr">′</span>/<i>l</i><span class="pr">′</span> − <i>n</i>/<i>l</i> = (<i>n</i><span class="pr">′</span>−<i>n</i>)/<i>r</i>；遇到反射面换成 1/<i>l</i><span class="pr">′</span> + 1/<i>l</i> = 2/<i>r</i>，解出 <i>l</i><span class="pr">′</span>。</div>
+  <div class="step"><b class="n">3</b>算 <i>β</i> = <i>n l</i><span class="pr">′</span>/(<i>n</i><span class="pr">′</span><i>l</i>)（反射镜 <i>β</i> = −<i>l</i><span class="pr">′</span>/<i>l</i>），并一路连乘。</div>
+  <div class="step"><b class="n">4</b>反射之后的第二次折射：<b>把光路反演</b> —— <i>r</i> 变号、<i>n</i> 与 <i>n</i><span class="pr">′</span> 互换，解完再把 <i>l</i><span class="pr">′</span> 的符号翻译回原坐标（"入射侧"= 虚像）。</div>
   <div class="step"><b class="n">5</b>收尾用"总光焦度"或"物像对称"粗验算一遍，量级和正倒不对就回头查符号。</div>
 </div>
 
@@ -275,7 +276,7 @@
   ① 反射面在玻璃里时，<i>r</i> 用几何半径、不乘 <i>n</i>；但"凸/凹"要站在入射光一侧看 —— 本题第二面从玻璃里看是凸面镜（<i>r</i> = +15），不是凹面镜。<br>
   ② 第三次折射别忘 <i>r</i> 变号：+5 要写成 −5，否则整道题的结果全错。<br>
   ③ <i>β</i> 是三次连乘，符号决定正倒；只拿最后一次的 <i>β</i> 当总放大率是常见失分点。<br>
-  ④ <i>l</i>′ 的"左/右"要在<b>原坐标</b>里说清楚，反向光路的符号极易读反。
+  ④ <i>l</i><span class="pr">′</span> 的"左/右"要在<b>原坐标</b>里说清楚，反向光路的符号极易读反。
 </div>
 
 <!-- ===== C ===== -->
@@ -290,16 +291,16 @@
   <div class="hd"><span class="tag">2023-三-2（简答）</span><span class="ttl">放大镜 5× 的焦距是多少</span></div>
   <div class="stem">什么是放大镜的视角放大率？放大倍数 5× 的放大镜焦距多少？</div>
   <div class="ans">
-    <div class="step"><b class="n">1</b>视角放大率的定义：用仪器后像对人眼的张角 <i>ω</i>′，与不用仪器、把物放在明视距离（250 mm）处时对人眼的张角 <i>ω</i> 之比
-      <div class="eqb"><i>Γ</i> = <span class="frac"><span class="num">tan<i>ω</i>′</span><span class="den">tan<i>ω</i></span></span></div>
+    <div class="step"><b class="n">1</b>视角放大率的定义：用仪器后像对人眼的张角 <i>ω</i><span class="pr">′</span>，与不用仪器、把物放在明视距离（250 mm）处时对人眼的张角 <i>ω</i> 之比
+      <div class="eqb"><i>Γ</i> = <span class="frac"><span class="num">tan<i>ω</i><span class="pr">′</span></span><span class="den">tan<i>ω</i></span></span></div>
     </div>
     <div class="step"><b class="n">2</b>放大镜把物放在前焦点以内，像成在无穷远（正常调节）时，通行的标法是
-      <div class="eqb"><i>Γ</i> = <span class="frac"><span class="num">250 mm</span><span class="den"><i>f</i>′</span></span></div>
+      <div class="eqb"><i>Γ</i> = <span class="frac"><span class="num">250 mm</span><span class="den"><i>f</i><span class="pr">′</span></span></span></div>
     </div>
     <div class="step"><b class="n">3</b>代入 <i>Γ</i> = 5
-      <div class="eqb"><i>f</i>′ = <span class="frac"><span class="num">250</span><span class="den">5</span></span> = <b>50 mm</b></div>
+      <div class="eqb"><i>f</i><span class="pr">′</span> = <span class="frac"><span class="num">250</span><span class="den">5</span></span> = <b>50 mm</b></div>
     </div>
-    <div class="res"><i>f</i>′ = <b>50 mm</b>（按"像在无穷远"的通行标法）。若题目约定像成在明视距离处，则 <i>Γ</i> = 1 + 250/<i>f</i>′，解出 <i>f</i>′ = 62.5 mm —— 两种约定要看清题意。</div>
+    <div class="res"><i>f</i><span class="pr">′</span> = <b>50 mm</b>（按"像在无穷远"的通行标法）。若题目约定像成在明视距离处，则 <i>Γ</i> = 1 + 250/<i>f</i><span class="pr">′</span>，解出 <i>f</i><span class="pr">′</span> = 62.5 mm —— 两种约定要看清题意。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -307,29 +308,29 @@
 <div class="q" id="q003">
   <div class="hd"><span class="tag">2023-三-3（简答）</span><span class="ttl">由等光程条件求旋转对称反射面的方程</span></div>
   <div class="stem">
-    关于 <i>z</i> 坐标轴旋转对称的反射曲面经过坐标原点 <i>O</i>，可以将旋转对称轴上实物点 <i>A</i> 反射成像在 <i>A</i>′，如果 <i>AO</i> = 4 cm，<i>AA</i>′ = 2 cm，试基于光完善条件确定反射面的方程。
+    关于 <i>z</i> 坐标轴旋转对称的反射曲面经过坐标原点 <i>O</i>，可以将旋转对称轴上实物点 <i>A</i> 反射成像在 <i>A</i><span class="pr">′</span>，如果 <i>AO</i> = 4 cm，<i>AA</i><span class="pr">′</span> = 2 cm，试基于光完善条件确定反射面的方程。
   </div>
   <details class="figbox" open><summary>图 · 点此收起 / 展开</summary><figure>
     <img src="data:image/png;base64,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" alt="反射曲面：物点A、像点A′、顶点O与面上一点P的光路" style="max-width:100%;height:auto">
-    <figcaption>源 PDF 第 55 页：<i>A</i> 为物点、<i>A</i>′ 为像点、<i>O</i> 为曲面顶点（坐标原点），<i>P</i> 为反射面上任一点。</figcaption>
+    <figcaption>源 PDF 第 55 页：<i>A</i> 为物点、<i>A</i><span class="pr">′</span> 为像点、<i>O</i> 为曲面顶点（坐标原点），<i>P</i> 为反射面上任一点。</figcaption>
   </figure></details>
   <div class="ans">
-    <div class="step"><b class="n">1</b>建坐标：<i>O</i> 为原点，<i>z</i> 轴沿对称轴、取光传播方向为 +<i>z</i>（向右）。<i>A</i> 在 <i>O</i> 左侧 4 cm ⇒ <i>z</i><sub>A</sub> = −4 cm；<i>A</i>′ 在 <i>A</i> 与 <i>O</i> 之间，<i>AA</i>′ = 2 cm ⇒ <i>z</i><sub>A′</sub> = −2 cm。</div>
-    <div class="step"><b class="n">2</b>光完善条件就是<b>等光程</b>：从 <i>A</i> 出发、经面上任一点 <i>P</i> 反射到 <i>A</i>′ 的光程都相等（反射定律正是它的驻值条件）
-      <div class="eqb">|<i>AP</i>| + |<i>PA</i>′| = 常数</div>
+    <div class="step"><b class="n">1</b>建坐标：<i>O</i> 为原点，<i>z</i> 轴沿对称轴、取光传播方向为 +<i>z</i>（向右）。<i>A</i> 在 <i>O</i> 左侧 4 cm ⇒ <i>z</i><sub>A</sub> = −4 cm；<i>A</i><span class="pr">′</span> 在 <i>A</i> 与 <i>O</i> 之间，<i>AA</i><span class="pr">′</span> = 2 cm ⇒ <i>z</i><sub>A<span class="pr">′</span></sub> = −2 cm。</div>
+    <div class="step"><b class="n">2</b>光完善条件就是<b>等光程</b>：从 <i>A</i> 出发、经面上任一点 <i>P</i> 反射到 <i>A</i><span class="pr">′</span> 的光程都相等（反射定律正是它的驻值条件）
+      <div class="eqb">|<i>AP</i>| + |<i>PA</i><span class="pr">′</span>| = 常数</div>
     </div>
     <div class="step"><b class="n">3</b>取 <i>P</i> = <i>O</i>（<i>O</i> 在面上）定出常数
-      <div class="eqb">常数 = <i>AO</i> + <i>A</i>′<i>O</i> = 4 + 2 = 6 cm</div>
+      <div class="eqb">常数 = <i>AO</i> + <i>A</i><span class="pr">′</span><i>O</i> = 4 + 2 = 6 cm</div>
     </div>
-    <div class="step"><b class="n">4</b>"到两定点距离之和为常数"的旋转曲面 = 以 <i>A</i>、<i>A</i>′ 为焦点的<b>旋转椭球面</b>：
-      <div class="eqb">2<i>a</i> = 6 ⇒ <i>a</i> = 3 cm；　2<i>c</i> = <i>AA</i>′ = 2 ⇒ <i>c</i> = 1 cm；　<i>b</i><sup>2</sup> = <i>a</i><sup>2</sup> − <i>c</i><sup>2</sup> = 9 − 1 = 8 cm<sup>2</sup></div>
+    <div class="step"><b class="n">4</b>"到两定点距离之和为常数"的旋转曲面 = 以 <i>A</i>、<i>A</i><span class="pr">′</span> 为焦点的<b>旋转椭球面</b>：
+      <div class="eqb">2<i>a</i> = 6 ⇒ <i>a</i> = 3 cm；　2<i>c</i> = <i>AA</i><span class="pr">′</span> = 2 ⇒ <i>c</i> = 1 cm；　<i>b</i><sup>2</sup> = <i>a</i><sup>2</sup> − <i>c</i><sup>2</sup> = 9 − 1 = 8 cm<sup>2</sup></div>
     </div>
-    <div class="step"><b class="n">5</b>椭球中心在 <i>AA</i>′ 的中点 <i>z</i> = −3 cm，故方程为
+    <div class="step"><b class="n">5</b>椭球中心在 <i>AA</i><span class="pr">′</span> 的中点 <i>z</i> = −3 cm，故方程为
       <div class="eqb"><span class="frac"><span class="num">(<i>z</i> + 3)<sup>2</sup></span><span class="den">9</span></span> + <span class="frac"><span class="num"><i>x</i><sup>2</sup> + <i>y</i><sup>2</sup></span><span class="den">8</span></span> = 1　（长度单位 cm）</div>
     </div>
-    <div class="step"><b class="n">6</b>验算：<i>O</i>(0, 0, 0) 代入得 9/9 = 1 ✓；另一顶点 <i>z</i> = −6 cm 处 |<i>AP</i>| + |<i>PA</i>′| = 2 + 4 = 6 ✓。
+    <div class="step"><b class="n">6</b>验算：<i>O</i>(0, 0, 0) 代入得 9/9 = 1 ✓；另一顶点 <i>z</i> = −6 cm 处 |<i>AP</i>| + |<i>PA</i><span class="pr">′</span>| = 2 + 4 = 6 ✓。
     </div>
-<div class="res">反射面是<b>旋转椭球面</b>：<b>(<i>z</i>+3)<sup>2</sup>/9 + (<i>x</i><sup>2</sup>+<i>y</i><sup>2</sup>)/8 = 1</b>（cm）。顶点在 <i>O</i>，另一顶点在 <i>z</i> = −6 cm，<i>A</i>、<i>A</i>′ 是它的两个焦点，反射发生在椭球内表面。<br>
+<div class="res">反射面是<b>旋转椭球面</b>：<b>(<i>z</i>+3)<sup>2</sup>/9 + (<i>x</i><sup>2</sup>+<i>y</i><sup>2</sup>)/8 = 1</b>（cm）。顶点在 <i>O</i>，另一顶点在 <i>z</i> = −6 cm，<i>A</i>、<i>A</i><span class="pr">′</span> 是它的两个焦点，反射发生在椭球内表面。<br>
     若把 +<i>z</i> 取为向左，则同一曲面写成 (<i>z</i>−3)<sup>2</sup>/9 + (<i>x</i><sup>2</sup>+<i>y</i><sup>2</sup>)/8 = 1，只是坐标取向不同。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
@@ -352,11 +353,11 @@
   <tr><td>55</td><td>2023-三</td><td class="l">简答（畸变、放大镜、反射面方程、施密特棱镜）</td><td class="l">第 2、3 小问已作 <a href="#c">附录 C</a></td></tr>
   <tr><td>56</td><td>2024-三</td><td class="l">简答与画图（完善像、像散场曲、坐标系）</td><td class="l">非计算题</td></tr>
   <tr><td>57</td><td>2009-8</td><td class="l">平凸透镜 + 直角棱镜 + 高反膜</td><td class="l">早于 2016</td></tr>
-  <tr><td>58</td><td>2010-11</td><td class="l">薄透镜（f′=100）+ 直角棱镜（90 mm）</td><td class="l">早于 2016</td></tr>
-  <tr><td>59</td><td>2011-12</td><td class="l">薄透镜（f′=100）+ 直角棱镜（60 mm）</td><td class="l">早于 2016</td></tr>
-  <tr><td>60</td><td>2012-11</td><td class="l">薄透镜（f′=60）+ 直角棱镜（60 mm）</td><td class="l">早于 2016</td></tr>
-  <tr><td>61</td><td>2013-11</td><td class="l">薄透镜（f′=100）+ 二次反射五角棱镜</td><td class="l">早于 2016</td></tr>
-  <tr><td>62</td><td>2014-11</td><td class="l">薄透镜（f′=100）+ 五角棱镜（同 2013 参数）</td><td class="l">早于 2016</td></tr>
+  <tr><td>58</td><td>2010-11</td><td class="l">薄透镜（f<span class="pr">′</span>=100）+ 直角棱镜（90 mm）</td><td class="l">早于 2016</td></tr>
+  <tr><td>59</td><td>2011-12</td><td class="l">薄透镜（f<span class="pr">′</span>=100）+ 直角棱镜（60 mm）</td><td class="l">早于 2016</td></tr>
+  <tr><td>60</td><td>2012-11</td><td class="l">薄透镜（f<span class="pr">′</span>=60）+ 直角棱镜（60 mm）</td><td class="l">早于 2016</td></tr>
+  <tr><td>61</td><td>2013-11</td><td class="l">薄透镜（f<span class="pr">′</span>=100）+ 二次反射五角棱镜</td><td class="l">早于 2016</td></tr>
+  <tr><td>62</td><td>2014-11</td><td class="l">薄透镜（f<span class="pr">′</span>=100）+ 五角棱镜（同 2013 参数）</td><td class="l">早于 2016</td></tr>
   <tr><td>63</td><td>2016-四-3</td><td class="l">薄透镜 + 五角棱镜（与 2013/2014 同参数）</td><td class="l">页码 63 超出本批 49–62</td></tr>
 </table>
 

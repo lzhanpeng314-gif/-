@@ -91,6 +91,7 @@
     .q{page-break-inside:avoid;border-left:2px solid #999;}
     .ans{box-shadow:none;}
   }
+  .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -384,7 +385,7 @@
 
 <!-- ============ 三 ============ -->
 <h2 id="m3">三 · 光的衍射<span class="sc">考纲 15 分</span><span class="cnt">10 问</span></h2>
-<div class="kbig"><div class="kh">答题必带关键词 · 衍射</div><ul><li>惠更斯-菲涅尔原理、半波带法</li><li>菲涅尔衍射（近场）vs 夫琅和费（远场）</li><li>单缝：<b>单缝衍射因子</b>、中央亮纹角宽 2λ/a</li><li>多缝：缺级 d/a = k/k′</li><li>分辨本领：望远 1.22λ/D、显微 0.61λ/NA</li><li>光栅：d sinθ=kλ、角色散、色分辨本领 R=kN</li></ul></div>
+<div class="kbig"><div class="kh">答题必带关键词 · 衍射</div><ul><li>惠更斯-菲涅尔原理、半波带法</li><li>菲涅尔衍射（近场）vs 夫琅和费（远场）</li><li>单缝：<b>单缝衍射因子</b>、中央亮纹角宽 2λ/a</li><li>多缝：缺级 d/a = k/k<span class="pr">′</span></li><li>分辨本领：望远 1.22λ/D、显微 0.61λ/NA</li><li>光栅：d sinθ=kλ、角色散、色分辨本领 R=kN</li></ul></div>
 <div class="lead">考纲点名：菲涅尔近似与夫琅禾费近似的判据、衍射概念、衍射与干涉的区别、望远镜/显微镜/照相物镜分辨本领、光栅方程（正入射与斜入射）。</div>
 
 <div class="q" id="q018">
@@ -408,7 +409,7 @@
     <p>隔缝遮住后，参与衍射的<b>缝数 N 减半</b>，而相邻<b>有效缝距变为 2d</b>（光栅常数变成 2d，出现缺级）。</p>
     <ul>
       <li><b>分辨本领</b> R = kN → 降为原来的 <b>1/2</b>；</li>
-      <li><b>色散本领</b>（角色散率 dθ/dλ = k/(d′cosθ)）→ 也降为 <b>1/2</b>，谱线间距变为原来的 2 倍，谱线变稀。</li>
+      <li><b>色散本领</b>（角色散率 dθ/dλ = k/(d<span class="pr">′</span>cosθ)）→ 也降为 <b>1/2</b>，谱线间距变为原来的 2 倍，谱线变稀。</li>
     </ul>
     <span class="src">【教材】</span>
   </div>
@@ -435,8 +436,8 @@
   <div class="stem">在望远镜的设计中，如何提高望远镜的分辨本领？在望远镜的分辨本领确定的前提下，如何考虑其视角放大率？</div>
   <div class="ans">
     <p><b>提高分辨本领</b>：望远镜的分辨角 θ<sub>0</sub> = 1.22λ/D，只由<b>物镜通光口径 D</b> 决定 → 增大物镜口径。</p>
-    <p><b>口径确定后</b>：θ<sub>0</sub> 已定，视角放大率 Γ 必须与之<b>匹配</b> —— 使物镜刚能分辨的两点经放大后恰好达到人眼的分辨极限（约 1′）：</p>
-    <div class="eq">Γ ≈ 1′ / θ<sub>0</sub>　（θ<sub>0</sub> 用角分表示）</div>
+    <p><b>口径确定后</b>：θ<sub>0</sub> 已定，视角放大率 Γ 必须与之<b>匹配</b> —— 使物镜刚能分辨的两点经放大后恰好达到人眼的分辨极限（约 1<span class="pr">′</span>）：</p>
+    <div class="eq">Γ ≈ 1<span class="pr">′</span> / θ<sub>0</sub>　（θ<sub>0</sub> 用角分表示）</div>
     <p>Γ 过小 → 物镜分辨的细节人眼看不见（浪费口径）；Γ 过大 → <b>无效放大</b>（空放大），像变大但更模糊。</p>
     <span class="src">【原答】</span>
   </div>
@@ -634,14 +635,9 @@
 <div class="q" id="q036">
   <div class="hd"><span class="tag">2013-1(2)</span><span class="ttl">声光布拉格衍射，声频变化时衍射光怎么变</span></div>
   <div class="stem">一束入射光通过声光晶体后发生布拉格衍射，如果声波频率发生变化，衍射光将会怎样变化？</div>
-  <div class="ans">
-    <p>布拉格条件：</p>
-    <div class="eq">sin θ<sub>B</sub> = λ / (2λ<sub>s</sub>)，　λ<sub>s</sub> = v<sub>s</sub>/f<sub>s</sub></div>
-    <p>声频 f<sub>s</sub> 增大 → 声波波长 λ<sub>s</sub> 减小 → sin θ<sub>B</sub> 增大 → <b>布拉格角 θ<sub>B</sub> 增大</b>，0 级与 1 级谱线的夹角增大；同时衍射光频移量（= f<sub>s</sub>）也增大。</p>
-    <p>声频减小则结论相反。</p>
+  <div class="ans"><div class="eqb">sinθ<sub>B</sub> = λ/(2λ<sub>s</sub>)，　λ<sub>s</sub> = <i>v</i><sub>s</sub>/<i>f</i><sub>s</sub></div><p>声频 <i>f</i><sub>s</sub> ↑ → λ<sub>s</sub> ↓ → sinθ<sub>B</sub> ↑ → <b>θ<sub>B</sub> 变大</b>，0 级与 1 级夹角（≈2θ<sub>B</sub>）变大；</p><p>同时<b>频移 = ±<i>f</i><sub>s</sub></b>（0 级无频移），故频移也变大。声频减小则相反。</p><p style="margin-top:6px"><b>易错</b>：θ<sub>B</sub> 是与<b>声波波前</b>的夹角；频移只有一个 <i>f</i><sub>s</sub>，不是 2<i>f</i><sub>s</sub>。</p>
     <span class="src">【原答】</span>
-  </div>
-</div>
+  </div></div>
 
 <div class="q" id="q037">
   <div class="hd"><span class="tag">2018-1(4)</span><span class="ttl">什么是感应双折射？常见的有哪几种</span></div>
@@ -697,7 +693,7 @@
   <div class="ans">
     <p>不加电场时 P<sub>1</sub>、P<sub>2</sub> 正交，出射消光。要透射最强，须让 KDP 把光的振动面<b>旋转 90°</b>，使从 P<sub>1</sub> 出来的线偏振光变为与 P<sub>2</sub> 平行。</p>
     <p>条件（相位差为 π）：</p>
-    <div class="eqb">Δφ = <span class="frac"><span class="num">2π (<i>n</i><sub>e</sub>′ − <i>n</i><sub>o</sub>) <i>l</i></span><span class="den">λ</span></span> = π</div>
+    <div class="eqb">Δφ = <span class="frac"><span class="num">2π (<i>n</i><sub>e</sub><span class="pr">′</span> − <i>n</i><sub>o</sub>) <i>l</i></span><span class="den">λ</span></span> = π</div>
     <p>即所加电压为<b>半波电压</b> U<sub>λ/2</sub>，且 KDP 的感应主轴与 P<sub>1</sub> 透光轴成 <b>45°</b>（使两分量等幅）。</p>
     <p>此时 KDP 相当于一块<b>半波片</b>。</p>
     <span class="src">【教材】</span>
@@ -822,7 +818,7 @@
 
 <!-- ============ 七 ============ -->
 <h2 id="m7">七 · 几何光学基础<span class="sc">15 分</span><span class="cnt">4 问</span></h2>
-<div class="kbig"><div class="kh">答题必带关键词 · 几何光学基础</div><ul><li><b>符号规则</b>（光线方向为正）必须先声明</li><li>单球面折射 n′/l′−n/l=(n′−n)/r；薄透镜 1/l′−1/l=1/f′</li><li>理想成像、虚物/虚像的判定</li><li>视深 h′=h/n</li></ul></div>
+<div class="kbig"><div class="kh">答题必带关键词 · 几何光学基础</div><ul><li><b>符号规则</b>（光线方向为正）必须先声明</li><li>单球面折射 n<span class="pr">′</span>/l<span class="pr">′</span>−n/l=(n<span class="pr">′</span>−n)/r；薄透镜 1/l<span class="pr">′</span>−1/l=1/f<span class="pr">′</span></li><li>理想成像、虚物/虚像的判定</li><li>视深 h<span class="pr">′</span>=h/n</li></ul></div>
 <div class="lead">费马原理、光焦度、透镜正负的判定。应用光学部分的"基本概念"题集中在这里。</div>
 
 <div class="q" id="q049">
@@ -852,11 +848,11 @@
   <div class="stem">光焦度的概念，以及公式表示、与焦距的关系？</div>
   <div class="ans">
     <p><b>光焦度</b> Φ 表示光学系统对光线的会聚或发散本领，定义为</p>
-    <div class="eq">Φ = n′/f′ = −n/f　（空气中 Φ = 1/f′）</div>
+    <div class="eq">Φ = n<span class="pr">′</span>/f<span class="pr">′</span> = −n/f　（空气中 Φ = 1/f<span class="pr">′</span>）</div>
     <p>单位：<b>屈光度 D</b>（m<sup>−1</sup>）。</p>
     <ul>
-      <li>Φ &gt; 0：会聚系统（正透镜，f′ &gt; 0）；</li>
-      <li>Φ &lt; 0：发散系统（负透镜，f′ &lt; 0）。</li>
+      <li>Φ &gt; 0：会聚系统（正透镜，f<span class="pr">′</span> &gt; 0）；</li>
+      <li>Φ &lt; 0：发散系统（负透镜，f<span class="pr">′</span> &lt; 0）。</li>
     </ul>
     <p>与焦距<b>成反比</b>：焦距越短，光焦度越大。</p>
     <span class="src">【教材】</span>
@@ -879,7 +875,7 @@
 
 <!-- ============ 八 ============ -->
 <h2 id="m8">八 · 理想光学系统<span class="sc">15 分</span><span class="cnt">4 问</span></h2>
-<div class="kbig"><div class="kh">答题必带关键词 · 理想光学系统</div><ul><li>基点：焦点 F/F′、主点 H/H′、节点</li><li>高斯公式、光焦度 Φ=1/f′</li><li>组合焦距 f′=f₁′f₂′/(f₁′+f₂′−d)</li><li>主平面是<b>放大率 +1</b> 的共轭面（这句常是得分点）</li></ul></div>
+<div class="kbig"><div class="kh">答题必带关键词 · 理想光学系统</div><ul><li>基点：焦点 F/F<span class="pr">′</span>、主点 H/H<span class="pr">′</span>、节点</li><li>高斯公式、光焦度 Φ=1/f<span class="pr">′</span></li><li>组合焦距 f<span class="pr">′</span>=f₁<span class="pr">′</span>f₂<span class="pr">′</span>/(f₁<span class="pr">′</span>+f₂<span class="pr">′</span>−d)</li><li>主平面是<b>放大率 +1</b> 的共轭面（这句常是得分点）</li></ul></div>
 <div class="lead">这 4 问其实是<b>同一道题考了 4 次</b>（景深）。背熟一次即可拿满。</div>
 
 <div class="q" id="q053">
@@ -1003,7 +999,7 @@
 
 <!-- ============ 十 ============ -->
 <h2 id="m10">十 · 光学仪器与光度学<span class="sc">15 分</span><span class="cnt">7 问</span></h2>
-<div class="kbig"><div class="kh">答题必带关键词 · 光学仪器与光度学</div><ul><li>放大镜 Γ=250/f′；显微镜 Γ=β<sub>o</sub>Γ<sub>e</sub>；望远镜 Γ=f₁′/f₂′</li><li>分辨本领与有效放大率（<b>要写出所用判据</b>）</li><li>光度学四量：光通量、发光强度、光亮度、光照度（各自定义一句话）</li><li>景深与容许弥散圆</li></ul></div>
+<div class="kbig"><div class="kh">答题必带关键词 · 光学仪器与光度学</div><ul><li>放大镜 Γ=250/f<span class="pr">′</span>；显微镜 Γ=β<sub>o</sub>Γ<sub>e</sub>；望远镜 Γ=f₁<span class="pr">′</span>/f₂<span class="pr">′</span></li><li>分辨本领与有效放大率（<b>要写出所用判据</b>）</li><li>光度学四量：光通量、发光强度、光亮度、光照度（各自定义一句话）</li><li>景深与容许弥散圆</li></ul></div>
 <div class="lead">光度学定义式连考三年（2012/2013/2014），分辨本领的正确表达式也是高频。</div>
 
 <div class="q" id="q062">
@@ -1062,7 +1058,7 @@
   <div class="ans">
     <ul>
       <li><b>望远镜</b>：θ<sub>0</sub> = 1.22λ/<b>D</b>，由<b>物镜（入瞳）通光口径 D</b> 决定 —— 口径越大，分辨本领越高。</li>
-      <li><b>照相物镜</b>：δ = 1.22λ·<b>F</b>（F = f′/D 为光圈数），由<b>相对孔径 D/f′</b> 决定 —— 相对孔径越大（光圈开得越大、F 越小），分辨本领越高。</li>
+      <li><b>照相物镜</b>：δ = 1.22λ·<b>F</b>（F = f<span class="pr">′</span>/D 为光圈数），由<b>相对孔径 D/f<span class="pr">′</span></b> 决定 —— 相对孔径越大（光圈开得越大、F 越小），分辨本领越高。</li>
     </ul>
     <p>注意别写反：望远镜看<b>口径</b>，照相物镜看<b>相对孔径</b>。</p>
     <span class="src">【原答】</span>

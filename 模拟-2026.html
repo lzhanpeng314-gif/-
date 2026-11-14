@@ -84,6 +84,7 @@
     .q{page-break-inside:avoid;border-left:2px solid #999;}
     .fcard,.ans{box-shadow:none;}
   }
+  .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -226,7 +227,7 @@
     <div class="step"><b class="n">1</b><b>方案 A（首选，精度最高）：最小偏向角法（棱镜法）</b>
       <div class="eqb">把材料磨成顶角 <i>A</i> 的三棱镜，用单色平行光入射，转动棱镜找到<b>最小偏向角 δ<sub>min</sub></b></div>
       <div class="eqb"><i>n</i> = <span class="frac"><span class="num">sin[(<i>A</i> + δ<sub>min</sub>)/2]</span><span class="den">sin(<i>A</i>/2)</span></span></div>
-      <p style="margin:4px 0 0">要点：最小偏向角时入射光与出射光对称（i<sub>1</sub> = i<sub>2</sub>′），读数最灵敏；精度可达 10<sup>−5</sup> 量级。测 n(λ) 时换不同波长的单色光即得色散曲线。</p>
+      <p style="margin:4px 0 0">要点：最小偏向角时入射光与出射光对称（i<sub>1</sub> = i<sub>2</sub><span class="pr">′</span>），读数最灵敏；精度可达 10<sup>−5</sup> 量级。测 n(λ) 时换不同波长的单色光即得色散曲线。</p>
     </div>
     <div class="step"><b class="n">2</b><b>方案 B（最快，适合平板/液体）：布儒斯特角法</b>
       <div class="eqb">测 p 分量反射光<b>消光</b>时的入射角 <i>i</i><sub>B</sub>　⇒　<i>n</i> = tan<i>i</i><sub>B</sub></div>
@@ -256,7 +257,7 @@
       <div class="eqb">③ 这些圆的<b>圆心沿一条直线依次偏移</b>（偏移量 ∝ h<sup>2</sup>），叠加起来就成了彗星状</div>
     </div>
     <div class="step"><b class="n">3</b><b>特征与规律</b>（考点密集）：
-      <div class="eqb">δ<i>y</i>′ ∝ <i>y</i>·<i>h</i><sup>2</sup>（<b>与视场一次方、孔径平方成正比</b>）</div>
+      <div class="eqb">δ<i>y</i><span class="pr">′</span> ∝ <i>y</i>·<i>h</i><sup>2</sup>（<b>与视场一次方、孔径平方成正比</b>）</div>
       <p style="margin:4px 0 0">—— 与球差（∝h²，轴上就有）不同，<b>彗差只在轴外出现</b>，且随视场线性增大；<b>对光阑位置极敏感</b>：移动光阑可使彗差为零（该位置称<b>不晕点/齐明点</b>），这也是"光阑放在透镜上"能消彗差的原因。</p>
     </div>
     <div class="step"><b class="n">4</b><b>与其它像差区分</b>：球差（轴上、圆对称光斑）／彗差（轴外、彗星状）／像散（轴外、子午与弧矢焦距不同，成两条焦线）／场曲（像面弯曲）／畸变（清晰但变形，无弥散斑）。
@@ -271,11 +272,11 @@
   <div class="stem">（回忆原文）<b>画图和课本例图差不多</b><br>
     <span style="color:#6d6d6d;font-size:13px">—— 回忆者没有记下画的是什么图（可能是一次/二次反射棱镜光路、虚物/虚像作图、或节点/焦点作图之一）。</span></div>
   <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
-    <div class="step"><b class="n">1</b><b>题面缺失，无法复原</b>。2026 这一题的具体图形、给点（F/H/H′/F′ 的排列）、要求（求像/求节点/画棱镜光路）全都没有记录。
+    <div class="step"><b class="n">1</b><b>题面缺失，无法复原</b>。2026 这一题的具体图形、给点（F/H/H<span class="pr">′</span>/F<span class="pr">′</span> 的排列）、要求（求像/求节点/画棱镜光路）全都没有记录。
     </div>
     <div class="step"><b class="n">2</b><b>应对策略</b>（按 2025 与往年规律押）：851 的应光作图题近年只考四类，把这四类的画法练熟即可覆盖：
       <div class="eqb">① 轴上虚物/实物点的像（两条特殊光线 + 主平面等高过渡）</div>
-      <div class="eqb">② 节点 J、J′（n = n′ 时与 H、H′ 重合，γ = 1）</div>
+      <div class="eqb">② 节点 J、J<span class="pr">′</span>（n = n<span class="pr">′</span> 时与 H、H<span class="pr">′</span> 重合，γ = 1）</div>
       <div class="eqb">③ 一次/二次反射棱镜光路（折转 90° / 180°，奇数次反射成镜像）</div>
       <div class="eqb">④ 光阑、入瞳/出瞳、窗的判定与光路</div>
     </div>
@@ -285,7 +286,7 @@
 </div>
 
 </div></div><div class="score" id="sc">得分 <b>0</b>/0</div><script>
-var KEY = "g851-mock-" + "2026", N = 8, MAX = 40;
+var KEY = "g851-mock2-" + "2026", N = 8, MAX = 40;
 var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
 function paint(){
@@ -294,7 +295,7 @@ function paint(){
     var w = q.parentNode, id = w.id, parts = w.getAttribute("data-parts");
     if (!parts) return;
     var ms = parts.split("|").map(parseFloat), rec = st[id];
-    if (!rec) return;
+    if (!rec || typeof rec !== "object") return;
     var cnt = 0;
     for (var i = 0; i < ms.length; i++) {
       if (rec[i] !== undefined) { got += ms[i] * rec[i]; cnt++; }
@@ -310,14 +311,14 @@ function paint(){
 }
 function mark(btn, f){
   var q = btn.closest(".q"), w = q.parentNode, id = w.id, p = btn.getAttribute("data-p");
-  if (!st[id]) st[id] = {};
+  if (typeof st[id] !== "object" || st[id] === null) st[id] = {};
   st[id][p] = f; save();
   q.querySelectorAll('.sb[data-p="' + p + '"]').forEach(function(b){ b.classList.remove("sel"); });
   btn.classList.add("sel"); paint();
 }
 document.querySelectorAll(".q").forEach(function(q){
   var w = q.parentNode, id = w.id, rec = st[id];
-  if (!rec) return;
+  if (!rec || typeof rec !== "object") return;
   q.querySelectorAll(".sb").forEach(function(b){
     var v = rec[b.getAttribute("data-p")];
     if (v !== undefined && parseFloat(v) === parseFloat(b.getAttribute("data-f"))) b.classList.add("sel");

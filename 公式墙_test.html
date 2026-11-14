@@ -1,0 +1,941 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公式墙 · 851 · 851 计算题 · 第三章 光的衍射</title>
+<style>
+  :root{--bg:#fbfaf7;--ink:#1b1b1b;--mut:#6d6d6d;--line:#e3dfd7;--acc:#8c4a2f;--hl:#fff3c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.85 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px;}
+  header.top{padding:36px 0 16px;border-bottom:2px solid var(--ink);}
+  h1{font-size:24px;margin:0 0 8px;letter-spacing:.5px;}
+  .sub{color:var(--mut);font-size:13.5px;line-height:1.7;}
+  .lg{margin-top:10px;font-size:12.5px;color:var(--mut);}
+  .lg b{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:9;background:rgba(251,250,247,.97);
+      border-bottom:1px solid var(--line);padding:9px 0;backdrop-filter:blur(8px);}
+  nav a{display:inline-block;margin:3px 12px 3px 0;font-size:13.5px;color:var(--acc);
+        text-decoration:none;border-bottom:1px dotted rgba(140,74,47,.5);}
+  nav a:hover{background:var(--hl);}
+  h2{font-size:18px;margin:44px 0 2px;padding-top:10px;border-top:1px solid var(--line);}
+  h2 .cnt{font-size:12.5px;color:var(--mut);font-weight:400;margin-left:10px;}
+  .lead{font-size:13px;color:var(--mut);margin:2px 0 16px;}
+  .q{padding:15px 0 15px 17px;border-left:3px solid var(--line);}
+  .q:hover{border-left-color:var(--acc);}
+  .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .tag{font-size:12px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums;}
+  .ttl{font-weight:600;font-size:15.5px;}
+  .hot{font-size:11px;background:#fde2d3;color:#8c4a2f;border-radius:8px;padding:1px 7px;font-weight:600;}
+  .stem{margin:7px 0 9px;font-size:15px;}
+  .ans{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px 16px;font-size:14.7px;}
+  .step{margin:0 0 8px;padding-left:26px;position:relative;}
+  .step b.n{position:absolute;left:0;top:0;width:19px;height:19px;line-height:19px;text-align:center;
+            background:var(--acc);color:#fff;border-radius:50%;font-size:11.5px;font-weight:600;}
+  .eq{text-align:center;font-family:"Cambria Math",Cambria,Georgia,serif;margin:7px 0;font-size:15px;}
+  .frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 .2em;}
+  .frac .num{display:block;padding:0 .34em .1em;border-bottom:1.3px solid currentColor;line-height:1.26;}
+  .frac .den{display:block;padding:.08em .34em 0;line-height:1.38;}
+  .bkt{border-left:1.6px solid currentColor;border-right:1.6px solid currentColor;padding:0 .22em;}
+  .eqb{display:block;text-align:center;line-height:2.7;margin:9px 0;
+       font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.14em;}
+  .eqb sup{font-size:.72em;vertical-align:.42em;line-height:0;}
+  .eqb sub{font-size:.72em;vertical-align:-.28em;}
+  .eqb i{font-style:italic;}
+  .fbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px 11px;}
+  .fname{font-size:12px;color:var(--acc);font-weight:700;letter-spacing:.4px;margin-bottom:2px;}
+  .fml{text-align:center;line-height:2.6;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .fnote{font-size:12.5px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;line-height:1.55;}
+  .res{background:#f6f2e9;border-left:3px solid var(--acc);padding:7px 12px;margin:9px 0 4px;
+       border-radius:0 4px 4px 0;font-weight:600;}
+  .src{display:block;font-size:11.5px;color:var(--mut);margin-top:9px;
+       border-top:1px dashed var(--line);padding-top:6px;}
+  .warn{background:#fff7ed;border-left:3px solid #d97706;padding:8px 12px;font-size:13.5px;
+        margin:9px 0;border-radius:0 4px 4px 0;}
+  table.g{width:100%;border-collapse:collapse;font-size:13.6px;margin:8px 0;}
+  table.g th,table.g td{border-bottom:1px solid var(--line);padding:5px 7px;text-align:center;}
+  table.g th{background:#f6f2e9;font-weight:600;}
+  .mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+      color:var(--mut);cursor:pointer;user-select:none;}
+  .mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+  .q.done{opacity:.45;}
+  .q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+  .bar{position:sticky;top:44px;z-index:8;background:rgba(251,250,247,.97);
+       padding:7px 0;font-size:13px;color:var(--mut);display:flex;gap:12px;align-items:center;
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .bar button{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);
+              border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .bar button.on{background:var(--acc);color:#fff;border-color:var(--acc);}
+  body.onlytodo .q.done{display:none;}
+  .btnbar{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;gap:8px;}
+  .btnbar button{border:0;border-radius:20px;padding:9px 15px;font-size:13px;cursor:pointer;
+                 background:var(--acc);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .btnbar button.alt{background:#fff;color:var(--acc);border:1px solid var(--acc);}
+  body.hide .ans{display:none;}
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6;}
+    nav,.btnbar,.bar{display:none;}
+    .wrap{max-width:100%;padding:0;}
+    body.hide .ans{display:block !important;}
+    h2{page-break-after:avoid;}
+    .q{page-break-inside:avoid;border-left:2px solid #999;}
+    .fcard,.ans{box-shadow:none;}
+  }
+  .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8c4a2f">
+</head><style>
+ .wallch{margin:30px 0 10px;padding:6px 12px;background:#6d3a24;color:#fff;border-radius:6px;font-size:17px}
+ .wallsec{margin:18px 0 8px;padding-bottom:4px;border-bottom:2px solid #e3dfd7;font-size:14.5px;color:#6d3a24}
+ .fitem{margin:12px 0;padding:10px 12px;background:#fbf9f6;border-left:3px solid #d8cbbb;border-radius:4px}
+ .fttl{font-weight:700;font-size:13.5px;color:#4a3a2a}
+ .fsym{font-size:12.5px;color:#5a5a5a;margin-top:4px;line-height:1.7}
+ .fcond{font-size:12px;color:#8a6a50;margin-top:2px}
+</style><body><div class="wrap"><h1>公式墙</h1>
+<div class="sub">按教材《物理光学与应用光学（第3版）》章节整理 · 符号照录教材 · 标注书页</div>
+<p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a></p>
+<h2 class="wallch">第 1 章 光在各向同性介质中的传播特性（书页 1–12）</h2>
+<h3 class="wallsec">1.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">1）麦克斯韦方程组（书 p2）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：**E** 电场强度矢量（V/m）；**H** 磁场强度矢量（A/m）；**D** 电位移矢量（C/m²）；**B** 磁感应强度（磁感应强度矢量）（T）；∇· 散度，∇× 旋度；t 时间（s）</div>
+<div class="fcond">条件：：光波在**无穷大、均匀、各向同性**介质中传播，且所讨论的光波区域**远离辐射源、不存在自由电荷（ρ）和传导电流（J）**</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）物质方程（本构方程）（书 p2）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：ε = ε₀ε_r 介质的**介电常数**（F/m），ε₀ 真空中的介电常数，ε_r **相对介电常数**；μ = μ₀μ_r 介质的**磁导率**（H/m），μ₀ 真空中的磁导率，μ_r **相对磁导率**；σ **电导率**（S/m）；J 传导电流密度（A/m²）</div>
+<div class="fcond">条件：：各向同性介质。均匀时 ε 为常数；非均匀时 ε 是空间位置的函数 ε(r)（第 6 章讨论）；各向异性时 ε 是张量，此时 D 与 E 方向不同（第 4 章讨论）</div>
+</div>
+<div class="fitem">
+<div class="fttl">3）波动方程（书 p2）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：∇² 拉普拉斯算符；其余同上</div>
+<div class="fcond">条件：：由麦克斯韦方程组 + 物质方程导出，适用于各向同性介质。教材强调：凡能在介质中传播的电磁波一定满足该方程，反之不满足该方程的光波场一定不存在</div>
+</div>
+<div class="fitem">
+<div class="fttl">4）光波（书 p2–p3）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：c 真空中光速；v 光波在介质中的传播速度（**相速度**，方向为光波的波矢方向）；n 光波在该介质中的**折射率**</div>
+<div class="fcond">条件：：真空光速式为定义式；v = c/n 对均匀各向同性介质成立；n = √(ε_r) 仅适用于磁性很弱的非铁磁介质</div>
+</div>
+<div class="fitem">
+<div class="fttl">5）光矢量（书 p3）</div>
+<div class="eqb">无（概念条目）</div>
+</div>
+<div class="fitem">
+<div class="fttl">6）特殊光波（书 p3–p4）</div>
+<div class="eqb"></div>
+<div class="eqb"><i>E</i> = (<i>A</i>₁/r)·e<sup>−<i>i</i>(ω<i>t</i> − kr + φ₀)<span class="frac"><span class="num"><</span><span class="den">sup></span></span> = Ẽ e<sup>−<i>i</i>ω<span class="frac"><span class="num">t<</span><span class="den">sup></span></span></div>
+<div class="eqb"><i>E</i> = (<i>A</i>₁/√<i>r</i>)·e<sup>−<i>i</i>(ω<i>t</i> − kr + φ₀)<span class="frac"><span class="num"><</span><span class="den">sup></span></span> = Ẽ e<sup>−<i>i</i>ω<span class="frac"><span class="num">t<</span><span class="den">sup></span></span></div>
+<div class="eqb"></div>
+<div class="fsym">符号：：E₀ 常数（振幅常数）；r 横向矢径（√(x²+y²)）；w(z) 与传播轴线相交于 z 点的高斯光束**等相位面上的光斑半径**；w₀ = w(z=0) **基模高斯光束的束腰半径**；f 高斯光束的**共焦参数（瑞利长度）**；R(z) 与传播轴线相交于 z 点的高斯光束**等相位面的曲率半径**；k 波矢大小</div>
+<div class="fcond">条件：：基模（TEM₀₀）高斯光束，以 z 轴为柱对称，大体朝 z 轴方向传播；是波动方程的一种特解</div>
+</div>
+<div class="fitem">
+<div class="fttl">7）光波的能量密度、能流密度（书 p4–p5）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：w 光波**能量密度**（J/m³）；S 光波**能流密度**（坡印廷矢量）（W/m²），方向为能量传播方向，大小为垂直于传播方向上单位面积、单位时间内通过的能量；⟨S⟩ 能流密度的时间平均值，即**光强 I**（W/m²）；α 比例系数；E₀ 电场强度振幅；D*、B*、H* 复矢量的**共轭复量**（注意复坡印廷矢量中为 E × H*）；Re 取实部</div>
+<div class="fcond">条件：：S = E × H 为瞬时值式；⟨w⟩、⟨S⟩、S=½E×H* 为**单色平面光波采用复数形式表示**时的时间平均值式；相对光强式在同一介质中只关心相对值时省略比例系数</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）平面光波的横波特性（书 p5）</div>
+<div class="eqb">无独立公式</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）平面光波的偏振特性（书 p5–p6）</div>
+<div class="eqb"></div>
+<div class="eqb"></div>
+<div class="eqb">(<span class="frac"><span class="num">E<sub>x</sub></span><span class="den">E</span></span>₀<i>x</i>)² + (<span class="frac"><span class="num">E<sub>y</sub></span><span class="den">E</span></span>₀<i>y</i>)² − 2(<span class="frac"><span class="num">E<sub>x</sub></span><span class="den">E</span></span>₀<i>x</i>)(<span class="frac"><span class="num">E<sub>y</sub></span><span class="den">E</span></span>₀<i>y</i>)·cosφ = sin²φ，　其中 φ = φ<span class="frac"><span class="num"><sub>y<</span><span class="den">sub></span></span> − φ<span class="frac"><span class="num"><sub>x<</span><span class="den">sub></span></span></div>
+<div class="eqb"></div>
+<div class="eqb"></div>
+<div class="fsym">符号：：P **偏振度**，表示在部分偏振光的总强度中完全偏振光所占的比例；I_L 完全偏振光的光强；I_总 部分偏振光的总强度（书中小标为汉字"总"）；I_M、I_m 分别为两个特殊（正交）方向上所对应的**最大和最小光强**</div>
+<div class="fcond">条件：：上述偏振态结论是针对**本书所采用的 E = E₀e^{−i(ωt − k·r + φ₀)} 光场表示式**及**逆光传播方向判别左右旋向**的规定得到的；若采用 E = E₀e^{i(ωt − k·r + φ₀)}，处理方法相同但结论可能相反</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）时域频谱（书 p7–p8）</div>
+<div class="eqb"></div>
+<div class="eqb"><i>E</i>(<i>t</i>) = <i>E</i>₀(<i>t</i>)·e<sup>−<i>i</i>2πν₀<span class="frac"><span class="num">t<</span><span class="den">sup></span></span></div>
+<div class="eqb"></div>
+<div class="fsym">符号：：A 振幅；t₀ 振幅最大的时刻；Δt 表征该准单色波**持续振荡的有效时间**（当 |t − t₀| = Δt/2 时振幅降为 A/e）；ν₂、ν₁ 最大强度 1/e 处对应的两个频率；Δν 频谱宽度</div>
+<div class="fcond">条件：：实际光源均为包含许多频率分量的复色光波，其频率分量愈少愈接近单色光波；若振幅随时间的变化比振荡本身缓慢得多，则频率分量集中在 ν₀ 附近很窄的频谱宽度 Δν 内，可认为是中心频率为 ν₀ 的准单色光波</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）空域频谱（书 p8–p9）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：α、β、γ **方向余弦**（波矢 k 分别与 x、y、z 轴的夹角余弦）；f_x、f_y、f_z **空间频率**（沿任一方向单位距离内所包含的空间周期数，m⁻¹）；Ẽ(f_x, f_y) **空间频谱（角谱）**；Ẽ_z 在 z 面上的复振幅分布</div>
+<div class="fcond">条件：：单色平面光波场；式 E = E₀e^{−i(ωt−k·r+φ₀)} 为本书所采用的表示式</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）单色光波的速度</div>
+<div class="fsym">符号：：v **相速度**（也表示为 v_p），单色光波所特有，指等相位面的传播速度；k₀ 波矢方向的单位矢量（书中为黑斜体矢量）；k = |k|；n 表征光在介质中传播快慢特性的介质折射率，通常它是光频率的函数 n(ω)，称为**色散特性**</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）复色光波的群速度（书 p9–p10）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：v_g **群速度**，表征复色光波**振幅面（包络）**的传播速度，也称包络速度；v 相速度；λ 波长；n 折射率</div>
+<div class="fcond">条件：：只对**复色光**而言，且要求该复色光的频谱宽度 Δν 很窄、介质的色散很小，此时群速度才有意义，它表征光波能量的传播速度。在无色散介质（dn/dλ = 0）中，复色光波的群速度等于相速度</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）反射定律和折射定律（书 p10）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：n_i 入射介质折射率；n_r 反射介质（即入射侧介质）折射率；n_t 折射（透射）介质折射率；θ_i **入射角**；θ_r **反射角**；θ_t **折射角**（均为光波传播方向与界面法线的夹角）</div>
+<div class="fcond">条件：：二介质均匀、透明、各向同性，分界面为无穷大的平面；光由一种介质入射到另一种介质</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）反射系数和透射系数（书 p10）</div>
+<div class="fsym">符号：：n₁ 入射介质折射率；n₂ 折射介质折射率；θ₁ **入射角**；θ₂ **折射角**；其余同定义式</div>
+<div class="fcond">条件：：均匀、透明、各向同性介质的分界面上，两介质磁导率近似相同（教材未显式声明，但公式按非磁性介质给出）</div>
+</div>
+<div class="fitem">
+<div class="fttl">3）反射率和透射率（书 p10–p11）</div>
+<div class="eqb"></div>
+<div class="eqb"></div>
+<div class="fsym">符号：：同前</div>
+<div class="fcond">条件：：与 2）菲涅耳公式相同</div>
+</div>
+<div class="fitem">
+<div class="fttl">4）自然光入射时反射光和折射光的偏振度（书 p11）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：P_r 反射光的偏振度；P_t 折射光的偏振度；I_rp、I_rs 反射光 p、s 分量光强；I_tp、I_ts 折射光 p、s 分量光强；R_p、R_s、T_p、T_s 同前</div>
+</div>
+<div class="fitem">
+<div class="fttl">5）布儒斯特角（书 p11）</div>
+<div class="eqb">θ<span class="frac"><span class="num"><sub>B<</span><span class="den">sub></span></span> = arctan(<i>n</i>₂/n₁)</div>
+<div class="fsym">符号：：θ_B **布儒斯特角**，定义为在介质界面上相应于 **p 分量反射系数 r_p 为零**的入射角 θ₁</div>
+<div class="fcond">条件：：光由 n₁ 介质入射到 n₂ 介质界面</div>
+</div>
+<div class="fitem">
+<div class="fttl">6）半波损失（书 p11）</div>
+<div class="eqb">无独立公式（相位跃变 π 的定性结论）</div>
+</div>
+<div class="fitem">
+<div class="fttl">7）全反射（书 p11–p12）</div>
+<div class="eqb">sinθ<span class="frac"><span class="num"><sub>c<</span><span class="den">sub></span></span> = <i>n</i>₂/n₁</div>
+<div class="eqb">Δφ = φ<span class="frac"><span class="num"><sub>r<</span><span class="den">sub>s</span></span> − φ<span class="frac"><span class="num"><sub>r<</span><span class="den">sub>p</span></span> = 2·arctan[ cosθ₁·√(sin²θ₁ − <i>n</i>²) / sin²θ₁ ]</div>
+<div class="eqb"><span class="frac"><span class="num">E<sub>t<</span><span class="den">sub></span></span> = <span class="frac"><span class="num">E<sub>0t<</span><span class="den">sub></span></span>·e<sup>−<span class="frac"><span class="num">k<sub>t<</span><span class="den">sub></span></span>·<i>z</i>·√(sin²θ₁ − <i>n</i>²)<span class="frac"><span class="num">/n<</span><span class="den">sup></span></span>·e<sup>−<i>i</i>(ω<i>t</i> − <span class="frac"><span class="num">k<sub>t<</span><span class="den">sub></span></span>·<i>x</i>·sinθ₁/n)<span class="frac"><span class="num"><</span><span class="den">sup></span></span></div>
+<div class="fsym">符号：：E_t 透射（第二介质中）光场；E_{0t} 透射光振幅；k_t 透射光波矢（下标 t 表示 transmitted，书中印刷较小）；z 沿界面法线方向的坐标；x 沿界面方向的坐标；n = n₂/n₁；θ₁ 入射角</div>
+<div class="fcond">条件：：光由光密介质射向光疏介质发生全反射时，第二个介质中存在衰逝波</div>
+</div>
+<div class="fitem">
+<div class="fttl">8）光在金属中的传播（书 p12）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：α 复介电常数因子（无量纲）；σ 电导率；ε 介电常数；ω 圆频率；k̃ **复波数**；k₀ 波矢单位矢量；n′ 光在金属中传播时的**折射率**；n″ 描述光在金属中传播时**衰减特性**的量；二者都是光频率 ω 的函数</div>
+<div class="fcond">条件：：金属，其电导率 σ ≠ 0（与各向同性介质的主要差别），因电导率与焦耳热损耗有关，导致光在金属中传播时产生损耗衰减，以致几乎不透明</div>
+</div>
+<div class="fitem">
+<div class="fttl">9）左手材料的负折射现象（书 p12）</div>
+<div class="eqb">无（定性结论，教材仅给出 <i>S</i> = <i>E</i> × <i>H</i> 的说明）</div>
+</div>
+<h2 class="wallch">第 2 章 光的干涉（书页 30–38）</h2>
+<h3 class="wallsec">2.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">1）两束光波的相干叠加（书 p31）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：E₀₁、E₀₂ 二光束振幅；ω₁、ω₂ 二光束圆频率；k₁、k₂ 二光束波矢；φ₀₁、φ₀₂ 二光束初相位；I₁、I₂ 二光束光强；I₁₂ 干涉交叉项（**干涉项**）；θ 两光束在相遇点**振动方向间的夹角**；φ 二光束在该点的**相位差**</div>
+<div class="fcond">条件：：两列**单色平面线偏振光**在空间某点相遇</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）光波的干涉（书 p31）</div>
+<div class="fsym">符号：：I_M **干涉光强极大值**；I_m **干涉光强极小值**；I₀ 单束光强；θ 振动方向夹角（同上）</div>
+</div>
+<div class="fitem">
+<div class="fttl">3）干涉条纹可见度（对比度）（书 p32）</div>
+<div class="eqb"><i>V</i> ≝ (<span class="frac"><span class="num">I<sub>M<</span><span class="den">sub></span></span> − <span class="frac"><span class="num">I<sub>m<</span><span class="den">sub></span></span>)/(<span class="frac"><span class="num">I<sub>M<</span><span class="den">sub></span></span> + <span class="frac"><span class="num">I<sub>m<</span><span class="den">sub></span></span>)</div>
+<div class="fsym">符号：：V **干涉条纹可见度**（定义为…，书中用 ≝ 定义号）；I_M、I_m 干涉光强的极大值与极小值</div>
+</div>
+<div class="fitem">
+<div class="fttl">4）实现光束干涉的基本方法（书 p32）</div>
+<div class="eqb">无</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）分波面法双光束干涉</div>
+<div class="eqb"></div>
+<div class="eqb">无（定性）</div>
+<div class="fsym">符号：：I₀ 单缝光强；φ 二光束在观察点 P 处的相位差；Δ 光程差；R₁、R₂ 由光源 S 到二缝 S₁、S₂ 的距离；r₁、r₂ 由二缝到观察点的距离；ΔR = R₂ − R₁ 初始光程差（S 到 S₁、S₂ 距离差）；Δr = r₂ − r₁；y 观察屏上的坐标（条纹位置）；d 双缝间距；D 双缝到观察屏的距离；ε **条纹间距**（相邻两亮/暗条纹间的距离）；ω **光束会聚角**，ω = d/D；m 条纹级数</div>
+<div class="fcond">条件：：d ≪ D，且在观察屏 y 很小的范围内；S 可视为点源或线源 → 杨氏干涉为**非定域干涉**</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）分振幅双光束干涉</div>
+<div class="eqb"></div>
+<div class="eqb"></div>
+<div class="eqb"></div>
+<div class="fsym">符号：：Δ 反射光光程差；h 空气层厚度；r_N 第 N 个暗环半径；N 环序号；R 平凸透镜**曲率半径**；λ 波长</div>
+<div class="fcond">条件：：半径很大的平凸透镜与玻璃平板之间的**薄空气层**形成的同心圆环形等厚干涉条纹；光垂直照射平凸透镜</div>
+</div>
+<div class="fitem">
+<div class="fttl">（1）爱里公式（书 p35）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：I_r 反射光强；I_t 透射光强；I_i 入射光强；φ 相邻两反射光（透射光）之间的**相位差**；n 平板折射率；h 平板厚度；θ 光束**入射角**（书中写作 cosθ）；R 平板表面**反射率**；F **条纹精细度系数**</div>
+<div class="fcond">条件：：平行平板表面反射率较高（必须考虑板内光波多次反射和折射）；表面反射率越大（表面透射率越小），参与相干叠加的光束数目越多，多光束干涉效应越明显；当表面反射率较小时可近似为双光束干涉</div>
+</div>
+<div class="fitem">
+<div class="fttl">（2）多光束干涉图样的特点（书 p35）</div>
+<div class="fsym">符号：：ε **干涉条纹锐度**；N **干涉条纹的条纹精细度**；F 精细度系数；R 反射率</div>
+</div>
+<div class="fitem">
+<div class="fttl">（1）单层膜（书 p35–p36）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：R 单层膜系统**反射率**；E_{0r} 反射光复振幅；E_{0i} 入射光复振幅；r₁、r₂ 分别为第一（n₀/n₁）和第二（n₁/n₂）界面的**反射系数**；φ 薄膜反射相邻两光束在干涉处的相位差；n₀ 入射侧（基底外）介质折射率；n₁ **薄膜折射率**；n₂ **基片折射率**；h 薄膜厚度；λ₀ **中心（参考）波长**</div>
+<div class="fcond">条件：：单层透明介质薄膜镀在透明平整玻璃基片或金属光滑表面上；"光束正入射"时的反射率式；若把式中的折射率 n 以有效折射率 n̄ 替代（n̄ 对 s 分量为 n·cosθ，对 p 分量为 n/cosθ），则公式在形式上适用于斜入射</div>
+</div>
+<div class="fitem">
+<div class="fttl">（2）多层高反射膜（书 p36）</div>
+<div class="eqb">R<sub>2<i>p</i>+<span class="frac"><span class="num">1<</span><span class="den">sub></span></span> = [ (<i>n</i>₀ − (<span class="frac"><span class="num">n<sub>H</sub>/n<sub>L<</span><span class="den">sub></span></span>)<span class="frac"><span class="num"><sup>2p<</span><span class="den">sup></span></span>·(<span class="frac"><span class="num">n<sub>H<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/n<sub>G<</span><span class="den">sub></span></span>)) / (<i>n</i>₀ + (<span class="frac"><span class="num">n<sub>H</sub>/n<sub>L<</span><span class="den">sub></span></span>)<span class="frac"><span class="num"><sup>2p<</span><span class="den">sup></span></span>·(<span class="frac"><span class="num">n<sub>H<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/n<sub>G<</span><span class="den">sub></span></span>)) ]²</div>
+<div class="fsym">符号：：R_{2p+1} 奇数层（2p+1 层）λ₀/4 膜系对波长 λ₀ 光束的**反射率**；n₀ 入射介质折射率；n_H **高折射率**介质；n_L **低折射率**介质；n_G **基片（玻璃）折射率**；p 层对数（膜系由基片交替镀制高、低折射率介质的奇数层膜构成，每层光学厚度可以是 λ₀/4 或非 λ₀/4）</div>
+<div class="fcond">条件：：由基片交替镀制高折射率和低折射率介质的**奇数层膜系**；光束**正入射**、各层光学厚度均为 **λ₀/4** 的膜系</div>
+</div>
+<div class="fitem">
+<div class="fttl">（3）薄膜波导（书 p36）</div>
+<div class="eqb">2<i>k</i>₀nh·cosθ₁ + φ₁ + φ₂ = 2<i>m</i>π，　<i>m</i> = 0, 1, 2, …</div>
+<div class="fsym">符号：：k₀ 真空（自由空间）波数；n 薄膜折射率；h 薄膜厚度；θ₁ 光在波导界面上的**入射角**；φ₁、φ₂ 两个波导界面上的**全反射相位**；m 模序数</div>
+<div class="fcond">条件：：光在薄膜波导中传输的必要条件是光在波导界面上的**全反射**，其充分条件即该**模式方程**；这是集成光学中的基础元件</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）迈克尔逊干涉仪（书 p36–p37）</div>
+<div class="eqb"><i>L</i> = <i>N</i>·(λ/2)</div>
+<div class="fsym">符号：：L 反射镜 M₁ 的平移量；N 干涉条纹移过的数目；λ 波长</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）光源特性对干涉条纹可见度的影响（书 p38）</div>
+<div class="eqb"></div>
+<div class="eqb"></div>
+<div class="fsym">符号：：V **条纹可见度**；Δk **波数宽度**（光谱宽度对应的波数范围）；Δ **光程差**；λ 波长；Δλ **光谱宽度（波长宽度）**</div>
+<div class="fcond">条件：：教材第 65 页图 2-7 所示的平行平板干涉实验；相当于单色光源时 V = 1</div>
+</div>
+<div class="fitem">
+<div class="fttl">2）光波的相干性（书 p38）</div>
+<div class="eqb"></div>
+<div class="fsym">符号：：d_c **横向相干宽度**（距离 S₁S₂ 为横向相干宽度的两点光场可发生干涉）；θ **扩展光源对 S₁S₂ 连线中点的张角**；λ 波长；A_c **相干面积**</div>
+<div class="fcond">条件：：教材第 106 页图 2-59 所示的扩展光源杨氏干涉实验及"条纹可见度表示式"；相应于**临界张角 β_c = λ/b** 时条纹可见度 V = 0。凡是 S₁S₂ 所对应横向宽度以内的任意两点光场，均可发生干涉，表明它们空间相关、具有空间相干性</div>
+</div>
+<h2 class="wallch">录入情况说明</h2>
+<h2 class="wallch">第 3 章 光的衍射（书页 66–78）</h2>
+<h3 class="wallsec">3.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">2. 基尔霍夫积分定理（书 p67）</div>
+<div class="eqb">Ẽ(<i>P</i>) = (<span class="frac"><span class="num">1</span><span class="den">4</span></span>π) ∬_Σ [ (∂Ẽ/∂<i>n</i>)·(<span class="frac"><span class="num">e<sup>ikr</sup></span><span class="den">r</span></span>) − Ẽ·(∂/∂<i>n</i>)(<span class="frac"><span class="num">e<sup>ikr</sup></span><span class="den">r</span></span>) ] <i>d</i>σ</div>
+<div class="fsym">符号：：Ẽ(P) 空间 P 点的光场复振幅；Σ 包围 P 点的任一闭合曲面；n 曲面 Σ 的外法线方向；r 由 Σ 上考察点到 P 点的距离；k = 2π/λ 波数；dσ 曲面 Σ 上的面积元。</div>
+<div class="fcond">条件：：基尔霍夫由电磁场理论引入；把 P 点光场与闭合面 Σ 上的光场联系起来（标量衍射理论框架）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">3. 基尔霍夫衍射公式（书 p67）</div>
+<div class="eqb">Ẽ(<i>P</i>) = −(<i>i</i>/λ) ∬_Σ Ẽ(<i>l</i>)·(<span class="frac"><span class="num">e<sup>ikr</sup></span><span class="den">r</span></span>)·[ (cos(<i>n</i>,<i>r</i>) − cos(<i>n</i>,<i>l</i>)) / 2 ] <i>d</i>σ</div>
+<div class="fsym">符号：：Ẽ(l) 衍射孔径面 Σ 上的光场复振幅（l 为 Σ 上点的位置）；r 由 Σ 上场点到 P 点的距离；n 孔径面法线；[cos(n,r) − cos(n,l)]/2 为**倾斜因子**（方向因子）。</div>
+<div class="fcond">条件：：λ &lt; δ ≪ Min(r, l)，其中 δ 为孔径线度；对应教材（正文）第 134 页图 3-5 的孔径衍射。</div>
+</div>
+<div class="fitem">
+<div class="fttl">4. 傍轴（近轴）近似（书 p67）</div>
+<div class="eqb">Ẽ(<i>P</i>) = −(<span class="frac"><span class="num">i</span><span class="den">λz<sub>1</sub></span></span>) ∬_Σ Ẽ(<i>Q</i>) <span class="frac"><span class="num">e<sup>ikr<</span><span class="den">sup></span></span> <i>d</i>σ</div>
+<div class="fsym">符号：：z_1 观察屏到衍射孔径的距离；Q 孔径面上的场点；Ẽ(Q) 孔径面上的复振幅。</div>
+<div class="fcond">条件：：傍轴近似——考虑衍射孔径的线度，观察屏上的考察范围比观察屏到孔径的距离小得多（此时倾斜因子取 1，r ≈ z_1）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">5. 菲涅耳近似与菲涅耳衍射公式（书 p67）</div>
+<div class="eqb">Ẽ(<i>x</i>, <i>y</i>) = −(<span class="frac"><span class="num">i</span><span class="den">λz<sub>1</sub></span></span>) ∬_Σ Ẽ(<span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>, <span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>) e<sup> ik·<span class="frac"><span class="num">z<sub>1<</span><span class="den">sub></span></span>·[ 1 + ((<i>x</i>−<span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>)² + (<i>y</i>−<span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>)²)/(<span class="frac"><span class="num">2z<sub>1<</span><span class="den">sub></span></span>²) ] <span class="frac"><span class="num"><</span><span class="den">sup></span></span> <span class="frac"><span class="num">dx<sub>1<</span><span class="den">sub></span></span> <span class="frac"><span class="num">dy<sub>1<</span><span class="den">sub></span></span></div>
+<div class="fsym">符号：：x_1, y_1 衍射孔径面上的坐标；x, y 观察屏上的坐标；z_1 观察屏到孔径的距离；max 表示在孔径与观察范围内取最大值。</div>
+<div class="fcond">条件：：在傍轴近似条件下，观察屏距离 z_1 大到满足上述不等式；该区域内观察到的衍射称**菲涅耳衍射**（近场衍射，孔径上的次波应视为球面波）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">6. 夫琅和费近似与夫琅和费衍射公式（书 p67）</div>
+<div class="eqb">Ẽ(<i>x</i>, <i>y</i>) = −(<i>i</i> <span class="frac"><span class="num">e<sup>ikz<sub>1</sub></sup></span><span class="den">λz<sub>1</sub></span></span>)·e<sup> ik(<i>x</i>² + <i>y</i>²)/(<span class="frac"><span class="num">2z<sub>1<</span><span class="den">sub></span></span>) <span class="frac"><span class="num"><</span><span class="den">sup></span></span>·∬_Σ Ẽ(<span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>, <span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>) e<sup> −ik(<span class="frac"><span class="num">xx<sub>1<</span><span class="den">sub></span></span> + <span class="frac"><span class="num">yy<sub>1<</span><span class="den">sub></span></span>)<span class="frac"><span class="num">/z<sub>1<</span><span class="den">sub></span></span> <span class="frac"><span class="num"><</span><span class="den">sup></span></span> <span class="frac"><span class="num">dx<sub>1<</span><span class="den">sub></span></span> <span class="frac"><span class="num">dy<sub>1<</span><span class="den">sub></span></span></div>
+<div class="fsym">符号：：同菲涅耳式；积分核中的 (xx_1 + yy_1) 决定衍射图样的空间频率。</div>
+<div class="fcond">条件：：在菲涅耳衍射区中，若观察屏距离 z_1 很大、满足上述不等式；该区域内观察到的衍射称**夫琅和费衍射**（远场衍射；孔径面上次波视为平面波）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">7. 巴俾涅原理（书 p68）</div>
+<div class="eqb">Ẽ<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span>(<i>P</i>) = Ẽ<span class="frac"><span class="num"><sub>1<</span><span class="den">sub></span></span>(<i>P</i>) + Ẽ<span class="frac"><span class="num"><sub>2<</span><span class="den">sub></span></span>(<i>P</i>)</div>
+<div class="fsym">符号：：Ẽ_0(P) 无衍射屏时 P 点的光场复振幅；Ẽ_1(P)、Ẽ_2(P) 两个互补屏单独存在时 P 点的复振幅。</div>
+<div class="fcond">条件：：两屏互补（一个的开孔恰为另一个的遮光部分）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">8. 单缝夫琅和费衍射（书 p68）</div>
+<div class="eqb"><i>I</i> = <span class="frac"><span class="num">I<sub>0<</span><span class="den">sub></span></span> (sinα / α)²，其中 α = (π<i>a</i>/λ)·sinθ</div>
+<div class="fsym">符号：：a 缝宽；θ 衍射角；λ 波长；I_0 中央主极大光强；(sinα/α)² 称**单缝衍射因子**。</div>
+<div class="fcond">条件：：夫琅和费（远场）近似；对应教材第 149 页图 3-20。</div>
+</div>
+<div class="fitem">
+<div class="fttl">9. 单缝衍射的暗纹与极大（书 p68）</div>
+<div class="fsym">符号：：f 透镜焦距；Δx_m 相邻暗纹间距；Δθ、Δx 分别为中央亮纹的半角宽度、半线宽。</div>
+<div class="fcond">条件：：单缝、夫琅和费衍射；小角近似下 Δx = f·Δθ。</div>
+</div>
+<div class="fitem">
+<div class="fttl">11. 夫琅和费细丝（窄带）衍射（书 p68）</div>
+<div class="fsym">符号：：Ẽ_0(P) 无衍射屏时 P 点复振幅。</div>
+<div class="fcond">条件：：巴俾涅原理 + 细丝/窄带与单缝互补。</div>
+</div>
+<div class="fitem">
+<div class="fttl">12. 夫琅和费矩形孔衍射（书 p69）</div>
+<div class="eqb"><i>I</i>(<i>x</i>, <i>y</i>) = <span class="frac"><span class="num">I<sub>0<</span><span class="den">sub></span></span> (sinα/α)² (sinβ/β)²</div>
+<div class="fsym">符号：：a、b 矩形孔在 x、y 方向的边长；θ_x、θ_y 衍射角分量。</div>
+<div class="fcond">条件：：夫琅和费（远场）近似；对应教材第 141 页图 3-12。</div>
+</div>
+<div class="fitem">
+<div class="fttl">13. 夫琅和费圆孔衍射（书 p69）</div>
+<div class="eqb"><i>I</i>(ρ, φ) = <span class="frac"><span class="num">I<sub>0<</span><span class="den">sub></span></span> [ <span class="frac"><span class="num">2J<sub>1<</span><span class="den">sub></span></span>(Φ) / Φ ]²</div>
+<div class="fsym">符号：：ρ、φ 观察屏上的极坐标（φ 为方位角）；J_1 一阶第一类贝塞尔函数；a 圆孔半径；k = 2π/λ；θ 衍射角。</div>
+<div class="fcond">条件：：夫琅和费（远场）近似；对应教材第 143 页图 3-15。</div>
+</div>
+<div class="fitem">
+<div class="fttl">14. 爱里光斑的角半径、线半径与面积（书 p69）</div>
+<div class="fsym">符号：：a 圆孔半径；D 圆孔直径（D = 2a）；f 透镜焦距；S 圆孔面积。</div>
+<div class="fcond">条件：：夫琅和费圆孔衍射、小角近似。</div>
+</div>
+<div class="fitem">
+<div class="fttl">15. 瑞利判据与分辨本领的一般表述（书 p69）</div>
+<div class="fsym">符号：：分辨本领（分辨力）指能分辨开两个靠近的点物或物体细节的能力。</div>
+</div>
+<div class="fitem">
+<div class="fttl">16. 人眼的分辨本领（书 p69–70）</div>
+<div class="eqb">α<span class="frac"><span class="num"><sub>e<</span><span class="den">sub></span></span> = θ<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span> = 1.22·λ<span class="frac"><span class="num">/D<sub>e<</span><span class="den">sub></span></span> = 3.3 × 10⁻⁴ rad</div>
+<div class="fsym">符号：：α_e 人眼最小分辨角；D_e 人眼瞳孔直径；λ 波长。</div>
+</div>
+<div class="fitem">
+<div class="fttl">17. 望远镜的分辨本领（书 p70）</div>
+<div class="fsym">符号：：D 望远镜物镜（入瞳）直径；D_e 人眼瞳孔直径；α_e 人眼最小分辨角。</div>
+<div class="fcond">条件：：望远镜作用相当于增大瞳孔；为充分利用物镜分辨本领，应使 α 经放大后等于人眼的最小分辨角。</div>
+</div>
+<div class="fitem">
+<div class="fttl">18. 照相物镜的分辨本领（书 p70）</div>
+<div class="fsym">符号：：f 物镜焦距；D 物镜孔径；ε 底片上恰能分辨的两直线间距离；N 每毫米线条数；D/f 相对孔径。</div>
+<div class="fcond">条件：：瑞利判据；结论：相对孔径愈大，分辨本领愈高。</div>
+</div>
+<div class="fitem">
+<div class="fttl">19. 显微镜的分辨本领（书 p70）</div>
+<div class="eqb">ε = 0.61λ/(<i>n</i>·sinu) = 0.61λ/NA</div>
+<div class="fsym">符号：：ε 显微镜能分辨开两点物的最小距离；n 物方介质折射率；u 物方孔径角；NA 数值孔径。</div>
+<div class="fcond">条件：：瑞利判据；圆孔光阑（显微物镜）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">20. 夫琅和费多缝（多缝）衍射（书 p70）</div>
+<div class="eqb"><i>I</i>(<i>P</i>) = <span class="frac"><span class="num">I<sub>0<</span><span class="den">sub></span></span> (sinα/α)² · [ sin<span class="frac"><span class="num">Nφ/2</span><span class="den">sin</span></span>(φ/2) ]²</div>
+<div class="fsym">符号：：a 缝宽；d 相邻缝间距；N 总缝数；θ 衍射角；α 单缝衍射因子参量；φ 相邻两缝衍射光在观察点的**相位差**。</div>
+<div class="fcond">条件：：夫琅和费（远场）近似；等振幅、等相位差多光束；对应教材第 151 页图 3-22。</div>
+</div>
+<div class="fitem">
+<div class="fttl">21. 多缝衍射的主极大与极小（书 p70）</div>
+<div class="fsym">符号：：m 主极大级次；m′ 相邻主极大间的极小编号；N 总缝数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">22. 缺级现象（书 p71）</div>
+<div class="eqb"><i>m</i> = (<span class="frac"><span class="num">d</span><span class="den">a</span></span>)·<i>n</i>，<i>n</i> = ±1, ±2, …</div>
+<div class="fsym">符号：：d 光栅常数；a 缝宽；m 缺级的级次；n 单缝衍射极小的级次。</div>
+<div class="fcond">条件：：多缝衍射中干涉主极大与单缝衍射极小重合处出现缺级。</div>
+</div>
+<div class="fitem">
+<div class="fttl">23. 光栅方程（书 p71）</div>
+<div class="fsym">符号：：d 光栅常数；θ **衍射角**；φ **入射角**；m 级次。</div>
+<div class="fcond">条件：：斜入射式的符号规则——当入射光与衍射光在光栅法线**同侧**时取「+」号，**异侧**时取「−」号。</div>
+</div>
+<div class="fitem">
+<div class="fttl">25. 光栅的色散本领（书 p71）</div>
+<div class="fsym">符号：：dθ/dλ 角色散（波长相差 0.1 nm 的两条谱线分开的角距离）；dl/dλ 线色散（透镜焦平面上波长相差 0.1 nm 的两谱线分开的距离）；f 物镜焦距。</div>
+<div class="fcond">条件：：实用光栅 d 很小（刻痕密度 1/d 很大），故色散本领很大。</div>
+</div>
+<div class="fitem">
+<div class="fttl">26. 光栅的分辨本领（书 p71）</div>
+<div class="eqb"><i>A</i> = λ/Δλ = mN</div>
+<div class="fsym">符号：：A 分辨本领；m 光谱级次；N 光栅总刻痕数；Δλ 可分辨的最小波长差。</div>
+<div class="fcond">条件：：与光栅常数 d 无关，只与光谱级次 m 和总刻痕数 N 有关。</div>
+</div>
+<div class="fitem">
+<div class="fttl">27. 光栅的自由光谱范围（书 p71–72）</div>
+<div class="eqb">Δλ = λ/m</div>
+<div class="fsym">符号：：Δλ 自由光谱范围（色散范围）；m 级次。</div>
+</div>
+<div class="fitem">
+<div class="fttl">28. 闪耀光栅（书 p72）</div>
+<div class="fsym">符号：：θ_0 闪耀光栅的齿形槽面与光栅平面的夹角（**闪耀角**），此时闪耀方向即闪耀角 θ_0 的方向；λ_M 该光栅的**闪耀波长**；m 相应的闪耀级次；d 光栅常数。</div>
+<div class="fcond">条件：：闪耀光栅（又称炫耀光栅、定向光栅）为相位型光栅，用于弥补平面光栅效率低的不足。</div>
+</div>
+<div class="fitem">
+<div class="fttl">29. 正弦型振幅光栅（书 p72）</div>
+<div class="fsym">符号：：t_0、t_1 透过率函数的常数项与调制幅度；d 光栅常数；α 单缝衍射因子参量；N 缝数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">31. 菲涅耳圆孔衍射（书 p72）</div>
+<div class="fsym">符号：：ρ_N 圆孔半径（第 N 个半波带半径）；R 点光源到波带片的距离；r_0 圆孔中心到考察点 P_0 的距离；N 半波带数；a_1、a_N 第 1、第 N 个半波带在 P_0 点产生的振幅。</div>
+<div class="fcond">条件：：菲涅耳圆孔、波带法；考察点 P_0 位于过圆孔中心且垂直于圆孔轴的轴上。</div>
+</div>
+<div class="fitem">
+<div class="fttl">32. 菲涅耳圆屏衍射（书 p73）</div>
+<div class="eqb"><i>A</i>_∞ = <i>a</i>_<span class="frac"><span class="num">N+1</span><span class="den">2</span></span></div>
+<div class="fsym">符号：：a_(N+1) 第 N+1 个半波带在 P_0 点的振幅；A_∞ 圆屏后 P_0 点的光场振幅。</div>
+<div class="fcond">条件：：菲涅耳圆屏；P_0 位于过圆屏中心且垂直于圆屏轴的轴上。</div>
+</div>
+<div class="fitem">
+<div class="fttl">34. 菲涅耳波带片（书 p73）</div>
+<div class="fsym">符号：：ρ_N 第 N 个半波带的半径（波带片半径）；R 物点到波带片的距离；r_0 波带片到像点（考察点 P_0）的距离；N 半波带数；f 波带片焦距；λ 波长。</div>
+<div class="fcond">条件：：菲涅耳波带片（挡住偶数带或奇数带的特殊光阑，有聚光作用，又称菲涅耳透镜）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">36. 平面波物光 + 平面波参考光的全息记录（书 p74）</div>
+<div class="fsym">符号：：O、R 物光波、参考光波的振幅；θ_O、θ_R 物光波、参考光波的传播方向角（其正弦给出底板上的线性相位因子）；k = 2π/λ。</div>
+</div>
+<div class="fitem">
+<div class="fttl">37. 全息图的再现（平面波情形，书 p74）</div>
+<div class="eqb">Ẽ<span class="frac"><span class="num"><sub>D<</span><span class="den">sub></span></span>(<i>x</i>, <i>y</i>) = (<i>O</i>² + <i>R</i>²)·<i>R</i>·e<sup> ikx·sinθ<span class="frac"><span class="num"><sub>R<</span><span class="den">sub></span></span> <span class="frac"><span class="num"><</span><span class="den">sup></span></span> + <i>R</i>²·<i>O</i>·e<sup> ikx·sinθ<span class="frac"><span class="num"><sub>O<</span><span class="den">sub></span></span> <span class="frac"><span class="num"><</span><span class="den">sup></span></span> + <i>R</i>²·e<sup> ikx(2sinθ<span class="frac"><span class="num"><sub>R<</span><span class="den">sub></span></span>) <span class="frac"><span class="num"><</span><span class="den">sup></span></span>·<i>O</i>·e<sup> −ikx·sinθ<span class="frac"><span class="num"><sub>O<</span><span class="den">sub></span></span> <span class="frac"><span class="num"><</span><span class="den">sup></span></span></div>
+<div class="fsym">符号：：Ẽ_D 透过全息图的衍射光波场复振幅。</div>
+<div class="fcond">条件：：用与记录参考光完全相同的光波照明。</div>
+</div>
+<div class="fitem">
+<div class="fttl">38. 球面波物光 + 平面波参考光的全息记录（书 p74–75）</div>
+<div class="fsym">符号：：z_1 点物 S 到照相底板的距离（物距）；O 物光振幅。</div>
+<div class="fcond">条件：：点物球面波为物光、平面波为参考光（属**菲涅耳全息**）；垂直照明全息图再现。</div>
+</div>
+<div class="fitem">
+<div class="fttl">40. 单色光波场的空间频谱（书 p75–76）</div>
+<div class="fsym">符号：：f_x、f_y 空间频率；Ẽ(f_x, f_y) 平面上复振幅分布的空间频率谱（空间频谱、角谱）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">41. 空间频谱的方向余弦表示（书 p76）</div>
+<div class="eqb">Ẽ(cosα/λ, cosβ/λ) = ∬_(−∞)^(+∞) Ẽ(<i>x</i>, <i>y</i>)·e<sup> −<i>i</i>2π( (cosα/λ)<i>x</i> + (cosβ/λ)<i>y</i> ) <span class="frac"><span class="num"><</span><span class="den">sup></span></span> dx dy</div>
+<div class="fsym">符号：：α、β 平面波分量的方向角（方向余弦 cosα、cosβ）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">42. 空间频谱分量的传播（书 p76）</div>
+<div class="eqb">Ẽ<span class="frac"><span class="num"><sub>z<</span><span class="den">sub></span></span>(<span class="frac"><span class="num">f<sub>x<</span><span class="den">sub></span></span>, <span class="frac"><span class="num">f<sub>y<</span><span class="den">sub></span></span>) = Ẽ<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span>(<span class="frac"><span class="num">f<sub>x<</span><span class="den">sub></span></span>, <span class="frac"><span class="num">f<sub>y<</span><span class="den">sub></span></span>)·e<sup> <i>i</i>(2π/λ)<i>z</i>·sqrt( 1 − (λ<span class="frac"><span class="num">f<sub>x<</span><span class="den">sub></span></span>)² − (λ<span class="frac"><span class="num">f<sub>y<</span><span class="den">sub></span></span>)² ) <span class="frac"><span class="num"><</span><span class="den">sup></span></span></div>
+<div class="fsym">符号：：Ẽ_0 孔径平面的空间频谱；Ẽ_z 传播到 z 处观察平面的空间频谱；z 传播距离。</div>
+<div class="fcond">条件：：光波从孔径平面传播到 z 处的观察平面。</div>
+</div>
+<div class="fitem">
+<div class="fttl">43. 衍射孔径对空间频率谱的效应（书 p76）</div>
+<div class="fsym">符号：：Ẽ_i 入射到孔径平面的复振幅；t(x, y) 衍射孔径平面的**透过率**；T 透过率函数的傅里叶变换；δ 单位振幅平面波的空间频谱（δ 函数）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">44. 夫琅和费衍射的傅里叶变换关系（书 p77）</div>
+<div class="eqb">Ẽ(<i>x</i>, <i>y</i>) = −(<span class="frac"><span class="num">i</span><span class="den">λz<sub>1</sub></span></span>)·<span class="frac"><span class="num">e<sup>ikz<sub>1</sub><</span><span class="den">sup></span></span>·e<sup> ik<span class="frac"><span class="num">x²+<i>y</i>²</span><span class="den">2z<sub>1</sub></span></span> <span class="frac"><span class="num"><</span><span class="den">sup></span></span>·∬_(−∞)^(+∞) Ẽ(<span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>, <span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>)·e<sup> −<i>i</i>2π(<span class="frac"><span class="num">f<sub>x<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span> + <span class="frac"><span class="num">f<sub>y<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>) <span class="frac"><span class="num"><</span><span class="den">sup></span></span> <span class="frac"><span class="num">dx<sub>1<</span><span class="den">sub></span></span> <span class="frac"><span class="num">dy<sub>1<</span><span class="den">sub></span></span></div>
+<div class="fsym">符号：：F 表示傅里叶变换；Ẽ(x_1, y_1) 衍射孔径平面上的复振幅分布。</div>
+</div>
+<div class="fitem">
+<div class="fttl">45. 透镜的傅里叶变换性质（书 p77）</div>
+<div class="fsym">符号：：f 透镜焦距；d_0 衍射屏到透镜的距离；F[...] 傅里叶变换。</div>
+</div>
+<div class="fitem">
+<div class="fttl">46. 矩形孔夫琅和费衍射的傅里叶分析（书 p77–78）</div>
+<div class="fsym">符号：：a、b 矩形孔在 x、y 方向边长；A 常数振幅；sinc(x) = sinx/x。</div>
+<div class="fcond">条件：：单色平面光波垂直入射矩形孔；夫琅和费衍射（远场）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">47. 傅里叶变换的相似性定理（书 p78）</div>
+<div class="eqb">Ẽ_(<i>m</i>,<i>n</i>)(<span class="frac"><span class="num">f<sub>x<</span><span class="den">sub></span></span>, <span class="frac"><span class="num">f<sub>y<</span><span class="den">sub></span></span>) = <i>F</i>{Ẽ(<i>m</i> <span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>, <i>n</i> <span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>)} = (<span class="frac"><span class="num">1</span><span class="den">mn</span></span>)·Ẽ(<span class="frac"><span class="num">f<sub>x</sub></span><span class="den">m</span></span>, <span class="frac"><span class="num">f<sub>y</sub></span><span class="den">n</span></span>) = ∬_(−∞)^(+∞) Ẽ(<i>m</i> <span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>, <i>n</i> <span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>)·e<sup> −<i>i</i>2π(<span class="frac"><span class="num">f<sub>x<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span> + <span class="frac"><span class="num">f<sub>y<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">y<sub>1<</span><span class="den">sub></span></span>) <span class="frac"><span class="num"><</span><span class="den">sup></span></span> <span class="frac"><span class="num">dx<sub>1<</span><span class="den">sub></span></span> <span class="frac"><span class="num">dy<sub>1<</span><span class="den">sub></span></span></div>
+<div class="fsym">符号：：m、n 孔径在 x_1、y_1 方向的缩放倍数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">49. 傅里叶变换的相移定理与双缝衍射（书 p78）</div>
+<div class="fsym">符号：：δ_1′ 孔径在孔径平面内平移一个距离后引入的光场相位变化（相移）；δ_2′ 第二孔对应的相移；d 双缝间距；a 缝宽；Ẽ(f_x) 处于光轴上的单缝产生的衍射光场复振幅。</div>
+</div>
+<h2 class="wallch">第 4 章 光在各向异性介质中的传播特性（书页 102–108）</h2>
+<h3 class="wallsec">4.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">50. 晶体的介电常数张量与物质方程（书 p103）</div>
+<div class="eqb"><i>D</i> = ε·<i>E</i> = ε<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span>·ε<span class="frac"><span class="num"><sub>r<</span><span class="den">sub></span></span>·<i>E</i></div>
+<div class="fsym">符号：：D 电位移矢量；E 电场强度矢量；ε 介电常数**张量**（对称张量）；ε_0 真空介电常数；ε_r 相对介电常数张量；ε_11、ε_22、ε_33（常表示为 ε_1、ε_2、ε_3）主介电系数；n 折射率；n_1、n_2、n_3 主折射率。</div>
+<div class="fcond">条件：：各向异性介质（晶体）；取主轴坐标系时 ε 为对角张量。</div>
+</div>
+<div class="fitem">
+<div class="fttl">51. 晶体的分类（书 p103）</div>
+<div class="fsym">符号：：n_o 寻常光（o 光）主折射率；n_e 非常光（e 光）主折射率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">52. 晶体中单色平面光波的波场结构（书 p103）</div>
+<div class="fsym">符号：：E 电场强度；D 电位移矢量；s 能量传播方向（光线方向，坡印廷矢量方向）；k 波法线方向。</div>
+<div class="fcond">条件：：晶体中（各向异性介质）；各向同性介质中为该情形的特例（对应教材第 239 页图 4-5）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">53. 相速度（书 p104）</div>
+<div class="eqb"><span class="frac"><span class="num">v<sub>p<</span><span class="den">sub></span></span> = <span class="frac"><span class="num">v<sub>p<</span><span class="den">sub></span></span>·<i>k</i> = (<span class="frac"><span class="num">c</span><span class="den">n</span></span>)·<i>k</i></div>
+<div class="fsym">符号：：v_p 相速度（单色平面光波等相位面的传播速度）；k 波法线方向的单位矢量；c 真空中光速；n 光波折射率。</div>
+<div class="fcond">条件：：单色平面光波。</div>
+</div>
+<div class="fitem">
+<div class="fttl">54. 光线速度（书 p104）</div>
+<div class="eqb"><span class="frac"><span class="num">v<sub>r<</span><span class="den">sub></span></span> = <span class="frac"><span class="num">v<sub>r<</span><span class="den">sub></span></span>·<i>s</i> = (|<i>S</i>|/w)·<i>s</i> = (<span class="frac"><span class="num">c/n<sub>r<</span><span class="den">sub></span></span>)·<i>s</i></div>
+<div class="fsym">符号：：v_r 光线速度（单色平面光波能量的传播速度）；s 能流密度（坡印廷矢量）方向的单位矢量；S 坡印廷矢量；w 能量密度；n_r 光线折射率。</div>
+<div class="fcond">条件：：单色平面光波；晶体中相速度与光线速度一般不相等。</div>
+</div>
+<div class="fitem">
+<div class="fttl">55. 相速度与光线速度的关系（书 p104）</div>
+<div class="eqb"><span class="frac"><span class="num">v<sub>p<</span><span class="den">sub></span></span> = <span class="frac"><span class="num">v<sub>r<</span><span class="den">sub></span></span>·(<i>s</i>·<i>k</i>) = <span class="frac"><span class="num">v<sub>r<</span><span class="den">sub></span></span>·cosα</div>
+<div class="fsym">符号：：α 光线方向 s 与波法线方向 k 的夹角。</div>
+<div class="fcond">条件：：一般情况下单色平面光波的相速度与光线速度分离。</div>
+</div>
+<div class="fitem">
+<div class="fttl">56. 基本方程（书 p104）</div>
+<div class="eqb"><i>D</i> = ε<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span>·<i>n</i>²·[ <i>E</i> − <i>k</i>(<i>k</i>·<i>E</i>) ]</div>
+<div class="fsym">符号：：D 电位移矢量；E 电场强度；k 波法线方向单位矢量；n 波法线折射率；ε_0 真空介电常数。</div>
+<div class="fcond">条件：：由麦克斯韦方程组直接推出，单色平面光波在晶体中传播时满足。</div>
+</div>
+<div class="fitem">
+<div class="fttl">57. 波法线菲涅耳方程（书 p104）</div>
+<div class="eqb"><span class="frac"><span class="num">k<sub>1<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1</span><span class="den">n</span></span>² − 1/ε<span class="frac"><span class="num"><sub>1<</span><span class="den">sub></span></span> ) + <span class="frac"><span class="num">k<sub>2<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1</span><span class="den">n</span></span>² − 1/ε<span class="frac"><span class="num"><sub>2<</span><span class="den">sub></span></span> ) + <span class="frac"><span class="num">k<sub>3<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1</span><span class="den">n</span></span>² − 1/ε<span class="frac"><span class="num"><sub>3<</span><span class="den">sub></span></span> ) = 0</div>
+<div class="fsym">符号：：k_1、k_2、k_3 波法线方向 k 在主轴坐标系中的方向余弦；n 波法线折射率；ε_1、ε_2、ε_3 主介电系数（= n_1², n_2², n_3²）。</div>
+<div class="fcond">条件：：主轴坐标系；单色平面光波；属本征值问题的本征方程（久期方程）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">58. 另一形式的基本方程（书 p104）</div>
+<div class="eqb"><i>E</i> = (<span class="frac"><span class="num">c</span><span class="den">ε<sub>0</sub>·n<sub>r</sub>²</span></span>)·[ <i>D</i> − <i>s</i>(<i>s</i>·<i>D</i>) ]　（原文如此，扫描件分子印为 <i>c</i>）</div>
+<div class="fsym">符号：：n_r 光线折射率；s 光线方向单位矢量；D 电位移矢量；其余同上。</div>
+<div class="fcond">条件：：由麦克斯韦方程组推出的另一种形式（以光线方向 s 描述）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">59. 光线菲涅耳方程（书 p104）</div>
+<div class="eqb"><span class="frac"><span class="num">s<sub>1<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">n<sub>r<</span><span class="den">sub></span></span>² − ε<span class="frac"><span class="num"><sub>1<</span><span class="den">sub></span></span> ) + <span class="frac"><span class="num">s<sub>2<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">n<sub>r<</span><span class="den">sub></span></span>² − ε<span class="frac"><span class="num"><sub>2<</span><span class="den">sub></span></span> ) + <span class="frac"><span class="num">s<sub>3<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">n<sub>r<</span><span class="den">sub></span></span>² − ε<span class="frac"><span class="num"><sub>3<</span><span class="den">sub></span></span> ) = 0</div>
+<div class="fsym">符号：：s_1、s_2、s_3 光线方向 s 在主轴坐标系中的方向余弦；n_r 光线折射率；ε_1、ε_2、ε_3 主介电系数。</div>
+<div class="fcond">条件：：主轴坐标系；本征方程（另一种形式）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">60. 折射率椭球（书 p105）</div>
+<div class="eqb"><span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/n<sub>1<</span><span class="den">sub></span></span>² + <span class="frac"><span class="num">x<sub>2<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/n<sub>2<</span><span class="den">sub></span></span>² + <span class="frac"><span class="num">x<sub>3<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/n<sub>3<</span><span class="den">sub></span></span>² = 1</div>
+<div class="fsym">符号：：x_1、x_2、x_3 主轴坐标系坐标；n_1、n_2、n_3 主折射率。</div>
+<div class="fcond">条件：：给定晶体（主轴坐标系）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">61. 折射率曲面（书 p105）</div>
+<div class="eqb"><span class="frac"><span class="num">k<sub>1<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1</span><span class="den">n</span></span>² − <span class="frac"><span class="num">1/n<sub>1<</span><span class="den">sub></span></span>² ) + <span class="frac"><span class="num">k<sub>2<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1</span><span class="den">n</span></span>² − <span class="frac"><span class="num">1/n<sub>2<</span><span class="den">sub></span></span>² ) + <span class="frac"><span class="num">k<sub>3<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1</span><span class="den">n</span></span>² − <span class="frac"><span class="num">1/n<sub>3<</span><span class="den">sub></span></span>² ) = 0</div>
+<div class="fsym">符号：：k_1、k_2、k_3 波法线方向的方向余弦；n 折射率；n_1、n_2、n_3 主折射率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">62. 波矢曲面（书 p105）</div>
+<div class="eqb">将折射率曲面的矢径长度乘以 ω/c</div>
+<div class="fsym">符号：：ω 圆频率；c 真空中光速。</div>
+</div>
+<div class="fitem">
+<div class="fttl">63. 菲涅耳椭球（书 p105）</div>
+<div class="eqb"><span class="frac"><span class="num">x<sub>1<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/v<sub>r<</span><span class="den">sub>1</span></span>² + <span class="frac"><span class="num">x<sub>2<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/v<sub>r<</span><span class="den">sub>2</span></span>² + <span class="frac"><span class="num">x<sub>3<</span><span class="den">sub></span></span>²<span class="frac"><span class="num">/v<sub>r<</span><span class="den">sub>3</span></span>² = 1</div>
+<div class="fsym">符号：：v_r1、v_r2、v_r3 三个主轴方向上晶体的**光线主速度**；x_1、x_2、x_3 坐标。</div>
+</div>
+<div class="fitem">
+<div class="fttl">64. 射线曲面（书 p105）</div>
+<div class="eqb"><span class="frac"><span class="num">s<sub>1<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1/v<sub>r<</span><span class="den">sub></span></span>² − <span class="frac"><span class="num">1/v<sub>r<</span><span class="den">sub>1</span></span>² ) + <span class="frac"><span class="num">s<sub>2<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1/v<sub>r<</span><span class="den">sub></span></span>² − <span class="frac"><span class="num">1/v<sub>r<</span><span class="den">sub>2</span></span>² ) + <span class="frac"><span class="num">s<sub>3<</span><span class="den">sub></span></span>²/( <span class="frac"><span class="num">1/v<sub>r<</span><span class="den">sub></span></span>² − <span class="frac"><span class="num">1/v<sub>r<</span><span class="den">sub>3</span></span>² ) = 0</div>
+<div class="fsym">符号：：s_1、s_2、s_3 光线方向的方向余弦；v_r 光线速度；v_r1、v_r2、v_r3 光线主速度。</div>
+</div>
+<div class="fitem">
+<div class="fttl">65. 单轴晶体的光学性质（书 p105）</div>
+<div class="fsym">符号：：n_o 寻常光主折射率；n_e 非常光主折射率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">67. e 光折射率 n_e(θ)（书 p106）</div>
+<div class="eqb"><span class="frac"><span class="num">1/n<sub>e<</span><span class="den">sub></span></span>²(θ) = cos²θ<span class="frac"><span class="num">/n<sub>o<</span><span class="den">sub></span></span>² + sin²θ<span class="frac"><span class="num">/n<sub>e<</span><span class="den">sub></span></span>²</div>
+<div class="fsym">符号：：θ **波法线方向 k 与晶体光轴方向 z 的夹角**（波法线角）；n_e(θ) e 光折射率；n_o、n_e 主折射率。</div>
+<div class="fcond">条件：：单轴晶体；e 光。</div>
+</div>
+<div class="fitem">
+<div class="fttl">68. e 光离散角 α（书 p106）</div>
+<div class="eqb">tanα = (<span class="frac"><span class="num">1</span><span class="den">2</span></span>)·sin2θ·( <span class="frac"><span class="num">1/n<sub>o<</span><span class="den">sub></span></span>² − <span class="frac"><span class="num">1/n<sub>e<</span><span class="den">sub></span></span>² )·( cos²θ<span class="frac"><span class="num">/n<sub>o<</span><span class="den">sub></span></span>² + sin²θ<span class="frac"><span class="num">/n<sub>e<</span><span class="den">sub></span></span>² )⁻¹</div>
+<div class="fsym">符号：：α **离散角**（e 光的 E 与 D、s_e 与 k 之间的方向分离角）；θ 波法线方向 k 与光轴 z 的夹角。</div>
+<div class="fcond">条件：：单轴晶体，e 光。</div>
+</div>
+<div class="fitem">
+<div class="fttl">69. e 光最大离散角（书 p106）</div>
+<div class="fsym">符号：：α_M 最大离散角；θ 波法线方向与光轴的夹角。</div>
+</div>
+<div class="fitem">
+<div class="fttl">71. 光在晶体界面上的折射定律和反射定律（书 p107）</div>
+<div class="fsym">符号：：k_i 入射波矢；k_t 折射波矢；k_r 反射波矢；r 界面内任意矢量；n_i 入射侧折射率；n_t、n_r 折射侧、反射侧折射率；θ_i 入射角；θ_t 折射角；θ_r 反射角。</div>
+<div class="fcond">条件：：光在晶体界面上仍遵从折射定律和反射定律；式中的传播方向都指**光的波矢方向**，θ_i、θ_t、θ_r 均针对波矢方向而言。</div>
+</div>
+<div class="fitem">
+<div class="fttl">75. 波片的相位延迟差（书 p108）</div>
+<div class="eqb">φ = (2π/λ)·(<span class="frac"><span class="num">n<sub>o<</span><span class="den">sub></span></span> − <span class="frac"><span class="num">n<sub>e<</span><span class="den">sub></span></span>)·<i>d</i></div>
+<div class="fsym">符号：：φ 波片引起的二本征模（o 光、e 光）的**相位延迟差**（教材用 φ，不用 δ 或 Δφ）；n_o、n_e 主折射率；d 波片厚度；λ 波长。</div>
+<div class="fcond">条件：：单轴晶体制成的波片（光垂直入射、光沿主轴方向传播）。</div>
+</div>
+<h2 class="wallch">附：p109 续（超出指定页范围 102–108，仅补全跨页内容，供参考）</h2>
+<h3 class="wallsec"></h3>
+<div class="fitem">
+<div class="fttl">80. 晶体的偏光干涉——平行光（书 p109）</div>
+<div class="fsym">符号：：φ 晶片引起的二本征模的相位延迟差（该页明确定义）；n′、n″ 晶片两个本征模的折射率；d 晶片厚度；β 两偏振器 P_1、P_2 偏振轴夹角（由「P_1⊥P_2 时 β=π/2」确定）；α 晶片主轴方位角（该页未给出文字定义，按公式形式为晶片主轴与 P_1 偏振轴的夹角）。</div>
+<div class="fcond">条件：：平行光通过偏光干涉装置；对应教材第 272 页图 4-53。</div>
+</div>
+<h2 class="wallch">符号约定（本章/第 4 章易混符号的教材定义）</h2>
+<h2 class="wallch">行内记法约定（供转 HTML 时对照）</h2>
+<h2 class="wallch">第 5 章 晶体的感应双折射（书页 130–134）</h2>
+<h3 class="wallsec">5.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">折射率椭球的普遍表示（书 p131）</div>
+<div class="fsym">符号：：`x_i`（i=1,2,3）为晶体主轴坐标；`n_ij` 为折射率椭球的主折射率分量；`B_ij` 为折射率椭球系数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">外电场引起的椭球系数变化（书 p131）</div>
+<div class="fsym">符号：：`E_k`、`E_p`、`E_q` 为外加电场分量。</div>
+</div>
+<div class="fitem">
+<div class="fttl">KDP 晶体外加电场平行于光轴时的线性电光效应（书 p131）</div>
+<div class="fsym">符号：：`γ_63` 为 KDP 的线性电光系数（单位 m/V）；`E_3` 为沿 `x_3` 轴的电场强度；`n_o`、`n_e` 为 o 光、e 光主折射率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">γ_63 的纵向运用（书 p131）</div>
+<div class="fsym">符号：：`d` 为光通过晶体的长度（= 电极间距，纵向运用时与电场方向厚度相同）；`E` 为外加电场；`U` 为外加电压；`λ` 为真空中光波长（书中写作 `λ`）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">γ_63 的横向运用（书 p132）</div>
+<div class="fsym">符号：：`d` 为晶体**在电场方向上**的厚度；`l` 为**传播方向上**的长度（横向运用 `l` 与 `d` 相互独立）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">声光效应（书 p132–133）</div>
+<div class="fsym">符号：：`σ` 为单向应力；`Π_11`、`Π_12` 为压光系数分量。</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）喇曼-乃斯衍射（书 p133）</div>
+<div class="fsym">符号：：`λ_s` 为超声波波长；`m` 为衍射级次；`I_i` 为入射光强；`V` 表示光通过声光介质后由折射率变化引起的**附加相移**；`J_m(V)` 为第 `m` 阶**贝塞尔函数**。</div>
+<div class="fcond">条件：：超声波频率 `ω_s` **较低**，声光作用区的长度**较短**，频率为 `ω` 的平行光**平行于超声波的波面**入射（即垂直于超声波传播的方向入射）。</div>
+</div>
+<h2 class="wallch">第 6 章 光的吸收、色散和散射（书页 140–143）</h2>
+<h3 class="wallsec">6.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">2）经典理论的基本方程（书 p141）</div>
+<div class="fsym">符号：：`r` 为电子离开平衡位置的位移；`γ` 为**衰减系数**；`ω_0` 为电子的**固有振动频率**；`e` 为电子电荷；`m` 为电子质量；`ε_0` 为真空介电常数；`N` 为单位体积内的电子数（书中由 `−N e r(t)` 引入，未另作文字注释）；`ω` 为入射光角频率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">1）光吸收定律（书 p141）</div>
+<div class="fsym">符号：：`α` 为比例系数（比尔定律中的吸收系数常数）；`c` 为溶液浓度；`l` 为厚度。</div>
+</div>
+<h2 class="wallch">第 7 章 几何光学基础（书页 149–156）</h2>
+<h3 class="wallsec">7.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">4. 共轴球面光学系统子午面内光路计算公式（书 p152，图 7-4）</div>
+<div class="fsym">符号：：`d_k` 为第 `k` 面到第 `k+1` 面的间隔（沿光轴，顺正方向为正）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">5. 折射球面近轴区光路计算的基本公式（书 p153）</div>
+<div class="fsym">符号：：`y`、`y′` 为物高、像高；`x`、`x′` 为从物方焦点、像方焦点量起的物距、像距（**牛顿**坐标，顺正方向为正）；`α` 轴向放大率；`γ` 角放大率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">6）平板（书 p155）</div>
+<div class="fsym">符号：：`d` 为平板厚度；`n_0` 为平板材料折射率，`n` 为平板外介质折射率（书中本节未重复注释，沿用薄透镜处的同一约定）；`U` 为入射孔径角；`ΔL` 为轴向光程差/轴向位移。</div>
+</div>
+<h2 class="wallch">符号约定</h2>
+<h2 class="wallch">录入说明与未录入清单</h2>
+<h2 class="wallch">第 8 章 理想光学系统（书页 168–173）</h2>
+<h3 class="wallsec">8.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">焦距（书 p169）</div>
+<div class="eqb">`f<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">f</span></span> = -n<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">n</span></span>`</div>
+<div class="fsym">符号：：n 物方介质折射率；n′ 像方介质折射率。</div>
+<div class="fcond">条件：：物方、像方介质折射率分别为 n、n′。</div>
+</div>
+<div class="fitem">
+<div class="fttl">光焦度（书 p169）</div>
+<div class="eqb">`φ = n<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">f<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = -<span class="frac"><span class="num">n</span><span class="den">f</span></span>`（书中 `=` 上方标 `def`，即定义式）</div>
+<div class="fsym">符号：：φ 光学系统的光焦度；f′ 像方焦距；f 物方焦距；n、n′ 物方、像方折射率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">高斯公式（书 p170，表 8-1）</div>
+<div class="eqb">`f<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">l<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> + <span class="frac"><span class="num">f</span><span class="den">l</span></span> = 1`</div>
+<div class="fsym">符号：：l 物方截距（物方主点 H 量起）；l′ 像方截距（像方主点 H′ 量起）；f 物方焦距；f′ 像方焦距。</div>
+</div>
+<div class="fitem">
+<div class="fttl">牛顿公式（书 p170，表 8-1）</div>
+<div class="eqb">`<i>x</i>·x<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = <i>f</i>·f<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`</div>
+<div class="fsym">符号：：x 物方焦点 F 到物点的距离（以 F 为原点）；x′ 像方焦点 F′ 到像点的距离（以 F′ 为原点）；f、f′ 物方、像方焦距。</div>
+</div>
+<div class="fitem">
+<div class="fttl">垂轴放大率 β（书 p170，表 8-1）</div>
+<div class="eqb">`β = y<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">y</span></span> = <i>n</i>·l<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span>/</span></span>(n<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>·<i>l</i>)`，且 `β = -x<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">f<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = -<span class="frac"><span class="num">f</span><span class="den">x</span></span>`</div>
+<div class="fsym">符号：：y 物高；y′ 像高；n、n′ 物方、像方折射率；l、l′ 物方、像方截距。</div>
+<div class="fcond">条件：：表 8-1 第二列用 l、l′，第三列用 x、x′（两种坐标系任选其一）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">轴向放大率 α（书 p170，表 8-1）</div>
+<div class="eqb">`α = dl<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">dl</span></span> = (<i>n</i>·l<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>²)/(n<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>·<i>l</i>²) = (n<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">n</span></span>)·β²`，且 `α = -x<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">x</span></span>`</div>
+<div class="fsym">符号：：dl、dl′ 物方、像方沿轴微小位移；其余同上。</div>
+</div>
+<div class="fitem">
+<div class="fttl">角放大率 γ（书 p170，表 8-1 及表上正文）</div>
+<div class="eqb">`γ = <span class="frac"><span class="num">l</span><span class="den">l<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = <i>n</i>/(n<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>·β)`，且 `γ = <span class="frac"><span class="num">x</span><span class="den">f<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = <span class="frac"><span class="num">f</span><span class="den">x<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`</div>
+<div class="fsym">符号：：U 物方孔径角；U′ 像方孔径角；其余同上。</div>
+</div>
+<div class="fitem">
+<div class="fttl">双光组组合：空间间隔 d 与光学间隔 Δ（书 p170，图 8-1）</div>
+<div class="eqb">`<i>d</i> = Δ + <span class="frac"><span class="num">f<sub>1<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> - <span class="frac"><span class="num">f<sub>2<</span><span class="den">sub></span></span>`</div>
+<div class="fsym">符号：：d 两光组的**空间间隔**（第一个光组的像方主点 H_1′ 到第二个光组的物方主点 H_2 的轴向线度）；Δ 两光组的**光学间隔**（第二个光组的物方焦点 F_2 相对第一个光组像方焦点 F_1′ 的轴向线度）；f_1′ 第一光组像方焦距；f_2 第二光组物方焦距。</div>
+<div class="fcond">条件：：f_1、f_1′ 为第一光组的物方、像方焦距；f_2、f_2′ 为第二光组的物方、像方焦距。</div>
+</div>
+<div class="fitem">
+<div class="fttl">双光组组合：焦点公式（书 p171）</div>
+<div class="eqb">`<span class="frac"><span class="num">x<sub>F<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = -(<span class="frac"><span class="num">f<sub>2<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">f<sub>2<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>)/Δ`，`<span class="frac"><span class="num">x<sub>F<</span><span class="den">sub></span></span> = (<span class="frac"><span class="num">f<sub>1<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">f<sub>1<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>)/Δ`</div>
+<div class="fsym">符号：：x_F′ 组合系统像方焦点 F′ 相对第二光组像方焦点 F_2′ 的位置；x_F 组合系统物方焦点 F 相对第一光组物方焦点 F_1 的位置；Δ 光学间隔。</div>
+<div class="fcond">条件：：双光组组合（两个光组共轴密接或分离均可，仅需 Δ ≠ 0）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">双光组组合：焦距公式（书 p171）</div>
+<div class="eqb">`f<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = -(<span class="frac"><span class="num">f<sub>1<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>·<span class="frac"><span class="num">f<sub>2<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>)/Δ`，`<i>f</i> = (<span class="frac"><span class="num">f<sub>1<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">f<sub>2<</span><span class="den">sub></span></span>)/Δ`</div>
+<div class="fsym">符号：：f′、f 组合系统的像方、物方焦距；f_1′ 第一光组像方焦距；f_2′ 第二光组像方焦距；f_1、f_2 第一、第二光组物方焦距。</div>
+</div>
+<div class="fitem">
+<div class="fttl">双光组组合：主点公式（书 p171）</div>
+<div class="eqb">`<span class="frac"><span class="num">l<sub>H<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = <i>d</i>·<span class="frac"><span class="num">f<sub>2<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span>/</span></span>Δ`，`<span class="frac"><span class="num">l<sub>H<</span><span class="den">sub></span></span> = <i>d</i>·<span class="frac"><span class="num">f<sub>1<</span><span class="den">sub>/</span></span>Δ`</div>
+<div class="fsym">符号：：l_H′ 组合系统像方主点 H′ 相对第二光组像方主点 H_2′ 的位置；l_H 组合系统物方主点 H 相对第一光组物方主点 H_1 的位置；d 空间间隔；Δ 光学间隔。</div>
+</div>
+<div class="fitem">
+<div class="fttl">双光组组合：光焦度公式（书 p171）</div>
+<div class="eqb">`φ = φ<span class="frac"><span class="num"><sub>1<</span><span class="den">sub></span></span> + φ<span class="frac"><span class="num"><sub>2<</span><span class="den">sub></span></span> - <i>d</i>·φ<span class="frac"><span class="num"><sub>1<</span><span class="den">sub></span></span>·φ<span class="frac"><span class="num"><sub>2</sub>/n<sub>2<</span><span class="den">sub></span></span>`</div>
+<div class="fsym">符号：：φ 组合系统光焦度；φ_1、φ_2 第一、第二光组光焦度；d 两光组空间间隔；n_2 两光组之间介质的折射率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">正切法：递推公式组（书 p171，图 8-3 流程图）</div>
+<div class="fsym">符号：：m 光组总数；h_k 第 k 个光组的入射光线与该光组物方主平面交点相对光轴的垂轴高度；h 整个系统的入射光线高度；U、U′ 物方、像方孔径角；φ_k 第 k 个光组光焦度；d_k 第 k 个光组到第 k+1 个光组的间隔；n_k、n_k′ 第 k 个光组的物方、像方折射率。</div>
+<div class="fcond">条件：：正切法**一次计算只能确定一个空间（像方）的基点**；物方基点须将系统倒置后按同样流程计算。</div>
+</div>
+<div class="fitem">
+<div class="fttl">正切法：基点公式（书 p171，图 8-3）</div>
+<div class="eqb">`<span class="frac"><span class="num">l<sub>F<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = h<span class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">tanU<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`，`f<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = <span class="frac"><span class="num">h</span><span class="den">tanU<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`，`<span class="frac"><span class="num">l<sub>H<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = (h<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> - <i>h</i>)/tanU<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`</div>
+<div class="fsym">符号：：l_F′ 组合系统像方焦点位置；f′ 组合系统像方焦距；l_H′ 组合系统像方主点位置；h 入射光线高度；h′ 出射光线高度；U′ 像方孔径角。</div>
+</div>
+<div class="fitem">
+<div class="fttl">截距法：像方基点公式（书 p172）</div>
+<div class="eqb">`<span class="frac"><span class="num">L<sub>F<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = <span class="frac"><span class="num">l<sub>m<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`，`f<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = (∏_(<i>i</i>=1..<i>m</i>) <span class="frac"><span class="num">l<sub>i<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>)/(∏_(<i>i</i>=2..<i>m</i>) <span class="frac"><span class="num">l<sub>i<</span><span class="den">sub></span></span>)`</div>
+<div class="fsym">符号：：L_F′ 整个系统像方焦点位置；l_m′ 最后一个光组的像距；l_i、l_i′ 第 i 个光组的物距、像距；m 光组总数。</div>
+<div class="fcond">条件：：采用逐次成象法计算光轴上**无穷远物点（l_1 = ∞）**逐次经过每个光组成像的物距和像距。</div>
+</div>
+<div class="fitem">
+<div class="fttl">截距法：物方基点公式（书 p172）</div>
+<div class="eqb">`<span class="frac"><span class="num">L<sub>F<</span><span class="den">sub></span></span> = <span class="frac"><span class="num">l<sub>1<</span><span class="den">sub></span></span>`，`<i>f</i> = (∏_(<i>i</i>=1..<i>m</i>) <span class="frac"><span class="num">l<sub>i<</span><span class="den">sub></span></span>)/(∏_(<i>i</i>=1..<i>m</i>-1) <span class="frac"><span class="num">l<sub>i<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>)`</div>
+<div class="fsym">符号：：L_F 整个系统物方焦点位置；l_1 第一个光组的物距；其余同上。</div>
+<div class="fcond">条件：：可以通过**倒置光学系统**按确定像方基点的方法确定；也可采用逐次成象法，计算形成整个光学系统像空间光轴上无穷远的像点（`l_m′ = ∞`）时各光组的物距和像距。</div>
+</div>
+<div class="fitem">
+<div class="fttl">传递矩阵：光线矢量的线性变换（书 p172）</div>
+<div class="eqb">`[h<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>; -u<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>] = [[<i>A</i>, <i>B</i>], [<i>C</i>, <i>D</i>]]·[<i>h</i>; -<i>u</i>]`</div>
+<div class="fsym">符号：：h、h′ 前、后一平面上光线的**高度**；u、u′ 光线的**孔径角**；A、B、C、D 矩阵元素。</div>
+<div class="fcond">条件：：光学系统近轴区成像或理想光学系统成像，不同平面间光线参数的变换是**线性**关系。</div>
+</div>
+<div class="fitem">
+<div class="fttl">传递矩阵：大孔径时用正切代替（书 p172）</div>
+<div class="eqb">`[h<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>; -tanu<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>] = [[<i>A</i>, <i>B</i>], [<i>C</i>, <i>D</i>]]·[<i>h</i>; -tanu]`</div>
+<div class="fsym">符号：：M = [[A, B], [C, D]] 称为光学系统两个横截面间光线矢量的**传递矩阵或高斯矩阵**，表征光线通过该系统两个横截面间的传播特性。</div>
+<div class="fcond">条件：：**如果孔径角比较大，则孔径角应该用它的正切值代替**。</div>
+</div>
+<div class="fitem">
+<div class="fttl">系统矩阵（书 p173）</div>
+<div class="eqb">`<i>M</i> = <span class="frac"><span class="num">N<sub>N<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">M<sub>N<</span><span class="den">sub></span></span>·…·<span class="frac"><span class="num">N<sub>2<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">M<sub>2<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">N<sub>1<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">M<sub>1<</span><span class="den">sub></span></span>·<span class="frac"><span class="num">N<sub>0<</span><span class="den">sub></span></span>`</div>
+<div class="fsym">符号：：M_k 各光学元件的特征传递矩阵（k = 1…N）；N_k 相邻两个光学元件间**空气间隔**的传递矩阵（k = 1…N-1）；N_0 为物方平面 π_1 到第一个光学元件间的均匀介质传递矩阵；N_N 为最后一个光学元件到像方平面 π_2 间的均匀介质传递矩阵。</div>
+<div class="fcond">条件：：N 个光学元件构成的光学系统；光线从物方平面 π_1 传播到像方平面 π_2。</div>
+</div>
+<h2 class="wallch">第 9 章 光学系统像差基础和光路计算（书页 189–192）</h2>
+<h3 class="wallsec">9.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">景深（书 p190，图 9-1）</div>
+<div class="fsym">符号：：Δ_1 远景深度；Δ_2 近景深度；Δ 光学系统的景深；D 入瞳直径；p 对准平面相对入瞳的间隔；Z_0 对应物面上的**空间分辨率**。</div>
+</div>
+<div class="fitem">
+<div class="fttl">轴向色差（书 p191）</div>
+<div class="eqb">`Δl<span class="pr"<span class="frac"><span class="num">>′</span><sub>F<</span><span class="den">sub>C</span></span> = l<span class="pr"<span class="frac"><span class="num">>′</span><sub>F<</span><span class="den">sub></span></span> - l<span class="pr"<span class="frac"><span class="num">>′</span><sub>C<</span><span class="den">sub></span></span>`</div>
+<div class="fsym">符号：：l′_F、l′_C 分别为 F、C 两种色光的像点位置。</div>
+</div>
+<div class="fitem">
+<div class="fttl">垂轴色差（书 p191）</div>
+<div class="eqb">`Δy<span class="pr"<span class="frac"><span class="num">>′</span><sub>F<</span><span class="den">sub>C</span></span> = y<span class="pr"<span class="frac"><span class="num">>′</span><sub>F<</span><span class="den">sub></span></span> - y<span class="pr"<span class="frac"><span class="num">>′</span><sub>C<</span><span class="den">sub></span></span>`</div>
+<div class="fsym">符号：：y′_F、y′_C 分别表示 F、C 光**主光线与同一像平面的交点高度**。</div>
+</div>
+<h2 class="wallch">第 10 章 光学仪器的基本原理（书页 198–200）</h2>
+<h3 class="wallsec">10.2 基本概念和公式</h3>
+<div class="fitem">
+<div class="fttl">眼睛的调节能力：远点、近点、折光度数（书 p198）</div>
+<div class="fsym">符号：：r 远点线度；p 近点线度；R 远点折光度数；P 近点折光度数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">眼睛调节能力（书 p199）</div>
+<div class="eqb">`<i>A</i> = <i>R</i> - <i>P</i>`</div>
+<div class="fsym">符号：：A 眼睛调节能力；R 远点折光度数；P 近点折光度数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">近视眼的校正（书 p199）</div>
+<div class="fsym">符号：：φ 眼镜光焦度；R 该眼远点折光度数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">远视眼的校正（书 p199）</div>
+<div class="fsym">符号：：φ 眼镜光焦度；P 该眼近点折光度数。</div>
+</div>
+<div class="fitem">
+<div class="fttl">眼睛的分辨率（书 p199）</div>
+<div class="eqb">`α<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span> = 1.22·λ/D`（眼睛的角分辨极限）</div>
+<div class="fsym">符号：：α_0 角分辨极限；λ 波长；D 瞳孔直径。</div>
+<div class="fcond">条件：：λ 为 550 nm 的黄绿光；D 为瞳孔直径，**D 的单位选择为 mm**；通常取 `α_0 = 60″`。</div>
+</div>
+<div class="fitem">
+<div class="fttl">放大镜：视角放大率定义（书 p199）</div>
+<div class="fsym">符号：：Γ 视角放大率；ω 物体（在明视距离处）对眼睛的张角；ω′ 放大镜的像对眼睛的张角。</div>
+</div>
+<div class="fitem">
+<div class="fttl">放大镜：视角放大率公式（书 p199）</div>
+<div class="eqb">`Γ = <span class="frac"><span class="num">250</span><span class="den">f<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`</div>
+<div class="fsym">符号：：f′ 放大镜（透镜）的像方焦距；250 为明视距离，单位 mm。</div>
+<div class="fcond">条件：：物体置于明视距离 250 mm 处；f′ 以 mm 计。</div>
+</div>
+<div class="fitem">
+<div class="fttl">放大镜：光束限制与视场（书 p199）</div>
+<div class="fsym">符号：：y 物方半视场线度（物面线视场大小）；h 透镜的半径；d 眼睛到透镜的距离；Γ 视角放大率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">显微镜：两个发光点的分辨率（书 p199）</div>
+<div class="eqb">`σ = 0.61λ/(<i>n</i>·sinU) = 0.61λ/NA`</div>
+<div class="fsym">符号：：σ 显微镜的分辨率；λ 测量时所用光波的**真空波长**；n 显微镜物空间的折射率；U 显微镜的物方孔径角；NA 物镜的数值孔径，`NA = n·sinU`。</div>
+</div>
+<div class="fitem">
+<div class="fttl">显微镜：不发光物体的分辨率（书 p199）</div>
+<div class="eqb">`σ = 0.5λ/NA`</div>
+<div class="fsym">符号：：同上一节。</div>
+<div class="fcond">条件：：**斜照明**时（不发光物体）。</div>
+</div>
+<div class="fitem">
+<div class="fttl">显微镜：视角放大率（书 p199，例题 p201 复核）</div>
+<div class="eqb">`Γ = β<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span>·Γ<span class="frac"><span class="num"><sub>e<</span><span class="den">sub></span></span> ≈ -(250·Δ)/(<span class="frac"><span class="num">f<sub>0<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>·<span class="frac"><span class="num">f<sub>e<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>) = <span class="frac"><span class="num">250</span><span class="den">f<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`</div>
+<div class="fsym">符号：：Γ 显微镜的视角放大率；β_0 物镜的垂轴放大率；Γ_e 目镜的视角放大率；Δ 光学筒长（物镜与目镜的光学间隔）；f_0′ 物镜焦距；f_e′ 目镜焦距；f′ 系统焦距。</div>
+</div>
+<div class="fitem">
+<div class="fttl">显微镜：有效视角放大率（书 p200）</div>
+<div class="fsym">符号：：NA 数值孔径；Γ 显微镜视角放大率。</div>
+<div class="fcond">条件：：为了充分利用物镜的分辨率，使已被物镜分辨的物体细节能同时被人眼看清，显微镜必须有恰当的视角放大率；一般情况下应使**分辨极限的线度通过显微镜成像后对人眼的张角在 2′~4′** 的范围内。</div>
+</div>
+<div class="fitem">
+<div class="fttl">显微镜：出瞳直径（书 p200）</div>
+<div class="eqb">`D<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = 500·NA/Γ`</div>
+<div class="fsym">符号：：D′ 出瞳直径；NA 数值孔径；Γ 视角放大率。</div>
+</div>
+<div class="fitem">
+<div class="fttl">显微镜：视场光阑与线视场（书 p200，例题 p201 复核）</div>
+<div class="eqb">`y<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = <i>y</i>·β<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span>`（即 `2<i>y</i> = 2y<span class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span>/</span></span>β<span class="frac"><span class="num"><sub>0<</span><span class="den">sub></span></span>`）</div>
+<div class="fsym">符号：：2y′ 视场光阑的大小；2y 物面的视场可见范围；β_0 物镜的垂轴放大率（负号表示成倒像）。</div>
+<div class="fcond">条件：：显微镜的视场光阑通常设置于**物镜的像平面**上，这时入窗和入瞳重合，可以保证消除渐晕。</div>
+</div>
+<div class="fitem">
+<div class="fttl">望远镜：分辨率（书 p200）</div>
+<div class="eqb">`σ = 1.22·λ·<i>F</i>`，其中 `<i>F</i> = <span class="frac"><span class="num">f<sub>0<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′</span></span><span class="den">D</span></span>`</div>
+<div class="fsym">符号：：σ 望远镜的分辨率；λ 波长；F 称 **F 数（或光圈数）**；f_0′ 物镜焦距；D 物镜（入瞳）直径。</div>
+<div class="fcond">条件：：F 数（光圈数）由 `F = f_0′/D` 定义。</div>
+</div>
+<div class="fitem">
+<div class="fttl">望远镜：视角放大率（书 p200）</div>
+<div class="eqb">`Γ = γ = <span class="frac"><span class="num">f<sub>0<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′</span>/f<sub>e<</span><span class="den">sub><span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span> = -<span class="frac"><span class="num">D</span><span class="den">D<span</span></span> class="pr"<span class="frac"><span class="num">>′<</span><span class="den">span></span></span>`</div>
+<div class="fsym">符号：：Γ 望远镜的视角放大率；γ 角放大率；f_0′ 物镜焦距；f_e′ 目镜焦距；D 入瞳直径；D′ 出瞳直径。</div>
+</div>
+<div class="fitem">
+<div class="fttl">望远镜：有效视角放大率（书 p200）</div>
+<div class="eqb">`Γ = 0.5·<i>D</i>`</div>
+<div class="fsym">符号：：Γ 有效视角放大率；D 直径量。</div>
+</div>
+<h2 class="wallch">符号约定</h2></div><style>
+#totop{position:fixed;right:16px;bottom:74px;z-index:40;display:none;width:40px;height:40px;
+  border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
+  text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92}
+#totop.show{display:block}
+#totop:hover{opacity:1}
+@media print{#totop{display:none}}
+</style>
+<button id="totop" title="返回顶端">↑</button>
+<script>
+(function(){
+  var b=document.getElementById('totop'); if(!b) return;
+  function upd(){ b.classList.toggle('show', window.scrollY>400); }
+  window.addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+</body></html>

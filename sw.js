@@ -17,6 +17,7 @@ const ASSETS = [
  "851-计算题-第9章-光路计算.html",
  "index.html",
  "公式墙.html",
+ "公式墙_test.html",
  "按年份.html",
  "搜索.html",
  "模拟-2009.html",

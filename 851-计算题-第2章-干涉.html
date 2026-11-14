@@ -75,6 +75,7 @@
     .q{page-break-inside:avoid;border-left:2px solid #999;}
     .ans{box-shadow:none;}
   }
+  .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -208,7 +209,7 @@
 <div class="q" id="q003">
   <div class="hd"><span class="tag">2021-二-1</span><span class="ttl">条纹间距、水中变化、消失级次、光源临界宽度</span><span class="hot">四问综合</span></div>
   <div class="stem">杨氏双缝实验中，双缝间距 d = 0.5 mm，接收屏距双缝 D = 1 m，点光源距双缝 l = 30 cm，点光源发射波长为 500 nm 的单色光，试求：<br>（1）屏上的条纹间距，若把整个装置放入水中，条纹间距如何变化；<br>（2）若点光源发出的光波长为（500 ± 2.5）nm 范围内的准单色光，求接收屏上干涉条纹消失时的级次；<br>（3）若光源具有一定的宽度，屏上干涉条纹消失时，它的临界宽度是多少？</div>
-  <div class="ans"><div class="step"><b class="n">1</b>（1）条纹间距<div class="eqb">Δ<i>x</i> = λ<i>D</i>/<i>d</i> = 500×10<sup>−9</sup> × 1 / (0.5×10<sup>−3</sup>) = <b>1 mm</b></div></div><div class="step"><b class="n">2</b>入水后波长变为 λ′ = λ/<i>n</i>（<i>n</i> ≈ 1.33），间距同比例缩小<div class="eqb">Δ<i>x</i>′ = Δ<i>x</i>/<i>n</i> ≈ 1/1.33 ≈ <b>0.75 mm</b>（条纹变密）</div></div><div class="step"><b class="n">3</b>（2）这是<b>连续谱带</b>（500±2.5 nm，全宽 Δλ = 5 nm），判据是<b>光程差超过相干长度</b>：<div class="eqb">Δ<i>l</i> = λ<sup>2</sup>/Δλ = (500 nm)<sup>2</sup>/5 nm = <b>50 μm</b></div><div class="eqb">Δ<i>l</i> = <i>m</i>λ ⇒ <i>m</i> = λ/Δλ = 500/5 = <b>100 级</b></div><p style="margin:4px 0 0"><b>别用 <i>m</i>Δλ = λ/2 那个判据</b>——那是“两条分离谱线”的错开条件，会得到 50 级，少一半。</p></div><div class="step"><b class="n">4</b>（3）光源宽度使<b>边缘两点</b>的条纹错开一个条纹间距，可见度降到零<div class="eqb"><i>b d</i>/<i>l</i> = λ ⇒ <i>b</i> = λ<i>l</i>/<i>d</i> = 500×10<sup>−9</sup> × 0.30 / (0.5×10<sup>−3</sup>) = <b>0.3 mm</b></div></div><div class="res">Δ<i>x</i> = <b>1 mm</b>；水中 <b>0.75 mm</b>；条纹消失级次 <b>100 级</b>；光源临界宽度 <b>0.3 mm</b>。</div><div class="warn"><b>两个判据别混</b>：<br>· <b>连续谱</b>（准单色光，宽度 Δλ）→ 相干长度 Δ<i>l</i> = λ<sup>2</sup>/Δλ，<i>m</i> = λ/Δλ；<br>· <b>两条谱线</b>（间隔 Δλ）→ 条纹错开半个间距，<i>m</i> = λ/(2Δλ)，且随后有“复现”。<br>本题是前者，答案 100 级。</div>
+  <div class="ans"><div class="step"><b class="n">1</b>（1）条纹间距<div class="eqb">Δ<i>x</i> = λ<i>D</i>/<i>d</i> = 500×10<sup>−9</sup> × 1 / (0.5×10<sup>−3</sup>) = <b>1 mm</b></div></div><div class="step"><b class="n">2</b>入水后波长变为 λ<span class="pr">′</span> = λ/<i>n</i>（<i>n</i> ≈ 1.33），间距同比例缩小<div class="eqb">Δ<i>x</i><span class="pr">′</span> = Δ<i>x</i>/<i>n</i> ≈ 1/1.33 ≈ <b>0.75 mm</b>（条纹变密）</div></div><div class="step"><b class="n">3</b>（2）这是<b>连续谱带</b>（500±2.5 nm，全宽 Δλ = 5 nm），判据是<b>光程差超过相干长度</b>：<div class="eqb">Δ<i>l</i> = λ<sup>2</sup>/Δλ = (500 nm)<sup>2</sup>/5 nm = <b>50 μm</b></div><div class="eqb">Δ<i>l</i> = <i>m</i>λ ⇒ <i>m</i> = λ/Δλ = 500/5 = <b>100 级</b></div><p style="margin:4px 0 0"><b>别用 <i>m</i>Δλ = λ/2 那个判据</b>——那是“两条分离谱线”的错开条件，会得到 50 级，少一半。</p></div><div class="step"><b class="n">4</b>（3）光源宽度使<b>边缘两点</b>的条纹错开一个条纹间距，可见度降到零<div class="eqb"><i>b d</i>/<i>l</i> = λ ⇒ <i>b</i> = λ<i>l</i>/<i>d</i> = 500×10<sup>−9</sup> × 0.30 / (0.5×10<sup>−3</sup>) = <b>0.3 mm</b></div></div><div class="res">Δ<i>x</i> = <b>1 mm</b>；水中 <b>0.75 mm</b>；条纹消失级次 <b>100 级</b>；光源临界宽度 <b>0.3 mm</b>。</div><div class="warn"><b>两个判据别混</b>：<br>· <b>连续谱</b>（准单色光，宽度 Δλ）→ 相干长度 Δ<i>l</i> = λ<sup>2</sup>/Δλ，<i>m</i> = λ/Δλ；<br>· <b>两条谱线</b>（间隔 Δλ）→ 条纹错开半个间距，<i>m</i> = λ/(2Δλ)，且随后有“复现”。<br>本题是前者，答案 100 级。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -319,9 +320,9 @@
       <div class="eqb"><i>N</i> = <span class="frac"><span class="num">2<i>n h</i> cos<i>θ</i><sub>t</sub></span><span class="den">λ</span></span> = <span class="frac"><span class="num">2×1.5×0.05×10<sup>−3</sup>×0.9428</span><span class="den">707×10<sup>−9</sup></span></span> ≈ <b>200 条</b></div>
     </div>
     <div class="step"><b class="n">4</b>换成空气劈尖（n = 1，同 30° 入射，cos θ<sub>t</sub> = cos30° = 0.866）
-      <div class="eq">N′ = 2 h cos30° / λ = 2×0.05×10<sup>−3</sup>×0.866 / 707×10<sup>−9</sup> ≈ <b>122 条</b></div>
+      <div class="eq">N<span class="pr">′</span> = 2 h cos30° / λ = 2×0.05×10<sup>−3</sup>×0.866 / 707×10<sup>−9</sup> ≈ <b>122 条</b></div>
     </div>
-    <div class="res">玻璃膜劈尖 <b>200 条</b>；空气劈尖约 <b>122 条</b>（若按正入射则 N′ = 2h/λ ≈ 141 条）。</div>
+    <div class="res">玻璃膜劈尖 <b>200 条</b>；空气劈尖约 <b>122 条</b>（若按正入射则 N<span class="pr">′</span> = 2h/λ ≈ 141 条）。</div>
     <div class="warn">
       <b>易错</b>：① 斜入射忘了 cos θ<sub>t</sub>；② 把 θ = 30° 直接当膜内角；③ 空气劈尖若也按 30° 斜入射，是 122 条而不是 141 条 —— 取决于题目是否保持同一入射角，两种都写更稳。
     </div>
@@ -334,7 +335,7 @@
 <div class="kcard">
 <div class="kh">D · F-P 与滤光片</div>
 <ul><li>多光束干涉，峰极锐</li><li>斜入射中心波长向短波移</li></ul>
-<div class="eqb">2<i>n</i><i>h</i>cosθ′ = <i>k</i>λ</div>
+<div class="eqb">2<i>n</i><i>h</i>cosθ<span class="pr">′</span> = <i>k</i>λ</div>
 <div class="eqb"><i>R</i> = <i>k</i>·<i>N</i><sub>eff</sub></div>
 </div>
 
@@ -370,7 +371,7 @@
     </div>
     <div class="step"><b class="n">3</b>10° 斜入射：膜内角由折射定律
       <div class="eq">sin θ<sub>t</sub> = sin10°/1.5 = 0.1158　⇒　θ<sub>t</sub> = 6.65°，cos θ<sub>t</sub> = 0.9933</div>
-      <div class="eq">λ′ = 2nd·cos θ<sub>t</sub> = 600 × 0.9933 ≈ <b>596 nm</b></div>
+      <div class="eq">λ<span class="pr">′</span> = 2nd·cos θ<sub>t</sub> = 600 × 0.9933 ≈ <b>596 nm</b></div>
     </div>
     <div class="res">中心波长 <b>600 nm</b>，半宽度 ≈ <b>20 nm</b>；10° 斜入射时透射波长移到 <b>596 nm</b>（向短波方向移 4 nm）。</div>
     <span class="src">【真题 + 自算】</span>
