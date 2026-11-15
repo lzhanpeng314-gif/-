@@ -1,4 +1,4 @@
-const CACHE = 'g851-inline-v4';
+const CACHE = 'g851-inline-40f50f53';
 const ASSETS = [
  "./",
  "851-应用光学-简答与画图-p49-56.html",
@@ -17,9 +17,9 @@ const ASSETS = [
  "851-计算题-第9章-光路计算.html",
  "index.html",
  "公式墙.html",
- "公式墙_test.html",
  "按年份.html",
  "搜索.html",
+ "收藏.html",
  "模拟-2009.html",
  "模拟-2010.html",
  "模拟-2011.html",
@@ -39,6 +39,7 @@ const ASSETS = [
  "模拟-2025.html",
  "模拟-2026.html",
  "模拟-组卷1.html",
+ "错题本.html",
  "manifest.webmanifest",
  "icon.svg"
 ];

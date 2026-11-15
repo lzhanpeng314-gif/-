@@ -412,6 +412,43 @@ document.querySelectorAll(".q").forEach(function(q){
   });
 });
 paint();
+
+/* ── 只看错题模式：URL 带 ?wrong=1 时，只显示判过「半分/0 分」的题 ── */
+(function () {
+  if (!/[?&]wrong=1/.test(location.search)) return;
+  var wraps = [], nWrong = 0;
+  Array.prototype.forEach.call(document.querySelectorAll(".q"), function (q) {
+    var w = q.parentNode;
+    if (!w || !w.getAttribute || !w.getAttribute("data-parts")) return;
+    wraps.push(w);
+  });
+  wraps.forEach(function (w) {
+    var rec = st[w.id], ps = w.getAttribute("data-parts").split("|"), bad = false;
+    for (var i = 0; i < ps.length; i++) {
+      if (rec && rec[i] !== undefined && parseFloat(rec[i]) < 1) bad = true;
+    }
+    if (bad) { nWrong++; } else { w.style.display = "none"; }
+  });
+  var bar = document.createElement("div");
+  bar.style.cssText = "position:sticky;top:0;z-index:32;background:#fdf4f3;color:#a8332a;"
+    + "border-bottom:1px solid #e2b7b2;padding:8px 14px;font-size:13px;display:flex;"
+    + "gap:10px;align-items:center;flex-wrap:wrap";
+  bar.innerHTML = '<b>只看错题</b>　本卷错 ' + nWrong + ' 题　'
+    + '<a href="错题本.html" style="color:#6d3a24">← 错题本</a>'
+    + '<button style="margin-left:auto;border:1px solid #e2b7b2;background:#fff;color:#a8332a;'
+    + 'border-radius:14px;padding:3px 12px;font-size:12.5px;cursor:pointer" id="showall">显示全部</button>';
+  var body = document.querySelector(".wrap") || document.body;
+  body.insertBefore(bar, body.firstChild);
+  bar.querySelector("#showall").onclick = function () {
+    wraps.forEach(function (w) { w.style.display = ""; });
+    bar.parentNode.removeChild(bar);
+  };
+  if (!nWrong) {
+    bar.innerHTML = '<b>只看错题</b>　本卷没有判过错的题（或还没判分）　'
+      + '<a href="错题本.html" style="color:#6d3a24">← 错题本</a>';
+  }
+})();
+
 var left = 180*60, tm = null;
 function show(){
   var m = Math.floor(left/60), s = left%60;
@@ -441,4 +478,12 @@ text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18)}#totop.sh
 <script>(function(){var b=document.getElementById('totop');if(!b)return;
 function u(){b.classList.toggle('show',window.scrollY>400)}
 addEventListener('scroll',u,{passive:true});u();
-b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script></body></html>
+b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script><!--ERRBOOK--><style>
+#errb{position:fixed;right:16px;bottom:66px;z-index:41;display:flex;align-items:center;
+  justify-content:center;height:40px;padding:0 12px;border-radius:20px;background:#6d3a24;
+  color:#fff;font-size:13px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.94}
+#errb:hover{opacity:1}
+@media print{#errb{display:none}}
+</style>
+<a id="errb" href="错题本.html" title="错题本">错题本</a>
+</body></html>

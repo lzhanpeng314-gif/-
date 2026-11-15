@@ -314,10 +314,10 @@
     </div>
     <div class="step"><b class="n">4</b>（2）物在第一透镜前 10 mm，对 H 取 <i>l</i> = −(10 + 30) = −40 mm
       <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">45</span></span> + <span class="frac"><span class="num">1</span><span class="den">−40</span></span> = −<span class="frac"><span class="num">1</span><span class="den">360</span></span>　⇒　<i>l</i><span class="pr">′</span> = −360 mm</div>
-      <p style="margin:2px 0 0"><i>l</i><span class="pr">′</span> &lt; 0 ⇒ 像在 H<span class="pr">′</span> 左方 360 mm，而 H<span class="pr">′</span> 在第一透镜右 10 mm，故像在<b>第一透镜左方 350 mm</b>；<i>β</i> = −360/(−40) = <b>+9</b>。</p>
+      <p style="margin:2px 0 0"><i>l</i><span class="pr">′</span> &lt; 0 ⇒ 像在 H<span class="pr">′</span> 左方 360 mm，而 H<span class="pr">′</span> = F<span class="pr">′</span> 左方 <i>f</i><span class="pr">′</span> = (第二透镜右 15 mm) − 45 mm = 在第一透镜右 30 mm，故像在<b>第一透镜左方 330 mm</b>；<i>β</i> = −360/(−40) = <b>+9</b>。</p>
     </div>
-    <div class="res">（1）<i>f</i><span class="pr">′</span> = <b>45 mm</b>；F<span class="pr">′</span> 在第二透镜右 15 mm，F 在第一透镜左 15 mm；H 在第一透镜右 30 mm，H<span class="pr">′</span> 在第一透镜右 10 mm。<br>（2）像在<b>第一透镜前方 350 mm</b>，<b>正立虚像</b>，<i>β</i> = +9。</div>
-    <div class="warn">【存疑】像位置：本页按 H 在主镜后 30 mm 得 350 mm；答案册以 H 为原点得 l<span class="pr">′</span> = −360 mm ⇒ 距首镜 330 mm。两者差 20 mm，需按教材主点位置复算。</div>
+    <div class="res">（1）<i>f</i><span class="pr">′</span> = <b>45 mm</b>；F<span class="pr">′</span> 在第二透镜右 15 mm，F 在第一透镜左 15 mm；H 在第一透镜右 30 mm，H<span class="pr">′</span> 在第一透镜右 30 mm。<br>（2）像在<b>第一透镜前方 330 mm</b>，<b>正立虚像</b>，<i>β</i> = +9。</div>
+    <div class="warn"><b>已核（答案册 2015 年 p98）</b>：答案册给 <i>l</i><span class="pr">′</span> = −360 mm（从 H<span class="pr">′</span> 量）、像方主点位于第二透镜前 30 mm，即第一透镜右 30 mm ⇒ 距首镜 <b>330 mm</b>。此前写的 350 mm 是把 H<span class="pr">′</span> 误当在第一透镜右 10 mm 造成的，已改正。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -387,6 +387,43 @@ document.querySelectorAll(".q").forEach(function(q){
   });
 });
 paint();
+
+/* ── 只看错题模式：URL 带 ?wrong=1 时，只显示判过「半分/0 分」的题 ── */
+(function () {
+  if (!/[?&]wrong=1/.test(location.search)) return;
+  var wraps = [], nWrong = 0;
+  Array.prototype.forEach.call(document.querySelectorAll(".q"), function (q) {
+    var w = q.parentNode;
+    if (!w || !w.getAttribute || !w.getAttribute("data-parts")) return;
+    wraps.push(w);
+  });
+  wraps.forEach(function (w) {
+    var rec = st[w.id], ps = w.getAttribute("data-parts").split("|"), bad = false;
+    for (var i = 0; i < ps.length; i++) {
+      if (rec && rec[i] !== undefined && parseFloat(rec[i]) < 1) bad = true;
+    }
+    if (bad) { nWrong++; } else { w.style.display = "none"; }
+  });
+  var bar = document.createElement("div");
+  bar.style.cssText = "position:sticky;top:0;z-index:32;background:#fdf4f3;color:#a8332a;"
+    + "border-bottom:1px solid #e2b7b2;padding:8px 14px;font-size:13px;display:flex;"
+    + "gap:10px;align-items:center;flex-wrap:wrap";
+  bar.innerHTML = '<b>只看错题</b>　本卷错 ' + nWrong + ' 题　'
+    + '<a href="错题本.html" style="color:#6d3a24">← 错题本</a>'
+    + '<button style="margin-left:auto;border:1px solid #e2b7b2;background:#fff;color:#a8332a;'
+    + 'border-radius:14px;padding:3px 12px;font-size:12.5px;cursor:pointer" id="showall">显示全部</button>';
+  var body = document.querySelector(".wrap") || document.body;
+  body.insertBefore(bar, body.firstChild);
+  bar.querySelector("#showall").onclick = function () {
+    wraps.forEach(function (w) { w.style.display = ""; });
+    bar.parentNode.removeChild(bar);
+  };
+  if (!nWrong) {
+    bar.innerHTML = '<b>只看错题</b>　本卷没有判过错的题（或还没判分）　'
+      + '<a href="错题本.html" style="color:#6d3a24">← 错题本</a>';
+  }
+})();
+
 var left = 180*60, tm = null;
 function show(){
   var m = Math.floor(left/60), s = left%60;
@@ -416,4 +453,12 @@ text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18)}#totop.sh
 <script>(function(){var b=document.getElementById('totop');if(!b)return;
 function u(){b.classList.toggle('show',window.scrollY>400)}
 addEventListener('scroll',u,{passive:true});u();
-b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script></body></html>
+b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script><!--ERRBOOK--><style>
+#errb{position:fixed;right:16px;bottom:66px;z-index:41;display:flex;align-items:center;
+  justify-content:center;height:40px;padding:0 12px;border-radius:20px;background:#6d3a24;
+  color:#fff;font-size:13px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.94}
+#errb:hover{opacity:1}
+@media print{#errb{display:none}}
+</style>
+<a id="errb" href="错题本.html" title="错题本">错题本</a>
+</body></html>

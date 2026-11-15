@@ -657,23 +657,55 @@
     return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
   }
 
+  /* 错题集合：扫所有整卷判分记录，凡是判过「半分/0 分」的题包裹 id 都收进来。
+     包裹 id 规则与 生成模拟卷.py 一致：'m' + tag 去掉非字母数字下划线（中文保留）。 */
+  var WRONG = (function () {
+    var set = {}, pfx = 'g851-mock2-';
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (!k || k.indexOf(pfx) !== 0) continue;
+        var ob = JSON.parse(localStorage.getItem(k) || 'null');
+        if (!ob || typeof ob !== 'object') continue;
+        for (var id in ob) {
+          var rec = ob[id];
+          if (!rec || typeof rec !== 'object') continue;
+          for (var p in rec) {
+            if (parseFloat(rec[p]) < 1) { set[id] = 1; break; }
+          }
+        }
+      }
+    } catch (e) {}
+    return set;
+  })();
+  function widOf(q) {
+    var t = q.querySelector('.tag');
+    if (!t) return '';
+    return 'm' + t.textContent.trim().replace(/[^0-9A-Za-z_一-鿿]/g, '');
+  }
+  function isWrong(q) { return !!WRONG[widOf(q)]; }
+
   function build() {
-    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
-    var base = (todo.length ? todo : all).slice();
-    // 未抽过的最前；其余按上次抽到时间从旧到新
-    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
-    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    /* 三档优先级：0 = 整卷里判过错；1 = 还没勾已掌握；2 = 已掌握。
+       档内按「上次抽到时间」从旧到新。 */
+    var base = all.map(function (q) {
+      var tier = isWrong(q) ? 0 : (q.classList.contains('done') ? 2 : 1);
+      return { q: q, tier: tier, seen: SEEN[keyOf(q)] || 0 };
+    });
+    base.sort(function (a, b) { return a.tier - b.tier || a.seen - b.seen; });
+    // 同一档同时刻的组内打乱，避免每次从第一章第一题开始
     var i = 0;
     while (i < base.length) {
-      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
-      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      var j = i;
+      while (j + 1 < base.length && base[j + 1].tier === base[i].tier
+             && base[j + 1].seen === base[i].seen) j++;
       if (j > i) {
         var chunk = shuffle(base.slice(i, j + 1));
         for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
       }
       i = j + 1;
     }
-    pool = base;
+    pool = base.map(function (x) { return x.q; });
   }
 
   function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
@@ -697,9 +729,10 @@
 
   function next() {
     if (!pool.length) build();
-    var q = pool.pop();
+    var q = pool.shift();   // shift：取"最久没碰"的（build 已按优先级+时间排好）
     SEEN[keyOf(q)] = Date.now(); saveSeen();
     show(q);
+    if (isWrong(q)) elIdx.textContent = '错题 · ' + elIdx.textContent;
   }
 
   function open() { build(); next(); ov.classList.add('on'); }
@@ -719,6 +752,9 @@
     if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
     if (e.key === 'ArrowRight') next();
   });
+
+  /* URL 带 ?quiz=1 直接进抽背（首页看板的「抽背这章」按钮用） */
+  if (/[?&]quiz=1/.test(location.search)) { open(); }
 })();
 </script>
 <script>
@@ -933,6 +969,68 @@
   });
   bar.insertBefore(sea, bar.firstChild);
   bar.insertBefore(back, bar.firstChild);
+})();
+</script>
+<!--MASTERED--><style>
+.mk{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font-size:11.5px;
+    color:var(--mut,#888);cursor:pointer;user-select:none;}
+.mk input{width:14px;height:14px;cursor:pointer;accent-color:#8c4a2f;}
+.q .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;}
+.q.done{opacity:.45;}
+.q.done .ttl{text-decoration:line-through;text-decoration-thickness:1px;}
+body.onlytodo .q.done{display:none;}
+@media print{.mk{display:none;}.q.done{opacity:1;}}
+</style>
+<!--MASTERED--><script>
+/* 已掌握勾选 + 未掌握过滤（由 tools/加已掌握.py 注入，勿手改） */
+(function () {
+  var tg = document.getElementById('tg');
+  if (tg && !tg.__bound) {
+    tg.__bound = 1;
+    tg.addEventListener('click', function () {
+      document.body.classList.toggle('hide');
+      tg.textContent = document.body.classList.contains('hide') ? '展开答案' : '收起答案';
+    });
+  }
+  var KEY = 'g851-c1-mastered';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+  var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  var stat = document.getElementById('stat');
+  function refresh() {
+    if (stat) stat.textContent = '已掌握 ' + document.querySelectorAll('.q.done').length + ' / ' + qs.length;
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+  }
+  qs.forEach(function (q) {
+    var tag = q.querySelector('.tag'), hd = q.querySelector('.hd');
+    if (!tag || !hd || hd.querySelector('.mk')) return;
+    var id = tag.textContent.trim();
+    var lab = document.createElement('label');
+    lab.className = 'mk';
+    lab.innerHTML = '<input type="checkbox"> 已掌握';
+    var box = lab.querySelector('input');
+    box.checked = !!saved[id];
+    if (box.checked) q.classList.add('done');
+    box.addEventListener('change', function () {
+      if (box.checked) { saved[id] = 1; q.classList.add('done'); }
+      else { delete saved[id]; q.classList.remove('done'); }
+      refresh();
+    });
+    hd.appendChild(lab);
+  });
+  refresh();
+  var bAll = document.getElementById('f-all'), bTodo = document.getElementById('f-todo');
+  function bind(el, only) {
+    if (!el || el.__bound) return;
+    el.__bound = 1;
+    el.addEventListener('click', function () {
+      document.body.classList.toggle('onlytodo', only);
+      bAll.classList.toggle('on', !only);
+      bTodo.classList.toggle('on', only);
+    });
+  }
+  bind(bAll, false);
+  bind(bTodo, true);
 })();
 </script>
 <script>/* SWREG */

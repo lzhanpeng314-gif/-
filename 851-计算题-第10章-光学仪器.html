@@ -169,7 +169,7 @@
 
 <div class="q" id="q001">
   <div class="hd"><span class="tag">2017-四-4</span><span class="ttl">5 m 内看不清要配多少度；近拍镜把最近拍摄距离推到多远</span></div>
-  <div class="stem">一个人眼看不清楚 5m 以内的物体，如果校正时应该佩戴眼镜的屈光度为多少？某照相机可拍摄的最近距离为 1m，装上 2 个屈光度（<i>f</i> = 500mm）的近拍镜后，能拍摄的最近距离是多少（近拍镜与照相机镜头的间距可忽略）？</div>
+  <div class="stem">一个人眼看不清楚 5m 以内的物体，如果校正时应该佩戴眼镜的屈光度为多少？某照相机可拍摄的最近距离为 1m，装上 2 个屈光度（<i>f</i> = 500mm）的近拍镜后，能拍摄的最近距离是多少（近拍镜与照相机镜头的间距可忽略）？<span class="qp" data-n="2"></span></div>
   <div class="ans">
     <div class="step"><b class="n">1</b>"5 m 以内看不清" = <b>近点跑到 5 m</b> 的远视眼。矫正目标：把 25 cm（明视距离）处的物，成虚像于近点 5 m 处
       <div class="eqb"><i>l</i> = −0.25 m，<i>l</i><span class="pr">′</span> = −5 m</div>
@@ -436,7 +436,7 @@
     <div class="step"><b class="n">4</b>（3）角分辨率（题未给波长，取 555 nm 的常用值）
       <div class="eqb"><i>θ</i> = 1.22<span class="frac"><span class="num">λ</span><span class="den"><i>D</i></span></span> = 1.22 × <span class="frac"><span class="num">555×10<sup>−9</sup></span><span class="den">0.05</span></span> = <b>1.35×10<sup>−5</sup> rad</b> ≈ <b>2.79″</b></div>
     </div>
-    <div class="res">（1）Γ = <b>−5×</b>；（2）孔径光阑 = <b>物镜框</b>（50 mm），视场光阑 = 焦面上的 <b>16 mm 光阑</b>；（3）角分辨率 <b>1.35×10<sup>−5</sup> rad（2.79″）</b>。</div>
+    <div class="res">（1）Γ = <b>−5×</b>；（2）孔径光阑 = <b>物镜框</b>（50 mm），视场光阑 = 焦面上的 <b>16 mm 光阑</b>；（3）角分辨率 <b>1.35×10<sup>−5</sup> rad（2.79″）</b>。</div><div class="warn"><b>答题口径（按答案册）</b>：本题<b>没给波长</b>，说明考的不是衍射极限。答案册用有效放大率判据：<i>αΓ</i> = 1′ ⇒ <i>α</i> = 1′/|Γ| = 2.91×10<sup>−4</sup>/5 ≈ <b>6×10<sup>−5</sup> rad</b>。衍射极限 1.22λ/D = 1.35×10<sup>−5</sup> rad 作为对照写在上面，<b>考场上先写 6×10<sup>−5</sup></b>。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -751,23 +751,55 @@
     return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
   }
 
+  /* 错题集合：扫所有整卷判分记录，凡是判过「半分/0 分」的题包裹 id 都收进来。
+     包裹 id 规则与 生成模拟卷.py 一致：'m' + tag 去掉非字母数字下划线（中文保留）。 */
+  var WRONG = (function () {
+    var set = {}, pfx = 'g851-mock2-';
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (!k || k.indexOf(pfx) !== 0) continue;
+        var ob = JSON.parse(localStorage.getItem(k) || 'null');
+        if (!ob || typeof ob !== 'object') continue;
+        for (var id in ob) {
+          var rec = ob[id];
+          if (!rec || typeof rec !== 'object') continue;
+          for (var p in rec) {
+            if (parseFloat(rec[p]) < 1) { set[id] = 1; break; }
+          }
+        }
+      }
+    } catch (e) {}
+    return set;
+  })();
+  function widOf(q) {
+    var t = q.querySelector('.tag');
+    if (!t) return '';
+    return 'm' + t.textContent.trim().replace(/[^0-9A-Za-z_一-鿿]/g, '');
+  }
+  function isWrong(q) { return !!WRONG[widOf(q)]; }
+
   function build() {
-    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
-    var base = (todo.length ? todo : all).slice();
-    // 未抽过的最前；其余按上次抽到时间从旧到新
-    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
-    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    /* 三档优先级：0 = 整卷里判过错；1 = 还没勾已掌握；2 = 已掌握。
+       档内按「上次抽到时间」从旧到新。 */
+    var base = all.map(function (q) {
+      var tier = isWrong(q) ? 0 : (q.classList.contains('done') ? 2 : 1);
+      return { q: q, tier: tier, seen: SEEN[keyOf(q)] || 0 };
+    });
+    base.sort(function (a, b) { return a.tier - b.tier || a.seen - b.seen; });
+    // 同一档同时刻的组内打乱，避免每次从第一章第一题开始
     var i = 0;
     while (i < base.length) {
-      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
-      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      var j = i;
+      while (j + 1 < base.length && base[j + 1].tier === base[i].tier
+             && base[j + 1].seen === base[i].seen) j++;
       if (j > i) {
         var chunk = shuffle(base.slice(i, j + 1));
         for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
       }
       i = j + 1;
     }
-    pool = base;
+    pool = base.map(function (x) { return x.q; });
   }
 
   function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
@@ -791,9 +823,10 @@
 
   function next() {
     if (!pool.length) build();
-    var q = pool.pop();
+    var q = pool.shift();   // shift：取"最久没碰"的（build 已按优先级+时间排好）
     SEEN[keyOf(q)] = Date.now(); saveSeen();
     show(q);
+    if (isWrong(q)) elIdx.textContent = '错题 · ' + elIdx.textContent;
   }
 
   function open() { build(); next(); ov.classList.add('on'); }
@@ -813,6 +846,9 @@
     if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
     if (e.key === 'ArrowRight') next();
   });
+
+  /* URL 带 ?quiz=1 直接进抽背（首页看板的「抽背这章」按钮用） */
+  if (/[?&]quiz=1/.test(location.search)) { open(); }
 })();
 </script>
 <script>

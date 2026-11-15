@@ -232,9 +232,54 @@
   </div>
 </div>
 
+<div class="q" id="q012">
+  <div class="hd"><span class="tag">2024-二-4</span><span class="ttl">单缝第一级明纹的两波长间距；换成光栅后第一主极大间距</span></div>
+  <div class="stem">单缝夫琅禾费衍射，<i>λ</i><sub>1</sub> = 400 nm，<i>λ</i><sub>2</sub> = 660 nm，缝宽 <i>a</i> = 1×10<sup>−2</sup> cm，透镜焦距 <i>f</i> = 50 cm。<br>
+  （1）求两光第一级衍射明纹中心的距离；<br>
+  （2）用 <i>d</i> = 1×10<sup>−3</sup> cm 的光栅代替单缝、衍射角情形一样时，求两光第一主极大的间距。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>单缝：只把 <i>a</i> sinθ = <i>m</i>λ 对 λ 取差，得 Δθ = Δλ/<i>a</i>
+      <div class="eqb"><i>a</i> = 1×10<sup>−2</sup> cm = 1×10<sup>−4</sup> m，　Δλ = 660 − 400 = 260 nm = 2.6×10<sup>−7</sup> m</div>
+      <div class="eqb">Δ<i>x</i><sub>1</sub> = <i>f</i>·<span class="frac"><span class="num">Δλ</span><span class="den"><i>a</i></span></span> = 0.5 × <span class="frac"><span class="num">2.6×10<sup>−7</sup></span><span class="den">1×10<sup>−4</sup></span></span> = 1.3×10<sup>−3</sup> m = <b>1.3 mm</b></div>
+    </div>
+    <div class="step"><b class="n">2</b>光栅：同一个式子，只把 <i>a</i> 换成 <i>d</i>
+      <div class="eqb"><i>d</i> = 1×10<sup>−3</sup> cm = 1×10<sup>−5</sup> m</div>
+      <div class="eqb">Δ<i>x</i><sub>1</sub> = <i>f</i>·<span class="frac"><span class="num">Δλ</span><span class="den"><i>d</i></span></span> = 0.5 × <span class="frac"><span class="num">2.6×10<sup>−7</sup></span><span class="den">1×10<sup>−5</sup></span></span> = 1.3×10<sup>−2</sup> m = <b>13 mm</b></div>
+    </div>
+    <div class="res">（1）单缝：两波长第一级明纹中心相距 <b>1.3 mm</b>；（2）换成光栅后：两第一主极大相距 <b>13 mm</b>（正好是 <i>a</i>/<i>d</i> = 10 倍）。</div>
+    <div class="warn"><b>易错</b>：① <i>a</i>、<i>d</i> 给的是 cm，先换 m（少换一次就错 10² 倍）；② 第（1）问只能用 <i>a</i>，别顺手用 <i>d</i>；③ 答案册口径是 Δ<i>x</i> = <i>f</i>Δλ/<i>a</i>；若严格按第 1 明纹位置 1.43λ/<i>a</i>，则为 1.86 mm 与 18.6 mm。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+<div class="q" id="q013">
+  <div class="hd"><span class="tag">2014-4</span><span class="ttl">光栅 30° 斜入射的全部级次；正入射第一级的半角宽与分辨本领</span></div>
+  <div class="stem">波长为 589.3 nm 的平行光以 30° 斜入射照射光栅，光栅宽 40 mm，每毫米有 500 条刻痕，透明与不透明宽度相等。求：<br>
+  （1）该光栅能呈现的全部级次；<br>
+  （2）正入射时第一级谱线的半角宽度和分辨本领。</div>
+  <div class="ans">
+    <div class="step"><b class="n">1</b>光栅常数与总刻线数
+      <div class="eqb"><i>d</i> = <span class="frac"><span class="num">1</span><span class="den">500</span></span> mm = 2 μm，　<i>N</i> = 500 × 40 = <b>2×10<sup>4</sup></b> 条</div>
+    </div>
+    <div class="step"><b class="n">2</b>斜入射光栅方程，看 <i>m</i> 能取到多少（<i>d</i>/λ = 2×10<sup>−6</sup>/589.3×10<sup>−9</sup> = 3.394）
+      <div class="eqb"><i>d</i>(sin<i>θ</i> + sin30°) = <i>m</i>λ　⇒　sin<i>θ</i> = <span class="frac"><span class="num"><i>m</i></span><span class="den">3.394</span></span> − 0.5</div>
+      <div class="eqb">|<i>m</i>| 上限：<i>m</i><sub>max</sub> = (1 + sin30°)×3.394 = 5.09 ⇒ <b><i>m</i> ≤ 5</b>；　<i>m</i><sub>min</sub> = −(1 − sin30°)×3.394 = −1.70 ⇒ <b><i>m</i> ≥ −1</b></div>
+    </div>
+    <div class="step"><b class="n">3</b>缺级：透明宽 = 不透明宽 ⇒ <i>a</i> = <i>d</i>/2，单缝极小条件 <i>a</i> sin<i>θ</i> = <i>k</i>λ 与光栅方程相比 ⇒ <b><i>m</i> = 2<i>k</i> 缺级</b>（±2、±4 看不到）
+    </div>
+    <div class="step"><b class="n">4</b>正入射第一级：sin<i>θ</i> = λ/<i>d</i> = 0.2946 ⇒ <i>θ</i> = 17.1°，cos<i>θ</i> = 0.9556
+      <div class="eqb">Δ<i>θ</i> = <span class="frac"><span class="num">λ</span><span class="den"><i>N d</i> cos<i>θ</i></span></span> = <span class="frac"><span class="num">589.3×10<sup>−9</sup></span><span class="den">2×10<sup>4</sup> × 2×10<sup>−6</sup> × 0.9556</span></span> = <b>1.54×10<sup>−5</sup> rad</b></div>
+      <div class="eqb"><i>R</i> = <i>mN</i> = 1 × 2×10<sup>4</sup> = <b>2×10<sup>4</sup></b></div>
+    </div>
+    <div class="res">（1）实际能看到的只有 <b>5 条</b>：<i>m</i> = <b>0、±1、+3、+5</b>（范围 −1 ≤ <i>m</i> ≤ 5，其中 ±2、±4 <b>缺级</b>，<i>m</i> ≤ −2 已超出 90°）；<br>（2）Δ<i>θ</i> = <b>1.54×10<sup>−5</sup> rad</b>，<i>R</i> = <b>2×10<sup>4</sup></b>。</div>
+    <div class="warn"><b>答案册这里有两处不能照抄</b>（2014 答案册 p92）：它算出 <i>m</i><sub>min</sub> = −1，却写成「全部级次 0, ±1, ±2 … ±5」；又没处理「透明宽 = 不透明宽」带来的 ±2、±4 缺级。<br><b>记住</b>：① 斜入射时正负两侧<u>不对称</u>，<i>m</i><sub>max</sub> 与 <i>m</i><sub>min</sub> 要分别算；② 题目一旦给出「缝宽/不透光宽」的关系，就是在考缺级，必须查。</div>
+    <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
 <div class="q" id="q004">
   <div class="hd"><span class="tag">2021-二-2</span><span class="ttl">2.5 m 望远镜的分辨角；放大率取多大合适</span></div>
-  <div class="stem">反射式天文望远镜物镜的通光孔径为 2.5 m，求当发射波长为 550 nm 的光波时，可以分辨的双星的最小夹角？为充分利用物镜的分辨本领，该望远镜的放大率以多大为宜？（人瞳孔的直径取 2 mm。）</div>
+  <div class="stem">反射式天文望远镜物镜的通光孔径为 2.5 m，求当发射波长为 550 nm 的光波时，可以分辨的双星的最小夹角？为充分利用物镜的分辨本领，该望远镜的放大率以多大为宜？（人瞳孔的直径取 2 mm。）<span class="qp" data-n="2"></span></div>
   <div class="ans">
     <div class="step"><b class="n">1</b>最小分辨角
       <div class="eqb"><i>θ</i><sub>min</sub> = 1.22<span class="frac"><span class="num">550×10<sup>−9</sup></span><span class="den">2.5</span></span> = 2.68×10<sup>−7</sup> rad ≈ <b>0.055″</b></div>
@@ -685,23 +730,55 @@
     return (document.title || '') + '|' + (t ? t.textContent.trim() : '');
   }
 
+  /* 错题集合：扫所有整卷判分记录，凡是判过「半分/0 分」的题包裹 id 都收进来。
+     包裹 id 规则与 生成模拟卷.py 一致：'m' + tag 去掉非字母数字下划线（中文保留）。 */
+  var WRONG = (function () {
+    var set = {}, pfx = 'g851-mock2-';
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (!k || k.indexOf(pfx) !== 0) continue;
+        var ob = JSON.parse(localStorage.getItem(k) || 'null');
+        if (!ob || typeof ob !== 'object') continue;
+        for (var id in ob) {
+          var rec = ob[id];
+          if (!rec || typeof rec !== 'object') continue;
+          for (var p in rec) {
+            if (parseFloat(rec[p]) < 1) { set[id] = 1; break; }
+          }
+        }
+      }
+    } catch (e) {}
+    return set;
+  })();
+  function widOf(q) {
+    var t = q.querySelector('.tag');
+    if (!t) return '';
+    return 'm' + t.textContent.trim().replace(/[^0-9A-Za-z_一-鿿]/g, '');
+  }
+  function isWrong(q) { return !!WRONG[widOf(q)]; }
+
   function build() {
-    var todo = all.filter(function (q) { return !q.classList.contains('done'); });
-    var base = (todo.length ? todo : all).slice();
-    // 未抽过的最前；其余按上次抽到时间从旧到新
-    base.sort(function (a, b) { return (SEEN[keyOf(a)] || 0) - (SEEN[keyOf(b)] || 0); });
-    // 时间戳相同的组内打乱，避免每次都从第一章第一题开始
+    /* 三档优先级：0 = 整卷里判过错；1 = 还没勾已掌握；2 = 已掌握。
+       档内按「上次抽到时间」从旧到新。 */
+    var base = all.map(function (q) {
+      var tier = isWrong(q) ? 0 : (q.classList.contains('done') ? 2 : 1);
+      return { q: q, tier: tier, seen: SEEN[keyOf(q)] || 0 };
+    });
+    base.sort(function (a, b) { return a.tier - b.tier || a.seen - b.seen; });
+    // 同一档同时刻的组内打乱，避免每次从第一章第一题开始
     var i = 0;
     while (i < base.length) {
-      var j = i, t0v = SEEN[keyOf(base[i])] || 0;
-      while (j + 1 < base.length && (SEEN[keyOf(base[j + 1])] || 0) === t0v) j++;
+      var j = i;
+      while (j + 1 < base.length && base[j + 1].tier === base[i].tier
+             && base[j + 1].seen === base[i].seen) j++;
       if (j > i) {
         var chunk = shuffle(base.slice(i, j + 1));
         for (var k = 0; k < chunk.length; k++) base[i + k] = chunk[k];
       }
       i = j + 1;
     }
-    pool = base;
+    pool = base.map(function (x) { return x.q; });
   }
 
   function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
@@ -725,9 +802,10 @@
 
   function next() {
     if (!pool.length) build();
-    var q = pool.pop();
+    var q = pool.shift();   // shift：取"最久没碰"的（build 已按优先级+时间排好）
     SEEN[keyOf(q)] = Date.now(); saveSeen();
     show(q);
+    if (isWrong(q)) elIdx.textContent = '错题 · ' + elIdx.textContent;
   }
 
   function open() { build(); next(); ov.classList.add('on'); }
@@ -747,6 +825,9 @@
     if (e.key === ' ') { e.preventDefault(); document.getElementById('qshow').click(); }
     if (e.key === 'ArrowRight') next();
   });
+
+  /* URL 带 ?quiz=1 直接进抽背（首页看板的「抽背这章」按钮用） */
+  if (/[?&]quiz=1/.test(location.search)) { open(); }
 })();
 </script>
 <script>
