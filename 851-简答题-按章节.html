@@ -95,6 +95,49 @@
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
+
+
+
+
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
 </head>
 <body>
 <div class="wrap">
@@ -294,15 +337,16 @@
   <div class="hd"><span class="tag">2017-1(3)</span><span class="ttl">玻璃上镀保护膜应满足什么条件</span></div>
   <div class="stem">若想在玻璃上镀一层保护膜，则该膜应满足什么条件？该膜层的反射率是多少？</div>
   <div class="ans">
-    <p>应满足<b>增反（高反）条件</b>：</p>
+    <p>保护膜的作用是<b>保护玻璃表面但不改变它的光学性能</b>，所以要让这层膜<b>等效于不存在</b>：</p>
     <ul>
-      <li>膜折射率 <b>n<sub>1</sub> &gt; n<sub>2</sub></b>（膜大于玻璃）；</li>
-      <li>膜厚 <b>n<sub>1</sub>h = λ<sub>0</sub>/4</b>，使两反射光同相叠加。</li>
+      <li>膜的光学厚度取 <b>n<sub>1</sub>h = λ<sub>0</sub>/2</b>（半波层，mλ<sub>0</sub>/2，m = 1,2,…）；</li>
+      <li>此时膜上下两表面反射光相差 2π，与没有膜时完全一样。</li>
     </ul>
-    <p>此时反射率最大：</p>
-    <div class="eq">R<sub>M</sub> = [ (n<sub>0</sub>n<sub>2</sub> − n<sub>1</sub>²) / (n<sub>0</sub>n<sub>2</sub> + n<sub>1</sub>²) ]²</div>
-    <p>其中 n<sub>0</sub> 为空气、n<sub>1</sub> 为膜、n<sub>2</sub> 为玻璃。若改成"增透"，只需把不等号反向并让 n<sub>1</sub> = √(n<sub>0</sub>n<sub>2</sub>)。</p>
-    <span class="src">【原答】</span>
+    <p>所以反射率就是<b>裸玻璃表面的反射率</b>（正入射）：</p>
+    <div class="eq">R = [ (n<sub>0</sub> − n<sub>2</sub>) / (n<sub>0</sub> + n<sub>2</sub>) ]²</div>
+    <p>其中 n<sub>0</sub> 为空气、n<sub>2</sub> 为玻璃（n<sub>1</sub> 只要满足膜厚条件，取值不影响结果）。</p>
+    <div class="warn"><b>别答成增反膜</b>：<b>增反</b>膜是 n<sub>1</sub> &gt; n<sub>2</sub> + 光学厚度 λ<sub>0</sub>/4，反射率 R<sub>M</sub> = [(n<sub>0</sub>n<sub>2</sub> − n<sub>1</sub>²)/(n<sub>0</sub>n<sub>2</sub> + n<sub>1</sub>²)]²；<b>增透</b>膜是 n<sub>1</sub> = √(n<sub>0</sub>n<sub>2</sub>) + λ<sub>0</sub>/4。本题问的是<b>保护膜</b>，条件就是 <b>λ<sub>0</sub>/2</b>。<br>（本页此前误答成「λ<sub>0</sub>/4 增反」，2026-11-15 按 2017 答案册 p109 原文改正：答案册写的就是 n<sub>1</sub>h = λ/2、R = [(n<sub>0</sub>−n<sub>2</sub>)/(n<sub>0</sub>+n<sub>2</sub>)]²。）</div>
+    <span class="src">【真题 + 教材】</span>
   </div>
 </div>
 
@@ -378,7 +422,7 @@
   <div class="stem">杨氏双缝干涉实验中，光源上移，条纹会出现什么变化？增加光源到双缝的距离，条纹如何变化？</div>
   <div class="ans">
     <p>①<b>光源上移</b>：零级条纹向<b>相反方向</b>（下方）平移，整个条纹图样下移；<b>条纹间距不变</b>（Δx = λD/d 只与 D、d 有关）。</p>
-    <p>②<b>增大光源到双缝的距离</b>：光源的<b>空间相干性</b>变差，条纹可见度下降、逐渐模糊直至消失；条纹间距仍不变。判据是光源宽度对应的相干孔径 θ ≈ λ/b，超过即失去相干性。</p>
+    <p>②<b>增大光源到双缝的距离</b>：<b>亮度下降</b>（照度 ∝ 1/<i>l</i>²），但<b>空间相干性反而变好</b> —— 光源对双缝的张角变小，允许的最大缝距 <i>d</i><sub>max</sub> = λ<i>l</i>/<i>a</i> 变大，条纹可见度<b>不会</b>因此下降，条纹间距也仍不变。</p><div class="warn"><b>易错（这题最容易答反）</b>：光源离双缝<b>越远</b>，空间相干性<b>越好</b>（张角小）；光源<b>越宽</b>或离得<b>越近</b>，相干性才越差。答案册 2024 p2 只写「光源远离双缝，干涉条纹亮度下降」——讲的是亮度，不是相干性。<br>本页此前写成「空间相干性变差、可见度下降」，方向搞反了，已改正；判据与本库 <code>2023-二-2</code> 的 <i>d</i><sub>max</sub> = λ<i>l</i>/<i>a</i> 一致。</div>
     <span class="src">【教材】</span>
   </div>
 </div>
@@ -558,6 +602,7 @@
   <div class="ans">
     <p><b>①沿光轴入射：不发生双折射。</b>此时 o 光与 e 光传播方向相同、速度也相同（都等于 n<sub>o</sub>），两束光不分开。</p>
     <p><b>②光轴平行于表面、光垂直入射：发生双折射。</b>此时光轴垂直于传播方向，o 光与 e 光速度不同（分别为 n<sub>o</sub>、n<sub>e</sub>），产生双折射 —— 但因两者仍沿法线传播，<b>传播方向相同，只是速度不同</b>（不分开）。</p>
+    <div class="warn"><b>口径（答案册 p121）</b>：答案册对第 2 问写「此时 tanα = 0，<b>也不会发生双折射</b>」—— 它说的是<b>不分开</b>（离散角为零）。物理上 o、e 的<b>速度不同</b>（n<sub>o</sub> ≠ n<sub>e</sub>），严格说仍属双折射，只是两条光线重合；这正是波片能产生相位差的原因。<br><b>答题写全</b>：①（沿光轴）不发生双折射，两光同速；②（垂直光轴）光线<b>不分开</b>，但 o、e 速度不同、有相位差，器件上就是波片。若按答案册口径答「不发生」，必须把「不分开」三个字写出来。</div>
     <div class="knote">同类问法见 2024-1(4)：n<sub>e</sub> 只在波法线⊥光轴时才叫 e 光折射率。</div>
     <span class="src">【教材】</span>
   </div>
@@ -585,9 +630,10 @@
       <li><b>全波片</b>（相位差 2π）：偏振态<b>不变</b>，出射仍是原方向的线偏振光。</li>
       <li><b>半波片</b>（相位差 π）：出射仍是线偏振光，但振动面相对入射方向<b>转过 2α</b>（α 为入射振动方向与波片光轴的夹角）。α = 45° 时转过 90°。</li>
     </ul>
-    <p>记忆：全波片"什么都不做"，半波片"镜像反转"。</p>
+    <p>记忆：全波片"什么都不做"，半波片"镜像反转"。<div class="warn"><b>⚠ 答案册这里写错了</b>（2021 答案册 p133 一.4）：它写「线偏振光过<b>半波片</b>后变为圆偏振光」——错。线偏振光过任何波片后仍是<b>线偏振</b>：全波片方向不变，半波片转 2α，1/4 波片在 α=45° 时才是圆偏振。<br><b>别被机构答案带跑</b>：把「只有 1/4 波片能把线偏振变圆偏振」记死。</div></p>
     <span class="src">【原答】</span>
-  </div>
+  
+    <div class="warn"><b>考场速答（3 句，背这个）</b>：①<b>全波片</b>：δ = 2π<i>m</i> ⇒ 两个分量同相回来，<b>出射仍是线偏振、振动方向不变</b>；②<b>半波片</b>：δ = (2<i>m</i>+1)π ⇒ 一个分量反号，<b>仍是线偏振，但振动方向相对光轴镜像</b>（原与光轴成 θ，出射成 −θ，即整体转了 2θ）；③判据一句话：<b>看两分量相位差是 2π 的整数倍还是半整数倍</b>，别去背"转多少度"，画个轴就出来。</div></div>
 </div>
 
 <div class="q" id="q033">
@@ -624,7 +670,7 @@
 
 <div class="q" id="q035">
   <div class="hd"><span class="tag">2024-1(4)</span><span class="ttl">"o 光 n = n<sub>o</sub>，e 光 n = n<sub>e</sub>" 对不对</span></div>
-  <div class="stem">有人说，n<sub>1</sub> = n<sub>1</sub> = n<sub>o</sub>，n<sub>3</sub> = n<sub>e</sub>，则 o 光 n = n<sub>o</sub>，e 光 n = n<sub>e</sub>，对还是不对，说明理由？</div>
+  <div class="stem">有人说，n<sub>1</sub> = n<sub>2</sub> = n<sub>o</sub>，n<sub>3</sub> = n<sub>e</sub>，则 o 光 n = n<sub>o</sub>，e 光 n = n<sub>e</sub>，对还是不对，说明理由？</div>
   <div class="ans"><p><b>结论：不对。</b>这句话把 <i>n</i><sub>o</sub> 和 <i>n</i><sub>e</sub> 当成了“两种光各自的折射率”，而它们其实是<b>两个主折射率</b>——只有在特定方向上才对应某一支光。</p><p><b>① o 光</b>：折射率恒为 <i>n</i><sub>o</sub>，<b>与传播方向无关</b>（这半句成立）。</p><p><b>② e 光</b>：折射率随波法线与光轴的夹角 θ 变化：</p><div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>n</i><sub>e</sub>(θ)<sup>2</sup></span></span> = <span class="frac"><span class="num">cos<sup>2</sup>θ</span><span class="den"><i>n</i><sub>o</sub><sup>2</sup></span></span> + <span class="frac"><span class="num">sin<sup>2</sup>θ</span><span class="den"><i>n</i><sub>e</sub><sup>2</sup></span></span></div><p>只有<b>θ = 90°（波法线⊥光轴）</b>时才有 <i>n</i><sub>e</sub>(90°) = <i>n</i><sub>e</sub>；<b>θ = 0（沿光轴）</b>时 <i>n</i><sub>e</sub>(0) = <i>n</i><sub>o</sub>，两支不分开、无双折射。</p><p><b>③ 一句话记法</b>：<b>o 光走哪都是 n<sub>o</sub>；e 光只有“垂直于光轴”时才 n<sub>e</sub>，沿光轴时退回 n<sub>o</sub>，其余方向介于两者之间。</b></p><p><b>三种问法是一回事</b>：<br>·「n<sub>1</sub>=n<sub>2</sub>=n<sub>o</sub>、n<sub>3</sub>=n<sub>e</sub>，则 o 光 n=n<sub>o</sub>、e 光 n=n<sub>e</sub>，对吗？」<br>·「晶体双折射有两个许可折射率 n<sub>o</sub>、n<sub>e</sub>，这样说对不对？」<br>·「沿光轴入射会不会双折射？」——不会，因为此时两支折射率都等于 n<sub>o</sub>。<br>答题时按上面①~③的顺序写，都能拿到分。</p><span class="src">【真题 + 教材】</span></div></div>
 
 <!-- ============ 五 ============ -->
@@ -1707,5 +1753,214 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 })();
 </script>
+<!--HINT--><style>
+.hintbtn{margin-left:8px;border:1px solid #d8cfc2;background:#fff;color:#6d3a24;border-radius:14px;
+  padding:4px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.hintbtn:hover{background:#fdfaf5}
+.hintbtn.on{background:#6d3a24;color:#fff;border-color:#6d3a24}
+.hintbox{display:none;margin:8px 0 0;padding:9px 12px;background:#fdf8f2;border-left:3px solid #8c4a2f;
+  border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.62;color:#3a3a3a}
+.hintbox.on{display:block}
+.hintbox b{color:#6d3a24;font-size:12px;letter-spacing:.04em;margin-right:8px}
+@media print{.hintbtn{display:none}.hintbox{display:block}}
+</style>
+<script>
+/* HINT —— 每题「看提示」：先给一行要点，回忆完整推导 */
+(function () {
+  if (window.__hintInit) return;
+  window.__hintInit = 1;
+
+  function tx(el) { return el ? el.textContent.replace(/\s+/g, " ").trim() : ""; }
+
+  function pick(q) {
+    var ans = q.querySelector(".ans");
+    if (!ans) return "";
+    var b = ans.querySelector("b");
+    if (b) {
+      var t = tx(b).replace(/^【[^】]*】\s*/, "");
+      if (t.length >= 4 && t.length <= 80) return t;
+    }
+    var p = ans.querySelector("p") || ans;
+    var s = tx(p);
+    var m = s.match(/^[^。；]{6,70}[。；]/);
+    if (m) return m[0].replace(/[。；]$/, "");
+    var eq = ans.querySelector(".eqb");
+    if (eq) { var e = tx(eq); if (e) return e.slice(0, 80); }
+    return s.slice(0, 60);
+  }
+
+  var n = 0;
+  Array.prototype.forEach.call(document.querySelectorAll(".q"), function (q) {
+    var hd = q.querySelector(".hd"), stem = q.querySelector(".stem"), ans = q.querySelector(".ans");
+    if (!ans || !hd || q.querySelector(".hintbtn")) return;
+    var hint = pick(q);
+    if (!hint) return;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "hintbtn";
+    btn.textContent = "看提示";
+
+    var box = document.createElement("div");
+    box.className = "hintbox";
+    var lab = document.createElement("b");
+    lab.textContent = "要点";
+    box.appendChild(lab);
+    box.appendChild(document.createTextNode(hint));
+
+    btn.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      var on = box.classList.toggle("on");
+      btn.classList.toggle("on", on);
+      btn.textContent = on ? "收起要点" : "看提示";
+    });
+
+    // 按钮挂在题头（.hd），要点框插在题干（.stem）之后 ——
+    // 这样即使整页答案被「收起答案」隐藏，要点仍然看得见。
+    hd.appendChild(btn);
+    var anchor = stem || hd;
+    anchor.parentNode.insertBefore(box, anchor.nextSibling);
+    n++;
+  });
+})();
+</script>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
 </body>
 </html>

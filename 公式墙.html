@@ -88,6 +88,49 @@
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
+
+
+
+
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
 </head><style>
  .wallbar{margin:12px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
  .wallbar button{background:#fff;border:1px solid #d8cbbb;color:#6d3a24;border-radius:14px;
@@ -100,6 +143,9 @@
  .wallch .caret{font-size:12px;transition:transform .15s;display:inline-block}
  .wallch.folded .caret{transform:rotate(-90deg)}
  .wallch .chnum{margin-left:auto;font-size:12px;font-weight:400;opacity:.85}
+ .wallch .chgo{margin-left:10px;font-size:12px;font-weight:400;color:#f6e6da;text-decoration:none;
+   border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:1px 8px;white-space:nowrap}
+ .wallch .chgo:hover{background:rgba(255,255,255,.16)}
  .wallsec{margin:20px 0 10px;padding-bottom:5px;border-bottom:2px solid #e3dfd7;font-size:14.5px;color:#6d3a24}
  .fitem{margin:12px 0;padding:10px 14px;background:#fbf9f6;border-left:3px solid #d8cbbb;border-radius:4px}
  .fttl{font-weight:700;font-size:13.5px;color:#4a3a2a;margin-bottom:6px}
@@ -108,578 +154,749 @@
  .fitem .eqb{margin:6px 0;text-align:center}
  .fitem .eqb .pr{margin-left:.06em;font-family:Georgia,'Times New Roman',serif;font-style:normal;font-size:.92em}
  .fitem .eqb i + i{margin-left:.06em}
- @media print{.wallch{background:#eee;color:#000}.chbody{display:block !important}.wallbar{display:none}}
+ .wallbar button.on{background:#6d3a24;color:#fff;border-color:#6d3a24}
+ #fprog{font-size:12.5px;color:#6d3a24;font-weight:600}
+ .fr{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap;align-items:center}
+ .fr span{font-size:11.5px;color:#9a8a7a;margin-right:2px}
+ .fr button{border:1px solid #e0d6c8;background:#fff;color:#7a6a5a;border-radius:12px;
+   padding:2px 11px;font-size:12px;cursor:pointer;font-family:inherit}
+ .fr button:hover{background:#f6f1ea}
+ .fr button.sel{color:#fff;font-weight:600}
+ .fr button[data-v="1"].sel{background:#3f8a4a;border-color:#3f8a4a}
+ .fr button[data-v="0.5"].sel{background:#c8892b;border-color:#c8892b}
+ .fr button[data-v="0"].sel{background:#b23a2e;border-color:#b23a2e}
+ .fitem.ok{border-left-color:#3f8a4a;background:#f4f9f4}
+ .fitem.mid{border-left-color:#c8892b;background:#fdf9f1}
+ .fitem.bad{border-left-color:#b23a2e;background:#fdf5f4}
+ body.mem .fitem .eqb{filter:blur(7px);cursor:pointer;user-select:none}
+ body.mem .fitem.rev .eqb{filter:none}
+ body.onlybad .fitem:not(.bad){display:none}
+ @media print{.wallch{background:#eee;color:#000}.chbody{display:block !important}.wallbar{display:none}
+   body.mem .fitem .eqb{filter:none}
+   .fr{display:none}}
 </style><body><div class="wrap"><h1>公式墙</h1>
 <div class="sub">按石顺祥《物理光学与应用光学》第 3 版章节整理 · 符号照录教材 · 标书页</div>
 <p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="搜索.html">搜索</a></p>
 <div class="fcond" style="margin:10px 0;padding:8px 12px;background:#f4e9dd;border-radius:6px"><b>符号说明</b>：本页符号严格照教材（相位差用 <b>φ</b>、离散角用 <b>α</b>、光焦度用 <b>φ</b>、级次用 <b>m</b>）。题库解答里沿用的 <b>δ</b> 与教材的 <b>φ</b> 是同一个量（相位差），只是记号不同。</div>
-<div class="wallbar"><button onclick="allFold(true)">全部收起</button><button onclick="allFold(false)">全部展开</button><span class="wallhint">点章节标题可单独收合</span></div>
+<div class="wallbar"><button onclick="allFold(true)">全部收起</button><button onclick="allFold(false)">全部展开</button><button id="memBtn" type="button">背诵模式</button><button id="badBtn" type="button">只看没记住</button><span id="fprog" class="wallhint"></span><span class="wallhint">点章节标题可单独收合</span></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 1 章 · 光在各向同性介质中的传播特性<span class="chnum">11 条</span></h2>
+<h2 class="wallch" id="ch1" onclick="tog(this)"><span class="caret">▾</span>第 1 章 · 光在各向同性介质中的传播特性<span class="chnum">12 条</span><a class="chgo" href="考点.html?ch1" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">基本方程</h3>
-<div class="fitem">
+<div class="fitem" data-fid="c7c17116">
 <div class="fttl">麦克斯韦方程组（无源介质）<span class="fpg">书 p2</span></div>
 <div class="eqb">∇·<i>D</i> = 0　∇·<i>B</i> = 0</div>
 <div class="eqb">∇×<i>E</i> = −<span class="frac"><span class="num">∂<i>B</i></span><span class="den">∂<i>t</i></span></span>　∇×<i>H</i> = <span class="frac"><span class="num">∂<i>D</i></span><span class="den">∂<i>t</i></span></span></div>
 <div class="fsym">符号：E 电场强度、D 电位移矢量、B 磁感应强度、H 磁场强度</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="bd60a600">
 <div class="fttl">物质方程与折射率<span class="fpg">书 p2</span></div>
 <div class="eqb"><i>D</i> = ε<i>E</i>　<i>B</i> = μ<i>H</i>　<i>J</i> = σ<i>E</i></div>
 <div class="eqb"><i>n</i> = √(ε<sub>r</sub>μ<sub>r</sub>)　<i>v</i> = <span class="frac"><span class="num"><i>c</i></span><span class="den"><i>n</i></span></span></div>
 <div class="fsym">符号：ε = ε₀ε<sub>r</sub> 介电常数；μ = μ₀μ<sub>r</sub> 磁导率；σ 电导率；v 介质中光速</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="237cad4c">
 <div class="fttl">波动方程<span class="fpg">书 p2</span></div>
 <div class="eqb">∇²<i>E</i> − με<span class="frac"><span class="num">∂²<i>E</i></span><span class="den">∂<i>t</i>²</span></span> = 0</div>
 <div class="fsym">符号：με = 1/v²，是光波在介质中传播必须满足的方程</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">平面光波</h3>
-<div class="fitem">
+<div class="fitem" data-fid="41700a32">
 <div class="fttl">平面波表达式<span class="fpg">书 p4</span></div>
 <div class="eqb"><i>E</i> = <i>A</i> cos(ω<i>t</i> − <b>k</b>·<b>r</b> + φ<sub>0</sub>)</div>
 <div class="eqb">|<b>k</b>| = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span></div>
 <div class="fsym">符号：ω 角频率；k 波矢；φ₀ 初相位；教材时谐因子取 e<sup>−i(ωt−k·r)</sup></div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="47b88e0d">
 <div class="fttl">能流密度（坡印廷矢量）<span class="fpg">书 p5</span></div>
 <div class="eqb"><b>S</b> = <b>E</b> × <b>H</b></div>
 <div class="eqb">⟨<b>S</b>⟩ = <span class="frac"><span class="num">1</span><span class="den">2</span></span>Re(<b>E</b> × <b>H</b>*)</div>
 <div class="fsym">符号：⟨S⟩ 平均能流密度即光强 I；单色光下 I ∝ E₀²</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="59f279ca">
 <div class="fttl">相速度与群速度<span class="fpg">书 p14</span></div>
 <div class="eqb"><i>v</i><sub>g</sub> = <i>v</i><sub>p</sub> − λ<span class="frac"><span class="num">d<i>v</i><sub>p</sub></span><span class="den">dλ</span></span></div>
 <div class="fsym">符号：正常色散时 v<sub>g</sub>&lt;v<sub>p</sub>；反常色散时 v<sub>g</sub>&gt;v<sub>p</sub></div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">反射与折射</h3>
-<div class="fitem">
+<div class="fitem" data-fid="8f2da13f">
 <div class="fttl">菲涅耳公式<span class="fpg">书 p15</span></div>
 <div class="eqb"><i>r</i><sub>s</sub> = −<span class="frac"><span class="num">sin(θ<sub>1</sub>−θ<sub>2</sub>)</span><span class="den">sin(θ<sub>1</sub>+θ<sub>2</sub>)</span></span></div>
 <div class="eqb"><i>r</i><sub>p</sub> = <span class="frac"><span class="num">tan(θ<sub>1</sub>−θ<sub>2</sub>)</span><span class="den">tan(θ<sub>1</sub>+θ<sub>2</sub>)</span></span></div>
 <div class="fsym">符号：θ₁ 入射角、θ₂ 折射角；s 分量 ⊥ 入射面，p 分量在入射面内</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="4008600d">
 <div class="fttl">反射率与透射率<span class="fpg">书 p16</span></div>
 <div class="eqb"><i>R</i> = |<i>r</i>|²　<i>T</i> = <span class="frac"><span class="num"><i>n</i><sub>2</sub>cosθ<sub>2</sub></span><span class="den"><i>n</i><sub>1</sub>cosθ<sub>1</sub></span></span>|<i>t</i>|²</div>
 <div class="fsym">符号：正入射时 r = (n₂−n₁)/(n₂+n₁)，R = r²</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="94e50946">
 <div class="fttl">布儒斯特角<span class="fpg">书 p18</span></div>
 <div class="eqb">tanθ<sub>B</sub> = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>n</i><sub>1</sub></span></span></div>
 <div class="fsym">符号：此时 θ₁+θ₂ = 90°，反射光只含 s 分量（纯偏振）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="4cf5f930">
 <div class="fttl">全反射<span class="fpg">书 p19</span></div>
 <div class="eqb">sinθ<sub>c</sub> = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>n</i><sub>1</sub></span></span></div>
 <div class="eqb">tan<span class="frac"><span class="num">Δφ</span><span class="den">2</span></span> = <span class="frac"><span class="num">√(sin²θ<sub>1</sub> − sin²θ<sub>c</sub>)</span><span class="den">cosθ<sub>1</sub></span></span></div>
 <div class="fsym">符号：Δφ = φ<sub>s</sub> − φ<sub>p</sub>，全反射时 s、p 分量产生不同相位跃变；Δφ 随入射角变化</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">偏振</h3>
-<div class="fitem">
+<div class="fitem" data-fid="255ce3c2">
 <div class="fttl">偏振度<span class="fpg">书 p10</span></div>
 <div class="eqb"><i>P</i> = <span class="frac"><span class="num"><i>I</i><sub>max</sub> − <i>I</i><sub>min</sub></span><span class="den"><i>I</i><sub>max</sub> + <i>I</i><sub>min</sub></span></span></div>
 <div class="fsym">符号：自然光 P = 0，线偏振 P = 1，部分偏振 0&lt;P&lt;1</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<h3 class="wallsec">反射与折射的偏振</h3>
+<div class="fitem" data-fid="e9cdf082">
+<div class="fttl">反射后圆/椭圆偏振的旋向判据<span class="fpg">指导书未单列</span></div>
+<div class="eqb"><i>r</i><sub>s</sub> 与 <i>r</i><sub>p</sub> <b>异号</b> ⇒ 附加 π ⇒ 旋向<b>反转</b>；<b>同号</b> ⇒ 旋向<b>不变</b></div>
+<div class="eqb">叠加波片时：δ<sub>out</sub> = δ<sub>in</sub> + Δ，只有越过 0 或 ±180° 才翻旋向</div>
+<div class="fsym">符号：s 分量 ⊥ 入射面、p 分量在入射面内。<b>易错</b>：空气→玻璃 r<sub>s</sub>&lt;0、r<sub>p</sub>&gt;0（反转）；水→空气两者同号（不反转）——不能一律背「反射必反旋向」</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 2 章 · 光的干涉<span class="chnum">11 条</span></h2>
+<h2 class="wallch" id="ch2" onclick="tog(this)"><span class="caret">▾</span>第 2 章 · 光的干涉<span class="chnum">12 条</span><a class="chgo" href="考点.html?ch2" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">相干叠加与条纹</h3>
-<div class="fitem">
+<div class="fitem" data-fid="9dce614a">
 <div class="fttl">两相干光叠加<span class="fpg">书 p31</span></div>
 <div class="eqb"><i>I</i> = <i>I</i><sub>1</sub> + <i>I</i><sub>2</sub> + 2√(<i>I</i><sub>1</sub><i>I</i><sub>2</sub>) cosφ</div>
 <div class="fsym">符号：φ 为相位差（教材相位差一律用 φ）；φ = 2πΔ/λ，Δ 为光程差</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="81356141">
 <div class="fttl">两平面波干涉的条纹间距<span class="fpg">书 p34</span></div>
 <div class="eqb">Δ<i>x</i> = <span class="frac"><span class="num">λ</span><span class="den">sinθ<sub>1</sub> + sinθ<sub>2</sub></span></span></div>
 <div class="fsym">符号：θ₁、θ₂ 为两波与法线（z 轴）的夹角，分居两侧取和、同侧取差</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="6fa15068">
 <div class="fttl">可见度<span class="fpg">书 p32</span></div>
 <div class="eqb"><i>V</i> = <span class="frac"><span class="num"><i>I</i><sub>max</sub> − <i>I</i><sub>min</sub></span><span class="den"><i>I</i><sub>max</sub> + <i>I</i><sub>min</sub></span></span></div>
 <div class="fsym">符号：等强度时 V=1；光源宽度、谱线宽度都会降低 V</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="36e48b1f">
 <div class="fttl">杨氏双缝条纹间距<span class="fpg">书 p33</span></div>
 <div class="eqb">Δ<i>x</i> = <span class="frac"><span class="num">λ<i>D</i></span><span class="den"><i>d</i></span></span></div>
 <div class="fsym">符号：D 缝到屏距离、d 双缝间距；入水后 λ′=λ/n，Δx 同比例缩小</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">薄膜干涉</h3>
-<div class="fitem">
+<div class="fitem" data-fid="37b67726">
 <div class="fttl">等倾干涉<span class="fpg">书 p36</span></div>
 <div class="eqb">2<i>n</i><i>h</i> cosθ<sub>2</sub> = <i>m</i>λ（亮）</div>
 <div class="eqb">2<i>n</i><i>h</i> cosθ<sub>2</sub> = (<i>m</i>+<span class="frac"><span class="num">1</span><span class="den">2</span></span>)λ（暗）</div>
 <div class="fsym">符号：θ₂ 膜内折射角；级次教材用 m；有半波损失时附加 λ/2</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="9f9c3726">
 <div class="fttl">牛顿环<span class="fpg">书 p37</span></div>
 <div class="eqb"><i>r</i><sub>m</sub> = √(<i>m</i>λ<i>R</i>)（暗环）</div>
 <div class="fsym">符号：R 透镜曲率半径；中心为暗斑（半波损失）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="00d4ce83">
 <div class="fttl">单层增透膜<span class="fpg">书 p38</span></div>
 <div class="eqb"><i>h</i> = <span class="frac"><span class="num">λ</span><span class="den">4<i>n</i><sub>1</sub></span></span></div>
 <div class="eqb"><i>R</i><sub>min</sub> = (<span class="frac"><span class="num"><i>n</i><sub>0</sub><i>n</i><sub>2</sub> − <i>n</i><sub>1</sub>²</span><span class="den"><i>n</i><sub>0</sub><i>n</i><sub>2</sub> + <i>n</i><sub>1</sub>²</span></span>)²</div>
 <div class="fsym">符号：要求 n₀&lt;n₁&lt;n₂；h 为膜厚（光学厚度 λ/4）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">相干性与多光束</h3>
-<div class="fitem">
+<div class="fitem" data-fid="61951d17">
 <div class="fttl">相干长度（时间相干性）<span class="fpg">书 p38</span></div>
 <div class="eqb">Δ<i>l</i><sub>max</sub> = <span class="frac"><span class="num">λ²</span><span class="den">Δλ</span></span></div>
 <div class="eqb"><i>m</i><sub>max</sub> = <span class="frac"><span class="num">λ</span><span class="den">Δλ</span></span></div>
 <div class="fsym">符号：连续谱宽 Δλ；条纹消失级次 m=λ/Δλ（不是 λ/2Δλ）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="33abc255">
 <div class="fttl">空间相干性<span class="fpg">书 p38</span></div>
 <div class="eqb"><i>d</i><sub>c</sub> = <span class="frac"><span class="num">λ</span><span class="den">θ</span></span>　<i>A</i><sub>c</sub> = (<span class="frac"><span class="num">λ</span><span class="den">θ</span></span>)²</div>
 <div class="fsym">符号：θ 光源对双缝张角；临界宽度 b = λl/d</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="641960b0">
 <div class="fttl">F–P 透射谱线半宽度<span class="fpg">书 p43</span></div>
 <div class="eqb">Δλ<sub>1/2</sub> = <span class="frac"><span class="num">λ²(1 − <i>R</i>)</span><span class="den">2π<i>n</i><i>h</i>√<i>R</i></span></span></div>
 <div class="fsym">符号：R 镜面反射率；R 越大条纹越锐；干涉滤光片的带宽即由它决定</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="efe9cc8e">
 <div class="fttl">法布里–珀罗干涉仪<span class="fpg">书 p42</span></div>
 <div class="eqb">2<i>n</i><i>h</i> cosθ<sub>2</sub> = <i>m</i>λ</div>
 <div class="eqb">Δλ<sub>FSR</sub> = <span class="frac"><span class="num">λ²</span><span class="den">2<i>n</i><i>h</i></span></span></div>
 <div class="fsym">符号：Δλ<sub>FSR</sub> 为自由光谱范围；分辨本领 A = mN<sub>eff</sub></div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<h3 class="wallsec">薄膜干涉与相位</h3>
+<div class="fitem" data-fid="4231a949">
+<div class="fttl">半波损失判据<span class="fpg">指导书未单列</span></div>
+<div class="eqb">由<b>疏入密</b>反射（n<sub>1</sub> < n<sub>2</sub>）→ 附加 π（等效 λ/2）；由<b>密入疏</b>反射 → 无附加</div>
+<div class="eqb">两侧界面一有一无 ⇒ 净加 λ/2；都有或都没有 ⇒ 不加</div>
+<div class="fsym">符号：比较的是反射面两侧折射率大小。<b>易错</b>：别一律「反射就加 λ/2」；插入平板改变的光程是 (n−1)d，不是 nd</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 3 章 · 光的衍射<span class="chnum">13 条</span></h2>
+<h2 class="wallch" id="ch3" onclick="tog(this)"><span class="caret">▾</span>第 3 章 · 光的衍射<span class="chnum">13 条</span><a class="chgo" href="考点.html?ch3" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">夫琅禾费衍射</h3>
-<div class="fitem">
+<div class="fitem" data-fid="dacf4052">
 <div class="fttl">单缝衍射<span class="fpg">书 p67</span></div>
 <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub>(<span class="frac"><span class="num">sinα</span><span class="den">α</span></span>)²　α = <span class="frac"><span class="num">π<i>a</i> sinθ</span><span class="den">λ</span></span></div>
 <div class="fsym">符号：a 缝宽、θ 衍射角；教材单缝参量用 α（不是 u）；中央明纹半角宽 λ/a</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="f67f9167">
 <div class="fttl">圆孔衍射与爱里斑<span class="fpg">书 p69</span></div>
 <div class="eqb">θ<sub>1</sub> = 1.22<span class="frac"><span class="num">λ</span><span class="den"><i>D</i></span></span></div>
 <div class="fsym">符号：D 圆孔直径；爱里斑占中央能量 83.8%</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="89ddb326">
 <div class="fttl">光学仪器分辨本领<span class="fpg">书 p70</span></div>
 <div class="eqb">θ<sub>min</sub> = 1.22<span class="frac"><span class="num">λ</span><span class="den"><i>D</i></span></span>（望远镜）</div>
 <div class="eqb">δ = <span class="frac"><span class="num">0.61λ</span><span class="den">NA</span></span>（显微镜，NA = <i>n</i> sin<i>u</i>）</div>
 <div class="fsym">符号：NA 数值孔径；照相物镜用 N = 1/ε 表示相对孔径倒数</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="1e9e8a53">
 <div class="fttl">多缝（光栅）强度分布<span class="fpg">书 p71</span></div>
 <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub>(<span class="frac"><span class="num">sinα</span><span class="den">α</span></span>)²(<span class="frac"><span class="num">sin<i>N</i>β</span><span class="den">sinβ</span></span>)²</div>
 <div class="eqb">β = <span class="frac"><span class="num">π<i>d</i> sinθ</span><span class="den">λ</span></span></div>
 <div class="fsym">符号：α 单缝因子、β 相邻缝相位差的一半；N 缝数、d 光栅常数</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">光栅</h3>
-<div class="fitem">
+<div class="fitem" data-fid="8d352b09">
 <div class="fttl">光栅方程（正/斜入射）<span class="fpg">书 p71</span></div>
 <div class="eqb"><i>d</i> sinθ = <i>m</i>λ</div>
 <div class="eqb"><i>d</i>(sinθ ± sinθ<sub>0</sub>) = <i>m</i>λ</div>
 <div class="fsym">符号：θ₀ 斜入射角；级次教材用 m</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="da62a618">
 <div class="fttl">缺级与最大级次<span class="fpg">书 p72</span></div>
 <div class="eqb"><span class="frac"><span class="num"><i>d</i></span><span class="den"><i>a</i></span></span> = <span class="frac"><span class="num"><i>m</i></span><span class="den"><i>n</i></span></span></div>
 <div class="eqb"><i>m</i><sub>max</sub> = <span class="frac"><span class="num"><i>d</i></span><span class="den">λ</span></span></div>
 <div class="fsym">符号：d/a 为整数时第 m 级缺级；最大级次由 sinθ≤1 定</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="0ba840e4">
 <div class="fttl">谱线半角宽度<span class="fpg">书 p72</span></div>
 <div class="eqb">Δθ = <span class="frac"><span class="num">λ</span><span class="den"><i>Nd</i> cosθ</span></span></div>
 <div class="fsym">符号：N 总刻线数；主极大半角宽，与色散相乘即分辨本领</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="e5e02f70">
 <div class="fttl">色散与分辨本领<span class="fpg">书 p72</span></div>
 <div class="eqb"><i>D</i><sub>θ</sub> = <span class="frac"><span class="num">dθ</span><span class="den">dλ</span></span> = <span class="frac"><span class="num"><i>m</i></span><span class="den"><i>d</i> cosθ</span></span></div>
 <div class="eqb"><i>A</i> = <span class="frac"><span class="num">λ</span><span class="den">Δλ</span></span> = <i>mN</i></div>
 <div class="fsym">符号：N 总刻线数；A 取最大级次 m<sub>max</sub> 时最大</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="b91d5e66">
 <div class="fttl">斜入射的最大级次<span class="fpg">书 p72</span></div>
 <div class="eqb"><i>m</i><sub>max</sub> = <span class="frac"><span class="num"><i>d</i>(1 + sinθ<sub>0</sub>)</span><span class="den">λ</span></span></div>
 <div class="fsym">符号：θ₀ 斜入射角；两侧级次不再对称，一侧 (1+sinθ₀)、另一侧 (1−sinθ₀)</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="45bcfbfb">
 <div class="fttl">自由光谱范围<span class="fpg">书 p73</span></div>
 <div class="eqb">Δλ = <span class="frac"><span class="num">λ</span><span class="den"><i>m</i></span></span></div>
 <div class="fsym">符号：m 级与 m+1 级光谱不重叠的波长范围</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">菲涅耳衍射</h3>
-<div class="fitem">
+<div class="fitem" data-fid="80fd881d">
 <div class="fttl">菲涅耳半波带<span class="fpg">书 p74</span></div>
 <div class="eqb">ρ<sub>N</sub> = √(<i>N</i>λ / (<span class="frac"><span class="num">1</span><span class="den"><i>R</i></span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>0</sub></span></span>))</div>
 <div class="fsym">符号：R 波面曲率半径、r₀ 观察点到波面距离；N 带数</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="1e85b6f9">
 <div class="fttl">圆孔/圆屏中心强度<span class="fpg">书 p75</span></div>
 <div class="eqb"><i>A</i>(<i>P</i>) = <span class="frac"><span class="num"><i>a</i><sub>1</sub></span><span class="den">2</span></span> ± <span class="frac"><span class="num"><i>a</i><sub>N</sub></span><span class="den">2</span></span></div>
 <div class="fsym">符号：圆孔取 ±；圆屏只剩下 a₁/2 ⇒ 中心恒为亮斑（泊松亮斑）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="2dcba49e">
 <div class="fttl">波带片<span class="fpg">书 p76</span></div>
 <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>R</i></span></span> + <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>0</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den"><i>f</i></span></span></div>
 <div class="eqb"><i>f</i> = <span class="frac"><span class="num">ρ<sub>N</sub>²</span><span class="den"><i>N</i>λ</span></span></div>
 <div class="fsym">符号：波带片有多个焦点（主焦点与次焦点）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 4 章 · 光在各向异性介质中的传播特性<span class="chnum">9 条</span></h2>
+<h2 class="wallch" id="ch4" onclick="tog(this)"><span class="caret">▾</span>第 4 章 · 光在各向异性介质中的传播特性<span class="chnum">10 条</span><a class="chgo" href="考点.html?ch4" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">单轴晶体</h3>
-<div class="fitem">
+<div class="fitem" data-fid="fcf6d11b">
 <div class="fttl">e 光折射率随方向变化<span class="fpg">书 p103</span></div>
 <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>n</i><sub>e</sub>²(θ)</span></span> = <span class="frac"><span class="num">cos²θ</span><span class="den"><i>n</i><sub>o</sub>²</span></span> + <span class="frac"><span class="num">sin²θ</span><span class="den"><i>n</i><sub>e</sub>²</span></span></div>
 <div class="fsym">符号：θ = 波法线与光轴夹角（教材 θ 就是波法线角）；θ=0 时 n<sub>e</sub>(0)=n<sub>o</sub>，不分开</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="fd62dff0">
 <div class="fttl">离散角<span class="fpg">书 p104</span></div>
 <div class="eqb">tanα = <span class="frac"><span class="num">sinθcosθ(<i>n</i><sub>e</sub>² − <i>n</i><sub>o</sub>²)</span><span class="den"><i>n</i><sub>o</sub>²sin²θ + <i>n</i><sub>e</sub>²cos²θ</span></span></div>
 <div class="fsym">符号：α 为波法线与光线（能流）的夹角，教材就用 α（不是 ρ）；正晶体光线靠近光轴、负晶体远离</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="fec53e94">
 <div class="fttl">e 光最大离散角<span class="fpg">书 p106</span></div>
 <div class="eqb">tanθ = <span class="frac"><span class="num"><i>n</i><sub>e</sub></span><span class="den"><i>n</i><sub>o</sub></span></span></div>
 <div class="eqb">α<sub>M</sub> = arctan<span class="frac"><span class="num"><i>n</i><sub>e</sub>² − <i>n</i><sub>o</sub>²</span><span class="den">2<i>n</i><sub>o</sub><i>n</i><sub>e</sub></span></span></div>
 <div class="fsym">符号：θ 为取最大离散角时的波法线方向与光轴夹角；α<sub>M</sub> 为该晶体的最大离散角（书 p106）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="0903e8ef">
 <div class="fttl">相速度与光线速度<span class="fpg">书 p103</span></div>
 <div class="eqb"><i>v</i><sub>p</sub> = <i>v</i><sub>r</sub> cosα</div>
 <div class="fsym">符号：v<sub>p</sub> 沿波法线、v<sub>r</sub> 沿光线方向；能量沿光线传播</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="6d9aa8ee">
 <div class="fttl">界面折射（双折射）<span class="fpg">书 p106</span></div>
 <div class="eqb"><i>n</i><sub>1</sub> sin<i>i</i> = <i>n</i><sub>o</sub> sin<i>r</i><sub>o</sub> = <i>n</i><sub>e</sub>(θ) sin<i>r</i><sub>e</sub></div>
 <div class="fsym">符号：折射定律约束的是波法线，不是光线方向</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="d7ef6118">
 <div class="fttl">平行平板内两光的横向间距<span class="fpg">书 p106</span></div>
 <div class="eqb"><i>s</i> = <i>d</i> tanα</div>
 <div class="fsym">符号：d 平板厚度、α 离散角；掠入射时换成 s = d(1 − tan<i>r</i><sub>o</sub>/tan<i>r</i><sub>e</sub>) 之类的几何式</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">折射率椭球与波片</h3>
-<div class="fitem">
+<div class="fitem" data-fid="d2abe4df">
 <div class="fttl">折射率椭球<span class="fpg">书 p105</span></div>
 <div class="eqb"><i>x</i><sub>1</sub>²/<i>n</i><sub>1</sub>² + <i>x</i><sub>2</sub>²/<i>n</i><sub>2</sub>² + <i>x</i><sub>3</sub>²/<i>n</i><sub>3</sub>² = 1</div>
 <div class="fsym">符号：主轴方向即三个主介电方向；单轴时 n₁=n₂=n<sub>o</sub>、n₃=n<sub>e</sub></div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="a0abc8e5">
 <div class="fttl">波片相位延迟<span class="fpg">书 p107</span></div>
 <div class="eqb">φ = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>|<i>n</i><sub>o</sub> − <i>n</i><sub>e</sub>|<i>d</i></div>
 <div class="fsym">符号：φ=π/2 为 λ/4 波片、φ=π 为 λ/2 波片；教材波片相位差用 φ（不是 δ）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="4187578e">
 <div class="fttl">偏振棱镜视场<span class="fpg">书 p106</span></div>
 <div class="eqb">arcsin(1/<i>n</i><sub>o</sub>) < θ < arcsin(1/<i>n</i><sub>e</sub>)</div>
 <div class="fsym">符号：靠全反射丢掉一支光，只在两个临界角之间有效</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<h3 class="wallsec">偏振棱镜</h3>
+<div class="fitem" data-fid="0c44fdd8">
+<div class="fttl">偏振棱镜胶合面分束角<span class="fpg">指导书未单列</span></div>
+<div class="eqb">β<sub>1</sub> = arcsin[(<i>n</i><sub>e</sub>/<i>n</i><sub>o</sub>) sin<i>α</i>]　β<sub>2</sub> = arcsin[(<i>n</i><sub>o</sub>/<i>n</i><sub>e</sub>) sin<i>α</i>]　Δβ = |β<sub>2</sub> − β<sub>1</sub>|</div>
+<div class="fsym">符号：α 顶角；两棱镜光轴互相垂直 ⇒ 过胶合面时两支「角色互换」（第一块的 e 在第二块变 o）。<b>易错</b>：光轴是⊥纸面还是在纸面内必须照图看，决定哪支是 o/e；两支分居法线两侧</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 5 章 · 晶体的感应双折射<span class="chnum">10 条</span></h2>
+<h2 class="wallch" id="ch5" onclick="tog(this)"><span class="caret">▾</span>第 5 章 · 晶体的感应双折射<span class="chnum">10 条</span><a class="chgo" href="考点.html?ch5" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">电光效应</h3>
-<div class="fitem">
+<div class="fitem" data-fid="9c74691b">
 <div class="fttl">折射率椭球的变化<span class="fpg">书 p131</span></div>
 <div class="eqb">Δ<i>B</i><sub>ij</sub> = γ<sub>ijk</sub><i>E</i><sub>k</sub> + <i>h</i><sub>ijpq</sub><i>E</i><sub>p</sub><i>E</i><sub>q</sub> + ⋯</div>
 <div class="fsym">符号：第一项线性电光（泡克耳斯）、第二项二次电光（克尔）；γ 线性电光系数</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="dd437aab">
 <div class="fttl">KDP 纵向运用的相位差<span class="fpg">书 p132</span></div>
 <div class="eqb">φ = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span><i>n</i><sub>o</sub>³γ<sub>63</sub><i>U</i></div>
 <div class="fsym">符号：纵向：电场 ∥ 通光方向；相位差只与 U 有关、与晶体长度无关</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="71d762d0">
 <div class="fttl">半波电压<span class="fpg">书 p133</span></div>
 <div class="eqb"><i>U</i><sub>λ/2</sub> = <span class="frac"><span class="num">λ</span><span class="den">2<i>n</i><sub>o</sub>³γ<sub>63</sub></span></span></div>
 <div class="fsym">符号：使相位差达到 π 所需的电压</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="191715f9">
 <div class="fttl">KDP 横向运用<span class="fpg">书 p133</span></div>
 <div class="eqb">φ = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>[(<i>n</i><sub>o</sub> − <i>n</i><sub>e</sub>)<i>d</i> + <span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>o</sub>³γ<sub>63</sub><i>E</i><sub>3</sub><i>l</i>]</div>
 <div class="fsym">符号：横向：电场 ⊥ 通光方向；含自然双折射项 (n<sub>o</sub>−n<sub>e</sub>)d，需补偿</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="aa5efea0">
 <div class="fttl">克尔效应（二次电光）<span class="fpg">书 p134</span></div>
 <div class="eqb">Δ<i>n</i> = <i>K</i>λ<i>E</i>²</div>
 <div class="fsym">符号：K 克尔常数；与 E² 成正比</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">声光与磁光</h3>
-<div class="fitem">
+<div class="fitem" data-fid="1a994871">
 <div class="fttl">布拉格衍射的频移<span class="fpg">书 p134</span></div>
 <div class="eqb">Δν = ±<i>f</i><sub>s</sub>（±1 级）；0 级 Δν = 0</div>
 <div class="fsym">符号：声子图像：±1 级各吸收/放出一个声子，故频移恰为一个声频；喇曼–乃斯第 m 级为 m·f<sub>s</sub></div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="c726f6fc">
 <div class="fttl">声波波长与声频<span class="fpg">书 p134</span></div>
 <div class="eqb">λ<sub>s</sub> = <span class="frac"><span class="num"><i>v</i><sub>s</sub></span><span class="den"><i>f</i><sub>s</sub></span></span></div>
 <div class="fsym">符号：v<sub>s</sub> 声速、f<sub>s</sub> 声频；声频升高 → 声波波长变短 → 布拉格角变大、衍射光频移变大</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="c2b56cd1">
 <div class="fttl">喇曼–乃斯衍射（声频低时）<span class="fpg">书 p134</span></div>
 <div class="eqb">λ<sub>s</sub> sinθ = <i>m</i>λ</div>
 <div class="fsym">符号：声频低、声光作用长度短时为多级衍射；与布拉格衍射的判据是声光作用长度是否足够长</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="c2144028">
 <div class="fttl">布喇格衍射条件<span class="fpg">书 p134</span></div>
 <div class="eqb">sinθ<sub>B</sub> = <span class="frac"><span class="num">λ</span><span class="den">2λ<sub>s</sub></span></span></div>
 <div class="fsym">符号：λ<sub>s</sub> 声波波长；θ<sub>B</sub> 布喇格角</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="b08f94f2">
 <div class="fttl">法拉第效应<span class="fpg">书 p134</span></div>
 <div class="eqb">θ = <i>V</i><i>B</i><i>l</i></div>
 <div class="fsym">符号：V 费尔德常数、B 磁感应强度、l 介质长度；指导书只给定性叙述</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 6 章 · 光的吸收、色散和散射<span class="chnum">5 条</span></h2>
+<h2 class="wallch" id="ch6" onclick="tog(this)"><span class="caret">▾</span>第 6 章 · 光的吸收、色散和散射<span class="chnum">5 条</span><a class="chgo" href="考点.html?ch6" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">吸收与色散</h3>
-<div class="fitem">
+<div class="fitem" data-fid="9b1d105e">
 <div class="fttl">朗伯定律<span class="fpg">书 p141</span></div>
 <div class="eqb"><i>I</i> = <i>I</i><sub>0</sub>e<sup>−<i>K</i><i>l</i></sup></div>
 <div class="fsym">符号：K 吸收系数、l 介质厚度；比尔定律中 K = αc</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="2c5fcd48">
 <div class="fttl">科希色散公式<span class="fpg">书 p142</span></div>
 <div class="eqb"><i>n</i> = <i>A</i> + <span class="frac"><span class="num"><i>B</i></span><span class="den">λ²</span></span> + <span class="frac"><span class="num"><i>C</i></span><span class="den">λ⁴</span></span></div>
 <div class="fsym">符号：正常色散区适用；n 随 λ 增大而减小</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="28c29a16">
 <div class="fttl">色散率<span class="fpg">书 p142</span></div>
 <div class="eqb">ν = <span class="frac"><span class="num">d<i>n</i></span><span class="den">dλ</span></span></div>
 <div class="fsym">符号：dn/dλ&lt;0 为正常色散、&gt;0 为反常色散（吸收带附近）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">散射</h3>
-<div class="fitem">
+<div class="fitem" data-fid="976541af">
 <div class="fttl">瑞利散射<span class="fpg">书 p143</span></div>
 <div class="eqb"><i>I</i>(θ) ∝ <span class="frac"><span class="num">1</span><span class="den">λ⁴</span></span>(1 + cos²θ)</div>
 <div class="fsym">符号：微粒线度 ≪ λ/10 时成立；天空蓝、夕阳红的成因</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="31679a6f">
 <div class="fttl">米氏散射<span class="fpg">书 p143</span></div>
 <div class="eqb"><i>I</i>(θ) ∝ <span class="frac"><span class="num">1</span><span class="den">λ<sup><i>n</i></sup></span></span></div>
 <div class="fsym">符号：微粒线度与 λ 相当或更大；n 约 1~3</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 7 章 · 几何光学基础<span class="chnum">12 条</span></h2>
+<h2 class="wallch" id="ch7" onclick="tog(this)"><span class="caret">▾</span>第 7 章 · 几何光学基础<span class="chnum">14 条</span><a class="chgo" href="考点.html?ch7" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">符号规则</h3>
-<div class="fitem">
+<div class="fitem" data-fid="495c3db2">
 <div class="fttl">符号法则<span class="fpg">书 p149</span></div>
 <div class="eqb"><i>l</i> 实物为负、实像 <i>l</i><span class="pr">′</span> 为正；<i>r</i> 凸向物方为正；<i>f</i><span class="pr">′</span>>0 会聚</div>
 <div class="fsym">符号：正方向 = 光的传播方向（从左向右）；横向线度光轴上为正；角度顺时针为正</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">球面与薄透镜</h3>
-<div class="fitem">
+<div class="fitem" data-fid="f7c8b44d">
 <div class="fttl">单球面折射（近轴）<span class="fpg">书 p153</span></div>
 <div class="eqb"><span class="frac"><span class="num"><i>n</i><span class="pr">′</span></span><span class="den"><i>l</i><span class="pr">′</span></span></span> − <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i><span class="pr">′</span> − <i>n</i></span><span class="den"><i>r</i></span></span></div>
 <div class="fsym">符号：教材就是带减号的写法（不是 n/l + n′/l′）；n′ 像方折射率</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="c7c8f1bc">
 <div class="fttl">阿贝不变量与光焦度<span class="fpg">书 p153</span></div>
 <div class="eqb"><i>n</i><span class="pr">′</span><i>u</i><span class="pr">′</span> − <i>n</i><i>u</i> = <i>h</i><span class="frac"><span class="num"><i>n</i><span class="pr">′</span> − <i>n</i></span><span class="den"><i>r</i></span></span></div>
 <div class="fsym">符号：u 孔径角、h 入射高度；光焦度 φ = (n′−n)/r（小写 φ）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="83bb8806">
 <div class="fttl">焦距<span class="fpg">书 p154</span></div>
 <div class="eqb"><i>f</i><span class="pr">′</span> = <span class="frac"><span class="num"><i>n</i><span class="pr">′</span><i>r</i></span><span class="den"><i>n</i><span class="pr">′</span> − <i>n</i></span></span></div>
 <div class="eqb"><i>f</i> = −<span class="frac"><span class="num"><i>n</i><i>r</i></span><span class="den"><i>n</i><span class="pr">′</span> − <i>n</i></span></span></div>
 <div class="fsym">符号：两侧同介质时 f = −f′</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="e6836419">
 <div class="fttl">共轭距与放大率、焦距的关系<span class="fpg">书 p155（例题）</span></div>
 <div class="eqb"><i>L</i> = |<i>l</i><span class="pr">′</span> − <i>l</i>| = −<i>f</i><span class="pr">′</span><span class="frac"><span class="num">(1 − β)²</span><span class="den">β</span></span></div>
 <div class="fsym">符号：L 物像间距离（共轭距）；已知 L 与 β 可直接解 f′，实物/虚物各得一解</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="916cf720">
 <div class="fttl">薄透镜（空气中）<span class="fpg">书 p154</span></div>
 <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = (<i>n</i> − 1)(<span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den"><i>r</i><sub>2</sub></span></span>)</div>
 <div class="fsym">符号：双凸 r₁&gt;0、r₂&lt;0；两侧介质不同要改用光焦度 φ</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="efef24c3">
 <div class="fttl">纵向放大率<span class="fpg">书 p154</span></div>
 <div class="eqb">α = <span class="frac"><span class="num">d<i>l</i><span class="pr">′</span></span><span class="den">d<i>l</i></span></span> = <span class="frac"><span class="num"><i>n</i></span><span class="den"><i>n</i><span class="pr">′</span></span></span>(<span class="frac"><span class="num"><i>l</i><span class="pr">′</span></span><span class="den"><i>l</i></span></span>)²</div>
 <div class="fsym">符号：轴线上物点移动 dl 时像移动 dl′；球形鱼缸那道题求速度就用它</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="ee09376a">
 <div class="fttl">平面折射（视深）<span class="fpg">书 p154</span></div>
 <div class="eqb"><i>h</i><span class="pr">′</span> = <span class="frac"><span class="num"><i>n</i><sub>2</sub></span><span class="den"><i>n</i><sub>1</sub></span></span><i>h</i></div>
 <div class="fsym">符号：从空气看水中变浅为 3/4；横向尺寸不变</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">棱镜展开</h3>
-<div class="fitem">
+<div class="fitem" data-fid="c5df434f">
 <div class="fttl">等效平行平板像面位移<span class="fpg">书 p154</span></div>
 <div class="eqb">Δ<i>l</i><span class="pr">′</span> = <i>d</i>(1 − <span class="frac"><span class="num">1</span><span class="den"><i>n</i></span></span>)</div>
 <div class="eqb"><i>l</i><sub>2</sub><span class="pr">′</span> = <i>l</i><sub>1</sub><span class="pr">′</span> + Δ<i>l</i><span class="pr">′</span></div>
 <div class="fsym">符号：d 为平板（或展开后的棱镜）厚度、n 为玻璃折射率；像沿光轴外移 Δl′，大小不变</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="bc7934d9">
 <div class="fttl">折合光程等价的算法<span class="fpg">书 p154</span></div>
 <div class="eqb"><i>l</i><span class="pr">′</span> = <i>d</i><sub>镜距</sub> + <span class="frac"><span class="num"><i>L</i></span><span class="den"><i>n</i></span></span> + <i>s</i><span class="pr">′</span></div>
 <div class="fsym">符号：与上条的位移式代数等价：先求展开厚度 L，再用 L(1−1/n) 得位移；两种写法结果相同</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="87605cba">
 <div class="fttl">一次反射直角棱镜<span class="fpg">教材第 7 章（指导书未给）</span></div>
 <div class="eqb"><i>L</i> = <i>a</i></div>
 <div class="fsym">符号：a 为直角边长；展开成等效平板</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="1eec219b">
 <div class="fttl">二次反射五棱镜<span class="fpg">教材第 7 章（指导书未给）</span></div>
 <div class="eqb"><i>L</i> = (2 + √2)<i>a</i> ≈ 3.414<i>a</i></div>
 <div class="fsym">符号：a 为通光面边长；不是 2a，用错会把像距算偏约 50 mm</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<h3 class="wallsec">棱镜</h3>
+<div class="fitem" data-fid="397de56e">
+<div class="fttl">最小偏向角法测折射率<span class="fpg">指导书未单列</span></div>
+<div class="eqb"><i>n</i> = <span class="frac"><span class="num">sin[(<i>A</i> + δ<sub>min</sub>)/2]</span><span class="den">sin(<i>A</i>/2)</span></span></div>
+<div class="fsym">符号：A 顶角、δ<sub>min</sub> 最小偏向角。<b>易错</b>：δ<sub>min</sub> 是「偏向角最小」时的读数，不是任意一次入射；必须单色光</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<h3 class="wallsec">棱镜与反射系统</h3>
+<div class="fitem" data-fid="4200601f">
+<div class="fttl">棱镜系统像方坐标与手性<span class="fpg">指导书未单列</span></div>
+<div class="eqb">逐面展开，每过一次反射就把垂直该面的轴反向；反射次数<b>奇 ⇒ 左手系</b>、<b>偶 ⇒ 右手系</b></div>
+<div class="fsym">符号：屋脊面（带屋脊的直角棱镜）算<b>两次</b>反射。<b>易错</b>：偶数次 ≠ 三轴同向（可能绕光轴转 180°）；必须画出三根轴，不能只写「右手系」</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 8 章 · 理想光学系统<span class="chnum">7 条</span></h2>
+<h2 class="wallch" id="ch8" onclick="tog(this)"><span class="caret">▾</span>第 8 章 · 理想光学系统<span class="chnum">7 条</span><a class="chgo" href="考点.html?ch8" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">成像公式</h3>
-<div class="fitem">
+<div class="fitem" data-fid="0142f2f1">
 <div class="fttl">高斯公式（教材写法）<span class="fpg">书 p169</span></div>
 <div class="eqb"><span class="frac"><span class="num"><i>f</i><span class="pr">′</span></span><span class="den"><i>l</i><span class="pr">′</span></span></span> + <span class="frac"><span class="num"><i>f</i></span><span class="den"><i>l</i></span></span> = 1</div>
 <div class="fsym">符号：f′/f = −n′/n；两侧同介质（n=n′）时化为 1/l′ − 1/l = 1/f′</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="09e50392">
 <div class="fttl">牛顿公式<span class="fpg">书 p169</span></div>
 <div class="eqb"><i>x</i><i>x</i><span class="pr">′</span> = <i>f</i><i>f</i><span class="pr">′</span></div>
 <div class="fsym">符号：x 从物方焦点量起、x′ 从像方焦点量起</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="ac5dff90">
 <div class="fttl">光焦度与焦距<span class="fpg">书 p169</span></div>
 <div class="eqb">φ = <span class="frac"><span class="num"><i>n</i><span class="pr">′</span></span><span class="den"><i>f</i><span class="pr">′</span></span></span> = −<span class="frac"><span class="num"><i>n</i></span><span class="den"><i>f</i></span></span></div>
 <div class="fsym">符号：教材光焦度用小写 φ（不是 Φ）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="59ee1b6a">
 <div class="fttl">三组放大率<span class="fpg">书 p170</span></div>
 <div class="eqb">β = <span class="frac"><span class="num"><i>n</i><i>l</i><span class="pr">′</span></span><span class="den"><i>n</i><span class="pr">′</span><i>l</i></span></span></div>
 <div class="eqb">γ = <span class="frac"><span class="num"><i>x</i><i>l</i><span class="pr">′</span></span><span class="den"><i>x</i><span class="pr">′</span><i>l</i></span></span></div>
 <div class="fsym">符号：β 垂轴、α 轴向、γ 角放大率；同一对共轭面上三者满足 α = β² 等关系</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="3852d86b">
 <div class="fttl">二次成像法求焦距<span class="fpg">书 p174（例题）</span></div>
 <div class="eqb"><span class="frac"><span class="num">1</span><span class="den">β<sub>1</sub></span></span> − <span class="frac"><span class="num">1</span><span class="den">β<sub>2</sub></span></span> = <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i></span></span></div>
 <div class="fsym">符号：同一透镜两次成像：物移动 d、放大率由 β₁ 变 β₂；由此反求 f′（2021-四-2）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">双光组</h3>
-<div class="fitem">
+<div class="fitem" data-fid="8114b11b">
 <div class="fttl">组合焦距与光学间隔<span class="fpg">书 p171</span></div>
 <div class="eqb">Δ = <i>d</i> − <i>f</i><sub>1</sub><span class="pr">′</span> + <i>f</i><sub>2</sub></div>
 <div class="eqb"><i>f</i><span class="pr">′</span> = −<span class="frac"><span class="num"><i>f</i><sub>1</sub><span class="pr">′</span><i>f</i><sub>2</sub><span class="pr">′</span></span><span class="den">Δ</span></span></div>
 <div class="fsym">符号：d 两透镜间隔；Δ 为光学间隔（F₁′ 到 F₂ 的距离）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="f13afa39">
 <div class="fttl">后截距与主点<span class="fpg">书 p171</span></div>
 <div class="eqb"><i>l</i><sub>F</sub><span class="pr">′</span> = <i>f</i><span class="pr">′</span>(1 − <span class="frac"><span class="num"><i>d</i></span><span class="den"><i>f</i><sub>1</sub><span class="pr">′</span></span></span>)</div>
 <div class="eqb"><i>l</i><sub>H</sub><span class="pr">′</span> = <i>l</i><sub>F</sub><span class="pr">′</span> − <i>f</i><span class="pr">′</span></div>
 <div class="fsym">符号：l<sub>F</sub>′ 从第二透镜量起、l<sub>F</sub> 从第一透镜量起，原点不同不能混</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 9 章 · 光学系统像差基础与光路计算<span class="chnum">9 条</span></h2>
+<h2 class="wallch" id="ch9" onclick="tog(this)"><span class="caret">▾</span>第 9 章 · 光学系统像差基础与光路计算<span class="chnum">9 条</span><a class="chgo" href="考点.html?ch9" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">光阑</h3>
-<div class="fitem">
+<div class="fitem" data-fid="741b2a34">
 <div class="fttl">孔径光阑与入瞳/出瞳<span class="fpg">书 p189</span></div>
 <div class="eqb">入瞳：孔径光阑经其前面所有透镜所成的像</div>
 <div class="eqb">出瞳：孔径光阑经其后面所有透镜所成的像</div>
 <div class="fsym">符号：判定孔径光阑比较的是张角（不是直径）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="4acf6fe2">
 <div class="fttl">视场光阑与入窗/出窗<span class="fpg">书 p190</span></div>
 <div class="eqb">入窗：视场光阑经其前方系统的像</div>
 <div class="eqb">出窗：视场光阑经其后方系统的像</div>
 <div class="fsym">符号：线视场 2y；渐晕系数 K<sub>D</sub>（线）、K<sub>S</sub>（面）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">像差</h3>
-<div class="fitem">
+<div class="fitem" data-fid="3a2e2f4a">
 <div class="fttl">球差<span class="fpg">书 p191</span></div>
 <div class="eqb">δ<i>L</i><span class="pr">′</span> = <i>L</i><span class="pr">′</span> − <i>l</i><span class="pr">′</span>（轴向）</div>
 <div class="eqb">δ<i>T</i><span class="pr">′</span> = <i>T</i><span class="pr">′</span> − <i>l</i><span class="pr">′</span>（垂轴）</div>
 <div class="fsym">符号：轴上点、只与孔径有关；校正困难，通常保留一定量</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="a2594000">
 <div class="fttl">像差总览：五种单色 + 两种色差<span class="fpg">书 p191</span></div>
 <div class="eqb">球差 · 彗差 · 像散 · 场曲 · 畸变</div>
 <div class="eqb">位置色差 · 倍率色差</div>
 <div class="fsym">符号：记住两条线索：<b>哪种像差与孔径有关</b>（球差、彗差的一部分）与<b>哪种只与视场有关</b>（像散、场曲、畸变）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="3a2e2f4a">
 <div class="fttl">球差<span class="fpg">书 p191</span></div>
 <div class="eqb">δ<i>L</i><span class="pr">′</span> = <i>L</i><span class="pr">′</span> − <i>l</i><span class="pr">′</span>（轴向球差）</div>
 <div class="eqb">δ<i>T</i><span class="pr">′</span> = δ<i>L</i><span class="pr">′</span> tan<i>U</i><span class="pr">′</span>（垂轴球差）</div>
 <div class="fsym">符号：轴上点、只与<b>孔径</b>有关；U′ 为孔径角；球差使光束不再交于一点，弥散斑半径即 δT′</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="f81a0463">
 <div class="fttl">彗差<span class="fpg">书 p191</span></div>
 <div class="eqb">彗差 = 轴外点宽光束失去对称性形成的<b>彗星状</b>弥散斑</div>
 <div class="fsym">符号：与<b>孔径和视场都有关</b>；主光线两侧光束不对称即产生彗差；孔径光阑位置影响彗差大小</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="ab11d791">
 <div class="fttl">像散与场曲<span class="fpg">书 p191</span></div>
 <div class="eqb">子午焦线 <i>t</i><span class="pr">′</span>、弧矢焦线 <i>s</i><span class="pr">′</span>（两焦线不重合即像散）</div>
 <div class="eqb">场曲：清晰像面是<b>曲面</b>（匹兹伐面）</div>
 <div class="fsym">符号：都随<b>视场</b>增大而增大（∝ 视场²）；像散使轴外点成两条焦线，场曲使平面物不能在平面上清晰成像</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="9509b9bd">
 <div class="fttl">畸变<span class="fpg">书 p191</span></div>
 <div class="eqb">Δ<i>y</i><span class="pr">′</span> = <i>y</i><span class="pr">′</span> − <i>y</i><sub>0</sub><span class="pr">′</span>（<i>y</i><sub>0</sub><span class="pr">′</span> 为理想像高）</div>
 <div class="eqb">相对畸变 <i>q</i> = <span class="frac"><span class="num">Δ<i>y</i><span class="pr">′</span></span><span class="den"><i>y</i><sub>0</sub><span class="pr">′</span></span></span> ×100%</div>
 <div class="fsym">符号：∝ 视场³；<b>只改变像的形状、不影响清晰度</b>；q&gt;0 枕形、q&lt;0 桶形</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="5d160e11">
 <div class="fttl">色差<span class="fpg">书 p192</span></div>
 <div class="eqb">位置色差 Δ<i>l</i><span class="pr">′</span><sub>FC</sub> = <i>l</i><span class="pr">′</span><sub>F</sub> − <i>l</i><span class="pr">′</span><sub>C</sub></div>
 <div class="eqb">倍率色差 Δ<i>y</i><span class="pr">′</span><sub>FC</sub> = <i>y</i><span class="pr">′</span><sub>F</sub> − <i>y</i><span class="pr">′</span><sub>C</sub></div>
 <div class="fsym">符号：F、C 为氢蓝、氢红谱线；位置色差影响轴上点清晰度、倍率色差使像带彩色边缘</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div>
 <div class="chwrap">
-<h2 class="wallch" onclick="tog(this)"><span class="caret">▾</span>第 10 章 · 光学仪器的基本原理<span class="chnum">7 条</span></h2>
+<h2 class="wallch" id="ch10" onclick="tog(this)"><span class="caret">▾</span>第 10 章 · 光学仪器的基本原理<span class="chnum">10 条</span><a class="chgo" href="考点.html?ch10" onclick="event.stopPropagation()">考点 &rarr;</a></h2>
 <div class="chbody">
 <h3 class="wallsec">眼睛与眼镜</h3>
-<div class="fitem">
+<div class="fitem" data-fid="18d541b5">
 <div class="fttl">屈光度与校正<span class="fpg">书 p199</span></div>
 <div class="eqb">Φ = <span class="frac"><span class="num">1</span><span class="den"><i>f</i><span class="pr">′</span></span></span>（f<span class="pr">′</span> 以 m 计，单位 D）</div>
 <div class="eqb">远点 R = 1/<i>r</i>，近点 P = 1/<i>p</i>，调节能力 A = R − P</div>
 <div class="fsym">符号：近视为 −Φ；远视取 +(4 − A) 一类修正式；5 m 看不清 → 远点 5 m，度数 = 1/5 = 200 度</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">放大率</h3>
-<div class="fitem">
+<div class="fitem" data-fid="1b75ae9f">
 <div class="fttl">放大镜<span class="fpg">书 p199</span></div>
 <div class="eqb">Γ = <span class="frac"><span class="num">250</span><span class="den"><i>f</i><span class="pr">′</span></span></span></div>
 <div class="fsym">符号：f′ 以 mm 计；像在明视距离 250 mm 时成立</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="9c9bfb63">
 <div class="fttl">显微镜<span class="fpg">书 p200</span></div>
 <div class="eqb">Γ = β<sub>0</sub>Γ<sub>e</sub> ≈ −<span class="frac"><span class="num">250Δ</span><span class="den"><i>f</i><sub>0</sub><span class="pr">′</span><i>f</i><sub>e</sub><span class="pr">′</span></span></span> = <span class="frac"><span class="num">250</span><span class="den"><i>f</i><span class="pr">′</span></span></span></div>
 <div class="fsym">符号：β₀ 物镜垂轴放大率、Γ<sub>e</sub> 目镜视角放大率；Δ 光学筒长</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="c8df63b6">
 <div class="fttl">望远镜<span class="fpg">书 p200</span></div>
 <div class="eqb">Γ = <span class="frac"><span class="num"><i>f</i><sub>0</sub><span class="pr">′</span></span><span class="den"><i>f</i><sub>e</sub><span class="pr">′</span></span></span> = −<span class="frac"><span class="num"><i>D</i></span><span class="den"><i>D</i><span class="pr">′</span></span></span></div>
 <div class="fsym">符号：D 入瞳直径、D′ 出瞳直径；Γ 为视角放大率</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 <h3 class="wallsec">分辨与光度学</h3>
-<div class="fitem">
+<div class="fitem" data-fid="824f59ec">
 <div class="fttl">分辨本领与有效放大率<span class="fpg">书 p200</span></div>
 <div class="eqb">σ = 1.22<span class="frac"><span class="num">λ</span><span class="den"><i>D</i></span></span>（望远镜）</div>
 <div class="eqb">δ = <span class="frac"><span class="num">0.61λ</span><span class="den">NA</span></span>（显微镜）；500NA < Γ < 1000NA</div>
 <div class="fsym">符号：有效放大率判据各教材不同，答题要写出所用判据</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="1d46e40b">
 <div class="fttl">望远镜工作放大率<span class="fpg">书 p200</span></div>
 <div class="eqb">Γ = 0.5<i>D</i></div>
 <div class="fsym">符号：原式只写 Γ=0.5D，未注明 D 含义；推断为物镜口径（mm）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
-<div class="fitem">
+<div class="fitem" data-fid="1c3d96e3">
 <div class="fttl">光度学四量<span class="fpg">教材 p459（指导书缺）</span></div>
 <div class="eqb">光通量 Φ<sub>v</sub>　发光强度 <i>I</i><sub>v</sub>　光亮度 <i>L</i><sub>v</sub>　光照度 <i>E</i><sub>v</sub></div>
 <div class="fsym">符号：指导书 §10.2 未收录，需查教材 §10.1（教材 p459 起）</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<h3 class="wallsec">景深</h3>
+<div class="fitem" data-fid="e2cd2643">
+<div class="fttl">景深与近景/远景<span class="fpg">书 p199</span></div>
+<div class="eqb"><i>p</i><sub>1</sub> = <span class="frac"><span class="num">p f<span class="pr">′</span><sup>2</sup></span><span class="den">f<span class="pr">′</span><sup>2</sup> − <i>F</i><i>z</i><i>p</i></span></span>　<i>p</i><sub>2</sub> = <span class="frac"><span class="num">p f<span class="pr">′</span><sup>2</sup></span><span class="den">f<span class="pr">′</span><sup>2</sup> + <i>F</i><i>z</i><i>p</i></span></span></div>
+<div class="eqb">远景在无穷远时　<i>p</i> = <span class="frac"><span class="num">f<span class="pr">′</span><sup>2</sup></span><span class="den"><i>F</i><i>z</i></span></span></div>
+<div class="fsym">符号：F 光圈数 = f′/D；z 容许弥散圆（常取 0.03 mm）；p 对准平面距离。<b>易错</b>：z 取 0.03 还是 0.05 会让答案差约 1.7 倍；「对准平面以后整个空间都清晰」= 远景在无穷远</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<h3 class="wallsec">光阑与渐晕</h3>
+<div class="fitem" data-fid="1b005e89">
+<div class="fttl">视场光阑直径（望远镜/投影）<span class="fpg">指导书未单列</span></div>
+<div class="eqb"><i>D</i><sub>视</sub> = 2<i>f</i><span class="pr">′</span><sub>o</sub> tan<i>ω</i></div>
+<div class="fsym">符号：ω 半视场角（题目给的常是 2ω，全长视场）。消除渐晕时光阑放在物镜像方焦平面。<b>易错</b>：把 2ω 当 ω 代进去，直径算大一倍</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
+</div>
+<div class="fitem" data-fid="9ad33779">
+<div class="fttl">消除渐晕的条件（柯勒照明）<span class="fpg">指导书未单列</span></div>
+<div class="eqb">照明出射窗与物面重合　+　光源成像在投影物镜入瞳（光瞳衔接）⇒ 轴上、轴外光束截面相同</div>
+<div class="fsym">符号：「窗」= 照明系统的出窗；「入瞳」= 投影物镜的入瞳。<b>易错</b>：无渐晕 ≠ 照度均匀（还有 cos⁴ 衰减）；靠的是光瞳衔接，不是加大口径</div>
+<div class="fr"><span>自评</span><button type="button" data-v="1">记住了</button><button type="button" data-v="0.5">模糊</button><button type="button" data-v="0">没记住</button></div>
 </div>
 </div></div><script>
 function tog(h){var b=h.nextElementSibling;var fold=b.style.display!=='none';
@@ -687,6 +904,67 @@ function tog(h){var b=h.nextElementSibling;var fold=b.style.display!=='none';
 function allFold(f){document.querySelectorAll('.chwrap').forEach(function(w){
   var h=w.querySelector('.wallch'),b=w.querySelector('.chbody');
   b.style.display=f?'none':'';h.classList.toggle('folded',f);});}
+</script>
+<script>
+/* 背诵模式 + 自评（g851-formula） */
+(function(){
+  var KEY = 'g851-formula', st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { st = {}; }
+  var items = [].slice.call(document.querySelectorAll('.fitem'));
+
+  function paint(){
+    var ok = 0, mid = 0, bad = 0, none = 0;
+    items.forEach(function(el){
+      var fid = el.getAttribute('data-fid');
+      var v = st[fid];
+      el.classList.remove('ok', 'mid', 'bad');
+      if (v === 1) { el.classList.add('ok'); ok++; }
+      else if (v === 0.5) { el.classList.add('mid'); mid++; }
+      else if (v === 0) { el.classList.add('bad'); bad++; }
+      else { none++; }
+      el.querySelectorAll('.fr button').forEach(function(b){
+        b.classList.toggle('sel', v !== undefined && parseFloat(v) === parseFloat(b.getAttribute('data-v')));
+      });
+    });
+    var p = document.getElementById('fprog');
+    if (p) p.textContent = '共 ' + items.length + ' 条：已记 ' + ok + ' / 模糊 ' + mid
+      + ' / 未记 ' + bad + (none ? ' / 未评 ' + none : '');
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+
+  items.forEach(function(el){
+    var fid = el.getAttribute('data-fid');
+    el.querySelectorAll('.fr button').forEach(function(b){
+      b.addEventListener('click', function(ev){
+        ev.stopPropagation();
+        var v = parseFloat(b.getAttribute('data-v'));
+        if (st[fid] === v) { delete st[fid]; } else { st[fid] = v; }
+        save(); paint();
+      });
+    });
+    el.querySelectorAll('.eqb').forEach(function(eq){
+      eq.addEventListener('click', function(){
+        if (document.body.classList.contains('mem')) el.classList.toggle('rev');
+      });
+    });
+  });
+
+  var mb = document.getElementById('memBtn');
+  if (mb) mb.addEventListener('click', function(){
+    var on = document.body.classList.toggle('mem');
+    this.classList.toggle('on', on);
+    this.textContent = on ? '背诵模式：开' : '背诵模式';
+    if (!on) items.forEach(function(el){ el.classList.remove('rev'); });
+  });
+
+  var fb = document.getElementById('badBtn');
+  if (fb) fb.addEventListener('click', function(){
+    var on = document.body.classList.toggle('onlybad');
+    this.classList.toggle('on', on);
+  });
+
+  paint();
+})();
 </script></div><style>
 #totop{position:fixed;right:16px;bottom:74px;z-index:40;display:none;width:40px;height:40px;
   border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
@@ -712,4 +990,142 @@ function allFold(f){document.querySelectorAll('.chwrap').forEach(function(w){
 @media print{#errb{display:none}}
 </style>
 <a id="errb" href="错题本.html" title="错题本">错题本</a>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
 </body></html>

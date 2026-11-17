@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6d3a24">
+<title>记录中心 · 851</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f4ee;color:#2b2b2b;
+     font:15px/1.72 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 90px}
+h1{font-size:21px;margin:6px 0 4px;color:#6d3a24}
+.sub{color:#6b6259;font-size:13.5px;margin:0 0 16px}
+.top{display:inline-block;margin-bottom:12px;color:#8a6a55;font-size:13px;text-decoration:none}
+.sum{background:#fff;border:1px solid #e3dfd7;border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.sum b{color:#6d3a24;font-size:19px}
+.sum .line{color:#6b6259;font-size:13px;margin-top:4px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3dfd7;border-radius:12px;
+      overflow:hidden;font-size:13px}
+th,td{padding:8px 10px;text-align:left;border-top:1px solid #f4efe7}
+th{background:#fbf8f3;color:#6d3a24;font-weight:600;border-top:0;font-size:12.5px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td.k{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#4a4a4a;word-break:break-all}
+.tag{display:inline-block;font-size:11px;padding:0 7px;border-radius:9px;background:#f3eee6;color:#7a6a5a}
+.acts{display:flex;gap:10px;margin:18px 0 8px;flex-wrap:wrap}
+.acts button{flex:1 1 150px;padding:11px 14px;border-radius:10px;border:1px solid #d8cfc2;
+     background:#fff;color:#6d3a24;font-size:14px;cursor:pointer;font-family:inherit}
+.acts button.primary{background:#6d3a24;color:#fff;border-color:#6d3a24;font-weight:600}
+.acts button.warn{border-color:#e2b7b2;color:#a8332a}
+.acts button:hover{filter:brightness(1.05)}
+.hint{color:#8a7b6c;font-size:12.5px;margin:6px 0 0;line-height:1.6}
+.danger{margin-top:26px;border-top:1px dashed #e0d6c8;padding-top:16px}
+.danger h3{font-size:13px;color:#a8332a;margin:0 0 8px}
+.msg{margin:14px 0 0;padding:10px 12px;border-radius:9px;font-size:13.5px;display:none;line-height:1.65}
+.msg.on{display:block}
+.msg.ok{background:#eef7ee;border:1px solid #bcd9bc;color:#2f6b34}
+.msg.bad{background:#fdf4f3;border:1px solid #e2b7b2;color:#a8332a}
+.msg.info{background:#fdf8f2;border:1px solid #e8dccb;color:#6d3a24}
+.foot{color:#9a9086;font-size:12.5px;text-align:center;margin-top:22px}
+input[type=file]{display:none}
+@media print{.acts,.danger{display:none}}
+</style>
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
+</head>
+<body>
+<div class="wrap">
+<a class="top" href="index.html">&larr; 返回目录</a>　<a class="top" href="错题本.html" style="margin-left:10px">错题本 &rarr;</a>　<a class="top" href="收藏.html" style="margin-left:10px">收藏夹 &rarr;</a>
+<h1>记录中心</h1>
+<p class="sub">这里是你全部的复习进度。换手机、清缓存前先导出一份。</p>
+
+<div id="sum" class="sum"></div>
+<table>
+  <thead><tr><th>类别</th><th>键</th><th class="n">条目</th><th class="n">大小</th></tr></thead>
+  <tbody id="tb"><tr><td colspan="4">读取中…</td></tr></tbody>
+</table>
+
+<div class="acts">
+  <button id="exp" class="primary">导出全部记录</button>
+  <button id="imp">从文件导入</button>
+</div>
+<p class="hint">导出文件是 JSON，包含所有 <code>g851-*</code> 键，可直接换设备导入恢复。</p>
+<input type="file" id="file" accept=".json,application/json">
+
+<div class="danger">
+  <h3>危险区</h3>
+  <div class="acts">
+    <button id="clr" class="warn">清空全部记录</button>
+  </div>
+  <p class="hint">清空后进度不可恢复（页面上的题不会变，只是勾选/判分/笔记没了）。建议先导出。</p>
+</div>
+
+<div id="msg" class="msg"></div>
+<p class="foot">数据只存在这台设备的浏览器里。</p>
+</div>
+<script>
+var PFX = "g851-", VER = 2;
+
+function say(txt, cls) {
+  var m = document.getElementById("msg");
+  m.className = "msg on " + cls;
+  m.innerHTML = txt;
+}
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function catOf(k) {
+  if (k.indexOf("g851-mock2-") === 0) return "整卷判分";
+  if (/mastered$/.test(k) || k === "g851-zhenti-2526" || k === "g851-appo-qa-p4956") return "已掌握";
+  if (k === "g851-star") return "收藏";
+  if (k === "g851-notes") return "笔记";
+  if (k === "g851-seen") return "抽背记录";
+  if (k === "g851-daily") return "每日一题";
+  if (k === "g851-formula") return "公式自评";
+  return "其他";
+}
+function countOf(v) {
+  try {
+    var o = JSON.parse(v);
+    if (o && typeof o === "object") return Object.keys(o).length;
+    return 1;
+  } catch (e) { return 1; }
+}
+function allKeys() {
+  var out = [];
+  try {
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (k && k.indexOf(PFX) === 0) out.push(k);
+    }
+  } catch (e) {}
+  out.sort();
+  return out;
+}
+
+function render() {
+  var ks = allKeys(), tb = document.getElementById("tb");
+  if (!ks.length) {
+    tb.innerHTML = '<tr><td colspan="4">还没有任何记录。去勾几道「已掌握」或做一套整卷，这里就有了。</td></tr>';
+    document.getElementById("sum").innerHTML = '共 <b>0</b> 项记录';
+    return;
+  }
+  var rows = [], total = 0, items = 0;
+  ks.forEach(function (k) {
+    var v = "";
+    try { v = localStorage.getItem(k) || ""; } catch (e) {}
+    var n = countOf(v), bytes = v.length;
+    total += bytes; items += n;
+    rows.push('<tr><td><span class="tag">' + esc(catOf(k)) + '</span></td><td class="k">' + esc(k)
+      + '</td><td class="n">' + n + '</td><td class="n">' + (bytes < 1024 ? bytes + " B"
+      : (Math.round(bytes / 102.4) / 10) + " KB") + '</td></tr>');
+  });
+  tb.innerHTML = rows.join("");
+  document.getElementById("sum").innerHTML = '共 <b>' + items + '</b> 条记录，'
+    + '<b>' + ks.length + '</b> 个键，约占 <b>' + (Math.round(total / 102.4) / 10) + ' KB</b>'
+    + '<div class="line">浏览器通常给 5 MB 左右，够了。条目数 = 勾选/判分的题数之和。</div>';
+}
+
+document.getElementById("exp").onclick = function () {
+  var data = {};
+  allKeys().forEach(function (k) { try { data[k] = localStorage.getItem(k); } catch (e) {} });
+  var blob = new Blob([JSON.stringify({
+    app: "851", version: VER, time: new Date().toISOString(), data: data
+  }, null, 1)], { type: "application/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "851全部记录-" + new Date().toISOString().slice(0, 10) + ".json";
+  document.body.appendChild(a); a.click();
+  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  say("已导出 " + Object.keys(data).length + " 个键。这个文件保管好，换设备用它恢复。", "ok");
+};
+
+function validate(obj) {
+  if (!obj || typeof obj !== "object") return { ok: false, msg: "不是合法的 JSON 对象" };
+  if (obj.version && obj.version > VER) {
+    return { ok: false, msg: "文件版本 v" + obj.version + " 比本页支持的 v" + VER + " 新，请更新站点后再导入" };
+  }
+  var d = obj.data;
+  if (d === undefined) {
+    // 带 app/version/time 却不是备份结构 → 明确报缺 data，别误判成"非 851 键名"
+    if (obj.app || obj.version || obj.time) return { ok: false, msg: "文件里缺少 data 字段（不是本站导出的备份？）" };
+    d = obj;
+  }
+  if (!d || typeof d !== "object") return { ok: false, msg: "文件里缺少 data 字段" };
+  var ks = Object.keys(d);
+  if (!ks.length) return { ok: false, msg: "文件里没有任何记录" };
+  var bad = ks.filter(function (k) { return k.indexOf(PFX) !== 0; });
+  if (bad.length) return { ok: false, msg: "含有非 851 的键名，已拒绝：" + bad.slice(0, 3).join("、") };
+  var nonstr = ks.filter(function (k) { return typeof d[k] !== "string"; });
+  if (nonstr.length) return { ok: false, msg: "值不是字符串，已拒绝：" + nonstr.slice(0, 3).join("、") };
+  return { ok: true, keys: ks, data: d };
+}
+
+document.getElementById("imp").onclick = function () { document.getElementById("file").click(); };
+
+document.getElementById("file").addEventListener("change", function () {
+  var f = this.files && this.files[0];
+  this.value = "";
+  if (!f) return;
+  var r = new FileReader();
+  r.onload = function () {
+    var obj;
+    try { obj = JSON.parse(r.result); }
+    catch (e) { say("文件不是合法 JSON：" + e.message, "bad"); return; }
+    var v = validate(obj);
+    if (!v.ok) { say(v.msg, "bad"); return; }
+
+    var cur = allKeys(), overwrite = 0, add = 0;
+    v.keys.forEach(function (k) { if (cur.indexOf(k) >= 0) overwrite++; else add++; });
+    var detail = '文件里有 <b>' + v.keys.length + '</b> 个键：'
+      + (overwrite ? '覆盖本机 <b>' + overwrite + '</b> 个' : '')
+      + (add ? (overwrite ? '，' : '') + '新增 <b>' + add + '</b> 个' : '')
+      + (obj.time ? '<br>文件时间：' + esc(obj.time) : '');
+    say(detail + '<br><br><button id="dook" style="padding:8px 16px;border-radius:8px;border:1px solid #6d3a24;background:#6d3a24;color:#fff;font-size:13px;cursor:pointer">确认导入</button>'
+      + ' <button id="dono" style="padding:8px 16px;border-radius:8px;border:1px solid #d8cfc2;background:#fff;color:#6d3a24;font-size:13px;cursor:pointer">取消</button>', "info");
+
+    document.getElementById("dook").onclick = function () {
+      var n = 0;
+      v.keys.forEach(function (k) { try { localStorage.setItem(k, v.data[k]); n++; } catch (e) {} });
+      say("已导入 " + n + " 个键，正在刷新…", "ok");
+      setTimeout(function () { location.reload(); }, 700);
+    };
+    document.getElementById("dono").onclick = function () { say("已取消，什么都没改。", "info"); };
+  };
+  r.readAsText(f);
+});
+
+document.getElementById("clr").onclick = function () {
+  var ks = allKeys();
+  if (!ks.length) { say("本来就没有记录。", "info"); return; }
+  if (!confirm("将清空 " + ks.length + " 个键的全部记录，不可恢复。确定？")) return;
+  if (!confirm("再确认一次：真的要清空吗？建议先点「导出全部记录」。")) return;
+  ks.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+  say("已清空 " + ks.length + " 个键。", "ok");
+  render();
+};
+
+render();
+</script>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
+</body>
+</html>

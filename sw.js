@@ -1,49 +1,47 @@
-const CACHE = 'g851-inline-40f50f53';
-const ASSETS = [
+const CACHE = 'g851-inline-45b47064';
+const CORE = [
  "./",
- "851-应用光学-简答与画图-p49-56.html",
- "851-真题-2025-2026.html",
- "851-简答题-按章节.html",
- "851-计算题-应用光学-解析法.html",
- "851-计算题-早年真题-合集.html",
- "851-计算题-第10章-光学仪器.html",
- "851-计算题-第1章-电磁理论.html",
- "851-计算题-第2章-干涉.html",
- "851-计算题-第3章-衍射.html",
- "851-计算题-第4章-光在各向异性介质中的传播特性.html",
- "851-计算题-第5章-感应双折射.html",
- "851-计算题-第7章-几何光学.html",
- "851-计算题-第8章-理想光学系统.html",
- "851-计算题-第9章-光路计算.html",
  "index.html",
- "公式墙.html",
  "按年份.html",
  "搜索.html",
- "收藏.html",
- "模拟-2009.html",
- "模拟-2010.html",
- "模拟-2011.html",
- "模拟-2012.html",
- "模拟-2013.html",
- "模拟-2014.html",
- "模拟-2015.html",
- "模拟-2016.html",
- "模拟-2017.html",
- "模拟-2018.html",
- "模拟-2019.html",
- "模拟-2020.html",
- "模拟-2021.html",
- "模拟-2022.html",
- "模拟-2023.html",
- "模拟-2024.html",
- "模拟-2025.html",
- "模拟-2026.html",
- "模拟-组卷1.html",
+ "公式墙.html",
  "错题本.html",
+ "收藏.html",
+ "考点.html",
+ "记录.html",
+ "专项卷.html",
+ "qindex.js",
  "manifest.webmanifest",
- "icon.svg"
+ "icon.svg",
+ "bg.png"
 ];
-self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())); });
-self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
-self.addEventListener('fetch', e => { if (e.request.method !== 'GET') return;
-  e.respondWith(caches.match(e.request).then(hit => hit || fetch(e.request).catch(() => caches.match('index.html')))); });
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE)
+    .then(c => Promise.all(CORE.map(u => c.add(u).catch(() => {}))))
+    .then(() => self.skipWaiting()));
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys()
+    .then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))
+    .then(() => self.clients.claim()));
+});
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  let url; try { url = new URL(e.request.url); } catch (err) { return; }
+  if (url.origin !== location.origin) return;
+  e.respondWith(
+    caches.match(e.request, { ignoreSearch: true }).then(hit => {
+      if (hit) return hit;
+      return fetch(e.request).then(res => {
+        if (res && res.ok && res.type === 'basic') {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
+        }
+        return res;
+      }).catch(() => {
+        if (e.request.mode === 'navigate') return caches.match('index.html');
+        return new Response('', { status: 504, statusText: 'offline' });
+      });
+    })
+  );
+});

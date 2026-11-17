@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6d3a24">
+<title>按考点 · 851</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f4ee;color:#2b2b2b;
+     font:15px/1.7 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:820px;margin:0 auto;padding:18px 14px 90px}
+h1{font-size:21px;margin:6px 0 4px;color:#6d3a24}
+.sub{color:#6b6259;font-size:13.5px;margin:0 0 14px}
+.toplink{display:inline-block;margin-bottom:10px;color:#8a6a55;font-size:13px;text-decoration:none}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tools input{flex:1 1 180px;padding:9px 12px;border:1px solid #d8cfc2;border-radius:9px;font-size:14px;
+     font-family:inherit;background:#fff}
+.tools button{padding:9px 12px;border:1px solid #d8cfc2;border-radius:9px;background:#fff;color:#6d3a24;
+     font-size:13px;cursor:pointer;font-family:inherit}
+.tools button.on{background:#6d3a24;color:#fff;border-color:#6d3a24}
+.doc{background:#fff;border:1px solid #e3dfd7;border-radius:12px;margin-bottom:12px;overflow:hidden}
+.dh{display:flex;gap:8px;align-items:center;padding:11px 14px;background:#fbf8f3;
+    border-bottom:1px solid #efe9e0;font-weight:600;color:#6d3a24;cursor:pointer;user-select:none}
+.dh .n{margin-left:auto;font-weight:400;font-size:12.5px;color:#8a6a55}
+.dh .fchip{font-size:11.5px;font-weight:400;color:#6d3a24;text-decoration:none;background:#fff;
+    border:1px solid #d8cfc2;border-radius:9px;padding:1px 8px;margin-left:8px;white-space:nowrap}
+.dh .fchip:hover{background:#6d3a24;color:#fff}
+.dh .ar{font-size:11px;color:#b9a99a;transition:transform .15s}
+.doc.fold .dh .ar{transform:rotate(-90deg)}
+.doc.fold .db{display:none}
+.db{padding:2px 0}
+.sh{padding:7px 14px 5px;font-size:12.5px;color:#8c4a2f;font-weight:600;background:#fdfbf8;
+    border-top:1px solid #f3eee6}
+.sh .n{color:#9a9086;font-weight:400;margin-left:6px}
+.yr{display:flex;gap:2px;padding:3px 14px 7px;background:#fdfbf8}
+.yr i{flex:1 1 0;min-width:0;text-align:center;font-size:9px;font-style:normal;line-height:15px;
+    border-radius:3px;background:#f1ede5;color:#bdb2a2;font-variant-numeric:tabular-nums}
+.yr i.on{background:#8c4a2f;color:#fff;font-weight:600}
+.yr i.recent{background:#a8332a}
+.it{display:block;padding:7px 14px;border-top:1px solid #f6f2ec;color:#2b2b2b;text-decoration:none;font-size:13.5px}
+.it:hover{background:#fdfaf5}
+.it .tag{color:#6d3a24;font-weight:600;margin-right:7px}
+.it.done{opacity:.42}
+.it.done .tag::after{content:" ✓";color:#4a8a52}
+.it .tx{color:#4a4a4a}
+.hide-done .it.done{display:none}
+.empty{background:#fff;border:1px dashed #ddd5c8;border-radius:12px;padding:28px 16px;text-align:center;color:#8a7b6c}
+.sum{color:#6b6259;font-size:13px;margin:0 0 12px}
+</style>
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
+</head>
+<body>
+<div class="wrap">
+<a class="toplink" href="index.html">&larr; 返回目录</a>　<a class="toplink" href="错题本.html" style="margin-left:8px">错题本 &rarr;</a>
+<h1>按考点</h1>
+<p class="sub">同一考点的历年题聚在一起。分组用的是各文档自己的小节标题（A 双缝、B 分辨本领……），不是猜的。</p>
+<div class="tools">
+  <input id="q" type="search" placeholder="搜题号 / 标题 / 小节 / 文档…">
+  <button id="fAll" class="on">全部展开</button>
+  <button id="fNone">全部折叠</button>
+  <button id="fUndone">只看未掌握</button>
+  <button id="fRecent">近年优先</button>
+  <button id="expQ">导出题库 CSV</button>
+  <button id="expT">导出考点 CSV</button>
+</div>
+<div id="sum" class="sum"></div>
+<div id="list"></div>
+</div>
+<script>
+var DOCS = [{"f":"851-应用光学-简答与画图-p49-56.html","t":"简答与画图（p49–56）","k":"g851-appo-qa-p4956","c":0,"s":[{"t":"A · 完善像与完善成像条件","q":[["2017-三-2","什么是完善像？系统成完善的条件？","q001"],["2018-三-1（前）","完善成像条件","q002"],["2019-三-1","完善条件；无穷远物点经单一曲面反射成完善像的面形","q003"],["2020-三-2（前）","完善成像条件","q004"],["2021-三-1","格里高利望远镜次镜应是什么面形","q005"],["2023-三-3","等光程求反射面方程（AO=4，AA′=2）","q006"],["2024-三-1","完善像的含义与条件；单个球面折射镜、反射镜能否完善成像","q007"],["2016-三-1","像散与场曲","q037"],["2016-三-2","物方远心光路与像方远心光路","q038"],["2016-三-3","画出垂轴实物 AB 的像 A′B′","q039"],["2016-三-4","右手坐标系经棱镜系统后的像方坐标方向","q040"]]},{"t":"B · 几何像差与色差","q":[["2018-三-1（后）","像差概念；几何像差包括哪几种","q008"],["2020-三-2（后）","色差有哪几种、产生原因","q009"],["2021-三-2","由图判断 (a)(b) 各存在哪种单色像差","q010"],["2023-三-1","畸变的定义与形成原因（画图说明）","q011"],["2024-三-2","像散、场曲的概念及对成像的影响","q012"]]},{"t":"C · 孔径光阑与视场光阑","q":[["2018-三-2","孔径光阑与入瞳/出瞳；视场光阑与入窗/出窗","q013"]]},{"t":"D · 光度学：光亮度与光照度","q":[["2017-三-3","光亮度和光照度的定义与表达式","q014"]]},{"t":"E · 费马原理","q":[["2019-三-2","费马原理的内容；用它解释直线传播","q015"]]},{"t":"F · 景深","q":[["2019-三-3","景深定义、影响因素；增大景深怎么调光圈","q016"]]},{"t":"G · 屋脊棱镜","q":[["2019-三-4","什么是屋脊棱镜；举例并画平面表示图","q017"]]},{"t":"H · 显微镜","q":[["2020-三-1","显微镜的结构、放大原理与分辨率","q018"]]},{"t":"I · 放大镜与视角放大率","q":[["2023-三-2","放大镜视角放大率；5× 的焦距","q019"]]},{"t":"J · 图解法：物像作图","q":[["2017-三-4","作虚物 A 经光组所成的像 A′","q020"],["2017-三-5","作图确定节点 J、J′","q021"],["2018-三-3","作实物 ABC 的像 A′B′C′","q022"],["2019-三-5","作虚物 AB 的像 A′B′","q023"],["2019-三-6","由 β=+1、β=−1 的共轭面作 A 的像","q024"],["2020-三-3","作虚物 AB 的像 A′B′","q025"],["2021-三-3","负光组：作物体 AB 的像","q026"],["2021-三-4","已知 F、H、J、F′，求 H′ 与 J′","q027"],["2022-二-2","负光组：作垂轴实物 AB 的像","q028"],["2023-三-5","定 A 的像","q029"],["2024-三-3","画出 AB 所成的像","q030"]]},{"t":"K · 棱镜系统的像方坐标系","q":[["2017-三-6","平面镜 + 等腰直角棱镜（两反射面互垂）","q031"],["2018-三-4","直角棱镜 + 五角棱镜 + 直角棱镜（链）","q032"],["2020-三-4","同型链（直角 + 五角 + 直角）","q033"],["2022-二-1","平面镜 + 直角棱镜（两反射面平行）","q034"],["2024-三-4","一倍焦距外经薄透镜、平面镜、带屋脊的直角反射镜：画像的坐标系","q035"]]},{"t":"L · 施密特棱镜光路","q":[["2023-三-4","施密特棱镜：过 A 的光路与 A′B′ 方向","q036"]]},{"t":"早年图解法作图题（2010–2015）","q":[["2010-8","图解法：作轴上虚物点、垂轴虚物的像","q-2010-8"],["2011-8","图解法：虚物求像 / 像散 / 棱镜坐标系","q-2011-8"],["2012-8","图解法：实物求像 / 场曲 / 棱镜坐标系","q-2012-8"],["2013-8","图解法：虚物求像 / 场曲与像散 / 棱镜坐标系","q-2013-8"],["2014-8","图解法：由 H/H′/F/F′ 求像 / 像散 / 棱镜坐标系","q-2014-8"],["2015-8","图解法：实物求像 / 像散 / 棱镜坐标系","q-2015-8"]]}]},{"f":"851-真题-2025-2026.html","t":"2025 & 2026（补最近两年）","k":"g851-zhenti-2526","c":0,"s":[{"t":"2025 年真题（2024 年 12 月考试）","q":[["2025-一-1","F-P 干涉仪：透射条纹与反射条纹的区别","q250101"],["2025-一-2","平行平板：透射/反射图样之别、工程上用哪个、等倾条纹对光源的要求","q250102"],["2025-一-3","F-P 与光栅分光原理之别；大范围分光选哪个、为什么","q250103"],["2025-一-4","白纸上的黑点，盖上方解石看什么","q250104"],["2025-一-5","暗室里 45°、90°、180° 看到的瑞利散射光强比","q250105"],["2025-一-6","KDP 纵向电光调制：输出光强表达式与所需电压","q250106"],["2025-二-1","自然光垂直入射玻璃：反射/透射的振幅、强度与偏振度","q250201"],["2025-二-2","双光源 S、S′ 分别开/同时开时的干涉光强分布","q250202"],["2025-二-3","n = 2.35 单层膜镀在 n = 1.6 玻璃上：最大/最小反射率及对应膜厚","q250203"],["2025-二-4","红宝石激光打月球：光斑多大、要多大倍率望远镜、扩束后光斑","q250204"],["2025-二-5","5 cm 光栅 500 条/mm：二级可分辨波长差、二级半角宽、遮住一半缝后","q250205"],["2025-二-6","负单轴晶体直角棱镜：o/e 光路与振动方向；证明 e 光反射后偏离光轴角","q250206"],["2025-三-1","完善像条件与各情形下的曲面形状","q250301"],["2025-三-2","什么是光学系统的像差；畸变的定义与形成原理","q250302"],["2025-三-3","画出等腰直角棱镜作一次反射、二次反射棱镜的光路图","q250303"],["2025-三-4","作轴上虚物点 A 的像点 A′","q250304"],["2025-三-5","作图确定节点 J 和 J′","q250305"],["2025-四-1","汽车后视镜：要缩小像选哪种？要放大像选哪种？","q250401"],["2025-四-2","三透镜 + 两平面镜折叠系统：像的位置；孔径光阑与入瞳","q250402"],["2025-四-3","双薄透镜（60 / 40，间距 45）：像位置像高；要倒立等高实像时物的位置","q250403"],["2025-四-4","150 m 外看足球/乒乓球；5× 伽利略望远镜的目镜焦距与物镜口径","q250404"],["2025-四-5","显微镜：空气/油浸最小分辨距离、总放大率、油浸提高分辨本领的本质答案册无","q250405"]]},{"t":"2026 年真题（2025 年 12 月考试）仅 8 条回忆版","q":[["2026-应-1","投影光学系统成像无渐晕的原因","q260101"],["2026-应-2","设计一种测量光学材料折射率的实验方法","q260102"],["2026-应-3","十字叉平面物经彗差后在理想像面上的模糊像样式","q260103"],["2026-应-4","右手坐标系经棱镜系统后的像方坐标方向","q260104"],["2026-四-1","薄透镜 + 二次反射五角棱镜：像的位置和大小","q260401"],["2026-四-2","双薄光组：求两光组焦距与间隔","q260402"],["2026-四-3","景深：对准平面、近景面、调焦无穷远时的近景","q260403"],["2026-二-1","右旋圆偏光由水射向空气：45° 与 60° 时的反射、透射偏振态","q260301"],["2026-二-2","薄膜上下表面反射光干涉：P₀ 亮暗 + 插介质片使亮度相反","q260302"],["2026-二-3","人眼最小分辨角；望远镜物镜直径与放大率","q260303"],["2026-二-4","设计光栅：二级 θ≤30°、分辨 0.02 nm、第四级缺级、色散最大","q260304"],["2026-二-5","杨氏双缝：光源最大宽度与条纹间距","q260305"],["2026-二-6","光轴与表面成 θ 角、光沿光轴方向入射是否双折射","q260306"],["2026-二-7","双直角三棱镜偏振棱镜：光路、振动方向与胶合面后的夹角","q260307"],["2026-四-4","开普勒望远镜消除渐晕：物镜目镜焦距与视场光阑直径","q260404"],["2026-物-1","影响反射率大小的因素","q260201"],["2026-物-2","菲涅尔波带片与普通透镜的区别","q260202"],["2026-物-3","晶体电光效应可开发的有用器件（≥4 种）","q260203"],["2026-物-4","一般性吸收与选择性吸收及实例","q260204"]]}]},{"f":"851-简答题-按章节.html","t":"简答题","k":"g851-jt-mastered","c":0,"s":[{"t":"一 · 光的电磁理论基础","q":[["2016-1(1)","全反射时，光疏介质中有没有光场？","q001"],["2018-1(1)","两种指数形式的波表达式各表示什么光波","q002"],["2014-1(1)","反射无损失，对入射光的要求","q003"],["2021-1(1)","右旋圆偏振光正入射玻璃，反射光偏振态","q004"],["2023-1(2)","两个透明介质界面\"完全透射\"的条件","q005"],["2024-1(1)","光纤传光的原理与数值孔径","q006"]]},{"t":"二 · 光的干涉","q":[["2013-1(1)","增透膜的折射率怎么选","q007"],["2016-1(2)","牛顿环与等倾条纹\"形状相同、光程差相同\"，是否同类","q008"],["2017-1(1)","两束相干平面波以夹角 θ 相遇","q009"],["2017-1(2)","牛顿环与法布里–珀罗环的异同","q010"],["2017-1(3)","玻璃上镀保护膜应满足什么条件","q011"],["2018-1(2)","同为等倾，为何双光束看反射、多光束看透射","q012"],["2019-1(2)","由谱线宽度求最大测距量程","q013"],["2020-1(2)","白光等倾干涉，同一级圆环各色如何分布","q014"],["2020-1(3)","光盘表面为什么呈彩色条纹","q015"],["2021-1(2)","F-P 两镜反射率 0.5，最大与最小透射率","q016"],["2024-1(2)","杨氏双缝：光源上移 / 增大光源到双缝的距离","q017"]]},{"t":"三 · 光的衍射","q":[["2019-1(1)","干涉与衍射的本质联系与区别","q018"],["2014-1(2)","隔缝遮住光栅狭缝，分辨本领与色散如何变","q019"],["2014-1(3)","提高显微镜分辨率的主要途径","q020"],["2015-1(1)","望远镜如何提高分辨率；口径确定后如何看视角放大率","q021"],["2015-1(2)","光栅光谱仪与 F-P 标准具分辨本领为何都高","q022"],["2016-1(3)","显微镜紫外光 300 nm 的分辨本领是 550 nm 的几倍","q023"],["2018-1(3)","菲涅尔衍射与夫琅禾费衍射的距离判据（估算）","q024"],["2019-1(3)","斜入射平面光栅的光栅方程及各量意义","q025"],["2021-1(3)","光栅光谱仪的分辨率与成像系统分辨率有何区别","q026"],["2024-1(3)","菲涅尔圆屏衍射，轴线中心是亮斑还是暗斑","q027"]]},{"t":"四 · 光在各向异性介质中的传播","q":[["2015-1(3)","自然光 → 45° 起偏器 → 1/4 波片，再叠一块 1/4 波片","q028"],["2016-1(4)","检偏器前加 1/4 波片，转一周两亮两黑","q029"],["2019-1(4)","沿光轴入射 / 光轴平行表面正入射，会不会双折射","q030"],["2020-1(1)","自然光正入射玻璃 / 左旋晶体，出射偏振态","q031"],["2021-1(4)","线偏振光通过全波片 / 半波片","q032"],["2022-1(1)","四种偏振光如何检验区分","q033"],["2023-1(1)","0°–90° 非常光的变化，是否存在双折射","q034"],["2024-1(4)","\"o 光 n = no，e 光 n = ne\" 对不对","q035"]]},{"t":"五 · 晶体的感应双折射","q":[["2013-1(2)","声光布拉格衍射，声频变化时衍射光怎么变","q036"],["2018-1(4)","什么是感应双折射？常见的有哪几种","q037"],["2020-1(4)","法拉第效应与晶体旋光效应是一回事吗","q038"],["2021-1(5)","KDP 线性电光效应，γ63 纵向与横向运用的条件","q039"],["2023-1(5)","P1 ⊥ P2 的电光开关，KDP 纵向运用","q040"]]},{"t":"六 · 光的吸收、色散和散射15 分","q":[["2016-1(5)","香烟的烟为什么是蓝的，口吐的烟为什么是白的","q041"],["2017-1(5)","散射角 0° / 45° / 90° 时散射光的偏振态","q042"],["2018-1(5)","交叉棱镜色散，画出光屏上的光谱分布","q043"],["2019-1(5)","由 dn/dλ 的符号判断色散类型","q044"],["2020-1(5)","太阳光通过大气时的散射有哪几种，各有什么特点","q045"],["2021-1(6)","海水吸收：多深还能看见光","q046"],["2023-1(3)","什么是散射；雾天拍照加红玻璃片的原理","q047"],["2024-1(5)","同一 He-Ne 激光，超净室与实验室看到的一样吗","q048"]]},{"t":"七 · 几何光学基础15 分","q":[["2011-9(1)","解释费马原理","q049"],["2015-1(5)","解释费马原理，给出数学表达式","q050"],["2022-1(5)","光焦度的概念、公式与焦距的关系","q051"],["2023-四-3","双凸透镜一定是正透镜、双凹一定是负透镜吗","q052"]]},{"t":"八 · 理想光学系统15 分","q":[["2011-9(2)","景深产生的原因与影响因素","q053"],["2014-9(1)","解释景深概念，景深大小受哪些因素影响","q054"],["2015-1(4)","解释景深概念，景深大小受哪些因素影响","q055"],["2022-1(4)","什么是景深","q056"]]},{"t":"九 · 光学系统像差基础与光路计算15 分","q":[["2009-10(1)","什么是光学系统的像差，单色像差分几种","q057"],["2009-10(2)","正方形物成像后边缘弯曲，是什么像差","q058"],["2009-10(3)","辐条形物成像后出现十字模糊，是什么像差","q059"],["2012-9(1)","完善成像条件、像差概念、单色像差几种","q060"],["2022-1(3)","五种单色像差的概念","q061"]]},{"t":"十 · 光学仪器与光度学15 分","q":[["2012-9(2)","光亮度与光照度的概念、联系与定义式","q062"],["2013-9(2)","光亮度、光照度概念及联系","q063"],["2014-9(2)","光亮度、光照度概念及联系","q064"],["2013-9(1)","设计一个实用光学系统的步骤与软件","q065"],["2017-1(4)","望远镜与照相物镜的分辨本领各由什么决定","q066"],["2022-1(2)","物面消渐晕的两种方法，投影仪与照相机怎么消","q067"],["2023-1(4)","显微镜放大率给定，物镜与人眼分辨率应满足什么条件","q068"]]}]},{"f":"851-计算题-应用光学-解析法.html","t":"解析法","k":"g851-appo-parax-mastered","c":0,"s":[{"t":"A · 薄透镜 + 全反射膜","q":[["2019-四-1","正弯月薄透镜；右面镀全反射膜后像的位置与大小","q001"]]}]},{"f":"851-计算题-早年真题-合集.html","t":"早年真题 2009–2015","k":"g851-early-p1-mastered","c":0,"s":[{"t":"第一章 · 光的电磁理论基础","q":[["2009-1","45° 振动的光 30° 入射平行平板：上表面反射率与上下表面反射光的振动方向","q001"],["2010-2","自然光 30° 入射 n=1.5 玻璃：反射率与反射光偏振度","q002"],["2011-1","红宝石表面无反射损失：对入射光的要求与入射角","q003"],["2011-10","给入射方向与界面法线，求反射、折射光线的方向矢量","q004"],["2011-11","双平面镜：入射平行一镜、出射平行另一镜，求夹角","q005"],["2012-2","红宝石→空气布儒斯特角入射：反射率、透射率、两边偏振度","q006"],["2013-2","玻璃→空气：正入射反射率，30° 入射的反射率与偏振度","q007"],["2014-2","45° 振动面偏振光 30° 入射：反射光振动方向与反射强度","q008"],["2015-2","左旋圆偏振光 50° 入射空气—玻璃：反射光与透射光的偏振态","q009"]]},{"t":"第二章 · 光的干涉","q":[["2009-2","两束平行光与屏法线夹角 θO、θR：图样形状与周期","q010"],["2009-3","双光束（片 1 上下表面反射）干涉：相干长度限制下求片 2 的厚度","q011"],["2010-1","两束在 xz 面内与 z 轴成 θ1、θ2：z=0 面上条纹形状与间距","q012"],["2010-5","双缝条纹间距；光源移 2 mm 条纹移多少；±2.5 nm 的最大干涉级次","q013"],["2010-6","正交偏振器间插 λ/2 片转一周；换成全波片","q014"],["2011-2","两波夹角 2α、屏垂直于角平分线：条纹间距与形状","q015"],["2011-3","插玻璃片使中央亮纹移到原第 5 级：求厚度","q016"],["2012-1","一束沿 z 轴、一束与 z 轴成 θ：z=0 面上的条纹形状与间距","q017"],["2013-3","三束平面波（θ、0、−θ，振幅 A、2A、A）：光强分布与条纹","q018"],["2014-3","由相干长度估算线宽与频宽","q019"],["2014-5","薄片放在缝与屏之间：P0 最强的条件；一条缝加宽一倍后的可见度","q020"],["2015-4","条纹清晰所允许的光源宽度最大值；屏上条纹间距","q021"]]},{"t":"第三章 · 光的衍射","q":[["2009-4","由条纹间距和缺级求缝距缝宽；第 1、2 级相对强度","q022"],["2010-3","D=100 mm 望远镜：放大率取多少、1000 km 处能分辨多远","q023"],["2010-4","400 条/mm 光栅：一级角色散率；30° 斜入射时的最小波长差","q024"],["2011-4","电子显微镜的最小分辨距离与所需放大倍数","q025"],["2011-5","单缝中央亮纹角宽；其中能装几级谱线；谱线半角宽度","q026"],["2012-3","M=50 望远镜：物镜最小直径与 500 km 处的分辨距离","q027"],["2012-4","晶片 Q + 光栅 R：一级光谱散开的角度；632.8 nm 的角色散率","q028"],["2013-4","NA=1.32 显微镜：分辨距离、有效放大率、光学筒长","q029"],["2013-6","1000 条/mm 光栅的一级角色散率；与 F-P 标准具比分辨本领","q030"],["2015-5","λ=632.8 nm 同型题：缝距缝宽 + 一级与零级强度比","q031"]]},{"t":"第四章 · 光在各向异性介质中的传播特性","q":[["2009-5","0.081 mm 方解石波片（θ = 26.57°）出射光的偏振状态","q032"],["2009-6","格兰-傅科棱镜的底角 θ 范围与失效入射角","q033"],["2011-7","格兰-傅科棱镜：两种光轴取向的 θ 范围与出射偏振对比","q034"],["2012-5","对 800 nm 是 λ/4 片的片子，对 400 nm 起什么作用","q035"],["2012-6","光轴与法线成 45°、d=1 cm：o/e 两束的间距、相位差、间距最大条件","q036"],["2013-5","0.05 mm 晶片（光轴∥x）：θ=45° 与 θ=120° 的出射偏振态","q037"],["2014-6","石英涅拉斯顿棱镜（α=30°）：两束夹角；换成 n=no 玻璃后","q038"]]},{"t":"第五章 · 晶体的感应双折射","q":[["2009-7","KDP 半波电压、电光延迟、出射偏振态","q039"],["2010-7","KDP（A）+ 方解石（B）：λ/2 电压、两束光间距与相位差","q040"],["2011-6","双楔形 KDP 电光偏转器的偏转角","q041"],["2012-7","电光调制器：半波电压、U = 0 与 Uλ/2 时的输出光强","q042"],["2013-7","LiNbO₃ 产生 π/2 延迟的外加电压；偏振器与 x₁ 的夹角","q043"],["2014-7","KDP 强度调制原理；λ/4 电压有多大","q044"],["2015-6","KDP（A）+ 石英（B）：半波电压、两束光间距","q045"]]},{"t":"第七章 · 几何光学基础","q":[["2012-10","β = −1 加贴第二块透镜后像移 20 mm、放大率变 3/4，求两焦距","q046"],["2013-10","共轭距 250 mm、β = −4，实物与虚物两种情形","q047"],["2014-10","球形鱼缸里金鱼的实际位置与实际速度","q048"],["2015-7","共轭距 160 mm、β = −3，实物与虚物两种情形","q049"]]},{"t":"第八章 · 理想光学系统","q":[["2009-9","f₁′ = 90 cm、f₂′ = 30 cm、d = 60 cm 的双光组","q050"],["2010-10","已知 f′、总长度 L、后焦距 lF′，反求两个焦距与间隔","q051"],["2015-9","两个 f′ = 60 mm、间隔 40 mm 的透镜组成的目镜","q052"]]},{"t":"第九章 · 光学系统像差与光路计算","q":[["2009-8","厚平凸透镜；加直角棱镜；后表面镀高反膜","q053"],["2010-9","n = 1.5、r₁ = 10、r₂ = −50、d = 5 的厚透镜成像","q054"],["2010-11","f′ = 100 mm 薄透镜 + 90 mm 直角棱镜","q055"],["2010-12","物在 −∞ 与 −300 mm 时的光阑、入瞳、出瞳","q056"],["2011-12","f′ = 100 mm 薄透镜 + 60 mm 直角棱镜","q057"],["2012-11","f′ = 60 mm 薄透镜 + 60 mm 直角棱镜","q058"],["2013-11","f′ = 100 mm 薄透镜 + 二次反射五棱镜","q059"],["2014-11","与 2013-11 参数完全相同的五棱镜题","q060"]]},{"t":"第十章 · 光学仪器","q":[["2009-11","10× 、f₁′ = 20 cm：目镜焦距、物镜口径、出射光束宽度","q061"],["2010-13","β₁ = −40、Γ₂ = 15、共轭距 195 mm 的显微镜","q062"],["2011-13","10 km 处 50 mm 两点：倍率、焦距、口径","q063"],["2012-12","f′ = 75 mm、F = 16，远景到无穷远时的对准平面与近景面","q064"],["2012-13","Γ = −300×、目镜 20 mm：物镜倍率与最小分辨距离","q065"],["2013-12","f′ = 40 mm、D₁ = 30 mm 的放大镜：光阑、入瞳、入窗、线视场","q066"],["2013-13","Γ = −1000×、NA = 1.3、λ = 555 nm 的分辨距离","q067"],["2014-12","0.6 m 的相机加近拍镜能拍 0.2 m，求近拍镜焦距","q068"],["2014-13","用 −10、10、200 mm 三片与一个光阑设计无渐晕望远镜","q069"],["2015-10","与 2013-12 同参数的放大镜题","q070"],["2015-11","与 2012-13 同参数（−300×、目镜 20 mm、60″）","q071"]]}]},{"f":"851-计算题-第10章-光学仪器.html","t":"第十章 光学仪器","k":"g851-c10-mastered","c":10,"s":[{"t":"A · 人眼与照相机","q":[["2017-四-4","5 m 内看不清要配多少度；近拍镜把最近拍摄距离推到多远","q001"]]},{"t":"B · 放大镜","q":[["2024-四-3","放大镜＋眼在 F′：孔径光阑、入瞳、入窗、渐晕","q002"],["2017-四-3","同一放大镜：入/出瞳与入/出窗","q003"]]},{"t":"C · 显微镜","q":[["2022-三-7","物镜 −40×、目镜 15×、共轭距 195mm：求全套参数","q004"],["2018-四-3","Γ = −40×，物镜 35mm、目镜 25mm：求物镜倍率与总焦距","q005"],["2024-四-4","两片 f′ = 50mm 组成 10× 显微镜","q006"],["2016-四-2","Γ = −125×、目镜 20mm：物镜倍率与最小分辨距离","q007"],["2019-四-3","筒长 150mm、物镜 20mm、目镜 12.5×：含盖玻片修正","q008"]]},{"t":"D · 望远镜","q":[["2021-四-4","10× 望远镜设计：目镜焦距、物镜口径、视场光阑、扩束","q009"],["2019-四-2","f′ = 1000mm、筒长 1200mm 的望远镜：倍率、光阑、分辨率","q010"],["2023-四-4","筒长 280mm、15× 直立像：伽利略式望远镜＋600mm 物成像","q011"],["2020-四-4","三片镜中选两片＋一个光阑，设计无渐晕望远镜","q012"]]}]},{"f":"851-计算题-第1章-电磁理论.html","t":"第一章 光的电磁理论基础","k":"g851-c1-mastered","c":1,"s":[{"t":"一 · 光波场表达式与空间频率1 题 ·","q":[["2015-3","由相位分布求电场表示式、空间频率与波矢方向","q001"]]},{"t":"二 · 布儒斯特角与偏振度","q":[["2017-二-1","红宝石表面反射光为全偏振光，求入射角、透射光强与偏振度","q002"],["2019-二-1","反射光强为零时，入射光的偏振态与入射角","q003"],["2016-二-2","玻璃片：反射率、振动方向；以布儒斯特角入射并绕轴旋转一周","q004"]]},{"t":"三 · 菲涅尔公式、反射率与振动方向","q":[["2022-三-1","平行平板：上表面反射率与上下表面反射光的振动方向","q005"],["2024-二-2","45° 线偏振光 30° 入射 n = 1.5 玻璃","q006"],["2018-二-1","20° 入射晶体的反射率与偏振度；加电场后线偏振光垂直入射","q007"]]},{"t":"四 · 正入射与全反射","q":[["2020-二-1","左旋圆偏振光正入射，求反射光偏振态与光强","q008"],["2023-二-1","棱镜内两次反射后反向射出，求出射光强","q009"]]}]},{"f":"851-计算题-第2章-干涉.html","t":"第二章 光的干涉","k":"g851-c2-mastered","c":2,"s":[{"t":"A · 杨氏双缝","q":[["2016-二-1","由 10 个条纹间距反求波长；白光时条纹如何变","q001"],["2017-二-2","贴薄片后条纹移动距离；多厚才使条纹消失","q002"],["2021-二-1","条纹间距、水中变化、消失级次、光源临界宽度","q003"],["2023-二-2","p 点光强比；圆形光源下的最大孔距","q004"]]},{"t":"B · 两束平面波干涉","q":[["2022-三-2","两平面波分居 z 轴两侧，z 平面上条纹形状与间距","q005"],["2024-二-3","两相互垂直的光波，z = 0 平面上的条纹","q006"]]},{"t":"C · 劈尖等厚干涉","q":[["2018-二-2","斜入射劈尖的条纹数；换成空气劈尖后是多少","q007"]]},{"t":"D · F-P 干涉仪与干涉滤光片","q":[["2019-二-2","由条纹错位求波长差；求分辨本领","q008"],["2020-二-2","干涉滤光片的中心波长、半宽度、斜入射透射波长","q009"]]},{"t":"E · 光学薄膜","q":[["2021-二-3","氟化镁增透膜的厚度、最小反射率、与未镀膜比较","q010"]]}]},{"f":"851-计算题-第3章-衍射.html","t":"第三章 光的衍射","k":"g851-c3-mastered","c":3,"s":[{"t":"A · 双缝夫琅和费衍射","q":[["2023-二-3","单缝中央极大内有多少干涉极大；零级与一级强度","q001"]]},{"t":"B · 分辨本领","q":[["2018-二-3","宇航员在 100 km 高空能分辨多远的两点","q002"],["2024-二-1","能不能看清 20 m 外间隔 5 mm 的两条线","q003"],["2024-二-4","单缝第一级明纹的两波长间距；换成光栅后第一主极大间距","q012"],["2014-4","光栅 30° 斜入射的全部级次；正入射第一级的半角宽与分辨本领","q013"],["2021-二-2","2.5 m 望远镜的分辨角；放大率取多大合适","q004"]]},{"t":"C · 光栅","q":[["2020-二-3","缝宽、二级可分辨波长差、二级半角宽度","q005"],["2017-二-3","零级半角宽度、二级波长差、实际可见级次","q006"],["2019-二-3","中央峰角宽度、可分辨的最小波长差","q007"],["2018-二-4","垂直入射能看多少条；30° 斜入射两侧最高级次","q008"],["2021-二-4","钠黄光双线：二级角间距、能否分辨","q009"]]},{"t":"A · 一块晶片 + 光栅","q":[["2023-二-4","可见光穿过光轴切割晶片后有无变化；一级光谱角范围；能否分辨钠双线","q010"]]},{"t":"B · 设计光栅","q":[["2016-二-3","设计光栅：二级 θ≤30°、色散尽量大、三级缺级、二级分辨率 0.02 nm","q011"]]}]},{"f":"851-计算题-第4章-光在各向异性介质中的传播特性.html","t":"第四章 光在各向异性介质中的传播特性","k":"g851-c4-mastered","c":4,"s":[{"t":"A · 折射定律与双折射画图","q":[["2020-二-4","掠入射 5 cm 单轴平板，第二面上二光分开多远","q001"],["2021-二-5","方解石直角棱镜：只让一种线偏振光射出，顶角 α 取多大","q002"],["2024-二-5","方解石薄片：垂直入射与 60° 斜入射后，出射光的偏振","q003"]]},{"t":"B · 光在单轴晶体中的传播","q":[["2018-二-5","0.05 mm 石英晶片：45° 入射的出射偏振态、是几号波片","q004"],["2023-二-5","钠黄光 2.5π 相位延迟：多厚、出射什么偏振","q005"],["2016-二-4","光轴与表面成 45° 的 1 mm 晶体：o、e 光线夹角与相位差","q006"]]},{"t":"C · 偏振棱镜","q":[["2017-二-4","渥拉斯顿棱镜（45° 方解石）：ADC 中两光夹角","q007"]]},{"t":"D · 波片","q":[["2019-二-4","λ1 的 1/4 波片对 λ2 是什么波片","q008"]]},{"t":"E · 偏光干涉与 KDP 电光调制","q":[["2016-二-5","KDP 纵向运用：感应主轴上的两个折射率与输出光强式","q009"],["2019-二-5","KDP 强度调制器：U = 3.74 kV 时的相位差、Uπ 与 U2π 时的输出","q010"]]}]},{"f":"851-计算题-第5章-感应双折射.html","t":"第五章 晶体的感应双折射","k":"g851-c5-birefringence-mastered","c":5,"s":[{"t":"A · 纵向电光效应（KDP）","q":[["2017-二-5","KDP 纵向运用：半波电压，以及 V = 0 与 V = Vλ/2 时的输出光强","q001"]]},{"t":"B · 电光强度调制（LiNbO₃）","q":[["2024-二-6","LiNbO₃ 产生 π/2 相位延迟所需电压；起偏器该放多少度","q002"]]},{"t":"C · KDP 半波电压与圆偏振条件","q":[["2020-二-5","产生 π/2 相位延迟要加多少伏；怎样才能出圆偏振","q003"]]},{"t":"D · KDP + 方解石：间距与相位差","q":[["2022-三-6","半波电压；B 晶体输出的两光间距与相位差","q004"]]}]},{"f":"851-计算题-第7章-几何光学.html","t":"第七章 几何光学基础","k":"g851-c7-geometric-mastered","c":7,"s":[{"t":"A · 薄透镜成像4 题次","q":[["2017-四-1","平凸薄透镜：反推后表面曲率半径，再换物距成像","q001"],["2021-四-1","平凸透镜：像方焦距；平面贴水面后的物方/像方焦距与池底物体成像","q002"],["2016-四-1","共轭距 250 mm、β = 4，实物与虚物两种情形的焦距","q003"],["2024-四-1","共轭距 250 mm、β = −4，实物与虚物两种情形的焦距","q004"]]},{"t":"B · 厚透镜与反射膜","q":[["2023-四-2","厚透镜直接成像；后表面镀全反射膜后的像","q005"]]},{"t":"C · 单球面折射与视深2 题（3 题次）","q":[["2023-四-1","水中的铅球、空气中的气球，各看成什么形状多大","q006"],["2024-四-2","看到的是 12×16 cm、深 2.7 m 的物体，实际是什么","q007"],["2020-四-1","球形鱼缸：金鱼经过曲率中心时的实际位置与速度","q008"],["2022-三-4","球形鱼缸：金鱼经过曲率中心时的实际位置与速度","q250"]]}]},{"f":"851-计算题-第8章-理想光学系统.html","t":"第八章 理想光学系统","k":"g851-c8-mastered","c":8,"s":[{"t":"A · 双光组组合","q":[["2022-三-5","双光组：已知像距与像高，反求物面位置与物高","q001"],["2017-四-2","短焦距照相物镜：由 f′、工作距离、总长反求两片焦距","q002"],["2018-四-1","已知 f′、总长、后截距，反求双光组","q003"],["2020-四-2","已知间隔、放大率、共轭距，反求两光组焦距","q004"]]},{"t":"B · 高斯公式与二次成像","q":[["2021-四-2","二次成像法：由两次像高反求 f′ 与物移动量","q005"]]}]},{"f":"851-计算题-第9章-光路计算.html","t":"第九章 光学系统像差基础和光路计算","k":"g851-c9-mastered","c":9,"s":[{"t":"A · 解析法：薄透镜＋反射棱镜","q":[["2016-四-3","薄透镜＋二次反射五角棱镜：像的位置与大小","q001"],["2022-三-3","同一结构的重复题（数据与 2016-四-3 完全相同）","q002"],["2018-四-2","棱镜在透镜后 150mm：展开成平板求像距","q003"],["2021-四-3","透镜＋45° 平面镜＋一次反射直角棱镜：像在哪、多大","q004"]]},{"t":"B · 孔径光阑 · 视场光阑 · 出瞳","q":[["2016-四-4","无焦系统的孔径光阑、视场光阑与出瞳","q005"],["2020-四-3","同一无焦系统的重复题（数据完全相同）","q006"]]}]}], KEYTO = {"851-应用光学-简答与画图-p49-56.html":"g851-appo-qa-p4956","851-真题-2025-2026.html":"g851-zhenti-2526","851-简答题-按章节.html":"g851-jt-mastered","851-计算题-应用光学-解析法.html":"g851-appo-parax-mastered","851-计算题-早年真题-合集.html":"g851-early-p1-mastered","851-计算题-第10章-光学仪器.html":"g851-c10-mastered","851-计算题-第1章-电磁理论.html":"g851-c1-mastered","851-计算题-第2章-干涉.html":"g851-c2-mastered","851-计算题-第3章-衍射.html":"g851-c3-mastered","851-计算题-第4章-光在各向异性介质中的传播特性.html":"g851-c4-mastered","851-计算题-第5章-感应双折射.html":"g851-c5-birefringence-mastered","851-计算题-第7章-几何光学.html":"g851-c7-geometric-mastered","851-计算题-第8章-理想光学系统.html":"g851-c8-mastered","851-计算题-第9章-光路计算.html":"g851-c9-mastered"}, CHFOR = {"1":12,"2":12,"3":13,"4":10,"5":10,"6":5,"7":14,"8":7,"9":9,"10":10};
+var CHP = (location.search.match(/[?&]ch=(\d+)/) || [])[1] || "";
+if (CHP) DOCS = DOCS.filter(function(d){ return String(d.c) === CHP; });
+function jget(k){ try { return JSON.parse(localStorage.getItem(k) || "null"); } catch(e){ return null; } }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+var MASTER = {};
+DOCS.forEach(function(d){
+  if (!d.k) return;
+  var ob = jget(d.k);
+  if (ob && typeof ob === "object") Object.keys(ob).forEach(function(t){ MASTER[t] = 1; });
+});
+
+/* 年份热力条：2009–2026 一排格子，有题就点亮，近三年用红色 */
+var Y0 = 2009, Y1 = 2026, RECENT = 2023;
+var SORT_RECENT = false;
+
+function yearsOf(items){
+  var c = {};
+  items.forEach(function(it){
+    var y = parseInt(String(it[0]).slice(0, 4), 10);
+    if (y >= Y0 && y <= Y1) c[y] = (c[y] || 0) + 1;
+  });
+  return c;
+}
+function strip(items){
+  var c = yearsOf(items), out = [];
+  for (var y = Y0; y <= Y1; y++) {
+    var n = c[y] || 0;
+    out.push('<i class="' + (n ? (y >= RECENT ? 'on recent' : 'on') : '')
+      + '" title="' + y + ' 年：' + n + ' 题">' + String(y).slice(2) + '</i>');
+  }
+  return '<div class="yr">' + out.join("") + '</div>';
+}
+function lastYear(items){
+  var ys = Object.keys(yearsOf(items)).map(Number);
+  return ys.length ? Math.max.apply(null, ys) : 0;
+}
+
+function render(){
+  var kw = document.getElementById("q").value.trim().toLowerCase();
+  var list = document.getElementById("list"), html = [], total = 0, shown = 0, secN = 0;
+  DOCS.forEach(function(d){
+    var rows = [];
+    var secs = SORT_RECENT
+      ? d.s.slice().sort(function(a, b){ return lastYear(b.q) - lastYear(a.q); })
+      : d.s;
+    secs.forEach(function(sec){
+      var items = sec.q.filter(function(it){
+        total++;
+        var ok = !kw || (it[0] + " " + it[1] + " " + sec.t + " " + d.t).toLowerCase().indexOf(kw) >= 0;
+        if (ok) { shown++; return true; }
+        return false;
+      });
+      if (!items.length) return;
+      secN++;
+      var doneN = items.filter(function(it){ return MASTER[it[0]]; }).length;
+      rows.push('<div class="sh">' + esc(sec.t) + '<span class="n">' + items.length + ' 题'
+        + (doneN ? ' · 已掌握 ' + doneN : '') + '</span></div>');
+      rows.push(strip(items));
+      items.forEach(function(it){
+        var dn = MASTER[it[0]];
+        rows.push('<a class="it' + (dn ? ' done' : '') + '" href="' + esc(d.f) + (it[2] ? '#' + esc(it[2]) : '') + '">'
+          + '<span class="tag">' + esc(it[0]) + '</span><span class="tx">' + esc(it[1] || '') + '</span></a>');
+      });
+    });
+    if (!rows.length) return;
+    var chip = (d.c && CHFOR[d.c])
+      ? '<a class="fchip" href="公式墙.html#ch' + d.c + '" onclick="event.stopPropagation()">公式 '
+        + CHFOR[d.c] + ' 条 &rarr;</a>' : '';
+    html.push('<div class="doc"><div class="dh"><span>' + esc(d.t) + '</span>' + chip
+      + '<span class="n">' + d.s.length + ' 个考点</span><span class="ar">▼</span></div>'
+      + '<div class="db">' + rows.join("") + '</div></div>');
+  });
+  list.innerHTML = html.length ? html.join("") :
+    '<div class="empty">没有匹配的题。换个关键词，或清空搜索框。</div>';
+  var head = "";
+  if (CHP) {
+    head = "第 " + CHP + " 章　";
+    if (!html.length) {
+      list.innerHTML = '<div class="empty">第 ' + CHP + ' 章没有对应的章节文档（可能只出现在简答题合辑里）。'
+        + '<br><a href="考点.html">看全部考点 &rarr;</a></div>';
+    }
+  }
+  document.getElementById("sum").textContent = head
+    + "共 " + total + " 题 / " + DOCS.reduce(function(a,d){ return a + d.s.length; }, 0) + " 个考点"
+    + (kw ? "　匹配 " + shown + " 题" : "");
+  bind();
+}
+
+function bind(){
+  document.querySelectorAll(".dh").forEach(function(h){
+    h.onclick = function(){
+      var doc = h.parentNode;
+      doc.classList.toggle("fold");
+      h.querySelector(".ar").textContent = doc.classList.contains("fold") ? "▶" : "▼";
+    };
+  });
+}
+
+document.getElementById("q").addEventListener("input", render);
+document.getElementById("fAll").onclick = function(){
+  document.querySelectorAll(".doc").forEach(function(d){ d.classList.remove("fold"); });
+  this.classList.add("on"); document.getElementById("fNone").classList.remove("on");
+};
+document.getElementById("fNone").onclick = function(){
+  document.querySelectorAll(".doc").forEach(function(d){ d.classList.add("fold"); });
+  this.classList.add("on"); document.getElementById("fAll").classList.remove("on");
+};
+document.getElementById("fUndone").onclick = function(){
+  var on = document.body.classList.toggle("hide-done");
+  this.classList.toggle("on", on);
+};
+document.getElementById("fRecent").onclick = function(){
+  SORT_RECENT = !SORT_RECENT;
+  this.classList.toggle("on", SORT_RECENT);
+  render();
+};
+
+/* ===== 导出 CSV ===== */
+var STAR = jget("g851-star") || {}, NOTES = jget("g851-notes") || {};
+
+var WRONGCNT = (function () {
+  var c = {};
+  try {
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (!k || k.indexOf("g851-mock2-") !== 0) continue;
+      var ob = JSON.parse(localStorage.getItem(k) || "null");
+      if (!ob || typeof ob !== "object") continue;
+      for (var id in ob) {
+        var rec = ob[id];
+        if (!rec || typeof rec !== "object") continue;
+        for (var p in rec) {
+          if (parseFloat(rec[p]) < 1) { c[id] = (c[id] || 0) + 1; }
+        }
+      }
+    }
+  } catch (e) {}
+  return c;
+})();
+
+function widOfTag(tag) { return "m" + String(tag).replace(/[^0-9A-Za-z_\u4e00-\u9fff]/g, ""); }
+function cq(v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }
+function dl(name, text) {
+  var blob = new Blob(["\ufeff" + text], { type: "text/csv;charset=utf-8" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+function today() { return new Date().toISOString().slice(0, 10); }
+
+document.getElementById("expQ").onclick = function () {
+  var rows = [["年份", "题号", "文档", "考点", "题干", "已掌握", "收藏", "笔记", "整卷判错次数"]];
+  DOCS.forEach(function (d) {
+    d.s.forEach(function (sec) {
+      sec.q.forEach(function (it) {
+        var tag = it[0];
+        rows.push([
+          parseInt(String(tag).slice(0, 4), 10) || "",
+          tag, d.t, sec.t, it[1],
+          MASTER[tag] ? 1 : 0,
+          STAR[tag] ? 1 : 0,
+          NOTES[tag] || "",
+          WRONGCNT[widOfTag(tag)] || 0
+        ]);
+      });
+    });
+  });
+  rows.sort(function (a, b) { return (b[0] || 0) - (a[0] || 0) || String(a[1]).localeCompare(String(b[1])); });
+  dl("851题库-" + today() + ".csv", rows.map(function (r) { return r.map(cq).join(","); }).join("\r\n"));
+};
+
+document.getElementById("expT").onclick = function () {
+  var rows = [["文档", "考点", "题数", "已掌握", "掌握率", "考过年份", "最近年份"]];
+  DOCS.forEach(function (d) {
+    d.s.forEach(function (sec) {
+      var ys = yearsOf(sec.q);
+      var list = Object.keys(ys).map(Number).sort(function (a, b) { return a - b; });
+      var doneN = sec.q.filter(function (it) { return MASTER[it[0]]; }).length;
+      rows.push([d.t, sec.t, sec.q.length, doneN,
+        Math.round(doneN / sec.q.length * 100) + "%",
+        list.join(" "), list.length ? list[list.length - 1] : ""]);
+    });
+  });
+  rows.sort(function (a, b) { return (b[6] || 0) - (a[6] || 0) || b[2] - a[2]; });
+  dl("851考点-" + today() + ".csv", rows.map(function (r) { return r.map(cq).join(","); }).join("\r\n"));
+};
+render();
+</script>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
+</body>
+</html>

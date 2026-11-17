@@ -88,6 +88,49 @@
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
+
+
+
+
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
 </head>
 <body>
 <div class="wrap">
@@ -238,16 +281,13 @@
   （1）求两光第一级衍射明纹中心的距离；<br>
   （2）用 <i>d</i> = 1×10<sup>−3</sup> cm 的光栅代替单缝、衍射角情形一样时，求两光第一主极大的间距。</div>
   <div class="ans">
-    <div class="step"><b class="n">1</b>单缝：只把 <i>a</i> sinθ = <i>m</i>λ 对 λ 取差，得 Δθ = Δλ/<i>a</i>
-      <div class="eqb"><i>a</i> = 1×10<sup>−2</sup> cm = 1×10<sup>−4</sup> m，　Δλ = 660 − 400 = 260 nm = 2.6×10<sup>−7</sup> m</div>
-      <div class="eqb">Δ<i>x</i><sub>1</sub> = <i>f</i>·<span class="frac"><span class="num">Δλ</span><span class="den"><i>a</i></span></span> = 0.5 × <span class="frac"><span class="num">2.6×10<sup>−7</sup></span><span class="den">1×10<sup>−4</sup></span></span> = 1.3×10<sup>−3</sup> m = <b>1.3 mm</b></div>
-    </div>
+    <div class="step"><b class="n">1</b><b>单缝"第一级明纹"的位置：<i>a</i>sinθ = (2<i>k</i>+1)λ/2</b>，<i>k</i>=1 ⇒ sinθ = 1.5λ/<i>a</i>（<b>不是</b> λ/<i>a</i> —— λ/<i>a</i> 是<b>第一暗纹</b>）。<i>y</i> = 1.5<i>f</i>λ/<i>a</i>：<div class="eqb">λ<sub>1</sub>：<i>y</i><sub>1</sub> = 1.5 × 400×10<sup>−9</sup> × 0.5 ÷ 1×10<sup>−4</sup> = <b>3.0 mm</b>　　λ<sub>2</sub>：<i>y</i><sub>2</sub> = <b>4.95 mm</b></div>⇒　Δ<i>y</i> = 1.5<i>f</i>Δλ/<i>a</i> = 1.5 × 0.5 × 2.6×10<sup>−7</sup> ÷ 1×10<sup>−4</sup> = <b>1.95 mm</b>（≈2.0 mm）</div>
     <div class="step"><b class="n">2</b>光栅：同一个式子，只把 <i>a</i> 换成 <i>d</i>
       <div class="eqb"><i>d</i> = 1×10<sup>−3</sup> cm = 1×10<sup>−5</sup> m</div>
       <div class="eqb">Δ<i>x</i><sub>1</sub> = <i>f</i>·<span class="frac"><span class="num">Δλ</span><span class="den"><i>d</i></span></span> = 0.5 × <span class="frac"><span class="num">2.6×10<sup>−7</sup></span><span class="den">1×10<sup>−5</sup></span></span> = 1.3×10<sup>−2</sup> m = <b>13 mm</b></div>
     </div>
-    <div class="res">（1）单缝：两波长第一级明纹中心相距 <b>1.3 mm</b>；（2）换成光栅后：两第一主极大相距 <b>13 mm</b>（正好是 <i>a</i>/<i>d</i> = 10 倍）。</div>
-    <div class="warn"><b>易错</b>：① <i>a</i>、<i>d</i> 给的是 cm，先换 m（少换一次就错 10² 倍）；② 第（1）问只能用 <i>a</i>，别顺手用 <i>d</i>；③ 答案册口径是 Δ<i>x</i> = <i>f</i>Δλ/<i>a</i>；若严格按第 1 明纹位置 1.43λ/<i>a</i>，则为 1.86 mm 与 18.6 mm。</div>
+    <div class="res">（1）单缝：两波长<b>第一级明纹</b>中心相距 <b>1.95 mm</b>（≈2.0 mm；若用精确根 1.43λ/<i>a</i> 则 1.86 mm）；（2）换成光栅后，两<b>第一主极大</b>相距 <b>13 mm</b>（正好是 <i>a</i>/<i>d</i> = 10 倍）。<br><b>关键区分</b>：单缝<b>明纹</b>在 (2<i>k</i>+1)λ/(2<i>a</i>)、<b>暗纹</b>在 <i>k</i>λ/<i>a</i>；光栅主极大在 <i>k</i>λ/<i>d</i>。第（1）问误用 λ/<i>a</i>（暗纹）就会得 1.3 mm —— 那是第一暗纹的间距。</div>
+    <div class="warn"><b>易错（本题就考这个）</b>：① 单缝<b>明纹</b> <i>a</i>sinθ = (2<i>k</i>+1)λ/2、<b>暗纹</b> <i>a</i>sinθ = <i>k</i>λ；把"第一级明纹"当成 λ/<i>a</i> 是<b>最常见的错</b>（那是第一暗纹）。<br>② <i>a</i>、<i>d</i> 给的是 cm，先换 m（少换一次错 10² 倍）。<br>③ 光栅主极大位置只由 <i>d</i> 定、与 <i>a</i> 无关；<i>a</i> 只管缺级和衍射包络。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -1066,5 +1106,214 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 })();
 </script>
+<!--HINT--><style>
+.hintbtn{margin-left:8px;border:1px solid #d8cfc2;background:#fff;color:#6d3a24;border-radius:14px;
+  padding:4px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.hintbtn:hover{background:#fdfaf5}
+.hintbtn.on{background:#6d3a24;color:#fff;border-color:#6d3a24}
+.hintbox{display:none;margin:8px 0 0;padding:9px 12px;background:#fdf8f2;border-left:3px solid #8c4a2f;
+  border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.62;color:#3a3a3a}
+.hintbox.on{display:block}
+.hintbox b{color:#6d3a24;font-size:12px;letter-spacing:.04em;margin-right:8px}
+@media print{.hintbtn{display:none}.hintbox{display:block}}
+</style>
+<script>
+/* HINT —— 每题「看提示」：先给一行要点，回忆完整推导 */
+(function () {
+  if (window.__hintInit) return;
+  window.__hintInit = 1;
+
+  function tx(el) { return el ? el.textContent.replace(/\s+/g, " ").trim() : ""; }
+
+  function pick(q) {
+    var ans = q.querySelector(".ans");
+    if (!ans) return "";
+    var b = ans.querySelector("b");
+    if (b) {
+      var t = tx(b).replace(/^【[^】]*】\s*/, "");
+      if (t.length >= 4 && t.length <= 80) return t;
+    }
+    var p = ans.querySelector("p") || ans;
+    var s = tx(p);
+    var m = s.match(/^[^。；]{6,70}[。；]/);
+    if (m) return m[0].replace(/[。；]$/, "");
+    var eq = ans.querySelector(".eqb");
+    if (eq) { var e = tx(eq); if (e) return e.slice(0, 80); }
+    return s.slice(0, 60);
+  }
+
+  var n = 0;
+  Array.prototype.forEach.call(document.querySelectorAll(".q"), function (q) {
+    var hd = q.querySelector(".hd"), stem = q.querySelector(".stem"), ans = q.querySelector(".ans");
+    if (!ans || !hd || q.querySelector(".hintbtn")) return;
+    var hint = pick(q);
+    if (!hint) return;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "hintbtn";
+    btn.textContent = "看提示";
+
+    var box = document.createElement("div");
+    box.className = "hintbox";
+    var lab = document.createElement("b");
+    lab.textContent = "要点";
+    box.appendChild(lab);
+    box.appendChild(document.createTextNode(hint));
+
+    btn.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      var on = box.classList.toggle("on");
+      btn.classList.toggle("on", on);
+      btn.textContent = on ? "收起要点" : "看提示";
+    });
+
+    // 按钮挂在题头（.hd），要点框插在题干（.stem）之后 ——
+    // 这样即使整页答案被「收起答案」隐藏，要点仍然看得见。
+    hd.appendChild(btn);
+    var anchor = stem || hd;
+    anchor.parentNode.insertBefore(box, anchor.nextSibling);
+    n++;
+  });
+})();
+</script>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
 </body>
 </html>

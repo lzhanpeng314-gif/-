@@ -35,13 +35,52 @@
   }
   @media print{.grid{grid-template-columns:1fr 1fr;}}
 </style>
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
 </head>
 <body>
 <div class="wrap">
   <h1>851 物理光学与应用光学 · 资料总索引</h1>
   <div style="margin:0 0 6px"><a href="#" onclick="if(history.length>1){history.back();return false;}" style="font-size:13px;color:#6d5a4a">← 上一页</a></div>
 <div class="sub">西电 851 · 2027 备考 · 按考纲章节重排 · 题与答案同页</div>
-  <div class="tot">共 <b>14</b> 份文档、<b>291</b> 道不重复的题（含重复共 291 条）</div>
+  <div class="tot">共 <b>14</b> 份文档、<b>305</b> 道不重复的题（含重复共 305 条）</div>
   <!--DASHBOARD--><style>
 #db{background:#fff;border:1px solid #e3dfd7;border-radius:12px;padding:16px 18px;margin:22px 0 18px;
     box-shadow:0 1px 4px rgba(0,0,0,.04)}
@@ -76,13 +115,25 @@
 #db .go a.main{background:#8c4a2f;color:#fff;border-color:#8c4a2f;font-weight:600}
 #db .go a:hover{filter:brightness(1.06)}
 #db .empty{color:#9a9086;font-size:12.5px}
+#db .day{background:#fbf8f3;border:1px solid #e8e0d4;border-radius:10px;padding:12px 14px;margin-bottom:14px}
+#db .day .dl{font-size:12px;color:#8a7a68;display:flex;gap:8px;align-items:baseline;margin-bottom:5px}
+#db .day .dl b{color:#6d3a24;font-size:13px}
+#db .day .dt{font-size:13.5px;line-height:1.62}
+#db .day .dt i{font-style:normal;color:#6d3a24;font-weight:600;margin-right:6px}
+#db .day .da{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+#db .day .da a,#db .day .da button{flex:1 1 104px;text-align:center;padding:8px 12px;border-radius:8px;
+     font-size:13px;text-decoration:none;border:1px solid #d8cfc2;background:#fff;color:#6d3a24;
+     cursor:pointer;font-family:inherit}
+#db .day .da a.main{background:#8c4a2f;color:#fff;border-color:#8c4a2f;font-weight:600}
+#db .day .da .ok{background:#eef7ee;border-color:#bcd9bc;color:#2f6b34;font-weight:600}
 @media(max-width:430px){#db .bar .nm{flex-basis:104px}#db .kpi b{font-size:17px}}
 @media print{#db .bar:hover .nm{color:inherit}}
 </style>
 <div id="db"></div>
+<script src="qindex.js"></script>
 <script>
 (function () {
-  var DOCS = [{"f":"851-应用光学-简答与画图-p49-56.html","k":"g851-appo-qa-p4956","n":42,"t":"简答与画图（p49–56）"},{"f":"851-真题-2025-2026.html","k":"g851-zhenti-2526","n":30,"t":"2025 & 2026（补最近两年）"},{"f":"851-简答题-按章节.html","k":"g851-jt-mastered","n":68,"t":"简答题"},{"f":"851-计算题-应用光学-解析法.html","k":"g851-appo-parax-mastered","n":3,"t":"解析法"},{"f":"851-计算题-早年真题-合集.html","k":"g851-early-p1-mastered","n":71,"t":"早年真题 2009–2015"},{"f":"851-计算题-第10章-光学仪器.html","k":"g851-c10-mastered","n":12,"t":"第十章 光学仪器"},{"f":"851-计算题-第1章-电磁理论.html","k":"g851-c1-mastered","n":9,"t":"第一章 光的电磁理论基础"},{"f":"851-计算题-第2章-干涉.html","k":"g851-c2-mastered","n":10,"t":"第二章 光的干涉"},{"f":"851-计算题-第3章-衍射.html","k":"g851-c3-mastered","n":13,"t":"第三章 光的衍射"},{"f":"851-计算题-第4章-光在各向异性介质中的传播特性.html","k":"g851-c4-mastered","n":10,"t":"第四章 光在各向异性介质中的传播特性"},{"f":"851-计算题-第5章-感应双折射.html","k":"g851-c5-birefringence-mastered","n":4,"t":"第五章 晶体的感应双折射"},{"f":"851-计算题-第7章-几何光学.html","k":"g851-c7-geometric-mastered","n":8,"t":"第七章 几何光学基础"},{"f":"851-计算题-第8章-理想光学系统.html","k":"g851-c8-mastered","n":5,"t":"第八章 理想光学系统"},{"f":"851-计算题-第9章-光路计算.html","k":"g851-c9-mastered","n":6,"t":"第九章 光学系统像差基础和光路计算"}], PAPERS = [{"k":"2009","f":"模拟-2009.html","n":13,"mx":130,"q":[["m20091","10"],["m20092","10"],["m20093","10"],["m20094","5|5"],["m20095","10"],["m20096","5|5"],["m20097","10"],["m20098","4|3|3"],["m20099","5|5"],["m200911","4|3|3"],["m2009101","10"],["m2009102","10"],["m2009103","10"]]},{"k":"2010","f":"模拟-2010.html","n":13,"mx":130,"q":[["m20101","10"],["m20102","10"],["m20103","5|5"],["m20104","10"],["m20105","4|3|3"],["m20106","5|5"],["m20107","10"],["m20108","5|5"],["m20109","10"],["m201010","10"],["m201011","10"],["m201012","10"],["m201013","10"]]},{"k":"2011","f":"模拟-2011.html","n":14,"mx":140,"q":[["m20111","5|5"],["m20112","10"],["m20113","10"],["m20114","10"],["m20115","4|3|3"],["m20116","10"],["m20117","4|3|3"],["m20118","4|3|3"],["m201110","10"],["m201111","10"],["m201112","10"],["m201113","4|3|3"],["m201191","10"],["m201192","10"]]},{"k":"2012","f":"模拟-2012.html","n":14,"mx":140,"q":[["m20121","10"],["m20122","10"],["m20123","10"],["m20124","10"],["m20125","10"],["m20126","10"],["m20127","5|5"],["m20128","4|3|3"],["m201210","10"],["m201211","10"],["m201212","10"],["m201213","10"],["m201291","10"],["m201292","10"]]},{"k":"2013","f":"模拟-2013.html","n":15,"mx":140,"q":[["m201311","5"],["m201312","5"],["m20132","10"],["m20133","5|5"],["m20134","4|3|3"],["m20135","10"],["m20136","5|5"],["m20137","5|5"],["m20138","4|3|3"],["m201310","10"],["m201311","10"],["m201312","4|3|3"],["m201313","10"],["m201391","10"],["m201392","10"]]},{"k":"2014","f":"模拟-2014.html","n":16,"mx":145,"q":[["m201411","5"],["m201412","5"],["m201413","5"],["m20142","5|5"],["m20143","10"],["m20144","5|5"],["m20145","5|5"],["m20146","4|3|3"],["m20147","5|5"],["m20148","4|3|3"],["m201410","10"],["m201411","10"],["m201412","10"],["m201413","4|3|3"],["m201491","10"],["m201492","10"]]},{"k":"2015","f":"模拟-2015.html","n":15,"mx":125,"q":[["m201511","5"],["m201512","5"],["m201513","5"],["m201514","5"],["m201515","5"],["m20152","10"],["m20153","10"],["m20154","10"],["m20155","5|5"],["m20156","5|5"],["m20157","10"],["m20158","4|3|3"],["m20159","5|5"],["m201510","4|3|3"],["m201511","10"]]},{"k":"2016","f":"模拟-2016.html","n":14,"mx":115,"q":[["m201611","5"],["m201612","5"],["m201613","5"],["m201614","5"],["m201615","5"],["m2016二1","10"],["m2016二2","10"],["m2016二3","10"],["m2016二4","4|3|3"],["m2016二5","10"],["m2016四1","10"],["m2016四2","10"],["m2016四3","10"],["m2016四4","10"]]},{"k":"2017","f":"模拟-2017.html","n":19,"mx":140,"q":[["m201711","5"],["m201712","5"],["m201713","5"],["m201714","5"],["m201715","5"],["m2017二1","10"],["m2017二2","5|5"],["m2017二3","4|3|3"],["m2017二4","5|5"],["m2017二5","5|5"],["m2017三2","5"],["m2017三3","5"],["m2017三4","5"],["m2017三5","5"],["m2017三6","5"],["m2017四1","5|5"],["m2017四2","10"],["m2017四3","5|5"],["m2017四4","5|5"]]},{"k":"2018","f":"模拟-2018.html","n":18,"mx":130,"q":[["m201811","5"],["m201812","5"],["m201813","5"],["m201814","5"],["m201815","5"],["m2018二1","5|5"],["m2018二2","10"],["m2018二3","10"],["m2018二4","5|5"],["m2018二5","5|5"],["m2018三1前","5"],["m2018三1后","5"],["m2018三2","5"],["m2018三3","5"],["m2018三4","5"],["m2018四1","10"],["m2018四2","10"],["m2018四3","10"]]},{"k":"2019","f":"模拟-2019.html","n":19,"mx":135,"q":[["m201911","5"],["m201912","5"],["m201913","5"],["m201914","5"],["m201915","5"],["m2019二1","10"],["m2019二2","10"],["m2019二3","10"],["m2019二4","4|3|3"],["m2019二5","4|3|3"],["m2019三1","5"],["m2019三2","5"],["m2019三3","5"],["m2019三4","5"],["m2019三5","5"],["m2019三6","5"],["m2019四1","5|5"],["m2019四2","4|3|3"],["m2019四3","3|3|2|2"]]},{"k":"2020","f":"模拟-2020.html","n":19,"mx":140,"q":[["m202011","5"],["m202012","5"],["m202013","5"],["m202014","5"],["m202015","5"],["m2020二1","10"],["m2020二2","10"],["m2020二3","10"],["m2020二4","10"],["m2020二5","5|5"],["m2020三1","5"],["m2020三2前","5"],["m2020三2后","5"],["m2020三3","5"],["m2020三4","5"],["m2020四12022三4","10"],["m2020四2","10"],["m2020四3","10"],["m2020四4","10"]]},{"k":"2021","f":"模拟-2021.html","n":19,"mx":140,"q":[["m202111","5"],["m202112","5"],["m202113","5"],["m202114","5"],["m202115","5"],["m202116","5"],["m2021二1","4|3|3"],["m2021二2","5|5"],["m2021二3","5|5"],["m2021二4","10"],["m2021二5","5|5"],["m2021三1","5"],["m2021三2","5"],["m2021三3","5"],["m2021三4","5"],["m2021四1","5|5"],["m2021四2","5|5"],["m2021四3","10"],["m2021四4","4|3|3"]]},{"k":"2022","f":"模拟-2022.html","n":13,"mx":75,"q":[["m202211","5"],["m202212","5"],["m202213","5"],["m202214","5"],["m202215","5"],["m2022二1","10"],["m2022二2","10"],["m2022三1","5"],["m2022三2","5"],["m2022三3","5"],["m2022三5","5"],["m2022三6","5"],["m2022三7","5"]]},{"k":"2023","f":"模拟-2023.html","n":21,"mx":150,"q":[["m202311","5"],["m202312","5"],["m202313","5"],["m202314","5"],["m202315","5"],["m2023二1","10"],["m2023二2","5|5"],["m2023二3","5|5"],["m2023二4","4|3|3"],["m2023二5","4|3|3"],["m2023三1","5"],["m2023三2","5"],["m2023三2简答","5"],["m2023三3","5"],["m2023三3简答","5"],["m2023三4","5"],["m2023三5","5"],["m2023四1","10"],["m2023四2","5|5"],["m2023四3","10"],["m2023四4","4|3|3"]]},{"k":"2024","f":"模拟-2024.html","n":19,"mx":145,"q":[["m202411","5"],["m202412","5"],["m202413","5"],["m202414","5"],["m202415","5"],["m2024二1","10"],["m2024二2","10"],["m2024二3","10"],["m2024二4","5|5"],["m2024二5","5|5"],["m2024二6","5|5"],["m2024三1","5"],["m2024三2","5"],["m2024三3","5"],["m2024三4","5"],["m2024四1","10"],["m2024四2","10"],["m2024四3","3|3|2|2"],["m2024四4","10"]]},{"k":"2025","f":"模拟-2025.html","n":22,"mx":165,"q":[["m2025一1","5"],["m2025一2","5"],["m2025一3","5"],["m2025一4","5"],["m2025一5","5"],["m2025一6","3|2"],["m2025二1","5|5"],["m2025二2","5|5"],["m2025二3","10"],["m2025二4","4|3|3"],["m2025二5","4|3|3"],["m2025二6","5|5"],["m2025三1","5"],["m2025三2","5"],["m2025三3","5"],["m2025三4","5"],["m2025三5","5"],["m2025四1","10"],["m2025四2","5|5"],["m2025四3","5|5"],["m2025四4","4|3|3"],["m2025四5","4|3|3"]]},{"k":"2026","f":"模拟-2026.html","n":8,"mx":40,"q":[["m2026物1","5"],["m2026物2","5"],["m2026物3","5"],["m2026物4","5"],["m2026应1","5"],["m2026应2","5"],["m2026应3","5"],["m2026应4","5"]]},{"k":"组卷1","f":"模拟-组卷1.html","n":20,"mx":150,"q":[["m201812","5"],["m201914","5"],["m201915","5"],["m202115","5"],["m202413","5"],["m2016二4","4|3|3"],["m2018二3","10"],["m2019二1","10"],["m2019二3","10"],["m2021二1","4|3|3"],["m2021二3","5|5"],["m2018三2","5"],["m2018三4","5"],["m2019三1","5"],["m2019三4","5"],["m2021三2","5"],["m2018四1","10"],["m2018四2","10"],["m2019四2","4|3|3"],["m2024四4","10"]]}], EXAM = "2026-12-19";
+  var DOCS = [{"f":"851-应用光学-简答与画图-p49-56.html","k":"g851-appo-qa-p4956","n":46,"t":"简答与画图（p49–56）"},{"f":"851-真题-2025-2026.html","k":"g851-zhenti-2526","n":41,"t":"2025 & 2026（补最近两年）"},{"f":"851-简答题-按章节.html","k":"g851-jt-mastered","n":68,"t":"简答题"},{"f":"851-计算题-应用光学-解析法.html","k":"g851-appo-parax-mastered","n":1,"t":"解析法"},{"f":"851-计算题-早年真题-合集.html","k":"g851-early-p1-mastered","n":71,"t":"早年真题 2009–2015"},{"f":"851-计算题-第10章-光学仪器.html","k":"g851-c10-mastered","n":12,"t":"第十章 光学仪器"},{"f":"851-计算题-第1章-电磁理论.html","k":"g851-c1-mastered","n":9,"t":"第一章 光的电磁理论基础"},{"f":"851-计算题-第2章-干涉.html","k":"g851-c2-mastered","n":10,"t":"第二章 光的干涉"},{"f":"851-计算题-第3章-衍射.html","k":"g851-c3-mastered","n":13,"t":"第三章 光的衍射"},{"f":"851-计算题-第4章-光在各向异性介质中的传播特性.html","k":"g851-c4-mastered","n":10,"t":"第四章 光在各向异性介质中的传播特性"},{"f":"851-计算题-第5章-感应双折射.html","k":"g851-c5-birefringence-mastered","n":4,"t":"第五章 晶体的感应双折射"},{"f":"851-计算题-第7章-几何光学.html","k":"g851-c7-geometric-mastered","n":9,"t":"第七章 几何光学基础"},{"f":"851-计算题-第8章-理想光学系统.html","k":"g851-c8-mastered","n":5,"t":"第八章 理想光学系统"},{"f":"851-计算题-第9章-光路计算.html","k":"g851-c9-mastered","n":6,"t":"第九章 光学系统像差基础和光路计算"}], PAPERS = [{"k":"2009","f":"模拟-2009.html","n":13,"mx":115,"q":[["m20091","10"],["m20092","10"],["m20093","10"],["m20094","5|5"],["m20095","10"],["m20096","5|5"],["m20097","10"],["m20098","4|3|3"],["m20099","5|5"],["m200911","4|3|3"],["m2009101","5"],["m2009102","5"],["m2009103","5"]]},{"k":"2010","f":"模拟-2010.html","n":13,"mx":125,"q":[["m20101","10"],["m20102","10"],["m20103","5|5"],["m20104","10"],["m20105","4|3|3"],["m20106","5|5"],["m20107","10"],["m20108","3|2"],["m20109","10"],["m201010","10"],["m201011","10"],["m201012","10"],["m201013","10"]]},{"k":"2011","f":"模拟-2011.html","n":14,"mx":125,"q":[["m20111","5|5"],["m20112","10"],["m20113","10"],["m20114","10"],["m20115","4|3|3"],["m20116","10"],["m20117","4|3|3"],["m20118","2|2|1"],["m201110","10"],["m201111","10"],["m201112","10"],["m201113","4|3|3"],["m201191","5"],["m201192","5"]]},{"k":"2012","f":"模拟-2012.html","n":14,"mx":125,"q":[["m20121","10"],["m20122","10"],["m20123","10"],["m20124","10"],["m20125","10"],["m20126","10"],["m20127","5|5"],["m20128","2|2|1"],["m201210","10"],["m201211","10"],["m201212","10"],["m201213","10"],["m201291","5"],["m201292","5"]]},{"k":"2013","f":"模拟-2013.html","n":15,"mx":125,"q":[["m201311","5"],["m201312","5"],["m20132","10"],["m20133","5|5"],["m20134","4|3|3"],["m20135","10"],["m20136","5|5"],["m20137","5|5"],["m20138","2|2|1"],["m201310","10"],["m201311","10"],["m201312","4|3|3"],["m201313","10"],["m201391","5"],["m201392","5"]]},{"k":"2014","f":"模拟-2014.html","n":16,"mx":130,"q":[["m201411","5"],["m201412","5"],["m201413","5"],["m20142","5|5"],["m20143","10"],["m20144","5|5"],["m20145","5|5"],["m20146","4|3|3"],["m20147","5|5"],["m20148","2|2|1"],["m201410","10"],["m201411","10"],["m201412","10"],["m201413","4|3|3"],["m201491","5"],["m201492","5"]]},{"k":"2015","f":"模拟-2015.html","n":15,"mx":120,"q":[["m201511","5"],["m201512","5"],["m201513","5"],["m201514","5"],["m201515","5"],["m20152","10"],["m20153","10"],["m20154","10"],["m20155","5|5"],["m20156","5|5"],["m20157","10"],["m20158","2|2|1"],["m20159","5|5"],["m201510","4|3|3"],["m201511","10"]]},{"k":"2016","f":"模拟-2016.html","n":18,"mx":135,"q":[["m201611","5"],["m201612","5"],["m201613","5"],["m201614","5"],["m201615","5"],["m2016二1","10"],["m2016二2","10"],["m2016二3","10"],["m2016二4","4|3|3"],["m2016二5","10"],["m2016三1","5"],["m2016三2","5"],["m2016三3","5"],["m2016三4","5"],["m2016四1","10"],["m2016四2","10"],["m2016四3","10"],["m2016四4","10"]]},{"k":"2017","f":"模拟-2017.html","n":19,"mx":140,"q":[["m201711","5"],["m201712","5"],["m201713","5"],["m201714","5"],["m201715","5"],["m2017二1","10"],["m2017二2","5|5"],["m2017二3","4|3|3"],["m2017二4","5|5"],["m2017二5","5|5"],["m2017三2","5"],["m2017三3","5"],["m2017三4","5"],["m2017三5","5"],["m2017三6","5"],["m2017四1","5|5"],["m2017四2","10"],["m2017四3","5|5"],["m2017四4","5|5"]]},{"k":"2018","f":"模拟-2018.html","n":18,"mx":130,"q":[["m201811","5"],["m201812","5"],["m201813","5"],["m201814","5"],["m201815","5"],["m2018二1","5|5"],["m2018二2","10"],["m2018二3","10"],["m2018二4","5|5"],["m2018二5","5|5"],["m2018三1前","5"],["m2018三1后","5"],["m2018三2","5"],["m2018三3","5"],["m2018三4","5"],["m2018四1","10"],["m2018四2","10"],["m2018四3","10"]]},{"k":"2019","f":"模拟-2019.html","n":19,"mx":135,"q":[["m201911","5"],["m201912","5"],["m201913","5"],["m201914","5"],["m201915","5"],["m2019二1","10"],["m2019二2","10"],["m2019二3","10"],["m2019二4","4|3|3"],["m2019二5","4|3|3"],["m2019三1","5"],["m2019三2","5"],["m2019三3","5"],["m2019三4","5"],["m2019三5","5"],["m2019三6","5"],["m2019四1","5|5"],["m2019四2","4|3|3"],["m2019四3","3|3|2|2"]]},{"k":"2020","f":"模拟-2020.html","n":19,"mx":140,"q":[["m202011","5"],["m202012","5"],["m202013","5"],["m202014","5"],["m202015","5"],["m2020二1","10"],["m2020二2","10"],["m2020二3","10"],["m2020二4","10"],["m2020二5","5|5"],["m2020三1","5"],["m2020三2前","5"],["m2020三2后","5"],["m2020三3","5"],["m2020三4","5"],["m2020四1","10"],["m2020四2","10"],["m2020四3","10"],["m2020四4","10"]]},{"k":"2021","f":"模拟-2021.html","n":19,"mx":140,"q":[["m202111","5"],["m202112","5"],["m202113","5"],["m202114","5"],["m202115","5"],["m202116","5"],["m2021二1","4|3|3"],["m2021二2","5|5"],["m2021二3","5|5"],["m2021二4","10"],["m2021二5","5|5"],["m2021三1","5"],["m2021三2","5"],["m2021三3","5"],["m2021三4","5"],["m2021四1","5|5"],["m2021四2","5|5"],["m2021四3","10"],["m2021四4","4|3|3"]]},{"k":"2022","f":"模拟-2022.html","n":14,"mx":105,"q":[["m202211","5"],["m202212","5"],["m202213","5"],["m202214","5"],["m202215","5"],["m2022二1","5"],["m2022二2","5"],["m2022三1","10"],["m2022三2","10"],["m2022三3","10"],["m2022三4","10"],["m2022三5","10"],["m2022三6","10"],["m2022三7","10"]]},{"k":"2023","f":"模拟-2023.html","n":19,"mx":135,"q":[["m202311","5"],["m202312","5"],["m202313","5"],["m202314","5"],["m202315","5"],["m2023二1","10"],["m2023二2","5|5"],["m2023二3","5|5"],["m2023二4","4|3|3"],["m2023二5","4|3|3"],["m2023三1","5"],["m2023三2","5"],["m2023三3","5"],["m2023三4","5"],["m2023三5","5"],["m2023四1","10"],["m2023四2","5|5"],["m2023四3","5"],["m2023四4","4|3|3"]]},{"k":"2024","f":"模拟-2024.html","n":19,"mx":145,"q":[["m202411","5"],["m202412","5"],["m202413","5"],["m202414","5"],["m202415","5"],["m2024二1","10"],["m2024二2","10"],["m2024二3","10"],["m2024二4","5|5"],["m2024二5","5|5"],["m2024二6","5|5"],["m2024三1","5"],["m2024三2","5"],["m2024三3","5"],["m2024三4","5"],["m2024四1","10"],["m2024四2","10"],["m2024四3","3|3|2|2"],["m2024四4","10"]]},{"k":"2025","f":"模拟-2025.html","n":22,"mx":165,"q":[["m2025一1","5"],["m2025一2","5"],["m2025一3","5"],["m2025一4","5"],["m2025一5","5"],["m2025一6","3|2"],["m2025二1","5|5"],["m2025二2","5|5"],["m2025二3","10"],["m2025二4","4|3|3"],["m2025二5","4|3|3"],["m2025二6","5|5"],["m2025三1","5"],["m2025三2","5"],["m2025三3","5"],["m2025三4","5"],["m2025三5","5"],["m2025四1","10"],["m2025四2","5|5"],["m2025四3","5|5"],["m2025四4","4|3|3"],["m2025四5","4|3|3"]]},{"k":"2026","f":"模拟-2026.html","n":19,"mx":150,"q":[["m2026物1","5"],["m2026物2","5"],["m2026物3","5"],["m2026物4","5"],["m2026二1","12"],["m2026二2","12"],["m2026二3","4|4"],["m2026二4","8"],["m2026二5","8"],["m2026二6","10"],["m2026二7","6|6"],["m2026应1","5"],["m2026应2","5"],["m2026应3","5"],["m2026应4","5"],["m2026四1","10"],["m2026四2","10"],["m2026四3","10"],["m2026四4","5|5"]]},{"k":"组卷1","f":"模拟-组卷1.html","n":20,"mx":150,"q":[["m201812","5"],["m201914","5"],["m201915","5"],["m202115","5"],["m202413","5"],["m2016二4","4|3|3"],["m2018二3","10"],["m2019二1","10"],["m2019二3","10"],["m2021二1","4|3|3"],["m2021二3","5|5"],["m2018三2","5"],["m2018三4","5"],["m2019三1","5"],["m2019三4","5"],["m2021三2","5"],["m2018四1","10"],["m2018四2","10"],["m2019四2","4|3|3"],["m2024四4","10"]]},{"k":"组卷2","f":"模拟-组卷2.html","n":20,"mx":150,"q":[["m201611","5"],["m201911","5"],["m201913","5"],["m202014","5"],["m202114","5"],["m2017二1","10"],["m2017二2","5|5"],["m2020二2","10"],["m2021二5","5|5"],["m2024二4","5|5"],["m2024二6","5|5"],["m2016三2","5"],["m2017三3","5"],["m2021三3","5"],["m2023三1","5"],["m2024三2","5"],["m2016四1","10"],["m2017四2","10"],["m2020四4","10"],["m2021四1","5|5"]]}], Q = window.G851_Q || [], EXAM = "2026-12-19";
   var PFX = "g851-mock2-";
   function jget(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } }
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -138,10 +189,71 @@
   /* ---- 倒计时 ---- */
   var days = Math.ceil((new Date(EXAM + "T00:00:00") - new Date()) / 86400000);
 
+  /* ---- 每日一题：当天确定性抽一道，优先错题 → 未掌握 → 已掌握 ---- */
+  var dk = (function () {
+    var t = new Date();
+    return t.getFullYear() + '-' + ('0' + (t.getMonth() + 1)).slice(-2) + '-' + ('0' + t.getDate()).slice(-2);
+  })();
+  function fnv(s) {
+    var hh = 2166136261;
+    for (var i = 0; i < s.length; i++) { hh ^= s.charCodeAt(i); hh = Math.imul(hh, 16777619); }
+    return hh >>> 0;
+  }
+  function widTag(tag) { return 'm' + String(tag).replace(/[^0-9A-Za-z_\u4e00-\u9fff]/g, ''); }
+
+  var WRONG = {};
+  try {
+    for (var wi = 0; wi < localStorage.length; wi++) {
+      var wk = localStorage.key(wi);
+      if (!wk || wk.indexOf(PFX) !== 0) continue;
+      var wob = JSON.parse(localStorage.getItem(wk) || 'null');
+      if (!wob || typeof wob !== 'object') continue;
+      for (var wid in wob) {
+        var wrec = wob[wid];
+        if (!wrec || typeof wrec !== 'object') continue;
+        for (var wp in wrec) { if (parseFloat(wrec[wp]) < 1) { WRONG[wid] = 1; break; } }
+      }
+    }
+  } catch (e) {}
+
+  var MASTER = {};
+  DOCS.forEach(function (d) {
+    var ob = d.k ? jget(d.k) : null;
+    if (ob && typeof ob === "object") Object.keys(ob).forEach(function (t) { MASTER[t] = 1; });
+  });
+
+  var daily = (function () {
+    if (!Q.length) return null;
+    var t0 = [], t1 = [], t2 = [];
+    Q.forEach(function (q) {
+      if (WRONG[widTag(q[0])]) t0.push(q);
+      else if (MASTER[q[0]]) t2.push(q);
+      else t1.push(q);
+    });
+    var pool = t0.length ? t0 : (t1.length ? t1 : (t2.length ? t2 : Q));
+    var pick = pool[fnv(dk) % pool.length];
+    var st = jget("g851-daily") || {};
+    return { q: pick, done: (st.d === dk && st.t === pick[0]),
+             tier: t0.length ? 0 : (t1.length ? 1 : 2) };
+  })();
+
   var pct = mTot ? Math.round(mSum / mTot * 100) : 0;
   var h = [];
   h.push('<div class="hd"><b>复习进度</b>'
     + '<span class="cd">距 2026 考研 ' + (days > 0 ? '<em>' + days + '</em> 天' : '已结束') + '</span></div>');
+
+  if (daily) {
+    var q = daily.q;
+    var tierTxt = daily.tier === 0 ? '错题优先' : (daily.tier === 1 ? '还没掌握' : '已掌握 · 复习');
+    h.push('<div class="day"><div class="dl"><b>每日一题</b><span>' + dk.slice(5) + ' · ' + tierTxt + '</span></div>'
+      + '<div class="dt"><i>' + esc(q[0]) + '</i>' + esc(q[3] || '') + '</div>'
+      + '<div class="da"><a class="main" href="' + esc(q[1]) + (q[2] ? '#' + esc(q[2]) : '') + '">去做</a>'
+      + (daily.done
+          ? '<span class="ok" style="flex:1 1 104px;text-align:center;padding:8px 12px;border-radius:8px;'
+            + 'border:1px solid #bcd9bc;font-size:13px">✓ 今天做完了</span>'
+          : '<button id="ddone">标记做完</button>')
+      + '</div></div>');
+  }
 
   h.push('<div class="row">'
     + '<div class="kpi"><i>总掌握率</i><b>' + pct + '<small>%</small></b></div>'
@@ -213,9 +325,25 @@
   }).join("") + '</div>');
 
   document.getElementById("db").innerHTML = h.join("");
+
+  var dbtn = document.getElementById("ddone");
+  if (dbtn && daily) {
+    dbtn.onclick = function () {
+      try { localStorage.setItem("g851-daily", JSON.stringify({ d: dk, t: daily.q[0], ok: 1 })); } catch (e) {}
+      var ok = document.createElement("span");
+      ok.className = "ok";
+      ok.style.cssText = "flex:1 1 104px;text-align:center;padding:8px 12px;border-radius:8px;"
+        + "border:1px solid #bcd9bc;font-size:13px";
+      ok.textContent = "✓ 今天做完了";
+      dbtn.parentNode.replaceChild(ok, dbtn);
+    };
+  }
 })();
 </script>
   <div class="quick">
+    <!--RECCENTER--><a href="记录.html">记录中心 →</a>
+    <!--DRILLPAGE--><a href="专项卷.html">专项卷 →</a>
+    <!--TOPICPAGE--><a href="考点.html">按考点 →</a>
     <!--STARPAGE--><a href="收藏.html">收藏夹 →</a>
     <a href="按年份.html">按年份看真题 →</a>
     <a href="搜索.html">搜索题库 →</a>
@@ -225,11 +353,11 @@
   <div class="grid">
     <a class="card" href="851-应用光学-简答与画图-p49-56.html">
       <div class="ct">851 应用光学 · 简答与画图（p49–56）</div>
-      <div class="cm"><b>42</b> 题 · 2010–2024 · 38 图</div>
+      <div class="cm"><b>46</b> 题 · 2010–2024 · 38 图</div>
     </a>
     <a class="card" href="851-真题-2025-2026.html">
       <div class="ct">851 真题 · 2025 &amp; 2026（补最近两年）</div>
-      <div class="cm"><b>30</b> 题 · 2025–2026 · 7 图</div>
+      <div class="cm"><b>41</b> 题 · 2025–2026 · 13 图</div>
     </a>
     <a class="card" href="851-简答题-按章节.html">
       <div class="ct">851 物理光学与应用光学 · 简答题</div>
@@ -237,7 +365,7 @@
     </a>
     <a class="card" href="851-计算题-应用光学-解析法.html">
       <div class="ct">851 计算题 · 应用光学 · 解析法</div>
-      <div class="cm"><b>3</b> 题 · 2019–2023 · 2 图</div>
+      <div class="cm"><b>1</b> 题 · 2019–2019 · 1 图</div>
     </a>
     <a class="card" href="851-计算题-早年真题-合集.html">
       <div class="ct">851 计算题 · 早年真题 2009–2015</div>
@@ -269,7 +397,7 @@
     </a>
     <a class="card" href="851-计算题-第7章-几何光学.html">
       <div class="ct">851 计算题 · 第七章 几何光学基础</div>
-      <div class="cm"><b>8</b> 题 · 2016–2024 · 1 图</div>
+      <div class="cm"><b>9</b> 题 · 2016–2024 · 1 图</div>
     </a>
     <a class="card" href="851-计算题-第8章-理想光学系统.html">
       <div class="ct">851 计算题 · 第八章 理想光学系统</div>
@@ -311,5 +439,143 @@
 @media print{#errb{display:none}}
 </style>
 <a id="errb" href="错题本.html" title="错题本">错题本</a>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
 </body>
 </html>

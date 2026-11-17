@@ -88,6 +88,49 @@
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
+
+
+
+
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
 </head><body><div class="wrap"><style>
  body{padding-top:0}
  .tbar{position:sticky;top:0;z-index:30;background:#6d3a24;color:#fff;padding:9px 14px;display:flex;
@@ -100,6 +143,31 @@
            color:#1b1b1b;text-decoration:none;}
  .qindex a:hover{background:#6d3a24;color:#fff;}
  .qindex .sec{color:#8c4a2f;font-weight:700;margin:0 6px;}
+ .qindex a.ok{background:#e6f4e8;border-color:#bcd9bc;color:#2f6b34;font-weight:600;}
+ .qindex a.half{background:#fdf6e3;border-color:#e6d3a0;color:#8a6a20;font-weight:600;}
+ .qindex a.bad{background:#fdf4f3;border-color:#e2b7b2;color:#a8332a;font-weight:600;}
+ #lastsub{font-size:12px;opacity:.9;}
+ .repov{position:fixed;inset:0;z-index:60;background:rgba(40,30,22,.45);display:none;
+   align-items:flex-start;justify-content:center;overflow:auto;padding:18px 12px}
+ .repov.on{display:flex}
+ .rep{background:#fff;border-radius:12px;max-width:520px;width:100%;padding:16px 18px;font-size:14px;
+   line-height:1.7;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+ .rep h3{margin:0 0 10px;font-size:16px;color:#6d3a24;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+ .rep h3 span{margin-left:auto;font-size:12px;color:#9a9086;font-weight:400}
+ .rep .big{font-size:15px;margin-bottom:8px}
+ .rep .big b{font-size:22px;color:#6d3a24}
+ .rep table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+ .rep td{padding:4px 6px;border-top:1px solid #f2ece4}
+ .rep td.n{text-align:right;font-variant-numeric:tabular-nums}
+ .rep .wr{margin:8px 0 0}
+ .rep .wr a{display:inline-block;margin:2px 6px 2px 0;padding:2px 9px;border-radius:10px;
+   background:#fdf4f3;border:1px solid #e2b7b2;color:#a8332a;text-decoration:none;font-size:12.5px}
+ .rep .tip{background:#fdf8f2;border-left:3px solid #8c4a2f;border-radius:0 8px 8px 0;
+   padding:8px 11px;margin-top:10px;font-size:13px}
+ .rep .acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+ .rep .acts button{flex:1 1 110px;padding:9px 12px;border-radius:9px;border:1px solid #d8cfc2;
+   background:#fff;color:#6d3a24;font-size:13.5px;cursor:pointer;font-family:inherit}
+ .rep .acts button.pri{background:#6d3a24;color:#fff;border-color:#6d3a24;font-weight:600}
  .q:not(.show) .ans{display:none;}
  .reveal{margin:8px 0 4px;display:flex;gap:8px;flex-wrap:wrap;}
  .reveal button{background:#f4e9dd;border:1px solid #d8cbbb;color:#6d3a24;border-radius:14px;
@@ -111,11 +179,11 @@
  .scorer{margin:6px 0 2px;font-size:13px;}
  .prow{display:flex;gap:6px;align-items:center;margin:3px 0;}
  .pl{min-width:52px;color:#6d3a24;font-weight:600;}
- .score{position:fixed;left:14px;bottom:16px;z-index:35;background:#fff;border:1px solid #e3dfd7;
+ .score{position:fixed;left:14px;bottom:52px;z-index:35;background:#fff;border:1px solid #e3dfd7;
         border-radius:10px;padding:8px 12px;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.12);}
  .score b{color:#6d3a24;font-size:15px;}
  @media print{.tbar,.qindex,.reveal,.score{display:none;} .q:not(.show) .ans{display:block !important;}}
-</style><div class="tbar"><span>剩余</span><b id="clk">180:00</b><button id="tstart">开始</button><button id="treset">重置</button><span style="margin-left:auto;font-size:12.5px;opacity:.9">先做，再展开答案</span></div><div class="qindex"><span class="sec">一 · 物理</span><a href="#m201611">1(1)</a><a href="#m201612">1(2)</a><a href="#m201613">1(3)</a><a href="#m201614">1(4)</a><a href="#m201615">1(5)</a><span class="sec">二 · 物理</span><a href="#m2016二1">二-1</a><a href="#m2016二2">二-2</a><a href="#m2016二3">二-3</a><a href="#m2016二4">二-4</a><a href="#m2016二5">二-5</a><span class="sec">四 · 应用</span><a href="#m2016四1">四-1</a><a href="#m2016四2">四-2</a><a href="#m2016四3">四-3</a><a href="#m2016四4">四-4</a></div><h1 style="margin-top:16px">2016 年 851 模拟卷</h1><div class="sub">14 题 · 建议限时 180 分钟 · 做完按分值打分（简答 5 / 计算 10，可给半分）</div><p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="公式墙.html">公式墙</a></p><h2 id="sec1" style="margin:26px 0 10px">一 · 物理光学 简答题</h2><div id="m201611" data-parts="5" data-full="5"><div class="q" id="q001">
+</style><div class="tbar"><span>剩余</span><b id="clk">180:00</b><button id="tstart">开始</button><button id="treset">重置</button><button id="submit">交卷</button><span id="lastsub" style="margin-left:auto"></span></div><div class="qindex"><span class="sec">一 · 物理</span><a href="#m201611">1(1)</a><a href="#m201612">1(2)</a><a href="#m201613">1(3)</a><a href="#m201614">1(4)</a><a href="#m201615">1(5)</a><span class="sec">二 · 物理</span><a href="#m2016二1">二-1</a><a href="#m2016二2">二-2</a><a href="#m2016二3">二-3</a><a href="#m2016二4">二-4</a><a href="#m2016二5">二-5</a><span class="sec">三 · 应用</span><a href="#m2016三1">三-1</a><a href="#m2016三2">三-2</a><a href="#m2016三3">三-3</a><a href="#m2016三4">三-4</a><span class="sec">四 · 应用</span><a href="#m2016四1">四-1</a><a href="#m2016四2">四-2</a><a href="#m2016四3">四-3</a><a href="#m2016四4">四-4</a></div><h1 style="margin-top:16px">2016 年 851 模拟卷</h1><div class="sub">18 题 · 建议限时 180 分钟 · 做完按分值打分（简答 5 / 计算 10，可给半分）</div><p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="公式墙.html">公式墙</a></p><h2 id="sec1" style="margin:26px 0 10px">一 · 物理光学 简答题</h2><div id="m201611" data-parts="5" data-full="5"><div class="q" id="q001">
   <div class="hd"><span class="tag">2016-1(1)</span><span class="ttl">全反射时，光疏介质中有没有光场？</span><span class="hot">考纲点名</span></div>
   <div class="stem">光由光密介质射向光疏介质，在一定条件下会发生全反射。当发生全反射时，光疏介质中是否有光场？如果有，请说明该光场的性质。</div>
   <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
@@ -278,7 +346,7 @@
       <div class="eqb"><i>δ</i> = <span class="frac"><span class="num">2π</span><span class="den">λ</span></span>(<i>n</i><sub>e</sub>(45°) − <i>n</i><sub>0</sub>)<i>d</i> = <span class="frac"><span class="num">2π</span><span class="den">600×10<sup>−9</sup></span></span> × (1.5621 − 1.654) × 1.0×10<sup>−3</sup> = −962 rad</div>
       <div class="eqb">|<i>δ</i>| ≈ 9.6×10<sup>2</sup> rad ≈ 306π ≈ 153.2 × 2π（即约 153 个波长）</div>
     </div>
-    <div class="res">（1）晶体内 o、e 光线夹角 <b>6.17°</b>（e 光线<b>偏离</b>光轴，θ<sub>ray</sub> = 51.17° &gt; 45°）；（3）相位差 |<i>δ</i>| ≈ <b>9.6×10<sup>2</sup> rad</b>（≈ 306π，折合 153.2 个波长），o 光超前。<b>【待核】</b>若按"直接用主折射率 <i>n</i><sub>e</sub>"算，会得 2π(0.17)(10<sup>−3</sup>)/6×10<sup>−7</sup> ≈ 1780 rad —— 那是把 45° 斜光轴当成"光线垂直光轴"，与本题条件矛盾，本页不采用。</div>
+    <div class="res">（1）晶体内 o、e 光线夹角 <b>6.17°</b>（e 光线<b>偏离</b>光轴，θ<sub>ray</sub> = 51.17° &gt; 45°）；（3）相位差 |<i>δ</i>| ≈ <b>9.6×10<sup>2</sup> rad</b>（≈ 306π，折合 153.2 个波长），o 光超前。<b>口径已定</b>：光轴与表面成 45°、光线与光轴不垂直，必须用<b>有效折射率</b> <i>n</i><sub>e</sub>(θ<sub>ray</sub>) 算（得 153.2 个波长）；直接用主折射率会得 1780 rad，那是把斜光轴当成"光线垂直光轴"，与题设矛盾。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -312,6 +380,59 @@
     </div>
     <div class="res"><i>n</i><sub>1,2</sub> = <b>1.51 ± 1.82×10<sup>−11</sup>(<i>U</i>/<i>l</i>)</b>（即 1.51 ± 1.82×10<sup>−11</sup><i>E</i>）；输出光强 <b><i>I</i> = <i>I</i><sub>0</sub>sin<sup>2</sup>(π<i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>U</i>/λ)</b>，与晶体长度无关。</div>
     <span class="src">【真题 + 自算】</span>
+  </div>
+</div>
+
+</div><h2 id="sec3" style="margin:26px 0 10px">三 · 应用光学 简答题</h2><div id="m2016三1" data-parts="5" data-full="5"><div class="q" id="q037">
+  <div class="hd"><span class="tag">2016-三-1</span><span class="ttl">像散与场曲</span></div>
+  <div class="stem">解释光学系统的两种像差：像散和场曲。</div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <p><b>像散</b>：光学系统在两个相互垂直的方向上聚焦本领不同 —— 一个物点发出的两束相互垂直的光（子午、弧矢）<b>交于不同位置</b>，在像面上形成两条互相垂直的焦线。</p>
+    <p><b>场曲</b>：考虑有一定大小的物面成像时，平面物所成的清晰像面是<b>一张曲面</b>（匹兹伐面），平面接收面上只有中心或边缘能同时清晰。</p>
+    <div class="res"><b>背</b>：像散 = 两个方向的焦点不重合；场曲 = 清晰像面是弯的。两者都<b>随视场增大</b>（∝视场²），常同时出现。</div>
+    <span class="src">【真题 + 答案册】</span>
+  </div>
+</div>
+
+</div><div id="m2016三2" data-parts="5" data-full="5"><div class="q" id="q038">
+  <div class="hd"><span class="tag">2016-三-2</span><span class="ttl">物方远心光路与像方远心光路</span></div>
+  <div class="stem">简述物方远心光路和像方远心光路的特点及应用情况。</div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <p><b>物方远心光路</b>：把<b>孔径光阑放在像方焦平面</b>上，使物方主光线平行于光轴（汇聚中心在物方无穷远）。物平面位置有误差时像高不变 ⇒ 消除<b>视差</b>，用于<b>测长</b>。</p>
+    <p><b>像方远心光路</b>：把<b>孔径光阑放在物方焦平面</b>上，使像方主光线平行于光轴（汇聚中心在像方无穷远）。像面位置有误差时像高不变 ⇒ 用于<b>测距</b>（如带分划板的测距仪）。</p>
+    <div class="res"><b>一句话记</b>：光阑放在<b>像方焦点</b> ⇒ 物方远心（测长）；光阑放在<b>物方焦点</b> ⇒ 像方远心（测距）。<b>光阑放哪边焦点，哪边就「远心」。</b></div>
+    <span class="src">【真题 + 答案册】</span>
+  </div>
+</div>
+
+</div><div id="m2016三3" data-parts="5" data-full="5"><div class="q" id="q039">
+  <div class="hd"><span class="tag">2016-三-3</span><span class="ttl">画出垂轴实物 AB 的像 A′B′</span></div>
+  <div class="stem">用图解法画出垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>（已知 H、H<span class="pr">′</span>、F、F<span class="pr">′</span>）。</div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <p><b>作图三线</b>（任取两条即可）：</p>
+    <ul class="k">
+      <li>过 B 作<b>平行于光轴</b>的光线 → 射到像方焦平面后过 F<span class="pr">′</span> 出射；</li>
+      <li>过 B 作<b>过物方焦点 F</b> 的光线 → 出射后平行于光轴；</li>
+      <li>过 B 作<b>过物方主点 H</b> 的光线 → 从像方主点 H<span class="pr">′</span> 沿同方向射出。</li>
+    </ul>
+    <p>两条出射线的交点即 B<span class="pr">′</span>，由 A 作垂轴得 A<span class="pr">′</span>B<span class="pr">′</span>。</p>
+    <div class="res"><b>判虚实</b>：实物在<b>一倍焦距以内</b> ⇒ 出射线发散、交点在同侧 ⇒ <b>正立放大虚像</b>；在一倍焦距以外 ⇒ <b>倒立实像</b>。</div>
+    <span class="src">【真题 + 教材】</span>
+  </div>
+</div>
+
+</div><div id="m2016三4" data-parts="5" data-full="5"><div class="q" id="q040">
+  <div class="hd"><span class="tag">2016-三-4</span><span class="ttl">右手坐标系经棱镜系统后的像方坐标方向</span></div>
+  <div class="stem">已知物体为右手坐标系，oz 为光轴方向，画出棱镜系统的像方成像坐标方向。</div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <p><b>做法</b>：把棱镜按<b>反射面逐个展开</b>，每经过一个反射面就把<b>垂直于该反射面的那根轴反向</b>；也可按反射次数快速判手性：</p>
+    <ul class="k">
+      <li><b>偶数次反射</b> ⇒ 不镜像，仍是<b>右手系</b>；</li>
+      <li><b>奇数次反射</b> ⇒ 镜像，变成<b>左手系</b>。</li>
+    </ul>
+    <p>光轴方向按每次反射折转（或看展开图最终出射方向）。</p>
+    <div class="res"><b>答题要点</b>：① 数反射面个数定手性（奇左偶右）；② 逐次把对应轴反向；③ 光轴方向按展开图定。同类题见本库 <code>2018-三-4</code>、<code>2020-三-4</code>（直角+五角+直角共四次反射 ⇒ 右手系、横向两轴均反）。</div>
+    <span class="src">【真题 + 教材】</span>
   </div>
 </div>
 
@@ -400,7 +521,7 @@
 </div>
 
 </div></div><div class="score" id="sc">得分 <b>0</b>/0</div><script>
-var KEY = "g851-mock2-" + "2016", N = 14, MAX = 115;
+var KEY = "g851-mock2-" + "2016", N = 18, MAX = 135;
 var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
 function paint(){
@@ -422,6 +543,7 @@ function paint(){
     s += "　得分率 <b>" + Math.round(r*100) + "%</b>　折算 <b>" + (Math.round(r*1500)/10) + "</b>/150";
   }
   document.getElementById("sc").innerHTML = s;
+  if (typeof paintChips === "function") paintChips();
 }
 function mark(btn, f){
   var q = btn.closest(".q"), w = q.parentNode, id = w.id, p = btn.getAttribute("data-p");
@@ -497,6 +619,192 @@ document.getElementById("treset").onclick = function(){
 };
 show();
 
+/* ===== 答题卡着色 + 交卷报告 ===== */
+var SUBKEY = KEY.replace("mock2-", "submit-");
+
+function labelMap(){
+  var m = {};
+  document.querySelectorAll(".qindex a").forEach(function(a){
+    var h = a.getAttribute("href") || "";
+    if (h.charAt(0) === "#") m[h.slice(1)] = a.textContent.trim();
+  });
+  return m;
+}
+var LABELS = labelMap();
+
+function statusOf(id){
+  var w = document.getElementById(id); if (!w) return "";
+  var ps = (w.getAttribute("data-parts") || "").split("|").map(parseFloat);
+  var rec = st[id], any = false, got = 0, lost = 0;
+  if (!rec) return "none";
+  for (var i = 0; i < ps.length; i++){
+    var f = rec[i];
+    if (f === undefined) continue;
+    any = true; f = parseFloat(f);
+    got += ps[i] * f; lost += ps[i] * (1 - f);
+  }
+  if (!any) return "none";
+  if (lost <= 0) return "ok";
+  return got > 0 ? "half" : "bad";
+}
+
+function paintChips(){
+  document.querySelectorAll(".qindex a").forEach(function(a){
+    var h = a.getAttribute("href") || "";
+    var id = h.charAt(0) === "#" ? h.slice(1) : "";
+    a.classList.remove("ok", "half", "bad");
+    var s = statusOf(id);
+    if (s === "ok" || s === "half" || s === "bad") a.classList.add(s);
+  });
+}
+
+function secOf(w){
+  var el = w.previousElementSibling;
+  while (el){ if (el.tagName === "H2") return el.textContent.trim(); el = el.previousElementSibling; }
+  return "题目";
+}
+
+function buildReport(){
+  var rows = [], cur = null, total = 0, max = 0, wrong = [], judged = 0;
+  document.querySelectorAll(".wrap > div[id][data-parts]").forEach(function(w){
+    var ps = w.getAttribute("data-parts").split("|").map(parseFloat);
+    var full = parseFloat(w.getAttribute("data-full") || "0") || ps.reduce(function(a,b){return a+b;},0);
+    var sec = secOf(w);
+    if (!cur || cur.sec !== sec){ cur = { sec: sec, got: 0, max: 0 }; rows.push(cur); }
+    var rec = st[w.id] || {}, got = 0, c = 0;
+    for (var i = 0; i < ps.length; i++){
+      if (rec[i] === undefined) continue;
+      c++; got += ps[i] * parseFloat(rec[i]);
+    }
+    if (c) judged++;
+    total += got; max += full; cur.got += got; cur.max += full;
+    if (c && got < full - 1e-9) {   // 只把「判过分且没拿满」的算错题，未判的不算
+      wrong.push({ id: w.id, lab: LABELS[w.id] || w.id, lost: Math.round((full - got) * 10) / 10 });
+    }
+  });
+  wrong.sort(function(a,b){ return b.lost - a.lost; });
+  return { rows: rows, total: total, max: max, wrong: wrong, judged: judged };
+}
+
+function txtReport(rep){
+  var L = [], t = new Date();
+  L.push("851 模拟卷 · " + (document.title || "") + " 交卷报告");
+  L.push("时间：" + t.toLocaleString());
+  L.push("");
+  var rate = rep.max ? rep.total / rep.max : 0;
+  L.push("得分 " + (Math.round(rep.total*10)/10) + "/" + rep.max
+    + "　得分率 " + Math.round(rate*100) + "%　折算 " + (Math.round(rate*1500)/10) + "/150");
+  var done = rep.judged, all = 0;
+  document.querySelectorAll(".wrap > div[id][data-parts]").forEach(function(){ all++; });
+  L.push("判完 " + done + "/" + all + " 题");
+  L.push("");
+  L.push("【各题型】");
+  rep.rows.forEach(function(r){
+    L.push("  " + r.sec + "  " + (Math.round(r.got*10)/10) + "/" + r.max);
+  });
+  if (rep.wrong.length){
+    L.push("");
+    L.push("【错题】");
+    rep.wrong.forEach(function(w){ L.push("  " + w.lab + "  失 " + w.lost + " 分"); });
+  }
+  return L.join("\n");
+}
+
+function showReport(){
+  var rep = buildReport();
+  var rate = rep.max ? rep.total / rep.max : 0;
+  var all = document.querySelectorAll(".wrap > div[id][data-parts]").length;
+  var h = [];
+  h.push("<h3>交卷报告<span>" + new Date().toLocaleString() + "</span></h3>");
+  h.push('<div class="big">得分 <b>' + (Math.round(rep.total*10)/10) + "</b>/" + rep.max
+    + "　得分率 <b>" + Math.round(rate*100) + "%</b>　折算 <b>"
+    + (Math.round(rate*1500)/10) + "</b>/150</div>");
+  h.push('<div style="font-size:12.5px;color:#8a7b6c">判完 ' + rep.judged + " / " + all + " 题"
+    + (rep.judged < all ? "　（未判 " + (all - rep.judged) + " 题不计入错题）" : "") + "</div>");
+  h.push("<table>");
+  rep.rows.forEach(function(r){
+    var pct = r.max ? Math.round(r.got / r.max * 100) : 0;
+    h.push("<tr><td>" + r.sec + '</td><td class="n">' + (Math.round(r.got*10)/10) + "/" + r.max
+      + '</td><td class="n">' + pct + "%</td></tr>");
+  });
+  h.push("</table>");
+  if (rep.wrong.length){
+    h.push('<div class="wr"><b style="font-size:12.5px;color:#a8332a">错题（共 '
+      + rep.wrong.length + " 处，点题号跳过去）</b><br>");
+    rep.wrong.forEach(function(w){
+      h.push('<a href="#' + w.id + '" data-cls="1">' + w.lab + " −" + w.lost + "</a>");
+    });
+    h.push("</div>");
+  } else {
+    h.push('<div class="wr" style="color:#2f6b34">全部判满分，没有错题。</div>');
+  }
+  /* 一句结论 */
+  var tip = "";
+  var worst = rep.rows.slice().sort(function(a,b){
+    return (b.max - b.got) - (a.max - a.got);
+  })[0];
+  if (!rep.judged){
+    tip = "还没判分，先做再交卷。";
+  } else if (rate >= 0.85){
+    tip = "整体很稳（" + Math.round(rate*100) + "%），这个状态保持节奏就行。";
+  } else if (worst && worst.max > 0 && worst.got / worst.max < 0.5){
+    tip = "失分集中在「" + worst.sec + "」：" + (Math.round(worst.got*10)/10) + "/" + worst.max + "。";
+    if (rep.wrong.length) tip += " 最大一处是 " + rep.wrong[0].lab + "，丢了 " + rep.wrong[0].lost + " 分。";
+  } else if (rep.wrong.length){
+    tip = "最大漏洞是 " + rep.wrong[0].lab + "（−" + rep.wrong[0].lost + " 分），先把它补掉。";
+  } else {
+    tip = "没有明显漏洞。";
+  }
+  h.push('<div class="tip"><b>结论</b>：' + tip + "</div>");
+  h.push('<div class="acts"><button class="pri" id="rexp">导出 txt</button>'
+    + '<button id="rclose">关闭</button></div>');
+
+  var ov = document.getElementById("repov");
+  if (!ov){
+    ov = document.createElement("div");
+    ov.id = "repov"; ov.className = "repov";
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML = '<div class="rep">' + h.join("") + "</div>";
+  ov.classList.add("on");
+
+  ov.querySelector("#rclose").onclick = function(){ ov.classList.remove("on"); };
+  ov.addEventListener("click", function(e){ if (e.target === ov) ov.classList.remove("on"); });
+  ov.querySelectorAll('a[data-cls]').forEach(function(a){
+    a.onclick = function(){ ov.classList.remove("on"); };
+  });
+  ov.querySelector("#rexp").onclick = function(){
+    var blob = new Blob([txtReport(rep)], { type: "text/plain;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "851交卷报告-" + new Date().toISOString().slice(0,10) + ".txt";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  };
+
+  try {
+    localStorage.setItem(SUBKEY, JSON.stringify({
+      time: new Date().toISOString(),
+      got: Math.round(rep.total*10)/10, max: rep.max,
+      rate: Math.round(rate*100), wrong: rep.wrong.length
+    }));
+  } catch (e) {}
+  paintLastSub();
+}
+
+function paintLastSub(){
+  var el = document.getElementById("lastsub"); if (!el) return;
+  var s = null;
+  try { s = JSON.parse(localStorage.getItem(SUBKEY) || "null"); } catch (e) {}
+  if (!s || !s.time) { el.textContent = "先做，再展开答案"; return; }
+  var d = new Date(s.time);
+  el.textContent = "上次交卷 " + (d.getMonth()+1) + "/" + d.getDate() + " " + s.got + "/" + s.max;
+}
+
+document.getElementById("submit").onclick = showReport;
+paintLastSub();
+paintChips();
+
 </script><style>#totop{position:fixed;right:14px;bottom:16px;z-index:40;display:none;width:40px;height:40px;
 border:0;border-radius:50%;background:#6d3a24;color:#fff;font-size:18px;line-height:40px;
 text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18)}#totop.show{display:block}
@@ -513,4 +821,142 @@ b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script><!--ERRB
 @media print{#errb{display:none}}
 </style>
 <a id="errb" href="错题本.html" title="错题本">错题本</a>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
 </body></html>
