@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>851 双缝条纹平移｜一页速记</title>
+<style>
+  :root{color-scheme:light}*{box-sizing:border-box}
+  body{margin:0;background:#fff;color:#242424;font-family:Arial,"Microsoft YaHei","Noto Sans CJK SC",sans-serif;font-size:15px;line-height:1.56}
+  main{max-width:820px;margin:0 auto;padding:27px 38px 35px}
+  h1{font-size:23px;line-height:1.35;margin:0 0 10px;font-weight:700}
+  h2{font-size:16px;margin:17px 0 6px;padding-bottom:3px;border-bottom:1px solid #dedede}
+  p{margin:7px 0} .note{font-size:13px;color:#555}
+  .math{font-family:"Cambria Math","Times New Roman",serif;text-align:center;font-size:19px;white-space:normal;margin:9px 0}
+  .math small{font-family:inherit;font-size:17px}
+  .mathblock{display:flex;justify-content:center;gap:12px 22px;flex-wrap:wrap;align-items:center}
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.88em;line-height:1.14;transform:translateY(-1px)}
+  .frac .num{border-bottom:1px solid currentColor;padding:0 3px 2px}.frac .den{padding:2px 3px 0}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin:7px 0}
+  th,td{text-align:left;padding:7px 9px;border:1px solid #dedede;vertical-align:top}
+  th{background:#f5f5f5;font-weight:600}
+  ul{padding-left:22px;margin:6px 0}li{margin:3px 0}
+  strong{font-weight:700}.em{font-weight:700}
+  footer{margin-top:11px;font-size:13px;color:#414141;border-top:1px solid #ddd;padding-top:8px}
+  @media(max-width:600px){main{padding:20px 16px 26px}h1{font-size:20px}h2{font-size:16px}.math{font-size:17px}table{font-size:13px}th,td{padding:5px 6px}}
+  @page{size:A4;margin:11mm 13mm}
+  @media print{body{font-size:10pt;line-height:1.33}main{max-width:none;margin:0;padding:0}h1{font-size:15pt}h2{font-size:11pt;margin:7pt 0 3pt;break-after:avoid}p{margin:3pt 0}.math{font-size:12pt;margin:4pt 0}table{font-size:9.4pt;break-inside:avoid}th,td{padding:3pt 5pt}footer{font-size:9.5pt;padding-top:5pt;margin-top:7pt}section{break-inside:avoid}}
+  .navi{margin:0 0 14px;font-size:13px;color:#666;line-height:1.7}
+  .navi a{color:#8c4a2f;text-decoration:none;border-bottom:1px dotted #c9a999}
+  .fig{max-width:64%;margin:9px auto 2px;text-align:center}
+  .fig .figc{overflow:hidden;display:block;border-radius:4px;border:1px solid #e3dfd7}
+  .fig img{width:100%;display:block;margin-bottom:-27%}
+  .fig figcaption{font-size:12px;color:#666;margin-top:4px;line-height:1.5}
+  @media print{.fig{max-width:60%;break-inside:avoid}.fig figcaption{font-size:9pt;margin-top:3pt}}
+</style>
+<!-- G851_BG_V3_CSS_START -->
+<style id="g851-bg-style">
+/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+#g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
+#g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
+#g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
+#g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
+#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+@keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
+@keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
+@keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes naiwa-puff{0%,100%{transform:scale(1)}40%{transform:scale(1.09,.94)}70%{transform:scale(.98,1.03)}}
+@keyframes naiwa-jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px)}53%{transform:translateY(1px)}70%{transform:translateY(-3px)}}
+#g851-bg .naiwa-react.bop{animation:naiwa-bop .56s ease-out both}
+#g851-bg .naiwa-react.wiggle{animation:naiwa-wiggle .57s ease-out both}
+#g851-bg .naiwa-react.puff{animation:naiwa-puff .6s ease-out both}
+#g851-bg .naiwa-react.jump{animation:naiwa-jump .6s ease-out both}
+#g851-bg.no-motion .naiwa-float,#g851-bg.focus .naiwa-float{animation:none!important}
+#g851-bg.focus .naiwa-react{animation:none!important}
+#g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
+ font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
+#g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
+#g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
+ background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
+#g851-bgc.on .naiwa-bg-panel{display:block}
+#g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
+#g851-bgc .naiwa-row label{cursor:pointer;}
+#g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
+#g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
+@media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
+@media print{#g851-bg,#g851-bgc{display:none!important}}
+</style>
+<!-- G851_BG_V3_CSS_END -->
+</head>
+<body><main>
+<p class="navi"><a href="index.html">← 总目录</a> · <a href="851-计算题-第2章-干涉.html">第2章 干涉（相关题 2017-二-2、2024-1(2)）</a> · <a href="按年份.html">按年份</a></p>
+
+<h1>西电851｜杨氏双缝条纹平移 · 一页速记</h1>
+<p class="note">约定：上缝 S₁、下缝 S₂；屏幕向上为 <i>y</i> 正方向；δ＝S₂ 总光程－S₁ 总光程。<i>d</i> 为双缝间距，<i>D</i> 为双缝到屏幕距离，<i>L</i> 为光源到双缝距离。采用近轴近似。</p>
+<section>
+<h2>1．核心原理：附加光程差使整套明暗纹平移</h2>
+<div class="math">δ(<i>y</i>)＝<span class="frac"><span class="num"><i>d y</i></span><span class="den"><i>D</i></span></span>＋δ₀</div>
+<p>δ₀ 是外部操作引入的、与屏幕位置无关的光程差。<strong>明纹</strong>：δ＝<i>k</i>λ；<strong>暗纹</strong>：δ＝(<i>k</i>＋½)λ。因此 δ₀ 改变会使<strong>所有明暗纹一起平移</strong>；若 <i>d</i>、<i>D</i>、λ 不变，条纹间距不变。</p>
+<div class="math mathblock"><span><i>e</i>＝<span class="frac"><span class="num">λ<i>D</i></span><span class="den"><i>d</i></span></span></span><span>Δ<i>y</i>＝−<span class="frac"><span class="num"><i>D</i>δ₀</span><span class="den"><i>d</i></span></span></span><span><i>N</i>＝<span class="frac"><span class="num">Δ<i>y</i></span><span class="den"><i>e</i></span></span>＝−<span class="frac"><span class="num">δ₀</span><span class="den">λ</span></span></span></div>
+<p class="note"><b>e</b>：相邻两明纹（或两暗纹）的间距；<b>Δy</b>：整体有向位移；<b>N</b>：移动的有向周期数，不是屏幕条纹总数。明纹与相邻暗纹相隔 e/2。</p>
+<figure class="fig"><div class="figc"><img src="img/6cf9b654c511.jpg" alt="杨氏双缝：屏幕上的明暗条纹分布"></div><figcaption>屏幕上的明暗条纹分布：相邻明纹间距 <b>e</b>，相邻明暗纹中心相距 <b>e/2</b>，一个完整周期为 <b>e</b>。</figcaption></figure>
+</section>
+<section>
+<h2>2．两种常见操作</h2>
+<table><thead><tr><th>操作</th><th>附加光程差 δ₀</th><th>移动结果</th></tr></thead><tbody>
+<tr><td>光源向上移 <i>s</i></td><td>＋<i>ds/L</i></td><td>Δ<i>y</i>＝−<i>Ds/L</i>，向下</td></tr>
+<tr><td>上缝 S₁ 前插薄片（<i>t</i>、<i>n</i>）</td><td>−(<i>n</i>−1)<i>t</i></td><td>Δ<i>y</i>＝＋<i>D(n−1)t/d</i>，向上</td></tr>
+</tbody></table>
+<p class="note">对固定大小的扩展光源，增大其到双缝距离 L，张角变小，空间相干性一般改善；照度变暗 ≠ 相干性变差。</p>
+</section>
+<section>
+<h2>3．新旧级次：看清参照对象</h2>
+<p>图样沿正方向平移 <i>N</i> 个间距时，新第 <i>k</i> 级明纹位于 <i>y</i>′<sub>k</sub>＝(<i>k</i>＋<i>N</i>)<i>e</i>。</p>
+<ul><li><strong>追踪条纹</strong>：新第 <i>k</i> 级，落在原来第 <b>k＋N</b> 级的位置。</li>
+<li><strong>固定旧位置</strong>：原来第 <i>m</i> 级位置，现在对应新第 <b>m−N</b> 级。</li>
+<li>若 N 非整数，旧明纹位置不一定仍是明纹；移动 <b>e/2</b> 时，旧明纹位置变暗纹。</li></ul>
+</section>
+<section>
+<h2>4．2017年真题：插薄片后条纹平移</h2>
+<p><i>d</i>＝0.5 mm，<i>D</i>＝500 mm，<i>t</i>＝1.667×10<sup>−2</sup> mm，<i>n</i>＝1.60。</p>
+<div class="math">(<i>n</i>−1)<i>t</i>≈0.010 mm　⇒　Δ<i>y</i>≈<span class="frac"><span class="num">500</span><span class="den">0.5</span></span>×0.010＝<b>10 mm（向上）</b></div>
+<p><strong>第一问求平移距离，不需要波长。</strong>若采用后续小问给出的 λ＝500 nm，则 <i>e</i>＝0.5 mm，移动 <i>N</i>≈20 个完整周期。</p>
+</section>
+<footer><strong>我的易错点：</strong>当 D 加倍时，Δy 和 e <strong>同时加倍</strong>，N＝Δy/e <strong>不变</strong>。做题顺序：<b>光程差 → 位移 → 间距 → 周期数 → 新旧级次与明暗</b>。</footer>
+</main><style>
+#totop{position:fixed;right:16px;bottom:74px;z-index:40;display:none;width:40px;height:40px;
+  border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
+  text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92}
+#totop.show{display:block}
+#totop:hover{opacity:1}
+@media print{#totop{display:none}}
+</style>
+<button id="totop" title="返回顶端">↑</button>
+<script>
+(function(){
+  var b=document.getElementById('totop'); if(!b) return;
+  function upd(){ b.classList.toggle('show', window.scrollY>400); }
+  window.addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+<style id="g851-rail-style">
+/* 非高频模块收进右上角菜单：页面里不再重复摆按钮（菜单内的链接不受影响） */
+body a[href="收藏.html"],body a[href="专项卷.html"],body a[href="记录.html"],
+body a[href="考点.html"]{display:none!important}
+body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
+#g851-rail a{display:block!important}
+@media (hover:hover){body #errb{display:none!important}}
+
+#g851-rail{position:fixed;top:10px;right:10px;z-index:47;
+ font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif}
+#g851-rail .tab{width:32px;height:32px;padding:0;border:1px solid var(--line,#e3dfd7);border-radius:10px;
+ background:rgba(255,255,255,.9);color:#6d3d24;cursor:pointer;display:flex;align-items:center;
+ justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08);-webkit-tap-highlight-color:transparent;
+ transition:background .15s,box-shadow .15s}
+#g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+#g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
+#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+ border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
+ transition:opacity .16s ease,transform .16s ease,visibility .16s}
+#g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+#g851-rail .grp{padding:9px 14px 3px;font-size:11px;letter-spacing:1.5px;color:#a9958a}
+#g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
+#g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
+#g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
+ color:#9a9a9a;font-size:11.5px;line-height:1.5}
+#g851-rail .rf b{color:#6d3d24;font-weight:600}
+@media print{#g851-rail{display:none!important}}
+@media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
+ #g851-rail nav{width:200px;top:38px}}
+</style>
+
+<div id="g851-rail" aria-label="更多模块">
+  <button class="tab" type="button" aria-expanded="false" aria-label="更多模块" title="更多模块（悬停或点一下）">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav>
+    <div class="grp">复习</div>
+    <a href="错题本.html">错题本</a>
+    <a href="收藏.html">收藏夹</a>
+    <a href="专项卷.html">专项卷</a>
+    <div class="grp">资料</div>
+    <a href="按年份.html">按年份 / 整卷</a>
+    <a href="搜索.html">搜索题库</a>
+    <a href="考点.html">按考点</a>
+    <a href="公式墙.html">公式墙</a>
+    <a href="专题-双缝条纹平移.html">双缝平移速记</a>
+    <div class="grp">记录</div>
+    <a href="记录.html">记录中心</a>
+    <div class="rf">当前：<b class="cur-page">—</b></div>
+  </nav>
+</div>
+<script>
+/* G851_RAIL_JS */
+(function(){
+  var el = document.getElementById('g851-rail');
+  if (!el || el.getAttribute('data-init')) return;
+  el.setAttribute('data-init', '1');
+  var tab = el.querySelector('.tab'), openT = null, closeT = null;
+  function open(){ clearTimeout(closeT); el.classList.add('open'); tab.setAttribute('aria-expanded','1'); }
+  function close(){ el.classList.remove('open'); tab.setAttribute('aria-expanded','0'); }
+  tab.addEventListener('mouseenter', function(){
+    clearTimeout(openT);
+    openT = setTimeout(function(){ if (tab.matches(':hover')) open(); }, 150);
+  });
+  tab.addEventListener('mouseleave', function(){ clearTimeout(openT); });
+  el.addEventListener('mouseleave', function(){ closeT = setTimeout(close, 350); });
+  el.addEventListener('mouseenter', function(){ clearTimeout(closeT); });
+  tab.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (el.classList.contains('open')) close(); else open();
+  });
+  document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') close();
+    else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
+      e.preventDefault(); el.classList.contains('open') ? close() : open();
+    }
+  });
+  var here = decodeURIComponent((location.pathname.split('/').pop() || 'index.html'));
+  Array.prototype.forEach.call(el.querySelectorAll('a'), function(a){
+    if (a.getAttribute('href') === here) a.classList.add('cur');
+  });
+  var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
+    .filter(function(s){ return s && s !== '851'; });
+  el.querySelector('.cur-page').textContent = parts[0] || here;
+})();
+</script>
+<!-- G851_BG_V3_HTML_START -->
+<div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-bgc">
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+ <div class="naiwa-bg-panel" id="naiwa-bg-panel">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
+   <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
+   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
+ </div>
+</div>
+<script id="g851-bg-js">/* G851_BG_V3 */
+(function(){'use strict';
+ if(window.__g851NaiwaV3)return;
+ window.__g851NaiwaV3=true;
+ var layer=document.getElementById('g851-bg'),panel=document.getElementById('g851-bgc');
+ if(!layer||!panel)return;
+ var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
+  val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
+  reset=document.getElementById('g851-bgr');
+ var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+ var pageName=decodeURIComponent(location.pathname).split('/').pop();
+ var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
+ var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ function apply(){
+  var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
+  document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
+  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  val.textContent=v?v+'%':'关';
+  layer.classList.toggle('focus',onFocus);
+  layer.classList.toggle('no-motion',!motion.checked||reduced);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+ }
+ var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
+ range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ motion.checked=(get(KM)!=='0')&&!reduced;
+ eyes.checked=(get(KE)!=='0')&&!reduced;
+ focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ apply();
+ range.addEventListener('input',function(){apply();put(K,range.value)});
+ motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
+ eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
+ focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
+ reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+  try{localStorage.removeItem(KF)}catch(e){}});
+ btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
+ document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
+ function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;}}
+ function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function relayout(){
+  var W=innerWidth,H=innerHeight;
+  if(W<180||H<180)return;
+  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
+  lastW=W;lastH=H;layer.textContent='';sprites=[];
+  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
+  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
+  var count=clamp(Math.round(W*H/60000),6,30);
+  for(var i=0;i<count;i++){
+   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
+   var angle=(rand()-.5)*52;
+   if(rand()<.1)angle+=(rand()<.5?85:-85);
+   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
+   var margin=16,found=null,rect;
+   if(ew+margin*2>W||ew+margin*2>H)continue;
+   for(var attempt=0;attempt<360;attempt++){
+    var cx=ew/2+margin+rand()*(W-ew-2*margin);
+    var cy=ew/2+margin+rand()*(H-ew-2*margin);
+    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
+    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
+   }
+   if(!found)continue;
+   boxes.push(rect);
+   var kind=Math.floor(rand()*N);
+   var el=document.createElement('div');el.className='naiwa';
+   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
+   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
+   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   var fl=document.createElement('div');fl.className='naiwa-float';
+   var reaction=document.createElement('div');reaction.className='naiwa-react';
+   var face=document.createElement('div');face.className='naiwa-face';
+   face.style.setProperty('--atlas-scale',(N*100)+'%');
+   face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
+   reaction.appendChild(face);
+   var pupil=null;
+   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
+   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
+   sprites.push({el:el,react:reaction,pupil:pupil});
+  }
+ }
+ window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ document.addEventListener('pointermove',function(e){
+  if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
+  mouse={x:e.clientX,y:e.clientY};
+  if(eyeJob)return;
+  eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
+   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+    var max=clamp(r.width*.04,2,5);
+    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   }
+  });
+ },{passive:true});
+ var reactions=['bop','wiggle','puff','jump'];
+ document.addEventListener('pointerdown',function(e){
+  if(focus.checked||reduced||!motion.checked)return;
+  if(e.target.closest('a,button,input,select,textarea,label,[role="button"],[contenteditable="true"]'))return;
+  for(var j=sprites.length-1;j>=0;j--){
+   var s=sprites[j],r=s.el.getBoundingClientRect();
+   if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+    s.react.classList.remove(...reactions);void s.react.offsetWidth;
+    var reaction=reactions[Math.floor(Math.random()*reactions.length)];
+    s.react.classList.add(reaction);
+    (function(el,name){setTimeout(function(){el.classList.remove(name)},650)})(s.react,reaction);
+    break;
+   }
+  }
+ },{passive:true});
+ relayout();
+})();
+</script>
+<!-- G851_BG_V3_HTML_END -->
+</body></html>

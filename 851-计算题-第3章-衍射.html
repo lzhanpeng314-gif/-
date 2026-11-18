@@ -85,6 +85,11 @@
     .fcard,.ans{box-shadow:none;}
   }
   .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
+  details.fold{margin:9px 0;border:1px dashed var(--line);border-radius:5px;padding:5px 11px;background:#fdfcf8;}
+  details.fold>summary{cursor:pointer;font-size:12.5px;color:var(--mut);outline:none;user-select:none;}
+  details.fold>summary::marker{content:"▸ ";}
+  details.fold[open]>summary::marker{content:"▾ ";}
+  details.fold>summary+b,details.fold>summary+p{margin-top:6px;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -94,7 +99,7 @@
 
 <!-- G851_BG_V3_CSS_START -->
 <style id="g851-bg-style">
-/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
 #g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
 #g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
 #g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
@@ -207,6 +212,11 @@
 </div>
 
 
+
+<div class="kcard">
+<div class="kh">A · 单缝 / 双缝 / 光栅：三组判据一张表（最容易混的就在这里）</div>
+<table style="border-collapse:collapse;width:100%;font-size:13.5px"><tr style="background:#f4e9dd"><th style="border:1px solid #ddd;padding:4px">装置</th><th style="border:1px solid #ddd;padding:4px">极小的位置（本库一律用这组）</th><th style="border:1px solid #ddd;padding:4px">极大的位置</th></tr><tr><td style="border:1px solid #ddd;padding:4px"><b>单缝</b></td><td style="border:1px solid #ddd;padding:4px"><i>a</i>sinθ = <i>k</i>λ（<i>k</i>≠0）</td><td style="border:1px solid #ddd;padding:4px"><i>a</i>sinθ = (2<i>k</i>+1)λ/2（<b>第一级明纹 = 1.5λ/<i>a</i></b>；严格解 tanα=α ⇒ 1.43λ/<i>a</i>）</td></tr><tr><td style="border:1px solid #ddd;padding:4px"><b>双缝</b></td><td style="border:1px solid #ddd;padding:4px">受单缝包络调制</td><td style="border:1px solid #ddd;padding:4px"><i>d</i>sinθ = <i>k</i>λ（干涉主极大）</td></tr><tr><td style="border:1px solid #ddd;padding:4px"><b>光栅</b></td><td style="border:1px solid #ddd;padding:4px">相邻主极大间的零点 <i>N</i>−1 个</td><td style="border:1px solid #ddd;padding:4px"><i>d</i>sinθ = <i>k</i>λ；斜入射 <i>d</i>(sinθ ± sin<i>i</i>) = <i>k</i>λ（同侧 +、异侧 −）</td></tr></table><ul class="k" style="margin-top:6px"><li><b>缺级</b>：主极大落在单缝极小处 ⇒ <i>m</i> = (<i>d</i>/<i>a</i>)·<i>k</i> 缺级（如 <i>d</i> = 4<i>a</i> ⇒ ±4、±8 缺）。<b>求「最多看到几条」时必须先查缺级</b>。</li><li><b>分辨本领</b>：<i>R</i> = λ/δλ = <b>0.97<i>mN</i></b>（教材 p72；理想式 <i>mN</i> 差 3%），<i>N</i> = 刻线总数、<i>m</i> 用<b>工作级次</b>。</li><li><b>色散</b>：角色散 <i>D</i> = dθ/dλ = <i>m</i>/(<i>d</i>cosθ)；线色散 = <i>f</i>·<i>D</i>。<b>半角宽</b> Δθ = λ/(<i>Nd</i>cosθ)。</li><li><b>斜入射的最大级次</b>：<i>m</i><sub>max</sub> = <i>d</i>(1 + sin<i>i</i>)/λ（取整，再扣掉缺级）。</li></ul>
+</div>
 <div class="q" id="q001">
   <div class="hd"><span class="tag">2023-二-3</span><span class="ttl">单缝中央极大内有多少干涉极大；零级与一级强度</span></div>
   <div class="stem">夫朗和费双缝衍射中，双缝间距 0.178 mm，缝宽 0.0445 mm。透镜的焦距 f = 50 cm，用波长为 532 nm 的平行光垂直照射双缝衍射屏，求：<br>（1）其衍射图样在单缝衍射中央极大值两侧的两个衍射极小值间，将出现多少个干涉极大值？<br>（2）零级主极大及第一级亮纹的强度是多少？（该单缝在观察屏中心点的强度为 I<sub>0</sub>）</div>
@@ -282,11 +292,11 @@
   （2）用 <i>d</i> = 1×10<sup>−3</sup> cm 的光栅代替单缝、衍射角情形一样时，求两光第一主极大的间距。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b><b>单缝"第一级明纹"的位置：<i>a</i>sinθ = (2<i>k</i>+1)λ/2</b>，<i>k</i>=1 ⇒ sinθ = 1.5λ/<i>a</i>（<b>不是</b> λ/<i>a</i> —— λ/<i>a</i> 是<b>第一暗纹</b>）。<i>y</i> = 1.5<i>f</i>λ/<i>a</i>：<div class="eqb">λ<sub>1</sub>：<i>y</i><sub>1</sub> = 1.5 × 400×10<sup>−9</sup> × 0.5 ÷ 1×10<sup>−4</sup> = <b>3.0 mm</b>　　λ<sub>2</sub>：<i>y</i><sub>2</sub> = <b>4.95 mm</b></div>⇒　Δ<i>y</i> = 1.5<i>f</i>Δλ/<i>a</i> = 1.5 × 0.5 × 2.6×10<sup>−7</sup> ÷ 1×10<sup>−4</sup> = <b>1.95 mm</b>（≈2.0 mm）</div>
-    <div class="step"><b class="n">2</b>光栅：同一个式子，只把 <i>a</i> 换成 <i>d</i>
+    <div class="step"><b class="n">2</b>光栅<b>主极大用独立方程</b> <i>d</i>sinθ = <i>k</i>λ（<i>k</i> = 1，<b>没有 1.5 这个系数</b>，不是“把 <i>a</i> 换成 <i>d</i>”）
       <div class="eqb"><i>d</i> = 1×10<sup>−3</sup> cm = 1×10<sup>−5</sup> m</div>
       <div class="eqb">Δ<i>x</i><sub>1</sub> = <i>f</i>·<span class="frac"><span class="num">Δλ</span><span class="den"><i>d</i></span></span> = 0.5 × <span class="frac"><span class="num">2.6×10<sup>−7</sup></span><span class="den">1×10<sup>−5</sup></span></span> = 1.3×10<sup>−2</sup> m = <b>13 mm</b></div>
     </div>
-    <div class="res">（1）单缝：两波长<b>第一级明纹</b>中心相距 <b>1.95 mm</b>（≈2.0 mm；若用精确根 1.43λ/<i>a</i> 则 1.86 mm）；（2）换成光栅后，两<b>第一主极大</b>相距 <b>13 mm</b>（正好是 <i>a</i>/<i>d</i> = 10 倍）。<br><b>关键区分</b>：单缝<b>明纹</b>在 (2<i>k</i>+1)λ/(2<i>a</i>)、<b>暗纹</b>在 <i>k</i>λ/<i>a</i>；光栅主极大在 <i>k</i>λ/<i>d</i>。第（1）问误用 λ/<i>a</i>（暗纹）就会得 1.3 mm —— 那是第一暗纹的间距。</div>
+    <div class="res">（1）单缝第一级明纹：<b>近似口径</b>（教材写法 sinθ = 1.5λ/<i>a</i>）⇒ Δ<i>y</i> = <b>1.95 mm</b>；<b>严格解</b>（极大条件 tanα = α ⇒ sinθ = 1.4303λ/<i>a</i>）⇒ <b>1.86 mm</b>。考场写 1.95 mm、括注严格值 1.86 mm 最稳。<br>（2）光栅第一主极大由 <b><i>d</i>sinθ = <i>k</i>λ</b> 独立给出，Δ<i>y</i> = <i>f</i>Δλ/<i>d</i> = <b>13 mm</b>。（2）换成光栅后，两<b>第一主极大</b>相距 <b>13 mm</b>（正好是 <i>a</i>/<i>d</i> = 10 倍）。<br><b>关键区分</b>：单缝<b>明纹</b>在 (2<i>k</i>+1)λ/(2<i>a</i>)（严格 1.43λ/<i>a</i>）、<b>暗纹</b>在 <i>k</i>λ/<i>a</i>；光栅<b>主极大</b>在 <i>k</i>λ/<i>d</i>。两者来源不同（单缝是单缝<b>衍射</b>的极大，光栅是<b>多缝干涉</b>的极大），不能混用一套公式。第（1）问误用 λ/<i>a</i>（暗纹）就会得 1.3 mm —— 那是第一暗纹的间距。</div>
     <div class="warn"><b>易错（本题就考这个）</b>：① 单缝<b>明纹</b> <i>a</i>sinθ = (2<i>k</i>+1)λ/2、<b>暗纹</b> <i>a</i>sinθ = <i>k</i>λ；把"第一级明纹"当成 λ/<i>a</i> 是<b>最常见的错</b>（那是第一暗纹）。<br>② <i>a</i>、<i>d</i> 给的是 cm，先换 m（少换一次错 10² 倍）。<br>③ 光栅主极大位置只由 <i>d</i> 定、与 <i>a</i> 无关；<i>a</i> 只管缺级和衍射包络。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
@@ -386,7 +396,7 @@
 <div class="q" id="q007">
   <div class="hd"><span class="tag">2019-二-3</span><span class="ttl">中央峰角宽度、可分辨的最小波长差</span></div>
   <div class="stem">平面透射光栅每毫米内 400 条刻线，光栅宽为 5 cm。当波长为 500 nm 的平行光垂直入射到该光栅，发现第 4 级衍射光谱处在单缝衍射的第一极小位置，试求：衍射中央峰的角宽度；正入射时光栅能分辨的谱线最小波长差。</div>
-  <div class="ans"><div class="step"><b class="n">1</b>光栅常数与缝宽：<i>d</i> = 1/400 mm = <b>2.5 μm</b>；第 4 级主极大落在单缝第一极小处，故 <i>d</i>/<i>a</i> = 4<div class="eqb"><i>a</i> = <i>d</i>/4 = <b>0.625 μm</b></div></div><div class="step"><b class="n">2</b><b>“衍射中央峰”指单缝衍射包络的中央明纹</b>（不是干涉主极大！），宽度由缝宽决定，与刻线总数 <i>N</i> 无关<div class="eqb">sin<i>θ</i><sub>1</sub> = λ/<i>a</i> = 0.5/0.625 = 0.8 ⇒ <i>θ</i><sub>1</sub> = 53.13°</div><div class="eqb">中央峰全角宽 = 2<i>θ</i><sub>1</sub> = <b>106.3° ≈ 1.86 rad</b></div><p style="margin:4px 0 0">答案册写的是 2λ/<i>a</i> = 1.6 rad —— 那是 sin<i>θ</i>≈<i>θ</i> 的近似。本题 <i>θ</i><sub>1</sub> 已达 53°，近似误差 16%。<b>考试按答案册写 1.6 rad 可得分，但要知道它是近似。</b></p></div><div class="step"><b class="n">3</b>能分辨的最小波长差：刻线总数 <i>N</i> = 400 × 50 = <b>20000</b>，分辨本领 <i>R</i> = <i>mN</i> 要用<b>最大级次</b><div class="eqb"><i>m</i><sub>max</sub> = 3（第 4 级缺级）⇒ <i>R</i> = 3 × 20000 = 6×10<sup>4</sup></div><div class="eqb">δλ = λ/<i>R</i> = 500 nm / 6×10<sup>4</sup> = <b>8.33×10<sup>−3</sup> nm</b></div></div><div class="res">（1）中央峰（单缝包络）全角宽 <b>106.3°</b>（≈1.86 rad；答案册近似值 1.6 rad）；（2）可分辨的最小波长差 <b>8.33×10<sup>−3</sup> nm</b>。<b>易错</b>：把“中央峰”当成干涉主极大，会用 2λ/(<i>Nd</i>) 得到 2×10<sup>−5</sup> rad 的荒谬结果。</div><div class="warn"><b>两种“宽”别混</b>：<br>· <b>单缝包络</b>中央明纹宽 = 2λ/<i>a</i>（精确为 2 arcsin(λ/<i>a</i>)）—— 由缝宽定，与 <i>N</i> 无关；<br>· <b>干涉主极大</b>半角宽 = λ/(<i>Nd</i>) —— 由总刻线数定，描述谱线“细不细”。<br>本题问“衍射中央峰”，取前者。</div>
+  <div class="ans"><div class="step"><b class="n">1</b>光栅常数与缝宽：<i>d</i> = 1/400 mm = <b>2.5 μm</b>；第 4 级主极大落在单缝第一极小处，故 <i>d</i>/<i>a</i> = 4<div class="eqb"><i>a</i> = <i>d</i>/4 = <b>0.625 μm</b></div></div><div class="step"><b class="n">2</b><b>“衍射中央峰”指单缝衍射包络的中央明纹</b>（不是干涉主极大！），宽度由缝宽决定，与刻线总数 <i>N</i> 无关<div class="eqb">sin<i>θ</i><sub>1</sub> = λ/<i>a</i> = 0.5/0.625 = 0.8 ⇒ <i>θ</i><sub>1</sub> = 53.13°</div><div class="eqb">中央峰全角宽 = 2<i>θ</i><sub>1</sub> = <b>106.3° ≈ 1.86 rad</b></div><p style="margin:4px 0 0">答案册写的是 2λ/<i>a</i> = 1.6 rad —— 那是 sin<i>θ</i>≈<i>θ</i> 的近似。本题 <i>θ</i><sub>1</sub> 已达 53°，近似误差 16%。<b>考试按答案册写 1.6 rad 可得分，但要知道它是近似。</b></p></div><div class="step"><b class="n">3</b>能分辨的最小波长差：刻线总数 <i>N</i> = 400 × 50 = <b>20000</b>，分辨本领按<b>教材 p72 写 <i>R</i> = 0.97<i>mN</i></b>（0.97 是有效刻线数修正；理想式 <i>mN</i> 只差 3%，考试写 0.97mN 与教材一致），<i>m</i> 要用<b>最大级次</b><div class="eqb"><i>m</i><sub>max</sub> = 3（第 4 级缺级）⇒ <i>R</i> = 0.97 × 3 × 20000 = <b>5.82×10<sup>4</sup></b></div><div class="eqb">δλ = λ/<i>R</i> = 500 nm / 5.82×10<sup>4</sup> = <b>8.59×10<sup>−3</sup> nm</b></div></div><div class="res">（1）中央峰（单缝包络）全角宽 <b>106.3°</b>（≈1.86 rad；答案册近似值 1.6 rad）；（2）可分辨的最小波长差 <b>8.59×10<sup>−3</sup> nm</b>（按教材 <i>R</i> = 0.97<i>mN</i>；若用理想式 <i>mN</i> 则为 8.33×10<sup>−3</sup> nm，差 3%）。<b>易错</b>：把“中央峰”当成干涉主极大，会用 2λ/(<i>Nd</i>) 得到 2×10<sup>−5</sup> rad 的荒谬结果。</div><div class="warn"><b>两种“宽”别混</b>：<br>· <b>单缝包络</b>中央明纹宽 = 2λ/<i>a</i>（精确为 2 arcsin(λ/<i>a</i>)）—— 由缝宽定，与 <i>N</i> 无关；<br>· <b>干涉主极大</b>半角宽 = λ/(<i>Nd</i>) —— 由总刻线数定，描述谱线“细不细”。<br>本题问“衍射中央峰”，取前者。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
@@ -451,7 +461,7 @@
     （1）垂直入射的平行可见光（380–780 nm）通过 Q 后，是否有变化，为什么？<br>
     （2）该入射的平行光通过 Q 后，由 R 出射后的一级光谱散开的角范围（用反三角表示）。<br>
     （3）钠原子的 D 线包含波长分别为 589.6 nm，589.0 nm 两条谱线，能否用此光栅的一级光谱分辨率？</div>
-    <details class="figbox" open><summary>图 · 点此收起 / 展开</summary><figure><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjcAAAF5CAIAAADs8Jx4AAAQzklEQVR4nO3dwWub9/3A8a9+9Lo2inYaXWns9FbwoGo6SjKaQCYRdmhpmRMGu6SQ2TmsKSMOdmEtW8pkBu1GmzSlYZexJNDBDiPEHSSDeAMv6oihpYdEXjBhp2hytj/Agz7DPy92bNmzpc8jvV4nW3okfSPFevM8z/d5nsLi4mICgJD+r9sDAICHUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4lIpAOJSKQDiUikA4nqk2wMA6HeFQiHl1uLi4rY+v0rB1sj1F02P2e7vTTrJFj8A4rIuBRBFjtYCC53aeKBS0L9fND3GRteeZIsfAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFABxqRQAcakUAHGpFKzizp073heIQKVgFb/4xS/279//u9/9zrsD3aVSsLo//vGPL730klZBd6kUrEWroLtUCtanVdAtKgXt0iroPJWCjdEq6CSVgs3QKuiMwuLiYmde6c0333zrrbc681rQST/+8Y9fe+21YrGY/dqxvykeUCgUcvoR5HHkhU6NuXOVghw5ceLEu+++u+5iL7zwwg9/+MMXX3wxp180PSa/H0EeR17o1Jgf2dZnh161vE/A9lEp2Bh9gk5SKWiXPkHnqRSsT5+gW1QK1qJP0F0qBavTJ4jATHRYxcLCwo4dO3p+MnGPye9HkMeRFxwvBfmSxy+aHpPfjyCPIy90aszOkARAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBUBcKgVAXCoFQFwqBb1s9+7d1Wp1dnZ2cw8/d+7cxMTEug8vFArVavXy5cubexVYQyFHFzCGyGJeFLxQKBSLxVu3bpVKpeW3N5vNu3fvDg0Nrf3wZ599tl6vVyqVM2fODAwMrLFYq9W6fft26qqYH0GvjrzgivJA+6anpx921549ex5IVErp/Pnz+/fvX3vtp9ls1uv1wcHBK1eurJGolFKpVNq9e7fPi+1gix/k3ujo6L59+0ZHR9tcfnZ2dmxsrNVq/elPf1pjsZmZmZTS8PDwFg0TNuORTT0KCOTYsWMXL148e/ZsSunMmTNrL9xsNl999dWU0oULFw4fPvzAvZOTk4899tj9+/dTSlevXk0ptVqtycnJlNITTzwxPz//yiuvrL1eBVtLpSD3hoaGrl279vLLL7cTquPHj9fr9VqttjJRKaWxsbEHbsmec8nzzz+vUnSSSkEvGBoampmZee6559YO1ejo6KVLl4aHh0+ePLnqAo1GI4vQ3Nzc4ODg+Pj46dOnly/QbDanp6f//Oc/L78xmzeRrXItsdbF1lgEtkKEv6mbN28Wi8WUUq1WWxpVpVLJfh4ZGUkplcvle/furftUH3zwQUrp5s2bK++6cOFCO98t169fX+y/j6B/Rp46NWazJ6DXNv0Vi8VKpbLqvdmEvZVT/lb66KOPyuXy0NDQxYsXq9XquXPnlu56/PHHH4hQ5UtLv9Zqta3+l9G/VAp6ytDQ0K1bt1Y9EOrYsWMzMzPtJGpubq5er2eTLObn56empr7+9a9vz3hhHfZLQV49sB/oYW7fvr3ukg/sQzp//nxK6eDBg0u3PProo//DSGHzVAryauV8vFU1Go11l1w+c6/ZbJ49e7ZSqZjLRwQqBXl17969VTffTU9P79u3r1KpXLlyJbtlcnJybGzsYWffaTaby389fvx4q9VaWlfLjpr6zW9+k83re+KJJ7L9UtAZKgV51c4epk08z8LCQkpp6ksrj5qqVCpvvPHG8m6tnImehQ22hEpBr/n8889TSgcOHNjcw7NjrZY292XrYdevX9+7d2+24vXFF1+sPNq3/S2QsCHm+EGvmZ+fTyk99thjm3v4wJfWXfEyE53OUCnoNZ988klK6Zvf/GaHT74O20GloKdkhzoVi8V1rx21IZ9//vnExMTOnTvfe++9LXxaWJf9UtBTPv7445TSqmeS3ahmszkzM5NNhfjBD36QnV3p+9///lYME9qlUtA7ms3mz372s5TSj370ozYfkp069ujRo9kOp7m5uT/84Q/z8/OffPJJvV5fWqxWqy0tY6MfnaRS0Du+973vtVqtkZGR9g/IvXv37tjY2NWrV7ODq/7+979nq00ppZGRke985zufffbZ2NjY888/v1UT32FDVAp6xOjo6NTU1ODg4E9+8pONTgh85plnsl/37t07MjLyrW996+DBg1mWPvvsszXmuy8/LnhpHevOnTv/2z8F/p9KQe7Nzc1liSoWi7/97W8fttIzPT2dHfO0ZHZ2NttC+N3vfnfpxnWv9ptZWuVasm/fvk0NH9aiUpBjly9f/v3vf58dYFsulz/66KNVp/Zlx05lp01auvH27duNRiOlNDw8vIkJgUvH+a6UHQi80SeEVakU5NLc3Fy5XM5OuPfA7IaVjh07dv/+/Q8//HD5SY+yy1C99NJLx44d69SoYcNUCnJpYGDg2rVrL7/88vDw8NGjR9edLnHyS1vy0tnp+/75z38+bIGnn366Vqt97Wtf25KXo88VHnaaZGBjf0uFQvaDv6luye9HkMeRFzo1ZueeACAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpUCIC6VAiAulQIgLpWC3FhYWEj5dOfOnW4PgbxSKciBhYWFN998c9euXTn9ut+/f/+JEydyOni6S6UgH31666238rsulVJ69913d+3apVVslEpBUD3Tp+W0io1SKQinJ/u0nFbRPpWCQHq+T8tpFe1QKQihr/q0nFaxNpWCLuvbPi2nVTxMYXFx8aF3Am0rFArZDxv6m1pYWNi1a1ffxmmlHTt2/OpXv3rxxRc79hFE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" alt="原卷插图" style="max-width:100%;height:auto"><figcaption>原卷 p21 插图（自动裁自真题 PDF）</figcaption></figure></details>
+    <details class="figbox" open><summary>图</summary><figure><img src="img/a51d19ea3b2c.png" alt="原卷插图" style="max-width:100%;height:auto"><figcaption>原卷 p21 插图</figcaption></figure></details>
 <div class="ans">
     <p><b>（1）</b></p>
     <div class="step"><b class="n">1</b>Q 是"垂直光轴切割"的平行平板 ⇒ 光轴就是通光面的法线；光又垂直入射，所以<b>光沿光轴传播</b>。沿光轴传播时 o 光与 e 光速度相同（都取 <i>n</i><sub>0</sub>），不存在双折射、也不发生双折射分束。
@@ -517,7 +527,7 @@
 <p><b>合并说明</b>：本文件由 2 份分片合并而成（原分片因页码分工被切在同一章中间），内容已按题号顺序相接，无删减。</p>
   <div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
   <p><b>进度</b>：简答 68 问（全十章节）✅　计算 第 1 章 9 题 ✅　第 2 章 10 题 ✅　第 3 章 9 题 ✅　下一批：第四章 各向异性 + 第五章 感应双折射。</p>
-  <p><b>已知局限</b>：① 结果为教材推导（【自算】），未逐题比对机构答案册；② 2018-二-4 斜入射的"两侧"按"衍射光与入射光同侧/异侧"区分，若你们的符号约定相反，数值互换即可；③ 本章示意图（光栅衍射装置）为标准光路，已在题干文字中描述。</p>
+  
 </div>
 
 </div>
@@ -833,7 +843,10 @@
     var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
         ans = q.querySelector('.ans');
     elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
-    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elStem.innerHTML = (stem ? stem.innerHTML : '') + (function(){
+      var f = q.querySelector('details.figbox');   /* 题干里的插图也要带出来，否则只看到"如图所示" */
+      return f ? f.outerHTML : '';
+    })();
     elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
     elAns.classList.remove('on');
     document.getElementById('qshow').textContent = '显示答案';
@@ -1177,10 +1190,101 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   });
 })();
 </script>
+
+<style id="g851-rail-style">
+/* 非高频模块收进右上角菜单：页面里不再重复摆按钮（菜单内的链接不受影响） */
+body a[href="收藏.html"],body a[href="专项卷.html"],body a[href="记录.html"],
+body a[href="考点.html"]{display:none!important}
+body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
+#g851-rail a{display:block!important}
+@media (hover:hover){body #errb{display:none!important}}
+
+#g851-rail{position:fixed;top:10px;right:10px;z-index:47;
+ font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif}
+#g851-rail .tab{width:32px;height:32px;padding:0;border:1px solid var(--line,#e3dfd7);border-radius:10px;
+ background:rgba(255,255,255,.9);color:#6d3d24;cursor:pointer;display:flex;align-items:center;
+ justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08);-webkit-tap-highlight-color:transparent;
+ transition:background .15s,box-shadow .15s}
+#g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+#g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
+#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+ border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
+ transition:opacity .16s ease,transform .16s ease,visibility .16s}
+#g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+#g851-rail .grp{padding:9px 14px 3px;font-size:11px;letter-spacing:1.5px;color:#a9958a}
+#g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
+#g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
+#g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
+ color:#9a9a9a;font-size:11.5px;line-height:1.5}
+#g851-rail .rf b{color:#6d3d24;font-weight:600}
+@media print{#g851-rail{display:none!important}}
+@media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
+ #g851-rail nav{width:200px;top:38px}}
+</style>
+
+<div id="g851-rail" aria-label="更多模块">
+  <button class="tab" type="button" aria-expanded="false" aria-label="更多模块" title="更多模块（悬停或点一下）">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav>
+    <div class="grp">复习</div>
+    <a href="错题本.html">错题本</a>
+    <a href="收藏.html">收藏夹</a>
+    <a href="专项卷.html">专项卷</a>
+    <div class="grp">资料</div>
+    <a href="按年份.html">按年份 / 整卷</a>
+    <a href="搜索.html">搜索题库</a>
+    <a href="考点.html">按考点</a>
+    <a href="公式墙.html">公式墙</a>
+    <a href="专题-双缝条纹平移.html">双缝平移速记</a>
+    <div class="grp">记录</div>
+    <a href="记录.html">记录中心</a>
+    <div class="rf">当前：<b class="cur-page">—</b></div>
+  </nav>
+</div>
+<script>
+/* G851_RAIL_JS */
+(function(){
+  var el = document.getElementById('g851-rail');
+  if (!el || el.getAttribute('data-init')) return;
+  el.setAttribute('data-init', '1');
+  var tab = el.querySelector('.tab'), openT = null, closeT = null;
+  function open(){ clearTimeout(closeT); el.classList.add('open'); tab.setAttribute('aria-expanded','1'); }
+  function close(){ el.classList.remove('open'); tab.setAttribute('aria-expanded','0'); }
+  tab.addEventListener('mouseenter', function(){
+    clearTimeout(openT);
+    openT = setTimeout(function(){ if (tab.matches(':hover')) open(); }, 150);
+  });
+  tab.addEventListener('mouseleave', function(){ clearTimeout(openT); });
+  el.addEventListener('mouseleave', function(){ closeT = setTimeout(close, 350); });
+  el.addEventListener('mouseenter', function(){ clearTimeout(closeT); });
+  tab.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (el.classList.contains('open')) close(); else open();
+  });
+  document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') close();
+    else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
+      e.preventDefault(); el.classList.contains('open') ? close() : open();
+    }
+  });
+  var here = decodeURIComponent((location.pathname.split('/').pop() || 'index.html'));
+  Array.prototype.forEach.call(el.querySelectorAll('a'), function(a){
+    if (a.getAttribute('href') === here) a.classList.add('cur');
+  });
+  var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
+    .filter(function(s){ return s && s !== '851'; });
+  el.querySelector('.cur-page').textContent = parts[0] || here;
+})();
+</script>
 <!-- G851_BG_V3_HTML_START -->
 <div id="g851-bg" aria-hidden="true"></div>
 <div id="g851-bgc">
- <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
  <div class="naiwa-bg-panel" id="naiwa-bg-panel">
    <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
    <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">

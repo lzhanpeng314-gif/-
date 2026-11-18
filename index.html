@@ -21,23 +21,26 @@
   .cm{font-size:12.5px;color:var(--mut);}
   .cm b{color:var(--acc);}
   .quick{display:flex;gap:10px;margin:0 0 20px;flex-wrap:wrap;}
-  .quick a{flex:1;min-width:150px;text-align:center;background:#8c4a2f;color:#fff;text-decoration:none;
-           border-radius:8px;padding:10px 0;font-size:14px;font-weight:600;}
-  .quick a:hover{filter:brightness(1.08);}
+  .quick a{flex:0 0 auto;min-width:120px;padding:10px 18px;text-align:center;background:#fff;color:#8c4a2f;
+           text-decoration:none;border:1px solid #e0d3c6;border-radius:9px;font-size:13.5px;font-weight:600;}
+  .quick a:first-child{background:#8c4a2f;color:#fff;border-color:#8c4a2f;}
+  .quick a:hover{background:#fbf3ea;border-color:#c9a999;}
+  .quick a:first-child:hover{background:#7d4228;border-color:#7d4228;}
   .tip{margin-top:26px;font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:14px;}
   h1{word-break:break-word;}
   @media (max-width:640px){
     .wrap{padding:22px 14px 70px;}
     h1{font-size:21px;}
     .grid{grid-template-columns:1fr;}
-    .quick{flex-direction:column;}
+    .quick{flex-direction:row;gap:8px;}
+    .quick a{flex:1 1 0;min-width:0;padding:9px 6px;font-size:12.5px;white-space:nowrap;}
     .card{padding:12px 14px;}
   }
   @media print{.grid{grid-template-columns:1fr 1fr;}}
 </style>
 <!-- G851_BG_V3_CSS_START -->
 <style id="g851-bg-style">
-/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
 #g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
 #g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
 #g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
@@ -81,25 +84,41 @@
   <div style="margin:0 0 6px"><a href="#" onclick="if(history.length>1){history.back();return false;}" style="font-size:13px;color:#6d5a4a">← 上一页</a></div>
 <div class="sub">西电 851 · 2027 备考 · 按考纲章节重排 · 题与答案同页</div>
   <div class="tot">共 <b>14</b> 份文档、<b>305</b> 道不重复的题（含重复共 305 条）</div>
+  <div class="quick">
+    <!--TOPICMEMO--><a href="专题-双缝条纹平移.html">双缝平移速记 →</a>
+    <!--RECCENTER--><a href="记录.html">记录中心 →</a>
+    <!--DRILLPAGE--><a href="专项卷.html">专项卷 →</a>
+    <!--TOPICPAGE--><a href="考点.html">按考点 →</a>
+    <!--STARPAGE--><a href="收藏.html">收藏夹 →</a>
+    <a href="按年份.html">整卷模拟 →</a>
+    <a href="搜索.html">搜索题库 →</a>
+    <a href="公式墙.html">公式墙 →</a>
+  </div>
   <!--DASHBOARD--><style>
 #db{background:#fff;border:1px solid #e3dfd7;border-radius:12px;padding:16px 18px;margin:22px 0 18px;
     box-shadow:0 1px 4px rgba(0,0,0,.04)}
 #db .hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-#db .hd b{font-size:16px;color:#6d3a24}
+#db .hd b{font-size:16px;color:#6d3a24;letter-spacing:.2px}
+#db .hd b::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+     background:#8c4a2f;margin-right:8px;vertical-align:2px}
 #db .hd .cd{margin-left:auto;font-size:13px;color:#8a6a55}
 #db .hd .cd em{font-style:normal;font-size:22px;font-weight:700;color:#a8332a;margin:0 2px}
 #db .row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-#db .kpi{flex:1 1 96px;background:#fbf8f3;border-radius:9px;padding:9px 12px}
-#db .kpi i{display:block;font-style:normal;font-size:11.5px;color:#8a7b6c;margin-bottom:2px}
-#db .kpi b{font-size:19px;color:#6d3a24;font-variant-numeric:tabular-nums}
+#db .kpi{position:relative;flex:1 1 96px;min-width:0;background:#fff;border:1px solid #ece5da;border-radius:10px;
+     padding:10px 12px 9px;overflow:hidden}
+#db .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#ece5da}
+#db .kpi:first-child{border-color:#e7d8c6;background:linear-gradient(180deg,#fffdf9,#fff)}
+#db .kpi:first-child::before{background:#8c4a2f}
+#db .kpi i{display:block;font-style:normal;font-size:11px;letter-spacing:.4px;color:#8a7b6c;margin-bottom:3px}
+#db .kpi b{font-size:20px;color:#5a2f1d;letter-spacing:-.2px;font-variant-numeric:tabular-nums}
 #db .kpi b small{font-size:11.5px;color:#9a9086;font-weight:400}
-#db h3{font-size:13px;color:#6d3a24;margin:14px 0 7px;font-weight:600}
+#db h3{font-size:13px;color:#6d3a24;margin:14px 0 7px;font-weight:600;padding-left:8px;border-left:2px solid #e8d9c8}
 #db .bar{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:5px 0;color:#3a3a3a;
      text-decoration:none}
 #db .bar:hover .nm{color:#a8332a}
 #db .bar .nm{flex:0 0 132px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #db .bar .tr{flex:1 1 auto;height:7px;background:#efe9e0;border-radius:4px;overflow:hidden;min-width:60px}
-#db .bar .tr i{display:block;height:100%;background:#8c4a2f;border-radius:4px}
+#db .bar .tr i{display:block;height:100%;background:linear-gradient(90deg,#a85a38,#8c4a2f);border-radius:4px}
 #db .bar .vl{flex:0 0 62px;text-align:right;color:#8a7b6c;font-variant-numeric:tabular-nums}
 #db .sc{display:flex;flex-wrap:wrap;gap:6px}
 #db .sc a{font-size:12px;padding:3px 9px;border-radius:11px;background:#fbf8f3;border:1px solid #e8e0d4;
@@ -115,7 +134,7 @@
 #db .go a.main{background:#8c4a2f;color:#fff;border-color:#8c4a2f;font-weight:600}
 #db .go a:hover{filter:brightness(1.06)}
 #db .empty{color:#9a9086;font-size:12.5px}
-#db .day{background:#fbf8f3;border:1px solid #e8e0d4;border-radius:10px;padding:12px 14px;margin-bottom:14px}
+#db .day{background:#fffdf9;border:1px solid #ece5da;border-left:3px solid #8c4a2f;border-radius:8px;padding:12px 14px;margin-bottom:14px}
 #db .day .dl{font-size:12px;color:#8a7a68;display:flex;gap:8px;align-items:baseline;margin-bottom:5px}
 #db .day .dl b{color:#6d3a24;font-size:13px}
 #db .day .dt{font-size:13.5px;line-height:1.62}
@@ -126,14 +145,14 @@
      cursor:pointer;font-family:inherit}
 #db .day .da a.main{background:#8c4a2f;color:#fff;border-color:#8c4a2f;font-weight:600}
 #db .day .da .ok{background:#eef7ee;border-color:#bcd9bc;color:#2f6b34;font-weight:600}
-@media(max-width:430px){#db .bar .nm{flex-basis:104px}#db .kpi b{font-size:17px}}
+@media(max-width:430px){#db .bar .nm{flex-basis:104px}#db .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#db .kpi{flex:none;width:auto}#db .kpi b{font-size:18px}}
 @media print{#db .bar:hover .nm{color:inherit}}
 </style>
 <div id="db"></div>
 <script src="qindex.js"></script>
 <script>
 (function () {
-  var DOCS = [{"f":"851-应用光学-简答与画图-p49-56.html","k":"g851-appo-qa-p4956","n":46,"t":"简答与画图（p49–56）"},{"f":"851-真题-2025-2026.html","k":"g851-zhenti-2526","n":41,"t":"2025 & 2026（补最近两年）"},{"f":"851-简答题-按章节.html","k":"g851-jt-mastered","n":68,"t":"简答题"},{"f":"851-计算题-应用光学-解析法.html","k":"g851-appo-parax-mastered","n":1,"t":"解析法"},{"f":"851-计算题-早年真题-合集.html","k":"g851-early-p1-mastered","n":71,"t":"早年真题 2009–2015"},{"f":"851-计算题-第10章-光学仪器.html","k":"g851-c10-mastered","n":12,"t":"第十章 光学仪器"},{"f":"851-计算题-第1章-电磁理论.html","k":"g851-c1-mastered","n":9,"t":"第一章 光的电磁理论基础"},{"f":"851-计算题-第2章-干涉.html","k":"g851-c2-mastered","n":10,"t":"第二章 光的干涉"},{"f":"851-计算题-第3章-衍射.html","k":"g851-c3-mastered","n":13,"t":"第三章 光的衍射"},{"f":"851-计算题-第4章-光在各向异性介质中的传播特性.html","k":"g851-c4-mastered","n":10,"t":"第四章 光在各向异性介质中的传播特性"},{"f":"851-计算题-第5章-感应双折射.html","k":"g851-c5-birefringence-mastered","n":4,"t":"第五章 晶体的感应双折射"},{"f":"851-计算题-第7章-几何光学.html","k":"g851-c7-geometric-mastered","n":9,"t":"第七章 几何光学基础"},{"f":"851-计算题-第8章-理想光学系统.html","k":"g851-c8-mastered","n":5,"t":"第八章 理想光学系统"},{"f":"851-计算题-第9章-光路计算.html","k":"g851-c9-mastered","n":6,"t":"第九章 光学系统像差基础和光路计算"}], PAPERS = [{"k":"2009","f":"模拟-2009.html","n":13,"mx":115,"q":[["m20091","10"],["m20092","10"],["m20093","10"],["m20094","5|5"],["m20095","10"],["m20096","5|5"],["m20097","10"],["m20098","4|3|3"],["m20099","5|5"],["m200911","4|3|3"],["m2009101","5"],["m2009102","5"],["m2009103","5"]]},{"k":"2010","f":"模拟-2010.html","n":13,"mx":125,"q":[["m20101","10"],["m20102","10"],["m20103","5|5"],["m20104","10"],["m20105","4|3|3"],["m20106","5|5"],["m20107","10"],["m20108","3|2"],["m20109","10"],["m201010","10"],["m201011","10"],["m201012","10"],["m201013","10"]]},{"k":"2011","f":"模拟-2011.html","n":14,"mx":125,"q":[["m20111","5|5"],["m20112","10"],["m20113","10"],["m20114","10"],["m20115","4|3|3"],["m20116","10"],["m20117","4|3|3"],["m20118","2|2|1"],["m201110","10"],["m201111","10"],["m201112","10"],["m201113","4|3|3"],["m201191","5"],["m201192","5"]]},{"k":"2012","f":"模拟-2012.html","n":14,"mx":125,"q":[["m20121","10"],["m20122","10"],["m20123","10"],["m20124","10"],["m20125","10"],["m20126","10"],["m20127","5|5"],["m20128","2|2|1"],["m201210","10"],["m201211","10"],["m201212","10"],["m201213","10"],["m201291","5"],["m201292","5"]]},{"k":"2013","f":"模拟-2013.html","n":15,"mx":125,"q":[["m201311","5"],["m201312","5"],["m20132","10"],["m20133","5|5"],["m20134","4|3|3"],["m20135","10"],["m20136","5|5"],["m20137","5|5"],["m20138","2|2|1"],["m201310","10"],["m201311","10"],["m201312","4|3|3"],["m201313","10"],["m201391","5"],["m201392","5"]]},{"k":"2014","f":"模拟-2014.html","n":16,"mx":130,"q":[["m201411","5"],["m201412","5"],["m201413","5"],["m20142","5|5"],["m20143","10"],["m20144","5|5"],["m20145","5|5"],["m20146","4|3|3"],["m20147","5|5"],["m20148","2|2|1"],["m201410","10"],["m201411","10"],["m201412","10"],["m201413","4|3|3"],["m201491","5"],["m201492","5"]]},{"k":"2015","f":"模拟-2015.html","n":15,"mx":120,"q":[["m201511","5"],["m201512","5"],["m201513","5"],["m201514","5"],["m201515","5"],["m20152","10"],["m20153","10"],["m20154","10"],["m20155","5|5"],["m20156","5|5"],["m20157","10"],["m20158","2|2|1"],["m20159","5|5"],["m201510","4|3|3"],["m201511","10"]]},{"k":"2016","f":"模拟-2016.html","n":18,"mx":135,"q":[["m201611","5"],["m201612","5"],["m201613","5"],["m201614","5"],["m201615","5"],["m2016二1","10"],["m2016二2","10"],["m2016二3","10"],["m2016二4","4|3|3"],["m2016二5","10"],["m2016三1","5"],["m2016三2","5"],["m2016三3","5"],["m2016三4","5"],["m2016四1","10"],["m2016四2","10"],["m2016四3","10"],["m2016四4","10"]]},{"k":"2017","f":"模拟-2017.html","n":19,"mx":140,"q":[["m201711","5"],["m201712","5"],["m201713","5"],["m201714","5"],["m201715","5"],["m2017二1","10"],["m2017二2","5|5"],["m2017二3","4|3|3"],["m2017二4","5|5"],["m2017二5","5|5"],["m2017三2","5"],["m2017三3","5"],["m2017三4","5"],["m2017三5","5"],["m2017三6","5"],["m2017四1","5|5"],["m2017四2","10"],["m2017四3","5|5"],["m2017四4","5|5"]]},{"k":"2018","f":"模拟-2018.html","n":18,"mx":130,"q":[["m201811","5"],["m201812","5"],["m201813","5"],["m201814","5"],["m201815","5"],["m2018二1","5|5"],["m2018二2","10"],["m2018二3","10"],["m2018二4","5|5"],["m2018二5","5|5"],["m2018三1前","5"],["m2018三1后","5"],["m2018三2","5"],["m2018三3","5"],["m2018三4","5"],["m2018四1","10"],["m2018四2","10"],["m2018四3","10"]]},{"k":"2019","f":"模拟-2019.html","n":19,"mx":135,"q":[["m201911","5"],["m201912","5"],["m201913","5"],["m201914","5"],["m201915","5"],["m2019二1","10"],["m2019二2","10"],["m2019二3","10"],["m2019二4","4|3|3"],["m2019二5","4|3|3"],["m2019三1","5"],["m2019三2","5"],["m2019三3","5"],["m2019三4","5"],["m2019三5","5"],["m2019三6","5"],["m2019四1","5|5"],["m2019四2","4|3|3"],["m2019四3","3|3|2|2"]]},{"k":"2020","f":"模拟-2020.html","n":19,"mx":140,"q":[["m202011","5"],["m202012","5"],["m202013","5"],["m202014","5"],["m202015","5"],["m2020二1","10"],["m2020二2","10"],["m2020二3","10"],["m2020二4","10"],["m2020二5","5|5"],["m2020三1","5"],["m2020三2前","5"],["m2020三2后","5"],["m2020三3","5"],["m2020三4","5"],["m2020四1","10"],["m2020四2","10"],["m2020四3","10"],["m2020四4","10"]]},{"k":"2021","f":"模拟-2021.html","n":19,"mx":140,"q":[["m202111","5"],["m202112","5"],["m202113","5"],["m202114","5"],["m202115","5"],["m202116","5"],["m2021二1","4|3|3"],["m2021二2","5|5"],["m2021二3","5|5"],["m2021二4","10"],["m2021二5","5|5"],["m2021三1","5"],["m2021三2","5"],["m2021三3","5"],["m2021三4","5"],["m2021四1","5|5"],["m2021四2","5|5"],["m2021四3","10"],["m2021四4","4|3|3"]]},{"k":"2022","f":"模拟-2022.html","n":14,"mx":105,"q":[["m202211","5"],["m202212","5"],["m202213","5"],["m202214","5"],["m202215","5"],["m2022二1","5"],["m2022二2","5"],["m2022三1","10"],["m2022三2","10"],["m2022三3","10"],["m2022三4","10"],["m2022三5","10"],["m2022三6","10"],["m2022三7","10"]]},{"k":"2023","f":"模拟-2023.html","n":19,"mx":135,"q":[["m202311","5"],["m202312","5"],["m202313","5"],["m202314","5"],["m202315","5"],["m2023二1","10"],["m2023二2","5|5"],["m2023二3","5|5"],["m2023二4","4|3|3"],["m2023二5","4|3|3"],["m2023三1","5"],["m2023三2","5"],["m2023三3","5"],["m2023三4","5"],["m2023三5","5"],["m2023四1","10"],["m2023四2","5|5"],["m2023四3","5"],["m2023四4","4|3|3"]]},{"k":"2024","f":"模拟-2024.html","n":19,"mx":145,"q":[["m202411","5"],["m202412","5"],["m202413","5"],["m202414","5"],["m202415","5"],["m2024二1","10"],["m2024二2","10"],["m2024二3","10"],["m2024二4","5|5"],["m2024二5","5|5"],["m2024二6","5|5"],["m2024三1","5"],["m2024三2","5"],["m2024三3","5"],["m2024三4","5"],["m2024四1","10"],["m2024四2","10"],["m2024四3","3|3|2|2"],["m2024四4","10"]]},{"k":"2025","f":"模拟-2025.html","n":22,"mx":165,"q":[["m2025一1","5"],["m2025一2","5"],["m2025一3","5"],["m2025一4","5"],["m2025一5","5"],["m2025一6","3|2"],["m2025二1","5|5"],["m2025二2","5|5"],["m2025二3","10"],["m2025二4","4|3|3"],["m2025二5","4|3|3"],["m2025二6","5|5"],["m2025三1","5"],["m2025三2","5"],["m2025三3","5"],["m2025三4","5"],["m2025三5","5"],["m2025四1","10"],["m2025四2","5|5"],["m2025四3","5|5"],["m2025四4","4|3|3"],["m2025四5","4|3|3"]]},{"k":"2026","f":"模拟-2026.html","n":19,"mx":150,"q":[["m2026物1","5"],["m2026物2","5"],["m2026物3","5"],["m2026物4","5"],["m2026二1","12"],["m2026二2","12"],["m2026二3","4|4"],["m2026二4","8"],["m2026二5","8"],["m2026二6","10"],["m2026二7","6|6"],["m2026应1","5"],["m2026应2","5"],["m2026应3","5"],["m2026应4","5"],["m2026四1","10"],["m2026四2","10"],["m2026四3","10"],["m2026四4","5|5"]]},{"k":"组卷1","f":"模拟-组卷1.html","n":20,"mx":150,"q":[["m201812","5"],["m201914","5"],["m201915","5"],["m202115","5"],["m202413","5"],["m2016二4","4|3|3"],["m2018二3","10"],["m2019二1","10"],["m2019二3","10"],["m2021二1","4|3|3"],["m2021二3","5|5"],["m2018三2","5"],["m2018三4","5"],["m2019三1","5"],["m2019三4","5"],["m2021三2","5"],["m2018四1","10"],["m2018四2","10"],["m2019四2","4|3|3"],["m2024四4","10"]]},{"k":"组卷2","f":"模拟-组卷2.html","n":20,"mx":150,"q":[["m201611","5"],["m201911","5"],["m201913","5"],["m202014","5"],["m202114","5"],["m2017二1","10"],["m2017二2","5|5"],["m2020二2","10"],["m2021二5","5|5"],["m2024二4","5|5"],["m2024二6","5|5"],["m2016三2","5"],["m2017三3","5"],["m2021三3","5"],["m2023三1","5"],["m2024三2","5"],["m2016四1","10"],["m2017四2","10"],["m2020四4","10"],["m2021四1","5|5"]]}], Q = window.G851_Q || [], EXAM = "2026-12-19";
+  var DOCS = [{"f":"851-应用光学-简答与画图-p49-56.html","k":"g851-appo-qa-p4956","n":46,"t":"简答与画图（p49–56）"},{"f":"851-真题-2025-2026.html","k":"g851-zhenti-2526","n":41,"t":"2025 & 2026（补最近两年）"},{"f":"851-简答题-按章节.html","k":"g851-jt-mastered","n":68,"t":"简答题"},{"f":"851-计算题-应用光学-解析法.html","k":"g851-appo-parax-mastered","n":1,"t":"解析法"},{"f":"851-计算题-早年真题-合集.html","k":"g851-early-p1-mastered","n":71,"t":"早年真题 2009–2015"},{"f":"851-计算题-第10章-光学仪器.html","k":"g851-c10-mastered","n":12,"t":"第十章 光学仪器"},{"f":"851-计算题-第1章-电磁理论.html","k":"g851-c1-mastered","n":9,"t":"第一章 光的电磁理论基础"},{"f":"851-计算题-第2章-干涉.html","k":"g851-c2-mastered","n":10,"t":"第二章 光的干涉"},{"f":"851-计算题-第3章-衍射.html","k":"g851-c3-mastered","n":13,"t":"第三章 光的衍射"},{"f":"851-计算题-第4章-光在各向异性介质中的传播特性.html","k":"g851-c4-mastered","n":10,"t":"第四章 光在各向异性介质中的传播特性"},{"f":"851-计算题-第5章-感应双折射.html","k":"g851-c5-birefringence-mastered","n":4,"t":"第五章 晶体的感应双折射"},{"f":"851-计算题-第7章-几何光学.html","k":"g851-c7-geometric-mastered","n":9,"t":"第七章 几何光学基础"},{"f":"851-计算题-第8章-理想光学系统.html","k":"g851-c8-mastered","n":5,"t":"第八章 理想光学系统"},{"f":"851-计算题-第9章-光路计算.html","k":"g851-c9-mastered","n":6,"t":"第九章 光学系统像差基础和光路计算"}], PAPERS = [{"k":"2009","f":"模拟-2009.html","n":13,"mx":115,"q":[["m20091","10"],["m20092","10"],["m20093","10"],["m20094","5|5"],["m20095","10"],["m20096","5|5"],["m20097","10"],["m20098","4|3|3"],["m20099","5|5"],["m200911","4|3|3"],["m2009101","5"],["m2009102","5"],["m2009103","5"]]},{"k":"2010","f":"模拟-2010.html","n":13,"mx":125,"q":[["m20101","10"],["m20102","10"],["m20103","5|5"],["m20104","10"],["m20105","4|3|3"],["m20106","5|5"],["m20107","10"],["m20108","3|2"],["m20109","10"],["m201010","10"],["m201011","10"],["m201012","10"],["m201013","10"]]},{"k":"2011","f":"模拟-2011.html","n":14,"mx":125,"q":[["m20111","5|5"],["m20112","10"],["m20113","10"],["m20114","10"],["m20115","4|3|3"],["m20116","10"],["m20117","4|3|3"],["m20118","2|2|1"],["m201110","10"],["m201111","10"],["m201112","10"],["m201113","4|3|3"],["m201191","5"],["m201192","5"]]},{"k":"2012","f":"模拟-2012.html","n":14,"mx":125,"q":[["m20121","10"],["m20122","10"],["m20123","10"],["m20124","10"],["m20125","10"],["m20126","10"],["m20127","5|5"],["m20128","2|2|1"],["m201210","10"],["m201211","10"],["m201212","10"],["m201213","10"],["m201291","5"],["m201292","5"]]},{"k":"2013","f":"模拟-2013.html","n":15,"mx":125,"q":[["m201311","5"],["m201312","5"],["m20132","10"],["m20133","5|5"],["m20134","4|3|3"],["m20135","10"],["m20136","5|5"],["m20137","5|5"],["m20138","2|2|1"],["m201310","10"],["m201311","10"],["m201312","4|3|3"],["m201313","10"],["m201391","5"],["m201392","5"]]},{"k":"2014","f":"模拟-2014.html","n":16,"mx":130,"q":[["m201411","5"],["m201412","5"],["m201413","5"],["m20142","5|5"],["m20143","10"],["m20144","5|5"],["m20145","5|5"],["m20146","4|3|3"],["m20147","5|5"],["m20148","2|2|1"],["m201410","10"],["m201411","10"],["m201412","10"],["m201413","4|3|3"],["m201491","5"],["m201492","5"]]},{"k":"2015","f":"模拟-2015.html","n":15,"mx":120,"q":[["m201511","5"],["m201512","5"],["m201513","5"],["m201514","5"],["m201515","5"],["m20152","10"],["m20153","10"],["m20154","10"],["m20155","5|5"],["m20156","5|5"],["m20157","10"],["m20158","2|2|1"],["m20159","5|5"],["m201510","4|3|3"],["m201511","10"]]},{"k":"2016","f":"模拟-2016.html","n":18,"mx":135,"q":[["m201611","5"],["m201612","5"],["m201613","5"],["m201614","5"],["m201615","5"],["m2016二1","10"],["m2016二2","10"],["m2016二3","10"],["m2016二4","4|3|3"],["m2016二5","10"],["m2016三1","5"],["m2016三2","5"],["m2016三3","5"],["m2016三4","5"],["m2016四1","10"],["m2016四2","10"],["m2016四3","10"],["m2016四4","10"]]},{"k":"2017","f":"模拟-2017.html","n":19,"mx":140,"q":[["m201711","5"],["m201712","5"],["m201713","5"],["m201714","5"],["m201715","5"],["m2017二1","10"],["m2017二2","5|5"],["m2017二3","4|3|3"],["m2017二4","5|5"],["m2017二5","5|5"],["m2017三2","5"],["m2017三3","5"],["m2017三4","5"],["m2017三5","5"],["m2017三6","5"],["m2017四1","5|5"],["m2017四2","10"],["m2017四3","5|5"],["m2017四4","5|5"]]},{"k":"2018","f":"模拟-2018.html","n":18,"mx":130,"q":[["m201811","5"],["m201812","5"],["m201813","5"],["m201814","5"],["m201815","5"],["m2018二1","5|5"],["m2018二2","10"],["m2018二3","10"],["m2018二4","5|5"],["m2018二5","5|5"],["m2018三1前","5"],["m2018三1后","5"],["m2018三2","5"],["m2018三3","5"],["m2018三4","5"],["m2018四1","10"],["m2018四2","10"],["m2018四3","10"]]},{"k":"2019","f":"模拟-2019.html","n":19,"mx":135,"q":[["m201911","5"],["m201912","5"],["m201913","5"],["m201914","5"],["m201915","5"],["m2019二1","10"],["m2019二2","10"],["m2019二3","10"],["m2019二4","4|3|3"],["m2019二5","4|3|3"],["m2019三1","5"],["m2019三2","5"],["m2019三3","5"],["m2019三4","5"],["m2019三5","5"],["m2019三6","5"],["m2019四1","5|5"],["m2019四2","4|3|3"],["m2019四3","3|3|2|2"]]},{"k":"2020","f":"模拟-2020.html","n":19,"mx":140,"q":[["m202011","5"],["m202012","5"],["m202013","5"],["m202014","5"],["m202015","5"],["m2020二1","10"],["m2020二2","10"],["m2020二3","10"],["m2020二4","10"],["m2020二5","5|5"],["m2020三1","5"],["m2020三2前","5"],["m2020三2后","5"],["m2020三3","5"],["m2020三4","5"],["m2020四1","10"],["m2020四2","10"],["m2020四3","10"],["m2020四4","10"]]},{"k":"2021","f":"模拟-2021.html","n":19,"mx":140,"q":[["m202111","5"],["m202112","5"],["m202113","5"],["m202114","5"],["m202115","5"],["m202116","5"],["m2021二1","4|3|3"],["m2021二2","5|5"],["m2021二3","5|5"],["m2021二4","10"],["m2021二5","5|5"],["m2021三1","5"],["m2021三2","5"],["m2021三3","5"],["m2021三4","5"],["m2021四1","5|5"],["m2021四2","5|5"],["m2021四3","10"],["m2021四4","4|3|3"]]},{"k":"2022","f":"模拟-2022.html","n":14,"mx":105,"q":[["m202211","5"],["m202212","5"],["m202213","5"],["m202214","5"],["m202215","5"],["m2022二1","5"],["m2022二2","5"],["m2022三1","10"],["m2022三2","10"],["m2022三3","10"],["m2022三4","10"],["m2022三5","10"],["m2022三6","10"],["m2022三7","10"]]},{"k":"2023","f":"模拟-2023.html","n":19,"mx":135,"q":[["m202311","5"],["m202312","5"],["m202313","5"],["m202314","5"],["m202315","5"],["m2023二1","10"],["m2023二2","5|5"],["m2023二3","5|5"],["m2023二4","4|3|3"],["m2023二5","4|3|3"],["m2023三1","5"],["m2023三2","5"],["m2023三3","5"],["m2023三4","5"],["m2023三5","5"],["m2023四1","10"],["m2023四2","5|5"],["m2023四3","5"],["m2023四4","4|3|3"]]},{"k":"2024","f":"模拟-2024.html","n":19,"mx":145,"q":[["m202411","5"],["m202412","5"],["m202413","5"],["m202414","5"],["m202415","5"],["m2024二1","10"],["m2024二2","10"],["m2024二3","5|5"],["m2024二4","5|5"],["m2024二5","5|5"],["m2024二6","5|5"],["m2024三1","5"],["m2024三2","5"],["m2024三3","5"],["m2024三4","5"],["m2024四1","10"],["m2024四2","10"],["m2024四3","3|3|2|2"],["m2024四4","10"]]},{"k":"2025","f":"模拟-2025.html","n":22,"mx":165,"q":[["m2025一1","5"],["m2025一2","5"],["m2025一3","5"],["m2025一4","5"],["m2025一5","5"],["m2025一6","3|2"],["m2025二1","5|5"],["m2025二2","5|5"],["m2025二3","10"],["m2025二4","4|3|3"],["m2025二5","4|3|3"],["m2025二6","5|5"],["m2025三1","5"],["m2025三2","5"],["m2025三3","5"],["m2025三4","5"],["m2025三5","5"],["m2025四1","10"],["m2025四2","5|5"],["m2025四3","5|5"],["m2025四4","4|3|3"],["m2025四5","4|3|3"]]},{"k":"2026","f":"模拟-2026.html","n":19,"mx":150,"q":[["m2026物1","5"],["m2026物2","5"],["m2026物3","5"],["m2026物4","5"],["m2026二1","12"],["m2026二2","12"],["m2026二3","4|4"],["m2026二4","8"],["m2026二5","8"],["m2026二6","10"],["m2026二7","6|6"],["m2026应1","5"],["m2026应2","5"],["m2026应3","5"],["m2026应4","5"],["m2026四1","10"],["m2026四2","10"],["m2026四3","10"],["m2026四4","5|5"]]},{"k":"组卷1","f":"模拟-组卷1.html","n":20,"mx":150,"q":[["m201812","5"],["m201914","5"],["m201915","5"],["m202115","5"],["m202413","5"],["m2016二4","4|3|3"],["m2018二3","10"],["m2019二1","10"],["m2019二3","10"],["m2021二1","4|3|3"],["m2021二3","5|5"],["m2018三2","5"],["m2018三4","5"],["m2019三1","5"],["m2019三4","5"],["m2021三2","5"],["m2018四1","10"],["m2018四2","10"],["m2019四2","4|3|3"],["m2024四4","10"]]},{"k":"组卷2","f":"模拟-组卷2.html","n":20,"mx":150,"q":[["m201611","5"],["m201911","5"],["m201913","5"],["m202014","5"],["m202114","5"],["m2016二5","10"],["m2017二1","10"],["m2017二2","5|5"],["m2020二2","10"],["m2021二5","5|5"],["m2024二4","5|5"],["m2016三2","5"],["m2017三3","5"],["m2021三3","5"],["m2023三1","5"],["m2024三2","5"],["m2016四1","10"],["m2017四2","10"],["m2020四4","10"],["m2021四1","5|5"]]}], Q = window.G851_Q || [], EXAM = "2026-12-19";
   var PFX = "g851-mock2-";
   function jget(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } }
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -340,20 +359,10 @@
   }
 })();
 </script>
-  <div class="quick">
-    <!--RECCENTER--><a href="记录.html">记录中心 →</a>
-    <!--DRILLPAGE--><a href="专项卷.html">专项卷 →</a>
-    <!--TOPICPAGE--><a href="考点.html">按考点 →</a>
-    <!--STARPAGE--><a href="收藏.html">收藏夹 →</a>
-    <a href="按年份.html">按年份看真题 →</a>
-    <a href="搜索.html">搜索题库 →</a>
-    <a href="公式墙.html">公式墙 →</a>
-    <a href="按年份.html">整卷模拟 →</a>
-  </div>
   <div class="grid">
     <a class="card" href="851-应用光学-简答与画图-p49-56.html">
       <div class="ct">851 应用光学 · 简答与画图（p49–56）</div>
-      <div class="cm"><b>46</b> 题 · 2010–2024 · 38 图</div>
+      <div class="cm"><b>46</b> 题 · 2010–2024 · 49 图</div>
     </a>
     <a class="card" href="851-真题-2025-2026.html">
       <div class="ct">851 真题 · 2025 &amp; 2026（补最近两年）</div>
@@ -373,7 +382,7 @@
     </a>
     <a class="card" href="851-计算题-第10章-光学仪器.html">
       <div class="ct">851 计算题 · 第十章 光学仪器</div>
-      <div class="cm"><b>12</b> 题 · 2016–2024 · 0 图</div>
+      <div class="cm"><b>12</b> 题 · 2016–2024 · 1 图</div>
     </a>
     <a class="card" href="851-计算题-第1章-电磁理论.html">
       <div class="ct">851 计算题 · 第一章 光的电磁理论基础</div>
@@ -389,11 +398,11 @@
     </a>
     <a class="card" href="851-计算题-第4章-光在各向异性介质中的传播特性.html">
       <div class="ct">851 计算题 · 第四章 光在各向异性介质中的传播特性</div>
-      <div class="cm"><b>10</b> 题 · 2016–2024 · 9 图</div>
+      <div class="cm"><b>10</b> 题 · 2016–2024 · 11 图</div>
     </a>
     <a class="card" href="851-计算题-第5章-感应双折射.html">
       <div class="ct">851 计算题 · 第五章 晶体的感应双折射</div>
-      <div class="cm"><b>4</b> 题 · 2017–2024 · 4 图</div>
+      <div class="cm"><b>4</b> 题 · 2017–2024 · 5 图</div>
     </a>
     <a class="card" href="851-计算题-第7章-几何光学.html">
       <div class="ct">851 计算题 · 第七章 几何光学基础</div>
@@ -439,10 +448,101 @@
 @media print{#errb{display:none}}
 </style>
 <a id="errb" href="错题本.html" title="错题本">错题本</a>
+
+<style id="g851-rail-style">
+/* 非高频模块收进右上角菜单：页面里不再重复摆按钮（菜单内的链接不受影响） */
+body a[href="收藏.html"],body a[href="专项卷.html"],body a[href="记录.html"],
+body a[href="考点.html"]{display:none!important}
+body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
+#g851-rail a{display:block!important}
+@media (hover:hover){body #errb{display:none!important}}
+
+#g851-rail{position:fixed;top:10px;right:10px;z-index:47;
+ font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif}
+#g851-rail .tab{width:32px;height:32px;padding:0;border:1px solid var(--line,#e3dfd7);border-radius:10px;
+ background:rgba(255,255,255,.9);color:#6d3d24;cursor:pointer;display:flex;align-items:center;
+ justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08);-webkit-tap-highlight-color:transparent;
+ transition:background .15s,box-shadow .15s}
+#g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+#g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
+#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+ border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
+ transition:opacity .16s ease,transform .16s ease,visibility .16s}
+#g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+#g851-rail .grp{padding:9px 14px 3px;font-size:11px;letter-spacing:1.5px;color:#a9958a}
+#g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
+#g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
+#g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
+ color:#9a9a9a;font-size:11.5px;line-height:1.5}
+#g851-rail .rf b{color:#6d3d24;font-weight:600}
+@media print{#g851-rail{display:none!important}}
+@media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
+ #g851-rail nav{width:200px;top:38px}}
+</style>
+
+<div id="g851-rail" aria-label="更多模块">
+  <button class="tab" type="button" aria-expanded="false" aria-label="更多模块" title="更多模块（悬停或点一下）">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav>
+    <div class="grp">复习</div>
+    <a href="错题本.html">错题本</a>
+    <a href="收藏.html">收藏夹</a>
+    <a href="专项卷.html">专项卷</a>
+    <div class="grp">资料</div>
+    <a href="按年份.html">按年份 / 整卷</a>
+    <a href="搜索.html">搜索题库</a>
+    <a href="考点.html">按考点</a>
+    <a href="公式墙.html">公式墙</a>
+    <a href="专题-双缝条纹平移.html">双缝平移速记</a>
+    <div class="grp">记录</div>
+    <a href="记录.html">记录中心</a>
+    <div class="rf">当前：<b class="cur-page">—</b></div>
+  </nav>
+</div>
+<script>
+/* G851_RAIL_JS */
+(function(){
+  var el = document.getElementById('g851-rail');
+  if (!el || el.getAttribute('data-init')) return;
+  el.setAttribute('data-init', '1');
+  var tab = el.querySelector('.tab'), openT = null, closeT = null;
+  function open(){ clearTimeout(closeT); el.classList.add('open'); tab.setAttribute('aria-expanded','1'); }
+  function close(){ el.classList.remove('open'); tab.setAttribute('aria-expanded','0'); }
+  tab.addEventListener('mouseenter', function(){
+    clearTimeout(openT);
+    openT = setTimeout(function(){ if (tab.matches(':hover')) open(); }, 150);
+  });
+  tab.addEventListener('mouseleave', function(){ clearTimeout(openT); });
+  el.addEventListener('mouseleave', function(){ closeT = setTimeout(close, 350); });
+  el.addEventListener('mouseenter', function(){ clearTimeout(closeT); });
+  tab.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (el.classList.contains('open')) close(); else open();
+  });
+  document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') close();
+    else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
+      e.preventDefault(); el.classList.contains('open') ? close() : open();
+    }
+  });
+  var here = decodeURIComponent((location.pathname.split('/').pop() || 'index.html'));
+  Array.prototype.forEach.call(el.querySelectorAll('a'), function(a){
+    if (a.getAttribute('href') === here) a.classList.add('cur');
+  });
+  var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
+    .filter(function(s){ return s && s !== '851'; });
+  el.querySelector('.cur-page').textContent = parts[0] || here;
+})();
+</script>
 <!-- G851_BG_V3_HTML_START -->
 <div id="g851-bg" aria-hidden="true"></div>
 <div id="g851-bgc">
- <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
  <div class="naiwa-bg-panel" id="naiwa-bg-panel">
    <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
    <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">

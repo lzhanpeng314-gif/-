@@ -85,6 +85,11 @@
     .fcard,.ans{box-shadow:none;}
   }
   .pr{margin-left:.05em;font-style:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em}
+  details.fold{margin:9px 0;border:1px dashed var(--line);border-radius:5px;padding:5px 11px;background:#fdfcf8;}
+  details.fold>summary{cursor:pointer;font-size:12.5px;color:var(--mut);outline:none;user-select:none;}
+  details.fold>summary::marker{content:"▸ ";}
+  details.fold[open]>summary::marker{content:"▾ ";}
+  details.fold>summary+b,details.fold>summary+p{margin-top:6px;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#8c4a2f">
@@ -94,7 +99,7 @@
 
 <!-- G851_BG_V3_CSS_START -->
 <style id="g851-bg-style">
-/* 奶娃 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
+/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
 #g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
 #g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
 #g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
@@ -210,6 +215,11 @@
 
 <div class="lead">屈光度 Φ = 1/<i>f</i><span class="pr">′</span>（<i>f</i><span class="pr">′</span> 用 m）。远视眼配正透镜、近视眼配负透镜；判据永远是"物在明视距离 25 cm，像落在近点/远点"。</div>
 
+
+<div class="kcard">
+<div class="kh">A · 光学仪器五条公式（放大镜/显微镜/望远镜/光阑/景深）</div>
+<ul class="k"><li><b>放大镜</b>：Γ = 250/<i>f</i>′（明视距离 250 mm）；眼在 <i>F</i>′ 时视场最大。</li><li><b>显微镜</b>：Γ = (Δ/<i>f</i><sub>o</sub>′)(250/<i>f</i><sub>e</sub>′)；分辨 δ = <b>0.61λ/NA</b>（NA = <i>n</i>sin<i>U</i>）；<b>有效放大率 500NA ~ 1000NA</b>（分辨极限的像对人眼张 2′~4′）—— 比它小是「看不清」、比它大是「无效放大」。</li><li><b>望远镜</b>：Γ = −<i>f</i><sub>o</sub>′/<i>f</i><sub>e</sub>′；分辨 α = 1.22λ/<i>D</i>；<b>正常（有效）放大率 Γ ≈ <i>D</i>/2.3</b>（<i>D</i> 以 mm 计）—— 2009-11 那道题就是把它和 1.22λ/<i>D</i> 判据联立。</li><li><b>光阑</b>：孔径光阑定 <i>U</i>、视场光阑定视场；<b>入窗 = 视场光阑经其前方系统所成的像</b>，物方视场角 2ω = 入窗直径/入窗距离。把视场光阑放在<b>物镜像方焦面</b>即消除渐晕。</li><li><b>景深</b>：<i>p</i><sub>1</sub> = <i>pf</i>′²/(<i>f</i>′²−<i>Fzp</i>)、<i>p</i><sub>2</sub> = <i>pf</i>′²/(<i>f</i>′²+<i>Fzp</i>)；后景深无限 ⇔ <i>Fz p</i> = <i>f</i>′²。教材版 <i>D</i>/ε 写法见 Ch10 与简答题 2022-1(4)。</li></ul><p style="margin:4px 0 0"><b>曲光度</b>：Φ = 1/<i>f</i>′（m⁻¹，D）；配镜 <i>f</i>′ = 1/Φ。</p>
+</div>
 <div class="q" id="q001">
   <div class="hd"><span class="tag">2017-四-4</span><span class="ttl">5 m 内看不清要配多少度；近拍镜把最近拍摄距离推到多远</span></div>
   <div class="stem">一个人眼看不清楚 5m 以内的物体，如果校正时应该佩戴眼镜的屈光度为多少？某照相机可拍摄的最近距离为 1m，装上 2 个屈光度（<i>f</i> = 500mm）的近拍镜后，能拍摄的最近距离是多少（近拍镜与照相机镜头的间距可忽略）？<span class="qp" data-n="2"></span></div>
@@ -521,6 +531,7 @@
   <div class="hd"><span class="tag">2020-四-4</span><span class="ttl">三片镜中选两片＋一个光阑，设计无渐晕望远镜</span></div>
   <div class="stem">现有焦距分别为 −10mm、10mm 和 200mm 的三个薄透镜和一个光阑，试用其中的两个薄透镜和光阑设计一个无渐晕的望远镜系统：画出光学系统的结构图；该系统的视角放大率为多少；如果要使物方全视场角为 2°，问光阑的孔径应该为多大？</div>
   <div class="ans">
+    <details class="figbox" open><summary>图</summary><figure><img src="img/3286fde739a5.jpg" alt="物镜 200mm + 视场光阑 + 目镜 10mm 的开普勒望远镜结构" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>规范结构图（2020 答案册 p131 原图）</b>：物镜（<i>f</i><sub>o</sub>′ = 200 mm）—— 视场光阑（置物镜像方焦面，即公共焦面）—— 目镜（<i>f</i><sub>e</sub>′ = 10 mm）；间隔 200 + 10 = 210 mm。</figcaption></figure></details>
     <div class="step"><b class="n">1</b><b>选型</b>：要"无渐晕"，光阑必须放在中间实像面（物镜像方焦面 = 目镜物方焦面）。伽利略式（+200 配 −10）没有实中间像，放不了 ➜ 只能取<b>开普勒式</b>
       <div class="eqb">物镜 <i>f</i><sub>o</sub><span class="pr">′</span> = 200 mm，目镜 <i>f</i><sub>e</sub><span class="pr">′</span> = 10 mm，　<i>d</i> = 200 + 10 = <b>210 mm</b></div>
     </div>
@@ -538,7 +549,7 @@
         ● = 视场光阑 φ6.98 mm，置于公共焦面（物镜后 200 mm）
       </div>
     </div>
-    <div class="res">物镜 <b>200 mm</b> + 目镜 <b>10 mm</b>，间隔 <b>210 mm</b>（开普勒式）；Γ = <b>−20×</b>；光阑置于公共焦面、孔径 <b>6.98 mm ≈ 7.0 mm</b>。这样轴上与 1° 视场的光束都不会被别的框切掉，即无渐晕。</div>
+    <div class="res">物镜 <b>200 mm</b> + 目镜 <b>10 mm</b>，间隔 <b>210 mm</b>（开普勒式）；Γ = <b>−20×</b>；光阑置于公共焦面、孔径 <b>6.98 mm ≈ 7.0 mm</b>。（2020 答案册 p131 取 tan1° ≈ 0.0175 得 <b>7 mm</b>，同一结果。）<br><b>关于「无渐晕」的成立范围（别写太满）</b>：题目<b>没有给三片镜的通光口径</b>，所以只能按教材 p190 的<b>消渐晕条件</b>——把视场光阑放在物镜焦面上——来认定；严格是否被别的框切光，需要各框口径都给定才能验算。答题时补一句「并要求物镜、目镜口径不小于该视场所需的光束宽度」最稳。</div>
     <div class="warn"><b>为什么不能选 −10 与 200 组合</b>：伽利略式的出射光无中间实像，视场光阑只能贴在物镜或目镜上，轴外光束必然被切 → 一定渐晕。这正是本题"无渐晕"三个字的考点。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
@@ -547,7 +558,7 @@
 <div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
   <p><b>第 81 页就是 PDF 的最后一页</b>，本文件覆盖的是第 72–81 页，<b>该章内容已完整</b>（第 81 页最后一题为 <b>2020-四-4</b>，已是全文档最后一题）。</p>
   <p><b>未收录</b>（2016 年以前，按规则跳过）：2013-12 放大镜（第 72 页）、2015-10 放大镜（第 73 页）、2010-13 显微镜（第 74 页）、2012-13 显微镜视角放大率与分辨本领（第 75 页）、2015-11 显微镜（第 76 页）、2013-13 显微镜（第 76 页）、2012-12 景深（第 78 页）、2014-12 高斯公式·近拍镜（第 78 页）、2009-11 望远镜（第 79 页）、2011-13 人眼·望远镜（第 80 页）、2014-13 望远镜（第 81 页）。</p>
-  <p><b>已知局限</b>：① 全部结果为教材推导（【自算】），未与机构答案册逐题比对；② 2016-四-2 的"60″"按人眼分辨角处理（原题表述有误，已在题内注出）；③ 2019-四-2、2023-四-4 的角分辨率/像位置若换用别的波长或符号约定，末位数字会变，公式本身不变。</p>
+  
 </div>
 
 </div>
@@ -863,7 +874,10 @@
     var tag = q.querySelector('.tag'), ttl = q.querySelector('.ttl'), stem = q.querySelector('.stem'),
         ans = q.querySelector('.ans');
     elIdx.textContent = (tag ? tag.textContent.trim() : '') + (ttl ? '　' + ttl.textContent.trim() : '');
-    elStem.innerHTML = stem ? stem.innerHTML : '';
+    elStem.innerHTML = (stem ? stem.innerHTML : '') + (function(){
+      var f = q.querySelector('details.figbox');   /* 题干里的插图也要带出来，否则只看到"如图所示" */
+      return f ? f.outerHTML : '';
+    })();
     elAns.innerHTML = ans ? ans.innerHTML : '<p>（本题无答案区）</p>';
     elAns.classList.remove('on');
     document.getElementById('qshow').textContent = '显示答案';
@@ -1207,10 +1221,101 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   });
 })();
 </script>
+
+<style id="g851-rail-style">
+/* 非高频模块收进右上角菜单：页面里不再重复摆按钮（菜单内的链接不受影响） */
+body a[href="收藏.html"],body a[href="专项卷.html"],body a[href="记录.html"],
+body a[href="考点.html"]{display:none!important}
+body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
+#g851-rail a{display:block!important}
+@media (hover:hover){body #errb{display:none!important}}
+
+#g851-rail{position:fixed;top:10px;right:10px;z-index:47;
+ font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif}
+#g851-rail .tab{width:32px;height:32px;padding:0;border:1px solid var(--line,#e3dfd7);border-radius:10px;
+ background:rgba(255,255,255,.9);color:#6d3d24;cursor:pointer;display:flex;align-items:center;
+ justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08);-webkit-tap-highlight-color:transparent;
+ transition:background .15s,box-shadow .15s}
+#g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+#g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
+#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+ border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
+ transition:opacity .16s ease,transform .16s ease,visibility .16s}
+#g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+#g851-rail .grp{padding:9px 14px 3px;font-size:11px;letter-spacing:1.5px;color:#a9958a}
+#g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
+#g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
+#g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
+ color:#9a9a9a;font-size:11.5px;line-height:1.5}
+#g851-rail .rf b{color:#6d3d24;font-weight:600}
+@media print{#g851-rail{display:none!important}}
+@media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
+ #g851-rail nav{width:200px;top:38px}}
+</style>
+
+<div id="g851-rail" aria-label="更多模块">
+  <button class="tab" type="button" aria-expanded="false" aria-label="更多模块" title="更多模块（悬停或点一下）">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav>
+    <div class="grp">复习</div>
+    <a href="错题本.html">错题本</a>
+    <a href="收藏.html">收藏夹</a>
+    <a href="专项卷.html">专项卷</a>
+    <div class="grp">资料</div>
+    <a href="按年份.html">按年份 / 整卷</a>
+    <a href="搜索.html">搜索题库</a>
+    <a href="考点.html">按考点</a>
+    <a href="公式墙.html">公式墙</a>
+    <a href="专题-双缝条纹平移.html">双缝平移速记</a>
+    <div class="grp">记录</div>
+    <a href="记录.html">记录中心</a>
+    <div class="rf">当前：<b class="cur-page">—</b></div>
+  </nav>
+</div>
+<script>
+/* G851_RAIL_JS */
+(function(){
+  var el = document.getElementById('g851-rail');
+  if (!el || el.getAttribute('data-init')) return;
+  el.setAttribute('data-init', '1');
+  var tab = el.querySelector('.tab'), openT = null, closeT = null;
+  function open(){ clearTimeout(closeT); el.classList.add('open'); tab.setAttribute('aria-expanded','1'); }
+  function close(){ el.classList.remove('open'); tab.setAttribute('aria-expanded','0'); }
+  tab.addEventListener('mouseenter', function(){
+    clearTimeout(openT);
+    openT = setTimeout(function(){ if (tab.matches(':hover')) open(); }, 150);
+  });
+  tab.addEventListener('mouseleave', function(){ clearTimeout(openT); });
+  el.addEventListener('mouseleave', function(){ closeT = setTimeout(close, 350); });
+  el.addEventListener('mouseenter', function(){ clearTimeout(closeT); });
+  tab.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (el.classList.contains('open')) close(); else open();
+  });
+  document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') close();
+    else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
+      e.preventDefault(); el.classList.contains('open') ? close() : open();
+    }
+  });
+  var here = decodeURIComponent((location.pathname.split('/').pop() || 'index.html'));
+  Array.prototype.forEach.call(el.querySelectorAll('a'), function(a){
+    if (a.getAttribute('href') === here) a.classList.add('cur');
+  });
+  var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
+    .filter(function(s){ return s && s !== '851'; });
+  el.querySelector('.cur-page').textContent = parts[0] || here;
+})();
+</script>
 <!-- G851_BG_V3_HTML_START -->
 <div id="g851-bg" aria-hidden="true"></div>
 <div id="g851-bgc">
- <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶娃背景</button>
+ <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
  <div class="naiwa-bg-panel" id="naiwa-bg-panel">
    <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
    <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
