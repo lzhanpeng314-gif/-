@@ -260,7 +260,9 @@ function render(){
     keep[tag].forEach(function(it, i){
       kh.push('<div class="card" data-tag="' + esc(tag) + '" data-i="' + i + '">'
         + '<div class="hd"><span class="tag">' + esc(tag) + '</span>'
-        + '<span class="vt' + (it.verdict === '站内可能有错' ? ' bad' : '') + '">' + esc(it.verdict || '未判定') + '</span>'
+        + (it.verdict && it.verdict !== '未判定'
+            ? '<span class="vt' + (it.verdict === '站内可能有错' ? ' bad' : '') + '">' + esc(it.verdict) + '</span>'
+            : '')
         + '<span class="meta">手动保留 · ' + esc(it.at || '') + ' · ' + esc(it.mode || '') + ' · ' + esc(it.model || '') + '</span></div>'
         + '<pre>' + esc(it.text || '') + '</pre>'
         + '<div class="ops"><button class="copy">复制</button><button class="del">删除</button></div></div>');

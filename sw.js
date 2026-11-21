@@ -1,4 +1,4 @@
-const CACHE = 'g851-inline-edb6bee1';
+const CACHE = 'g851-inline-cd5c616a';
 const CORE = [
  "./",
  "index.html",
