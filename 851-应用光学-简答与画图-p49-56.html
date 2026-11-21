@@ -103,23 +103,145 @@
   details.fold>summary+b,details.fold>summary+p{margin-top:6px;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#8c4a2f">
-
-
-
-
-<!-- G851_BG_V3_CSS_START -->
+<meta name="theme-color" content="#8c4a2f"><script>/*G851_THEME_EARLY*/
+(function(){
+  try {
+    var d = document.documentElement;
+    var t = localStorage.getItem('g851-theme');
+    if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    if (t === 'dark') d.setAttribute('data-theme', 'dark');
+    var f = localStorage.getItem('g851-fs');
+    if (f) d.setAttribute('data-fs', f);
+    /* 打卡：今天第一次打开就记一天（放在 head，保证首页看板首屏就能读到） */
+    var A = 'g851-active', arr = JSON.parse(localStorage.getItem(A) || '[]') || [];
+    var n = new Date();
+    var td = n.getFullYear() + '-' + ('0' + (n.getMonth() + 1)).slice(-2) + '-' + ('0' + n.getDate()).slice(-2);
+    if (arr.length === 0 || arr[arr.length - 1] !== td) {
+      arr.push(td);
+      if (arr.length > 400) arr = arr.slice(-400);
+      localStorage.setItem(A, JSON.stringify(arr));
+    }
+  } catch(e){}
+})();
+</script><!-- G851_BG_V3_CSS_START -->
 <style id="g851-bg-style">
-/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
-#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+/* 奶蛙 v3 阅读优化：只调整背景/正文显示层，不改题目、公式、答案和交互数据。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.06);contain:layout paint;
+ /* 侧边装饰保留；中央正文后方显著淡化。 */
+ -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+ mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+}
+/* 由原视频逐帧抠图的透明动画，独立于静态奶蛙；始终在正文层之后，不阻挡任何点击。 */
+#g851-motion-actor{position:fixed;right:max(12px,calc((100vw - 1024px)/2 - 220px));bottom:2vh;
+ width:clamp(150px,18vw,240px);aspect-ratio:300/407;z-index:-1;pointer-events:none;
+ opacity:var(--g851-motion-alpha,.22);user-select:none;}
+#g851-motion-actor img{display:block;width:100%;height:100%;object-fit:contain;}
+@media(max-width:780px){#g851-motion-actor{width:114px;right:-10px;bottom:8vh;
+ opacity:calc(var(--g851-motion-alpha,.22) * .55);}}
+@media print{#g851-motion-actor{display:none!important}}
+/* 阅读保护层只作用于 body 的顶层正文容器，不碰题目及公式内部子元素。 */
+html.g851-reading body > .wrap,
+html.g851-reading body > .wr,
+html.g851-reading body > main,
+html.g851-reading body > article{
+ position:relative;
+ background-color:rgba(255,255,255,.985)!important;
+ border-radius:14px;
+ box-shadow:0 0 0 1px rgba(94,78,60,.08),0 8px 28px rgba(60,49,35,.045);
+}
+@media(max-width:780px){
+ /* 窄屏阅读面积更大，不刻意在中间挖出一条渐变。 */
+ #g851-bg{-webkit-mask-image:none;mask-image:none;}
+ html.g851-reading body > .wrap,html.g851-reading body > .wr,
+ html.g851-reading body > main,html.g851-reading body > article{border-radius:0;box-shadow:none;}
+}
+/* ===== 851 阅读 UI 增强：仅针对章节真题页的现有结构，不重排 DOM、不触碰评分逻辑 ===== */
+/* 顶层正文板块已经使用 g851-reading 白底；本层只负责内部信息层级。 */
+html.g851-ui:not(.g851-exam) body > .wrap > h1{
+ color:#263a2e;letter-spacing:.012em;line-height:1.4;
+ text-wrap:balance;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .sub{
+ color:#647168;line-height:1.7;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > h2{
+ color:#345a43;
+ padding:11px 14px;
+ margin-top:27px;margin-bottom:15px;
+ background:linear-gradient(90deg,rgba(236,244,238,.95),rgba(255,255,255,0));
+ border-left:4px solid #7e9e86;
+ border-bottom:1px solid rgba(94,124,101,.14);
+ border-radius:7px 0 0 7px;
+ line-height:1.5;
+}
+/* 直接子元素保证只美化题库正文；不会误伤浮窗、目录和专项卷组件。 */
+html.g851-ui:not(.g851-exam) body > .wrap > .q{
+ position:relative;background:#fff;
+ border:1px solid #e1e8e0;
+ border-left:3px solid #a2baa6;
+ border-radius:12px;
+ padding:20px 22px;
+ margin-bottom:18px;
+ box-shadow:0 3px 13px rgba(35,67,45,.045);
+ scroll-margin-top:100px;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q:target{
+ border-color:#789983;
+ box-shadow:0 0 0 2px rgba(121,164,130,.13),0 4px 15px rgba(35,67,45,.07);
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{
+ color:#24332a;
+ font-size:16.5px;
+ line-height:1.86;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{
+ background:#f7faf7;
+ border:1px solid #e4ede5;
+ border-left:3px solid #92b09a;
+ border-radius:8px;
+ padding:14px 17px;
+ margin-top:14px;
+ color:#293b30;
+ line-height:1.83;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans .eqb{
+ max-width:100%;overflow-x:auto;overflow-y:hidden;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q img{
+ max-width:100%;height:auto;
+}
+@media(max-width:780px){
+ html.g851-ui:not(.g851-exam) body > .wrap > h2{padding:9px 11px;margin-top:20px;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q{
+  padding:15px 14px;border-radius:9px;margin-bottom:13px;
+  box-shadow:0 1px 5px rgba(35,67,45,.025);
+ }
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{font-size:16px;line-height:1.78;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{padding:11px 12px;line-height:1.76;}
+}
+@media print{
+ html.g851-ui body > .wrap > .q{box-shadow:none!important;}
+}
+/* ===== 阅读 UI 增强结束 ===== */
 #g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
 #g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
 #g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
 #g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
-#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+/* 每张造型按图集 metadata 独立设定眼睛位置；原版单瞳孔行为不变。 */
+#g851-bg .naiwa-eye{position:absolute;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
  transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
  transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+/* 思考奶蛙两眼原图带固定瞳孔：先盖住静态瞳孔，只让黑色动态瞳孔移动。 */
+#g851-bg .naiwa-eye--masked{overflow:hidden;transform:translate(-50%,-50%);box-shadow:none;
+ background:radial-gradient(ellipse at 42% 37%,var(--iris-light,#b1cb9a) 0%,
+ var(--iris-mid,#9fbe84) 55%,var(--iris-dark,#849d65) 96%,rgba(130,157,100,0) 100%);}
+#g851-bg .naiwa-eye-dot{display:block;position:absolute;left:50%;top:50%;border-radius:50%;
+ background:radial-gradient(ellipse at 39% 34%,#17231a 0%,#080f09 60%,#010402 90%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -1px -1px 3px rgba(0,0,0,.3);}
 @keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
 @keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
 @keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
@@ -134,6 +256,9 @@
 #g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
  font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
 #g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+#g851-bgc .naiwa-quick-toggle[aria-pressed="false"]{background:rgba(246,247,245,.96);color:#68746a;border-color:#d7e0d8;}
+#g851-bgc .naiwa-quick-toggle:focus-visible,#g851-bgc .naiwa-bg-button:focus-visible{outline:2px solid #638e76;outline-offset:2px;}
 #g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
 #g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
  background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
@@ -141,6 +266,8 @@
 #g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
 #g851-bgc .naiwa-row label{cursor:pointer;}
 #g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc #g851-bga3{width:75px;max-width:75px;accent-color:#aa795c;}
+#g851-bgc #g851-bga4{font-variant-numeric:tabular-nums;min-width:29px;text-align:right;}
 #g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
 #g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
 @media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
@@ -189,7 +316,7 @@
 <div class="lead">七年里问了六次。核心只有一句：<b>物点发出的所有光线到像点的光程相等</b>；轴外点再加正弦条件。</div>
 
 <div class="q" id="q001">
-  <div class="hd"><span class="tag">2017-三-2</span><span class="ttl">什么是完善像？系统成完善的条件？</span></div>
+  <div class="hd"><span class="tag">2017-三-2</span><span class="ttl">什么是完善像？系统成完善的条件？</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2017-三-2" data-ai-title="什么是完善像？系统成完善的条件？" title="AI 讲这题">AI</button></div>
   <div class="stem">什么是光学系统的完善像，光学系统成完善的条件是什么？</div>
   <div class="ans">
     <p><b>完善像</b>：由同一物点发出的所有光线，经系统后都交于同一点（点对点成像），像面上得到清晰的点像，称该像点为物点的完善像。等价说法：系统把发散的球面波变换成会聚的球面波。</p>
@@ -204,7 +331,7 @@
 </div>
 
 <div class="q" id="q002">
-  <div class="hd"><span class="tag">2018-三-1（前）</span><span class="ttl">完善成像条件</span></div>
+  <div class="hd"><span class="tag">2018-三-1（前）</span><span class="ttl">完善成像条件</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2018-三-1（前）" data-ai-title="完善成像条件" title="AI 讲这题">AI</button></div>
   <div class="stem">光学系统的完善的成像条件是什么？</div>
   <div class="ans">
     <p>物点与像点之间所有光线的<b>光程相等</b>（等光程条件），即实际波面为以像点为中心的球面；对轴外点还要满足<b>正弦条件</b>，保证宽光束无彗差。同时满足这两条的系统称为<b>理想光学系统</b>。</p>
@@ -214,7 +341,7 @@
 </div>
 
 <div class="q" id="q003">
-  <div class="hd"><span class="tag">2019-三-1</span><span class="ttl">完善条件；无穷远物点经单一曲面反射成完善像的面形</span></div>
+  <div class="hd"><span class="tag">2019-三-1</span><span class="ttl">完善条件；无穷远物点经单一曲面反射成完善像的面形</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-三-1" data-ai-title="完善条件；无穷远物点经单一曲面反射成完善像的面形" title="AI 讲这题">AI</button></div>
   <div class="stem">光学系统成完善像的条件是什么？试由该条件确定将无穷远的物点经单一曲面反射成完善实像点的曲面形状。</div>
   <div class="ans">
     <p><b>条件</b>：等光程（轴外点再加正弦条件）。</p>
@@ -225,7 +352,7 @@
 </div>
 
 <div class="q" id="q004">
-  <div class="hd"><span class="tag">2020-三-2（前）</span><span class="ttl">完善成像条件</span></div>
+  <div class="hd"><span class="tag">2020-三-2（前）</span><span class="ttl">完善成像条件</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2020-三-2（前）" data-ai-title="完善成像条件" title="AI 讲这题">AI</button></div>
   <div class="stem">光学系统的完善成像条件是什么？</div>
   <div class="ans">
     <p>同一物点发出的所有光线经系统后<b>光程相等</b>并交于同一点；轴外点还需<b>正弦条件</b> <i>n y</i> sin<i>u</i> = <i>n</i><span class="pr">′</span><i>y</i><span class="pr">′</span> sin<i>u</i><span class="pr">′</span>。</p>
@@ -235,7 +362,7 @@
 </div>
 
 <div class="q" id="q005">
-  <div class="hd"><span class="tag">2021-三-1</span><span class="ttl">格里高利望远镜次镜应是什么面形</span></div>
+  <div class="hd"><span class="tag">2021-三-1</span><span class="ttl">格里高利望远镜次镜应是什么面形</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2021-三-1" data-ai-title="格里高利望远镜次镜应是什么面形" title="AI 讲这题">AI</button></div>
   <div class="stem">什么是光学系统的完善像？格里高利双反射式望远镜的次镜为了将主镜在有限位置的实像（对次镜为实物）进一步成像为有限处的实像，它的次镜反射面的几何面应该是什么形状，并说明原因？</div>
   <div class="ans">
     <p><b>完善像</b>：同一物点发出的所有光线经系统后交于同一点。</p>
@@ -247,7 +374,7 @@
 </div>
 
 <div class="q" id="q006">
-  <div class="hd"><span class="tag">2023-三-3</span><span class="ttl">等光程求反射面方程（AO=4，AA<span class="pr">′</span>=2）</span></div>
+  <div class="hd"><span class="tag">2023-三-3</span><span class="ttl">等光程求反射面方程（AO=4，AA<span class="pr">′</span>=2）</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2023-三-3" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">关于 <i>z</i> 坐标轴旋转对称的反射曲面经过坐标原点 <i>O</i>，可以将旋转对称轴上实物点 <i>A</i> 反射成像在 <i>A</i><span class="pr">′</span>，如果 <i>AO</i> = 4 cm，<i>AA</i><span class="pr">′</span> = 2 cm，试基于光完善条件确定反射面的方程。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/191ac0e02fa5.png" alt="A 经反射面成像于 A′，O 为顶点" style="max-width:100%;height:auto"><figcaption>原卷 p55：<i>A</i> 物点、<i>A</i><span class="pr">′</span> 像点、<i>O</i> 顶点、<i>P</i> 面上任一点。</figcaption></figure></details>
   <div class="ans">
@@ -260,7 +387,7 @@
 </div>
 
 <div class="q" id="q007">
-  <div class="hd"><span class="tag">2024-三-1</span><span class="ttl">完善像的含义与条件；单个球面折射镜、反射镜能否完善成像</span></div>
+  <div class="hd"><span class="tag">2024-三-1</span><span class="ttl">完善像的含义与条件；单个球面折射镜、反射镜能否完善成像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2024-三-1" data-ai-title="完善像的含义与条件；单个球面折射镜、反射镜能否完善成像" title="AI 讲这题">AI</button></div>
   <div class="stem">成完善像的物理含义与条件是什么？分析单个球面折射镜（透镜）能不能成完善像；单个球面反射镜成的是什么像？有限距离实物点经单一曲面反射成完善像点，曲面形状是什么？</div>
   <div class="ans">
     <p><b>条件</b>：等光程 +（轴外）正弦条件。</p>
@@ -278,7 +405,7 @@
 </div>
 
 ﻿<div class="q" id="q037">
-  <div class="hd"><span class="tag">2016-三-1</span><span class="ttl">像散与场曲</span></div>
+  <div class="hd"><span class="tag">2016-三-1</span><span class="ttl">像散与场曲</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2016-三-1" data-ai-title="像散与场曲" title="AI 讲这题">AI</button></div>
   <div class="stem">解释光学系统的两种像差：像散和场曲。</div>
   <div class="ans">
     <p><b>像散</b>：光学系统在两个相互垂直的方向上聚焦本领不同 —— 一个物点发出的两束相互垂直的光（子午、弧矢）<b>交于不同位置</b>，在像面上形成两条互相垂直的焦线。</p>
@@ -289,7 +416,7 @@
 </div>
 
 <div class="q" id="q038">
-  <div class="hd"><span class="tag">2016-三-2</span><span class="ttl">物方远心光路与像方远心光路</span></div>
+  <div class="hd"><span class="tag">2016-三-2</span><span class="ttl">物方远心光路与像方远心光路</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2016-三-2" data-ai-title="物方远心光路与像方远心光路" title="AI 讲这题">AI</button></div>
   <div class="stem">简述物方远心光路和像方远心光路的特点及应用情况。</div>
   <div class="ans">
     <p><b>物方远心光路</b>：把<b>孔径光阑放在像方焦平面</b>上，使物方主光线平行于光轴（汇聚中心在物方无穷远）。物平面位置有误差时像高不变 ⇒ 消除<b>视差</b>，用于<b>测长</b>。</p>
@@ -300,7 +427,7 @@
 </div>
 
 <div class="q" id="q039">
-  <div class="hd"><span class="tag">2016-三-3</span><span class="ttl">画出垂轴实物 AB 的像 A′B′</span></div>
+  <div class="hd"><span class="tag">2016-三-3</span><span class="ttl">画出垂轴实物 AB 的像 A′B′</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2016-三-3" data-ai-title="画出垂轴实物 AB 的像 A′B′" title="AI 讲这题">AI</button></div>
   <div class="stem">用图解法画出垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>（已知 H、H<span class="pr">′</span>、F、F<span class="pr">′</span>）。</div>
   <div class="ans">
     <details class="figbox" open><summary>图 · 点开看作图答案（2016 答案册 p106）</summary><figure><img src="img/6941b4e5658c.jpg" alt="垂轴实物 AB 经光组成像的作图" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>规范作图（答案册原图）</b>：由 <i>B</i> 作平行光轴光线 → 出射后（延长线）过 <i>F</i>′；由 <i>B</i> 作过 <i>F</i> 的光线 → 出射后平行光轴。两条出射光线的<b>反向延长线</b>交于 <i>B</i>′，<i>A</i>′ 在轴上 ⇒ <b>虚像、正立、缩小</b>（<i>A</i>′B′ 比 AB 短，且与物同侧）。注意本题 <i>F</i>′ 在 <i>H</i> 左侧、<i>F</i> 在 <i>H</i>′ 右侧 —— 负光组。</figcaption></figure></details>
@@ -317,8 +444,9 @@
 </div>
 
 <div class="q" id="q040">
-  <div class="hd"><span class="tag">2016-三-4</span><span class="ttl">右手坐标系经棱镜系统后的像方坐标方向</span></div>
+  <div class="hd"><span class="tag">2016-三-4</span><span class="ttl">右手坐标系经棱镜系统后的像方坐标方向</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2016-三-4" data-ai-title="右手坐标系经棱镜系统后的像方坐标方向" title="AI 讲这题">AI</button></div>
   <div class="stem">已知物体为右手坐标系，oz 为光轴方向，画出棱镜系统的像方成像坐标方向。</div>
+  <details class="figbox" open><summary>图</summary><figure><img src="img/b45e90362bb2.jpg" alt="直角棱镜 + 五角棱镜 + 直角棱镜组成的棱镜系统，物方坐标系 o-xyz（右手系）" loading="lazy" style="max-width:100%;height:auto"><figcaption>原卷 p31 题图：物方右手系 <i>o-xyz</i>，其后依次为<b>直角棱镜</b>（1 次反射）、<b>五角棱镜</b>（2 次反射）、<b>直角棱镜</b>（1 次反射），共 4 次反射。</figcaption></figure></details>
   <div class="ans">
     <details class="figbox" open><summary>图 · 点开看答案（2016 答案册 p106）</summary><figure><img src="img/8648bbad4edd.jpg" alt="棱镜系统的像方坐标系" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>答案（答案册原图）</b>：物方右手系 <i>o-xyz</i> 经该系统后，<b><i>z</i>′ 与 <i>z</i> 同向、<i>x</i>′ 向下、<i>y</i>′ 指向左前</b> —— 三轴相对原方向「<i>x</i> 反、<i>y</i> 反、<i>z</i> 不变」等价于绕 <i>z</i> 轴转 180°，仍是右手系（反射次数为偶数）。作图口诀：<b>奇数次反射 ⇒ 左手系；偶数次 ⇒ 右手系</b>，再逐面把垂直于反射面的轴反向。</figcaption></figure></details>
     <p><b>做法</b>：把棱镜按<b>反射面逐个展开</b>，每经过一个反射面就把<b>垂直于该反射面的那根轴反向</b>；也可按反射次数快速判手性：</p>
@@ -339,7 +467,7 @@
 <div class="lead">单色像差 5 种、色差 2 种，必须能一口气报出来；畸变、像散、场曲要能对上图。</div>
 
 <div class="q" id="q008">
-  <div class="hd"><span class="tag">2018-三-1（后）</span><span class="ttl">像差概念；几何像差包括哪几种</span></div>
+  <div class="hd"><span class="tag">2018-三-1（后）</span><span class="ttl">像差概念；几何像差包括哪几种</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2018-三-1（后）" data-ai-title="像差概念；几何像差包括哪几种" title="AI 讲这题">AI</button></div>
   <div class="stem">解释实际光学系统的像差概念？光学系统的几何像差主要包括哪几种？</div>
   <div class="ans">
     <p><b>像差</b>：实际光学系统所成的像与理想（高斯）像之间的偏差。本质是实际出射波面偏离了理想的球面波。</p>
@@ -354,7 +482,7 @@
 </div>
 
 <div class="q" id="q009">
-  <div class="hd"><span class="tag">2020-三-2（后）</span><span class="ttl">色差有哪几种、产生原因</span></div>
+  <div class="hd"><span class="tag">2020-三-2（后）</span><span class="ttl">色差有哪几种、产生原因</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2020-三-2（后）" data-ai-title="色差有哪几种、产生原因" title="AI 讲这题">AI</button></div>
   <div class="stem">光学系统的色差主要包括哪几种，解释其产生的原因？</div>
   <div class="ans">
     <p><b>位置色差（轴向色差）</b>：轴上物点不同波长的光成像位置不同（焦距随波长变），像点沿光轴前后分开，屏上看到彩色圆斑。</p>
@@ -366,7 +494,7 @@
 </div>
 
 <div class="q" id="q010">
-  <div class="hd"><span class="tag">2021-三-2</span><span class="ttl">由图判断 (a)(b) 各存在哪种单色像差</span></div>
+  <div class="hd"><span class="tag">2021-三-2</span><span class="ttl">由图判断 (a)(b) 各存在哪种单色像差</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2021-三-2" data-ai-title="由图判断 (a)(b) 各存在哪种单色像差" title="AI 讲这题">AI</button></div>
   <div class="stem">什么是光学系统的像差？下图 (a) 和 (b) 分别给出了物体经过两个光学系统成像后像面，试问这时它们各自主要存在哪种单色像差？</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/12a3e6a5b938.png" alt="(a) 正方形物体及其枕形像；(b) 同心圆辐射线物体及其变形像" style="max-width:100%;height:auto"><figcaption>原卷 p53：(a) 物为正方形、像四边内凹四角外伸；(b) 物为同心圆 + 辐射线，像的圆与辐射线不能同时清晰。</figcaption></figure></details>
   <div class="ans">
@@ -379,7 +507,7 @@
 </div>
 
 <div class="q" id="q011">
-  <div class="hd"><span class="tag">2023-三-1</span><span class="ttl">畸变的定义与形成原因（画图说明）</span></div>
+  <div class="hd"><span class="tag">2023-三-1</span><span class="ttl">畸变的定义与形成原因（画图说明）</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2023-三-1" data-ai-title="畸变的定义与形成原因（画图说明）" title="AI 讲这题">AI</button></div>
   <div class="stem">从物像关系画图说明什么是光学成像的畸变像差，并解释其形成原因。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/5e8a9bc14bed.png" alt="(a) 物；(b) 正畸变（枕形）；(c) 负畸变（桶形）" style="max-width:100%;height:auto"><figcaption>原卷 p55：(a) 物为方格；(b) 正畸变（枕形）—— 四角外拉、四边内凹；(c) 负畸变（桶形）—— 四边外鼓、四角内收。</figcaption></figure></details>
   <div class="ans">
@@ -392,7 +520,7 @@
 </div>
 
 <div class="q" id="q012">
-  <div class="hd"><span class="tag">2024-三-2</span><span class="ttl">像散、场曲的概念及对成像的影响</span></div>
+  <div class="hd"><span class="tag">2024-三-2</span><span class="ttl">像散、场曲的概念及对成像的影响</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2024-三-2" data-ai-title="像散、场曲的概念及对成像的影响" title="AI 讲这题">AI</button></div>
   <div class="stem">两个像散，场曲的概念，对成像又有何影响？</div>
   <div class="ans">
     <p><b>像散</b>：轴外物点发出的细光束经系统后，子午方向与弧矢方向的聚焦位置不同，形成两条互相垂直的短焦线（子午焦线、弧矢焦线），两线之间为最小弥散圆。影响：轴外点不能成清晰的点像，像被拉成椭圆或短线，视场越大越明显。</p>
@@ -407,7 +535,7 @@
 <div class="kbig"><div class="kh">必背 · 两类光阑</div><ul><li><b>孔径光阑</b>：限制轴上点光束，决定光强与分辨 —— 它的像是<b>入瞳/出瞳</b></li><li><b>视场光阑</b>：限制成像范围 —— 它的像是<b>入窗/出窗</b></li><li>判定方法：对轴上物点比较<b>张角</b>（不是比直径）</li></ul></div>
 
 <div class="q" id="q013">
-  <div class="hd"><span class="tag">2018-三-2</span><span class="ttl">孔径光阑与入瞳/出瞳；视场光阑与入窗/出窗</span></div>
+  <div class="hd"><span class="tag">2018-三-2</span><span class="ttl">孔径光阑与入瞳/出瞳；视场光阑与入窗/出窗</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2018-三-2" data-ai-title="孔径光阑与入瞳/出瞳；视场光阑与入窗/出窗" title="AI 讲这题">AI</button></div>
   <div class="stem">对于一个光学系统，什么是孔径光阑，它与入瞳和出瞳的关系是什么？什么是视场光阑，它与入窗和出窗的关系是什么？</div>
   <div class="ans">
     <p><b>孔径光阑</b>：系统中限制轴上物点成像光束孔径角（光束立体角）的那个光阑，它决定进入系统的光能量和系统的分辨率。</p>
@@ -432,7 +560,7 @@
 <div class="kbig"><div class="kh">必背 · 光度学四个量</div><ul><li><b>光通量</b> Φ（lm）：单位时间通过的光能，按人眼视觉加权</li><li><b>发光强度</b> I（cd）：光源在单位立体角内的光通量</li><li><b>光亮度</b> L（cd/m²）：单位面积、单位立体角内的光通量 —— <b>与距离无关</b></li><li><b>光照度</b> E（lx）：被照面上单位面积接收的光通量 —— <b>按 1/r² 衰减</b></li></ul><div class="knote">最容易混的是“亮度不随距离变，照度按平方反比变”——这句话常单独给分。</div></div>
 
 <div class="q" id="q014">
-  <div class="hd"><span class="tag">2017-三-3</span><span class="ttl">光亮度和光照度的定义与表达式</span></div>
+  <div class="hd"><span class="tag">2017-三-3</span><span class="ttl">光亮度和光照度的定义与表达式</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2017-三-3" data-ai-title="光亮度和光照度的定义与表达式" title="AI 讲这题">AI</button></div>
   <div class="stem">什么是光亮度和光照度？并写出它们定义的数学表达式。</div>
   <div class="ans">
     <p><b>光亮度 </b><i>L</i>：发光面上一点在给定方向上的发光强度 d<i>I</i>，与该面元在垂直于该方向的投影面积 d<i>A</i> cos<i>θ</i> 之比。</p>
@@ -450,7 +578,7 @@
 <div class="kbig"><div class="kh">必背 · 费马原理</div><ul><li>实际光路的光程取<b>极值</b>（通常是最小值）</li><li>由此可推反射定律、折射定律、以及“完善像 ⇔ 等光程”</li></ul></div>
 
 <div class="q" id="q015">
-  <div class="hd"><span class="tag">2019-三-2</span><span class="ttl">费马原理的内容；用它解释直线传播</span></div>
+  <div class="hd"><span class="tag">2019-三-2</span><span class="ttl">费马原理的内容；用它解释直线传播</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-三-2" data-ai-title="费马原理的内容；用它解释直线传播" title="AI 讲这题">AI</button></div>
   <div class="stem">费马原理的内容是什么？试用该原理解释光在均匀各向同性的介质中沿直线传播。</div>
   <div class="ans">
     <p><b>内容</b>：光从一点传播到另一点，其实际路径使光程取极值（极小、极大或稳定值），即光程的一阶变分为零：</p>
@@ -466,7 +594,7 @@
 <div class="kbig"><div class="kh">必背 · 景深</div><ul><li>三个面：<b>对准平面</b>、<b>近景平面</b>、<b>远景平面</b>；近远之间就是景深</li><li>判据是<b>容许弥散圆 z</b>：z 越大、光圈越小，景深越大</li></ul><div class="knote">z 的取值各教材不同（0.03 / 0.05 mm），答题时把取值写出来。</div></div>
 
 <div class="q" id="q016">
-  <div class="hd"><span class="tag">2019-三-3</span><span class="ttl">景深定义、影响因素；增大景深怎么调光圈</span></div>
+  <div class="hd"><span class="tag">2019-三-3</span><span class="ttl">景深定义、影响因素；增大景深怎么调光圈</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-三-3" data-ai-title="景深定义、影响因素；增大景深怎么调光圈" title="AI 讲这题">AI</button></div>
   <div class="stem">什么是光学系统的景深？景深的大小受哪些因素影响？照相时为了增加景深，光圈应该增大还是减小？</div>
   <div class="ans">
     <p><b>景深</b>：在像面上能成清晰像的物空间深度（= 远景深度 + 近景深度），即物平面前后能清晰成像的范围。景深端点对应弥散圆直径等于允许值。</p>
@@ -488,7 +616,7 @@
 <div class="kbig"><div class="kh">必背 · 屋脊棱镜</div><ul><li>屋脊面 = <b>两个互相垂直的反射面</b>，光线在它上面反射两次 = 一次反射 + <b>一维倒像</b></li><li>作用：在折转光轴的同时把像“翻正”，用于转像系统（双筒望远镜）</li></ul><div class="knote">数反射面时一个屋脊面算<b>两个</b>；判断坐标系手性时这一步最关键。</div></div>
 
 <div class="q" id="q017">
-  <div class="hd"><span class="tag">2019-三-4</span><span class="ttl">什么是屋脊棱镜；举例并画平面表示图</span></div>
+  <div class="hd"><span class="tag">2019-三-4</span><span class="ttl">什么是屋脊棱镜；举例并画平面表示图</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-三-4" data-ai-title="什么是屋脊棱镜；举例并画平面表示图" title="AI 讲这题">AI</button></div>
   <div class="stem">什么是屋脊棱镜？试列举一个屋脊棱镜，并给出平面表示图。</div>
   <div class="ans">
     <p><b>定义</b>：把直角棱镜的一个反射面（通常是斜面）做成 <b>90° 屋脊</b>（两个互相垂直的反射面）的棱镜。屋脊的两个面各反射一次（共两次），使像在<b>垂直于屋脊</b>的方向上倒转，常用于望远系统/双筒望远镜的倒像。</p>
@@ -510,7 +638,7 @@
 <div class="kbig"><div class="kh">必背 · 显微镜</div><ul><li>总放大率 = 物镜<b>垂轴</b>放大率 × 目镜<b>角</b>放大率</li><li>分辨本领由 <b>NA = n sin u</b> 决定；有效放大率有上下限</li></ul></div>
 
 <div class="q" id="q018">
-  <div class="hd"><span class="tag">2020-三-1</span><span class="ttl">显微镜的结构、放大原理与分辨率</span></div>
+  <div class="hd"><span class="tag">2020-三-1</span><span class="ttl">显微镜的结构、放大原理与分辨率</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2020-三-1" data-ai-title="显微镜的结构、放大原理与分辨率" title="AI 讲这题">AI</button></div>
   <div class="stem">阐述显微镜光学系统结构组成和成像放大原理；显微镜分辨率受哪些物理参量影响？</div>
   <div class="ans">
     <p><b>组成</b>：物镜 + 目镜（外加聚光镜、光源、载物台）。</p>
@@ -530,7 +658,7 @@
 <div class="kbig"><div class="kh">必背 · 放大镜</div><ul><li>放大率是<b>角放大率</b>：像对人眼张角 / 物在明视距离处对人眼张角</li><li>像成在明视距离 250 mm 时 Γ = 250/f<span class="pr">′</span>；像在无穷远时略小</li></ul></div>
 
 <div class="q" id="q019">
-  <div class="hd"><span class="tag">2023-三-2</span><span class="ttl">放大镜视角放大率；5× 的焦距</span></div>
+  <div class="hd"><span class="tag">2023-三-2</span><span class="ttl">放大镜视角放大率；5× 的焦距</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2023-三-2" data-ai-title="放大镜视角放大率；5× 的焦距" title="AI 讲这题">AI</button></div>
   <div class="stem">什么是放大镜的视角放大率？放大倍数 5× 的放大镜焦距多少？</div>
   <div class="ans">
     <p><b>定义</b>：视角放大率 = 用仪器后像对人眼的张角 <i>ω</i><span class="pr">′</span>，与不用仪器、把物放在明视距离（250 mm）处时对人眼的张角 <i>ω</i> 之比：<i>Γ</i> = tan<i>ω</i><span class="pr">′</span>/tan<i>ω</i>。</p>
@@ -558,25 +686,25 @@
 </div>
 
 <div class="q" id="q020">
-  <div class="hd"><span class="tag">2017-三-4</span><span class="ttl">作虚物 A 经光组所成的像 A<span class="pr">′</span></span></div>
+  <div class="hd"><span class="tag">2017-三-4</span><span class="ttl">作虚物 A 经光组所成的像 A<span class="pr">′</span></span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2017-三-4" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">作出虚物 A 经光组所成的像 A<span class="pr">′</span>。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/6aef5894edb2.png" alt="光轴上的 F、H、H′、F′ 与虚物点 A" style="max-width:100%;height:auto"><figcaption>原卷 p49：<i>A</i> 在 <i>F</i><span class="pr">′</span> 之外（右侧），是虚物。</figcaption></figure></details>
   <div class="ans">
-    <details class="figbox" open><summary>图 · 点开看作图答案（2017 答案册 p112）</summary><figure><img src="img/5cef2b57b265.jpg" alt="虚物 A 经光组成像的作图" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>规范作图（答案册原图）</b>：<i>A</i> 是轴上的<b>虚物</b>（会聚光束的会聚点，在系统右侧）。由 <i>A</i> 出发的两条光线（图中虚线为入射光线的延长线）经系统后仍会聚/发散；把出射光线反向延长，与轴的交点即 <i>A</i>′。本题 <i>F</i>′ 在 <i>H</i>′ 右侧、A′ 落在 <i>H</i>′ 与 <i>F</i>′ 之间 ⇒ <b>实像、位于像方</b>（虚物经正光组可成实像）。</figcaption></figure></details>
+    <details class="figbox" open><summary>图 · 点开看作图答案（2017 答案册 p112）</summary><figure><img src="img/5cef2b57b265.jpg" alt="虚物 A 经光组成像的作图" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>规范作图（答案册原图）</b>：<i>A</i> 是轴上的<b>虚物</b>——入射光束本是会聚的，其会聚落在系统右侧（系统前那段画成虚线，因为实际光线只走到透镜面）。虚物经<b>正光组</b>后，<b>实际出射光线相交于 <i>A</i>′</b>（实像，不是把出射光线反向延长得到的）。本题 <i>F</i>′ 在 <i>H</i>′ 右侧、<i>A</i>′ 落在 <i>H</i>′ 与 <i>F</i>′ 之间 ⇒ <b>实像、位于像方</b>。</figcaption></figure></details>
     <p><b>作图步骤</b>：</p>
     <ol style="margin:4px 0 0 1.2em;padding:0">
-      <li>过 <i>A</i> 任作一条光线，交 <i>H</i> 面于 <i>M</i>，在 <i>H</i><span class="pr">′</span> 面取等高点 <i>M</i><span class="pr">′</span>；</li>
-      <li>过 <i>F</i> 作与 <i>AM</i> 平行的辅助光线，交 <i>H</i> 于 <i>N</i>，它出射后平行于光轴（高度为 <i>N</i><span class="pr">′</span>）；</li>
-      <li>连 <i>M</i><span class="pr">′</span> 与该平行线在像方焦平面上的交点，交光轴于 <i>A</i><span class="pr">′</span>。</li>
+      <li>选两条<b>向右延长后交于 <i>A</i></b> 的入射会聚光线，它们分别与主平面 <i>H</i> 交于 <i>M</i><sub>1</sub>、<i>M</i><sub>2</sub>。<b>实际入射光线只画到 <i>H</i> 面</b>；<i>H</i> 面之后到 <i>A</i> 的那一段只是延长线，画<b>虚线</b>。</li>
+      <li>对每条光线：先在 <i>H</i><span class="pr">′</span> 面取<b>等高</b>点 <i>M</i><span class="pr">′</span><sub>1</sub>、<i>M</i><span class="pr">′</span><sub>2</sub>（主平面性质）；再作一条<b>过 <i>F</i> 且与该入射线平行</b>的<b>辅助光线</b>，它出射后平行于光轴、交像方焦平面于 <i>P</i>（辅焦点）；连 <i>M</i><span class="pr">′</span><sub>1</sub><i>P</i> 即得该条<b>实际出射光线</b>的方向。<b>辅助光线画细虚线，实际出射光线画实线</b>，两者不要混。</li>
+      <li>两条<b>实际出射光线</b>与光轴的交点即 <i>A</i><span class="pr">′</span>（实像，由真实出射光线会聚而成）——<b>不是</b>把出射光线反向延长求交（那是虚像的画法）。</li>
     </ol>
-    <p><b>结果</b>：<i>A</i><span class="pr">′</span> 在 <i>H</i><span class="pr">′</span> 与 <i>F</i><span class="pr">′</span> 之间，是<b>实像</b>（虚物成实像），相对虚物正立、缩小。</p>
+    <p><b>结果</b>：轴上像点 <i>A</i><span class="pr">′</span> 落在 <i>H</i><span class="pr">′</span> 与 <i>F</i><span class="pr">′</span> 之间，是<b>实像</b>（虚物经正光组成实像）。</p>
     <div class="res"><b>答</b>：A<span class="pr">′</span> 落在 H<span class="pr">′</span>–F<span class="pr">′</span> 之间，实像。口诀：虚物在 F<span class="pr">′</span> 外 → 实像在 H<span class="pr">′</span>、F<span class="pr">′</span> 之间。</div>
     <span class="src">【真题 + 教材】</span>
   </div>
 </div>
 
 <div class="q" id="q021">
-  <div class="hd"><span class="tag">2017-三-5</span><span class="ttl">作图确定节点 J、J<span class="pr">′</span></span></div>
+  <div class="hd"><span class="tag">2017-三-5</span><span class="ttl">作图确定节点 J、J<span class="pr">′</span></span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2017-三-5" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">作图确定下图的节点 J 和 J<span class="pr">′</span>。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/986cbedd269e.png" alt="光轴及 F、H、H′、F′" style="max-width:100%;height:auto"><figcaption>原卷 p49：只给出 <i>F</i>、<i>H</i>、<i>H</i><span class="pr">′</span>、<i>F</i><span class="pr">′</span>。</figcaption></figure></details>
   <div class="ans">
@@ -591,7 +719,7 @@
 </div>
 
 <div class="q" id="q022">
-  <div class="hd"><span class="tag">2018-三-3</span><span class="ttl">作实物 ABC 的像 A<span class="pr">′</span>B<span class="pr">′</span>C<span class="pr">′</span></span></div>
+  <div class="hd"><span class="tag">2018-三-3</span><span class="ttl">作实物 ABC 的像 A<span class="pr">′</span>B<span class="pr">′</span>C<span class="pr">′</span></span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2018-三-3" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">作实物 ABC 的像 A<span class="pr">′</span>B<span class="pr">′</span>C<span class="pr">′</span>。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/0a87720eac98.png" alt="光轴上的 A、正上方的 B、B 右后方的 C，以及 F、H、H′、F′" style="max-width:100%;height:auto"><figcaption>原卷 p50：<i>A</i> 在轴上、<i>B</i> 在 <i>A</i> 正上方、<i>C</i> 在 <i>B</i> 的右后方（离透镜更近），三者不在同一物平面。</figcaption></figure></details>
   <div class="ans">
@@ -610,7 +738,7 @@
 </div>
 
 <div class="q" id="q023">
-  <div class="hd"><span class="tag">2019-三-5</span><span class="ttl">作虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span></span></div>
+  <div class="hd"><span class="tag">2019-三-5</span><span class="ttl">作虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span></span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-三-5" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">作出虚物 AB 经光组所成的像 A<span class="pr">′</span>B<span class="pr">′</span>。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/03a05aabc536.png" alt="光轴上的 F、H、H′、F′ 与虚物 AB" style="max-width:100%;height:auto"><figcaption>原卷 p51：<i>A</i> 在 <i>F</i><span class="pr">′</span> 右侧，<i>B</i> 在 <i>A</i> 上方。</figcaption></figure></details>
   <div class="ans">
@@ -623,7 +751,7 @@
 </div>
 
 <div class="q" id="q024">
-  <div class="hd"><span class="tag">2019-三-6</span><span class="ttl">由 β=+1、β=−1 的共轭面作 A 的像</span></div>
+  <div class="hd"><span class="tag">2019-三-6</span><span class="ttl">由 β=+1、β=−1 的共轭面作 A 的像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-三-6" data-ai-title="由 β=+1、β=−1 的共轭面作 A 的像" title="AI 讲这题">AI</button></div>
   <div class="stem">如图，一个理想光学系统，π<sub>1</sub> 和 π<sub>1</sub><span class="pr">′</span> 为一对垂直放大率为 1 的共轭面，π<sub>2</sub> 和 π<sub>2</sub><span class="pr">′</span> 为一对垂直放大率为 −1 的共轭面，试作图确定物点 A 的像点。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/9686613576ab.png" alt="π2、π1、系统、π1′、π2′ 与物点 A" style="max-width:100%;height:auto"><figcaption>原卷 p51：<i>A</i> 在 π<sub>2</sub> 左侧；中间为系统（画成带网纹的厚透镜）。</figcaption></figure></details>
   <div class="ans">
@@ -642,7 +770,7 @@
 </div>
 
 <div class="q" id="q025">
-  <div class="hd"><span class="tag">2020-三-3</span><span class="ttl">作虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span></span></div>
+  <div class="hd"><span class="tag">2020-三-3</span><span class="ttl">作虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span></span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2020-三-3" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">作虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/0437b3169448.png" alt="光轴上的 F、H、H′、F′ 与虚物 AB" style="max-width:100%;height:auto"><figcaption>原卷 p52：<i>A</i> 在 <i>F</i><span class="pr">′</span> 右侧，<i>B</i> 在 <i>A</i> 上方。</figcaption></figure></details>
   <div class="ans">
@@ -655,7 +783,7 @@
 </div>
 
 <div class="q" id="q026">
-  <div class="hd"><span class="tag">2021-三-3</span><span class="ttl">负光组：作物体 AB 的像</span></div>
+  <div class="hd"><span class="tag">2021-三-3</span><span class="ttl">负光组：作物体 AB 的像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2021-三-3" data-ai-title="负光组：作物体 AB 的像" title="AI 讲这题">AI</button></div>
   <div class="stem">作图确定物体 AB 的像。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/2a0b7e8958c6.png" alt="A、F′、H、H′、F 依次排列（负光组）" style="max-width:100%;height:auto"><figcaption>原卷 p53：从左到右依次为 <i>A</i>、<i>F</i><span class="pr">′</span>、<i>H</i>、<i>H</i><span class="pr">′</span>、<i>F</i> —— <i>F</i><span class="pr">′</span> 在 <i>H</i> 左侧、<i>F</i> 在 <i>H</i><span class="pr">′</span> 右侧，是<b>负（发散）光组</b>。</figcaption></figure></details>
   <div class="ans">
@@ -669,7 +797,7 @@
 </div>
 
 <div class="q" id="q027">
-  <div class="hd"><span class="tag">2021-三-4</span><span class="ttl">已知 F、H、J、F<span class="pr">′</span>，求 H<span class="pr">′</span> 与 J<span class="pr">′</span></span></div>
+  <div class="hd"><span class="tag">2021-三-4</span><span class="ttl">已知 F、H、J、F<span class="pr">′</span>，求 H<span class="pr">′</span> 与 J<span class="pr">′</span></span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2021-三-4" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">作图确定下面光组的基点 H<span class="pr">′</span> 和 J。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/40ae57bf5e85.png" alt="F、H、J、F′ 四点及 H 处的垂轴" style="max-width:100%;height:auto"><figcaption>原卷 p53：给出 <i>F</i>、<i>H</i>、<i>J</i>、<i>F</i><span class="pr">′</span>（题面写“H<span class="pr">′</span> 和 J”，图中 J 已给出，按求 <i>H</i><span class="pr">′</span>、<i>J</i><span class="pr">′</span> 作答）。</figcaption></figure></details>
   <div class="ans">
@@ -693,7 +821,7 @@
 </div>
 
 <div class="q" id="q028">
-  <div class="hd"><span class="tag">2022-二-2</span><span class="ttl">负光组：作垂轴实物 AB 的像</span></div>
+  <div class="hd"><span class="tag">2022-二-2</span><span class="ttl">负光组：作垂轴实物 AB 的像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2022-二-2" data-ai-title="负光组：作垂轴实物 AB 的像" title="AI 讲这题">AI</button></div>
   <div class="stem">作垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span></div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/48d0caae24ac.png" alt="A、F′、H、H′、F（负光组）与物 AB" style="max-width:100%;height:auto"><figcaption>原卷 p54：<i>A</i>、<i>F</i><span class="pr">′</span>、<i>H</i>、<i>H</i><span class="pr">′</span>、<i>F</i> 依次排列，负光组。</figcaption></figure></details>
   <div class="ans">
@@ -706,7 +834,7 @@
 </div>
 
 <div class="q" id="q029">
-  <div class="hd"><span class="tag">2023-三-5</span><span class="ttl">定 A 的像</span></div>
+  <div class="hd"><span class="tag">2023-三-5</span><span class="ttl">定 A 的像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2023-三-5" data-ai-title="定 A 的像" title="AI 讲这题">AI</button></div>
   <div class="stem">定 A 的像。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/b612f33f528c.png" alt="A、F、H、H′、F′（正光组）" style="max-width:100%;height:auto"><figcaption>原卷 p55：<i>A</i> 在 <i>F</i> 左侧（物在物方焦点之外），正光组。</figcaption></figure></details>
   <div class="ans">
@@ -719,7 +847,7 @@
 </div>
 
 <div class="q" id="q030">
-  <div class="hd"><span class="tag">2024-三-3</span><span class="ttl">画出 AB 所成的像</span></div>
+  <div class="hd"><span class="tag">2024-三-3</span><span class="ttl">画出 AB 所成的像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2024-三-3" data-ai-title="画出 AB 所成的像" title="AI 讲这题">AI</button></div>
   <div class="stem">画出 AB 所成的像。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/2f57205b7c81.png" alt="A、F′、H、H′、F（负光组）与物 AB" style="max-width:100%;height:auto"><figcaption>原卷 p56：<i>A</i>、<i>F</i><span class="pr">′</span>、<i>H</i>、<i>H</i><span class="pr">′</span>、<i>F</i> 依次排列，负光组。</figcaption></figure></details>
   <div class="ans">
@@ -747,7 +875,7 @@
 </div>
 
 <div class="q" id="q031">
-  <div class="hd"><span class="tag">2017-三-6</span><span class="ttl">平面镜 + 等腰直角棱镜（两反射面互垂）</span></div>
+  <div class="hd"><span class="tag">2017-三-6</span><span class="ttl">平面镜 + 等腰直角棱镜（两反射面互垂）</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2017-三-6" data-ai-title="平面镜 + 等腰直角棱镜（两反射面互垂）" title="AI 讲这题">AI</button></div>
   <div class="stem">已知物空间的右手坐标系 o-xyz，oz 为光轴方向，作平面镜与一个等腰直角棱镜构成系统的像方坐标系 o<span class="pr">′</span>-X<span class="pr">′</span>Y<span class="pr">′</span>Z<span class="pr">′</span>。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/dcba8bc0afff.png" alt="右手坐标系、45° 平面镜（\）与直角棱镜（斜面 /）" style="max-width:100%;height:auto"><figcaption>原卷 p49：平面镜为“\”，棱镜斜面为“/”，两面互成 90°。</figcaption></figure></details>
   <div class="ans">
@@ -762,7 +890,7 @@
 </div>
 
 <div class="q" id="q032">
-  <div class="hd"><span class="tag">2018-三-4</span><span class="ttl">直角棱镜 + 五角棱镜 + 直角棱镜（链）</span></div>
+  <div class="hd"><span class="tag">2018-三-4</span><span class="ttl">直角棱镜 + 五角棱镜 + 直角棱镜（链）</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2018-三-4" data-ai-title="直角棱镜 + 五角棱镜 + 直角棱镜（链）" title="AI 讲这题">AI</button></div>
   <div class="stem">已知物体为右手坐标系，oz 为光轴方向，作棱镜系统的像方成象坐标方向。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/151e3cc76e06.png" alt="坐标系与三块棱镜组成的链" style="max-width:100%;height:auto"><figcaption>原卷 p50：直角棱镜 → 五角棱镜 → 直角棱镜，光束沿链向下再折回 +z。</figcaption></figure></details>
   <div class="ans"><div class="step"><b class="n">1</b>数反射：直角棱镜 1 次 + 五角棱镜 2 次 + 直角棱镜 1 次 = <b>4 次</b>。偶数次 ⇒ <b>右手系</b>（不镜像）。</div><div class="step"><b class="n">2</b>光轴：入射 +z → 第一块折向下 → 五角棱镜平移并保持 → 末块折回 +z，故出射光轴与入射<b>平行同向</b>：<i>z</i><span class="pr">′</span> = <i>z</i>。</div><div class="step"><b class="n">3</b>横向两轴：两次直角棱镜各把横向翻一次，叠起来<b>两支都反向</b> ⇒ 出射坐标系相当于<b>绕光轴转 180°</b>：<div class="eqb"><i>x</i><span class="pr">′</span> = −<i>x</i>，　<i>y</i><span class="pr">′</span> = −<i>y</i>，　<i>z</i><span class="pr">′</span> = <i>z</i></div></div><details class="figbox" open><summary>图 · 答案册原图（点此收起）</summary><figure><img src="img/6a8f68620f15.png" alt="答案册原图：像方坐标轴" style="max-width:100%;height:auto"><figcaption>答案册 p118 原图：<i>z</i><span class="pr">′</span> 向右（与入射同向），<i>x</i><span class="pr">′</span> 向下、<i>y</i><span class="pr">′</span> 反向 —— 绕光轴转了 180°</figcaption></figure></details><div class="res">4 次反射 → <b>右手系</b>；出射光轴与入射同向（<i>z</i><span class="pr">′</span> = <i>z</i>），横向两轴均反向（<i>x</i><span class="pr">′</span> = −<i>x</i>、<i>y</i><span class="pr">′</span> = −<i>y</i>），即<b>绕光轴旋转 180°</b>。</div><div class="warn"><b>别只写“三轴同向”</b>：偶数次反射保证的是“不镜像、右手系”，不等于坐标轴方向不变 —— 这里实际转了 180°。判断横向翻转要<b>逐个数每个反射面把哪个轴翻过去</b>。</div>
@@ -771,7 +899,7 @@
 </div>
 
 <div class="q" id="q033">
-  <div class="hd"><span class="tag">2020-三-4</span><span class="ttl">同型链（直角 + 五角 + 直角）</span></div>
+  <div class="hd"><span class="tag">2020-三-4</span><span class="ttl">同型链（直角 + 五角 + 直角）</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2020-三-4" data-ai-title="同型链（直角 + 五角 + 直角）" title="AI 讲这题">AI</button></div>
   <div class="stem">已知物体为右手坐标系，oz 为光轴方向，作棱镜系统的像方成象坐标方向。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/473a70f19bf4.png" alt="坐标系与三块棱镜组成的链" style="max-width:100%;height:auto"><figcaption>原卷 p52：与 2018-三-4 同型。</figcaption></figure></details>
   <div class="ans">
@@ -782,7 +910,7 @@
 </div>
 
 <div class="q" id="q034">
-  <div class="hd"><span class="tag">2022-二-1</span><span class="ttl">平面镜 + 直角棱镜（两反射面平行）</span></div>
+  <div class="hd"><span class="tag">2022-二-1</span><span class="ttl">平面镜 + 直角棱镜（两反射面平行）</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2022-二-1" data-ai-title="平面镜 + 直角棱镜（两反射面平行）" title="AI 讲这题">AI</button></div>
   <div class="stem">已知物体为右手坐标系，oz 为光轴方向，作棱镜系统的像方成象坐标方向。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/d3eb8711f0de.png" alt="右手坐标系、45° 平面镜（\）与直角棱镜（斜面 \）" style="max-width:100%;height:auto"><figcaption>原卷 p54：平面镜与棱镜斜面都是“\”，互相平行。</figcaption></figure></details>
   <div class="ans">
@@ -797,7 +925,7 @@
 </div>
 
 <div class="q" id="q035">
-  <div class="hd"><span class="tag">2024-三-4</span><span class="ttl">一倍焦距外经薄透镜、平面镜、带屋脊的直角反射镜：画像的坐标系</span></div>
+  <div class="hd"><span class="tag">2024-三-4</span><span class="ttl">一倍焦距外经薄透镜、平面镜、带屋脊的直角反射镜：画像的坐标系</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2024-三-4" data-ai-title="一倍焦距外经薄透镜、平面镜、带屋脊的直角反射镜：画像的坐标系" title="AI 讲这题">AI</button></div>
   <div class="stem">物体先经薄透镜（物在<b>一倍焦距之外</b>），再过一块平面镜，再过一块等腰直角反射镜（<b>带一个屋脊面</b>），画出像的 <i>x</i><i>y</i><i>z</i> 坐标系。<br><span style="font-size:13px;color:#8a7f6d">题面两源有出入：答案册写「一倍焦距<b>外</b>」，回忆版（计算题分题型 p56）写「一倍焦距<b>前</b>」。按答案册作答，考场以原卷为准。</span></div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/d4ff452bcdfa.png" alt="右手坐标系、物（竖直箭头）、平面镜与直角棱镜" style="max-width:100%;height:auto"><figcaption>原卷 p56：坐标系 + 竖直物箭头 + 平面镜“\” + 直角棱镜（斜面“\”）。</figcaption></figure></details>
   <div class="ans">
@@ -815,7 +943,7 @@
 <div class="kbig"><div class="kh">必背 · 施密特棱镜</div><ul><li><b>三次反射</b>棱镜（教材 §7.8.3，p373 图 7-38，顶角 45° 等腰三角形）—— <b>不是</b>屋脊棱镜</li><li>3 是奇数次 ⇒ 出射成<b>镜像</b>（对称面 = 棱镜主截面），不能成一致像</li><li>屋脊棱镜是另一类：用两个互相垂直的反射面替换掉一个反射面，把奇数次变成偶数次，所以能翻成正立像</li></ul></div>
 
 <div class="q" id="q036">
-  <div class="hd"><span class="tag">2023-三-4</span><span class="ttl">施密特棱镜：过 A 的光路与 A<span class="pr">′</span>B<span class="pr">′</span> 方向</span></div>
+  <div class="hd"><span class="tag">2023-三-4</span><span class="ttl">施密特棱镜：过 A 的光路与 A<span class="pr">′</span>B<span class="pr">′</span> 方向</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2023-三-4" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">施密特棱镜的入射面前面有一个物体 AB，画出图中经过物点 A 的入射光线的光路及其在出射光线上像 A<span class="pr">′</span>B<span class="pr">′</span> 的方向。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/c18429e68de1.png" alt="顶角 45° 的施密特棱镜与两条入射光线、内部虚线光路" style="max-width:100%;height:auto"><figcaption>原卷 p55：棱镜顶角 45°，图中已给出两条入射光线与内部虚线光路。</figcaption></figure></details>
   <div class="ans">
@@ -876,17 +1004,17 @@
 <p><b>场曲</b>：中心调焦清晰时边缘模糊；边缘调焦清晰时中心模糊 —— 两幅图要分别画出、不能合并。</p>
 <p><b>棱镜坐标系</b>：每反射一次手性翻转，<b>奇数次反射→左手系，偶数次→右手系</b>；屋脊面使其中一轴反向（一维倒像）；oz 始终沿光轴。</p>
 
-<div class="q" id="q-2010-8"><div class="hd"><span class="tag">2010-8</span><span class="ttl">图解法：作轴上虚物点、垂轴虚物的像</span></div><div class="stem">作图。(1) 作轴上虚物点 A 的像点 A<span class="pr">′</span>。(2) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。</div><details class="figbox" open><summary>图</summary><figure><img src="img/b364acba4aca.png" alt="2010-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/a3227da7ff2d.png" alt="2010-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
+<div class="q" id="q-2010-8" data-marks="10"><div class="hd"><span class="tag">2010-8</span><span class="ttl">图解法：作轴上虚物点、垂轴虚物的像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2010-8" data-ai-title="图解法：作轴上虚物点、垂轴虚物的像" title="AI 讲这题">AI</button></div><div class="stem">作图。(1) 作轴上虚物点 A 的像点 A<span class="pr">′</span>。(2) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。</div><details class="figbox" open><summary>图</summary><figure><img src="img/b364acba4aca.png" alt="2010-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/a3227da7ff2d.png" alt="2010-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）作<b>轴上虚物点 <i>A</i></b> 的像 <i>A</i><span class="pr">′</span>：三条特殊光线——平行于光轴的光线出射后过 <i>F</i><span class="pr">′</span>；过 <i>F</i> 的光线出射后平行于光轴；过主点 <i>H</i> 的光线方向不变。虚物取入射光线的反向延长线，交点即 <i>A</i><span class="pr">′</span>，虚线画。（2）作<b>垂轴虚物 <i>AB</i></b> 的像 <i>A</i><span class="pr">′</span><i>B</i><span class="pr">′</span>：由 <i>B</i> 引两条特殊光线交于 <i>B</i><span class="pr">′</span>，由 <i>B</i><span class="pr">′</span> 向光轴作垂线得 <i>A</i><span class="pr">′</span>；虚物、虚像一律取延长线并画虚线。</div><div class="warn"><b>判分点</b>：三条特殊光线 + 实线/虚线（虚物、虚像部分画虚线）。<b>2010 卷只考这两小问</b>，没有像散/棱镜坐标系那两问（那是 2011、2012 卷的）。</div>
     <span class="src">【真题 + 教材】</span></div></div>
-<div class="q" id="q-2011-8"><div class="hd"><span class="tag">2011-8</span><span class="ttl">图解法：虚物求像 / 像散 / 棱镜坐标系</span></div><div class="stem">画图题。(1) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋沿半径方向直线的平面物，圆心在轴上；系统旋转对称并考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/2caa35978496.png" alt="2011-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/c75d70a85c0a.png" alt="2011-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/bb5e2eb5a74b.png" alt="2011-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
+<div class="q" id="q-2011-8" data-marks="15"><div class="hd"><span class="tag">2011-8</span><span class="ttl">图解法：虚物求像 / 像散 / 棱镜坐标系</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2011-8" data-ai-title="图解法：虚物求像 / 像散 / 棱镜坐标系" title="AI 讲这题">AI</button></div><div class="stem">画图题。(1) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋沿半径方向直线的平面物，圆心在轴上；系统旋转对称并考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/2caa35978496.png" alt="2011-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/c75d70a85c0a.png" alt="2011-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/bb5e2eb5a74b.png" alt="2011-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
     <span class="src">【真题 + 教材】</span></div></div>
-<div class="q" id="q-2012-8"><div class="hd"><span class="tag">2012-8</span><span class="ttl">图解法：实物求像 / 场曲 / 棱镜坐标系</span></div><div class="stem">画图题。(1) 作垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 十字线分划板平面物，存在严重场曲；分别画出中心调焦清晰与边缘调焦清晰两种情况下的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/ec31918b494d.png" alt="2012-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/554591f889c3.png" alt="2012-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/55c644bbd64f.png" alt="2012-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
+<div class="q" id="q-2012-8" data-marks="15"><div class="hd"><span class="tag">2012-8</span><span class="ttl">图解法：实物求像 / 场曲 / 棱镜坐标系</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2012-8" data-ai-title="图解法：实物求像 / 场曲 / 棱镜坐标系" title="AI 讲这题">AI</button></div><div class="stem">画图题。(1) 作垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 十字线分划板平面物，存在严重场曲；分别画出中心调焦清晰与边缘调焦清晰两种情况下的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/ec31918b494d.png" alt="2012-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/554591f889c3.png" alt="2012-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/55c644bbd64f.png" alt="2012-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
     <span class="src">【真题 + 教材】</span></div></div>
-<div class="q" id="q-2013-8"><div class="hd"><span class="tag">2013-8</span><span class="ttl">图解法：虚物求像 / 场曲与像散 / 棱镜坐标系</span></div><div class="stem">画图题。(1) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 十字线＋同心圆平面物；考虑场曲和像散，画出中心调焦清晰时的场曲图像，以及弧矢焦面上的像散图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的像方成像方向。</div><details class="figbox" open><summary>图</summary><figure><img src="img/dc7be507b3dc.png" alt="2013-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/25f835f38435.png" alt="2013-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/6788cb8d4005.png" alt="2013-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
+<div class="q" id="q-2013-8" data-marks="15"><div class="hd"><span class="tag">2013-8</span><span class="ttl">图解法：虚物求像 / 场曲与像散 / 棱镜坐标系</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2013-8" data-ai-title="图解法：虚物求像 / 场曲与像散 / 棱镜坐标系" title="AI 讲这题">AI</button></div><div class="stem">画图题。(1) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 十字线＋同心圆平面物；考虑场曲和像散，画出中心调焦清晰时的场曲图像，以及弧矢焦面上的像散图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的像方成像方向。</div><details class="figbox" open><summary>图</summary><figure><img src="img/dc7be507b3dc.png" alt="2013-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/25f835f38435.png" alt="2013-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/6788cb8d4005.png" alt="2013-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
     <span class="src">【真题 + 教材】</span></div></div>
-<div class="q" id="q-2014-8"><div class="hd"><span class="tag">2014-8</span><span class="ttl">图解法：由 H/H<span class="pr">′</span>/F/F<span class="pr">′</span> 求像 / 像散 / 棱镜坐标系</span></div><div class="stem">画图题。(1) 已知理想系统的主点 H、H<span class="pr">′</span> 与焦点 F、F<span class="pr">′</span>，画图求垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋辐条平面物，考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的成像空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/c1480af7c19b.png" alt="2014-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/11236bb72ff8.png" alt="2014-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/8689274ade99.png" alt="2014-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
+<div class="q" id="q-2014-8"><div class="hd"><span class="tag">2014-8</span><span class="ttl">图解法：由 H/H<span class="pr">′</span>/F/F<span class="pr">′</span> 求像 / 像散 / 棱镜坐标系</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2014-8" data-ai-title="" title="AI 讲这题">AI</button></div><div class="stem">画图题。(1) 已知理想系统的主点 H、H<span class="pr">′</span> 与焦点 F、F<span class="pr">′</span>，画图求垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋辐条平面物，考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的成像空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/c1480af7c19b.png" alt="2014-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/11236bb72ff8.png" alt="2014-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/8689274ade99.png" alt="2014-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
     <span class="src">【真题 + 教材】</span></div></div>
-<div class="q" id="q-2015-8"><div class="hd"><span class="tag">2015-8</span><span class="ttl">图解法：实物求像 / 像散 / 棱镜坐标系</span></div><div class="stem">画图题。(1) 作垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋辐条平面物，只考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/eaea1fea355a.png" alt="2015-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/11236bb72ff8.png" alt="2015-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/821fff216cb5.png" alt="2015-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
+<div class="q" id="q-2015-8"><div class="hd"><span class="tag">2015-8</span><span class="ttl">图解法：实物求像 / 像散 / 棱镜坐标系</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2015-8" data-ai-title="图解法：实物求像 / 像散 / 棱镜坐标系" title="AI 讲这题">AI</button></div><div class="stem">画图题。(1) 作垂轴实物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋辐条平面物，只考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/eaea1fea355a.png" alt="2015-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/11236bb72ff8.png" alt="2015-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/821fff216cb5.png" alt="2015-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
     <span class="src">【真题 + 教材】</span></div></div>
 <div style="margin:38px 0 10px;padding-top:14px;border-top:1px solid #e3dfd7;font-size:12.5px;color:#6d6d6d">
   <p><b>进度</b>：本文件 34 道真题（36 条）· 20 张裁图 · 12 个考点；《计算题》第 1–3 章、应用光学解析法均已单独成文。</p>
@@ -963,6 +1091,10 @@
                         border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
   #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
   #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 长图兜底（小牛 2026-11-18 反馈）：图不许把按钮顶出视野，按钮吸底 */
+  #quizov img,#quizov svg{max-height:42vh;width:auto;max-width:100%;height:auto;object-fit:contain}
+  #quizov .qbtns{position:sticky;bottom:-18px;z-index:2;background:#fff;padding:10px 0 2px;margin-top:14px;
+                 box-shadow:0 -10px 14px -12px rgba(0,0,0,.35);}
   /* 返回顶端 */
   #totop{position:fixed;right:16px;bottom:72px;z-index:21;display:none;width:40px;height:40px;
          border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
@@ -1553,7 +1685,8 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   });
 })();
 </script>
-
+<script src="ai-common.js"></script>
+<!--AI-ENTRY-->
 <style id="g851-rail-style">
 /* 非高频模块收进右上角菜单：页面里不再重复摆按钮（菜单内的链接不受影响） */
 body a[href="收藏.html"],body a[href="专项卷.html"],body a[href="记录.html"],
@@ -1570,9 +1703,9 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  transition:background .15s,box-shadow .15s}
 #g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 #g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
-#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+#g851-rail nav{position:absolute;right:0;top:40px;width:224px;background:#fff;
  border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
- padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:74vh;overflow:auto;
  opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
  transition:opacity .16s ease,transform .16s ease,visibility .16s}
 #g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
@@ -1580,12 +1713,218 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
 #g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
 #g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
 #g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .disp{display:flex;align-items:center;gap:6px;padding:4px 12px 8px;flex-wrap:wrap}
+#g851-rail .disp button{flex:0 0 auto;border:1px solid var(--line,#e3dfd7);background:#fff;color:#6d3d24;
+ border-radius:8px;padding:5px 9px;font-size:12.5px;font-family:inherit;cursor:pointer;line-height:1.4}
+#g851-rail .disp button:hover{background:#fdf7ef}
+#g851-rail .disp button.on{background:#8c4a2f;border-color:#8c4a2f;color:#fff}
+#g851-rail .disp .fsz{display:flex;gap:4px;margin-left:auto}
+#g851-rail .disp .fsz button{min-width:32px;padding:5px 6px}
 #g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
  color:#9a9a9a;font-size:11.5px;line-height:1.5}
 #g851-rail .rf b{color:#6d3d24;font-weight:600}
-@media print{#g851-rail{display:none!important}}
+#g851-toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);z-index:60;
+ display:flex;align-items:center;gap:10px;background:#2b241d;color:#f4ede2;border-radius:10px;
+ padding:9px 14px;font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+ box-shadow:0 6px 22px rgba(0,0,0,.28);opacity:0;transition:opacity .22s,transform .22s;max-width:92vw}
+#g851-toast.on{opacity:1;transform:translate(-50%,0)}
+#g851-toast button{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;
+ border-radius:7px;padding:3px 10px;font:inherit;cursor:pointer}
+#g851-toast button:hover{background:rgba(255,255,255,.12)}
+#g851-offline{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;
+ background:#6b3a2a;color:#fff;border-radius:9px;padding:6px 12px;font:12.5px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+/* 题旁 AI 小按钮（章节页注入的那批） */
+.g851-ai-mini{margin-left:auto;flex:0 0 auto;border:1px solid #e0cdb6;background:#fdf6ef;color:#8c4a2f;
+ border-radius:10px;padding:1px 8px;font:12px/1.7 inherit;cursor:pointer;letter-spacing:.5px}
+.g851-ai-mini:hover{background:#fdf4ea;border-color:#cfae95}
+/* 返回键 */
+#g851-back{position:fixed;right:16px;bottom:124px;z-index:40;width:40px;height:40px;border:0;border-radius:50%;
+ background:#8c4a2f;color:#fff;font-size:19px;line-height:40px;text-align:center;cursor:pointer;
+ box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92;padding:0}
+#g851-back:hover{opacity:1}
+@media print{.g851-ai-mini,.g851-ai-btn,#g851-back{display:none!important}}
+@media print{#g851-rail{display:none!important}#g851-toast,#g851-offline{display:none!important}}
 @media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
- #g851-rail nav{width:200px;top:38px}}
+ #g851-rail nav{width:208px;top:38px}}
+
+/* ══════════ 夜间模式（只在屏幕生效；打印永远浅色） ══════════ */
+@media screen{
+html[data-theme="dark"]{
+  --bg:#151410; --ink:#e8e2d6; --mut:#a89e90; --line:#3b362c; --acc:#d99a6d; --hl:#4a3d17;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+/* 面板：所有原来的白/米色块 */
+html[data-theme="dark"] .q,
+html[data-theme="dark"] .ans,
+html[data-theme="dark"] .res,
+html[data-theme="dark"] .warn,
+html[data-theme="dark"] .kcard,
+html[data-theme="dark"] .fitem,
+html[data-theme="dark"] details.figbox,
+html[data-theme="dark"] details.fold,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .kpi,
+html[data-theme="dark"] .day,
+html[data-theme="dark"] .tip,
+html[data-theme="dark"] .qindex,
+html[data-theme="dark"] .rep,
+html[data-theme="dark"] .prow,
+html[data-theme="dark"] .hintbtn,
+html[data-theme="dark"] .alt,
+html[data-theme="dark"] .sb,
+html[data-theme="dark"] .qstar,
+html[data-theme="dark"] .starbtn,
+html[data-theme="dark"] .fcond,
+html[data-theme="dark"] #db,
+html[data-theme="dark"] #db .day,
+html[data-theme="dark"] #db .kpi,
+html[data-theme="dark"] #db .sc a,
+html[data-theme="dark"] #db .go a,
+html[data-theme="dark"] .score,
+html[data-theme="dark"] nav,
+html[data-theme="dark"] .tbar{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"] .tbar{background:#241d15!important;color:#f0e8dc}
+html[data-theme="dark"] button,
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{background:#1c1a16;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] header.top{border-bottom-color:#6a6255}
+html[data-theme="dark"] nav{background:rgba(21,20,16,.96)!important}
+html[data-theme="dark"] .qindex{background:rgba(21,20,16,.97)!important}
+/* 强调色：原本的深棕在暗底上读不清，统一提亮 */
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .ttl,
+html[data-theme="dark"] .h3,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] #db .hd b,
+html[data-theme="dark"] #db .kpi b,
+html[data-theme="dark"] #db .bar .nm,
+html[data-theme="dark"] .cm b,
+html[data-theme="dark"] .cnt b,
+html[data-theme="dark"] .n,
+html[data-theme="dark"] .qact .qlink,
+html[data-theme="dark"] .sub b,
+html[data-theme="dark"] .lg b{color:var(--acc)!important}
+html[data-theme="dark"] .sub,
+html[data-theme="dark"] .lg,
+html[data-theme="dark"] .cm,
+html[data-theme="dark"] .mut,
+html[data-theme="dark"] .vl,
+html[data-theme="dark"] .wallhint,
+html[data-theme="dark"] figcaption{color:var(--mut)!important}
+/* 内联样式的常见硬编码色（页面里大量 style="color:#..."） */
+html[data-theme="dark"] [style*="color:#8c4a2f"]{color:#d99a6d!important}
+html[data-theme="dark"] [style*="color:#6d3a24"]{color:#cf9570!important}
+html[data-theme="dark"] [style*="color:#1b1b1b"]{color:#e8e2d6!important}
+html[data-theme="dark"] [style*="color:#3a3a3a"]{color:#ded7ca!important}
+html[data-theme="dark"] [style*="color:#6d6d6d"]{color:#a89e90!important}
+html[data-theme="dark"] [style*="color:#8a7b6c"]{color:#b5a996!important}
+html[data-theme="dark"] [style*="color:#a8332a"]{color:#e5907f!important}
+html[data-theme="dark"] [style*="background:#f"]{background:#1c1a16!important}
+html[data-theme="dark"] [style*="background:#fff"]{background:#1c1a16!important}
+/* 图与公式：线稿反相后是浅线深底，扫件不会刺眼 */
+html[data-theme="dark"] img,
+html[data-theme="dark"] svg{filter:invert(1) hue-rotate(180deg) brightness(.94) contrast(1.02)}
+/* 新版「阅读优化」主题会强制 .wrap 白底 + 绿色标题：暗色下要压过去 */
+html[data-theme="dark"][data-theme] .wrap,
+html[data-theme="dark"][data-theme] body > .wr,
+html[data-theme="dark"][data-theme] body > main,
+html[data-theme="dark"][data-theme] body > article{background:transparent!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > h1,
+html[data-theme="dark"][data-theme] .wrap > h2,
+html[data-theme="dark"][data-theme] .wrap h2,
+html[data-theme="dark"][data-theme] h1,
+html[data-theme="dark"][data-theme] h2,
+html[data-theme="dark"][data-theme] h3,
+html[data-theme="dark"][data-theme] h4{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .wrap > h2{background:linear-gradient(90deg,rgba(217,154,109,.12),transparent)!important;
+  border-left-color:var(--acc)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .wrap > .q,
+html[data-theme="dark"][data-theme] .q{background:#1e1b16!important;border-color:var(--line)!important;
+  border-left-color:#b5794f!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > .q .ans,
+html[data-theme="dark"][data-theme] .ans{background:#171511!important;border-color:var(--line)!important;
+  border-left-color:#8c6a4e!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .wrap > .q .stem,
+html[data-theme="dark"][data-theme] .stem{color:var(--ink)!important}
+/* 零散控件兜底：题号条、判分按钮、收藏按钮、底部操作条、首页快捷按钮 */
+html[data-theme="dark"][data-theme] .qindex a,
+html[data-theme="dark"][data-theme] .qindex .sec,
+html[data-theme="dark"][data-theme] .sb,
+html[data-theme="dark"][data-theme] .qact .qstar,
+html[data-theme="dark"][data-theme] .reveal button,
+html[data-theme="dark"][data-theme] .btnbar button,
+html[data-theme="dark"][data-theme] .quick a,
+html[data-theme="dark"][data-theme] #db .day .da a,
+html[data-theme="dark"][data-theme] #db .day .da button,
+html[data-theme="dark"][data-theme] #db .go a,
+html[data-theme="dark"][data-theme] .wallbar button{background:#26221c!important;
+  border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .qindex a{border-radius:999px;padding:2px 9px}
+html[data-theme="dark"][data-theme] .quick a:first-child,
+html[data-theme="dark"][data-theme] #db .day .da a.main,
+html[data-theme="dark"][data-theme] .go a.main,
+html[data-theme="dark"][data-theme] .btnbar button#tg{background:#a35b36!important;
+  border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"][data-theme] .sb.on,
+html[data-theme="dark"][data-theme] .qstar.on{background:#4a3a1f!important;border-color:#c79a4a!important;color:#f0c987!important}
+html[data-theme="dark"][data-theme] .qact .qlink{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] #wallq{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] #wallq::placeholder{color:#8a7a6a}
+html[data-theme="dark"][data-theme] a{color:var(--acc)}
+
+html[data-theme="dark"][data-theme] #g851-rail nav{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] #g851-rail .tab{background:#26221c;border-color:var(--line);color:var(--acc)}
+html[data-theme="dark"][data-theme] #g851-rail a:hover{background:#26221c}
+html[data-theme="dark"][data-theme] #g851-rail a.cur{background:#2f281f}
+html[data-theme="dark"][data-theme] #g851-rail .disp button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] #g851-rail .disp button.on{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] #g851-rail .rf{border-top-color:var(--line)}
+/* 独立页面（错题本 / 收藏 / 今日复习 / 记录 / 考点 / 专项卷 / 搜索）的卡片兜底 */
+html[data-theme="dark"][data-theme] [class*="card"],
+html[data-theme="dark"][data-theme] [class*="grp"],
+html[data-theme="dark"][data-theme] [class*="sum"],
+html[data-theme="dark"][data-theme] [class*="item"],
+html[data-theme="dark"][data-theme] [class*="empty"],
+html[data-theme="dark"][data-theme] [class*="box"],
+html[data-theme="dark"][data-theme] [class*="panel"]{background:#1e1b16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] [class*="tag"]{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] [class*="lost"]{color:#e5907f!important}
+html[data-theme="dark"][data-theme] .item button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] .item button.ok{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] .kbig{background:#211d17!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .kbig .kh,
+html[data-theme="dark"][data-theme] .kh{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .fcard{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .bar{background:rgba(21,20,16,.96)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"] .tr,
+html[data-theme="dark"] #db .bar .tr{background:#2c271f!important}
+html[data-theme="dark"] .tr i,
+html[data-theme="dark"] #db .bar .tr i{background:linear-gradient(90deg,#a9613c,#d99a6d)!important}
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] a.btn{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a,
+html[data-theme="dark"] #db .day .da button{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a.main{background:#a35b36!important;border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"] #db .day .da .ok{background:#1e2a1e!important;border-color:#3c5a3c!important;color:#9ecb9e!important}
+html[data-theme="dark"] #g851-rail svg,
+html[data-theme="dark"] #g851-bg img{filter:none}
+html[data-theme="dark"] #g851-bg{opacity:.10!important}
+html[data-theme="dark"] #totop{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] #g851-back{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] .g851-ai-mini{background:#26221c;border-color:#403a30;color:var(--acc)}
+html[data-theme="dark"] #errb{background:#2a2118;color:#f0e8dc;border-color:var(--line)}
+html[data-theme="dark"] ::selection{background:#5a4a22;color:#fff}
+/* 字号档 */
+html[data-fs="s"] body{font-size:15px}
+html[data-fs="l"] body{font-size:17.5px}
+html[data-fs="l"] .q,html[data-fs="l"] .ans,html[data-fs="l"] #db,html[data-fs="l"] .fitem{line-height:1.95}
+html[data-fs="s"] .q,html[data-fs="s"] .ans,html[data-fs="s"] #db,html[data-fs="s"] .fitem{line-height:1.75}
+html[data-fs="s"] #g851-rail .tab,
+html[data-fs="s"] #g851-rail nav{background:rgba(255,255,255,.92)}
+}
 </style>
 
 <div id="g851-rail" aria-label="更多模块">
@@ -1594,6 +1933,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   </button>
   <nav>
     <div class="grp">复习</div>
+    <a href="今日复习.html">今日复习</a>
     <a href="错题本.html">错题本</a>
     <a href="收藏.html">收藏夹</a>
     <a href="专项卷.html">专项卷</a>
@@ -1605,6 +1945,16 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     <a href="专题-双缝条纹平移.html">双缝平移速记</a>
     <div class="grp">记录</div>
     <a href="记录.html">记录中心</a>
+    <a href="AI-笔记.html">AI 笔记 / 待转交</a>
+    <div class="grp">显示</div>
+    <div class="disp">
+      <button type="button" id="g851-dark" title="夜间模式">☾ 夜间</button>
+      <span class="fsz">
+        <button type="button" data-fs="s" title="小字">A−</button>
+        <button type="button" data-fs="m" title="标准">A</button>
+        <button type="button" data-fs="l" title="大字">A+</button>
+      </span>
+    </div>
     <div class="rf">当前：<b class="cur-page">—</b></div>
   </nav>
 </div>
@@ -1629,6 +1979,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     if (el.classList.contains('open')) close(); else open();
   });
   document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  window.addEventListener('scroll', function(){ close(); }, {passive:true});
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') close();
     else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
@@ -1642,19 +1993,128 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
     .filter(function(s){ return s && s !== '851'; });
   el.querySelector('.cur-page').textContent = parts[0] || here;
+
+  /* ── 新版本提示 / 离线提示 ── */
+  (function () {
+    function toast(msg, actionText, onClick, ms) {
+      var d = document.createElement('div');
+      d.id = 'g851-toast';
+      var s = document.createElement('span');
+      s.textContent = msg;
+      d.appendChild(s);
+      if (actionText) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = actionText;
+        b.addEventListener('click', onClick);
+        d.appendChild(b);
+      }
+      document.body.appendChild(d);
+      setTimeout(function () { d.classList.add('on'); }, 30);
+      if (ms) setTimeout(function () {
+        d.classList.remove('on');
+        setTimeout(function () { d.parentNode && d.parentNode.removeChild(d); }, 300);
+      }, ms);
+    }
+    if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+      if (navigator.serviceWorker.controller) {
+        var fired = 0;
+        navigator.serviceWorker.addEventListener('controllerchange', function () {
+          if (fired) return;
+          fired = 1;
+          toast('库已更新到新版本', '刷新', function () { location.reload(); }, 15000);
+        });
+      }
+    }
+    var off = null;
+    function refreshOffline() {
+      if (navigator.onLine) {
+        if (off && off.parentNode) { off.parentNode.removeChild(off); off = null; }
+      } else if (!off) {
+        off = document.createElement('div');
+        off.id = 'g851-offline';
+        off.textContent = '离线中 · 已缓存的内容仍可看';
+        document.body.appendChild(off);
+      }
+    }
+    window.addEventListener('online', refreshOffline);
+    window.addEventListener('offline', refreshOffline);
+    refreshOffline();
+  })();
+
+  /* ── 返回上一页 ── */
+  (function () {
+    var b = document.createElement('button');
+    b.id = 'g851-back'; b.type = 'button'; b.title = '返回上一页'; b.textContent = '←';
+    b.setAttribute('aria-label', '返回上一页');
+    b.addEventListener('click', function () {
+      if (window.history.length > 1) window.history.back();
+      else location.href = 'index.html';
+    });
+    document.body.appendChild(b);
+  })();
+
+  /* ── 夜间模式 ── */
+  var darkBtn = document.getElementById('g851-dark');
+  function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
+  function paintDark(){
+    if (!darkBtn) return;
+    darkBtn.textContent = isDark() ? '☀ 日间' : '☾ 夜间';
+    darkBtn.classList.toggle('on', isDark());
+  }
+  function setDark(on){
+    if (on) document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('g851-theme', on ? 'dark' : 'light'); } catch(e){}
+    paintDark();
+  }
+  if (darkBtn) {
+    paintDark();
+    darkBtn.addEventListener('click', function(e){ e.stopPropagation(); setDark(!isDark()); });
+  }
+
+  /* ── 字号档 ── */
+  var fsBtns = el.querySelectorAll('.fsz button');
+  function curFs(){ return document.documentElement.getAttribute('data-fs') || 'm'; }
+  function paintFs(){
+    Array.prototype.forEach.call(fsBtns, function(b){
+      b.classList.toggle('on', b.getAttribute('data-fs') === curFs());
+    });
+  }
+  Array.prototype.forEach.call(fsBtns, function(b){
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      var v = b.getAttribute('data-fs');
+      if (v === 'm') document.documentElement.removeAttribute('data-fs');
+      else document.documentElement.setAttribute('data-fs', v);
+      try { localStorage.setItem('g851-fs', v); } catch(err){}
+      paintFs();
+    });
+  });
+  paintFs();
 })();
 </script>
 <!-- G851_BG_V3_HTML_START -->
 <div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-motion-actor" aria-hidden="true"><img id="g851-motion-img" src="bg-character-still.png" alt="" draggable="false"></div>
 <div id="g851-bgc">
- <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+ <div class="naiwa-toolbar">
+  <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+  <button class="naiwa-bg-button naiwa-quick-toggle" id="g851-bgt" type="button" aria-pressed="true" title="一键显示或隐藏视频奶蛙">🎬 动画：开</button>
+ </div>
  <div class="naiwa-bg-panel" id="naiwa-bg-panel">
-   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
-   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">6%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="6" aria-label="背景可见度百分比">
    <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
    <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgd">正文阅读保护层</label><input type="checkbox" id="g851-bgd" checked></div>
+   <div class="naiwa-row"><label for="g851-bgu">题目卡片排版</label><input type="checkbox" id="g851-bgu" checked></div>
+   <div class="naiwa-row"><label for="g851-bga2">显示视频奶蛙</label><input type="checkbox" id="g851-bga2" checked></div>
+   <div class="naiwa-row"><label for="g851-bgp">播放视频动画</label><input type="checkbox" id="g851-bgp" checked></div>
+   <div class="naiwa-row"><label for="g851-bga3">动画可见度</label><input type="range" id="g851-bga3" min="5" max="50" value="22"><span id="g851-bga4">22%</span></div>
    <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
-   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <p class="naiwa-caption">左下角可一键显示/隐藏；关闭播放时保留静态人物；专注模式自动隐藏动画。</p>
    <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
  </div>
 </div>
@@ -1666,10 +2126,15 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  if(!layer||!panel)return;
  var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
   val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
-  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
-  reset=document.getElementById('g851-bgr');
- var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
- var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),reading=document.getElementById('g851-bgd'),
+  ui=document.getElementById('g851-bgu'),reset=document.getElementById('g851-bgr'),
+  actor=document.getElementById('g851-motion-actor'),actorImg=document.getElementById('g851-motion-img'),
+  actorOn=document.getElementById('g851-bga2'),actorPlay=document.getElementById('g851-bgp'),
+  quickActor=document.getElementById('g851-bgt'),actorAlpha=document.getElementById('g851-bga3'),actorValue=document.getElementById('g851-bga4');
+ var N=5,EYE_MAP={"0":[{"x":39.9,"y":34.1,"w":11.8,"h":11.8}],"2":[{"x":9.8,"y":39.0,"w":12.3,"h":16.8,"mask":true,"pupilW":60,"pupilH":61,"colors":["#b0c998","#a2be85","#879d62"]},{"x":51.1,"y":28.9,"w":16.4,"h":16.4,"mask":true,"pupilW":55,"pupilH":58,"colors":["#b6d399","#a2c387","#839c60"]}]},sprites=[],resizeJob=0,eyeJob=0,mouse=null,layoutKey="";
+ // 固定槽位相对浏览器窗口与正文左右边缘布置，不再按窗口大小随机洗牌。
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes',KR='g851-bg-reading',KU='g851-bg-ui',KDV='g851-bg-read-default-v1',
+  KAC='g851-bg-character-enabled',KAL='g851-bg-character-opacity',KAP='g851-bg-character-playing';
  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
  function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
@@ -1677,89 +2142,179 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  var pageName=decodeURIComponent(location.pathname).split('/').pop();
  var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
  var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ document.documentElement.classList.toggle('g851-exam',defaultFocus);
  function apply(){
   var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
   document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
-  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  layer.style.opacity=onFocus?Math.min(v/100,.02):v/100;
   val.textContent=v?v+'%':'关';
   layer.classList.toggle('focus',onFocus);
   layer.classList.toggle('no-motion',!motion.checked||reduced);
-  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+  document.documentElement.classList.toggle('g851-reading',reading.checked||onFocus);
+  document.documentElement.classList.toggle('g851-ui',ui.checked);
+  var enabled=actorOn.checked&&!onFocus;
+  actor.style.display=enabled?'block':'none';
+  quickActor.textContent=actorOn.checked?'🎬 动画：开':'🎬 动画：关';
+  quickActor.setAttribute('aria-pressed',String(actorOn.checked));
+  quickActor.title=actorOn.checked?'点击隐藏视频奶蛙':'点击显示视频奶蛙';
+  var pct=clamp(+actorAlpha.value||22,5,50);
+  actorValue.textContent=pct+'%';actor.style.setProperty('--g851-motion-alpha',(pct/100).toFixed(2));
+  var src=(enabled&&actorPlay.checked&&!reduced)?'bg-character.webp':'bg-character-still.png';
+  if(actorImg.getAttribute('src')!==src)actorImg.setAttribute('src',src);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){for(var eye of s.eyes){eye.mover.style.setProperty('--look-x','0px');eye.mover.style.setProperty('--look-y','0px')}}}
  }
+ /* 旧版默认12%首次升级为6%；用户原先自定义的其他数值不改变。 */
  var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
- range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ if(get(KDV)!=='1'){
+  if(saved===null||saved==='12'){saved='6';put(K,6)}
+  put(KDV,'1');
+ }
+ range.value=clamp(query?+query[1]:(saved===null?6:+saved),0,30);
  motion.checked=(get(KM)!=='0')&&!reduced;
  eyes.checked=(get(KE)!=='0')&&!reduced;
  focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ reading.checked=get(KR)!=='0';
+ ui.checked=get(KU)!=='0';
+ actorOn.checked=get(KAC)!=='0';
+ actorPlay.checked=get(KAP)!=='0'&&!reduced;
+ actorAlpha.value=clamp(get(KAL)===null?22:+get(KAL),5,50);
  apply();
  range.addEventListener('input',function(){apply();put(K,range.value)});
  motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
  eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
  focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
- reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
-  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+ reading.addEventListener('change',function(){apply();put(KR,reading.checked?'1':'0')});
+ ui.addEventListener('change',function(){apply();put(KU,ui.checked?'1':'0')});
+ actorOn.addEventListener('change',function(){apply();put(KAC,actorOn.checked?'1':'0')});
+ quickActor.addEventListener('click',function(){actorOn.checked=!actorOn.checked;apply();put(KAC,actorOn.checked?'1':'0')});
+ actorPlay.addEventListener('change',function(){apply();put(KAP,actorPlay.checked?'1':'0')});
+ actorAlpha.addEventListener('input',function(){apply();put(KAL,actorAlpha.value)});
+ reset.addEventListener('click',function(){range.value=6;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;reading.checked=true;ui.checked=true;
+  actorOn.checked=true;actorPlay.checked=!reduced;actorAlpha.value=22;apply();put(K,6);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');put(KR,'1');put(KU,'1');put(KAC,'1');put(KAL,22);put(KAP,actorPlay.checked?'1':'0');
   try{localStorage.removeItem(KF)}catch(e){}});
  btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
  document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
- function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
-  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
-  return((t^t>>>14)>>>0)/4294967296;}}
+ // 固定编号固定侧边位置。浏览器缩放只缩放坐标，不会重新随机挑选造型/位置。
+ // 两边从上至下；右下角始终留给视频奶蛙，即使它暂时隐藏也不挪动其他图案。
+ var SLOTS=[
+  {side:'left', y:.14,kind:0,angle:-14}, {side:'right',y:.15,kind:2,angle:12},
+  {side:'left', y:.38,kind:3,angle:9}, {side:'right',y:.40,kind:1,angle:-12},
+  {side:'left', y:.62,kind:4,angle:-8}, {side:'right',y:.65,kind:0,angle:13},
+  {side:'left', y:.85,kind:2,angle:13}, {side:'right',y:.86,kind:3,angle:-10}
+ ];
  function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function boxOf(r){return {l:r.left,t:r.top,r:r.right,b:r.bottom};}
+ function actorBounds(){
+  // 即使关闭了视频奶蛙，也始终保留原来的动画位置，避免切换时其他图案跳动。
+  if(!actor)return null;
+  var wasHidden=getComputedStyle(actor).display==='none',oldDisplay=actor.style.display,oldVisibility=actor.style.visibility;
+  if(wasHidden){actor.style.display='block';actor.style.visibility='hidden';}
+  var r=actor.getBoundingClientRect();
+  if(wasHidden){actor.style.display=oldDisplay;actor.style.visibility=oldVisibility;}
+  return r.width>0&&r.height>0?boxOf(r):null;
+ }
+ function contentBounds(W){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  // 若页面没有主要阅读容器，保守预留中央正文区域。
+  if(!main)return {left:W>900?(W-900)/2:W*.15,right:W>900?(W+900)/2:W*.85};
+  var r=main.getBoundingClientRect();
+  return {left:clamp(r.left,0,W),right:clamp(r.right,0,W)};
+ }
  function relayout(){
-  var W=innerWidth,H=innerHeight;
+  var W=window.innerWidth,H=window.innerHeight;
   if(W<180||H<180)return;
-  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
-  lastW=W;lastH=H;layer.textContent='';sprites=[];
-  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
-  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
-  var count=clamp(Math.round(W*H/60000),6,30);
-  for(var i=0;i<count;i++){
-   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
-   var angle=(rand()-.5)*52;
-   if(rand()<.1)angle+=(rand()<.5?85:-85);
-   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
-   var margin=16,found=null,rect;
-   if(ew+margin*2>W||ew+margin*2>H)continue;
-   for(var attempt=0;attempt<360;attempt++){
-    var cx=ew/2+margin+rand()*(W-ew-2*margin);
-    var cy=ew/2+margin+rand()*(H-ew-2*margin);
-    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
-    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
-   }
-   if(!found)continue;
-   boxes.push(rect);
-   var kind=Math.floor(rand()*N);
+  var c=contentBounds(W),reserved=[],a=actorBounds();
+  // 题目展开/折叠只改变正文高度，不应触发图案刷新和动画重置。
+  var key=[Math.round(W),Math.round(H),Math.round(c.left),Math.round(c.right)].join('/');
+  if(key===layoutKey)return;
+  layoutKey=key;
+  // 根据固定槽位绘制；不使用尺寸作随机种子，也不以窗口面积改变选取顺序。
+  layer.textContent='';sprites=[];
+  if(a)reserved.push(a);
+  // 保留左下角开关的操作空间，不让装饰漂到按钮正后方。
+  var tb=panel.querySelector('.naiwa-toolbar');
+  if(tb){var t=tb.getBoundingClientRect();reserved.push(boxOf(t));}
+  var placed=[];
+  for(var i=0;i<SLOTS.length;i++){
+   var slot=SLOTS[i],left=slot.side==='left';
+   var railLeft=left?0:c.right,railRight=left?c.left:W;
+   var rail=railRight-railLeft;
+   // 侧边空间不足时直接不画，绝不强塞进正文或与视频角色重叠。
+   if(rail<68)continue;
+   var angle=slot.angle,aRad=angle*Math.PI/180;
+   var footprintFactor=Math.abs(Math.cos(aRad))+Math.abs(Math.sin(aRad));
+   // 占位盒包括旋转、漂浮与点击放大时的额外安全余量。
+   var width=Math.min(112,(rail-44)/(footprintFactor*1.17),H*.145);
+   if(width<38)continue;
+   var outer=width*footprintFactor*1.17+18;
+   var cx=(railLeft+railRight)/2,cy=slot.y*H;
+   var rect={l:cx-outer/2,t:cy-outer/2,r:cx+outer/2,b:cy+outer/2};
+   if(rect.l<7||rect.r>W-7||rect.t<7||rect.b>H-7)continue;
+   // 主阅读区也属于禁止占用区域，而非只靠白底遮住背景。
+   if(left&&rect.r>c.left-3||!left&&rect.l<c.right+3)continue;
+   if(reserved.some(function(b){return collision(rect,b,12)})||
+      placed.some(function(b){return collision(rect,b,12)}))continue;
+   placed.push(rect);
+   var kind=slot.kind%N;
    var el=document.createElement('div');el.className='naiwa';
-   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
-   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
-   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
-   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
-   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   el.dataset.slot=String(i);el.dataset.kind=String(kind);
+   el.style.left=(cx-width/2).toFixed(2)+'px';el.style.top=(cy-width/2).toFixed(2)+'px';
+   el.style.width=width.toFixed(2)+'px';el.style.height=width.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle+'deg');
+   el.style.setProperty('--speed',(7+(i%4)*1.3).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-i*1.7).toFixed(2)+'s');
    var fl=document.createElement('div');fl.className='naiwa-float';
    var reaction=document.createElement('div');reaction.className='naiwa-react';
    var face=document.createElement('div');face.className='naiwa-face';
    face.style.setProperty('--atlas-scale',(N*100)+'%');
    face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
    reaction.appendChild(face);
-   var pupil=null;
-   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
-   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   var eyeSet=EYE_MAP[String(kind)]||[],eyeParts=[];
+   for(var k=0;k<eyeSet.length;k++){
+    var ec=eyeSet[k],socket=document.createElement('div');
+    socket.className='naiwa-eye'+(ec.mask?' naiwa-eye--masked':'');
+    socket.style.left=ec.x+'%';socket.style.top=ec.y+'%';
+    socket.style.width=ec.w+'%';socket.style.height=(ec.h||ec.w)+'%';
+    var mover=socket;
+    if(ec.mask){
+     if(ec.colors){socket.style.setProperty('--iris-light',ec.colors[0]);socket.style.setProperty('--iris-mid',ec.colors[1]);socket.style.setProperty('--iris-dark',ec.colors[2]);}
+     mover=document.createElement('span');mover.className='naiwa-eye-dot';
+     mover.style.width=(ec.pupilW||56)+'%';mover.style.height=(ec.pupilH||56)+'%';
+     socket.appendChild(mover);
+    }
+    reaction.appendChild(socket);eyeParts.push({anchor:socket,mover:mover,masked:!!ec.mask});
+   }
    fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
-   sprites.push({el:el,react:reaction,pupil:pupil});
+   sprites.push({el:el,react:reaction,eyes:eyeParts});
   }
  }
- window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
-  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ function scheduleRelayout(){
+  if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout();});
+ }
+ window.addEventListener('resize',scheduleRelayout,{passive:true});
+ window.addEventListener('pageshow',scheduleRelayout);
+ if(window.ResizeObserver){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  if(main){var ro=new ResizeObserver(scheduleRelayout);ro.observe(main);}
+ }
  document.addEventListener('pointermove',function(e){
   if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
   mouse={x:e.clientX,y:e.clientY};
   if(eyeJob)return;
   eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
-   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
-    var max=clamp(r.width*.04,2,5);
-    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
-    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   for(var s of sprites){
+    var sr=s.el.getBoundingClientRect();
+    for(var eye of s.eyes){
+     var r=eye.anchor.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+     var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+     var max=clamp(sr.width*.04,2,5);
+     // 双眼瞳孔不能离开绿色眼眶；单眼保持旧版幅度。
+     if(eye.masked)max=Math.min(max,Math.min(r.width,r.height)*.16);
+     eye.mover.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+     eye.mover.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+    }
    }
   });
  },{passive:true});

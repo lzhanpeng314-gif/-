@@ -92,23 +92,145 @@
   details.fold>summary+b,details.fold>summary+p{margin-top:6px;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#8c4a2f">
-
-
-
-
-<!-- G851_BG_V3_CSS_START -->
+<meta name="theme-color" content="#8c4a2f"><script>/*G851_THEME_EARLY*/
+(function(){
+  try {
+    var d = document.documentElement;
+    var t = localStorage.getItem('g851-theme');
+    if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    if (t === 'dark') d.setAttribute('data-theme', 'dark');
+    var f = localStorage.getItem('g851-fs');
+    if (f) d.setAttribute('data-fs', f);
+    /* 打卡：今天第一次打开就记一天（放在 head，保证首页看板首屏就能读到） */
+    var A = 'g851-active', arr = JSON.parse(localStorage.getItem(A) || '[]') || [];
+    var n = new Date();
+    var td = n.getFullYear() + '-' + ('0' + (n.getMonth() + 1)).slice(-2) + '-' + ('0' + n.getDate()).slice(-2);
+    if (arr.length === 0 || arr[arr.length - 1] !== td) {
+      arr.push(td);
+      if (arr.length > 400) arr = arr.slice(-400);
+      localStorage.setItem(A, JSON.stringify(arr));
+    }
+  } catch(e){}
+})();
+</script><!-- G851_BG_V3_CSS_START -->
 <style id="g851-bg-style">
-/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
-#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+/* 奶蛙 v3 阅读优化：只调整背景/正文显示层，不改题目、公式、答案和交互数据。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.06);contain:layout paint;
+ /* 侧边装饰保留；中央正文后方显著淡化。 */
+ -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+ mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+}
+/* 由原视频逐帧抠图的透明动画，独立于静态奶蛙；始终在正文层之后，不阻挡任何点击。 */
+#g851-motion-actor{position:fixed;right:max(12px,calc((100vw - 1024px)/2 - 220px));bottom:2vh;
+ width:clamp(150px,18vw,240px);aspect-ratio:300/407;z-index:-1;pointer-events:none;
+ opacity:var(--g851-motion-alpha,.22);user-select:none;}
+#g851-motion-actor img{display:block;width:100%;height:100%;object-fit:contain;}
+@media(max-width:780px){#g851-motion-actor{width:114px;right:-10px;bottom:8vh;
+ opacity:calc(var(--g851-motion-alpha,.22) * .55);}}
+@media print{#g851-motion-actor{display:none!important}}
+/* 阅读保护层只作用于 body 的顶层正文容器，不碰题目及公式内部子元素。 */
+html.g851-reading body > .wrap,
+html.g851-reading body > .wr,
+html.g851-reading body > main,
+html.g851-reading body > article{
+ position:relative;
+ background-color:rgba(255,255,255,.985)!important;
+ border-radius:14px;
+ box-shadow:0 0 0 1px rgba(94,78,60,.08),0 8px 28px rgba(60,49,35,.045);
+}
+@media(max-width:780px){
+ /* 窄屏阅读面积更大，不刻意在中间挖出一条渐变。 */
+ #g851-bg{-webkit-mask-image:none;mask-image:none;}
+ html.g851-reading body > .wrap,html.g851-reading body > .wr,
+ html.g851-reading body > main,html.g851-reading body > article{border-radius:0;box-shadow:none;}
+}
+/* ===== 851 阅读 UI 增强：仅针对章节真题页的现有结构，不重排 DOM、不触碰评分逻辑 ===== */
+/* 顶层正文板块已经使用 g851-reading 白底；本层只负责内部信息层级。 */
+html.g851-ui:not(.g851-exam) body > .wrap > h1{
+ color:#263a2e;letter-spacing:.012em;line-height:1.4;
+ text-wrap:balance;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .sub{
+ color:#647168;line-height:1.7;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > h2{
+ color:#345a43;
+ padding:11px 14px;
+ margin-top:27px;margin-bottom:15px;
+ background:linear-gradient(90deg,rgba(236,244,238,.95),rgba(255,255,255,0));
+ border-left:4px solid #7e9e86;
+ border-bottom:1px solid rgba(94,124,101,.14);
+ border-radius:7px 0 0 7px;
+ line-height:1.5;
+}
+/* 直接子元素保证只美化题库正文；不会误伤浮窗、目录和专项卷组件。 */
+html.g851-ui:not(.g851-exam) body > .wrap > .q{
+ position:relative;background:#fff;
+ border:1px solid #e1e8e0;
+ border-left:3px solid #a2baa6;
+ border-radius:12px;
+ padding:20px 22px;
+ margin-bottom:18px;
+ box-shadow:0 3px 13px rgba(35,67,45,.045);
+ scroll-margin-top:100px;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q:target{
+ border-color:#789983;
+ box-shadow:0 0 0 2px rgba(121,164,130,.13),0 4px 15px rgba(35,67,45,.07);
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{
+ color:#24332a;
+ font-size:16.5px;
+ line-height:1.86;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{
+ background:#f7faf7;
+ border:1px solid #e4ede5;
+ border-left:3px solid #92b09a;
+ border-radius:8px;
+ padding:14px 17px;
+ margin-top:14px;
+ color:#293b30;
+ line-height:1.83;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans .eqb{
+ max-width:100%;overflow-x:auto;overflow-y:hidden;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q img{
+ max-width:100%;height:auto;
+}
+@media(max-width:780px){
+ html.g851-ui:not(.g851-exam) body > .wrap > h2{padding:9px 11px;margin-top:20px;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q{
+  padding:15px 14px;border-radius:9px;margin-bottom:13px;
+  box-shadow:0 1px 5px rgba(35,67,45,.025);
+ }
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{font-size:16px;line-height:1.78;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{padding:11px 12px;line-height:1.76;}
+}
+@media print{
+ html.g851-ui body > .wrap > .q{box-shadow:none!important;}
+}
+/* ===== 阅读 UI 增强结束 ===== */
 #g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
 #g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
 #g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
 #g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
-#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+/* 每张造型按图集 metadata 独立设定眼睛位置；原版单瞳孔行为不变。 */
+#g851-bg .naiwa-eye{position:absolute;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
  transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
  transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+/* 思考奶蛙两眼原图带固定瞳孔：先盖住静态瞳孔，只让黑色动态瞳孔移动。 */
+#g851-bg .naiwa-eye--masked{overflow:hidden;transform:translate(-50%,-50%);box-shadow:none;
+ background:radial-gradient(ellipse at 42% 37%,var(--iris-light,#b1cb9a) 0%,
+ var(--iris-mid,#9fbe84) 55%,var(--iris-dark,#849d65) 96%,rgba(130,157,100,0) 100%);}
+#g851-bg .naiwa-eye-dot{display:block;position:absolute;left:50%;top:50%;border-radius:50%;
+ background:radial-gradient(ellipse at 39% 34%,#17231a 0%,#080f09 60%,#010402 90%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -1px -1px 3px rgba(0,0,0,.3);}
 @keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
 @keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
 @keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
@@ -123,6 +245,9 @@
 #g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
  font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
 #g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+#g851-bgc .naiwa-quick-toggle[aria-pressed="false"]{background:rgba(246,247,245,.96);color:#68746a;border-color:#d7e0d8;}
+#g851-bgc .naiwa-quick-toggle:focus-visible,#g851-bgc .naiwa-bg-button:focus-visible{outline:2px solid #638e76;outline-offset:2px;}
 #g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
 #g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
  background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
@@ -130,6 +255,8 @@
 #g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
 #g851-bgc .naiwa-row label{cursor:pointer;}
 #g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc #g851-bga3{width:75px;max-width:75px;accent-color:#aa795c;}
+#g851-bgc #g851-bga4{font-variant-numeric:tabular-nums;min-width:29px;text-align:right;}
 #g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
 #g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
 @media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
@@ -140,8 +267,19 @@
  body{padding-top:0}
  /* 题图不设宽度时按自然尺寸显示，会在手机上横向溢出：统一兜底 */
  img{max-width:100%;height:auto}
+ svg{max-width:100%;height:auto}
  table{max-width:100%}
  .ans .eqb,.ans .eq{overflow-x:auto}
+ /* 图框/折叠框：与章节页同一套样式（小牛 2026-11-18 反馈：SVG 在内嵌图里被撑大） */
+ figure{margin:10px auto;text-align:center;max-width:100%}
+ figcaption{font-size:12.5px;color:#6d6d6d;margin-top:6px;line-height:1.65}
+ details.figbox{margin:10px 0;border:1px solid var(--line,#e3dfd7);border-radius:6px;
+                padding:5px 10px;background:#fdfcf8}
+ details.figbox>summary,details.fold>summary{cursor:pointer;font-size:12.5px;color:#6d6d6d;
+                outline:none;user-select:none}
+ details.figbox>summary::marker,details.fold>summary::marker{content:"▸ "}
+ details.fold{margin:9px 0;border:1px dashed var(--line,#e3dfd7);border-radius:5px;
+              padding:5px 11px;background:#fdfcf8}
  .tbar{position:sticky;top:0;z-index:30;background:#6d3a24;color:#fff;padding:9px 14px;display:flex;
        gap:10px;align-items:center;font-size:14px;flex-wrap:wrap;}
  .tbar b{font-size:17px;font-variant-numeric:tabular-nums;}
@@ -181,8 +319,16 @@
  .reveal{margin:8px 0 4px;display:flex;gap:8px;flex-wrap:wrap;}
  .reveal button{background:#f4e9dd;border:1px solid #d8cbbb;color:#6d3a24;border-radius:14px;
                 padding:4px 14px;font-size:13px;cursor:pointer;}
- .reveal button.sb{background:#fff;border-color:#d8cbbb;}
- .reveal button.sb.sel{background:#2e7d32;border-color:#2e7d32;color:#fff;}
+ .scin{display:inline-flex;align-items:center;gap:4px}
+ .scb{width:26px;height:26px;border:1px solid #d8cbbb;background:#fff;color:#6d3a24;border-radius:8px;
+      font-size:15px;line-height:1;cursor:pointer;padding:0;font-family:inherit}
+ .scb:hover{background:#f4e9dd}
+ .sci{width:58px;height:26px;border:1px solid #d8cbbb;border-radius:8px;text-align:center;
+      font:13px/1 inherit;color:#2b2b2b;background:#fff;padding:0 4px;-moz-appearance:textfield}
+ .sci::-webkit-outer-spin-button,.sci::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+ .sci:focus{outline:2px solid #c9a883;outline-offset:0}
+ .scmax{border:0;background:none;color:#8c4a2f;font:12px inherit;cursor:pointer;padding:0 2px;text-decoration:underline}
+ .scu{color:#8a7b6c;font-size:12px}
  .reveal button.okb{background:#2e7d32;border-color:#2e7d32;color:#fff;}
  .reveal button.nob{background:#b23b3b;border-color:#b23b3b;color:#fff;}
  .scorer{margin:6px 0 2px;font-size:13px;}
@@ -191,12 +337,25 @@
  .score{position:fixed;left:14px;bottom:52px;z-index:35;background:#fff;border:1px solid #e3dfd7;
         border-radius:10px;padding:8px 12px;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.12);}
  .score b{color:#6d3a24;font-size:15px;}
- @media print{.tbar,.qindex,.reveal,.score{display:none;} .q:not(.show) .ans{display:block !important;}}
-</style><div class="tbar"><span>剩余</span><b id="clk">180:00</b><button id="tstart">开始</button><button id="treset">重置</button><button id="submit">交卷</button><span id="lastsub" style="margin-left:auto"></span></div><div class="qindex"><span class="sec">其余</span><a href="#m20111">1</a><a href="#m20112">2</a><a href="#m20113">3</a><a href="#m20114">4</a><a href="#m20115">5</a><a href="#m20116">6</a><a href="#m20117">7</a><a href="#m20118">8</a><a href="#m201110">10</a><a href="#m201111">11</a><a href="#m201112">12</a><a href="#m201113">13</a><a href="#m201191">9(1)</a><a href="#m201192">9(2)</a></div><h1 style="margin-top:16px">2011 年 851 模拟卷</h1><div class="sub">14 题 · 建议限时 180 分钟 · 做完按分值打分（简答 5 / 计算 10，可给半分）</div><p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="公式墙.html">公式墙</a></p><h2 id="sec9" style="margin:26px 0 10px">其余</h2><div id="m20111" data-parts="5|5" data-full="10"><div class="q" id="q003">
+ @media print{.tbar,.qindex,.reveal,.score,.qact,.scorer{display:none;} .q:not(.show) .ans{display:block !important;}}
+ /* 每题底部的「收藏 / 回原题」小操作条 */
+ .qact{display:flex;gap:10px;justify-content:flex-end;align-items:center;margin:8px 0 2px;font-size:12.5px}
+ .qact .qstar{border:1px solid #e0d3c6;background:#fff;color:#8c4a2f;border-radius:999px;
+              padding:3px 11px;cursor:pointer;font-size:12.5px;font-family:inherit;line-height:1.5}
+ .qact .qstar:hover{background:#fdf4ea;border-color:#cfae95}
+ .qact .qstar.on{background:#fff6e0;border-color:#e0b64a;color:#a5701a}
+ .qact .qlink{color:#8a7b6c;text-decoration:none;border-bottom:1px dotted #c9b8a8}
+ .qact .qlink:hover{color:#8c4a2f;border-bottom-color:#8c4a2f}
+ .qact .qai{display:none}
+ body.graded .qact .qai{display:inline-block}
+ body.graded .qact .qai{background:#fff;border:1px solid #e0d3c6;color:#8c4a2f;border-radius:999px;
+   padding:3px 11px;font:12.5px/1.5 inherit;cursor:pointer}
+ body.graded .qact .qai:hover{background:#fdf4ea}
+</style><div class="tbar"><span>剩余</span><b id="clk">180:00</b><button id="tstart">开始</button><button id="treset">重置</button><button id="submit">交卷</button><span id="lastsub" style="margin-left:auto"></span></div><div class="qindex"><span class="sec">其余</span><a href="#m20111">1</a><a href="#m20112">2</a><a href="#m20113">3</a><a href="#m20114">4</a><a href="#m20115">5</a><a href="#m20116">6</a><a href="#m20117">7</a><a href="#m20118">8</a><a href="#m201110">10</a><a href="#m201111">11</a><a href="#m201112">12</a><a href="#m201113">13</a><a href="#m201191">9(1)</a><a href="#m201192">9(2)</a></div><h1 style="margin-top:16px">2011 年 851 模拟卷</h1><div class="sub">14 题 · 建议限时 180 分钟 · 做完按分值打分（简答 5 / 计算 10，可给半分）</div><p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="公式墙.html">公式墙</a></p><h2 id="sec9" style="margin:26px 0 10px">其余</h2><div id="m20111" data-parts="5|5" data-full="10"><div class="q" data-marks="10">
   <div class="hd"><span class="tag">2011-1</span><span class="ttl">红宝石表面无反射损失：对入射光的要求与入射角</span></div>
   <div class="stem">若要使线偏振光在红宝石晶体（n = 1.76）表面没有反射损失，对入射光有何要求？入射角应为多大？<span class="qp" data-n="2"></span></div>
     <details class="figbox" open><summary>图</summary><figure><img src="img/75e36cd78e28.png" alt="原卷插图" style="max-width:100%;height:auto"><figcaption>原卷 p2 插图</figcaption></figure></details>
-    <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）5 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div><div class="prow"><span class="pl">（2）5 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>介质界面反射率为零的唯一途径（空气→介质）是 <b>布儒斯特角入射</b>，此时反射光只留 s 分量、p 分量反射率为 0。所以要求：线偏振光的<b>振动方向在入射面内</b>（纯 p 偏振），且<b>入射角等于布儒斯特角</b>。
     </div>
     <div class="step"><b class="n">2</b>布儒斯特角（n<sub>1</sub> = 1，n<sub>2</sub> = 1.76）
@@ -209,11 +368,11 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m20112" data-parts="10" data-full="10"><div class="q" id="q015">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-1" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-1" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q003" title="回到题库原题">原题 &#8599;</a></div></div><div id="m20112" data-parts="10" data-full="10"><div class="q" data-marks="10">
   <div class="hd"><span class="tag">2011-2</span><span class="ttl">两波夹角 2α、屏垂直于角平分线：条纹间距与形状</span></div>
   <div class="stem">如图所示的两相干平面光波夹角 2α，在垂直于角平分线放置一观察屏，两光波在 z = 0 处，求出屏上的干涉条纹的间距和形状（波长 λ）。</div>
     <details class="figbox" open><summary>图</summary><figure><img src="img/39fad5a8fab7.png" alt="原卷插图" style="max-width:100%;height:auto"><figcaption>原卷 p10 插图</figcaption></figure></details>
-    <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="10" data-step="1" min="0" max="10" step="1" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;10</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>取角平分线为 z 轴（屏的法线就是它），两波对称：<b>k</b><sub>1,2</sub> = <i>k</i>(±sinα, 0, cosα)，屏在 z = 0
     </div>
     <div class="step"><b class="n">2</b>
@@ -226,11 +385,11 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m20113" data-parts="10" data-full="10"><div class="q" id="q016">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-2" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-2" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q015" title="回到题库原题">原题 &#8599;</a></div></div><div id="m20113" data-parts="12" data-full="12"><div class="q" data-marks="12">
   <div class="hd"><span class="tag">2011-3</span><span class="ttl">插玻璃片使中央亮纹移到原第 5 级：求厚度</span></div>
   <div class="stem">把折射率为 1.5 的玻璃片插入杨氏干涉实验的一束光路中，光屏上中央亮条纹移动至原来第 5 级亮条纹所在位置，求插入玻璃片的厚度。已知光波长为 600 nm。</div>
     <details class="figbox" open><summary>图</summary><figure><img src="img/335c474ee242.png" alt="原卷插图" style="max-width:100%;height:auto"><figcaption>原卷 p8 插图</figcaption></figure></details>
-    <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+    <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">12 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="12" data-step="1" min="0" max="12" step="1" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;12</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>插入玻璃片后，该束光多走的光程（几何厚度 t 换成 (n−1)t）
       <div class="eqb">Δ = (<i>n</i> − 1)<i>t</i></div>
     </div>
@@ -241,10 +400,10 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m20114" data-parts="10" data-full="10"><div class="q" id="q025">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-3" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-3" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q016" title="回到题库原题">原题 &#8599;</a></div></div><div id="m20114" data-parts="14" data-full="14"><div class="q" data-marks="14">
   <div class="hd"><span class="tag">2011-4</span><span class="ttl">电子显微镜的最小分辨距离与所需放大倍数</span></div>
   <div class="stem">电子显微镜的孔径角为 2u = 8°，电子束的波长为 10 nm，试求其最小分辨距离。若人眼在明视距离处能分辨 67 μm 的距离，则此显微镜的放大倍数是多少？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">14 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="14" data-step="1" min="0" max="14" step="1" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;14</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>孔径角 2u = 8° ⇒ 半孔径角 u = 4°，数值孔径 NA = sin4° = 0.0698（电子显微镜在真空中，n = 1）
     </div>
     <div class="step"><b class="n">2</b>最小分辨距离
@@ -258,10 +417,10 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m20115" data-parts="4|3|3" data-full="10"><div class="q" id="q026">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-4" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-4" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q025" title="回到题库原题">原题 &#8599;</a></div></div><div id="m20115" data-parts="5|5|4" data-full="14"><div class="q" data-marks="14">
   <div class="hd"><span class="tag">2011-5</span><span class="ttl">单缝中央亮纹角宽；其中能装几级谱线；谱线半角宽度</span></div>
   <div class="stem">用波长为 624 nm 的单色光照射缝宽为 0.012 mm、不透明部分的宽度为 0.029 mm、缝数为 1000 条的光栅，试求：（1）单缝衍射图样的中央亮纹角宽度；（2）单缝衍射图样中央亮纹宽度内能看到多少级谱线；（3）谱线的半角宽度为多少？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）3 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）3 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div><div class="prow"><span class="pl">（2）5 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div><div class="prow"><span class="pl">（3）4 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="4" data-step="0.5" min="0" max="4" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;4</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>a = 0.012 mm，b = 0.029 mm ⇒ d = a + b = 0.041 mm，d/a = 3.417（<b>不是整数 ⇒ 不缺级</b>）
     </div>
     <div class="step"><b class="n">2</b>（1）单缝衍射中央亮纹的角宽度（两侧第一极小之间）
@@ -278,11 +437,11 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m20116" data-parts="10" data-full="10"><div class="q" id="q041">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-5" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-5" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q026" title="回到题库原题">原题 &#8599;</a></div></div><div id="m20116" data-parts="14" data-full="14"><div class="q" data-marks="14">
   <div class="hd"><span class="tag">2011-6</span><span class="ttl">双楔形 KDP 电光偏转器的偏转角</span></div>
   <div class="stem">如图所示的电光偏转器由两块楔形 KDP 棱镜组成，其中 <i>h</i> 为 <i>x</i><sub>3</sub> 方向的晶体宽度，<i>l</i> 为沿光传播方向晶体的长度，<i>D</i> 为楔形棱镜的最大厚度。棱镜外加电压 <i>U</i> 沿图示 <i>x</i><sub>3</sub> 方向，两块棱镜的光轴方向（<i>x</i><sub>3</sub>）相反，<i>x</i><sub>1</sub><span class="pr">′</span>、<i>x</i><sub>2</sub><span class="pr">′</span> 为感应主轴方向。若光线沿 <i>x</i><sub>2</sub> 轴方向入射，光振动沿 <i>x</i><sub>1</sub><span class="pr">′</span> 方向，试求光束穿过偏转器后的偏转角度 θ。</div>
     <details class="figbox" open><summary>图</summary><figure><img src="img/8b35112d05a6.png" alt="原卷插图" loading="lazy" style="max-width:100%;height:auto"><figcaption>原卷 p37 插图</figcaption></figure></details>
-<div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+<div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">14 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="14" data-step="1" min="0" max="14" step="1" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;14</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>每块棱镜内：E ∥ <i>x</i><sub>3</sub>，<i>E</i> = <i>U</i>/<i>h</i>，椭球出现 <i>x</i><sub>1</sub><i>x</i><sub>2</sub> 交叉项 2<i>r</i><sub>63</sub><i>E x</i><sub>1</sub><i>x</i><sub>2</sub>，主轴转 45° 成 <i>x</i><sub>1</sub><span class="pr">′</span>、<i>x</i><sub>2</sub><span class="pr">′</span>
       <div class="eqb"><i>n</i><sub>1</sub><span class="pr">′</span> = <i>n</i><sub>0</sub> + <span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>E</i>，　<i>n</i><sub>2</sub><span class="pr">′</span> = <i>n</i><sub>0</sub> − <span class="frac"><span class="num">1</span><span class="den">2</span></span><i>n</i><sub>0</sub><sup>3</sup><i>γ</i><sub>63</sub><i>E</i></div>
     </div>
@@ -299,12 +458,12 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m20117" data-parts="4|3|3" data-full="10"><div class="q" id="q034">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-6" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-6" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q041" title="回到题库原题">原题 &#8599;</a></div></div><div id="m20117" data-parts="6|5|5" data-full="16"><div class="q" data-marks="16">
   <div class="hd"><span class="tag">2011-7</span><span class="ttl">格兰-傅科棱镜：两种光轴取向的 θ 范围与出射偏振对比</span></div>
   <div class="stem">方解石制成的两块偏振棱镜，中间留空气隙。棱镜 1 的光轴垂直于纸面（图中 ⊙），棱镜 2 的光轴在纸面内竖直（图中 ↑），入射面为纸面。光线按图示方向入射，已知 n<sub>o</sub> = 1.658，n<sub>e</sub> = 1.486。<br>（1）求 θ 角（图中记为 α，同一个角）在多大范围内，才能使入射的自然光经棱镜后变为线偏振光。<br>（2）若入射光强度相同，哪个棱镜射出的线偏振光强？<br>（3）画出自然光入射时的传输光路及光的偏振状态。</div>
   <div class="figpair" style="display:block">
-<svg viewbox="0 0 620 230" width="100%" style="max-width:620px;height:auto" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" markerwidth="8" markerheight="8" refx="7" refy="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#1b1b1b"></path></marker></defs><g stroke="#1b1b1b" stroke-width="2.2" fill="none" stroke-linejoin="round"><rect x="70" y="25" width="130" height="130"></rect><line x1="70" y1="155" x2="200" y2="25"></line><line x1="12" y1="90" x2="70" y2="90" marker-end="url(#ah)"></line><line x1="200" y1="90" x2="258" y2="90" marker-end="url(#ah)"></line><path d="M70,115 A40,40 0 0 1 98.3,126.7" stroke-width="1.4"></path><text x="96" y="149" font-size="17" font-style="italic" font-family="Georgia,serif" fill="#1b1b1b" stroke="none">α</text><circle cx="94" cy="51" r="8" fill="none"></circle><circle cx="94" cy="51" r="2.2" fill="#1b1b1b"></circle><circle cx="176" cy="129" r="8" fill="none"></circle><circle cx="176" cy="129" r="2.2" fill="#1b1b1b"></circle><text x="82" y="197" font-size="15" fill="#1b1b1b" stroke="none">偏振棱镜 1</text><rect x="370" y="25" width="130" height="130"></rect><line x1="370" y1="155" x2="500" y2="25"></line><line x1="312" y1="90" x2="370" y2="90" marker-end="url(#ah)"></line><line x1="500" y1="90" x2="558" y2="90" marker-end="url(#ah)"></line><path d="M370,115 A40,40 0 0 1 398.3,126.7" stroke-width="1.4"></path><text x="396" y="149" font-size="17" font-style="italic" font-family="Georgia,serif" fill="#1b1b1b" stroke="none">α</text><line x1="394" y1="62" x2="394" y2="40" marker-end="url(#ah)"></line><line x1="476" y1="140" x2="476" y2="118" marker-end="url(#ah)"></line><text x="382" y="197" font-size="15" fill="#1b1b1b" stroke="none">偏振棱镜 2</text></g></svg></div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）3 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）3 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+<svg viewbox="0 0 620 230" width="100%" style="max-width:620px;height:auto" xmlns="http://www.w3.org/2000/svg"><defs><marker markerwidth="8" markerheight="8" refx="7" refy="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#1b1b1b"></path></marker></defs><g stroke="#1b1b1b" stroke-width="2.2" fill="none" stroke-linejoin="round"><rect x="70" y="25" width="130" height="130"></rect><line x1="70" y1="155" x2="200" y2="25"></line><line x1="12" y1="90" x2="70" y2="90" marker-end="url(#ah)"></line><line x1="200" y1="90" x2="258" y2="90" marker-end="url(#ah)"></line><path d="M70,115 A40,40 0 0 1 98.3,126.7" stroke-width="1.4"></path><text x="96" y="149" font-size="17" font-style="italic" font-family="Georgia,serif" fill="#1b1b1b" stroke="none">α</text><circle cx="94" cy="51" r="8" fill="none"></circle><circle cx="94" cy="51" r="2.2" fill="#1b1b1b"></circle><circle cx="176" cy="129" r="8" fill="none"></circle><circle cx="176" cy="129" r="2.2" fill="#1b1b1b"></circle><text x="82" y="197" font-size="15" fill="#1b1b1b" stroke="none">偏振棱镜 1</text><rect x="370" y="25" width="130" height="130"></rect><line x1="370" y1="155" x2="500" y2="25"></line><line x1="312" y1="90" x2="370" y2="90" marker-end="url(#ah)"></line><line x1="500" y1="90" x2="558" y2="90" marker-end="url(#ah)"></line><path d="M370,115 A40,40 0 0 1 398.3,126.7" stroke-width="1.4"></path><text x="396" y="149" font-size="17" font-style="italic" font-family="Georgia,serif" fill="#1b1b1b" stroke="none">α</text><line x1="394" y1="62" x2="394" y2="40" marker-end="url(#ah)"></line><line x1="476" y1="140" x2="476" y2="118" marker-end="url(#ah)"></line><text x="382" y="197" font-size="15" fill="#1b1b1b" stroke="none">偏振棱镜 2</text></g></svg></div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）6 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="6" data-step="0.5" min="0" max="6" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;6</span></span></div><div class="prow"><span class="pl">（2）5 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div><div class="prow"><span class="pl">（3）5 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>棱镜 1（光轴 ⊥ 纸面）：主截面 ⊥ 纸面，故振动 <b>⊥ 纸面</b>的是 e 光（n<sub>e</sub> = 1.486，临界角大），振动 <b>在纸面内</b>的是 o 光（n<sub>o</sub> = 1.658，临界角小）。判据：o 光全反射、e 光透射。</div>
     <div class="step"><b class="n">2</b>（1）θ 的上下限由两支的临界角给出
       <div class="eqb">arcsin<span class="frac"><span class="num">1</span><span class="den">1.658</span></span> = <b>37.1°</b> &lt; θ &lt; arcsin<span class="frac"><span class="num">1</span><span class="den">1.486</span></span> = <b>42.3°</b></div>
@@ -317,12 +476,12 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m20118" data-parts="2|2|1" data-full="5"><div class="q" id="q-2011-8"><div class="hd"><span class="tag">2011-8</span><span class="ttl">图解法：虚物求像 / 像散 / 棱镜坐标系</span></div><div class="stem">画图题。(1) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋沿半径方向直线的平面物，圆心在轴上；系统旋转对称并考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/2caa35978496.png" alt="2011-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/c75d70a85c0a.png" alt="2011-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/bb5e2eb5a74b.png" alt="2011-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）2 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">1</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）2 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）1 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">0.5</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
+<div class="qact"><button class="qstar" type="button" data-tag="2011-7" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-7" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q034" title="回到题库原题">原题 &#8599;</a></div></div><div id="m20118" data-parts="5|5|5" data-full="15"><div class="q" data-marks="15"><div class="hd"><span class="tag">2011-8</span><span class="ttl">图解法：虚物求像 / 像散 / 棱镜坐标系</span></div><div class="stem">画图题。(1) 作垂轴虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span>。(2) 同心圆＋沿半径方向直线的平面物，圆心在轴上；系统旋转对称并考虑像散，分别画出子午焦面与弧矢焦面上的图像。(3) 右手坐标系、oz 为光轴，作棱镜系统的像方空间坐标系。</div><details class="figbox" open><summary>图</summary><figure><img src="img/2caa35978496.png" alt="2011-8 图1" style="max-width:100%;height:auto"><figcaption>原卷图 1</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/c75d70a85c0a.png" alt="2011-8 图2" style="max-width:100%;height:auto"><figcaption>原卷图 2</figcaption></figure></details><details class="figbox" open><summary>图</summary><figure><img src="img/bb5e2eb5a74b.png" alt="2011-8 图3" style="max-width:100%;height:auto"><figcaption>原卷图 3</figcaption></figure></details><div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div><div class="prow"><span class="pl">（2）5 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div><div class="prow"><span class="pl">（3）5 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans"><p>按上面五条要点作图即可；原卷图已附在上方，用于核对光路走向与虚实线。</p><div class="res">（1）按三条特殊光线求像：平行于光轴→过 F<span class="pr">′</span>，过 F→平行出射，过主点→方向不变；虚物、虚像取延长线并画虚线。（2）像散：子午焦面上弧矢方向线条清晰、同心圆拉成沿子午方向的椭圆，弧矢焦面反之；场曲则"中心清晰"与"边缘清晰"各画一幅。（3）棱镜坐标系按四步法：Oy 沿棱线、屋脊面个数定 O<span class="pr">′</span>y<span class="pr">′</span> 是否反向、反射面数（屋脊算两个）定右手/左手系。</div>
     <span class="src">【真题 + 教材】</span></div></div>
-</div><div id="m201110" data-parts="10" data-full="10"><div class="q" id="q004">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-8" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-8" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-应用光学-简答与画图-p49-56.html#q-2011-8" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201110" data-parts="8" data-full="8"><div class="q" data-marks="8">
   <div class="hd"><span class="tag">2011-10</span><span class="ttl">给入射方向与界面法线，求反射、折射光线的方向矢量</span></div>
   <div class="stem">沿 <b>A</b><sub>0</sub> = <b>i</b> 方向的光线，从 n = 1 的介质入射到 n<span class="pr">′</span> = √3 的介质中，已知界面的法线方向为 <b>n</b><sub>0</sub> = −½<b>i</b> + (√3/2)<b>j</b>，求反射和折射光线的方向矢量。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">8 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="8" data-step="0.5" min="0" max="8" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;8</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>入射角：cos θ<sub>1</sub> = |<b>A</b><sub>0</sub>·<b>n</b><sub>0</sub>| = |−½| = 0.5 ⇒ θ<sub>1</sub> = 60°
     </div>
     <div class="step"><b class="n">2</b>反射定律（矢量式）：<b>A</b><span class="pr">′</span> = <b>A</b><sub>0</sub> − 2(<b>A</b><sub>0</sub>·<b>n</b><sub>0</sub>)<b>n</b><sub>0</sub>，代入 <b>A</b><sub>0</sub>·<b>n</b><sub>0</sub> = −½
@@ -341,10 +500,10 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m201111" data-parts="10" data-full="10"><div class="q" id="q005">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-10" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-10" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q004" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201111" data-parts="7" data-full="7"><div class="q" data-marks="7">
   <div class="hd"><span class="tag">2011-11</span><span class="ttl">双平面镜：入射平行一镜、出射平行另一镜，求夹角</span></div>
   <div class="stem">有一双平面镜系统，光线与其中的一个镜面平行入射，经两次反射后，出射光线与另一镜面平行，问两平面镜的夹角为多少。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">7 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="7" data-step="0.5" min="0" max="7" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;7</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>双平面镜的基本结论：入射光线经两镜依次反射后，<b>偏向角</b> δ = 2α（α 为两镜夹角，取主截面内计算），且 δ 与入射角无关。
     </div>
     <div class="step"><b class="n">2</b>题设"入射光线 ∥ 镜 1、出射光线 ∥ 镜 2"。出射方向相对入射方向转过的角度，正是两镜方向之间的夹角 —— 但它是 <b>180° − α</b>（出射光被"折回"到另一侧），不是 α。
@@ -360,12 +519,12 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m201112" data-parts="10" data-full="10"><div class="q" id="q057">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-11" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-11" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q005" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201112" data-parts="8" data-full="8"><div class="q" data-marks="8">
   <div class="hd"><span class="tag">2011-12</span><span class="ttl">f<span class="pr">′</span> = 100 mm 薄透镜 + 60 mm 直角棱镜</span></div>
   <div class="stem">如图，一个由焦距为 100 mm 的薄透镜和一个一次等腰直角棱镜（介质折射率为 1.5，直角边长为 60 mm）构成的光学系统，在透镜前 150 mm 处有一个 1 mm 高的物体，试确定像的位置和大小。<br>
   <span style="color:#6d6d6d;font-size:13.5px">（题图与 2010-11 相同：棱镜竖直直角面距透镜 200 mm。）</span></div>
     <details class="figbox" open><summary>图</summary><figure><img src="img/b05ffbc17e74.png" alt="原卷插图" loading="lazy" style="max-width:100%;height:auto"><figcaption>原卷 p59 插图</figcaption></figure></details>
-<div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+<div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">8 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="8" data-step="0.5" min="0" max="8" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;8</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>透镜成像与 2010-11 完全一样：<i>l</i><span class="pr">′</span> = 300 mm，<i>β</i> = −2，会聚点距棱镜入射面 100 mm。
     </div>
     <div class="step"><b class="n">2</b><i>L</i> = 60 mm，平板位移
@@ -378,13 +537,13 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m201113" data-parts="4|3|3" data-full="10"><div class="q" id="q063">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-12" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-12" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q057" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201113" data-parts="4|4|4" data-full="12"><div class="q" data-marks="12">
   <div class="hd"><span class="tag">2011-13</span><span class="ttl">10 km 处 50 mm 两点：倍率、焦距、口径</span></div>
   <div class="stem">欲看清 10 km 处相隔 50 mm 的两个物点，用开普勒望远镜。试求：<br>
   （1）望远镜至少应选用多大倍率（正常倍率）；<br>
   （2）当筒长为 465 mm 时，物镜和目镜的焦距；<br>
   （3）保证人眼极限分辨角为 1<span class="pr">′</span> 时，物镜和目镜的口径 <i>D</i><sub>1</sub> 和 <i>D</i><sub>2</sub>。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）3 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）3 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="4" data-step="0.5" min="0" max="4" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;4</span></span></div><div class="prow"><span class="pl">（2）4 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="4" data-step="0.5" min="0" max="4" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;4</span></span></div><div class="prow"><span class="pl">（3）4 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="4" data-step="0.5" min="0" max="4" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;4</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>两物点对物镜的张角
       <div class="eqb"><i>θ</i> = <span class="frac"><span class="num">50</span><span class="den">10 × 10<sup>3</sup></span></span> = 5×10<sup>−6</sup> rad = 1.03″</div>
       <p style="margin:2px 0 0">要"看清"，放大后须达到人眼极限 1<span class="pr">′</span> = 60″。</p>
@@ -407,10 +566,10 @@
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
-</div><div id="m201191" data-parts="5" data-full="5"><div class="q" id="q049">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-13" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-13" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-早年真题-合集.html#q063" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201191" data-parts="5" data-full="5"><div class="q" data-marks="5">
   <div class="hd"><span class="tag">2011-9(1)</span><span class="ttl">解释费马原理</span><span class="hot">高频</span></div>
   <div class="stem">解释费马原理。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p>光线在介质中传播时，所走的路径使<b>光程取极值</b>（极小值、极大值或稳定值），即实际光程为所有可能路径中的极值。</p>
     <p>数学表达式：</p>
     <div class="eq">δL = δ ∫<sub>A</sub><sup>B</sup> n(s) ds = 0</div>
@@ -419,10 +578,10 @@
   </div>
 </div>
 
-</div><div id="m201192" data-parts="5" data-full="5"><div class="q" id="q053">
+<div class="qact"><button class="qstar" type="button" data-tag="2011-9(1)" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-9(1)" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-简答题-按章节.html#q049" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201192" data-parts="5" data-full="5"><div class="q" data-marks="5">
   <div class="hd"><span class="tag">2011-9(2)</span><span class="ttl">景深产生的原因与影响因素</span><span class="hot">★4 次</span></div>
   <div class="stem">解释光学系统景深产生的原因，景深的大小受哪些因素影响？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>景深</b>：在像面上能获得足够清晰像的<b>物空间深度</b>（能同时看清的物方纵深范围）。</p>
     <p><b>产生原因</b>：接收器（人眼/底片）能容许一定大小的<b>弥散斑</b>。物点偏离对准平面（景像平面）一定范围内，其弥散斑仍小于允许值，看起来仍清晰，于是形成一个"清晰深度"。</p>
     <p><b>影响因素</b>（三条，按重要程度）：</p>
@@ -436,8 +595,8 @@
   </div>
 </div>
 
-</div></div><div class="score" id="sc">得分 <b>0</b>/0</div><script>
-var KEY = "g851-mock2-" + "2011", N = 14, MAX = 125;
+<div class="qact"><button class="qstar" type="button" data-tag="2011-9(2)" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2011-9(2)" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-简答题-按章节.html#q053" title="回到题库原题">原题 &#8599;</a></div></div></div><div class="score" id="sc">得分 <b>0</b>/0</div><script>
+var KEY = "g851-mock2-" + "2011", N = 14, MAX = 150;
 var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
 function paint(){
@@ -461,19 +620,54 @@ function paint(){
   document.getElementById("sc").innerHTML = s;
   if (typeof paintChips === "function") paintChips();
 }
-function mark(btn, f){
-  var q = btn.closest(".q"), w = q.parentNode, id = w.id, p = btn.getAttribute("data-p");
-  if (typeof st[id] !== "object" || st[id] === null) st[id] = {};
-  st[id][p] = f; save();
-  q.querySelectorAll('.sb[data-p="' + p + '"]').forEach(function(b){ b.classList.remove("sel"); });
-  btn.classList.add("sel"); paint();
+function recOf(el){
+  var q = el.closest(".q"), w = q && q.parentNode;
+  if (!w || !w.getAttribute || !w.getAttribute("data-parts")) return null;
+  if (typeof st[w.id] !== "object" || st[w.id] === null) st[w.id] = {};
+  return { w: w, p: el.getAttribute("data-p"), rec: st[w.id] };
+}
+function writeVal(r, val){
+  var inp = r.w.querySelector('.sci[data-p="' + r.p + '"]');
+  var full = parseFloat(inp.getAttribute("data-max")) || 1;
+  if (val === null || isNaN(val)) { delete r.rec[r.p]; inp.value = ""; }
+  else {
+    val = Math.max(0, Math.min(full, Math.round(val * 100) / 100));
+    inp.value = (Math.round(val * 100) / 100);
+    r.rec[r.p] = Math.round((val / full) * 1000) / 1000;
+  }
+  save(); paint();
+}
+function setPart(inp){
+  var r = recOf(inp); if (!r) return;
+  var v = inp.value === "" ? null : parseFloat(inp.value);
+  var saveFocus = document.activeElement === inp;
+  writeVal(r, v);
+  if (saveFocus) { inp = r.w.querySelector('.sci[data-p="' + r.p + '"]'); try { inp.focus(); } catch (e) {} }
+}
+function stepPart(btn){
+  var r = recOf(btn); if (!r) return;
+  var inp = r.w.querySelector('.sci[data-p="' + r.p + '"]');
+  var full = parseFloat(inp.getAttribute("data-max")) || 1;
+  var step = parseFloat(inp.getAttribute("data-step")) || 0.5;
+  var cur = inp.value === "" ? null : parseFloat(inp.value);
+  var d = parseInt(btn.getAttribute("data-d"), 10) * step;
+  if (cur === null) cur = d > 0 ? 0 : 0;      /* 空 → 从 0 起算 */
+  writeVal(r, cur + d);
+}
+function fullPart(btn){
+  var r = recOf(btn); if (!r) return;
+  var inp = r.w.querySelector('.sci[data-p="' + r.p + '"]');
+  writeVal(r, parseFloat(inp.getAttribute("data-max")) || 0);
 }
 document.querySelectorAll(".q").forEach(function(q){
   var w = q.parentNode, id = w.id, rec = st[id];
   if (!rec || typeof rec !== "object") return;
-  q.querySelectorAll(".sb").forEach(function(b){
-    var v = rec[b.getAttribute("data-p")];
-    if (v !== undefined && parseFloat(v) === parseFloat(b.getAttribute("data-f"))) b.classList.add("sel");
+  q.querySelectorAll(".sci").forEach(function(inp){
+    var p = inp.getAttribute("data-p");
+    var v = rec[p];
+    if (v === undefined || v === null) return;
+    var full = parseFloat(inp.getAttribute("data-max")) || 1;
+    inp.value = Math.round((parseFloat(v) * full) * 100) / 100;
   });
 });
 paint();
@@ -481,6 +675,7 @@ paint();
 /* ── 只看错题模式：URL 带 ?wrong=1 时，只显示判过「半分/0 分」的题 ── */
 (function () {
   if (!/[?&]wrong=1/.test(location.search)) return;
+  document.body.classList.add("graded");
   var wraps = [], nWrong = 0;
   Array.prototype.forEach.call(document.querySelectorAll(".q"), function (q) {
     var w = q.parentNode;
@@ -627,6 +822,7 @@ function txtReport(rep){
 }
 
 function showReport(){
+  document.body.classList.add('graded');
   var rep = buildReport();
   var rate = rep.max ? rep.total / rep.max : 0;
   var all = document.querySelectorAll(".wrap > div[id][data-parts]").length;
@@ -729,7 +925,32 @@ text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18)}#totop.sh
 <script>(function(){var b=document.getElementById('totop');if(!b)return;
 function u(){b.classList.toggle('show',window.scrollY>400)}
 addEventListener('scroll',u,{passive:true});u();
-b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script><!--ERRBOOK--><style>
+b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script><script>
+/* 收藏 + 回原题（与章节页共用 g851-star：{题目标签:1}） */
+(function(){
+  var KEY='g851-star', st={};
+  try{ st = JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ st={}; }
+  function paint(b){
+    var on = !!st[b.getAttribute('data-tag')];
+    b.classList.toggle('on', on);
+    b.textContent = on ? '\u2605 已收藏' : '\u2606 收藏';
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  var bs = document.querySelectorAll('.qstar');
+  for (var i=0;i<bs.length;i++){
+    (function(b){
+      paint(b);
+      b.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        var tg = b.getAttribute('data-tag');
+        if (st[tg]) delete st[tg]; else st[tg]=1;
+        try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(err){}
+        paint(b);
+      });
+    })(bs[i]);
+  }
+})();
+</script><script src="ai-common.js"></script><script>if (window.G851AI) G851AI.bind();</script><!--ERRBOOK--><style>
 #errb{position:fixed;right:16px;bottom:66px;z-index:41;display:flex;align-items:center;
   justify-content:center;height:40px;padding:0 12px;border-radius:20px;background:#6d3a24;
   color:#fff;font-size:13px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.94}
@@ -754,9 +975,9 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  transition:background .15s,box-shadow .15s}
 #g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 #g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
-#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+#g851-rail nav{position:absolute;right:0;top:40px;width:224px;background:#fff;
  border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
- padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:74vh;overflow:auto;
  opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
  transition:opacity .16s ease,transform .16s ease,visibility .16s}
 #g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
@@ -764,12 +985,218 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
 #g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
 #g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
 #g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .disp{display:flex;align-items:center;gap:6px;padding:4px 12px 8px;flex-wrap:wrap}
+#g851-rail .disp button{flex:0 0 auto;border:1px solid var(--line,#e3dfd7);background:#fff;color:#6d3d24;
+ border-radius:8px;padding:5px 9px;font-size:12.5px;font-family:inherit;cursor:pointer;line-height:1.4}
+#g851-rail .disp button:hover{background:#fdf7ef}
+#g851-rail .disp button.on{background:#8c4a2f;border-color:#8c4a2f;color:#fff}
+#g851-rail .disp .fsz{display:flex;gap:4px;margin-left:auto}
+#g851-rail .disp .fsz button{min-width:32px;padding:5px 6px}
 #g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
  color:#9a9a9a;font-size:11.5px;line-height:1.5}
 #g851-rail .rf b{color:#6d3d24;font-weight:600}
-@media print{#g851-rail{display:none!important}}
+#g851-toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);z-index:60;
+ display:flex;align-items:center;gap:10px;background:#2b241d;color:#f4ede2;border-radius:10px;
+ padding:9px 14px;font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+ box-shadow:0 6px 22px rgba(0,0,0,.28);opacity:0;transition:opacity .22s,transform .22s;max-width:92vw}
+#g851-toast.on{opacity:1;transform:translate(-50%,0)}
+#g851-toast button{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;
+ border-radius:7px;padding:3px 10px;font:inherit;cursor:pointer}
+#g851-toast button:hover{background:rgba(255,255,255,.12)}
+#g851-offline{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;
+ background:#6b3a2a;color:#fff;border-radius:9px;padding:6px 12px;font:12.5px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+/* 题旁 AI 小按钮（章节页注入的那批） */
+.g851-ai-mini{margin-left:auto;flex:0 0 auto;border:1px solid #e0cdb6;background:#fdf6ef;color:#8c4a2f;
+ border-radius:10px;padding:1px 8px;font:12px/1.7 inherit;cursor:pointer;letter-spacing:.5px}
+.g851-ai-mini:hover{background:#fdf4ea;border-color:#cfae95}
+/* 返回键 */
+#g851-back{position:fixed;right:16px;bottom:124px;z-index:40;width:40px;height:40px;border:0;border-radius:50%;
+ background:#8c4a2f;color:#fff;font-size:19px;line-height:40px;text-align:center;cursor:pointer;
+ box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92;padding:0}
+#g851-back:hover{opacity:1}
+@media print{.g851-ai-mini,.g851-ai-btn,#g851-back{display:none!important}}
+@media print{#g851-rail{display:none!important}#g851-toast,#g851-offline{display:none!important}}
 @media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
- #g851-rail nav{width:200px;top:38px}}
+ #g851-rail nav{width:208px;top:38px}}
+
+/* ══════════ 夜间模式（只在屏幕生效；打印永远浅色） ══════════ */
+@media screen{
+html[data-theme="dark"]{
+  --bg:#151410; --ink:#e8e2d6; --mut:#a89e90; --line:#3b362c; --acc:#d99a6d; --hl:#4a3d17;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+/* 面板：所有原来的白/米色块 */
+html[data-theme="dark"] .q,
+html[data-theme="dark"] .ans,
+html[data-theme="dark"] .res,
+html[data-theme="dark"] .warn,
+html[data-theme="dark"] .kcard,
+html[data-theme="dark"] .fitem,
+html[data-theme="dark"] details.figbox,
+html[data-theme="dark"] details.fold,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .kpi,
+html[data-theme="dark"] .day,
+html[data-theme="dark"] .tip,
+html[data-theme="dark"] .qindex,
+html[data-theme="dark"] .rep,
+html[data-theme="dark"] .prow,
+html[data-theme="dark"] .hintbtn,
+html[data-theme="dark"] .alt,
+html[data-theme="dark"] .sb,
+html[data-theme="dark"] .qstar,
+html[data-theme="dark"] .starbtn,
+html[data-theme="dark"] .fcond,
+html[data-theme="dark"] #db,
+html[data-theme="dark"] #db .day,
+html[data-theme="dark"] #db .kpi,
+html[data-theme="dark"] #db .sc a,
+html[data-theme="dark"] #db .go a,
+html[data-theme="dark"] .score,
+html[data-theme="dark"] nav,
+html[data-theme="dark"] .tbar{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"] .tbar{background:#241d15!important;color:#f0e8dc}
+html[data-theme="dark"] button,
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{background:#1c1a16;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] header.top{border-bottom-color:#6a6255}
+html[data-theme="dark"] nav{background:rgba(21,20,16,.96)!important}
+html[data-theme="dark"] .qindex{background:rgba(21,20,16,.97)!important}
+/* 强调色：原本的深棕在暗底上读不清，统一提亮 */
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .ttl,
+html[data-theme="dark"] .h3,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] #db .hd b,
+html[data-theme="dark"] #db .kpi b,
+html[data-theme="dark"] #db .bar .nm,
+html[data-theme="dark"] .cm b,
+html[data-theme="dark"] .cnt b,
+html[data-theme="dark"] .n,
+html[data-theme="dark"] .qact .qlink,
+html[data-theme="dark"] .sub b,
+html[data-theme="dark"] .lg b{color:var(--acc)!important}
+html[data-theme="dark"] .sub,
+html[data-theme="dark"] .lg,
+html[data-theme="dark"] .cm,
+html[data-theme="dark"] .mut,
+html[data-theme="dark"] .vl,
+html[data-theme="dark"] .wallhint,
+html[data-theme="dark"] figcaption{color:var(--mut)!important}
+/* 内联样式的常见硬编码色（页面里大量 style="color:#..."） */
+html[data-theme="dark"] [style*="color:#8c4a2f"]{color:#d99a6d!important}
+html[data-theme="dark"] [style*="color:#6d3a24"]{color:#cf9570!important}
+html[data-theme="dark"] [style*="color:#1b1b1b"]{color:#e8e2d6!important}
+html[data-theme="dark"] [style*="color:#3a3a3a"]{color:#ded7ca!important}
+html[data-theme="dark"] [style*="color:#6d6d6d"]{color:#a89e90!important}
+html[data-theme="dark"] [style*="color:#8a7b6c"]{color:#b5a996!important}
+html[data-theme="dark"] [style*="color:#a8332a"]{color:#e5907f!important}
+html[data-theme="dark"] [style*="background:#f"]{background:#1c1a16!important}
+html[data-theme="dark"] [style*="background:#fff"]{background:#1c1a16!important}
+/* 图与公式：线稿反相后是浅线深底，扫件不会刺眼 */
+html[data-theme="dark"] img,
+html[data-theme="dark"] svg{filter:invert(1) hue-rotate(180deg) brightness(.94) contrast(1.02)}
+/* 新版「阅读优化」主题会强制 .wrap 白底 + 绿色标题：暗色下要压过去 */
+html[data-theme="dark"][data-theme] .wrap,
+html[data-theme="dark"][data-theme] body > .wr,
+html[data-theme="dark"][data-theme] body > main,
+html[data-theme="dark"][data-theme] body > article{background:transparent!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > h1,
+html[data-theme="dark"][data-theme] .wrap > h2,
+html[data-theme="dark"][data-theme] .wrap h2,
+html[data-theme="dark"][data-theme] h1,
+html[data-theme="dark"][data-theme] h2,
+html[data-theme="dark"][data-theme] h3,
+html[data-theme="dark"][data-theme] h4{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .wrap > h2{background:linear-gradient(90deg,rgba(217,154,109,.12),transparent)!important;
+  border-left-color:var(--acc)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .wrap > .q,
+html[data-theme="dark"][data-theme] .q{background:#1e1b16!important;border-color:var(--line)!important;
+  border-left-color:#b5794f!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > .q .ans,
+html[data-theme="dark"][data-theme] .ans{background:#171511!important;border-color:var(--line)!important;
+  border-left-color:#8c6a4e!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .wrap > .q .stem,
+html[data-theme="dark"][data-theme] .stem{color:var(--ink)!important}
+/* 零散控件兜底：题号条、判分按钮、收藏按钮、底部操作条、首页快捷按钮 */
+html[data-theme="dark"][data-theme] .qindex a,
+html[data-theme="dark"][data-theme] .qindex .sec,
+html[data-theme="dark"][data-theme] .sb,
+html[data-theme="dark"][data-theme] .qact .qstar,
+html[data-theme="dark"][data-theme] .reveal button,
+html[data-theme="dark"][data-theme] .btnbar button,
+html[data-theme="dark"][data-theme] .quick a,
+html[data-theme="dark"][data-theme] #db .day .da a,
+html[data-theme="dark"][data-theme] #db .day .da button,
+html[data-theme="dark"][data-theme] #db .go a,
+html[data-theme="dark"][data-theme] .wallbar button{background:#26221c!important;
+  border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .qindex a{border-radius:999px;padding:2px 9px}
+html[data-theme="dark"][data-theme] .quick a:first-child,
+html[data-theme="dark"][data-theme] #db .day .da a.main,
+html[data-theme="dark"][data-theme] .go a.main,
+html[data-theme="dark"][data-theme] .btnbar button#tg{background:#a35b36!important;
+  border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"][data-theme] .sb.on,
+html[data-theme="dark"][data-theme] .qstar.on{background:#4a3a1f!important;border-color:#c79a4a!important;color:#f0c987!important}
+html[data-theme="dark"][data-theme] .qact .qlink{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] #wallq{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] #wallq::placeholder{color:#8a7a6a}
+html[data-theme="dark"][data-theme] a{color:var(--acc)}
+
+html[data-theme="dark"][data-theme] #g851-rail nav{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] #g851-rail .tab{background:#26221c;border-color:var(--line);color:var(--acc)}
+html[data-theme="dark"][data-theme] #g851-rail a:hover{background:#26221c}
+html[data-theme="dark"][data-theme] #g851-rail a.cur{background:#2f281f}
+html[data-theme="dark"][data-theme] #g851-rail .disp button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] #g851-rail .disp button.on{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] #g851-rail .rf{border-top-color:var(--line)}
+/* 独立页面（错题本 / 收藏 / 今日复习 / 记录 / 考点 / 专项卷 / 搜索）的卡片兜底 */
+html[data-theme="dark"][data-theme] [class*="card"],
+html[data-theme="dark"][data-theme] [class*="grp"],
+html[data-theme="dark"][data-theme] [class*="sum"],
+html[data-theme="dark"][data-theme] [class*="item"],
+html[data-theme="dark"][data-theme] [class*="empty"],
+html[data-theme="dark"][data-theme] [class*="box"],
+html[data-theme="dark"][data-theme] [class*="panel"]{background:#1e1b16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] [class*="tag"]{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] [class*="lost"]{color:#e5907f!important}
+html[data-theme="dark"][data-theme] .item button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] .item button.ok{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] .kbig{background:#211d17!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .kbig .kh,
+html[data-theme="dark"][data-theme] .kh{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .fcard{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .bar{background:rgba(21,20,16,.96)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"] .tr,
+html[data-theme="dark"] #db .bar .tr{background:#2c271f!important}
+html[data-theme="dark"] .tr i,
+html[data-theme="dark"] #db .bar .tr i{background:linear-gradient(90deg,#a9613c,#d99a6d)!important}
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] a.btn{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a,
+html[data-theme="dark"] #db .day .da button{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a.main{background:#a35b36!important;border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"] #db .day .da .ok{background:#1e2a1e!important;border-color:#3c5a3c!important;color:#9ecb9e!important}
+html[data-theme="dark"] #g851-rail svg,
+html[data-theme="dark"] #g851-bg img{filter:none}
+html[data-theme="dark"] #g851-bg{opacity:.10!important}
+html[data-theme="dark"] #totop{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] #g851-back{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] .g851-ai-mini{background:#26221c;border-color:#403a30;color:var(--acc)}
+html[data-theme="dark"] #errb{background:#2a2118;color:#f0e8dc;border-color:var(--line)}
+html[data-theme="dark"] ::selection{background:#5a4a22;color:#fff}
+/* 字号档 */
+html[data-fs="s"] body{font-size:15px}
+html[data-fs="l"] body{font-size:17.5px}
+html[data-fs="l"] .q,html[data-fs="l"] .ans,html[data-fs="l"] #db,html[data-fs="l"] .fitem{line-height:1.95}
+html[data-fs="s"] .q,html[data-fs="s"] .ans,html[data-fs="s"] #db,html[data-fs="s"] .fitem{line-height:1.75}
+html[data-fs="s"] #g851-rail .tab,
+html[data-fs="s"] #g851-rail nav{background:rgba(255,255,255,.92)}
+}
 </style>
 
 <div id="g851-rail" aria-label="更多模块">
@@ -778,6 +1205,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   </button>
   <nav>
     <div class="grp">复习</div>
+    <a href="今日复习.html">今日复习</a>
     <a href="错题本.html">错题本</a>
     <a href="收藏.html">收藏夹</a>
     <a href="专项卷.html">专项卷</a>
@@ -789,6 +1217,16 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     <a href="专题-双缝条纹平移.html">双缝平移速记</a>
     <div class="grp">记录</div>
     <a href="记录.html">记录中心</a>
+    <a href="AI-笔记.html">AI 笔记 / 待转交</a>
+    <div class="grp">显示</div>
+    <div class="disp">
+      <button type="button" id="g851-dark" title="夜间模式">☾ 夜间</button>
+      <span class="fsz">
+        <button type="button" data-fs="s" title="小字">A−</button>
+        <button type="button" data-fs="m" title="标准">A</button>
+        <button type="button" data-fs="l" title="大字">A+</button>
+      </span>
+    </div>
     <div class="rf">当前：<b class="cur-page">—</b></div>
   </nav>
 </div>
@@ -813,6 +1251,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     if (el.classList.contains('open')) close(); else open();
   });
   document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  window.addEventListener('scroll', function(){ close(); }, {passive:true});
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') close();
     else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
@@ -826,19 +1265,128 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
     .filter(function(s){ return s && s !== '851'; });
   el.querySelector('.cur-page').textContent = parts[0] || here;
+
+  /* ── 新版本提示 / 离线提示 ── */
+  (function () {
+    function toast(msg, actionText, onClick, ms) {
+      var d = document.createElement('div');
+      d.id = 'g851-toast';
+      var s = document.createElement('span');
+      s.textContent = msg;
+      d.appendChild(s);
+      if (actionText) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = actionText;
+        b.addEventListener('click', onClick);
+        d.appendChild(b);
+      }
+      document.body.appendChild(d);
+      setTimeout(function () { d.classList.add('on'); }, 30);
+      if (ms) setTimeout(function () {
+        d.classList.remove('on');
+        setTimeout(function () { d.parentNode && d.parentNode.removeChild(d); }, 300);
+      }, ms);
+    }
+    if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+      if (navigator.serviceWorker.controller) {
+        var fired = 0;
+        navigator.serviceWorker.addEventListener('controllerchange', function () {
+          if (fired) return;
+          fired = 1;
+          toast('库已更新到新版本', '刷新', function () { location.reload(); }, 15000);
+        });
+      }
+    }
+    var off = null;
+    function refreshOffline() {
+      if (navigator.onLine) {
+        if (off && off.parentNode) { off.parentNode.removeChild(off); off = null; }
+      } else if (!off) {
+        off = document.createElement('div');
+        off.id = 'g851-offline';
+        off.textContent = '离线中 · 已缓存的内容仍可看';
+        document.body.appendChild(off);
+      }
+    }
+    window.addEventListener('online', refreshOffline);
+    window.addEventListener('offline', refreshOffline);
+    refreshOffline();
+  })();
+
+  /* ── 返回上一页 ── */
+  (function () {
+    var b = document.createElement('button');
+    b.id = 'g851-back'; b.type = 'button'; b.title = '返回上一页'; b.textContent = '←';
+    b.setAttribute('aria-label', '返回上一页');
+    b.addEventListener('click', function () {
+      if (window.history.length > 1) window.history.back();
+      else location.href = 'index.html';
+    });
+    document.body.appendChild(b);
+  })();
+
+  /* ── 夜间模式 ── */
+  var darkBtn = document.getElementById('g851-dark');
+  function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
+  function paintDark(){
+    if (!darkBtn) return;
+    darkBtn.textContent = isDark() ? '☀ 日间' : '☾ 夜间';
+    darkBtn.classList.toggle('on', isDark());
+  }
+  function setDark(on){
+    if (on) document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('g851-theme', on ? 'dark' : 'light'); } catch(e){}
+    paintDark();
+  }
+  if (darkBtn) {
+    paintDark();
+    darkBtn.addEventListener('click', function(e){ e.stopPropagation(); setDark(!isDark()); });
+  }
+
+  /* ── 字号档 ── */
+  var fsBtns = el.querySelectorAll('.fsz button');
+  function curFs(){ return document.documentElement.getAttribute('data-fs') || 'm'; }
+  function paintFs(){
+    Array.prototype.forEach.call(fsBtns, function(b){
+      b.classList.toggle('on', b.getAttribute('data-fs') === curFs());
+    });
+  }
+  Array.prototype.forEach.call(fsBtns, function(b){
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      var v = b.getAttribute('data-fs');
+      if (v === 'm') document.documentElement.removeAttribute('data-fs');
+      else document.documentElement.setAttribute('data-fs', v);
+      try { localStorage.setItem('g851-fs', v); } catch(err){}
+      paintFs();
+    });
+  });
+  paintFs();
 })();
 </script>
 <!-- G851_BG_V3_HTML_START -->
 <div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-motion-actor" aria-hidden="true"><img id="g851-motion-img" src="bg-character-still.png" alt="" draggable="false"></div>
 <div id="g851-bgc">
- <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+ <div class="naiwa-toolbar">
+  <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+  <button class="naiwa-bg-button naiwa-quick-toggle" id="g851-bgt" type="button" aria-pressed="true" title="一键显示或隐藏视频奶蛙">🎬 动画：开</button>
+ </div>
  <div class="naiwa-bg-panel" id="naiwa-bg-panel">
-   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
-   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">6%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="6" aria-label="背景可见度百分比">
    <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
    <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgd">正文阅读保护层</label><input type="checkbox" id="g851-bgd" checked></div>
+   <div class="naiwa-row"><label for="g851-bgu">题目卡片排版</label><input type="checkbox" id="g851-bgu" checked></div>
+   <div class="naiwa-row"><label for="g851-bga2">显示视频奶蛙</label><input type="checkbox" id="g851-bga2" checked></div>
+   <div class="naiwa-row"><label for="g851-bgp">播放视频动画</label><input type="checkbox" id="g851-bgp" checked></div>
+   <div class="naiwa-row"><label for="g851-bga3">动画可见度</label><input type="range" id="g851-bga3" min="5" max="50" value="22"><span id="g851-bga4">22%</span></div>
    <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
-   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <p class="naiwa-caption">左下角可一键显示/隐藏；关闭播放时保留静态人物；专注模式自动隐藏动画。</p>
    <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
  </div>
 </div>
@@ -850,10 +1398,15 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  if(!layer||!panel)return;
  var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
   val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
-  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
-  reset=document.getElementById('g851-bgr');
- var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
- var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),reading=document.getElementById('g851-bgd'),
+  ui=document.getElementById('g851-bgu'),reset=document.getElementById('g851-bgr'),
+  actor=document.getElementById('g851-motion-actor'),actorImg=document.getElementById('g851-motion-img'),
+  actorOn=document.getElementById('g851-bga2'),actorPlay=document.getElementById('g851-bgp'),
+  quickActor=document.getElementById('g851-bgt'),actorAlpha=document.getElementById('g851-bga3'),actorValue=document.getElementById('g851-bga4');
+ var N=5,EYE_MAP={"0":[{"x":39.9,"y":34.1,"w":11.8,"h":11.8}],"2":[{"x":9.8,"y":39.0,"w":12.3,"h":16.8,"mask":true,"pupilW":60,"pupilH":61,"colors":["#b0c998","#a2be85","#879d62"]},{"x":51.1,"y":28.9,"w":16.4,"h":16.4,"mask":true,"pupilW":55,"pupilH":58,"colors":["#b6d399","#a2c387","#839c60"]}]},sprites=[],resizeJob=0,eyeJob=0,mouse=null,layoutKey="";
+ // 固定槽位相对浏览器窗口与正文左右边缘布置，不再按窗口大小随机洗牌。
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes',KR='g851-bg-reading',KU='g851-bg-ui',KDV='g851-bg-read-default-v1',
+  KAC='g851-bg-character-enabled',KAL='g851-bg-character-opacity',KAP='g851-bg-character-playing';
  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
  function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
@@ -861,89 +1414,179 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  var pageName=decodeURIComponent(location.pathname).split('/').pop();
  var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
  var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ document.documentElement.classList.toggle('g851-exam',defaultFocus);
  function apply(){
   var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
   document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
-  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  layer.style.opacity=onFocus?Math.min(v/100,.02):v/100;
   val.textContent=v?v+'%':'关';
   layer.classList.toggle('focus',onFocus);
   layer.classList.toggle('no-motion',!motion.checked||reduced);
-  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+  document.documentElement.classList.toggle('g851-reading',reading.checked||onFocus);
+  document.documentElement.classList.toggle('g851-ui',ui.checked);
+  var enabled=actorOn.checked&&!onFocus;
+  actor.style.display=enabled?'block':'none';
+  quickActor.textContent=actorOn.checked?'🎬 动画：开':'🎬 动画：关';
+  quickActor.setAttribute('aria-pressed',String(actorOn.checked));
+  quickActor.title=actorOn.checked?'点击隐藏视频奶蛙':'点击显示视频奶蛙';
+  var pct=clamp(+actorAlpha.value||22,5,50);
+  actorValue.textContent=pct+'%';actor.style.setProperty('--g851-motion-alpha',(pct/100).toFixed(2));
+  var src=(enabled&&actorPlay.checked&&!reduced)?'bg-character.webp':'bg-character-still.png';
+  if(actorImg.getAttribute('src')!==src)actorImg.setAttribute('src',src);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){for(var eye of s.eyes){eye.mover.style.setProperty('--look-x','0px');eye.mover.style.setProperty('--look-y','0px')}}}
  }
+ /* 旧版默认12%首次升级为6%；用户原先自定义的其他数值不改变。 */
  var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
- range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ if(get(KDV)!=='1'){
+  if(saved===null||saved==='12'){saved='6';put(K,6)}
+  put(KDV,'1');
+ }
+ range.value=clamp(query?+query[1]:(saved===null?6:+saved),0,30);
  motion.checked=(get(KM)!=='0')&&!reduced;
  eyes.checked=(get(KE)!=='0')&&!reduced;
  focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ reading.checked=get(KR)!=='0';
+ ui.checked=get(KU)!=='0';
+ actorOn.checked=get(KAC)!=='0';
+ actorPlay.checked=get(KAP)!=='0'&&!reduced;
+ actorAlpha.value=clamp(get(KAL)===null?22:+get(KAL),5,50);
  apply();
  range.addEventListener('input',function(){apply();put(K,range.value)});
  motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
  eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
  focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
- reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
-  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+ reading.addEventListener('change',function(){apply();put(KR,reading.checked?'1':'0')});
+ ui.addEventListener('change',function(){apply();put(KU,ui.checked?'1':'0')});
+ actorOn.addEventListener('change',function(){apply();put(KAC,actorOn.checked?'1':'0')});
+ quickActor.addEventListener('click',function(){actorOn.checked=!actorOn.checked;apply();put(KAC,actorOn.checked?'1':'0')});
+ actorPlay.addEventListener('change',function(){apply();put(KAP,actorPlay.checked?'1':'0')});
+ actorAlpha.addEventListener('input',function(){apply();put(KAL,actorAlpha.value)});
+ reset.addEventListener('click',function(){range.value=6;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;reading.checked=true;ui.checked=true;
+  actorOn.checked=true;actorPlay.checked=!reduced;actorAlpha.value=22;apply();put(K,6);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');put(KR,'1');put(KU,'1');put(KAC,'1');put(KAL,22);put(KAP,actorPlay.checked?'1':'0');
   try{localStorage.removeItem(KF)}catch(e){}});
  btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
  document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
- function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
-  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
-  return((t^t>>>14)>>>0)/4294967296;}}
+ // 固定编号固定侧边位置。浏览器缩放只缩放坐标，不会重新随机挑选造型/位置。
+ // 两边从上至下；右下角始终留给视频奶蛙，即使它暂时隐藏也不挪动其他图案。
+ var SLOTS=[
+  {side:'left', y:.14,kind:0,angle:-14}, {side:'right',y:.15,kind:2,angle:12},
+  {side:'left', y:.38,kind:3,angle:9}, {side:'right',y:.40,kind:1,angle:-12},
+  {side:'left', y:.62,kind:4,angle:-8}, {side:'right',y:.65,kind:0,angle:13},
+  {side:'left', y:.85,kind:2,angle:13}, {side:'right',y:.86,kind:3,angle:-10}
+ ];
  function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function boxOf(r){return {l:r.left,t:r.top,r:r.right,b:r.bottom};}
+ function actorBounds(){
+  // 即使关闭了视频奶蛙，也始终保留原来的动画位置，避免切换时其他图案跳动。
+  if(!actor)return null;
+  var wasHidden=getComputedStyle(actor).display==='none',oldDisplay=actor.style.display,oldVisibility=actor.style.visibility;
+  if(wasHidden){actor.style.display='block';actor.style.visibility='hidden';}
+  var r=actor.getBoundingClientRect();
+  if(wasHidden){actor.style.display=oldDisplay;actor.style.visibility=oldVisibility;}
+  return r.width>0&&r.height>0?boxOf(r):null;
+ }
+ function contentBounds(W){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  // 若页面没有主要阅读容器，保守预留中央正文区域。
+  if(!main)return {left:W>900?(W-900)/2:W*.15,right:W>900?(W+900)/2:W*.85};
+  var r=main.getBoundingClientRect();
+  return {left:clamp(r.left,0,W),right:clamp(r.right,0,W)};
+ }
  function relayout(){
-  var W=innerWidth,H=innerHeight;
+  var W=window.innerWidth,H=window.innerHeight;
   if(W<180||H<180)return;
-  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
-  lastW=W;lastH=H;layer.textContent='';sprites=[];
-  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
-  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
-  var count=clamp(Math.round(W*H/60000),6,30);
-  for(var i=0;i<count;i++){
-   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
-   var angle=(rand()-.5)*52;
-   if(rand()<.1)angle+=(rand()<.5?85:-85);
-   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
-   var margin=16,found=null,rect;
-   if(ew+margin*2>W||ew+margin*2>H)continue;
-   for(var attempt=0;attempt<360;attempt++){
-    var cx=ew/2+margin+rand()*(W-ew-2*margin);
-    var cy=ew/2+margin+rand()*(H-ew-2*margin);
-    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
-    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
-   }
-   if(!found)continue;
-   boxes.push(rect);
-   var kind=Math.floor(rand()*N);
+  var c=contentBounds(W),reserved=[],a=actorBounds();
+  // 题目展开/折叠只改变正文高度，不应触发图案刷新和动画重置。
+  var key=[Math.round(W),Math.round(H),Math.round(c.left),Math.round(c.right)].join('/');
+  if(key===layoutKey)return;
+  layoutKey=key;
+  // 根据固定槽位绘制；不使用尺寸作随机种子，也不以窗口面积改变选取顺序。
+  layer.textContent='';sprites=[];
+  if(a)reserved.push(a);
+  // 保留左下角开关的操作空间，不让装饰漂到按钮正后方。
+  var tb=panel.querySelector('.naiwa-toolbar');
+  if(tb){var t=tb.getBoundingClientRect();reserved.push(boxOf(t));}
+  var placed=[];
+  for(var i=0;i<SLOTS.length;i++){
+   var slot=SLOTS[i],left=slot.side==='left';
+   var railLeft=left?0:c.right,railRight=left?c.left:W;
+   var rail=railRight-railLeft;
+   // 侧边空间不足时直接不画，绝不强塞进正文或与视频角色重叠。
+   if(rail<68)continue;
+   var angle=slot.angle,aRad=angle*Math.PI/180;
+   var footprintFactor=Math.abs(Math.cos(aRad))+Math.abs(Math.sin(aRad));
+   // 占位盒包括旋转、漂浮与点击放大时的额外安全余量。
+   var width=Math.min(112,(rail-44)/(footprintFactor*1.17),H*.145);
+   if(width<38)continue;
+   var outer=width*footprintFactor*1.17+18;
+   var cx=(railLeft+railRight)/2,cy=slot.y*H;
+   var rect={l:cx-outer/2,t:cy-outer/2,r:cx+outer/2,b:cy+outer/2};
+   if(rect.l<7||rect.r>W-7||rect.t<7||rect.b>H-7)continue;
+   // 主阅读区也属于禁止占用区域，而非只靠白底遮住背景。
+   if(left&&rect.r>c.left-3||!left&&rect.l<c.right+3)continue;
+   if(reserved.some(function(b){return collision(rect,b,12)})||
+      placed.some(function(b){return collision(rect,b,12)}))continue;
+   placed.push(rect);
+   var kind=slot.kind%N;
    var el=document.createElement('div');el.className='naiwa';
-   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
-   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
-   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
-   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
-   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   el.dataset.slot=String(i);el.dataset.kind=String(kind);
+   el.style.left=(cx-width/2).toFixed(2)+'px';el.style.top=(cy-width/2).toFixed(2)+'px';
+   el.style.width=width.toFixed(2)+'px';el.style.height=width.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle+'deg');
+   el.style.setProperty('--speed',(7+(i%4)*1.3).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-i*1.7).toFixed(2)+'s');
    var fl=document.createElement('div');fl.className='naiwa-float';
    var reaction=document.createElement('div');reaction.className='naiwa-react';
    var face=document.createElement('div');face.className='naiwa-face';
    face.style.setProperty('--atlas-scale',(N*100)+'%');
    face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
    reaction.appendChild(face);
-   var pupil=null;
-   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
-   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   var eyeSet=EYE_MAP[String(kind)]||[],eyeParts=[];
+   for(var k=0;k<eyeSet.length;k++){
+    var ec=eyeSet[k],socket=document.createElement('div');
+    socket.className='naiwa-eye'+(ec.mask?' naiwa-eye--masked':'');
+    socket.style.left=ec.x+'%';socket.style.top=ec.y+'%';
+    socket.style.width=ec.w+'%';socket.style.height=(ec.h||ec.w)+'%';
+    var mover=socket;
+    if(ec.mask){
+     if(ec.colors){socket.style.setProperty('--iris-light',ec.colors[0]);socket.style.setProperty('--iris-mid',ec.colors[1]);socket.style.setProperty('--iris-dark',ec.colors[2]);}
+     mover=document.createElement('span');mover.className='naiwa-eye-dot';
+     mover.style.width=(ec.pupilW||56)+'%';mover.style.height=(ec.pupilH||56)+'%';
+     socket.appendChild(mover);
+    }
+    reaction.appendChild(socket);eyeParts.push({anchor:socket,mover:mover,masked:!!ec.mask});
+   }
    fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
-   sprites.push({el:el,react:reaction,pupil:pupil});
+   sprites.push({el:el,react:reaction,eyes:eyeParts});
   }
  }
- window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
-  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ function scheduleRelayout(){
+  if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout();});
+ }
+ window.addEventListener('resize',scheduleRelayout,{passive:true});
+ window.addEventListener('pageshow',scheduleRelayout);
+ if(window.ResizeObserver){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  if(main){var ro=new ResizeObserver(scheduleRelayout);ro.observe(main);}
+ }
  document.addEventListener('pointermove',function(e){
   if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
   mouse={x:e.clientX,y:e.clientY};
   if(eyeJob)return;
   eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
-   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
-    var max=clamp(r.width*.04,2,5);
-    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
-    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   for(var s of sprites){
+    var sr=s.el.getBoundingClientRect();
+    for(var eye of s.eyes){
+     var r=eye.anchor.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+     var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+     var max=clamp(sr.width*.04,2,5);
+     // 双眼瞳孔不能离开绿色眼眶；单眼保持旧版幅度。
+     if(eye.masked)max=Math.min(max,Math.min(r.width,r.height)*.16);
+     eye.mover.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+     eye.mover.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+    }
    }
   });
  },{passive:true});

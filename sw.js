@@ -1,4 +1,4 @@
-const CACHE = 'g851-inline-e593d3e3';
+const CACHE = 'g851-inline-edb6bee1';
 const CORE = [
  "./",
  "index.html",
@@ -11,6 +11,9 @@ const CORE = [
  "记录.html",
  "专项卷.html",
  "qindex.js",
+ "ai-common.js",
+ "wrong-filter.js",
+ "AI-笔记.html",
  "manifest.webmanifest",
  "icon.svg",
  "bg.png"

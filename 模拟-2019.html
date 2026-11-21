@@ -92,23 +92,145 @@
   details.fold>summary+b,details.fold>summary+p{margin-top:6px;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#8c4a2f">
-
-
-
-
-<!-- G851_BG_V3_CSS_START -->
+<meta name="theme-color" content="#8c4a2f"><script>/*G851_THEME_EARLY*/
+(function(){
+  try {
+    var d = document.documentElement;
+    var t = localStorage.getItem('g851-theme');
+    if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    if (t === 'dark') d.setAttribute('data-theme', 'dark');
+    var f = localStorage.getItem('g851-fs');
+    if (f) d.setAttribute('data-fs', f);
+    /* 打卡：今天第一次打开就记一天（放在 head，保证首页看板首屏就能读到） */
+    var A = 'g851-active', arr = JSON.parse(localStorage.getItem(A) || '[]') || [];
+    var n = new Date();
+    var td = n.getFullYear() + '-' + ('0' + (n.getMonth() + 1)).slice(-2) + '-' + ('0' + n.getDate()).slice(-2);
+    if (arr.length === 0 || arr[arr.length - 1] !== td) {
+      arr.push(td);
+      if (arr.length > 400) arr = arr.slice(-400);
+      localStorage.setItem(A, JSON.stringify(arr));
+    }
+  } catch(e){}
+})();
+</script><!-- G851_BG_V3_CSS_START -->
 <style id="g851-bg-style">
-/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
-#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+/* 奶蛙 v3 阅读优化：只调整背景/正文显示层，不改题目、公式、答案和交互数据。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.06);contain:layout paint;
+ /* 侧边装饰保留；中央正文后方显著淡化。 */
+ -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+ mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+}
+/* 由原视频逐帧抠图的透明动画，独立于静态奶蛙；始终在正文层之后，不阻挡任何点击。 */
+#g851-motion-actor{position:fixed;right:max(12px,calc((100vw - 1024px)/2 - 220px));bottom:2vh;
+ width:clamp(150px,18vw,240px);aspect-ratio:300/407;z-index:-1;pointer-events:none;
+ opacity:var(--g851-motion-alpha,.22);user-select:none;}
+#g851-motion-actor img{display:block;width:100%;height:100%;object-fit:contain;}
+@media(max-width:780px){#g851-motion-actor{width:114px;right:-10px;bottom:8vh;
+ opacity:calc(var(--g851-motion-alpha,.22) * .55);}}
+@media print{#g851-motion-actor{display:none!important}}
+/* 阅读保护层只作用于 body 的顶层正文容器，不碰题目及公式内部子元素。 */
+html.g851-reading body > .wrap,
+html.g851-reading body > .wr,
+html.g851-reading body > main,
+html.g851-reading body > article{
+ position:relative;
+ background-color:rgba(255,255,255,.985)!important;
+ border-radius:14px;
+ box-shadow:0 0 0 1px rgba(94,78,60,.08),0 8px 28px rgba(60,49,35,.045);
+}
+@media(max-width:780px){
+ /* 窄屏阅读面积更大，不刻意在中间挖出一条渐变。 */
+ #g851-bg{-webkit-mask-image:none;mask-image:none;}
+ html.g851-reading body > .wrap,html.g851-reading body > .wr,
+ html.g851-reading body > main,html.g851-reading body > article{border-radius:0;box-shadow:none;}
+}
+/* ===== 851 阅读 UI 增强：仅针对章节真题页的现有结构，不重排 DOM、不触碰评分逻辑 ===== */
+/* 顶层正文板块已经使用 g851-reading 白底；本层只负责内部信息层级。 */
+html.g851-ui:not(.g851-exam) body > .wrap > h1{
+ color:#263a2e;letter-spacing:.012em;line-height:1.4;
+ text-wrap:balance;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .sub{
+ color:#647168;line-height:1.7;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > h2{
+ color:#345a43;
+ padding:11px 14px;
+ margin-top:27px;margin-bottom:15px;
+ background:linear-gradient(90deg,rgba(236,244,238,.95),rgba(255,255,255,0));
+ border-left:4px solid #7e9e86;
+ border-bottom:1px solid rgba(94,124,101,.14);
+ border-radius:7px 0 0 7px;
+ line-height:1.5;
+}
+/* 直接子元素保证只美化题库正文；不会误伤浮窗、目录和专项卷组件。 */
+html.g851-ui:not(.g851-exam) body > .wrap > .q{
+ position:relative;background:#fff;
+ border:1px solid #e1e8e0;
+ border-left:3px solid #a2baa6;
+ border-radius:12px;
+ padding:20px 22px;
+ margin-bottom:18px;
+ box-shadow:0 3px 13px rgba(35,67,45,.045);
+ scroll-margin-top:100px;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q:target{
+ border-color:#789983;
+ box-shadow:0 0 0 2px rgba(121,164,130,.13),0 4px 15px rgba(35,67,45,.07);
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{
+ color:#24332a;
+ font-size:16.5px;
+ line-height:1.86;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{
+ background:#f7faf7;
+ border:1px solid #e4ede5;
+ border-left:3px solid #92b09a;
+ border-radius:8px;
+ padding:14px 17px;
+ margin-top:14px;
+ color:#293b30;
+ line-height:1.83;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans .eqb{
+ max-width:100%;overflow-x:auto;overflow-y:hidden;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q img{
+ max-width:100%;height:auto;
+}
+@media(max-width:780px){
+ html.g851-ui:not(.g851-exam) body > .wrap > h2{padding:9px 11px;margin-top:20px;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q{
+  padding:15px 14px;border-radius:9px;margin-bottom:13px;
+  box-shadow:0 1px 5px rgba(35,67,45,.025);
+ }
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{font-size:16px;line-height:1.78;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{padding:11px 12px;line-height:1.76;}
+}
+@media print{
+ html.g851-ui body > .wrap > .q{box-shadow:none!important;}
+}
+/* ===== 阅读 UI 增强结束 ===== */
 #g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
 #g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
 #g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
 #g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
-#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+/* 每张造型按图集 metadata 独立设定眼睛位置；原版单瞳孔行为不变。 */
+#g851-bg .naiwa-eye{position:absolute;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
  transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
  transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+/* 思考奶蛙两眼原图带固定瞳孔：先盖住静态瞳孔，只让黑色动态瞳孔移动。 */
+#g851-bg .naiwa-eye--masked{overflow:hidden;transform:translate(-50%,-50%);box-shadow:none;
+ background:radial-gradient(ellipse at 42% 37%,var(--iris-light,#b1cb9a) 0%,
+ var(--iris-mid,#9fbe84) 55%,var(--iris-dark,#849d65) 96%,rgba(130,157,100,0) 100%);}
+#g851-bg .naiwa-eye-dot{display:block;position:absolute;left:50%;top:50%;border-radius:50%;
+ background:radial-gradient(ellipse at 39% 34%,#17231a 0%,#080f09 60%,#010402 90%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -1px -1px 3px rgba(0,0,0,.3);}
 @keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
 @keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
 @keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
@@ -123,6 +245,9 @@
 #g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
  font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
 #g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+#g851-bgc .naiwa-quick-toggle[aria-pressed="false"]{background:rgba(246,247,245,.96);color:#68746a;border-color:#d7e0d8;}
+#g851-bgc .naiwa-quick-toggle:focus-visible,#g851-bgc .naiwa-bg-button:focus-visible{outline:2px solid #638e76;outline-offset:2px;}
 #g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
 #g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
  background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
@@ -130,6 +255,8 @@
 #g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
 #g851-bgc .naiwa-row label{cursor:pointer;}
 #g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc #g851-bga3{width:75px;max-width:75px;accent-color:#aa795c;}
+#g851-bgc #g851-bga4{font-variant-numeric:tabular-nums;min-width:29px;text-align:right;}
 #g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
 #g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
 @media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
@@ -140,8 +267,19 @@
  body{padding-top:0}
  /* 题图不设宽度时按自然尺寸显示，会在手机上横向溢出：统一兜底 */
  img{max-width:100%;height:auto}
+ svg{max-width:100%;height:auto}
  table{max-width:100%}
  .ans .eqb,.ans .eq{overflow-x:auto}
+ /* 图框/折叠框：与章节页同一套样式（小牛 2026-11-18 反馈：SVG 在内嵌图里被撑大） */
+ figure{margin:10px auto;text-align:center;max-width:100%}
+ figcaption{font-size:12.5px;color:#6d6d6d;margin-top:6px;line-height:1.65}
+ details.figbox{margin:10px 0;border:1px solid var(--line,#e3dfd7);border-radius:6px;
+                padding:5px 10px;background:#fdfcf8}
+ details.figbox>summary,details.fold>summary{cursor:pointer;font-size:12.5px;color:#6d6d6d;
+                outline:none;user-select:none}
+ details.figbox>summary::marker,details.fold>summary::marker{content:"▸ "}
+ details.fold{margin:9px 0;border:1px dashed var(--line,#e3dfd7);border-radius:5px;
+              padding:5px 11px;background:#fdfcf8}
  .tbar{position:sticky;top:0;z-index:30;background:#6d3a24;color:#fff;padding:9px 14px;display:flex;
        gap:10px;align-items:center;font-size:14px;flex-wrap:wrap;}
  .tbar b{font-size:17px;font-variant-numeric:tabular-nums;}
@@ -181,8 +319,16 @@
  .reveal{margin:8px 0 4px;display:flex;gap:8px;flex-wrap:wrap;}
  .reveal button{background:#f4e9dd;border:1px solid #d8cbbb;color:#6d3a24;border-radius:14px;
                 padding:4px 14px;font-size:13px;cursor:pointer;}
- .reveal button.sb{background:#fff;border-color:#d8cbbb;}
- .reveal button.sb.sel{background:#2e7d32;border-color:#2e7d32;color:#fff;}
+ .scin{display:inline-flex;align-items:center;gap:4px}
+ .scb{width:26px;height:26px;border:1px solid #d8cbbb;background:#fff;color:#6d3a24;border-radius:8px;
+      font-size:15px;line-height:1;cursor:pointer;padding:0;font-family:inherit}
+ .scb:hover{background:#f4e9dd}
+ .sci{width:58px;height:26px;border:1px solid #d8cbbb;border-radius:8px;text-align:center;
+      font:13px/1 inherit;color:#2b2b2b;background:#fff;padding:0 4px;-moz-appearance:textfield}
+ .sci::-webkit-outer-spin-button,.sci::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+ .sci:focus{outline:2px solid #c9a883;outline-offset:0}
+ .scmax{border:0;background:none;color:#8c4a2f;font:12px inherit;cursor:pointer;padding:0 2px;text-decoration:underline}
+ .scu{color:#8a7b6c;font-size:12px}
  .reveal button.okb{background:#2e7d32;border-color:#2e7d32;color:#fff;}
  .reveal button.nob{background:#b23b3b;border-color:#b23b3b;color:#fff;}
  .scorer{margin:6px 0 2px;font-size:13px;}
@@ -191,11 +337,24 @@
  .score{position:fixed;left:14px;bottom:52px;z-index:35;background:#fff;border:1px solid #e3dfd7;
         border-radius:10px;padding:8px 12px;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.12);}
  .score b{color:#6d3a24;font-size:15px;}
- @media print{.tbar,.qindex,.reveal,.score{display:none;} .q:not(.show) .ans{display:block !important;}}
-</style><div class="tbar"><span>剩余</span><b id="clk">180:00</b><button id="tstart">开始</button><button id="treset">重置</button><button id="submit">交卷</button><span id="lastsub" style="margin-left:auto"></span></div><div class="qindex"><span class="sec">一 · 物理</span><a href="#m201911">1(1)</a><a href="#m201912">1(2)</a><a href="#m201913">1(3)</a><a href="#m201914">1(4)</a><a href="#m201915">1(5)</a><span class="sec">二 · 物理</span><a href="#m2019二1">二-1</a><a href="#m2019二2">二-2</a><a href="#m2019二3">二-3</a><a href="#m2019二4">二-4</a><a href="#m2019二5">二-5</a><span class="sec">三 · 应用</span><a href="#m2019三1">三-1</a><a href="#m2019三2">三-2</a><a href="#m2019三3">三-3</a><a href="#m2019三4">三-4</a><a href="#m2019三5">三-5</a><a href="#m2019三6">三-6</a><span class="sec">四 · 应用</span><a href="#m2019四1">四-1</a><a href="#m2019四2">四-2</a><a href="#m2019四3">四-3</a></div><h1 style="margin-top:16px">2019 年 851 模拟卷</h1><div class="sub">19 题 · 建议限时 180 分钟 · 做完按分值打分（简答 5 / 计算 10，可给半分）</div><p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="公式墙.html">公式墙</a></p><h2 id="sec1" style="margin:26px 0 10px">一 · 物理光学 简答题</h2><div id="m201911" data-parts="5" data-full="5"><div class="q" id="q018">
+ @media print{.tbar,.qindex,.reveal,.score,.qact,.scorer{display:none;} .q:not(.show) .ans{display:block !important;}}
+ /* 每题底部的「收藏 / 回原题」小操作条 */
+ .qact{display:flex;gap:10px;justify-content:flex-end;align-items:center;margin:8px 0 2px;font-size:12.5px}
+ .qact .qstar{border:1px solid #e0d3c6;background:#fff;color:#8c4a2f;border-radius:999px;
+              padding:3px 11px;cursor:pointer;font-size:12.5px;font-family:inherit;line-height:1.5}
+ .qact .qstar:hover{background:#fdf4ea;border-color:#cfae95}
+ .qact .qstar.on{background:#fff6e0;border-color:#e0b64a;color:#a5701a}
+ .qact .qlink{color:#8a7b6c;text-decoration:none;border-bottom:1px dotted #c9b8a8}
+ .qact .qlink:hover{color:#8c4a2f;border-bottom-color:#8c4a2f}
+ .qact .qai{display:none}
+ body.graded .qact .qai{display:inline-block}
+ body.graded .qact .qai{background:#fff;border:1px solid #e0d3c6;color:#8c4a2f;border-radius:999px;
+   padding:3px 11px;font:12.5px/1.5 inherit;cursor:pointer}
+ body.graded .qact .qai:hover{background:#fdf4ea}
+</style><div class="tbar"><span>剩余</span><b id="clk">180:00</b><button id="tstart">开始</button><button id="treset">重置</button><button id="submit">交卷</button><span id="lastsub" style="margin-left:auto"></span></div><div class="qindex"><span class="sec">一 · 物理</span><a href="#m201911">1(1)</a><a href="#m201912">1(2)</a><a href="#m201913">1(3)</a><a href="#m201914">1(4)</a><a href="#m201915">1(5)</a><span class="sec">二 · 物理</span><a href="#m2019二1">二-1</a><a href="#m2019二2">二-2</a><a href="#m2019二3">二-3</a><a href="#m2019二4">二-4</a><a href="#m2019二5">二-5</a><span class="sec">三 · 应用</span><a href="#m2019三1">三-1</a><a href="#m2019三2">三-2</a><a href="#m2019三3">三-3</a><a href="#m2019三4">三-4</a><a href="#m2019三5">三-5</a><a href="#m2019三6">三-6</a><span class="sec">四 · 应用</span><a href="#m2019四1">四-1</a><a href="#m2019四2">四-2</a><a href="#m2019四3">四-3</a></div><h1 style="margin-top:16px">2019 年 851 模拟卷</h1><div class="sub">19 题 · 建议限时 180 分钟 · 做完按分值打分（简答 5 / 计算 10，可给半分）</div><p><a href="index.html">← 总目录</a> ｜ <a href="按年份.html">按年份</a> ｜ <a href="公式墙.html">公式墙</a></p><h2 id="sec1" style="margin:26px 0 10px">一 · 物理光学 简答题</h2><div id="m201911" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-1(1)</span><span class="ttl">干涉与衍射的本质联系与区别</span></div>
   <div class="stem">光的干涉和光的衍射本质上的联系与区别是什么？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>联系</b>：本质都是相干光波叠加引起的光强重新分布；衍射可以看作无限多个连续分布的次波之间的干涉。</p>
     <p><b>区别</b>：</p>
     <ul>
@@ -206,10 +365,10 @@
   </div>
 </div>
 
-</div><div id="m201912" data-parts="5" data-full="5"><div class="q" id="q013">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-1(1)" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-1(1)" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-简答题-按章节.html#q018" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201912" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-1(2)</span><span class="ttl">由谱线宽度求最大测距量程</span></div>
   <div class="stem">已知波长为 500 nm 的光波，其谱线宽度为 Δλ = 8×10<sup>−5</sup> nm，若用这一光源来进行干涉测距，能实现的最大测距量程如何确定？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p>由相干长度</p>
     <div class="eqb"><i>L</i><sub>c</sub> = <span class="frac"><span class="num">λ<sup>2</sup></span><span class="den">Δλ</span></span> = <span class="frac"><span class="num">(500×10<sup>−9</sup>)<sup>2</sup></span><span class="den">8×10<sup>−14</sup></span></span> ≈ <b>3.1 m</b></div>
     <p><b>严格说</b>：相干长度限制的是"两束光能够有效干涉的<b>最大光程差</b>"，即</p><div class="eqb">|<i>OPD</i>| ≤ <i>L</i><sub>c</sub> ≈ 3.1 m</div><p>而"绝对测距量程"要看<b>干涉仪结构</b>——题目只说"用这一光源进行干涉测距"，没给结构：</p><ul><li><b>迈克尔逊式（光往返一次被测距离）</b>：<i>OPD</i> = 2<i>L</i> ⇒ <i>L</i><sub>max</sub> = <i>L</i><sub>c</sub>/2 ≈ <b>1.6 m</b>（最常见的口径，答案册按这个）；</li><li><b>马赫-曾德尔式（两臂各走一次）</b>：<i>OPD</i> = Δ<i>L</i> ⇒ <i>L</i><sub>max</sub> = <i>L</i><sub>c</sub> ≈ <b>3.1 m</b>。</li></ul><p>作答建议：先写 <b><i>L</i><sub>c</sub> = λ²/Δλ ≈ 3.1 m</b>，再说"光程差不得超过相干长度；若采用往返式（迈克尔逊）则量程减半 ≈ 1.6 m"。这样无论哪种结构都不会被判错。</p>
@@ -217,10 +376,10 @@
   </div>
 </div>
 
-</div><div id="m201913" data-parts="5" data-full="5"><div class="q" id="q025">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-1(2)" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-1(2)" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-简答题-按章节.html#q013" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201913" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-1(3)</span><span class="ttl">斜入射平面光栅的光栅方程及各量意义</span></div>
   <div class="stem">写出光波斜入射平面光栅时的光栅方程，并说明方程中各量的物理意义。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <div class="eq">d ( sin i ± sin θ ) = kλ</div>
     <ul>
       <li><b>d</b>：光栅常数（相邻两缝间距）；</li>
@@ -233,10 +392,10 @@
   </div>
 </div>
 
-</div><div id="m201914" data-parts="5" data-full="5"><div class="q" id="q030">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-1(3)" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-1(3)" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-简答题-按章节.html#q025" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201914" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-1(4)</span><span class="ttl">沿光轴入射 / 光轴平行表面正入射，会不会双折射</span></div>
   <div class="stem">两种入射情况：1）光波沿晶体的光轴入射；2）若光轴平行于晶体表面，光波正入射于晶体表面。问这两种情况下是否会发生双折射现象？请说明理由。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>①沿光轴入射：不发生双折射。</b>此时 o 光与 e 光传播方向相同、速度也相同（都等于 n<sub>o</sub>），两束光不分开。</p>
     <p><b>②光轴平行于表面、光垂直入射：发生双折射。</b>此时光轴垂直于传播方向，o 光与 e 光速度不同（分别为 n<sub>o</sub>、n<sub>e</sub>），产生双折射 —— 但因两者仍沿法线传播，<b>传播方向相同，只是速度不同</b>（不分开）。</p>
     <div class="warn"><b>口径（答案册 p121）</b>：答案册对第 2 问写「此时 tanα = 0，<b>也不会发生双折射</b>」—— 它说的是<b>不分开</b>（离散角为零）。物理上 o、e 的<b>速度不同</b>（n<sub>o</sub> ≠ n<sub>e</sub>），严格说仍属双折射，只是两条光线重合；这正是波片能产生相位差的原因。<br><b>答题写全</b>：①（沿光轴）不发生双折射，两光同速；②（垂直光轴）光线<b>不分开</b>，但 o、e 速度不同、有相位差，器件上就是波片。若按答案册口径答「不发生」，必须把「不分开」三个字写出来。</div>
@@ -245,10 +404,10 @@
   </div>
 </div>
 
-</div><div id="m201915" data-parts="5" data-full="5"><div class="q" id="q044">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-1(4)" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-1(4)" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-简答题-按章节.html#q030" title="回到题库原题">原题 &#8599;</a></div></div><div id="m201915" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-1(5)</span><span class="ttl">由 dn/dλ 的符号判断色散类型</span></div>
   <div class="stem">dn/dλ 表示介质折射率随波长改变的变化率，即为色散率。当色散率 dn/dλ &lt; 0 和 dn/dλ &gt; 0 时，相应介质的光色散类型是什么？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <ul>
       <li><b>dn/dλ &lt; 0</b>：折射率随波长增大而减小，<b>V &gt; V<sub>g</sub></b> → <b>正常色散</b>；</li>
       <li><b>dn/dλ &gt; 0</b>：折射率随波长增大而增大，<b>V &lt; V<sub>g</sub></b> → <b>反常色散</b>。</li>
@@ -258,10 +417,10 @@
   </div>
 </div>
 
-</div><h2 id="sec2" style="margin:26px 0 10px">二 · 物理光学 计算题</h2><div id="m2019二1" data-parts="10" data-full="10"><div class="q" id="q003">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-1(5)" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-1(5)" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-简答题-按章节.html#q044" title="回到题库原题">原题 &#8599;</a></div></div><h2 id="sec2" style="margin:26px 0 10px">二 · 物理光学 计算题</h2><div id="m2019二1" data-parts="10" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-二-1</span><span class="ttl">反射光强为零时，入射光的偏振态与入射角</span></div>
   <div class="stem">一束光由空气经透明玻璃平板（n = 1.56）的表面反射，若检测到反射光强为零，求这束光的偏振态和入射角。（计算结果用反三角函数表示）</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="10" data-step="1" min="0" max="10" step="1" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;10</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>反射光强为零 ⇒ 满足布儒斯特条件，且入射光不能含 s 分量
       <div class="eq">θ = θ<sub>B</sub> = <b>arctan 1.56 ≈ 57.3°</b></div>
     </div>
@@ -275,10 +434,10 @@
   </div>
 </div>
 
-</div><div id="m2019二2" data-parts="10" data-full="10"><div class="q" id="q008">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-二-1" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-二-1" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-第1章-电磁理论.html#q003" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019二2" data-parts="10" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-二-2</span><span class="ttl">由条纹错位求波长差；求分辨本领</span></div>
   <div class="stem">某光源发出波长很接近的两单色光，平均波长为 600 nm，通过间隔 d = 10 mm、腔镜反射率为 0.98 的法布里–珀罗干涉仪观察时，看到波长为 λ<sub>1</sub> 的光所产生的干涉条纹正好在波长为 λ<sub>2</sub> 的光所产生干涉条纹的中间，试求：两单色光的波长差；在接近正入射时，此干涉仪的分辨本领？（取平均波长为 600 nm）</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="10" data-step="1" min="0" max="10" step="1" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;10</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>正入射时 2d = kλ，级次
       <div class="eq">k = 2d/λ = 2×10×10<sup>−3</sup> / 600×10<sup>−9</sup> ≈ 3.33×10<sup>4</sup></div>
     </div>
@@ -287,25 +446,26 @@
     </div>
     <div class="step"><b class="n">3</b>分辨本领 = 级次 × 精细度 F
       <div class="eqb"><i>F</i> = <span class="frac"><span class="num">π√<i>R</i></span><span class="den">1 − <i>R</i></span></span> = <span class="frac"><span class="num">π√0.98</span><span class="den">1 − 0.98</span></span> ≈ 155.5</div>
-      <div class="eqb"><i>R</i><sub>p</sub> = <i>k</i>·<i>F</i> ≈ 3.33×10<sup>4</sup> × 155.5 ≈ <b>5.2×10<sup>6</sup></b></div>
+      <div class="eqb"><i>R</i><sub>p</sub> = <i>k</i>·<i>F</i> = 3.333×10<sup>4</sup> × 155.5 ≈ <b>5.18×10<sup>6</sup></b></div>
     </div>
-    <div class="res">波长差 Δλ ≈ <b>0.009 nm</b>；分辨本领 ≈ <b>5.2×10<sup>6</sup></b>（相当于能分辨 1.2×10<sup>−4</sup> nm）。</div>
+    <div class="res">波长差 Δλ ≈ <b>0.009 nm</b>；分辨本领 <i>R</i><sub>p</sub> ≈ <b>5.18×10<sup>6</sup></b>（约 5.2×10<sup>6</sup>，相当于能分辨 1.2×10<sup>−4</sup> nm）。</div>
+    <div class="warn"><b>口径说明</b>：本体按精细度 <i>F</i> = π√<i>R</i>/(1−<i>R</i>) = 155.5、级次 <i>k</i> = 2<i>d</i>/λ = 3.333×10<sup>4</sup> 算得 5.18×10<sup>6</sup>；答案册给 ≈5.03×10<sup>6</sup>，是其精细度/级次取整口径不同所致（差异约 3%），不是计算错误。考试写 <b>5.0–5.2×10<sup>6</sup></b> 均可给分。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
 
-</div><div id="m2019二3" data-parts="10" data-full="10"><div class="q" id="q007">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-二-2" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-二-2" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-第2章-干涉.html#q008" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019二3" data-parts="10" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-二-3</span><span class="ttl">中央峰角宽度、可分辨的最小波长差</span></div>
   <div class="stem">平面透射光栅每毫米内 400 条刻线，光栅宽为 5 cm。当波长为 500 nm 的平行光垂直入射到该光栅，发现第 4 级衍射光谱处在单缝衍射的第一极小位置，试求：衍射中央峰的角宽度；正入射时光栅能分辨的谱线最小波长差。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans"><div class="step"><b class="n">1</b>光栅常数与缝宽：<i>d</i> = 1/400 mm = <b>2.5 μm</b>；第 4 级主极大落在单缝第一极小处，故 <i>d</i>/<i>a</i> = 4<div class="eqb"><i>a</i> = <i>d</i>/4 = <b>0.625 μm</b></div></div><div class="step"><b class="n">2</b><b>“衍射中央峰”指单缝衍射包络的中央明纹</b>（不是干涉主极大！），宽度由缝宽决定，与刻线总数 <i>N</i> 无关<div class="eqb">sin<i>θ</i><sub>1</sub> = λ/<i>a</i> = 0.5/0.625 = 0.8 ⇒ <i>θ</i><sub>1</sub> = 53.13°</div><div class="eqb">中央峰全角宽 = 2<i>θ</i><sub>1</sub> = <b>106.3° ≈ 1.86 rad</b></div><p style="margin:4px 0 0">答案册写的是 2λ/<i>a</i> = 1.6 rad —— 那是 sin<i>θ</i>≈<i>θ</i> 的近似。本题 <i>θ</i><sub>1</sub> 已达 53°，近似误差 16%。<b>考试按答案册写 1.6 rad 可得分，但要知道它是近似。</b></p></div><div class="step"><b class="n">3</b>能分辨的最小波长差：刻线总数 <i>N</i> = 400 × 50 = <b>20000</b>，分辨本领按<b>教材 p72 写 <i>R</i> = 0.97<i>mN</i></b>（0.97 是有效刻线数修正；理想式 <i>mN</i> 只差 3%，考试写 0.97mN 与教材一致），<i>m</i> 要用<b>最大级次</b><div class="eqb"><i>m</i><sub>max</sub> = 3（第 4 级缺级）⇒ <i>R</i> = 0.97 × 3 × 20000 = <b>5.82×10<sup>4</sup></b></div><div class="eqb">δλ = λ/<i>R</i> = 500 nm / 5.82×10<sup>4</sup> = <b>8.59×10<sup>−3</sup> nm</b></div></div><div class="res">（1）中央峰（单缝包络）全角宽 <b>106.3°</b>（≈1.86 rad；答案册近似值 1.6 rad）；（2）可分辨的最小波长差 <b>8.59×10<sup>−3</sup> nm</b>（按教材 <i>R</i> = 0.97<i>mN</i>；若用理想式 <i>mN</i> 则为 8.33×10<sup>−3</sup> nm，差 3%）。<b>易错</b>：把“中央峰”当成干涉主极大，会用 2λ/(<i>Nd</i>) 得到 2×10<sup>−5</sup> rad 的荒谬结果。</div><div class="warn"><b>两种“宽”别混</b>：<br>· <b>单缝包络</b>中央明纹宽 = 2λ/<i>a</i>（精确为 2 arcsin(λ/<i>a</i>)）—— 由缝宽定，与 <i>N</i> 无关；<br>· <b>干涉主极大</b>半角宽 = λ/(<i>Nd</i>) —— 由总刻线数定，描述谱线“细不细”。<br>本题问“衍射中央峰”，取前者。</div>
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">10 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="10" data-step="1" min="0" max="10" step="1" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;10</span></span></div></div><div class="ans"><div class="step"><b class="n">1</b>光栅常数与缝宽：<i>d</i> = 1/400 mm = <b>2.5 μm</b>；第 4 级主极大落在单缝第一极小处，故 <i>d</i>/<i>a</i> = 4<div class="eqb"><i>a</i> = <i>d</i>/4 = <b>0.625 μm</b></div></div><div class="step"><b class="n">2</b><b>“衍射中央峰”指单缝衍射包络的中央明纹</b>（不是干涉主极大！），宽度由缝宽决定，与刻线总数 <i>N</i> 无关<div class="eqb">sin<i>θ</i><sub>1</sub> = λ/<i>a</i> = 0.5/0.625 = 0.8 ⇒ <i>θ</i><sub>1</sub> = 53.13°</div><div class="eqb">中央峰全角宽 = 2<i>θ</i><sub>1</sub> = <b>106.3° ≈ 1.86 rad</b></div><p style="margin:4px 0 0">答案册写的是 2λ/<i>a</i> = 1.6 rad —— 那是 sin<i>θ</i>≈<i>θ</i> 的近似。本题 <i>θ</i><sub>1</sub> 已达 53°，近似误差 16%。<b>考试按答案册写 1.6 rad 可得分，但要知道它是近似。</b></p></div><div class="step"><b class="n">3</b>能分辨的最小波长差：刻线总数 <i>N</i> = 400 × 50 = <b>20000</b>，分辨本领按<b>教材 p72 写 <i>R</i> = 0.97<i>mN</i></b>（0.97 是有效刻线数修正；理想式 <i>mN</i> 只差 3%，考试写 0.97mN 与教材一致），<i>m</i> 要用<b>最大级次</b><div class="eqb"><i>m</i><sub>max</sub> = 3（第 4 级缺级）⇒ <i>R</i> = 0.97 × 3 × 20000 = <b>5.82×10<sup>4</sup></b></div><div class="eqb">δλ = λ/<i>R</i> = 500 nm / 5.82×10<sup>4</sup> = <b>8.59×10<sup>−3</sup> nm</b></div></div><div class="res">（1）中央峰（单缝包络）全角宽 <b>106.3°</b>（≈1.86 rad；答案册近似值 1.6 rad）；（2）可分辨的最小波长差 <b>8.59×10<sup>−3</sup> nm</b>（按教材 <i>R</i> = 0.97<i>mN</i>；若用理想式 <i>mN</i> 则为 8.33×10<sup>−3</sup> nm，差 3%）。<b>易错</b>：把“中央峰”当成干涉主极大，会用 2λ/(<i>Nd</i>) 得到 2×10<sup>−5</sup> rad 的荒谬结果。</div><div class="warn"><b>两种“宽”别混</b>：<br>· <b>单缝包络</b>中央明纹宽 = 2λ/<i>a</i>（精确为 2 arcsin(λ/<i>a</i>)）—— 由缝宽定，与 <i>N</i> 无关；<br>· <b>干涉主极大</b>半角宽 = λ/(<i>Nd</i>) —— 由总刻线数定，描述谱线“细不细”。<br>本题问“衍射中央峰”，取前者。</div>
     <span class="src">【真题 + 自算】</span>
   </div>
 </div>
 
-</div><div id="m2019二4" data-parts="4|3|3" data-full="10"><div class="q" id="q008">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-二-3" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-二-3" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-第3章-衍射.html#q007" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019二4" data-parts="4|3|3" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-二-4</span><span class="ttl">λ<sub>1</sub> 的 1/4 波片对 λ<sub>2</sub> 是什么波片</span></div>
   <div class="stem">已知方解石对波长 λ<sub>1</sub> = 405 nm 光波的主折射率为 <i>n</i><sub>o</sub> = 1.6813，<i>n</i><sub>e</sub> = 1.4969；对波长 λ<sub>2</sub> = 710 nm 光波的主折射率为 <i>n</i><sub>o</sub><span class="pr">′</span> = 1.6521，<i>n</i><sub>e</sub><span class="pr">′</span> = 1.4836。若一束波长为 λ<sub>2</sub> 的左旋正椭圆偏振光入射到相应于波长为 λ<sub>1</sub> 的方解石 1/4 波片上，求：（1）λ<sub>1</sub> 光波通过该波片时，所产生的相位差？（2）对于 λ<sub>2</sub> 光波而言，判断该波片是哪种波片？（3）出射光束的偏振态？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）3 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）3 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="4" data-step="0.5" min="0" max="4" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;4</span></span></div><div class="prow"><span class="pl">（2）3 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div><div class="prow"><span class="pl">（3）3 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div></div><div class="ans">
     <p><b>（1）</b></p>
     <div class="step"><b class="n">1</b>定义就是答案：既然它是"对 λ<sub>1</sub> 的 1/4 波片"，则 λ<sub>1</sub> 通过时的相位差
       <div class="eqb"><i>δ</i><sub>1</sub> = <span class="frac"><span class="num">2π</span><span class="den">λ<sub>1</sub></span></span>(<i>n</i><sub>o</sub> − <i>n</i><sub>e</sub>)<i>d</i> = <span class="frac"><span class="num">π</span><span class="den">2</span></span> = <b>90°</b>，　且 (1.6813 − 1.4969)<i>d</i> = <span class="frac"><span class="num">405</span><span class="den">4</span></span> nm = 101.25 nm</div>
@@ -326,14 +486,14 @@
   </div>
 </div>
 
-</div><div id="m2019二5" data-parts="4|3|3" data-full="10"><div class="q" id="q010">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-二-4" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-二-4" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-第4章-光在各向异性介质中的传播特性.html#q008" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019二5" data-parts="4|3|3" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-二-5</span><span class="ttl">KDP 强度调制器：U = 3.74 kV 时的相位差、U<sub>π</sub> 与 U<sub>2π</sub> 时的输出</span></div>
-  <div class="stem">如图所示为一电光强度调制器的原理图，电光晶体是纵向运用的 KDP 晶体，沿 <i>x</i><sub>3</sub> 方向晶体长度为 <i>l</i>，入射光的振动方向与检偏器 P 的透光方向垂直，且与 KDP 晶体的感应主轴（<i>x</i><sub>1</sub><span class="pr">′</span>，<i>x</i><sub>2</sub><span class="pr">′</span>）方向成 45° 角。入射光强为 <i>I</i><sub>0</sub>，若其波长为 550mm 时，KDP 晶体的 <i>n</i><sub>0</sub> = 1.51，γ<sub>63</sub> = 10.6×10<sup>−12</sup> cm/V，求：（1）与未加电场相比，加电场后 KDP 晶体的光学特性有哪些变化；（2）计算外加电压为 3.74×10<sup>3</sup> 伏特时，从晶体中射出的两偏振光的相位差；（3）计算 <i>U</i> = <i>U</i><sub>2π</sub>、<i>U</i><sub>π</sub> 时，通过检偏器 P 输出的光强。</div>
+  <div class="stem">如图所示为一电光强度调制器的原理图，电光晶体是纵向运用的 KDP 晶体，沿 <i>x</i><sub>3</sub> 方向晶体长度为 <i>l</i>，入射光的振动方向与检偏器 P 的透光方向垂直，且与 KDP 晶体的感应主轴（<i>x</i><sub>1</sub><span class="pr">′</span>，<i>x</i><sub>2</sub><span class="pr">′</span>）方向成 45° 角。入射光强为 <i>I</i><sub>0</sub>，若其波长为 550 nm 时，KDP 晶体的 <i>n</i><sub>0</sub> = 1.51，γ<sub>63</sub> = 10.6×10<sup>−12</sup> m/V，求：（1）与未加电场相比，加电场后 KDP 晶体的光学特性有哪些变化；（2）计算外加电压为 3.74×10<sup>3</sup> 伏特时，从晶体中射出的两偏振光的相位差；（3）计算 <i>U</i> = <i>U</i><sub>2π</sub>、<i>U</i><sub>π</sub> 时，通过检偏器 P 输出的光强。</div>
 <details class="figbox" open><summary>图</summary><figure style="margin:14px 0;text-align:center">
     <img src="img/7bac71a9d8e5.png" alt="KDP 电光强度调制器" style="max-width:100%;border:1px solid #e3dfd7;border-radius:4px;background:#fff">
     <figcaption style="font-size:12.5px;color:#6d6d6d;margin-top:6px">题图（原 PDF 第 32 页）：起偏器 P<sub>1</sub>—KDP（<i>x</i><sub>1</sub>、<i>x</i><sub>2</sub> 为主轴）—检偏器 P<sub>2</sub>，光沿 <i>x</i><sub>3</sub></figcaption>
   </figure></details>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）3 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）3 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="4" data-step="0.5" min="0" max="4" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;4</span></span></div><div class="prow"><span class="pl">（2）3 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div><div class="prow"><span class="pl">（3）3 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div></div><div class="ans">
     <p><b>（1）</b></p>
     <div class="step"><b class="n">1</b>未加电场：KDP 是单轴晶体，光沿光轴 <i>x</i><sub>3</sub> 传播 ⇒ <b>没有双折射</b>，任何偏振的入射光出射后偏振态不变。<br>
       加电场后：<i>x</i><sub>3</sub> 方向加 <i>E</i>，电光张量 γ<sub>63</sub> 起作用，单轴晶体变成<b>双轴晶体</b>，感应主轴 <i>x</i><sub>1</sub><span class="pr">′</span>、<i>x</i><sub>2</sub><span class="pr">′</span> 相对原主轴 <i>x</i><sub>1</sub>、<i>x</i><sub>2</sub> 转过 45°，并出现感应双折射 Δ<i>n</i> = <i>n</i><sub>0</sub><sup>3</sup>γ<sub>63</sub><i>E</i>；原来的光轴 <i>x</i><sub>3</sub> 不再是光轴（沿它传播会出现相位差）。
@@ -359,10 +519,10 @@
   </div>
 </div>
 
-</div><h2 id="sec3" style="margin:26px 0 10px">三 · 应用光学 简答题</h2><div id="m2019三1" data-parts="5" data-full="5"><div class="q" id="q003">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-二-5" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-二-5" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-第4章-光在各向异性介质中的传播特性.html#q010" title="回到题库原题">原题 &#8599;</a></div></div><h2 id="sec3" style="margin:26px 0 10px">三 · 应用光学 简答题</h2><div id="m2019三1" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-三-1</span><span class="ttl">完善条件；无穷远物点经单一曲面反射成完善像的面形</span></div>
   <div class="stem">光学系统成完善像的条件是什么？试由该条件确定将无穷远的物点经单一曲面反射成完善实像点的曲面形状。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>条件</b>：等光程（轴外点再加正弦条件）。</p>
     <p><b>面形</b>：<b>旋转抛物面</b>。平行光（无穷远物点）沿轴入射，反射后会聚于焦点，焦点就是像点；抛物面上任一点到焦点的距离等于它到准平面的距离，故各条光路光程相等 —— 满足等光程，成完善像。</p>
     <div class="res"><b>背</b>：无穷远物点 → 抛物面（焦点即像点）；有限共轭点 → 椭球面（两焦点为物、像点）。</div>
@@ -370,10 +530,10 @@
   </div>
 </div>
 
-</div><div id="m2019三2" data-parts="5" data-full="5"><div class="q" id="q015">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-三-1" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-三-1" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-应用光学-简答与画图-p49-56.html#q003" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019三2" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-三-2</span><span class="ttl">费马原理的内容；用它解释直线传播</span></div>
   <div class="stem">费马原理的内容是什么？试用该原理解释光在均匀各向同性的介质中沿直线传播。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>内容</b>：光从一点传播到另一点，其实际路径使光程取极值（极小、极大或稳定值），即光程的一阶变分为零：</p>
     <div class="eqb">δ∫<sub><i>A</i></sub><sup><i>B</i></sup> <i>n</i> d<i>s</i> = 0</div>
     <p><b>解释直线传播</b>：均匀各向同性介质中 <i>n</i> = 常数，光程 = <i>n</i> × 几何路程；两点间几何路程以直线最短，故光程也最小，光沿直线传播。</p>
@@ -382,10 +542,10 @@
   </div>
 </div>
 
-</div><div id="m2019三3" data-parts="5" data-full="5"><div class="q" id="q016">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-三-2" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-三-2" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-应用光学-简答与画图-p49-56.html#q015" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019三3" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-三-3</span><span class="ttl">景深定义、影响因素；增大景深怎么调光圈</span></div>
   <div class="stem">什么是光学系统的景深？景深的大小受哪些因素影响？照相时为了增加景深，光圈应该增大还是减小？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>景深</b>：在像面上能成清晰像的物空间深度（= 远景深度 + 近景深度），即物平面前后能清晰成像的范围。景深端点对应弥散圆直径等于允许值。</p>
     <p><b>影响因素</b>：</p>
     <ul class="k">
@@ -400,10 +560,10 @@
   </div>
 </div>
 
-</div><div id="m2019三4" data-parts="5" data-full="5"><div class="q" id="q017">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-三-3" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-三-3" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-应用光学-简答与画图-p49-56.html#q016" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019三4" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-三-4</span><span class="ttl">什么是屋脊棱镜；举例并画平面表示图</span></div>
   <div class="stem">什么是屋脊棱镜？试列举一个屋脊棱镜，并给出平面表示图。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>定义</b>：把直角棱镜的一个反射面（通常是斜面）做成 <b>90° 屋脊</b>（两个互相垂直的反射面）的棱镜。屋脊的两个面各反射一次（共两次），使像在<b>垂直于屋脊</b>的方向上倒转，常用于望远系统/双筒望远镜的倒像。</p>
     <p><b>举例</b>：屋脊直角棱镜（阿贝棱镜）、屋脊五角棱镜、屋脊半五角棱镜。</p>
     <p><b>平面表示图画法</b>（答题时按这四步画）：</p>
@@ -418,11 +578,11 @@
   </div>
 </div>
 
-</div><div id="m2019三5" data-parts="5" data-full="5"><div class="q" id="q023">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-三-4" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-三-4" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-应用光学-简答与画图-p49-56.html#q017" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019三5" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-三-5</span><span class="ttl">作虚物 AB 的像 A<span class="pr">′</span>B<span class="pr">′</span></span></div>
   <div class="stem">作出虚物 AB 经光组所成的像 A<span class="pr">′</span>B<span class="pr">′</span>。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/03a05aabc536.png" alt="光轴上的 F、H、H′、F′ 与虚物 AB" style="max-width:100%;height:auto"><figcaption>原卷 p51：<i>A</i> 在 <i>F</i><span class="pr">′</span> 右侧，<i>B</i> 在 <i>A</i> 上方。</figcaption></figure></details>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <details class="figbox" open><summary>图 · 点开看作图答案（2019 答案册 p124）</summary><figure><img src="img/db63940f68f1.jpg" alt="虚物 AB 经光组成像的作图" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>规范作图（答案册原图）</b>：虚物 <i>AB</i>（会聚光束，<i>A</i> 在像方）——① 由 <i>B</i> 作平行光轴的光线，出射后过 <i>F</i>′；② 由 <i>B</i> 作过 <i>F</i> 的光线，出射后平行光轴；两条出射光线的交点即 <i>B</i>′，在 <i>A</i>′ 上方且更长 ⇒ <b>放大实像</b>（虚物经正光组可得放大实像，这是显微物镜的工作状态）。</figcaption></figure></details>
     <p><b>作图步骤</b>：同 2017-三-4 的三步，先求出 <i>A</i><span class="pr">′</span>（轴上），再由 <i>B</i> 引两条特殊光线求 <i>B</i><span class="pr">′</span>：平行于光轴的光线出射后过 <i>F</i><span class="pr">′</span>；过 <i>F</i> 的光线出射后平行于光轴。两线交点即 <i>B</i><span class="pr">′</span>。</p>
     <p><b>结果</b>：<i>A</i><span class="pr">′</span><i>B</i><span class="pr">′</span> 在 <i>H</i><span class="pr">′</span> 与 <i>F</i><span class="pr">′</span> 之间，<b>实像、正立（相对虚物）、缩小</b>；<i>B</i><span class="pr">′</span> 与 <i>B</i> 在光轴同侧。</p>
@@ -431,11 +591,11 @@
   </div>
 </div>
 
-</div><div id="m2019三6" data-parts="5" data-full="5"><div class="q" id="q024">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-三-5" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-三-5" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-应用光学-简答与画图-p49-56.html#q023" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019三6" data-parts="5" data-full="5"><div class="q">
   <div class="hd"><span class="tag">2019-三-6</span><span class="ttl">由 β=+1、β=−1 的共轭面作 A 的像</span></div>
   <div class="stem">如图，一个理想光学系统，π<sub>1</sub> 和 π<sub>1</sub><span class="pr">′</span> 为一对垂直放大率为 1 的共轭面，π<sub>2</sub> 和 π<sub>2</sub><span class="pr">′</span> 为一对垂直放大率为 −1 的共轭面，试作图确定物点 A 的像点。</div>
   <details class="figbox" open><summary>图</summary><figure><img src="img/9686613576ab.png" alt="π2、π1、系统、π1′、π2′ 与物点 A" style="max-width:100%;height:auto"><figcaption>原卷 p51：<i>A</i> 在 π<sub>2</sub> 左侧；中间为系统（画成带网纹的厚透镜）。</figcaption></figure></details>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <details class="figbox" open><summary>图 · 点开看作图答案（2019 答案册 p124）</summary><figure><img src="img/0f346456cfb6.jpg" alt="由 β=+1、β=−1 的共轭面作 A 的像" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>规范作图（答案册原图）</b>：β = +1 的共轭面 <i>π</i>₁（物）与 <i>π</i>₁′（像）、β = −1 的共轭面 <i>π</i>₂/<i>π</i>₂′ 已知；① 物点 <i>A</i> 与它在 <i>π</i>₁ 上的对应点 <i>B</i>₁ 连线，经系统后过 <i>π</i>₁′ 上的 <i>B</i>₁′；② 同理取 <i>C</i>₁ → <i>C</i>₁′；③ 两组出射光线的交点即 <i>A</i>′。等价说法：<b>β=+1 面确定"点对点同向"、β=−1 面确定"点对点反向"</b>，两条光线一组即可唯一确定像点。</figcaption></figure></details>
     <p><b>第一步：把共轭面翻译成基点</b></p>
     <ul class="k">
@@ -450,7 +610,7 @@
   </div>
 </div>
 
-</div><h2 id="sec4" style="margin:26px 0 10px">四 · 应用光学 计算题</h2><div id="m2019四1" data-parts="5|5" data-full="10"><div class="q" id="q001">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-三-6" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-三-6" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-应用光学-简答与画图-p49-56.html#q024" title="回到题库原题">原题 &#8599;</a></div></div><h2 id="sec4" style="margin:26px 0 10px">四 · 应用光学 计算题</h2><div id="m2019四1" data-parts="5|5" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-四-1</span><span class="ttl">正弯月薄透镜；右面镀全反射膜后像的位置与大小</span></div>
   <div class="stem">
     一折射率为 1.5 的正弯月薄透镜，其左面曲率半径为 5 cm，右面曲率半径为 15 cm，如图 a 所示，该透镜前 30 cm 处有一个高为 1 mm 的物体。<br>
@@ -458,7 +618,7 @@
     （2）如果在透镜的右面涂上全反射膜，如图 b 所示，试确定这时物体像的大小和位置。
   </div>
     <details class="figbox" open><summary>图</summary><figure><img src="img/d5de12ce700a.png" alt="原卷插图" loading="lazy" style="max-width:100%;height:auto"><figcaption>原卷 p57 插图</figcaption></figure></details>
-<div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）5 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）5 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">2.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+<div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）5 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div><div class="prow"><span class="pl">（2）5 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="5" data-step="0.5" min="0" max="5" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;5</span></span></div></div><div class="ans">
     <p><b>（1）不镀膜：一次薄透镜成像</b></p>
 
     <div class="step"><b class="n">1</b>先定符号。正弯月透镜两个面同向弯曲，球心都在右侧，故 <i>r</i><sub>1</sub> = +5 cm、<i>r</i><sub>2</sub> = +15 cm；<i>n</i> = 1.5。
@@ -523,10 +683,10 @@
   </div>
 </div>
 
-</div><div id="m2019四2" data-parts="4|3|3" data-full="10"><div class="q" id="q010">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-四-1" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-四-1" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-应用光学-解析法.html#q001" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019四2" data-parts="4|3|3" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-四-2</span><span class="ttl">f<span class="pr">′</span> = 1000mm、筒长 1200mm 的望远镜：倍率、光阑、分辨率</span></div>
   <div class="stem">一架望远镜由两个正薄透镜组成，已知物镜的像方焦距 <i>f</i><span class="pr">′</span> = 1000mm，其通光口径 <i>D</i> = 50mm，物镜与目镜的空间间隔为 1200mm，目镜的通光口径 <i>D</i> = 20mm。今在物镜的像方焦平面上设置一个直径为 16mm 的圆孔光阑，求：<br>（1）该望远镜的视角放大率；<br>（2）此光学系统的孔径光阑和视场光阑；<br>（3）该望远镜的角分辨率。</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">2</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）3 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）3 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）4 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="4" data-step="0.5" min="0" max="4" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;4</span></span></div><div class="prow"><span class="pl">（2）3 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div><div class="prow"><span class="pl">（3）3 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>（1）无焦望远镜：<i>f</i><sub>e</sub><span class="pr">′</span> = <i>d</i> − <i>f</i><sub>o</sub><span class="pr">′</span> = 1200 − 1000 = 200 mm
       <div class="eqb">Γ = −<span class="frac"><span class="num"><i>f</i><sub>o</sub><span class="pr">′</span></span><span class="den"><i>f</i><sub>e</sub><span class="pr">′</span></span></span> = −<span class="frac"><span class="num">1000</span><span class="den">200</span></span> = <b>−5×</b></div>
     </div>
@@ -553,10 +713,10 @@
   </div>
 </div>
 
-</div><div id="m2019四3" data-parts="3|3|2|2" data-full="10"><div class="q" id="q008">
+<div class="qact"><button class="qstar" type="button" data-tag="2019-四-2" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-四-2" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-第10章-光学仪器.html#q010" title="回到题库原题">原题 &#8599;</a></div></div><div id="m2019四3" data-parts="3|3|2|2" data-full="10"><div class="q">
   <div class="hd"><span class="tag">2019-四-3</span><span class="ttl">筒长 150mm、物镜 20mm、目镜 12.5×：含盖玻片修正</span></div>
   <div class="stem">现用显微镜观察一个物体，已知该显微镜的光学筒长为 150mm，物镜的焦距为 20mm，目镜的视放大率为 12.5×，求（长度的计算结果精确到 0.01mm）：<br>（1）总的视角放大率；（2）系统的焦距；（3）直接观察物体时，物体到物镜的距离为多少；（4）如果用该显微镜观察物体时，物体上有一个厚度为 1.5mm，折射率为 1.5 的盖玻片，这时物体到物镜的距离应该为多少？</div>
-  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）3 分</span><button class="sb" data-p="0" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="0" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="0" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（2）3 分</span><button class="sb" data-p="1" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="1" data-f="0.5" onclick="mark(this,0.5)">1.5</button><button class="sb" data-p="1" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（3）2 分</span><button class="sb" data-p="2" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="2" data-f="0.5" onclick="mark(this,0.5)">1</button><button class="sb" data-p="2" data-f="0" onclick="mark(this,0)">0</button></div><div class="prow"><span class="pl">（4）2 分</span><button class="sb" data-p="3" data-f="1" onclick="mark(this,1)">满分</button><button class="sb" data-p="3" data-f="0.5" onclick="mark(this,0.5)">1</button><button class="sb" data-p="3" data-f="0" onclick="mark(this,0)">0</button></div></div><div class="ans">
+  <div class="reveal"><button onclick="var q=this.closest('.q');q.classList.toggle('show');this.textContent=q.classList.contains('show')?'收起答案':'展开答案';">展开答案</button></div><div class="scorer"><div class="prow"><span class="pl">（1）3 分</span><span class="scin"><button class="scb" type="button" data-p="0" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="0" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="0" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="0" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div><div class="prow"><span class="pl">（2）3 分</span><span class="scin"><button class="scb" type="button" data-p="1" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="1" data-max="3" data-step="0.5" min="0" max="3" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="1" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="1" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;3</span></span></div><div class="prow"><span class="pl">（3）2 分</span><span class="scin"><button class="scb" type="button" data-p="2" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="2" data-max="2" data-step="0.5" min="0" max="2" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="2" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="2" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;2</span></span></div><div class="prow"><span class="pl">（4）2 分</span><span class="scin"><button class="scb" type="button" data-p="3" data-d="-1" aria-label="减分" onclick="stepPart(this)">&#8722;</button><input class="sci" type="number" data-p="3" data-max="2" data-step="0.5" min="0" max="2" step="0.5" inputmode="decimal" placeholder="&#8212;" oninput="setPart(this)"><button class="scb" type="button" data-p="3" data-d="1" aria-label="加分" onclick="stepPart(this)">+</button><button class="scmax" type="button" data-p="3" onclick="fullPart(this)">满</button><span class="scu">/&nbsp;2</span></span></div></div><div class="ans">
     <div class="step"><b class="n">1</b>（1）物镜的线放大率 β<sub>o</sub> = −Δ/<i>f</i><sub>o</sub><span class="pr">′</span> = −150/20 = −7.5
       <div class="eqb">Γ = β<sub>o</sub>Γ<sub>e</sub> = (−7.5)(12.5) = <b>−93.75×</b></div>
     </div>
@@ -580,7 +740,7 @@
   </div>
 </div>
 
-</div></div><div class="score" id="sc">得分 <b>0</b>/0</div><script>
+<div class="qact"><button class="qstar" type="button" data-tag="2019-四-3" aria-pressed="false">&#9734; 收藏</button><button class="g851-ai-btn qai" type="button" data-ai-tag="2019-四-3" title="交卷后可问 AI">AI 讲解</button><a class="qlink" href="851-计算题-第10章-光学仪器.html#q008" title="回到题库原题">原题 &#8599;</a></div></div></div><div class="score" id="sc">得分 <b>0</b>/0</div><script>
 var KEY = "g851-mock2-" + "2019", N = 19, MAX = 135;
 var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
@@ -605,19 +765,54 @@ function paint(){
   document.getElementById("sc").innerHTML = s;
   if (typeof paintChips === "function") paintChips();
 }
-function mark(btn, f){
-  var q = btn.closest(".q"), w = q.parentNode, id = w.id, p = btn.getAttribute("data-p");
-  if (typeof st[id] !== "object" || st[id] === null) st[id] = {};
-  st[id][p] = f; save();
-  q.querySelectorAll('.sb[data-p="' + p + '"]').forEach(function(b){ b.classList.remove("sel"); });
-  btn.classList.add("sel"); paint();
+function recOf(el){
+  var q = el.closest(".q"), w = q && q.parentNode;
+  if (!w || !w.getAttribute || !w.getAttribute("data-parts")) return null;
+  if (typeof st[w.id] !== "object" || st[w.id] === null) st[w.id] = {};
+  return { w: w, p: el.getAttribute("data-p"), rec: st[w.id] };
+}
+function writeVal(r, val){
+  var inp = r.w.querySelector('.sci[data-p="' + r.p + '"]');
+  var full = parseFloat(inp.getAttribute("data-max")) || 1;
+  if (val === null || isNaN(val)) { delete r.rec[r.p]; inp.value = ""; }
+  else {
+    val = Math.max(0, Math.min(full, Math.round(val * 100) / 100));
+    inp.value = (Math.round(val * 100) / 100);
+    r.rec[r.p] = Math.round((val / full) * 1000) / 1000;
+  }
+  save(); paint();
+}
+function setPart(inp){
+  var r = recOf(inp); if (!r) return;
+  var v = inp.value === "" ? null : parseFloat(inp.value);
+  var saveFocus = document.activeElement === inp;
+  writeVal(r, v);
+  if (saveFocus) { inp = r.w.querySelector('.sci[data-p="' + r.p + '"]'); try { inp.focus(); } catch (e) {} }
+}
+function stepPart(btn){
+  var r = recOf(btn); if (!r) return;
+  var inp = r.w.querySelector('.sci[data-p="' + r.p + '"]');
+  var full = parseFloat(inp.getAttribute("data-max")) || 1;
+  var step = parseFloat(inp.getAttribute("data-step")) || 0.5;
+  var cur = inp.value === "" ? null : parseFloat(inp.value);
+  var d = parseInt(btn.getAttribute("data-d"), 10) * step;
+  if (cur === null) cur = d > 0 ? 0 : 0;      /* 空 → 从 0 起算 */
+  writeVal(r, cur + d);
+}
+function fullPart(btn){
+  var r = recOf(btn); if (!r) return;
+  var inp = r.w.querySelector('.sci[data-p="' + r.p + '"]');
+  writeVal(r, parseFloat(inp.getAttribute("data-max")) || 0);
 }
 document.querySelectorAll(".q").forEach(function(q){
   var w = q.parentNode, id = w.id, rec = st[id];
   if (!rec || typeof rec !== "object") return;
-  q.querySelectorAll(".sb").forEach(function(b){
-    var v = rec[b.getAttribute("data-p")];
-    if (v !== undefined && parseFloat(v) === parseFloat(b.getAttribute("data-f"))) b.classList.add("sel");
+  q.querySelectorAll(".sci").forEach(function(inp){
+    var p = inp.getAttribute("data-p");
+    var v = rec[p];
+    if (v === undefined || v === null) return;
+    var full = parseFloat(inp.getAttribute("data-max")) || 1;
+    inp.value = Math.round((parseFloat(v) * full) * 100) / 100;
   });
 });
 paint();
@@ -625,6 +820,7 @@ paint();
 /* ── 只看错题模式：URL 带 ?wrong=1 时，只显示判过「半分/0 分」的题 ── */
 (function () {
   if (!/[?&]wrong=1/.test(location.search)) return;
+  document.body.classList.add("graded");
   var wraps = [], nWrong = 0;
   Array.prototype.forEach.call(document.querySelectorAll(".q"), function (q) {
     var w = q.parentNode;
@@ -771,6 +967,7 @@ function txtReport(rep){
 }
 
 function showReport(){
+  document.body.classList.add('graded');
   var rep = buildReport();
   var rate = rep.max ? rep.total / rep.max : 0;
   var all = document.querySelectorAll(".wrap > div[id][data-parts]").length;
@@ -873,7 +1070,32 @@ text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18)}#totop.sh
 <script>(function(){var b=document.getElementById('totop');if(!b)return;
 function u(){b.classList.toggle('show',window.scrollY>400)}
 addEventListener('scroll',u,{passive:true});u();
-b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script><!--ERRBOOK--><style>
+b.onclick=function(){scrollTo({top:0,behavior:'smooth'})};})();</script><script>
+/* 收藏 + 回原题（与章节页共用 g851-star：{题目标签:1}） */
+(function(){
+  var KEY='g851-star', st={};
+  try{ st = JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ st={}; }
+  function paint(b){
+    var on = !!st[b.getAttribute('data-tag')];
+    b.classList.toggle('on', on);
+    b.textContent = on ? '\u2605 已收藏' : '\u2606 收藏';
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  var bs = document.querySelectorAll('.qstar');
+  for (var i=0;i<bs.length;i++){
+    (function(b){
+      paint(b);
+      b.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        var tg = b.getAttribute('data-tag');
+        if (st[tg]) delete st[tg]; else st[tg]=1;
+        try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(err){}
+        paint(b);
+      });
+    })(bs[i]);
+  }
+})();
+</script><script src="ai-common.js"></script><script>if (window.G851AI) G851AI.bind();</script><!--ERRBOOK--><style>
 #errb{position:fixed;right:16px;bottom:66px;z-index:41;display:flex;align-items:center;
   justify-content:center;height:40px;padding:0 12px;border-radius:20px;background:#6d3a24;
   color:#fff;font-size:13px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.94}
@@ -898,9 +1120,9 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  transition:background .15s,box-shadow .15s}
 #g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 #g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
-#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+#g851-rail nav{position:absolute;right:0;top:40px;width:224px;background:#fff;
  border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
- padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:74vh;overflow:auto;
  opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
  transition:opacity .16s ease,transform .16s ease,visibility .16s}
 #g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
@@ -908,12 +1130,218 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
 #g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
 #g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
 #g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .disp{display:flex;align-items:center;gap:6px;padding:4px 12px 8px;flex-wrap:wrap}
+#g851-rail .disp button{flex:0 0 auto;border:1px solid var(--line,#e3dfd7);background:#fff;color:#6d3d24;
+ border-radius:8px;padding:5px 9px;font-size:12.5px;font-family:inherit;cursor:pointer;line-height:1.4}
+#g851-rail .disp button:hover{background:#fdf7ef}
+#g851-rail .disp button.on{background:#8c4a2f;border-color:#8c4a2f;color:#fff}
+#g851-rail .disp .fsz{display:flex;gap:4px;margin-left:auto}
+#g851-rail .disp .fsz button{min-width:32px;padding:5px 6px}
 #g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
  color:#9a9a9a;font-size:11.5px;line-height:1.5}
 #g851-rail .rf b{color:#6d3d24;font-weight:600}
-@media print{#g851-rail{display:none!important}}
+#g851-toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);z-index:60;
+ display:flex;align-items:center;gap:10px;background:#2b241d;color:#f4ede2;border-radius:10px;
+ padding:9px 14px;font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+ box-shadow:0 6px 22px rgba(0,0,0,.28);opacity:0;transition:opacity .22s,transform .22s;max-width:92vw}
+#g851-toast.on{opacity:1;transform:translate(-50%,0)}
+#g851-toast button{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;
+ border-radius:7px;padding:3px 10px;font:inherit;cursor:pointer}
+#g851-toast button:hover{background:rgba(255,255,255,.12)}
+#g851-offline{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;
+ background:#6b3a2a;color:#fff;border-radius:9px;padding:6px 12px;font:12.5px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+/* 题旁 AI 小按钮（章节页注入的那批） */
+.g851-ai-mini{margin-left:auto;flex:0 0 auto;border:1px solid #e0cdb6;background:#fdf6ef;color:#8c4a2f;
+ border-radius:10px;padding:1px 8px;font:12px/1.7 inherit;cursor:pointer;letter-spacing:.5px}
+.g851-ai-mini:hover{background:#fdf4ea;border-color:#cfae95}
+/* 返回键 */
+#g851-back{position:fixed;right:16px;bottom:124px;z-index:40;width:40px;height:40px;border:0;border-radius:50%;
+ background:#8c4a2f;color:#fff;font-size:19px;line-height:40px;text-align:center;cursor:pointer;
+ box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92;padding:0}
+#g851-back:hover{opacity:1}
+@media print{.g851-ai-mini,.g851-ai-btn,#g851-back{display:none!important}}
+@media print{#g851-rail{display:none!important}#g851-toast,#g851-offline{display:none!important}}
 @media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
- #g851-rail nav{width:200px;top:38px}}
+ #g851-rail nav{width:208px;top:38px}}
+
+/* ══════════ 夜间模式（只在屏幕生效；打印永远浅色） ══════════ */
+@media screen{
+html[data-theme="dark"]{
+  --bg:#151410; --ink:#e8e2d6; --mut:#a89e90; --line:#3b362c; --acc:#d99a6d; --hl:#4a3d17;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+/* 面板：所有原来的白/米色块 */
+html[data-theme="dark"] .q,
+html[data-theme="dark"] .ans,
+html[data-theme="dark"] .res,
+html[data-theme="dark"] .warn,
+html[data-theme="dark"] .kcard,
+html[data-theme="dark"] .fitem,
+html[data-theme="dark"] details.figbox,
+html[data-theme="dark"] details.fold,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .kpi,
+html[data-theme="dark"] .day,
+html[data-theme="dark"] .tip,
+html[data-theme="dark"] .qindex,
+html[data-theme="dark"] .rep,
+html[data-theme="dark"] .prow,
+html[data-theme="dark"] .hintbtn,
+html[data-theme="dark"] .alt,
+html[data-theme="dark"] .sb,
+html[data-theme="dark"] .qstar,
+html[data-theme="dark"] .starbtn,
+html[data-theme="dark"] .fcond,
+html[data-theme="dark"] #db,
+html[data-theme="dark"] #db .day,
+html[data-theme="dark"] #db .kpi,
+html[data-theme="dark"] #db .sc a,
+html[data-theme="dark"] #db .go a,
+html[data-theme="dark"] .score,
+html[data-theme="dark"] nav,
+html[data-theme="dark"] .tbar{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"] .tbar{background:#241d15!important;color:#f0e8dc}
+html[data-theme="dark"] button,
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{background:#1c1a16;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] header.top{border-bottom-color:#6a6255}
+html[data-theme="dark"] nav{background:rgba(21,20,16,.96)!important}
+html[data-theme="dark"] .qindex{background:rgba(21,20,16,.97)!important}
+/* 强调色：原本的深棕在暗底上读不清，统一提亮 */
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .ttl,
+html[data-theme="dark"] .h3,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] #db .hd b,
+html[data-theme="dark"] #db .kpi b,
+html[data-theme="dark"] #db .bar .nm,
+html[data-theme="dark"] .cm b,
+html[data-theme="dark"] .cnt b,
+html[data-theme="dark"] .n,
+html[data-theme="dark"] .qact .qlink,
+html[data-theme="dark"] .sub b,
+html[data-theme="dark"] .lg b{color:var(--acc)!important}
+html[data-theme="dark"] .sub,
+html[data-theme="dark"] .lg,
+html[data-theme="dark"] .cm,
+html[data-theme="dark"] .mut,
+html[data-theme="dark"] .vl,
+html[data-theme="dark"] .wallhint,
+html[data-theme="dark"] figcaption{color:var(--mut)!important}
+/* 内联样式的常见硬编码色（页面里大量 style="color:#..."） */
+html[data-theme="dark"] [style*="color:#8c4a2f"]{color:#d99a6d!important}
+html[data-theme="dark"] [style*="color:#6d3a24"]{color:#cf9570!important}
+html[data-theme="dark"] [style*="color:#1b1b1b"]{color:#e8e2d6!important}
+html[data-theme="dark"] [style*="color:#3a3a3a"]{color:#ded7ca!important}
+html[data-theme="dark"] [style*="color:#6d6d6d"]{color:#a89e90!important}
+html[data-theme="dark"] [style*="color:#8a7b6c"]{color:#b5a996!important}
+html[data-theme="dark"] [style*="color:#a8332a"]{color:#e5907f!important}
+html[data-theme="dark"] [style*="background:#f"]{background:#1c1a16!important}
+html[data-theme="dark"] [style*="background:#fff"]{background:#1c1a16!important}
+/* 图与公式：线稿反相后是浅线深底，扫件不会刺眼 */
+html[data-theme="dark"] img,
+html[data-theme="dark"] svg{filter:invert(1) hue-rotate(180deg) brightness(.94) contrast(1.02)}
+/* 新版「阅读优化」主题会强制 .wrap 白底 + 绿色标题：暗色下要压过去 */
+html[data-theme="dark"][data-theme] .wrap,
+html[data-theme="dark"][data-theme] body > .wr,
+html[data-theme="dark"][data-theme] body > main,
+html[data-theme="dark"][data-theme] body > article{background:transparent!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > h1,
+html[data-theme="dark"][data-theme] .wrap > h2,
+html[data-theme="dark"][data-theme] .wrap h2,
+html[data-theme="dark"][data-theme] h1,
+html[data-theme="dark"][data-theme] h2,
+html[data-theme="dark"][data-theme] h3,
+html[data-theme="dark"][data-theme] h4{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .wrap > h2{background:linear-gradient(90deg,rgba(217,154,109,.12),transparent)!important;
+  border-left-color:var(--acc)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .wrap > .q,
+html[data-theme="dark"][data-theme] .q{background:#1e1b16!important;border-color:var(--line)!important;
+  border-left-color:#b5794f!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > .q .ans,
+html[data-theme="dark"][data-theme] .ans{background:#171511!important;border-color:var(--line)!important;
+  border-left-color:#8c6a4e!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .wrap > .q .stem,
+html[data-theme="dark"][data-theme] .stem{color:var(--ink)!important}
+/* 零散控件兜底：题号条、判分按钮、收藏按钮、底部操作条、首页快捷按钮 */
+html[data-theme="dark"][data-theme] .qindex a,
+html[data-theme="dark"][data-theme] .qindex .sec,
+html[data-theme="dark"][data-theme] .sb,
+html[data-theme="dark"][data-theme] .qact .qstar,
+html[data-theme="dark"][data-theme] .reveal button,
+html[data-theme="dark"][data-theme] .btnbar button,
+html[data-theme="dark"][data-theme] .quick a,
+html[data-theme="dark"][data-theme] #db .day .da a,
+html[data-theme="dark"][data-theme] #db .day .da button,
+html[data-theme="dark"][data-theme] #db .go a,
+html[data-theme="dark"][data-theme] .wallbar button{background:#26221c!important;
+  border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .qindex a{border-radius:999px;padding:2px 9px}
+html[data-theme="dark"][data-theme] .quick a:first-child,
+html[data-theme="dark"][data-theme] #db .day .da a.main,
+html[data-theme="dark"][data-theme] .go a.main,
+html[data-theme="dark"][data-theme] .btnbar button#tg{background:#a35b36!important;
+  border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"][data-theme] .sb.on,
+html[data-theme="dark"][data-theme] .qstar.on{background:#4a3a1f!important;border-color:#c79a4a!important;color:#f0c987!important}
+html[data-theme="dark"][data-theme] .qact .qlink{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] #wallq{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] #wallq::placeholder{color:#8a7a6a}
+html[data-theme="dark"][data-theme] a{color:var(--acc)}
+
+html[data-theme="dark"][data-theme] #g851-rail nav{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] #g851-rail .tab{background:#26221c;border-color:var(--line);color:var(--acc)}
+html[data-theme="dark"][data-theme] #g851-rail a:hover{background:#26221c}
+html[data-theme="dark"][data-theme] #g851-rail a.cur{background:#2f281f}
+html[data-theme="dark"][data-theme] #g851-rail .disp button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] #g851-rail .disp button.on{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] #g851-rail .rf{border-top-color:var(--line)}
+/* 独立页面（错题本 / 收藏 / 今日复习 / 记录 / 考点 / 专项卷 / 搜索）的卡片兜底 */
+html[data-theme="dark"][data-theme] [class*="card"],
+html[data-theme="dark"][data-theme] [class*="grp"],
+html[data-theme="dark"][data-theme] [class*="sum"],
+html[data-theme="dark"][data-theme] [class*="item"],
+html[data-theme="dark"][data-theme] [class*="empty"],
+html[data-theme="dark"][data-theme] [class*="box"],
+html[data-theme="dark"][data-theme] [class*="panel"]{background:#1e1b16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] [class*="tag"]{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] [class*="lost"]{color:#e5907f!important}
+html[data-theme="dark"][data-theme] .item button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] .item button.ok{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] .kbig{background:#211d17!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .kbig .kh,
+html[data-theme="dark"][data-theme] .kh{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .fcard{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .bar{background:rgba(21,20,16,.96)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"] .tr,
+html[data-theme="dark"] #db .bar .tr{background:#2c271f!important}
+html[data-theme="dark"] .tr i,
+html[data-theme="dark"] #db .bar .tr i{background:linear-gradient(90deg,#a9613c,#d99a6d)!important}
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] a.btn{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a,
+html[data-theme="dark"] #db .day .da button{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a.main{background:#a35b36!important;border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"] #db .day .da .ok{background:#1e2a1e!important;border-color:#3c5a3c!important;color:#9ecb9e!important}
+html[data-theme="dark"] #g851-rail svg,
+html[data-theme="dark"] #g851-bg img{filter:none}
+html[data-theme="dark"] #g851-bg{opacity:.10!important}
+html[data-theme="dark"] #totop{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] #g851-back{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] .g851-ai-mini{background:#26221c;border-color:#403a30;color:var(--acc)}
+html[data-theme="dark"] #errb{background:#2a2118;color:#f0e8dc;border-color:var(--line)}
+html[data-theme="dark"] ::selection{background:#5a4a22;color:#fff}
+/* 字号档 */
+html[data-fs="s"] body{font-size:15px}
+html[data-fs="l"] body{font-size:17.5px}
+html[data-fs="l"] .q,html[data-fs="l"] .ans,html[data-fs="l"] #db,html[data-fs="l"] .fitem{line-height:1.95}
+html[data-fs="s"] .q,html[data-fs="s"] .ans,html[data-fs="s"] #db,html[data-fs="s"] .fitem{line-height:1.75}
+html[data-fs="s"] #g851-rail .tab,
+html[data-fs="s"] #g851-rail nav{background:rgba(255,255,255,.92)}
+}
 </style>
 
 <div id="g851-rail" aria-label="更多模块">
@@ -922,6 +1350,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   </button>
   <nav>
     <div class="grp">复习</div>
+    <a href="今日复习.html">今日复习</a>
     <a href="错题本.html">错题本</a>
     <a href="收藏.html">收藏夹</a>
     <a href="专项卷.html">专项卷</a>
@@ -933,6 +1362,16 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     <a href="专题-双缝条纹平移.html">双缝平移速记</a>
     <div class="grp">记录</div>
     <a href="记录.html">记录中心</a>
+    <a href="AI-笔记.html">AI 笔记 / 待转交</a>
+    <div class="grp">显示</div>
+    <div class="disp">
+      <button type="button" id="g851-dark" title="夜间模式">☾ 夜间</button>
+      <span class="fsz">
+        <button type="button" data-fs="s" title="小字">A−</button>
+        <button type="button" data-fs="m" title="标准">A</button>
+        <button type="button" data-fs="l" title="大字">A+</button>
+      </span>
+    </div>
     <div class="rf">当前：<b class="cur-page">—</b></div>
   </nav>
 </div>
@@ -957,6 +1396,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     if (el.classList.contains('open')) close(); else open();
   });
   document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  window.addEventListener('scroll', function(){ close(); }, {passive:true});
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') close();
     else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
@@ -970,19 +1410,128 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
     .filter(function(s){ return s && s !== '851'; });
   el.querySelector('.cur-page').textContent = parts[0] || here;
+
+  /* ── 新版本提示 / 离线提示 ── */
+  (function () {
+    function toast(msg, actionText, onClick, ms) {
+      var d = document.createElement('div');
+      d.id = 'g851-toast';
+      var s = document.createElement('span');
+      s.textContent = msg;
+      d.appendChild(s);
+      if (actionText) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = actionText;
+        b.addEventListener('click', onClick);
+        d.appendChild(b);
+      }
+      document.body.appendChild(d);
+      setTimeout(function () { d.classList.add('on'); }, 30);
+      if (ms) setTimeout(function () {
+        d.classList.remove('on');
+        setTimeout(function () { d.parentNode && d.parentNode.removeChild(d); }, 300);
+      }, ms);
+    }
+    if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+      if (navigator.serviceWorker.controller) {
+        var fired = 0;
+        navigator.serviceWorker.addEventListener('controllerchange', function () {
+          if (fired) return;
+          fired = 1;
+          toast('库已更新到新版本', '刷新', function () { location.reload(); }, 15000);
+        });
+      }
+    }
+    var off = null;
+    function refreshOffline() {
+      if (navigator.onLine) {
+        if (off && off.parentNode) { off.parentNode.removeChild(off); off = null; }
+      } else if (!off) {
+        off = document.createElement('div');
+        off.id = 'g851-offline';
+        off.textContent = '离线中 · 已缓存的内容仍可看';
+        document.body.appendChild(off);
+      }
+    }
+    window.addEventListener('online', refreshOffline);
+    window.addEventListener('offline', refreshOffline);
+    refreshOffline();
+  })();
+
+  /* ── 返回上一页 ── */
+  (function () {
+    var b = document.createElement('button');
+    b.id = 'g851-back'; b.type = 'button'; b.title = '返回上一页'; b.textContent = '←';
+    b.setAttribute('aria-label', '返回上一页');
+    b.addEventListener('click', function () {
+      if (window.history.length > 1) window.history.back();
+      else location.href = 'index.html';
+    });
+    document.body.appendChild(b);
+  })();
+
+  /* ── 夜间模式 ── */
+  var darkBtn = document.getElementById('g851-dark');
+  function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
+  function paintDark(){
+    if (!darkBtn) return;
+    darkBtn.textContent = isDark() ? '☀ 日间' : '☾ 夜间';
+    darkBtn.classList.toggle('on', isDark());
+  }
+  function setDark(on){
+    if (on) document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('g851-theme', on ? 'dark' : 'light'); } catch(e){}
+    paintDark();
+  }
+  if (darkBtn) {
+    paintDark();
+    darkBtn.addEventListener('click', function(e){ e.stopPropagation(); setDark(!isDark()); });
+  }
+
+  /* ── 字号档 ── */
+  var fsBtns = el.querySelectorAll('.fsz button');
+  function curFs(){ return document.documentElement.getAttribute('data-fs') || 'm'; }
+  function paintFs(){
+    Array.prototype.forEach.call(fsBtns, function(b){
+      b.classList.toggle('on', b.getAttribute('data-fs') === curFs());
+    });
+  }
+  Array.prototype.forEach.call(fsBtns, function(b){
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      var v = b.getAttribute('data-fs');
+      if (v === 'm') document.documentElement.removeAttribute('data-fs');
+      else document.documentElement.setAttribute('data-fs', v);
+      try { localStorage.setItem('g851-fs', v); } catch(err){}
+      paintFs();
+    });
+  });
+  paintFs();
 })();
 </script>
 <!-- G851_BG_V3_HTML_START -->
 <div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-motion-actor" aria-hidden="true"><img id="g851-motion-img" src="bg-character-still.png" alt="" draggable="false"></div>
 <div id="g851-bgc">
- <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+ <div class="naiwa-toolbar">
+  <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+  <button class="naiwa-bg-button naiwa-quick-toggle" id="g851-bgt" type="button" aria-pressed="true" title="一键显示或隐藏视频奶蛙">🎬 动画：开</button>
+ </div>
  <div class="naiwa-bg-panel" id="naiwa-bg-panel">
-   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
-   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">6%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="6" aria-label="背景可见度百分比">
    <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
    <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgd">正文阅读保护层</label><input type="checkbox" id="g851-bgd" checked></div>
+   <div class="naiwa-row"><label for="g851-bgu">题目卡片排版</label><input type="checkbox" id="g851-bgu" checked></div>
+   <div class="naiwa-row"><label for="g851-bga2">显示视频奶蛙</label><input type="checkbox" id="g851-bga2" checked></div>
+   <div class="naiwa-row"><label for="g851-bgp">播放视频动画</label><input type="checkbox" id="g851-bgp" checked></div>
+   <div class="naiwa-row"><label for="g851-bga3">动画可见度</label><input type="range" id="g851-bga3" min="5" max="50" value="22"><span id="g851-bga4">22%</span></div>
    <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
-   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <p class="naiwa-caption">左下角可一键显示/隐藏；关闭播放时保留静态人物；专注模式自动隐藏动画。</p>
    <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
  </div>
 </div>
@@ -994,10 +1543,15 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  if(!layer||!panel)return;
  var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
   val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
-  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
-  reset=document.getElementById('g851-bgr');
- var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
- var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),reading=document.getElementById('g851-bgd'),
+  ui=document.getElementById('g851-bgu'),reset=document.getElementById('g851-bgr'),
+  actor=document.getElementById('g851-motion-actor'),actorImg=document.getElementById('g851-motion-img'),
+  actorOn=document.getElementById('g851-bga2'),actorPlay=document.getElementById('g851-bgp'),
+  quickActor=document.getElementById('g851-bgt'),actorAlpha=document.getElementById('g851-bga3'),actorValue=document.getElementById('g851-bga4');
+ var N=5,EYE_MAP={"0":[{"x":39.9,"y":34.1,"w":11.8,"h":11.8}],"2":[{"x":9.8,"y":39.0,"w":12.3,"h":16.8,"mask":true,"pupilW":60,"pupilH":61,"colors":["#b0c998","#a2be85","#879d62"]},{"x":51.1,"y":28.9,"w":16.4,"h":16.4,"mask":true,"pupilW":55,"pupilH":58,"colors":["#b6d399","#a2c387","#839c60"]}]},sprites=[],resizeJob=0,eyeJob=0,mouse=null,layoutKey="";
+ // 固定槽位相对浏览器窗口与正文左右边缘布置，不再按窗口大小随机洗牌。
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes',KR='g851-bg-reading',KU='g851-bg-ui',KDV='g851-bg-read-default-v1',
+  KAC='g851-bg-character-enabled',KAL='g851-bg-character-opacity',KAP='g851-bg-character-playing';
  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
  function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
@@ -1005,89 +1559,179 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  var pageName=decodeURIComponent(location.pathname).split('/').pop();
  var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
  var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ document.documentElement.classList.toggle('g851-exam',defaultFocus);
  function apply(){
   var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
   document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
-  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  layer.style.opacity=onFocus?Math.min(v/100,.02):v/100;
   val.textContent=v?v+'%':'关';
   layer.classList.toggle('focus',onFocus);
   layer.classList.toggle('no-motion',!motion.checked||reduced);
-  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+  document.documentElement.classList.toggle('g851-reading',reading.checked||onFocus);
+  document.documentElement.classList.toggle('g851-ui',ui.checked);
+  var enabled=actorOn.checked&&!onFocus;
+  actor.style.display=enabled?'block':'none';
+  quickActor.textContent=actorOn.checked?'🎬 动画：开':'🎬 动画：关';
+  quickActor.setAttribute('aria-pressed',String(actorOn.checked));
+  quickActor.title=actorOn.checked?'点击隐藏视频奶蛙':'点击显示视频奶蛙';
+  var pct=clamp(+actorAlpha.value||22,5,50);
+  actorValue.textContent=pct+'%';actor.style.setProperty('--g851-motion-alpha',(pct/100).toFixed(2));
+  var src=(enabled&&actorPlay.checked&&!reduced)?'bg-character.webp':'bg-character-still.png';
+  if(actorImg.getAttribute('src')!==src)actorImg.setAttribute('src',src);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){for(var eye of s.eyes){eye.mover.style.setProperty('--look-x','0px');eye.mover.style.setProperty('--look-y','0px')}}}
  }
+ /* 旧版默认12%首次升级为6%；用户原先自定义的其他数值不改变。 */
  var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
- range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ if(get(KDV)!=='1'){
+  if(saved===null||saved==='12'){saved='6';put(K,6)}
+  put(KDV,'1');
+ }
+ range.value=clamp(query?+query[1]:(saved===null?6:+saved),0,30);
  motion.checked=(get(KM)!=='0')&&!reduced;
  eyes.checked=(get(KE)!=='0')&&!reduced;
  focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ reading.checked=get(KR)!=='0';
+ ui.checked=get(KU)!=='0';
+ actorOn.checked=get(KAC)!=='0';
+ actorPlay.checked=get(KAP)!=='0'&&!reduced;
+ actorAlpha.value=clamp(get(KAL)===null?22:+get(KAL),5,50);
  apply();
  range.addEventListener('input',function(){apply();put(K,range.value)});
  motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
  eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
  focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
- reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
-  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+ reading.addEventListener('change',function(){apply();put(KR,reading.checked?'1':'0')});
+ ui.addEventListener('change',function(){apply();put(KU,ui.checked?'1':'0')});
+ actorOn.addEventListener('change',function(){apply();put(KAC,actorOn.checked?'1':'0')});
+ quickActor.addEventListener('click',function(){actorOn.checked=!actorOn.checked;apply();put(KAC,actorOn.checked?'1':'0')});
+ actorPlay.addEventListener('change',function(){apply();put(KAP,actorPlay.checked?'1':'0')});
+ actorAlpha.addEventListener('input',function(){apply();put(KAL,actorAlpha.value)});
+ reset.addEventListener('click',function(){range.value=6;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;reading.checked=true;ui.checked=true;
+  actorOn.checked=true;actorPlay.checked=!reduced;actorAlpha.value=22;apply();put(K,6);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');put(KR,'1');put(KU,'1');put(KAC,'1');put(KAL,22);put(KAP,actorPlay.checked?'1':'0');
   try{localStorage.removeItem(KF)}catch(e){}});
  btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
  document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
- function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
-  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
-  return((t^t>>>14)>>>0)/4294967296;}}
+ // 固定编号固定侧边位置。浏览器缩放只缩放坐标，不会重新随机挑选造型/位置。
+ // 两边从上至下；右下角始终留给视频奶蛙，即使它暂时隐藏也不挪动其他图案。
+ var SLOTS=[
+  {side:'left', y:.14,kind:0,angle:-14}, {side:'right',y:.15,kind:2,angle:12},
+  {side:'left', y:.38,kind:3,angle:9}, {side:'right',y:.40,kind:1,angle:-12},
+  {side:'left', y:.62,kind:4,angle:-8}, {side:'right',y:.65,kind:0,angle:13},
+  {side:'left', y:.85,kind:2,angle:13}, {side:'right',y:.86,kind:3,angle:-10}
+ ];
  function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function boxOf(r){return {l:r.left,t:r.top,r:r.right,b:r.bottom};}
+ function actorBounds(){
+  // 即使关闭了视频奶蛙，也始终保留原来的动画位置，避免切换时其他图案跳动。
+  if(!actor)return null;
+  var wasHidden=getComputedStyle(actor).display==='none',oldDisplay=actor.style.display,oldVisibility=actor.style.visibility;
+  if(wasHidden){actor.style.display='block';actor.style.visibility='hidden';}
+  var r=actor.getBoundingClientRect();
+  if(wasHidden){actor.style.display=oldDisplay;actor.style.visibility=oldVisibility;}
+  return r.width>0&&r.height>0?boxOf(r):null;
+ }
+ function contentBounds(W){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  // 若页面没有主要阅读容器，保守预留中央正文区域。
+  if(!main)return {left:W>900?(W-900)/2:W*.15,right:W>900?(W+900)/2:W*.85};
+  var r=main.getBoundingClientRect();
+  return {left:clamp(r.left,0,W),right:clamp(r.right,0,W)};
+ }
  function relayout(){
-  var W=innerWidth,H=innerHeight;
+  var W=window.innerWidth,H=window.innerHeight;
   if(W<180||H<180)return;
-  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
-  lastW=W;lastH=H;layer.textContent='';sprites=[];
-  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
-  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
-  var count=clamp(Math.round(W*H/60000),6,30);
-  for(var i=0;i<count;i++){
-   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
-   var angle=(rand()-.5)*52;
-   if(rand()<.1)angle+=(rand()<.5?85:-85);
-   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
-   var margin=16,found=null,rect;
-   if(ew+margin*2>W||ew+margin*2>H)continue;
-   for(var attempt=0;attempt<360;attempt++){
-    var cx=ew/2+margin+rand()*(W-ew-2*margin);
-    var cy=ew/2+margin+rand()*(H-ew-2*margin);
-    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
-    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
-   }
-   if(!found)continue;
-   boxes.push(rect);
-   var kind=Math.floor(rand()*N);
+  var c=contentBounds(W),reserved=[],a=actorBounds();
+  // 题目展开/折叠只改变正文高度，不应触发图案刷新和动画重置。
+  var key=[Math.round(W),Math.round(H),Math.round(c.left),Math.round(c.right)].join('/');
+  if(key===layoutKey)return;
+  layoutKey=key;
+  // 根据固定槽位绘制；不使用尺寸作随机种子，也不以窗口面积改变选取顺序。
+  layer.textContent='';sprites=[];
+  if(a)reserved.push(a);
+  // 保留左下角开关的操作空间，不让装饰漂到按钮正后方。
+  var tb=panel.querySelector('.naiwa-toolbar');
+  if(tb){var t=tb.getBoundingClientRect();reserved.push(boxOf(t));}
+  var placed=[];
+  for(var i=0;i<SLOTS.length;i++){
+   var slot=SLOTS[i],left=slot.side==='left';
+   var railLeft=left?0:c.right,railRight=left?c.left:W;
+   var rail=railRight-railLeft;
+   // 侧边空间不足时直接不画，绝不强塞进正文或与视频角色重叠。
+   if(rail<68)continue;
+   var angle=slot.angle,aRad=angle*Math.PI/180;
+   var footprintFactor=Math.abs(Math.cos(aRad))+Math.abs(Math.sin(aRad));
+   // 占位盒包括旋转、漂浮与点击放大时的额外安全余量。
+   var width=Math.min(112,(rail-44)/(footprintFactor*1.17),H*.145);
+   if(width<38)continue;
+   var outer=width*footprintFactor*1.17+18;
+   var cx=(railLeft+railRight)/2,cy=slot.y*H;
+   var rect={l:cx-outer/2,t:cy-outer/2,r:cx+outer/2,b:cy+outer/2};
+   if(rect.l<7||rect.r>W-7||rect.t<7||rect.b>H-7)continue;
+   // 主阅读区也属于禁止占用区域，而非只靠白底遮住背景。
+   if(left&&rect.r>c.left-3||!left&&rect.l<c.right+3)continue;
+   if(reserved.some(function(b){return collision(rect,b,12)})||
+      placed.some(function(b){return collision(rect,b,12)}))continue;
+   placed.push(rect);
+   var kind=slot.kind%N;
    var el=document.createElement('div');el.className='naiwa';
-   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
-   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
-   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
-   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
-   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   el.dataset.slot=String(i);el.dataset.kind=String(kind);
+   el.style.left=(cx-width/2).toFixed(2)+'px';el.style.top=(cy-width/2).toFixed(2)+'px';
+   el.style.width=width.toFixed(2)+'px';el.style.height=width.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle+'deg');
+   el.style.setProperty('--speed',(7+(i%4)*1.3).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-i*1.7).toFixed(2)+'s');
    var fl=document.createElement('div');fl.className='naiwa-float';
    var reaction=document.createElement('div');reaction.className='naiwa-react';
    var face=document.createElement('div');face.className='naiwa-face';
    face.style.setProperty('--atlas-scale',(N*100)+'%');
    face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
    reaction.appendChild(face);
-   var pupil=null;
-   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
-   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   var eyeSet=EYE_MAP[String(kind)]||[],eyeParts=[];
+   for(var k=0;k<eyeSet.length;k++){
+    var ec=eyeSet[k],socket=document.createElement('div');
+    socket.className='naiwa-eye'+(ec.mask?' naiwa-eye--masked':'');
+    socket.style.left=ec.x+'%';socket.style.top=ec.y+'%';
+    socket.style.width=ec.w+'%';socket.style.height=(ec.h||ec.w)+'%';
+    var mover=socket;
+    if(ec.mask){
+     if(ec.colors){socket.style.setProperty('--iris-light',ec.colors[0]);socket.style.setProperty('--iris-mid',ec.colors[1]);socket.style.setProperty('--iris-dark',ec.colors[2]);}
+     mover=document.createElement('span');mover.className='naiwa-eye-dot';
+     mover.style.width=(ec.pupilW||56)+'%';mover.style.height=(ec.pupilH||56)+'%';
+     socket.appendChild(mover);
+    }
+    reaction.appendChild(socket);eyeParts.push({anchor:socket,mover:mover,masked:!!ec.mask});
+   }
    fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
-   sprites.push({el:el,react:reaction,pupil:pupil});
+   sprites.push({el:el,react:reaction,eyes:eyeParts});
   }
  }
- window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
-  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ function scheduleRelayout(){
+  if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout();});
+ }
+ window.addEventListener('resize',scheduleRelayout,{passive:true});
+ window.addEventListener('pageshow',scheduleRelayout);
+ if(window.ResizeObserver){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  if(main){var ro=new ResizeObserver(scheduleRelayout);ro.observe(main);}
+ }
  document.addEventListener('pointermove',function(e){
   if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
   mouse={x:e.clientX,y:e.clientY};
   if(eyeJob)return;
   eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
-   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
-    var max=clamp(r.width*.04,2,5);
-    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
-    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   for(var s of sprites){
+    var sr=s.el.getBoundingClientRect();
+    for(var eye of s.eyes){
+     var r=eye.anchor.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+     var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+     var max=clamp(sr.width*.04,2,5);
+     // 双眼瞳孔不能离开绿色眼眶；单眼保持旧版幅度。
+     if(eye.masked)max=Math.min(max,Math.min(r.width,r.height)*.16);
+     eye.mover.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+     eye.mover.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+    }
    }
   });
  },{passive:true});

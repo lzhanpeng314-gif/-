@@ -92,23 +92,145 @@
   details.fold>summary+b,details.fold>summary+p{margin-top:6px;}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#8c4a2f">
-
-
-
-
-<!-- G851_BG_V3_CSS_START -->
+<meta name="theme-color" content="#8c4a2f"><script>/*G851_THEME_EARLY*/
+(function(){
+  try {
+    var d = document.documentElement;
+    var t = localStorage.getItem('g851-theme');
+    if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    if (t === 'dark') d.setAttribute('data-theme', 'dark');
+    var f = localStorage.getItem('g851-fs');
+    if (f) d.setAttribute('data-fs', f);
+    /* 打卡：今天第一次打开就记一天（放在 head，保证首页看板首屏就能读到） */
+    var A = 'g851-active', arr = JSON.parse(localStorage.getItem(A) || '[]') || [];
+    var n = new Date();
+    var td = n.getFullYear() + '-' + ('0' + (n.getMonth() + 1)).slice(-2) + '-' + ('0' + n.getDate()).slice(-2);
+    if (arr.length === 0 || arr[arr.length - 1] !== td) {
+      arr.push(td);
+      if (arr.length > 400) arr = arr.slice(-400);
+      localStorage.setItem(A, JSON.stringify(arr));
+    }
+  } catch(e){}
+})();
+</script><!-- G851_BG_V3_CSS_START -->
 <style id="g851-bg-style">
-/* 奶蛙 v3：装饰层透明、鼠标穿透、不影响题目、按钮、表单和页内锚点。 */
-#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.12);contain:layout paint;}
+/* 奶蛙 v3 阅读优化：只调整背景/正文显示层，不改题目、公式、答案和交互数据。 */
+#g851-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:var(--g851-bga,.06);contain:layout paint;
+ /* 侧边装饰保留；中央正文后方显著淡化。 */
+ -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+ mask-image:linear-gradient(90deg,#000 0%,#000 11%,rgba(0,0,0,.55) 23%,rgba(0,0,0,.14) 36%,rgba(0,0,0,.14) 64%,rgba(0,0,0,.55) 77%,#000 89%,#000 100%);
+}
+/* 由原视频逐帧抠图的透明动画，独立于静态奶蛙；始终在正文层之后，不阻挡任何点击。 */
+#g851-motion-actor{position:fixed;right:max(12px,calc((100vw - 1024px)/2 - 220px));bottom:2vh;
+ width:clamp(150px,18vw,240px);aspect-ratio:300/407;z-index:-1;pointer-events:none;
+ opacity:var(--g851-motion-alpha,.22);user-select:none;}
+#g851-motion-actor img{display:block;width:100%;height:100%;object-fit:contain;}
+@media(max-width:780px){#g851-motion-actor{width:114px;right:-10px;bottom:8vh;
+ opacity:calc(var(--g851-motion-alpha,.22) * .55);}}
+@media print{#g851-motion-actor{display:none!important}}
+/* 阅读保护层只作用于 body 的顶层正文容器，不碰题目及公式内部子元素。 */
+html.g851-reading body > .wrap,
+html.g851-reading body > .wr,
+html.g851-reading body > main,
+html.g851-reading body > article{
+ position:relative;
+ background-color:rgba(255,255,255,.985)!important;
+ border-radius:14px;
+ box-shadow:0 0 0 1px rgba(94,78,60,.08),0 8px 28px rgba(60,49,35,.045);
+}
+@media(max-width:780px){
+ /* 窄屏阅读面积更大，不刻意在中间挖出一条渐变。 */
+ #g851-bg{-webkit-mask-image:none;mask-image:none;}
+ html.g851-reading body > .wrap,html.g851-reading body > .wr,
+ html.g851-reading body > main,html.g851-reading body > article{border-radius:0;box-shadow:none;}
+}
+/* ===== 851 阅读 UI 增强：仅针对章节真题页的现有结构，不重排 DOM、不触碰评分逻辑 ===== */
+/* 顶层正文板块已经使用 g851-reading 白底；本层只负责内部信息层级。 */
+html.g851-ui:not(.g851-exam) body > .wrap > h1{
+ color:#263a2e;letter-spacing:.012em;line-height:1.4;
+ text-wrap:balance;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .sub{
+ color:#647168;line-height:1.7;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > h2{
+ color:#345a43;
+ padding:11px 14px;
+ margin-top:27px;margin-bottom:15px;
+ background:linear-gradient(90deg,rgba(236,244,238,.95),rgba(255,255,255,0));
+ border-left:4px solid #7e9e86;
+ border-bottom:1px solid rgba(94,124,101,.14);
+ border-radius:7px 0 0 7px;
+ line-height:1.5;
+}
+/* 直接子元素保证只美化题库正文；不会误伤浮窗、目录和专项卷组件。 */
+html.g851-ui:not(.g851-exam) body > .wrap > .q{
+ position:relative;background:#fff;
+ border:1px solid #e1e8e0;
+ border-left:3px solid #a2baa6;
+ border-radius:12px;
+ padding:20px 22px;
+ margin-bottom:18px;
+ box-shadow:0 3px 13px rgba(35,67,45,.045);
+ scroll-margin-top:100px;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q:target{
+ border-color:#789983;
+ box-shadow:0 0 0 2px rgba(121,164,130,.13),0 4px 15px rgba(35,67,45,.07);
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{
+ color:#24332a;
+ font-size:16.5px;
+ line-height:1.86;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{
+ background:#f7faf7;
+ border:1px solid #e4ede5;
+ border-left:3px solid #92b09a;
+ border-radius:8px;
+ padding:14px 17px;
+ margin-top:14px;
+ color:#293b30;
+ line-height:1.83;
+ overflow-wrap:break-word;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q .ans .eqb{
+ max-width:100%;overflow-x:auto;overflow-y:hidden;
+}
+html.g851-ui:not(.g851-exam) body > .wrap > .q img{
+ max-width:100%;height:auto;
+}
+@media(max-width:780px){
+ html.g851-ui:not(.g851-exam) body > .wrap > h2{padding:9px 11px;margin-top:20px;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q{
+  padding:15px 14px;border-radius:9px;margin-bottom:13px;
+  box-shadow:0 1px 5px rgba(35,67,45,.025);
+ }
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .stem{font-size:16px;line-height:1.78;}
+ html.g851-ui:not(.g851-exam) body > .wrap > .q .ans{padding:11px 12px;line-height:1.76;}
+}
+@media print{
+ html.g851-ui body > .wrap > .q{box-shadow:none!important;}
+}
+/* ===== 阅读 UI 增强结束 ===== */
 #g851-bg .naiwa{position:absolute;display:block;pointer-events:none;transform:rotate(var(--angle));transform-origin:50% 50%;}
 #g851-bg .naiwa-float{width:100%;height:100%;animation:naiwa-float var(--speed) ease-in-out var(--delay) infinite alternate;}
 #g851-bg .naiwa-react{position:relative;width:100%;height:100%;}
 #g851-bg .naiwa-face{position:absolute;inset:0;background-image:url('bg.png');background-repeat:no-repeat;background-position:var(--sprite-pos) center;background-size:var(--atlas-scale) 100%;}
-#g851-bg .naiwa-eye{position:absolute;left:39.9%;top:34.1%;width:11.8%;height:11.8%;border-radius:50%;pointer-events:none;
+/* 每张造型按图集 metadata 独立设定眼睛位置；原版单瞳孔行为不变。 */
+#g851-bg .naiwa-eye{position:absolute;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle at 38% 32%,#1d261f 0%,#0a0d0b 62%,#030504 88%);
  transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
  transition:transform .16s ease-out;box-shadow:inset -2px -2px 5px rgba(0,0,0,.4);}
+/* 思考奶蛙两眼原图带固定瞳孔：先盖住静态瞳孔，只让黑色动态瞳孔移动。 */
+#g851-bg .naiwa-eye--masked{overflow:hidden;transform:translate(-50%,-50%);box-shadow:none;
+ background:radial-gradient(ellipse at 42% 37%,var(--iris-light,#b1cb9a) 0%,
+ var(--iris-mid,#9fbe84) 55%,var(--iris-dark,#849d65) 96%,rgba(130,157,100,0) 100%);}
+#g851-bg .naiwa-eye-dot{display:block;position:absolute;left:50%;top:50%;border-radius:50%;
+ background:radial-gradient(ellipse at 39% 34%,#17231a 0%,#080f09 60%,#010402 90%);
+ transform:translate(calc(-50% + var(--look-x,0px)),calc(-50% + var(--look-y,0px)));
+ transition:transform .16s ease-out;box-shadow:inset -1px -1px 3px rgba(0,0,0,.3);}
 @keyframes naiwa-float{from{transform:translate3d(-4px,3px,0) rotate(-1.2deg)}to{transform:translate3d(4px,-3px,0) rotate(1.2deg)}}
 @keyframes naiwa-bop{0%,100%{transform:scale(1)}30%{transform:translateY(-6px) scale(1.07)}65%{transform:translateY(2px) scale(.98)}}
 @keyframes naiwa-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
@@ -123,6 +245,9 @@
 #g851-bgc{position:fixed;left:10px;bottom:12px;z-index:41;color:#765541;
  font:12px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif;}
 #g851-bgc button,#g851-bgc input{font:inherit;}
+#g851-bgc .naiwa-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+#g851-bgc .naiwa-quick-toggle[aria-pressed="false"]{background:rgba(246,247,245,.96);color:#68746a;border-color:#d7e0d8;}
+#g851-bgc .naiwa-quick-toggle:focus-visible,#g851-bgc .naiwa-bg-button:focus-visible{outline:2px solid #638e76;outline-offset:2px;}
 #g851-bgc .naiwa-bg-button{border:1px solid #e3dfd7;border-radius:14px;padding:5px 10px;cursor:pointer;color:#77553e;background:rgba(255,255,255,.94);box-shadow:0 2px 8px #0001;}
 #g851-bgc .naiwa-bg-panel{display:none;position:absolute;bottom:34px;left:0;width:206px;max-width:calc(100vw - 20px);box-sizing:border-box;padding:12px;
  background:#fff;border:1px solid #e5ded6;border-radius:11px;box-shadow:0 7px 22px #0002;}
@@ -130,6 +255,8 @@
 #g851-bgc .naiwa-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0;}
 #g851-bgc .naiwa-row label{cursor:pointer;}
 #g851-bgc #g851-bgi{width:100%;margin:3px 0 8px;accent-color:#aa795c;}
+#g851-bgc #g851-bga3{width:75px;max-width:75px;accent-color:#aa795c;}
+#g851-bgc #g851-bga4{font-variant-numeric:tabular-nums;min-width:29px;text-align:right;}
 #g851-bgc .naiwa-bg-reset{border:0;background:transparent;padding:2px 0;color:#915c3d;text-decoration:underline;cursor:pointer;}
 #g851-bgc .naiwa-caption{font-size:10px;color:#98897c;margin:0 0 6px;}
 @media (prefers-reduced-motion: reduce){#g851-bg .naiwa-float,#g851-bg .naiwa-react{animation:none!important}}
@@ -221,7 +348,7 @@
 <ul class="k"><li><b>放大镜</b>：Γ = 250/<i>f</i>′（明视距离 250 mm）；眼在 <i>F</i>′ 时视场最大。</li><li><b>显微镜</b>：Γ = (Δ/<i>f</i><sub>o</sub>′)(250/<i>f</i><sub>e</sub>′)；分辨 δ = <b>0.61λ/NA</b>（NA = <i>n</i>sin<i>U</i>）；<b>有效放大率 500NA ~ 1000NA</b>（分辨极限的像对人眼张 2′~4′）—— 比它小是「看不清」、比它大是「无效放大」。</li><li><b>望远镜</b>：Γ = −<i>f</i><sub>o</sub>′/<i>f</i><sub>e</sub>′；分辨 α = 1.22λ/<i>D</i>；<b>正常（有效）放大率 Γ ≈ <i>D</i>/2.3</b>（<i>D</i> 以 mm 计）—— 2009-11 那道题就是把它和 1.22λ/<i>D</i> 判据联立。</li><li><b>光阑</b>：孔径光阑定 <i>U</i>、视场光阑定视场；<b>入窗 = 视场光阑经其前方系统所成的像</b>，物方视场角 2ω = 入窗直径/入窗距离。把视场光阑放在<b>物镜像方焦面</b>即消除渐晕。</li><li><b>景深</b>：<i>p</i><sub>1</sub> = <i>pf</i>′²/(<i>f</i>′²−<i>Fzp</i>)、<i>p</i><sub>2</sub> = <i>pf</i>′²/(<i>f</i>′²+<i>Fzp</i>)；后景深无限 ⇔ <i>Fz p</i> = <i>f</i>′²。教材版 <i>D</i>/ε 写法见 Ch10 与简答题 2022-1(4)。</li></ul><p style="margin:4px 0 0"><b>曲光度</b>：Φ = 1/<i>f</i>′（m⁻¹，D）；配镜 <i>f</i>′ = 1/Φ。</p>
 </div>
 <div class="q" id="q001">
-  <div class="hd"><span class="tag">2017-四-4</span><span class="ttl">5 m 内看不清要配多少度；近拍镜把最近拍摄距离推到多远</span></div>
+  <div class="hd"><span class="tag">2017-四-4</span><span class="ttl">5 m 内看不清要配多少度；近拍镜把最近拍摄距离推到多远</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2017-四-4" data-ai-title="5 m 内看不清要配多少度；近拍镜把最近拍摄距离推到多远" title="AI 讲这题">AI</button></div>
   <div class="stem">一个人眼看不清楚 5m 以内的物体，如果校正时应该佩戴眼镜的屈光度为多少？某照相机可拍摄的最近距离为 1m，装上 2 个屈光度（<i>f</i> = 500mm）的近拍镜后，能拍摄的最近距离是多少（近拍镜与照相机镜头的间距可忽略）？<span class="qp" data-n="2"></span></div>
   <div class="ans">
     <div class="step"><b class="n">1</b>"5 m 以内看不清" = <b>近点跑到 5 m</b> 的远视眼。矫正目标：把 25 cm（明视距离）处的物，成虚像于近点 5 m 处
@@ -256,35 +383,29 @@
 <div class="lead">同一套装置的两年重复题（眼在 <i>F</i><span class="pr">′</span>、物在 <i>F</i>），问法一个是"入瞳+视场+渐晕"，一个是"入/出瞳+入/出窗"。核心只有一条：<b>把每个孔径经其前面的元件成像，再比谁小</b>。</div>
 
 <div class="q" id="q002">
-  <div class="hd"><span class="tag">2024-四-3</span><span class="ttl">放大镜＋眼在 F<span class="pr">′</span>：孔径光阑、入瞳、入窗、渐晕</span></div>
-  <div class="stem">将一个像方焦距 <i>f</i><span class="pr">′</span> = 40mm，直径 <i>D</i><sub>1</sub> = 30mm 的薄透镜做成放大镜，眼睛位于透镜像方焦点 <i>F</i><span class="pr">′</span> 上，眼睛直径 <i>D</i><sub>2</sub> = 4mm，物面放在透镜物方焦点 <i>F</i> 上。试问：<br>（1）哪一个是孔径光阑？哪一个是视场光阑？<br>（2）入瞳在哪里，物方孔径角等于多少？<br>（3）入窗在哪里？物方线视场等于多少？<br>（4）视场边沿有无渐晕？</div>
+  <div class="hd"><span class="tag">2024-四-3</span><span class="ttl">放大镜＋眼在 F<span class="pr">′</span>：孔径光阑、入瞳、入窗、渐晕</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2024-四-3" data-ai-title="" title="AI 讲这题">AI</button></div>
+  <div class="stem">有一焦距 <i>f</i><span class="pr">′</span> = 40 mm、口径 <i>D</i><sub>1</sub> = 30 mm 的薄透镜（作放大镜用），物体位于物方焦点 <i>F</i> 上，眼睛位于像方焦点 <i>F</i><span class="pr">′</span> 上（眼睛直径 <i>D</i><sub>眼</sub> = 4 mm）。试求：（1）孔径光阑和视场光阑的位置；（2）入瞳位置、物方孔径角；（3）入窗位置、物方线视场。</div>
   <div class="ans">
-    <div class="step"><b class="n">1</b>比孔径：把眼睛瞳孔（4 mm，位于 <i>F</i><span class="pr">′</span> 即透镜后 40 mm）经透镜成像到物方。对透镜它是<b>虚物</b> <i>l</i> = +40
-      <div class="eqb"><span class="frac"><span class="num">1</span><span class="den"><i>l</i><span class="pr">′</span></span></span> = <span class="frac"><span class="num">1</span><span class="den">40</span></span> + <span class="frac"><span class="num">1</span><span class="den">40</span></span> = <span class="frac"><span class="num">1</span><span class="den">20</span></span>　⇒　<i>l</i><span class="pr">′</span> = 20 mm，　β = <span class="frac"><span class="num">20</span><span class="den">40</span></span> = 0.5</div>
-      <p style="margin:4px 0 0">像径 4 × 0.5 = 2 mm，远小于透镜框 30 mm ⇒ <b>孔径光阑是眼睛瞳孔</b>。</p>
+    <div class="step"><b class="n">1</b>判孔径光阑。瞳孔在像方焦平面 <i>F</i><span class="pr">′</span> 上，把它经透镜成像、<b>从物方看进去</b>（光由瞳孔射向物方）：物在透镜后 40 mm = <i>f</i><span class="pr">′</span> ⇒ 像在<b>物方无穷远</b>，其角半径 tan <i>u</i> = (<i>D</i><sub>眼</sub>/2)/<i>f</i><span class="pr">′</span> = 2/40 = 0.05（2.86°）；而透镜框在 <i>F</i> 面处的张角 arctan(15/40) ≈ 20.6°，远大于它。
+      <div class="eqb">2.86° ≪ 20.6° ⇒ 限光束的是瞳孔 ⇒ <b>孔径光阑 = 眼睛（瞳孔）</b>；余下的透镜框限视场 ⇒ <b>视场光阑 = 透镜框</b></div>
     </div>
-    <div class="step"><b class="n">2</b>入瞳 = 孔径光阑经其前系统（就是这片透镜）的像 ⇒ 直径 <b>2 mm</b>，位于透镜<b>后 20 mm</b>（虚像，在眼睛一侧）
+    <div class="step"><b class="n">2</b>入瞳 = 孔径光阑经其<b>前面</b>光学系统所成的像。瞳孔在 <i>F</i><span class="pr">′</span>，故像在物方无穷远 ⇒ <b>入瞳在物方无穷远</b>（虚像），角半径 2.86°。
+      <div class="eqb">tan <i>U</i> = <span class="frac"><span class="num"><i>D</i><sub>眼</sub>/2</span><span class="den"><i>f</i><span class="pr">′</span></span></span> = 2/40 = 1/20 ⇒ <i>U</i> = 2.86°，<b>2<i>U</i> = 5.73°</b></div>
     </div>
-    <div class="step"><b class="n">3</b>物方孔径角：物在透镜前 40 mm，入瞳在透镜后 20 mm ⇒ 物到入瞳 60 mm，入瞳半径 1 mm
-      <div class="eqb">tan <i>u</i> = <span class="frac"><span class="num">1</span><span class="den">60</span></span>　⇒　<i>u</i> = 0.955°，　<b>2<i>u</i> = 1.91°</b></div>
+    <div class="step"><b class="n">3</b>物方孔径角：物在 <i>F</i> 面上，物点发出的光束经透镜后成<b>平行光束</b>，宽度被瞳孔限制为 <i>D</i><sub>眼</sub> = 4 mm ⇒ 物面处半角 tan <i>U</i> = 2/40 = 1/20，<i>U</i> = 2.86°。</div>
+    <div class="step"><b class="n">4</b>入窗：视场光阑（透镜框）前面没有光学元件 ⇒ <b>入窗就是透镜框自身</b>（φ30 mm，在透镜平面）。</div>
+    <div class="step"><b class="n">5</b>物方线视场：主光线过孔径光阑中心（轴上 <i>F</i><span class="pr">′</span> 点），在物方与光轴平行、高度为 <i>y</i>；该物点发出的平行光束在透镜处的高度范围为 [<i>y</i>−2, <i>y</i>+2] mm。要全部通过镜框（±15 mm）：
+      <div class="eqb">|<i>y</i>| + 2 ≤ 15 ⇒ |<i>y</i>| ≤ 13 mm ⇒ <b>物方线视场 2<i>y</i> = 26 mm</b></div>
     </div>
-    <div class="step"><b class="n">4</b>视场光阑：孔径光阑已定为瞳孔，剩下的只有透镜框 ⇒ <b>视场光阑 = 透镜框（30 mm）</b>；它前面没有光学元件，故<b>入窗与透镜框重合</b>（30 mm，在透镜处）。
-    </div>
-    <div class="step"><b class="n">5</b>物方线视场：主光线过入瞳中心（透镜后 20 mm）与入窗边缘（透镜处 ±15 mm），延长到物面（透镜前 40 mm）
-      <div class="eqb"><i>y</i> = 15 × <span class="frac"><span class="num">20 + 40</span><span class="den">20</span></span> = 15 × 3 = <b>45 mm</b>　⇒　2<i>y</i> = <b>90 mm</b></div>
-    </div>
-    <div class="step"><b class="n">6</b>渐晕检验：物面上 <i>y</i> 处的光束要同时穿过瞳孔（±2 mm，在透镜后 40 mm）和透镜框（±15 mm）。该光束在透镜处的高度
-      <div class="eqb"><i>y</i><sub>透镜</sub> = <i>y</i> + (<i>y</i><sub>瞳</sub> − <i>y</i>)·<span class="frac"><span class="num">40</span><span class="den">80</span></span> = 0.5<i>y</i> + 0.5<i>y</i><sub>瞳</sub>，　|<i>y</i><sub>瞳</sub>| ≤ 2</div>
-      <div class="eqb">无渐晕要求 max|<i>y</i><sub>透镜</sub>| = 0.5|<i>y</i>| + 1 ≤ 15　⇒　|<i>y</i>| ≤ <b>28 mm</b></div>
-    </div>
-    <div class="res">（1）孔径光阑 = <b>眼睛瞳孔</b>（4 mm），视场光阑 = <b>透镜框</b>（30 mm）；（2）入瞳在透镜后 <b>20 mm</b>、直径 <b>2 mm</b>（虚），物方孔径角 <b>2<i>u</i> = 1.91°</b>；（3）入窗与透镜框重合（φ30 mm，在透镜处），物方线视场 <b>2<i>y</i> = 90 mm</b>；（4）<b>有渐晕</b> —— 无渐晕视场只有 2<i>y</i> = 56 mm（|<i>y</i>| ≤ 28 mm），到 90 mm 的"视场边沿"时只剩主光线能过（渐晕系数 K → 0）。</div>
-    <div class="warn"><b>两个概念别混</b>：<b>视场</b>由视场光阑按主光线定（本题 90 mm）；<b>无渐晕视场</b>由边缘光线定（56 mm）。题目问"有没有渐晕"，答的就是这两个数不相等。</div>
-    <span class="src">【真题 + 自算】</span>
+    <p><b>补充（原卷没问，常被追问）</b>：若只要求主光线过镜框（名义视场），则 |<i>y</i>| ≤ 15、2<i>y</i> = 30 mm；26 mm 是<b>无渐晕</b>口径，两者之差正是"视场边沿有渐晕"的定量说法。</p>
+    <div class="res">（1）<b>孔径光阑 = 眼睛（瞳孔）</b>，<b>视场光阑 = 透镜框</b>；（2）<b>入瞳在物方无穷远</b>（虚像，半角 2.86°），<b>物方孔径角 2<i>U</i> = 5.73°</b>；（3）<b>入窗 = 透镜框自身</b>（φ30 mm，在透镜处），<b>物方线视场 2<i>y</i> = 26 mm</b>（无渐晕口径；名义视场 30 mm）。</div>
+    <div class="warn"><b>易错</b>：① 入瞳方向别弄反 —— 入瞳是"光阑经它<b>前面</b>的系统、从<b>物方</b>看进去"的像；瞳孔在 <i>F</i><span class="pr">′</span>，像在<b>无穷远</b>。用 1/<i>l</i><span class="pr">′</span> = 1/<i>f</i><span class="pr">′</span> + 1/40 算出 20 mm 是把光阑往像方投影，方向错。② 26 mm（无渐晕）≠ 30 mm（名义视场）。</div>
+    <span class="src">【2024 答案册 p8 四.3：入瞳无穷远、tan<i>U</i>=1/20、入窗自身、2<i>y</i>=26 mm】</span>
   </div>
-</div>
+  </div>
 
 <div class="q" id="q003">
-  <div class="hd"><span class="tag">2017-四-3</span><span class="ttl">同一放大镜：入/出瞳与入/出窗</span></div>
+  <div class="hd"><span class="tag">2017-四-3</span><span class="ttl">同一放大镜：入/出瞳与入/出窗</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2017-四-3" data-ai-title="同一放大镜：入/出瞳与入/出窗" title="AI 讲这题">AI</button></div>
   <div class="stem">将一个像方焦距 <i>f</i> = 40mm，直径 <i>D</i><sub>1</sub> = 30mm 的薄透镜做成放大镜，眼睛位于透镜像方焦点 <i>F</i> 上，眼睛直径 <i>D</i><sub>2</sub> = 4mm，物面放在透镜物方焦点 <i>F</i> 上。试问：<br>（1）哪一个是孔径光阑，哪一个是视场光阑；<br>（2）试确定入瞳和出瞳的位置和大小；试确定入窗和出窗的位置和大小。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>瞳孔（4 mm @ 透镜后 40 mm）经透镜成像：<i>l</i><span class="pr">′</span> = 20 mm、β = 0.5 ⇒ 2 mm，比透镜框 30 mm 小
@@ -318,7 +439,7 @@
 <div class="lead">五道题分三类：① 给 <i>f</i><sub>o</sub><span class="pr">′</span>、<i>f</i><sub>e</sub><span class="pr">′</span> 与倍率反求结构（2018/2024）；② 给共轭距或筒长求全套参数（2022/2019）；③ 分辨率（2016）。公式一张 <b>Γ = β<sub>o</sub>·Γ<sub>e</sub></b> 全打通。</div>
 
 <div class="q" id="q004">
-  <div class="hd"><span class="tag">2022-三-7</span><span class="ttl">物镜 −40×、目镜 15×、共轭距 195mm：求全套参数</span></div>
+  <div class="hd"><span class="tag">2022-三-7</span><span class="ttl">物镜 −40×、目镜 15×、共轭距 195mm：求全套参数</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2022-三-7" data-ai-title="物镜 −40×、目镜 15×、共轭距 195mm：求全套参数" title="AI 讲这题">AI</button></div>
   <div class="stem">有一显微镜系统，物镜的放大率为 −40、目镜的倍率为 15（薄透镜），物镜的共轭距为 195mm，求物镜和目镜的焦距、物体的位置和光学筒长、物镜与目镜的间距、系统等效焦距、总倍率。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>共轭距 = 物到中间像的距离，且 β<sub>o</sub> = <i>l</i><span class="pr">′</span>/<i>l</i> = −40 ⇒ <i>l</i> = −<i>l</i><span class="pr">′</span>/40
@@ -345,7 +466,7 @@
 </div>
 
 <div class="q" id="q005">
-  <div class="hd"><span class="tag">2018-四-3</span><span class="ttl">Γ = −40×，物镜 35mm、目镜 25mm：求物镜倍率与总焦距</span></div>
+  <div class="hd"><span class="tag">2018-四-3</span><span class="ttl">Γ = −40×，物镜 35mm、目镜 25mm：求物镜倍率与总焦距</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2018-四-3" data-ai-title="Γ = −40×，物镜 35mm、目镜 25mm：求物镜倍率与总焦距" title="AI 讲这题">AI</button></div>
   <div class="stem">一个视角放大率为 −40× 的显微镜，由焦距 35mm 的物镜和焦距为 25mm 的目镜组成，试求该显微镜物镜的放大倍率及显微镜的总焦距。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>目镜的视放大率
@@ -367,7 +488,7 @@
 </div>
 
 <div class="q" id="q006">
-  <div class="hd"><span class="tag">2024-四-4</span><span class="ttl">两片 f<span class="pr">′</span> = 50mm 组成 10× 显微镜</span></div>
+  <div class="hd"><span class="tag">2024-四-4</span><span class="ttl">两片 f<span class="pr">′</span> = 50mm 组成 10× 显微镜</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2024-四-4" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">用两个 <i>f</i><span class="pr">′</span> = 50mm 的正透镜组成放大率为 10 倍的显微镜，求物镜、目镜的放大倍率以及目镜和物镜的距离。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>目镜（<i>f</i><sub>e</sub><span class="pr">′</span> = 50 mm）的视放大率
@@ -389,7 +510,7 @@
 </div>
 
 <div class="q" id="q007">
-  <div class="hd"><span class="tag">2016-四-2</span><span class="ttl">Γ = −125×、目镜 20mm：物镜倍率与最小分辨距离</span></div>
+  <div class="hd"><span class="tag">2016-四-2</span><span class="ttl">Γ = −125×、目镜 20mm：物镜倍率与最小分辨距离</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2016-四-2" data-ai-title="Γ = −125×、目镜 20mm：物镜倍率与最小分辨距离" title="AI 讲这题">AI</button></div>
   <div class="stem">已知显微镜的视角放大率为 −125×，目镜的焦距为 20mm，求显微镜物镜的倍率。假定人眼的视角放大率为 60″，问使用该显微镜观察时，能分辨的两物点的最小距离等于多少。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>目镜视放大率 Γ<sub>e</sub> = 250/20 = 12.5×
@@ -408,7 +529,7 @@
 </div>
 
 <div class="q" id="q008">
-  <div class="hd"><span class="tag">2019-四-3</span><span class="ttl">筒长 150mm、物镜 20mm、目镜 12.5×：含盖玻片修正</span></div>
+  <div class="hd"><span class="tag">2019-四-3</span><span class="ttl">筒长 150mm、物镜 20mm、目镜 12.5×：含盖玻片修正</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-四-3" data-ai-title="筒长 150mm、物镜 20mm、目镜 12.5×：含盖玻片修正" title="AI 讲这题">AI</button></div>
   <div class="stem">现用显微镜观察一个物体，已知该显微镜的光学筒长为 150mm，物镜的焦距为 20mm，目镜的视放大率为 12.5×，求（长度的计算结果精确到 0.01mm）：<br>（1）总的视角放大率；（2）系统的焦距；（3）直接观察物体时，物体到物镜的距离为多少；（4）如果用该显微镜观察物体时，物体上有一个厚度为 1.5mm，折射率为 1.5 的盖玻片，这时物体到物镜的距离应该为多少？</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>（1）物镜的线放大率 β<sub>o</sub> = −Δ/<i>f</i><sub>o</sub><span class="pr">′</span> = −150/20 = −7.5
@@ -446,7 +567,7 @@
 <div class="lead">两题考光阑（2019、2023）、两题考设计（2021、2020）。望远镜题的固定套路：<b>Γ = −<i>f</i><sub>o</sub><span class="pr">′</span>/<i>f</i><sub>e</sub><span class="pr">′</span></b>、<b><i>d</i> = <i>f</i><sub>o</sub><span class="pr">′</span> + <i>f</i><sub>e</sub><span class="pr">′</span></b>、<b>视场光阑放公共焦面</b>、<b>出瞳 = 物镜框经目镜成像</b>。</div>
 
 <div class="q" id="q009">
-  <div class="hd"><span class="tag">2021-四-4</span><span class="ttl">10× 望远镜设计：目镜焦距、物镜口径、视场光阑、扩束</span></div>
+  <div class="hd"><span class="tag">2021-四-4</span><span class="ttl">10× 望远镜设计：目镜焦距、物镜口径、视场光阑、扩束</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2021-四-4" data-ai-title="10× 望远镜设计：目镜焦距、物镜口径、视场光阑、扩束" title="AI 讲这题">AI</button></div>
   <div class="stem">想设计一个由两个正的薄透镜构成的放大倍率为 10× 的望远镜，如果物镜的像方焦距为 20cm。<br>（1）试问应该选择焦距为多大的目镜；<br>（2）如果眼睛的角分辨极限为 1<span class="pr">′</span>，要求通过该望远镜观察时不出现明显的假象，试问选择的物镜的口径至少为多大（以波长为 555nm 的光波为准）？要使该望远镜的物方全视场角为 2°，并能够消除渐晕，这时如何设置视场光阑，视场光阑孔径应该为多大；<br>（3）如果用该望远镜系统对平行光束进行扩束，入射光束的宽度为 0.2cm，试问出射光束的宽度为多少？</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>（1）Γ = −<i>f</i><sub>o</sub><span class="pr">′</span>/<i>f</i><sub>e</sub><span class="pr">′</span>，取 |Γ| = 10、<i>f</i><sub>o</sub><span class="pr">′</span> = 200 mm
@@ -471,7 +592,7 @@
 </div>
 
 <div class="q" id="q010">
-  <div class="hd"><span class="tag">2019-四-2</span><span class="ttl">f<span class="pr">′</span> = 1000mm、筒长 1200mm 的望远镜：倍率、光阑、分辨率</span></div>
+  <div class="hd"><span class="tag">2019-四-2</span><span class="ttl">f<span class="pr">′</span> = 1000mm、筒长 1200mm 的望远镜：倍率、光阑、分辨率</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2019-四-2" data-ai-title="" title="AI 讲这题">AI</button></div>
   <div class="stem">一架望远镜由两个正薄透镜组成，已知物镜的像方焦距 <i>f</i><span class="pr">′</span> = 1000mm，其通光口径 <i>D</i> = 50mm，物镜与目镜的空间间隔为 1200mm，目镜的通光口径 <i>D</i> = 20mm。今在物镜的像方焦平面上设置一个直径为 16mm 的圆孔光阑，求：<br>（1）该望远镜的视角放大率；<br>（2）此光学系统的孔径光阑和视场光阑；<br>（3）该望远镜的角分辨率。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>（1）无焦望远镜：<i>f</i><sub>e</sub><span class="pr">′</span> = <i>d</i> − <i>f</i><sub>o</sub><span class="pr">′</span> = 1200 − 1000 = 200 mm
@@ -501,7 +622,7 @@
 </div>
 
 <div class="q" id="q011">
-  <div class="hd"><span class="tag">2023-四-4</span><span class="ttl">筒长 280mm、15× 直立像：伽利略式望远镜＋600mm 物成像</span></div>
+  <div class="hd"><span class="tag">2023-四-4</span><span class="ttl">筒长 280mm、15× 直立像：伽利略式望远镜＋600mm 物成像</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2023-四-4" data-ai-title="筒长 280mm、15× 直立像：伽利略式望远镜＋600mm 物成像" title="AI 讲这题">AI</button></div>
   <div class="stem">有一个筒长为 280mm，物镜架开口大小为 30mm 的镜架，在其镜架上安装两个薄透镜构成放大率大小为 15× 成直立像的望远镜：<br>（1）应选择的物镜、目镜的焦距各为多少？<br>（2）如物镜口径选择与物镜架大小相同，并且物镜为望远镜的孔径光阑，这时目镜的最小口径应为多大，并确定系统入/出瞳位置。<br>（3）如果用该望远镜系统对物镜前 600mm 的物体成像，试确定像的位置。</div>
   <div class="ans">
     <div class="step"><b class="n">1</b>（1）"成直立像" ⇒ 必须是<b>伽利略式</b>（目镜为负透镜），此时筒长 = <i>f</i><sub>o</sub><span class="pr">′</span> + <i>f</i><sub>e</sub><span class="pr">′</span>，而 <i>f</i><sub>e</sub><span class="pr">′</span> 为负
@@ -528,7 +649,7 @@
 </div>
 
 <div class="q" id="q012">
-  <div class="hd"><span class="tag">2020-四-4</span><span class="ttl">三片镜中选两片＋一个光阑，设计无渐晕望远镜</span></div>
+  <div class="hd"><span class="tag">2020-四-4</span><span class="ttl">三片镜中选两片＋一个光阑，设计无渐晕望远镜</span><button class="g851-ai-btn g851-ai-mini" type="button" data-ai-tag="2020-四-4" data-ai-title="三片镜中选两片＋一个光阑，设计无渐晕望远镜" title="AI 讲这题">AI</button></div>
   <div class="stem">现有焦距分别为 −10mm、10mm 和 200mm 的三个薄透镜和一个光阑，试用其中的两个薄透镜和光阑设计一个无渐晕的望远镜系统：画出光学系统的结构图；该系统的视角放大率为多少；如果要使物方全视场角为 2°，问光阑的孔径应该为多大？</div>
   <div class="ans">
     <details class="figbox" open><summary>图</summary><figure><img src="img/3286fde739a5.jpg" alt="物镜 200mm + 视场光阑 + 目镜 10mm 的开普勒望远镜结构" loading="lazy" style="max-width:100%;height:auto"><figcaption><b>规范结构图（2020 答案册 p131 原图）</b>：物镜（<i>f</i><sub>o</sub>′ = 200 mm）—— 视场光阑（置物镜像方焦面，即公共焦面）—— 目镜（<i>f</i><sub>e</sub>′ = 10 mm）；间隔 200 + 10 = 210 mm。</figcaption></figure></details>
@@ -631,6 +752,10 @@
                         border-radius:8px;padding:9px 0;font-size:14px;cursor:pointer;}
   #quizov .qbtns button#qshow{background:#8c4a2f;color:#fff;}
   #quizov .qbtns button:hover{filter:brightness(.95);}
+  /* 长图兜底（小牛 2026-11-18 反馈）：图不许把按钮顶出视野，按钮吸底 */
+  #quizov img,#quizov svg{max-height:42vh;width:auto;max-width:100%;height:auto;object-fit:contain}
+  #quizov .qbtns{position:sticky;bottom:-18px;z-index:2;background:#fff;padding:10px 0 2px;margin-top:14px;
+                 box-shadow:0 -10px 14px -12px rgba(0,0,0,.35);}
   /* 返回顶端 */
   #totop{position:fixed;right:16px;bottom:72px;z-index:21;display:none;width:40px;height:40px;
          border:0;border-radius:50%;background:#8c4a2f;color:#fff;font-size:18px;line-height:40px;
@@ -1221,7 +1346,8 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   });
 })();
 </script>
-
+<script src="ai-common.js"></script>
+<!--AI-ENTRY-->
 <style id="g851-rail-style">
 /* 非高频模块收进右上角菜单：页面里不再重复摆按钮（菜单内的链接不受影响） */
 body a[href="收藏.html"],body a[href="专项卷.html"],body a[href="记录.html"],
@@ -1238,9 +1364,9 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  transition:background .15s,box-shadow .15s}
 #g851-rail .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 #g851-rail .tab:hover{background:#fff8ef;box-shadow:0 4px 14px rgba(0,0,0,.14)}
-#g851-rail nav{position:absolute;right:0;top:40px;width:214px;background:#fff;
+#g851-rail nav{position:absolute;right:0;top:40px;width:224px;background:#fff;
  border:1px solid var(--line,#e3dfd7);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.14);
- padding:6px 0 4px;display:flex;flex-direction:column;max-height:72vh;overflow:auto;
+ padding:6px 0 4px;display:flex;flex-direction:column;max-height:74vh;overflow:auto;
  opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
  transition:opacity .16s ease,transform .16s ease,visibility .16s}
 #g851-rail.open nav{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
@@ -1248,12 +1374,218 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
 #g851-rail a{padding:8px 14px;color:var(--ink,#1b1b1b);text-decoration:none;border-left:3px solid transparent}
 #g851-rail a:hover{background:#fdf7ef;border-left-color:#8c4a2f;color:#8c4a2f}
 #g851-rail a.cur{background:#f6efe4;border-left-color:#8c4a2f;color:#8c4a2f;font-weight:600}
+#g851-rail .disp{display:flex;align-items:center;gap:6px;padding:4px 12px 8px;flex-wrap:wrap}
+#g851-rail .disp button{flex:0 0 auto;border:1px solid var(--line,#e3dfd7);background:#fff;color:#6d3d24;
+ border-radius:8px;padding:5px 9px;font-size:12.5px;font-family:inherit;cursor:pointer;line-height:1.4}
+#g851-rail .disp button:hover{background:#fdf7ef}
+#g851-rail .disp button.on{background:#8c4a2f;border-color:#8c4a2f;color:#fff}
+#g851-rail .disp .fsz{display:flex;gap:4px;margin-left:auto}
+#g851-rail .disp .fsz button{min-width:32px;padding:5px 6px}
 #g851-rail .rf{margin-top:5px;padding:7px 14px 4px;border-top:1px dashed var(--line,#e3dfd7);
  color:#9a9a9a;font-size:11.5px;line-height:1.5}
 #g851-rail .rf b{color:#6d3d24;font-weight:600}
-@media print{#g851-rail{display:none!important}}
+#g851-toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);z-index:60;
+ display:flex;align-items:center;gap:10px;background:#2b241d;color:#f4ede2;border-radius:10px;
+ padding:9px 14px;font:13px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+ box-shadow:0 6px 22px rgba(0,0,0,.28);opacity:0;transition:opacity .22s,transform .22s;max-width:92vw}
+#g851-toast.on{opacity:1;transform:translate(-50%,0)}
+#g851-toast button{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;
+ border-radius:7px;padding:3px 10px;font:inherit;cursor:pointer}
+#g851-toast button:hover{background:rgba(255,255,255,.12)}
+#g851-offline{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;
+ background:#6b3a2a;color:#fff;border-radius:9px;padding:6px 12px;font:12.5px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+/* 题旁 AI 小按钮（章节页注入的那批） */
+.g851-ai-mini{margin-left:auto;flex:0 0 auto;border:1px solid #e0cdb6;background:#fdf6ef;color:#8c4a2f;
+ border-radius:10px;padding:1px 8px;font:12px/1.7 inherit;cursor:pointer;letter-spacing:.5px}
+.g851-ai-mini:hover{background:#fdf4ea;border-color:#cfae95}
+/* 返回键 */
+#g851-back{position:fixed;right:16px;bottom:124px;z-index:40;width:40px;height:40px;border:0;border-radius:50%;
+ background:#8c4a2f;color:#fff;font-size:19px;line-height:40px;text-align:center;cursor:pointer;
+ box-shadow:0 2px 10px rgba(0,0,0,.18);opacity:.92;padding:0}
+#g851-back:hover{opacity:1}
+@media print{.g851-ai-mini,.g851-ai-btn,#g851-back{display:none!important}}
+@media print{#g851-rail{display:none!important}#g851-toast,#g851-offline{display:none!important}}
 @media (max-width:600px){#g851-rail{top:8px;right:8px}#g851-rail .tab{width:30px;height:30px}
- #g851-rail nav{width:200px;top:38px}}
+ #g851-rail nav{width:208px;top:38px}}
+
+/* ══════════ 夜间模式（只在屏幕生效；打印永远浅色） ══════════ */
+@media screen{
+html[data-theme="dark"]{
+  --bg:#151410; --ink:#e8e2d6; --mut:#a89e90; --line:#3b362c; --acc:#d99a6d; --hl:#4a3d17;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+/* 面板：所有原来的白/米色块 */
+html[data-theme="dark"] .q,
+html[data-theme="dark"] .ans,
+html[data-theme="dark"] .res,
+html[data-theme="dark"] .warn,
+html[data-theme="dark"] .kcard,
+html[data-theme="dark"] .fitem,
+html[data-theme="dark"] details.figbox,
+html[data-theme="dark"] details.fold,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .kpi,
+html[data-theme="dark"] .day,
+html[data-theme="dark"] .tip,
+html[data-theme="dark"] .qindex,
+html[data-theme="dark"] .rep,
+html[data-theme="dark"] .prow,
+html[data-theme="dark"] .hintbtn,
+html[data-theme="dark"] .alt,
+html[data-theme="dark"] .sb,
+html[data-theme="dark"] .qstar,
+html[data-theme="dark"] .starbtn,
+html[data-theme="dark"] .fcond,
+html[data-theme="dark"] #db,
+html[data-theme="dark"] #db .day,
+html[data-theme="dark"] #db .kpi,
+html[data-theme="dark"] #db .sc a,
+html[data-theme="dark"] #db .go a,
+html[data-theme="dark"] .score,
+html[data-theme="dark"] nav,
+html[data-theme="dark"] .tbar{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"] .tbar{background:#241d15!important;color:#f0e8dc}
+html[data-theme="dark"] button,
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{background:#1c1a16;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] header.top{border-bottom-color:#6a6255}
+html[data-theme="dark"] nav{background:rgba(21,20,16,.96)!important}
+html[data-theme="dark"] .qindex{background:rgba(21,20,16,.97)!important}
+/* 强调色：原本的深棕在暗底上读不清，统一提亮 */
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .ttl,
+html[data-theme="dark"] .h3,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] #db .hd b,
+html[data-theme="dark"] #db .kpi b,
+html[data-theme="dark"] #db .bar .nm,
+html[data-theme="dark"] .cm b,
+html[data-theme="dark"] .cnt b,
+html[data-theme="dark"] .n,
+html[data-theme="dark"] .qact .qlink,
+html[data-theme="dark"] .sub b,
+html[data-theme="dark"] .lg b{color:var(--acc)!important}
+html[data-theme="dark"] .sub,
+html[data-theme="dark"] .lg,
+html[data-theme="dark"] .cm,
+html[data-theme="dark"] .mut,
+html[data-theme="dark"] .vl,
+html[data-theme="dark"] .wallhint,
+html[data-theme="dark"] figcaption{color:var(--mut)!important}
+/* 内联样式的常见硬编码色（页面里大量 style="color:#..."） */
+html[data-theme="dark"] [style*="color:#8c4a2f"]{color:#d99a6d!important}
+html[data-theme="dark"] [style*="color:#6d3a24"]{color:#cf9570!important}
+html[data-theme="dark"] [style*="color:#1b1b1b"]{color:#e8e2d6!important}
+html[data-theme="dark"] [style*="color:#3a3a3a"]{color:#ded7ca!important}
+html[data-theme="dark"] [style*="color:#6d6d6d"]{color:#a89e90!important}
+html[data-theme="dark"] [style*="color:#8a7b6c"]{color:#b5a996!important}
+html[data-theme="dark"] [style*="color:#a8332a"]{color:#e5907f!important}
+html[data-theme="dark"] [style*="background:#f"]{background:#1c1a16!important}
+html[data-theme="dark"] [style*="background:#fff"]{background:#1c1a16!important}
+/* 图与公式：线稿反相后是浅线深底，扫件不会刺眼 */
+html[data-theme="dark"] img,
+html[data-theme="dark"] svg{filter:invert(1) hue-rotate(180deg) brightness(.94) contrast(1.02)}
+/* 新版「阅读优化」主题会强制 .wrap 白底 + 绿色标题：暗色下要压过去 */
+html[data-theme="dark"][data-theme] .wrap,
+html[data-theme="dark"][data-theme] body > .wr,
+html[data-theme="dark"][data-theme] body > main,
+html[data-theme="dark"][data-theme] body > article{background:transparent!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > h1,
+html[data-theme="dark"][data-theme] .wrap > h2,
+html[data-theme="dark"][data-theme] .wrap h2,
+html[data-theme="dark"][data-theme] h1,
+html[data-theme="dark"][data-theme] h2,
+html[data-theme="dark"][data-theme] h3,
+html[data-theme="dark"][data-theme] h4{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .wrap > h2{background:linear-gradient(90deg,rgba(217,154,109,.12),transparent)!important;
+  border-left-color:var(--acc)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .wrap > .q,
+html[data-theme="dark"][data-theme] .q{background:#1e1b16!important;border-color:var(--line)!important;
+  border-left-color:#b5794f!important;box-shadow:none!important}
+html[data-theme="dark"][data-theme] .wrap > .q .ans,
+html[data-theme="dark"][data-theme] .ans{background:#171511!important;border-color:var(--line)!important;
+  border-left-color:#8c6a4e!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .wrap > .q .stem,
+html[data-theme="dark"][data-theme] .stem{color:var(--ink)!important}
+/* 零散控件兜底：题号条、判分按钮、收藏按钮、底部操作条、首页快捷按钮 */
+html[data-theme="dark"][data-theme] .qindex a,
+html[data-theme="dark"][data-theme] .qindex .sec,
+html[data-theme="dark"][data-theme] .sb,
+html[data-theme="dark"][data-theme] .qact .qstar,
+html[data-theme="dark"][data-theme] .reveal button,
+html[data-theme="dark"][data-theme] .btnbar button,
+html[data-theme="dark"][data-theme] .quick a,
+html[data-theme="dark"][data-theme] #db .day .da a,
+html[data-theme="dark"][data-theme] #db .day .da button,
+html[data-theme="dark"][data-theme] #db .go a,
+html[data-theme="dark"][data-theme] .wallbar button{background:#26221c!important;
+  border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] .qindex a{border-radius:999px;padding:2px 9px}
+html[data-theme="dark"][data-theme] .quick a:first-child,
+html[data-theme="dark"][data-theme] #db .day .da a.main,
+html[data-theme="dark"][data-theme] .go a.main,
+html[data-theme="dark"][data-theme] .btnbar button#tg{background:#a35b36!important;
+  border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"][data-theme] .sb.on,
+html[data-theme="dark"][data-theme] .qstar.on{background:#4a3a1f!important;border-color:#c79a4a!important;color:#f0c987!important}
+html[data-theme="dark"][data-theme] .qact .qlink{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] #wallq{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"][data-theme] #wallq::placeholder{color:#8a7a6a}
+html[data-theme="dark"][data-theme] a{color:var(--acc)}
+
+html[data-theme="dark"][data-theme] #g851-rail nav{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] #g851-rail .tab{background:#26221c;border-color:var(--line);color:var(--acc)}
+html[data-theme="dark"][data-theme] #g851-rail a:hover{background:#26221c}
+html[data-theme="dark"][data-theme] #g851-rail a.cur{background:#2f281f}
+html[data-theme="dark"][data-theme] #g851-rail .disp button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] #g851-rail .disp button.on{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] #g851-rail .rf{border-top-color:var(--line)}
+/* 独立页面（错题本 / 收藏 / 今日复习 / 记录 / 考点 / 专项卷 / 搜索）的卡片兜底 */
+html[data-theme="dark"][data-theme] [class*="card"],
+html[data-theme="dark"][data-theme] [class*="grp"],
+html[data-theme="dark"][data-theme] [class*="sum"],
+html[data-theme="dark"][data-theme] [class*="item"],
+html[data-theme="dark"][data-theme] [class*="empty"],
+html[data-theme="dark"][data-theme] [class*="box"],
+html[data-theme="dark"][data-theme] [class*="panel"]{background:#1e1b16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] [class*="tag"]{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] [class*="lost"]{color:#e5907f!important}
+html[data-theme="dark"][data-theme] .item button{background:#26221c;border-color:#403a30;color:var(--ink)}
+html[data-theme="dark"][data-theme] .item button.ok{background:#a35b36;border-color:#a35b36;color:#fff}
+html[data-theme="dark"][data-theme] .kbig{background:#211d17!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .kbig .kh,
+html[data-theme="dark"][data-theme] .kh{color:var(--acc)!important}
+html[data-theme="dark"][data-theme] .fcard{background:#1c1a16!important;border-color:var(--line)!important}
+html[data-theme="dark"][data-theme] .bar{background:rgba(21,20,16,.96)!important;border-bottom-color:var(--line)!important}
+html[data-theme="dark"] .tr,
+html[data-theme="dark"] #db .bar .tr{background:#2c271f!important}
+html[data-theme="dark"] .tr i,
+html[data-theme="dark"] #db .bar .tr i{background:linear-gradient(90deg,#a9613c,#d99a6d)!important}
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] a.btn{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a,
+html[data-theme="dark"] #db .day .da button{background:#26221c!important;border-color:#403a30!important;color:var(--ink)!important}
+html[data-theme="dark"] #db .day .da a.main{background:#a35b36!important;border-color:#a35b36!important;color:#fff!important}
+html[data-theme="dark"] #db .day .da .ok{background:#1e2a1e!important;border-color:#3c5a3c!important;color:#9ecb9e!important}
+html[data-theme="dark"] #g851-rail svg,
+html[data-theme="dark"] #g851-bg img{filter:none}
+html[data-theme="dark"] #g851-bg{opacity:.10!important}
+html[data-theme="dark"] #totop{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] #g851-back{background:#3a2a1c;color:#f0e8dc}
+html[data-theme="dark"] .g851-ai-mini{background:#26221c;border-color:#403a30;color:var(--acc)}
+html[data-theme="dark"] #errb{background:#2a2118;color:#f0e8dc;border-color:var(--line)}
+html[data-theme="dark"] ::selection{background:#5a4a22;color:#fff}
+/* 字号档 */
+html[data-fs="s"] body{font-size:15px}
+html[data-fs="l"] body{font-size:17.5px}
+html[data-fs="l"] .q,html[data-fs="l"] .ans,html[data-fs="l"] #db,html[data-fs="l"] .fitem{line-height:1.95}
+html[data-fs="s"] .q,html[data-fs="s"] .ans,html[data-fs="s"] #db,html[data-fs="s"] .fitem{line-height:1.75}
+html[data-fs="s"] #g851-rail .tab,
+html[data-fs="s"] #g851-rail nav{background:rgba(255,255,255,.92)}
+}
 </style>
 
 <div id="g851-rail" aria-label="更多模块">
@@ -1262,6 +1594,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   </button>
   <nav>
     <div class="grp">复习</div>
+    <a href="今日复习.html">今日复习</a>
     <a href="错题本.html">错题本</a>
     <a href="收藏.html">收藏夹</a>
     <a href="专项卷.html">专项卷</a>
@@ -1273,6 +1606,16 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     <a href="专题-双缝条纹平移.html">双缝平移速记</a>
     <div class="grp">记录</div>
     <a href="记录.html">记录中心</a>
+    <a href="AI-笔记.html">AI 笔记 / 待转交</a>
+    <div class="grp">显示</div>
+    <div class="disp">
+      <button type="button" id="g851-dark" title="夜间模式">☾ 夜间</button>
+      <span class="fsz">
+        <button type="button" data-fs="s" title="小字">A−</button>
+        <button type="button" data-fs="m" title="标准">A</button>
+        <button type="button" data-fs="l" title="大字">A+</button>
+      </span>
+    </div>
     <div class="rf">当前：<b class="cur-page">—</b></div>
   </nav>
 </div>
@@ -1297,6 +1640,7 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
     if (el.classList.contains('open')) close(); else open();
   });
   document.addEventListener('click', function(e){ if (!el.contains(e.target)) close(); });
+  window.addEventListener('scroll', function(){ close(); }, {passive:true});
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') close();
     else if (e.key === '?' && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''))) {
@@ -1310,19 +1654,128 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
   var parts = (document.title || '').split('·').map(function(s){ return s.replace(/^851\s*/, '').trim(); })
     .filter(function(s){ return s && s !== '851'; });
   el.querySelector('.cur-page').textContent = parts[0] || here;
+
+  /* ── 新版本提示 / 离线提示 ── */
+  (function () {
+    function toast(msg, actionText, onClick, ms) {
+      var d = document.createElement('div');
+      d.id = 'g851-toast';
+      var s = document.createElement('span');
+      s.textContent = msg;
+      d.appendChild(s);
+      if (actionText) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = actionText;
+        b.addEventListener('click', onClick);
+        d.appendChild(b);
+      }
+      document.body.appendChild(d);
+      setTimeout(function () { d.classList.add('on'); }, 30);
+      if (ms) setTimeout(function () {
+        d.classList.remove('on');
+        setTimeout(function () { d.parentNode && d.parentNode.removeChild(d); }, 300);
+      }, ms);
+    }
+    if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+      if (navigator.serviceWorker.controller) {
+        var fired = 0;
+        navigator.serviceWorker.addEventListener('controllerchange', function () {
+          if (fired) return;
+          fired = 1;
+          toast('库已更新到新版本', '刷新', function () { location.reload(); }, 15000);
+        });
+      }
+    }
+    var off = null;
+    function refreshOffline() {
+      if (navigator.onLine) {
+        if (off && off.parentNode) { off.parentNode.removeChild(off); off = null; }
+      } else if (!off) {
+        off = document.createElement('div');
+        off.id = 'g851-offline';
+        off.textContent = '离线中 · 已缓存的内容仍可看';
+        document.body.appendChild(off);
+      }
+    }
+    window.addEventListener('online', refreshOffline);
+    window.addEventListener('offline', refreshOffline);
+    refreshOffline();
+  })();
+
+  /* ── 返回上一页 ── */
+  (function () {
+    var b = document.createElement('button');
+    b.id = 'g851-back'; b.type = 'button'; b.title = '返回上一页'; b.textContent = '←';
+    b.setAttribute('aria-label', '返回上一页');
+    b.addEventListener('click', function () {
+      if (window.history.length > 1) window.history.back();
+      else location.href = 'index.html';
+    });
+    document.body.appendChild(b);
+  })();
+
+  /* ── 夜间模式 ── */
+  var darkBtn = document.getElementById('g851-dark');
+  function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
+  function paintDark(){
+    if (!darkBtn) return;
+    darkBtn.textContent = isDark() ? '☀ 日间' : '☾ 夜间';
+    darkBtn.classList.toggle('on', isDark());
+  }
+  function setDark(on){
+    if (on) document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('g851-theme', on ? 'dark' : 'light'); } catch(e){}
+    paintDark();
+  }
+  if (darkBtn) {
+    paintDark();
+    darkBtn.addEventListener('click', function(e){ e.stopPropagation(); setDark(!isDark()); });
+  }
+
+  /* ── 字号档 ── */
+  var fsBtns = el.querySelectorAll('.fsz button');
+  function curFs(){ return document.documentElement.getAttribute('data-fs') || 'm'; }
+  function paintFs(){
+    Array.prototype.forEach.call(fsBtns, function(b){
+      b.classList.toggle('on', b.getAttribute('data-fs') === curFs());
+    });
+  }
+  Array.prototype.forEach.call(fsBtns, function(b){
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      var v = b.getAttribute('data-fs');
+      if (v === 'm') document.documentElement.removeAttribute('data-fs');
+      else document.documentElement.setAttribute('data-fs', v);
+      try { localStorage.setItem('g851-fs', v); } catch(err){}
+      paintFs();
+    });
+  });
+  paintFs();
 })();
 </script>
 <!-- G851_BG_V3_HTML_START -->
 <div id="g851-bg" aria-hidden="true"></div>
+<div id="g851-motion-actor" aria-hidden="true"><img id="g851-motion-img" src="bg-character-still.png" alt="" draggable="false"></div>
 <div id="g851-bgc">
- <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+ <div class="naiwa-toolbar">
+  <button class="naiwa-bg-button" type="button" aria-controls="naiwa-bg-panel" aria-expanded="false">◐ 奶蛙背景</button>
+  <button class="naiwa-bg-button naiwa-quick-toggle" id="g851-bgt" type="button" aria-pressed="true" title="一键显示或隐藏视频奶蛙">🎬 动画：开</button>
+ </div>
  <div class="naiwa-bg-panel" id="naiwa-bg-panel">
-   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">12%</strong></div>
-   <input id="g851-bgi" type="range" min="0" max="30" value="12" aria-label="背景可见度百分比">
+   <div class="naiwa-row"><span>背景可见度</span><strong id="g851-bgv">6%</strong></div>
+   <input id="g851-bgi" type="range" min="0" max="30" value="6" aria-label="背景可见度百分比">
    <div class="naiwa-row"><label for="g851-bgm">缓慢浮动</label><input type="checkbox" id="g851-bgm" checked></div>
    <div class="naiwa-row"><label for="g851-bge">眼睛跟随鼠标</label><input type="checkbox" id="g851-bge" checked></div>
+   <div class="naiwa-row"><label for="g851-bgd">正文阅读保护层</label><input type="checkbox" id="g851-bgd" checked></div>
+   <div class="naiwa-row"><label for="g851-bgu">题目卡片排版</label><input type="checkbox" id="g851-bgu" checked></div>
+   <div class="naiwa-row"><label for="g851-bga2">显示视频奶蛙</label><input type="checkbox" id="g851-bga2" checked></div>
+   <div class="naiwa-row"><label for="g851-bgp">播放视频动画</label><input type="checkbox" id="g851-bgp" checked></div>
+   <div class="naiwa-row"><label for="g851-bga3">动画可见度</label><input type="range" id="g851-bga3" min="5" max="50" value="22"><span id="g851-bga4">22%</span></div>
    <div class="naiwa-row"><label for="g851-bgf">专注模式</label><input type="checkbox" id="g851-bgf"></div>
-   <p class="naiwa-caption">整卷模拟页默认自动专注；专注时降低浓淡、停止动画。</p>
+   <p class="naiwa-caption">左下角可一键显示/隐藏；关闭播放时保留静态人物；专注模式自动隐藏动画。</p>
    <button type="button" id="g851-bgr" class="naiwa-bg-reset">恢复默认</button>
  </div>
 </div>
@@ -1334,10 +1787,15 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  if(!layer||!panel)return;
  var btn=panel.querySelector('.naiwa-bg-button'),range=document.getElementById('g851-bgi'),
   val=document.getElementById('g851-bgv'),motion=document.getElementById('g851-bgm'),
-  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),
-  reset=document.getElementById('g851-bgr');
- var N=5,sprites=[],lastW=0,lastH=0,resizeJob=0,eyeJob=0,mouse=null;
- var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes';
+  eyes=document.getElementById('g851-bge'),focus=document.getElementById('g851-bgf'),reading=document.getElementById('g851-bgd'),
+  ui=document.getElementById('g851-bgu'),reset=document.getElementById('g851-bgr'),
+  actor=document.getElementById('g851-motion-actor'),actorImg=document.getElementById('g851-motion-img'),
+  actorOn=document.getElementById('g851-bga2'),actorPlay=document.getElementById('g851-bgp'),
+  quickActor=document.getElementById('g851-bgt'),actorAlpha=document.getElementById('g851-bga3'),actorValue=document.getElementById('g851-bga4');
+ var N=5,EYE_MAP={"0":[{"x":39.9,"y":34.1,"w":11.8,"h":11.8}],"2":[{"x":9.8,"y":39.0,"w":12.3,"h":16.8,"mask":true,"pupilW":60,"pupilH":61,"colors":["#b0c998","#a2be85","#879d62"]},{"x":51.1,"y":28.9,"w":16.4,"h":16.4,"mask":true,"pupilW":55,"pupilH":58,"colors":["#b6d399","#a2c387","#839c60"]}]},sprites=[],resizeJob=0,eyeJob=0,mouse=null,layoutKey="";
+ // 固定槽位相对浏览器窗口与正文左右边缘布置，不再按窗口大小随机洗牌。
+ var K='g851-bga',KM='g851-bg-motion',KE='g851-bg-eyes',KR='g851-bg-reading',KU='g851-bg-ui',KDV='g851-bg-read-default-v1',
+  KAC='g851-bg-character-enabled',KAL='g851-bg-character-opacity',KAP='g851-bg-character-playing';
  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
  function put(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
@@ -1345,89 +1803,179 @@ body .quick a[href="专题-双缝条纹平移.html"]{display:none!important}
  var pageName=decodeURIComponent(location.pathname).split('/').pop();
  var defaultFocus=pageName.startsWith('模拟-')||pageName.startsWith('专项卷')||/[?&]quiz=1(?:&|$)/.test(location.search);
  var KF=defaultFocus?'g851-bg-focus-exam':'g851-bg-focus-normal';
+ document.documentElement.classList.toggle('g851-exam',defaultFocus);
  function apply(){
   var v=clamp(+range.value||0,0,30),onFocus=focus.checked;
   document.documentElement.style.setProperty('--g851-bga',(v/100).toFixed(3));
-  layer.style.opacity=onFocus?Math.min(v/100,.035):v/100;
+  layer.style.opacity=onFocus?Math.min(v/100,.02):v/100;
   val.textContent=v?v+'%':'关';
   layer.classList.toggle('focus',onFocus);
   layer.classList.toggle('no-motion',!motion.checked||reduced);
-  if(onFocus||!eyes.checked||reduced){for(var s of sprites){if(s.pupil){s.pupil.style.setProperty('--look-x','0px');s.pupil.style.setProperty('--look-y','0px')}}}
+  document.documentElement.classList.toggle('g851-reading',reading.checked||onFocus);
+  document.documentElement.classList.toggle('g851-ui',ui.checked);
+  var enabled=actorOn.checked&&!onFocus;
+  actor.style.display=enabled?'block':'none';
+  quickActor.textContent=actorOn.checked?'🎬 动画：开':'🎬 动画：关';
+  quickActor.setAttribute('aria-pressed',String(actorOn.checked));
+  quickActor.title=actorOn.checked?'点击隐藏视频奶蛙':'点击显示视频奶蛙';
+  var pct=clamp(+actorAlpha.value||22,5,50);
+  actorValue.textContent=pct+'%';actor.style.setProperty('--g851-motion-alpha',(pct/100).toFixed(2));
+  var src=(enabled&&actorPlay.checked&&!reduced)?'bg-character.webp':'bg-character-still.png';
+  if(actorImg.getAttribute('src')!==src)actorImg.setAttribute('src',src);
+  if(onFocus||!eyes.checked||reduced){for(var s of sprites){for(var eye of s.eyes){eye.mover.style.setProperty('--look-x','0px');eye.mover.style.setProperty('--look-y','0px')}}}
  }
+ /* 旧版默认12%首次升级为6%；用户原先自定义的其他数值不改变。 */
  var saved=get(K),query=/[?&]bga=(\d+)/.exec(location.search);
- range.value=clamp(query?+query[1]:(saved===null?12:+saved),0,30);
+ if(get(KDV)!=='1'){
+  if(saved===null||saved==='12'){saved='6';put(K,6)}
+  put(KDV,'1');
+ }
+ range.value=clamp(query?+query[1]:(saved===null?6:+saved),0,30);
  motion.checked=(get(KM)!=='0')&&!reduced;
  eyes.checked=(get(KE)!=='0')&&!reduced;
  focus.checked=get(KF)===null?defaultFocus:get(KF)==='1';
+ reading.checked=get(KR)!=='0';
+ ui.checked=get(KU)!=='0';
+ actorOn.checked=get(KAC)!=='0';
+ actorPlay.checked=get(KAP)!=='0'&&!reduced;
+ actorAlpha.value=clamp(get(KAL)===null?22:+get(KAL),5,50);
  apply();
  range.addEventListener('input',function(){apply();put(K,range.value)});
  motion.addEventListener('change',function(){apply();put(KM,motion.checked?'1':'0')});
  eyes.addEventListener('change',function(){apply();put(KE,eyes.checked?'1':'0')});
  focus.addEventListener('change',function(){apply();put(KF,focus.checked?'1':'0')});
- reset.addEventListener('click',function(){range.value=12;motion.checked=!reduced;eyes.checked=!reduced;
-  focus.checked=defaultFocus;apply();put(K,12);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');
+ reading.addEventListener('change',function(){apply();put(KR,reading.checked?'1':'0')});
+ ui.addEventListener('change',function(){apply();put(KU,ui.checked?'1':'0')});
+ actorOn.addEventListener('change',function(){apply();put(KAC,actorOn.checked?'1':'0')});
+ quickActor.addEventListener('click',function(){actorOn.checked=!actorOn.checked;apply();put(KAC,actorOn.checked?'1':'0')});
+ actorPlay.addEventListener('change',function(){apply();put(KAP,actorPlay.checked?'1':'0')});
+ actorAlpha.addEventListener('input',function(){apply();put(KAL,actorAlpha.value)});
+ reset.addEventListener('click',function(){range.value=6;motion.checked=!reduced;eyes.checked=!reduced;
+  focus.checked=defaultFocus;reading.checked=true;ui.checked=true;
+  actorOn.checked=true;actorPlay.checked=!reduced;actorAlpha.value=22;apply();put(K,6);put(KM,motion.checked?'1':'0');put(KE,eyes.checked?'1':'0');put(KR,'1');put(KU,'1');put(KAC,'1');put(KAL,22);put(KAP,actorPlay.checked?'1':'0');
   try{localStorage.removeItem(KF)}catch(e){}});
  btn.addEventListener('click',function(){var on=panel.classList.toggle('on');btn.setAttribute('aria-expanded',String(on))});
  document.addEventListener('click',function(e){if(!panel.contains(e.target)){panel.classList.remove('on');btn.setAttribute('aria-expanded','false')}});
- function rng(seed){return function(){seed|=0;seed=seed+0x6d2b79f5|0;
-  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
-  return((t^t>>>14)>>>0)/4294967296;}}
+ // 固定编号固定侧边位置。浏览器缩放只缩放坐标，不会重新随机挑选造型/位置。
+ // 两边从上至下；右下角始终留给视频奶蛙，即使它暂时隐藏也不挪动其他图案。
+ var SLOTS=[
+  {side:'left', y:.14,kind:0,angle:-14}, {side:'right',y:.15,kind:2,angle:12},
+  {side:'left', y:.38,kind:3,angle:9}, {side:'right',y:.40,kind:1,angle:-12},
+  {side:'left', y:.62,kind:4,angle:-8}, {side:'right',y:.65,kind:0,angle:13},
+  {side:'left', y:.85,kind:2,angle:13}, {side:'right',y:.86,kind:3,angle:-10}
+ ];
  function collision(a,b,gap){return a.l<b.r+gap&&a.r+gap>b.l&&a.t<b.b+gap&&a.b+gap>b.t;}
+ function boxOf(r){return {l:r.left,t:r.top,r:r.right,b:r.bottom};}
+ function actorBounds(){
+  // 即使关闭了视频奶蛙，也始终保留原来的动画位置，避免切换时其他图案跳动。
+  if(!actor)return null;
+  var wasHidden=getComputedStyle(actor).display==='none',oldDisplay=actor.style.display,oldVisibility=actor.style.visibility;
+  if(wasHidden){actor.style.display='block';actor.style.visibility='hidden';}
+  var r=actor.getBoundingClientRect();
+  if(wasHidden){actor.style.display=oldDisplay;actor.style.visibility=oldVisibility;}
+  return r.width>0&&r.height>0?boxOf(r):null;
+ }
+ function contentBounds(W){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  // 若页面没有主要阅读容器，保守预留中央正文区域。
+  if(!main)return {left:W>900?(W-900)/2:W*.15,right:W>900?(W+900)/2:W*.85};
+  var r=main.getBoundingClientRect();
+  return {left:clamp(r.left,0,W),right:clamp(r.right,0,W)};
+ }
  function relayout(){
-  var W=innerWidth,H=innerHeight;
+  var W=window.innerWidth,H=window.innerHeight;
   if(W<180||H<180)return;
-  if(Math.abs(lastW-W)<10&&Math.abs(lastH-H)<10&&sprites.length)return;
-  lastW=W;lastH=H;layer.textContent='';sprites=[];
-  var rand=rng(20261116+Math.floor(W/24)*711+Math.floor(H/24)*137),boxes=[];
-  // 比旧版本稍密，但严格避让；空间不足就跳过，不强行重叠。
-  var count=clamp(Math.round(W*H/60000),6,30);
-  for(var i=0;i<count;i++){
-   var w=clamp((W<650?60:84)+rand()*(W<650?31:52),54,140),h=w;
-   var angle=(rand()-.5)*52;
-   if(rand()<.1)angle+=(rand()<.5?85:-85);
-   var a=angle*Math.PI/180,ew=w*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));
-   var margin=16,found=null,rect;
-   if(ew+margin*2>W||ew+margin*2>H)continue;
-   for(var attempt=0;attempt<360;attempt++){
-    var cx=ew/2+margin+rand()*(W-ew-2*margin);
-    var cy=ew/2+margin+rand()*(H-ew-2*margin);
-    rect={l:cx-ew/2,t:cy-ew/2,r:cx+ew/2,b:cy+ew/2};
-    if(!boxes.some(function(b){return collision(rect,b,22)})){found={x:cx-w/2,y:cy-h/2};break;}
-   }
-   if(!found)continue;
-   boxes.push(rect);
-   var kind=Math.floor(rand()*N);
+  var c=contentBounds(W),reserved=[],a=actorBounds();
+  // 题目展开/折叠只改变正文高度，不应触发图案刷新和动画重置。
+  var key=[Math.round(W),Math.round(H),Math.round(c.left),Math.round(c.right)].join('/');
+  if(key===layoutKey)return;
+  layoutKey=key;
+  // 根据固定槽位绘制；不使用尺寸作随机种子，也不以窗口面积改变选取顺序。
+  layer.textContent='';sprites=[];
+  if(a)reserved.push(a);
+  // 保留左下角开关的操作空间，不让装饰漂到按钮正后方。
+  var tb=panel.querySelector('.naiwa-toolbar');
+  if(tb){var t=tb.getBoundingClientRect();reserved.push(boxOf(t));}
+  var placed=[];
+  for(var i=0;i<SLOTS.length;i++){
+   var slot=SLOTS[i],left=slot.side==='left';
+   var railLeft=left?0:c.right,railRight=left?c.left:W;
+   var rail=railRight-railLeft;
+   // 侧边空间不足时直接不画，绝不强塞进正文或与视频角色重叠。
+   if(rail<68)continue;
+   var angle=slot.angle,aRad=angle*Math.PI/180;
+   var footprintFactor=Math.abs(Math.cos(aRad))+Math.abs(Math.sin(aRad));
+   // 占位盒包括旋转、漂浮与点击放大时的额外安全余量。
+   var width=Math.min(112,(rail-44)/(footprintFactor*1.17),H*.145);
+   if(width<38)continue;
+   var outer=width*footprintFactor*1.17+18;
+   var cx=(railLeft+railRight)/2,cy=slot.y*H;
+   var rect={l:cx-outer/2,t:cy-outer/2,r:cx+outer/2,b:cy+outer/2};
+   if(rect.l<7||rect.r>W-7||rect.t<7||rect.b>H-7)continue;
+   // 主阅读区也属于禁止占用区域，而非只靠白底遮住背景。
+   if(left&&rect.r>c.left-3||!left&&rect.l<c.right+3)continue;
+   if(reserved.some(function(b){return collision(rect,b,12)})||
+      placed.some(function(b){return collision(rect,b,12)}))continue;
+   placed.push(rect);
+   var kind=slot.kind%N;
    var el=document.createElement('div');el.className='naiwa';
-   el.style.left=found.x.toFixed(2)+'px';el.style.top=found.y.toFixed(2)+'px';
-   el.style.width=w.toFixed(2)+'px';el.style.height=h.toFixed(2)+'px';
-   el.style.setProperty('--angle',angle.toFixed(1)+'deg');
-   el.style.setProperty('--speed',(6+rand()*6).toFixed(2)+'s');
-   el.style.setProperty('--delay',(-rand()*11).toFixed(2)+'s');
+   el.dataset.slot=String(i);el.dataset.kind=String(kind);
+   el.style.left=(cx-width/2).toFixed(2)+'px';el.style.top=(cy-width/2).toFixed(2)+'px';
+   el.style.width=width.toFixed(2)+'px';el.style.height=width.toFixed(2)+'px';
+   el.style.setProperty('--angle',angle+'deg');
+   el.style.setProperty('--speed',(7+(i%4)*1.3).toFixed(2)+'s');
+   el.style.setProperty('--delay',(-i*1.7).toFixed(2)+'s');
    var fl=document.createElement('div');fl.className='naiwa-float';
    var reaction=document.createElement('div');reaction.className='naiwa-react';
    var face=document.createElement('div');face.className='naiwa-face';
    face.style.setProperty('--atlas-scale',(N*100)+'%');
    face.style.setProperty('--sprite-pos',(N===1?0:100*kind/(N-1)).toFixed(4)+'%');
    reaction.appendChild(face);
-   var pupil=null;
-   // 只有主造型经过眼部坐标校准。其余新增造型不会被错误套上瞳孔。
-   if(kind===0){pupil=document.createElement('div');pupil.className='naiwa-eye';reaction.appendChild(pupil)}
+   var eyeSet=EYE_MAP[String(kind)]||[],eyeParts=[];
+   for(var k=0;k<eyeSet.length;k++){
+    var ec=eyeSet[k],socket=document.createElement('div');
+    socket.className='naiwa-eye'+(ec.mask?' naiwa-eye--masked':'');
+    socket.style.left=ec.x+'%';socket.style.top=ec.y+'%';
+    socket.style.width=ec.w+'%';socket.style.height=(ec.h||ec.w)+'%';
+    var mover=socket;
+    if(ec.mask){
+     if(ec.colors){socket.style.setProperty('--iris-light',ec.colors[0]);socket.style.setProperty('--iris-mid',ec.colors[1]);socket.style.setProperty('--iris-dark',ec.colors[2]);}
+     mover=document.createElement('span');mover.className='naiwa-eye-dot';
+     mover.style.width=(ec.pupilW||56)+'%';mover.style.height=(ec.pupilH||56)+'%';
+     socket.appendChild(mover);
+    }
+    reaction.appendChild(socket);eyeParts.push({anchor:socket,mover:mover,masked:!!ec.mask});
+   }
    fl.appendChild(reaction);el.appendChild(fl);layer.appendChild(el);
-   sprites.push({el:el,react:reaction,pupil:pupil});
+   sprites.push({el:el,react:reaction,eyes:eyeParts});
   }
  }
- window.addEventListener('resize',function(){if(resizeJob)cancelAnimationFrame(resizeJob);
-  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout()})},{passive:true});
+ function scheduleRelayout(){
+  if(resizeJob)cancelAnimationFrame(resizeJob);
+  resizeJob=requestAnimationFrame(function(){resizeJob=0;relayout();});
+ }
+ window.addEventListener('resize',scheduleRelayout,{passive:true});
+ window.addEventListener('pageshow',scheduleRelayout);
+ if(window.ResizeObserver){
+  var main=document.querySelector('body > .wrap,body > .wr,body > main,body > article');
+  if(main){var ro=new ResizeObserver(scheduleRelayout);ro.observe(main);}
+ }
  document.addEventListener('pointermove',function(e){
   if(focus.checked||!eyes.checked||reduced||e.pointerType==='touch')return;
   mouse={x:e.clientX,y:e.clientY};
   if(eyeJob)return;
   eyeJob=requestAnimationFrame(function(){eyeJob=0;if(!mouse)return;
-   for(var s of sprites){if(!s.pupil)continue;var r=s.el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-    var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
-    var max=clamp(r.width*.04,2,5);
-    s.pupil.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
-    s.pupil.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+   for(var s of sprites){
+    var sr=s.el.getBoundingClientRect();
+    for(var eye of s.eyes){
+     var r=eye.anchor.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+     var dx=mouse.x-cx,dy=mouse.y-cy,dist=Math.hypot(dx,dy),a=dist<1?0:clamp(dist/250,0,1);
+     var max=clamp(sr.width*.04,2,5);
+     // 双眼瞳孔不能离开绿色眼眶；单眼保持旧版幅度。
+     if(eye.masked)max=Math.min(max,Math.min(r.width,r.height)*.16);
+     eye.mover.style.setProperty('--look-x',(max*a*dx/Math.max(1,dist)).toFixed(2)+'px');
+     eye.mover.style.setProperty('--look-y',(max*a*dy/Math.max(1,dist)).toFixed(2)+'px');
+    }
    }
   });
  },{passive:true});
